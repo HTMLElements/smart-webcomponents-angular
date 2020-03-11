@@ -16,7 +16,7 @@
     "rxjs": "6.3.3",
     "zone.js": "0.8.26",
     "moment": "2.22.2",
-    "smart-webcomponents-angular": "^7.1.11"
+    "smart-webcomponents-angular": "^7.1.12"
   },
   "version": "0.0.0",
   "license": "MIT",
