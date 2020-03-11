@@ -13,8 +13,6 @@ export class AppComponent {
 
     }
     ngAfterViewInit(): void {
-		const that = this;
-		that.accordion.expandMode = AccordionExpandMode.Multiple;
-		that.accordion.expand(1);  	
+	this.accordion.expand(1);
     }
 }
