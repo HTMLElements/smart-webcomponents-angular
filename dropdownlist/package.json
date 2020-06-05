@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-dropdownlist.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-dropdownlist.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-dropdownlist.js",
+  "esm5": "../esm5/dropdownlist/smart-webcomponents-angular-dropdownlist.js",
+  "esm2015": "../esm2015/dropdownlist/smart-webcomponents-angular-dropdownlist.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-dropdownlist.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-dropdownlist.js",
+  "typings": "smart-webcomponents-angular-dropdownlist.d.ts",
+  "metadata": "smart-webcomponents-angular-dropdownlist.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/dropdownlist"
+}

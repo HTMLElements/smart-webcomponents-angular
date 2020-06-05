@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-pager.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-pager.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-pager.js",
+  "esm5": "../esm5/pager/smart-webcomponents-angular-pager.js",
+  "esm2015": "../esm2015/pager/smart-webcomponents-angular-pager.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-pager.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-pager.js",
+  "typings": "smart-webcomponents-angular-pager.d.ts",
+  "metadata": "smart-webcomponents-angular-pager.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/pager"
+}

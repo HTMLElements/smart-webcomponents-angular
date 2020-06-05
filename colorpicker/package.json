@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-colorpicker.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-colorpicker.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-colorpicker.js",
+  "esm5": "../esm5/colorpicker/smart-webcomponents-angular-colorpicker.js",
+  "esm2015": "../esm2015/colorpicker/smart-webcomponents-angular-colorpicker.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-colorpicker.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-colorpicker.js",
+  "typings": "smart-webcomponents-angular-colorpicker.d.ts",
+  "metadata": "smart-webcomponents-angular-colorpicker.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/colorpicker"
+}

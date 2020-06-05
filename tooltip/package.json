@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-tooltip.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-tooltip.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-tooltip.js",
+  "esm5": "../esm5/tooltip/smart-webcomponents-angular-tooltip.js",
+  "esm2015": "../esm2015/tooltip/smart-webcomponents-angular-tooltip.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-tooltip.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-tooltip.js",
+  "typings": "smart-webcomponents-angular-tooltip.d.ts",
+  "metadata": "smart-webcomponents-angular-tooltip.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/tooltip"
+}

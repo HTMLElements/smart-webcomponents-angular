@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-multisplitbutton.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-multisplitbutton.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-multisplitbutton.js",
+  "esm5": "../esm5/multisplitbutton/smart-webcomponents-angular-multisplitbutton.js",
+  "esm2015": "../esm2015/multisplitbutton/smart-webcomponents-angular-multisplitbutton.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-multisplitbutton.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-multisplitbutton.js",
+  "typings": "smart-webcomponents-angular-multisplitbutton.d.ts",
+  "metadata": "smart-webcomponents-angular-multisplitbutton.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/multisplitbutton"
+}

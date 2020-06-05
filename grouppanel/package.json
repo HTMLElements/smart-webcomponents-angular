@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-grouppanel.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-grouppanel.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-grouppanel.js",
+  "esm5": "../esm5/grouppanel/smart-webcomponents-angular-grouppanel.js",
+  "esm2015": "../esm2015/grouppanel/smart-webcomponents-angular-grouppanel.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-grouppanel.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-grouppanel.js",
+  "typings": "smart-webcomponents-angular-grouppanel.d.ts",
+  "metadata": "smart-webcomponents-angular-grouppanel.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/grouppanel"
+}

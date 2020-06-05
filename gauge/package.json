@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-gauge.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-gauge.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-gauge.js",
+  "esm5": "../esm5/gauge/smart-webcomponents-angular-gauge.js",
+  "esm2015": "../esm2015/gauge/smart-webcomponents-angular-gauge.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-gauge.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-gauge.js",
+  "typings": "smart-webcomponents-angular-gauge.d.ts",
+  "metadata": "smart-webcomponents-angular-gauge.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/gauge"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-element.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-element.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-element.js",
+  "esm5": "../esm5/element/smart-webcomponents-angular-element.js",
+  "esm2015": "../esm2015/element/smart-webcomponents-angular-element.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-element.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-element.js",
+  "typings": "smart-webcomponents-angular-element.d.ts",
+  "metadata": "smart-webcomponents-angular-element.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/element"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-ganttchart.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-ganttchart.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-ganttchart.js",
+  "esm5": "../esm5/ganttchart/smart-webcomponents-angular-ganttchart.js",
+  "esm2015": "../esm2015/ganttchart/smart-webcomponents-angular-ganttchart.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-ganttchart.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-ganttchart.js",
+  "typings": "smart-webcomponents-angular-ganttchart.d.ts",
+  "metadata": "smart-webcomponents-angular-ganttchart.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/ganttchart"
+}

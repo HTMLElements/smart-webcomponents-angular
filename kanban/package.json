@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-kanban.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-kanban.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-kanban.js",
+  "esm5": "../esm5/kanban/smart-webcomponents-angular-kanban.js",
+  "esm2015": "../esm2015/kanban/smart-webcomponents-angular-kanban.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-kanban.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-kanban.js",
+  "typings": "smart-webcomponents-angular-kanban.d.ts",
+  "metadata": "smart-webcomponents-angular-kanban.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/kanban"
+}

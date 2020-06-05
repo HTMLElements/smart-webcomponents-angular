@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-button.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-button.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-button.js",
+  "esm5": "../esm5/button/smart-webcomponents-angular-button.js",
+  "esm2015": "../esm2015/button/smart-webcomponents-angular-button.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-button.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-button.js",
+  "typings": "smart-webcomponents-angular-button.d.ts",
+  "metadata": "smart-webcomponents-angular-button.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/button"
+}

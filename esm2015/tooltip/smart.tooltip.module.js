@@ -1,0 +1,15 @@
+import * as tslib_1 from "tslib";
+import { NgModule } from '@angular/core';
+import { TooltipComponent } from './smart.tooltip';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+let TooltipModule = class TooltipModule {
+};
+TooltipModule = tslib_1.__decorate([
+    NgModule({
+        declarations: [TooltipComponent],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        exports: [TooltipComponent]
+    })
+], TooltipModule);
+export { TooltipModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21hcnQudG9vbHRpcC5tb2R1bGUuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9zbWFydC13ZWJjb21wb25lbnRzLWFuZ3VsYXIvdG9vbHRpcC8iLCJzb3VyY2VzIjpbInNtYXJ0LnRvb2x0aXAubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRXpDLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLGlCQUFpQixDQUFDO0FBQ25ELE9BQU8sRUFBRSxzQkFBc0IsRUFBRyxNQUFNLGVBQWUsQ0FBQztBQVF4RCxJQUFhLGFBQWEsR0FBMUIsTUFBYSxhQUFhO0NBQUksQ0FBQTtBQUFqQixhQUFhO0lBTnpCLFFBQVEsQ0FBQztRQUNOLFlBQVksRUFBRSxDQUFDLGdCQUFnQixDQUFDO1FBQ25DLE9BQU8sRUFBRSxDQUFDLHNCQUFzQixDQUFDO1FBQ2pDLE9BQU8sRUFBRSxDQUFDLGdCQUFnQixDQUFDO0tBQzNCLENBQUM7R0FFVyxhQUFhLENBQUk7U0FBakIsYUFBYSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmltcG9ydCB7IFRvb2x0aXBDb21wb25lbnQgfSBmcm9tICcuL3NtYXJ0LnRvb2x0aXAnO1xuaW1wb3J0IHsgQ1VTVE9NX0VMRU1FTlRTX1NDSEVNQSAgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcblxuQE5nTW9kdWxlKHtcbiAgICBkZWNsYXJhdGlvbnM6IFtUb29sdGlwQ29tcG9uZW50XSxcblx0c2NoZW1hczogW0NVU1RPTV9FTEVNRU5UU19TQ0hFTUFdLFxuXHRleHBvcnRzOiBbVG9vbHRpcENvbXBvbmVudF1cbn0pXG5cbmV4cG9ydCBjbGFzcyBUb29sdGlwTW9kdWxlIHsgfVxuIl19

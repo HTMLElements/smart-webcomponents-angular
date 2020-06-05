@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-filterbuilder.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-filterbuilder.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-filterbuilder.js",
+  "esm5": "../esm5/filterbuilder/smart-webcomponents-angular-filterbuilder.js",
+  "esm2015": "../esm2015/filterbuilder/smart-webcomponents-angular-filterbuilder.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-filterbuilder.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-filterbuilder.js",
+  "typings": "smart-webcomponents-angular-filterbuilder.d.ts",
+  "metadata": "smart-webcomponents-angular-filterbuilder.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/filterbuilder"
+}

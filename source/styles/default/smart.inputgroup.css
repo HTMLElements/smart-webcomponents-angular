@@ -1,0 +1,309 @@
+.input-group {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    font-family: var(--smart-font-family);
+}
+
+.input-group-append,
+.input-group-prepend {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.input-group-prepend {
+    margin-right: -1px;
+}
+
+.input-group-append {
+    margin-left: -1px;
+}
+
+    .input-group-append smart-button + smart-button,
+    .input-group-append smart-button + .input-group-text,
+    .input-group-append .input-group-text + smart-button,
+    .input-group-append .input-group-text + .input-group-text,
+    .input-group-prepend smart-button + smart-button,
+    .input-group-prepend smart-button + .input-group-text,
+    .input-group-prepend .input-group-text + smart-button,
+    .input-group-prepend .input-group-text + .input-group-text {
+        margin-left: -1px;
+    }
+
+.input-group > .input-group-append > smart-button,
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-prepend:first-child > smart-button:not(:first-child),
+.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child),
+.input-group > .input-group-prepend:not(:first-child) > smart-button,
+.input-group > .input-group-prepend:not(:first-child) > .input-group-text {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-group > .input-group-append:last-child > smart-button:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child),
+.input-group > .input-group-append:not(:last-child) > smart-button,
+.input-group > .input-group-append:not(:last-child) > .input-group-text,
+.input-group > .input-group-prepend > smart-button,
+.input-group > .input-group-prepend > .input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-group-text,
+.form-control {
+    border-radius: var(--smart-border-radius);
+}
+
+.input-group-prepend,
+.input-group-append,
+.form-control {
+    height: auto;
+}
+
+    .input-group-prepend > smart-button,
+    .input-group-append > smart-button {
+        height: 100%;
+    }
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--smart-surface-color);
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--smart-surface);
+    border: 1px solid var(--smart-border);
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: var(--smart-font-size);
+    line-height: 1.5;
+    color: #495057;
+    background-color: var(--smart-background);
+    background-clip: padding-box;
+    border: 1px solid var(--smart-border);
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+    .form-control:focus,
+    .form-control[focus] {
+        color: var(--smart-color);
+        background-color: var(--smart-background);
+        border-color: var(--smart-primary);
+        outline: 0;
+    }
+
+.input-group smart-button[focus] {
+    color: var(--smart-color);
+    background-color: var(--smart-background);
+    border-color: var(--smart-primary);
+    outline: 0;
+    opacity: 1;
+}
+
+.input-group > .custom-file,
+.input-group > .custom-select,
+.input-group > .form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 0;
+}
+
+    .input-group > .custom-select:not(:first-child),
+    .input-group > .form-control:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .input-group > .custom-file:focus,
+    .input-group > .custom-select:focus,
+    .input-group > .form-control:focus,
+    .input-group > .form-control[focus],
+    .input-group smart-button[focus] {
+        z-index: 3;
+    }
+
+    .input-group > .form-control:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .input-group > .custom-select:not(:last-child),
+    .input-group > .form-control:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .input-group > .custom-file + .custom-file,
+    .input-group > .custom-file + .custom-select,
+    .input-group > .custom-file + .form-control,
+    .input-group > .custom-select + .custom-file,
+    .input-group > .custom-select + .custom-select,
+    .input-group > .custom-select + .form-control,
+    .input-group > .form-control + .custom-file,
+    .input-group > .form-control + .custom-select,
+    .input-group > .form-control + .form-control {
+        margin-left: -1px;
+    }
+
+    .smart-form {
+        padding: 20px;
+        background: var(--smart-surface);
+        color: var(--smart-surface-color);
+        border: 1px solid var(--smart-border);
+        border-radius: var(--smart-border-radius);
+        box-sizing: border-box;
+        overflow: hidden;
+        width: 350px;
+    }
+    .smart-form-row {
+         padding: 5px 0px;
+         box-sizing: border-box;
+         --smart-surface: var(--smart-background);
+         --smart-surface-color: var(--smart-background-color);
+    }
+
+    .smart-form-row-flex {
+        display: flex;
+    }
+
+    .smart-form-row .smart-form-label {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-family: var(--smart-font-family);
+        font-size: calc(0.9 * var(--smart-font-size));
+    }
+
+    .smart-form-row .smart-form-label[required]:after,
+    .smart-form-row .smart-form-control + .smart-form-label[required]:before {
+        content: '*';
+        color: #a94442;
+        font-size: 14px;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .smart-form-row .smart-form-control + .smart-form-label[required]:after {
+        content: '';
+    }
+
+    .smart-form-row .smart-form-control {
+        align-items: center;
+        display: flex;
+        box-sizing: border-box;
+    }
+
+    .smart-form-row .smart-form-control.center,
+    .smart-form-row .smart-form-label.center {
+        justify-content: center;
+    }
+
+    .smart-form-row .smart-form-control.right,
+    .smart-form-row .smart-form-label.right {
+        justify-content: flex-end;
+        margin-right: 4px;
+    }
+
+    .smart-form-row .smart-form-control.left,
+    .smart-form-row .smart-form-label.left {
+        justify-content: flex-start;
+        margin-left: 4px;
+    }
+
+    .smart-form-row .smart-form-control .smart-form-editor{
+        width:100%;
+    }
+
+    .smart-form-icon::after {
+        content: attr(tooltip);
+        visibility: hidden;
+        white-space:nowrap;
+        margin-top: 25px;
+        position: absolute;
+        border-top-left-radius: var(--smart-border-top-left-radius);
+        border-top-right-radius: var(--smart-border-top-right-radius);
+        border-bottom-left-radius: var(--smart-border-bottom-left-radius);
+        border-bottom-right-radius: var(--smart-border-bottom-right-radius);
+        padding: 7px;
+        background-color: var(--smart-secondary);
+        color: var(--smart-secondary-color);
+        font-size: calc(var(--smart-font-size) - 2px);
+        opacity: 0;
+        transform: scale(0);
+        transition: opacity 0.2s ease-out, transform 0.1s ease-out;
+        z-index: 9;
+    }
+
+
+    .smart-form-control.smart-valid .smart-form-editor:focus + .smart-form-icon::before,
+    .smart-form-control.smart-valid .smart-form-editor[focus] + .smart-form-icon::before  {
+        color: var(--smart-success);
+        content: var(--smart-icon-ok-squared);
+    }
+
+    .smart-form-control.smart-invalid .smart-form-editor:focus + .smart-form-icon:before,
+    .smart-form-control.smart-invalid .smart-form-editor[focus] + .smart-form-icon:before {
+        color: var(--smart-error);
+        content: var(--smart-icon-attention);
+    }
+
+    .smart-form-control.smart-valid .smart-form-icon:after {
+        background: var(--smart-success);
+        color: var(--smart-success-color);
+    }
+
+    .smart-form-control.smart-invalid .smart-form-icon:after {
+        background: var(--smart-error);
+        color: var(--smart-error-color);
+    }
+
+    .smart-form-control.smart-valid input::selection,
+    .smart-form-control.smart-invalid input::selection {
+        color: var(--smart-primary-color) !important;
+        background: var(--smart-primary) !important;
+    }
+
+    .smart-form-icon:hover::after {
+        visibility: visible;
+        opacity: 0.9;
+        transform: scale(1);
+    }
+
+    .smart-form [editor="header"] {
+        font-weight: bold;
+        display:flex;
+        justify-content: center;
+        color: var(--smart-surface-color);
+        text-transform: uppercase;
+        font-size: calc(1.75 * var(--smart-font-size));
+    }
+    .smart-form-editor.smart-validation-success:not(smart-check-box) > div.smart-container::after,
+    .smart-form-editor.smart-validation-error:not(smart-check-box) > div.smart-container::after {
+        display:none;
+    }
+
+    .smart-form-editor.smart-invalid + .smart-error-label-like-after-element,
+    .smart-form-editor.smart-valid + .smart-success-label-like-after-element {
+        display:none;
+    }

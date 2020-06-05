@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-chip.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-chip.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-chip.js",
+  "esm5": "../esm5/chip/smart-webcomponents-angular-chip.js",
+  "esm2015": "../esm2015/chip/smart-webcomponents-angular-chip.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-chip.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-chip.js",
+  "typings": "smart-webcomponents-angular-chip.d.ts",
+  "metadata": "smart-webcomponents-angular-chip.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/chip"
+}

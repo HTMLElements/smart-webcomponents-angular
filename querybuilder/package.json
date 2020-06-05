@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-querybuilder.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-querybuilder.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-querybuilder.js",
+  "esm5": "../esm5/querybuilder/smart-webcomponents-angular-querybuilder.js",
+  "esm2015": "../esm2015/querybuilder/smart-webcomponents-angular-querybuilder.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-querybuilder.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-querybuilder.js",
+  "typings": "smart-webcomponents-angular-querybuilder.d.ts",
+  "metadata": "smart-webcomponents-angular-querybuilder.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/querybuilder"
+}

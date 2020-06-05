@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-toast.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-toast.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-toast.js",
+  "esm5": "../esm5/toast/smart-webcomponents-angular-toast.js",
+  "esm2015": "../esm2015/toast/smart-webcomponents-angular-toast.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-toast.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-toast.js",
+  "typings": "smart-webcomponents-angular-toast.d.ts",
+  "metadata": "smart-webcomponents-angular-toast.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/toast"
+}

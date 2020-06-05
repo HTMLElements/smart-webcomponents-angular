@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-menu.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-menu.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-menu.js",
+  "esm5": "../esm5/menu/smart-webcomponents-angular-menu.js",
+  "esm2015": "../esm2015/menu/smart-webcomponents-angular-menu.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-menu.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-menu.js",
+  "typings": "smart-webcomponents-angular-menu.d.ts",
+  "metadata": "smart-webcomponents-angular-menu.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/menu"
+}

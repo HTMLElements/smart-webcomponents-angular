@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-breadcrumb.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-breadcrumb.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-breadcrumb.js",
+  "esm5": "../esm5/breadcrumb/smart-webcomponents-angular-breadcrumb.js",
+  "esm2015": "../esm2015/breadcrumb/smart-webcomponents-angular-breadcrumb.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-breadcrumb.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-breadcrumb.js",
+  "typings": "smart-webcomponents-angular-breadcrumb.d.ts",
+  "metadata": "smart-webcomponents-angular-breadcrumb.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/breadcrumb"
+}

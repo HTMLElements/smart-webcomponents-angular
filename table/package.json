@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-table.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-table.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-table.js",
+  "esm5": "../esm5/table/smart-webcomponents-angular-table.js",
+  "esm2015": "../esm2015/table/smart-webcomponents-angular-table.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-table.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-table.js",
+  "typings": "smart-webcomponents-angular-table.d.ts",
+  "metadata": "smart-webcomponents-angular-table.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/table"
+}

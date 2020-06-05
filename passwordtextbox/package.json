@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-passwordtextbox.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-passwordtextbox.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-passwordtextbox.js",
+  "esm5": "../esm5/passwordtextbox/smart-webcomponents-angular-passwordtextbox.js",
+  "esm2015": "../esm2015/passwordtextbox/smart-webcomponents-angular-passwordtextbox.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-passwordtextbox.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-passwordtextbox.js",
+  "typings": "smart-webcomponents-angular-passwordtextbox.d.ts",
+  "metadata": "smart-webcomponents-angular-passwordtextbox.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/passwordtextbox"
+}

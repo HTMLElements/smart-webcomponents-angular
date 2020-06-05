@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-checkinput.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-checkinput.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-checkinput.js",
+  "esm5": "../esm5/checkinput/smart-webcomponents-angular-checkinput.js",
+  "esm2015": "../esm2015/checkinput/smart-webcomponents-angular-checkinput.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-checkinput.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-checkinput.js",
+  "typings": "smart-webcomponents-angular-checkinput.d.ts",
+  "metadata": "smart-webcomponents-angular-checkinput.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/checkinput"
+}

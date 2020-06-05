@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-textbox.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-textbox.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-textbox.js",
+  "esm5": "../esm5/textbox/smart-webcomponents-angular-textbox.js",
+  "esm2015": "../esm2015/textbox/smart-webcomponents-angular-textbox.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-textbox.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-textbox.js",
+  "typings": "smart-webcomponents-angular-textbox.d.ts",
+  "metadata": "smart-webcomponents-angular-textbox.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/textbox"
+}

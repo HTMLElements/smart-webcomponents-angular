@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-multicolumnfilterpanel.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-multicolumnfilterpanel.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-multicolumnfilterpanel.js",
+  "esm5": "../esm5/multicolumnfilterpanel/smart-webcomponents-angular-multicolumnfilterpanel.js",
+  "esm2015": "../esm2015/multicolumnfilterpanel/smart-webcomponents-angular-multicolumnfilterpanel.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-multicolumnfilterpanel.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-multicolumnfilterpanel.js",
+  "typings": "smart-webcomponents-angular-multicolumnfilterpanel.d.ts",
+  "metadata": "smart-webcomponents-angular-multicolumnfilterpanel.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/multicolumnfilterpanel"
+}

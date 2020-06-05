@@ -1,0 +1,15 @@
+import * as tslib_1 from "tslib";
+import { NgModule } from '@angular/core';
+import { ValidatorComponent } from './smart.validator';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+let ValidatorModule = class ValidatorModule {
+};
+ValidatorModule = tslib_1.__decorate([
+    NgModule({
+        declarations: [ValidatorComponent],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        exports: [ValidatorComponent]
+    })
+], ValidatorModule);
+export { ValidatorModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21hcnQudmFsaWRhdG9yLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL3NtYXJ0LXdlYmNvbXBvbmVudHMtYW5ndWxhci92YWxpZGF0b3IvIiwic291cmNlcyI6WyJzbWFydC52YWxpZGF0b3IubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRXpDLE9BQU8sRUFBRSxrQkFBa0IsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQ3ZELE9BQU8sRUFBRSxzQkFBc0IsRUFBRyxNQUFNLGVBQWUsQ0FBQztBQVF4RCxJQUFhLGVBQWUsR0FBNUIsTUFBYSxlQUFlO0NBQUksQ0FBQTtBQUFuQixlQUFlO0lBTjNCLFFBQVEsQ0FBQztRQUNOLFlBQVksRUFBRSxDQUFDLGtCQUFrQixDQUFDO1FBQ3JDLE9BQU8sRUFBRSxDQUFDLHNCQUFzQixDQUFDO1FBQ2pDLE9BQU8sRUFBRSxDQUFDLGtCQUFrQixDQUFDO0tBQzdCLENBQUM7R0FFVyxlQUFlLENBQUk7U0FBbkIsZUFBZSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmltcG9ydCB7IFZhbGlkYXRvckNvbXBvbmVudCB9IGZyb20gJy4vc21hcnQudmFsaWRhdG9yJztcbmltcG9ydCB7IENVU1RPTV9FTEVNRU5UU19TQ0hFTUEgIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBOZ01vZHVsZSh7XG4gICAgZGVjbGFyYXRpb25zOiBbVmFsaWRhdG9yQ29tcG9uZW50XSxcblx0c2NoZW1hczogW0NVU1RPTV9FTEVNRU5UU19TQ0hFTUFdLFxuXHRleHBvcnRzOiBbVmFsaWRhdG9yQ29tcG9uZW50XVxufSlcblxuZXhwb3J0IGNsYXNzIFZhbGlkYXRvck1vZHVsZSB7IH1cbiJdfQ==

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-multicomboinput.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-multicomboinput.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-multicomboinput.js",
+  "esm5": "../esm5/multicomboinput/smart-webcomponents-angular-multicomboinput.js",
+  "esm2015": "../esm2015/multicomboinput/smart-webcomponents-angular-multicomboinput.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-multicomboinput.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-multicomboinput.js",
+  "typings": "smart-webcomponents-angular-multicomboinput.d.ts",
+  "metadata": "smart-webcomponents-angular-multicomboinput.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/multicomboinput"
+}

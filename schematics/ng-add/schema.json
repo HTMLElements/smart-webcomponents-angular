@@ -1,0 +1,47 @@
+  
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "angular-smart-ng-add",
+  "title": "Angular Smart ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "theme": {
+      "description": "The theme to apply",
+      "type": "string",
+      "default": "default",
+      "x-prompt": {
+        "message": "Choose a prebuilt theme name, or \"custom\" for a custom theme:",
+        "type": "list",
+        "items": [
+          { "value": "default",       "label": "Material Blue        [ Preview: https://htmlelements.com/demos/grid/overview/ ]" },
+          { "value": "red",        "label": "Material Red" },
+          { "value": "green",        "label": "Material Green" },
+          { "value": "purple",        "label": "Material Purple" },
+          { "value": "pink",        "label": "Material Pink" },
+          { "value": "turquoise",        "label": "Material Turquoise" },
+          { "value": "orange",        "label": "Material Orange" },
+          { "value": "dark",        "label": "Material Dark Blue" },
+	      { "value": "dark-red",        "label": "Material Dark Red" },
+          { "value": "dark-green",        "label": "Material Dark Green" },
+          { "value": "dark-purple",        "label": "Material Dark Purple" },
+          { "value": "dark-pink",        "label": "Material Dark Pink" },
+          { "value": "dark-turquoise",        "label": "Material Dark Turquoise" },
+          { "value": "dark-orange",        "label": "Material Dark Orange" },
+          { "value": "custom",            "label": "Custom" }
+        ]
+      }
+    },
+    "style": {
+      "description": "The file extension to be used for style files.",
+      "type": "string"
+    }
+  },
+  "required": []
+}

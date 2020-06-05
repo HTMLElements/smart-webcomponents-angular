@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-numerictextbox.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-numerictextbox.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-numerictextbox.js",
+  "esm5": "../esm5/numerictextbox/smart-webcomponents-angular-numerictextbox.js",
+  "esm2015": "../esm2015/numerictextbox/smart-webcomponents-angular-numerictextbox.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-numerictextbox.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-numerictextbox.js",
+  "typings": "smart-webcomponents-angular-numerictextbox.d.ts",
+  "metadata": "smart-webcomponents-angular-numerictextbox.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/numerictextbox"
+}

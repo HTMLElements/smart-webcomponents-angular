@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-cardview.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-cardview.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-cardview.js",
+  "esm5": "../esm5/cardview/smart-webcomponents-angular-cardview.js",
+  "esm2015": "../esm2015/cardview/smart-webcomponents-angular-cardview.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-cardview.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-cardview.js",
+  "typings": "smart-webcomponents-angular-cardview.d.ts",
+  "metadata": "smart-webcomponents-angular-cardview.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/cardview"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-accordion.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-accordion.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-accordion.js",
+  "esm5": "../esm5/accordion/smart-webcomponents-angular-accordion.js",
+  "esm2015": "../esm2015/accordion/smart-webcomponents-angular-accordion.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-accordion.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-accordion.js",
+  "typings": "smart-webcomponents-angular-accordion.d.ts",
+  "metadata": "smart-webcomponents-angular-accordion.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/accordion"
+}

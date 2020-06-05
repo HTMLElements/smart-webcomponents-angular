@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-dropdownbutton.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-dropdownbutton.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-dropdownbutton.js",
+  "esm5": "../esm5/dropdownbutton/smart-webcomponents-angular-dropdownbutton.js",
+  "esm2015": "../esm2015/dropdownbutton/smart-webcomponents-angular-dropdownbutton.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-dropdownbutton.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-dropdownbutton.js",
+  "typings": "smart-webcomponents-angular-dropdownbutton.d.ts",
+  "metadata": "smart-webcomponents-angular-dropdownbutton.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/dropdownbutton"
+}

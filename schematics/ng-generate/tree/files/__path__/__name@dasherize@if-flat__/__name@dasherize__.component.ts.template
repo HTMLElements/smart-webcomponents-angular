@@ -1,0 +1,77 @@
+import { AfterViewInit, Component, OnInit, ViewChild<% if(!!viewEncapsulation) { %>, ViewEncapsulation<% }%><% if(changeDetection !== 'Default') { %>, ChangeDetectionStrategy<% }%> } from '@angular/core';
+import { TreeComponent, Smart } from 'smart-webcomponents-angular/tree';
+
+@Component({
+  selector: '<%= selector %>',<% if(inlineTemplate) { %>
+  template: `
+    <%= indentTextContent(resolvedFiles.template, 4) %>
+  `,<% } else { %>
+  templateUrl: './<%= dasherize(name) %>.component.html',<% } if(inlineStyle) { %>
+  styles: [`
+    <%= indentTextContent(resolvedFiles.stylesheet, 4) %>
+  `]<% } else { %>
+  styleUrls: ['./<%= dasherize(name) %>.component.<%= style %>']<% } %><% if(!!viewEncapsulation) { %>,
+  encapsulation: ViewEncapsulation.<%= viewEncapsulation %><% } if (changeDetection !== 'Default') { %>,
+  changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
+})
+export class <%= classify(name) %>Component implements AfterViewInit, OnInit {
+  @ViewChild('tree', {read: TreeComponent, static: false}) tree: TreeComponent;
+
+  ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+     this.tree.dataSource =  [
+		{
+			label: 'Cats',
+			selected: true,
+			items: 
+			[
+				{
+					label: 'Tiger',
+					selected: true
+				},
+				{
+					label: 'Lion'
+				},
+				{
+					label: 'Jaguar'
+				},
+				{
+					label: 'Leopard'
+				},
+				{
+					label: 'Serval'
+				},
+				{
+					label: 'Domestic cat'
+				}
+			]
+		},
+        {
+            label: 'Dogs',
+            items: 
+			[
+                {
+                    label: 'Gray wolf'
+                },
+                {
+                    label: 'Ethiopian wolf',
+                    selected: true
+                },
+                {
+                    label: 'Arctic fox',
+                    selected: true
+                },
+                {
+                    label: 'Dingo'
+                },
+                {
+                    label: 'Domestic dog',
+                    selected: true
+                }
+            ]
+        }
+	];
+  }
+}

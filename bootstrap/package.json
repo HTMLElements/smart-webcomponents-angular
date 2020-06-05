@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-bootstrap.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-bootstrap.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-bootstrap.js",
+  "esm5": "../esm5/bootstrap/smart-webcomponents-angular-bootstrap.js",
+  "esm2015": "../esm2015/bootstrap/smart-webcomponents-angular-bootstrap.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-bootstrap.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-bootstrap.js",
+  "typings": "smart-webcomponents-angular-bootstrap.d.ts",
+  "metadata": "smart-webcomponents-angular-bootstrap.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/bootstrap"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-multilinetextbox.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-multilinetextbox.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-multilinetextbox.js",
+  "esm5": "../esm5/multilinetextbox/smart-webcomponents-angular-multilinetextbox.js",
+  "esm2015": "../esm2015/multilinetextbox/smart-webcomponents-angular-multilinetextbox.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-multilinetextbox.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-multilinetextbox.js",
+  "typings": "smart-webcomponents-angular-multilinetextbox.d.ts",
+  "metadata": "smart-webcomponents-angular-multilinetextbox.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/multilinetextbox"
+}

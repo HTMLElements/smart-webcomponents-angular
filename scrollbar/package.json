@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-scrollbar.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-scrollbar.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-scrollbar.js",
+  "esm5": "../esm5/scrollbar/smart-webcomponents-angular-scrollbar.js",
+  "esm2015": "../esm2015/scrollbar/smart-webcomponents-angular-scrollbar.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-scrollbar.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-scrollbar.js",
+  "typings": "smart-webcomponents-angular-scrollbar.d.ts",
+  "metadata": "smart-webcomponents-angular-scrollbar.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/scrollbar"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-tabs.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-tabs.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-tabs.js",
+  "esm5": "../esm5/tabs/smart-webcomponents-angular-tabs.js",
+  "esm2015": "../esm2015/tabs/smart-webcomponents-angular-tabs.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-tabs.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-tabs.js",
+  "typings": "smart-webcomponents-angular-tabs.d.ts",
+  "metadata": "smart-webcomponents-angular-tabs.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/tabs"
+}

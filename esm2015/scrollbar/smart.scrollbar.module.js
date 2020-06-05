@@ -1,0 +1,15 @@
+import * as tslib_1 from "tslib";
+import { NgModule } from '@angular/core';
+import { ScrollBarComponent } from './smart.scrollbar';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+let ScrollBarModule = class ScrollBarModule {
+};
+ScrollBarModule = tslib_1.__decorate([
+    NgModule({
+        declarations: [ScrollBarComponent],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA],
+        exports: [ScrollBarComponent]
+    })
+], ScrollBarModule);
+export { ScrollBarModule };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21hcnQuc2Nyb2xsYmFyLm1vZHVsZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL3NtYXJ0LXdlYmNvbXBvbmVudHMtYW5ndWxhci9zY3JvbGxiYXIvIiwic291cmNlcyI6WyJzbWFydC5zY3JvbGxiYXIubW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBRXpDLE9BQU8sRUFBRSxrQkFBa0IsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQ3ZELE9BQU8sRUFBRSxzQkFBc0IsRUFBRyxNQUFNLGVBQWUsQ0FBQztBQVF4RCxJQUFhLGVBQWUsR0FBNUIsTUFBYSxlQUFlO0NBQUksQ0FBQTtBQUFuQixlQUFlO0lBTjNCLFFBQVEsQ0FBQztRQUNOLFlBQVksRUFBRSxDQUFDLGtCQUFrQixDQUFDO1FBQ3JDLE9BQU8sRUFBRSxDQUFDLHNCQUFzQixDQUFDO1FBQ2pDLE9BQU8sRUFBRSxDQUFDLGtCQUFrQixDQUFDO0tBQzdCLENBQUM7R0FFVyxlQUFlLENBQUk7U0FBbkIsZUFBZSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IE5nTW9kdWxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmltcG9ydCB7IFNjcm9sbEJhckNvbXBvbmVudCB9IGZyb20gJy4vc21hcnQuc2Nyb2xsYmFyJztcbmltcG9ydCB7IENVU1RPTV9FTEVNRU5UU19TQ0hFTUEgIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbkBOZ01vZHVsZSh7XG4gICAgZGVjbGFyYXRpb25zOiBbU2Nyb2xsQmFyQ29tcG9uZW50XSxcblx0c2NoZW1hczogW0NVU1RPTV9FTEVNRU5UU19TQ0hFTUFdLFxuXHRleHBvcnRzOiBbU2Nyb2xsQmFyQ29tcG9uZW50XVxufSlcblxuZXhwb3J0IGNsYXNzIFNjcm9sbEJhck1vZHVsZSB7IH1cbiJdfQ==

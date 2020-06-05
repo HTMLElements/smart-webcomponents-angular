@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-fileupload.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-fileupload.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-fileupload.js",
+  "esm5": "../esm5/fileupload/smart-webcomponents-angular-fileupload.js",
+  "esm2015": "../esm2015/fileupload/smart-webcomponents-angular-fileupload.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-fileupload.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-fileupload.js",
+  "typings": "smart-webcomponents-angular-fileupload.d.ts",
+  "metadata": "smart-webcomponents-angular-fileupload.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/fileupload"
+}

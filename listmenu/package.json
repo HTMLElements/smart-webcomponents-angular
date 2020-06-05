@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-listmenu.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-listmenu.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-listmenu.js",
+  "esm5": "../esm5/listmenu/smart-webcomponents-angular-listmenu.js",
+  "esm2015": "../esm2015/listmenu/smart-webcomponents-angular-listmenu.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-listmenu.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-listmenu.js",
+  "typings": "smart-webcomponents-angular-listmenu.d.ts",
+  "metadata": "smart-webcomponents-angular-listmenu.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/listmenu"
+}

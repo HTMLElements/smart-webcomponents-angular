@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-colorpanel.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-colorpanel.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-colorpanel.js",
+  "esm5": "../esm5/colorpanel/smart-webcomponents-angular-colorpanel.js",
+  "esm2015": "../esm2015/colorpanel/smart-webcomponents-angular-colorpanel.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-colorpanel.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-colorpanel.js",
+  "typings": "smart-webcomponents-angular-colorpanel.d.ts",
+  "metadata": "smart-webcomponents-angular-colorpanel.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/colorpanel"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-card.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-card.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-card.js",
+  "esm5": "../esm5/card/smart-webcomponents-angular-card.js",
+  "esm2015": "../esm2015/card/smart-webcomponents-angular-card.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-card.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-card.js",
+  "typings": "smart-webcomponents-angular-card.d.ts",
+  "metadata": "smart-webcomponents-angular-card.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/card"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-radiobutton.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-radiobutton.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-radiobutton.js",
+  "esm5": "../esm5/radiobutton/smart-webcomponents-angular-radiobutton.js",
+  "esm2015": "../esm2015/radiobutton/smart-webcomponents-angular-radiobutton.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-radiobutton.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-radiobutton.js",
+  "typings": "smart-webcomponents-angular-radiobutton.d.ts",
+  "metadata": "smart-webcomponents-angular-radiobutton.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/radiobutton"
+}

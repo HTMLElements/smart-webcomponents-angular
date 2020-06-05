@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-carousel.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-carousel.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-carousel.js",
+  "esm5": "../esm5/carousel/smart-webcomponents-angular-carousel.js",
+  "esm2015": "../esm2015/carousel/smart-webcomponents-angular-carousel.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-carousel.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-carousel.js",
+  "typings": "smart-webcomponents-angular-carousel.d.ts",
+  "metadata": "smart-webcomponents-angular-carousel.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/carousel"
+}

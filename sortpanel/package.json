@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-sortpanel.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-sortpanel.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-sortpanel.js",
+  "esm5": "../esm5/sortpanel/smart-webcomponents-angular-sortpanel.js",
+  "esm2015": "../esm2015/sortpanel/smart-webcomponents-angular-sortpanel.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-sortpanel.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-sortpanel.js",
+  "typings": "smart-webcomponents-angular-sortpanel.d.ts",
+  "metadata": "smart-webcomponents-angular-sortpanel.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/sortpanel"
+}

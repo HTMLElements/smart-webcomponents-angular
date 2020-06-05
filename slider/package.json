@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-slider.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-slider.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-slider.js",
+  "esm5": "../esm5/slider/smart-webcomponents-angular-slider.js",
+  "esm2015": "../esm2015/slider/smart-webcomponents-angular-slider.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-slider.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-slider.js",
+  "typings": "smart-webcomponents-angular-slider.d.ts",
+  "metadata": "smart-webcomponents-angular-slider.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/slider"
+}

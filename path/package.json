@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-path.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-path.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-path.js",
+  "esm5": "../esm5/path/smart-webcomponents-angular-path.js",
+  "esm2015": "../esm2015/path/smart-webcomponents-angular-path.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-path.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-path.js",
+  "typings": "smart-webcomponents-angular-path.d.ts",
+  "metadata": "smart-webcomponents-angular-path.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/path"
+}

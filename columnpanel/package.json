@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-columnpanel.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-columnpanel.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-columnpanel.js",
+  "esm5": "../esm5/columnpanel/smart-webcomponents-angular-columnpanel.js",
+  "esm2015": "../esm2015/columnpanel/smart-webcomponents-angular-columnpanel.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-columnpanel.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-columnpanel.js",
+  "typings": "smart-webcomponents-angular-columnpanel.d.ts",
+  "metadata": "smart-webcomponents-angular-columnpanel.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/columnpanel"
+}

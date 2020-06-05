@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-tank.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-tank.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-tank.js",
+  "esm5": "../esm5/tank/smart-webcomponents-angular-tank.js",
+  "esm2015": "../esm2015/tank/smart-webcomponents-angular-tank.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-tank.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-tank.js",
+  "typings": "smart-webcomponents-angular-tank.d.ts",
+  "metadata": "smart-webcomponents-angular-tank.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/tank"
+}

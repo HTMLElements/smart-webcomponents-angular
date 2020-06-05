@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-progressbar.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-progressbar.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-progressbar.js",
+  "esm5": "../esm5/progressbar/smart-webcomponents-angular-progressbar.js",
+  "esm2015": "../esm2015/progressbar/smart-webcomponents-angular-progressbar.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-progressbar.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-progressbar.js",
+  "typings": "smart-webcomponents-angular-progressbar.d.ts",
+  "metadata": "smart-webcomponents-angular-progressbar.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/progressbar"
+}

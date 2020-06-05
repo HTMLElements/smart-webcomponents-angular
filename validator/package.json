@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-validator.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-validator.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-validator.js",
+  "esm5": "../esm5/validator/smart-webcomponents-angular-validator.js",
+  "esm2015": "../esm2015/validator/smart-webcomponents-angular-validator.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-validator.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-validator.js",
+  "typings": "smart-webcomponents-angular-validator.d.ts",
+  "metadata": "smart-webcomponents-angular-validator.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/validator"
+}

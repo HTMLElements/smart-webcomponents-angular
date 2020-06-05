@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-customizationdialog.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-customizationdialog.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-customizationdialog.js",
+  "esm5": "../esm5/customizationdialog/smart-webcomponents-angular-customizationdialog.js",
+  "esm2015": "../esm2015/customizationdialog/smart-webcomponents-angular-customizationdialog.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-customizationdialog.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-customizationdialog.js",
+  "typings": "smart-webcomponents-angular-customizationdialog.d.ts",
+  "metadata": "smart-webcomponents-angular-customizationdialog.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/customizationdialog"
+}

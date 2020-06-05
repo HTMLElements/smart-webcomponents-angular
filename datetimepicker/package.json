@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-datetimepicker.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-datetimepicker.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-datetimepicker.js",
+  "esm5": "../esm5/datetimepicker/smart-webcomponents-angular-datetimepicker.js",
+  "esm2015": "../esm2015/datetimepicker/smart-webcomponents-angular-datetimepicker.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-datetimepicker.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-datetimepicker.js",
+  "typings": "smart-webcomponents-angular-datetimepicker.d.ts",
+  "metadata": "smart-webcomponents-angular-datetimepicker.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/datetimepicker"
+}

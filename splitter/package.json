@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-splitter.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-splitter.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-splitter.js",
+  "esm5": "../esm5/splitter/smart-webcomponents-angular-splitter.js",
+  "esm2015": "../esm2015/splitter/smart-webcomponents-angular-splitter.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-splitter.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-splitter.js",
+  "typings": "smart-webcomponents-angular-splitter.d.ts",
+  "metadata": "smart-webcomponents-angular-splitter.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/splitter"
+}

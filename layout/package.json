@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-layout.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-layout.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-layout.js",
+  "esm5": "../esm5/layout/smart-webcomponents-angular-layout.js",
+  "esm2015": "../esm2015/layout/smart-webcomponents-angular-layout.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-layout.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-layout.js",
+  "typings": "smart-webcomponents-angular-layout.d.ts",
+  "metadata": "smart-webcomponents-angular-layout.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/layout"
+}

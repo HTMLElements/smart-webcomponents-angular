@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-combobox.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-combobox.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-combobox.js",
+  "esm5": "../esm5/combobox/smart-webcomponents-angular-combobox.js",
+  "esm2015": "../esm2015/combobox/smart-webcomponents-angular-combobox.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-combobox.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-combobox.js",
+  "typings": "smart-webcomponents-angular-combobox.d.ts",
+  "metadata": "smart-webcomponents-angular-combobox.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/combobox"
+}

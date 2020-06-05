@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-checkbox.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-checkbox.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-checkbox.js",
+  "esm5": "../esm5/checkbox/smart-webcomponents-angular-checkbox.js",
+  "esm2015": "../esm2015/checkbox/smart-webcomponents-angular-checkbox.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-checkbox.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-checkbox.js",
+  "typings": "smart-webcomponents-angular-checkbox.d.ts",
+  "metadata": "smart-webcomponents-angular-checkbox.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/checkbox"
+}

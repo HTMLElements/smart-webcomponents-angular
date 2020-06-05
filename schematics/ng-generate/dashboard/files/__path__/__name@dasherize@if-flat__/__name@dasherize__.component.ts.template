@@ -1,0 +1,267 @@
+import { AfterViewInit, Component, OnInit, ViewChild, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { ChartComponent, ChartColorScheme, ChartTheme, ChartType } from 'smart-webcomponents-angular/chart';
+import { GridComponent, DataAdapter, GridSelectionMode, Smart } from 'smart-webcomponents-angular/grid';
+import { CalendarComponent } from 'smart-webcomponents-angular/calendar';
+import { ListBoxComponent } from 'smart-webcomponents-angular/listbox';
+import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
+import { RadioButtonComponent } from 'smart-webcomponents-angular/radiobutton';
+import { DateTimePickerComponent } from 'smart-webcomponents-angular/datetimepicker';
+import { ButtonComponent } from 'smart-webcomponents-angular/button';
+
+@Component({
+  selector: '<%= selector %>',<% if(inlineTemplate) { %>
+  template: `
+    <%= indentTextContent(resolvedFiles.template, 4) %>
+  `,<% } else { %>
+  templateUrl: './<%= dasherize(name) %>.component.html',<% } if(inlineStyle) { %>
+  styles: [`
+    <%= indentTextContent(resolvedFiles.stylesheet, 4) %>
+  `]<% } else { %>
+  styleUrls: ['./<%= dasherize(name) %>.component.<%= style %>']<% } %><% if(!!viewEncapsulation) { %>,
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
+})
+export class <%= classify(name) %>Component implements AfterViewInit, OnInit {
+	 @ViewChild('calendar', {read: CalendarComponent, static: false}) calendar: CalendarComponent;
+	 @ViewChild('chart', {read: ChartComponent, static: false}) chart: ChartComponent;
+	 @ViewChild('grid', {read: GridComponent, static: false}) grid: GridComponent;
+	 @ViewChild('listbox', {read: ListBoxComponent, static: false}) listbox: ListBoxComponent;
+	 @ViewChild('name', {read: TextBoxComponent, static: false}) name: TextBoxComponent;
+	 @ViewChild('email', {read: TextBoxComponent, static: false}) email: TextBoxComponent;
+	 @ViewChild('datetimepicker', {read: DateTimePickerComponent, static: false}) datetimepicker: DateTimePickerComponent;
+	 @ViewChild('inpatient', {read: RadioButtonComponent, static: false}) inpatient: RadioButtonComponent;
+	 @ViewChild('outpatient', {read: RadioButtonComponent, static: false}) outpatient: RadioButtonComponent;
+	 @ViewChild('save', {read: ButtonComponent, static: false}) save: ButtonComponent;
+	 @ViewChild('reset', {read: ButtonComponent, static: false}) reset: ButtonComponent;
+
+	 private data: any[] = [
+		{ id: 0, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'Nancy Davolio', image: 'nancy', email: 'ndavolio@msn.com', diagnosis: 'Aerophobia', symptoms: 'Fear of flying', inpatient: false },
+		{ id: 1, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'Andrew Fuller', image: 'andrew', email: 'afuller@msn.com', diagnosis: 'Pyrophobia', symptoms: 'Fear of fire', inpatient: true },
+		{ id: 2, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'John Levering', image: 'john', email: 'jlevering@msn.com', diagnosis: 'Scolionophobia', symptoms: 'Fear of school', inpatient: true },
+		{ id: 3, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'Maria Peacock', image: 'maria', email: 'mpeacock@msn.com', diagnosis: 'Necrophobia', symptoms: 'Fear of death or dead things', inpatient: false },
+		{ id: 4, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'Steven Buchanan', image: 'steven', email: 'sbuchanan@msn.com', diagnosis: 'Megalophobia', symptoms: 'Fear of large things', inpatient: false },
+		{ id: 5, date: new Date(), name: 'Mark Suyama', image: 'mark', email: 'msuyama@msn.com', diagnosis: 'Microphobia', symptoms: 'Fear of small things', inpatient: true },
+		{ id: 6, date: new Date(), name: 'Laura Callahan', image: 'laura', email: 'lcallahan@msn.com', diagnosis: 'Obesophobia', symptoms: 'Fear of gaining weight', inpatient: false },
+		{ id: 7, date: new Date(), name: 'Robert King', image: 'robert', email: 'rking@msn.com', diagnosis: 'Pathophobia', symptoms: 'Fear of disease', inpatient: false },
+		{ id: 8, date: new Date(), name: 'Anne Barone', image: 'anne', email: 'abarone@msn.com', diagnosis: 'Tachophobia', symptoms: 'Fear of speed', inpatient: true },
+		{ id: 9, date: new Date(), name: 'Janet Peterson', image: 'janet', email: 'jpeterson@msn.com', diagnosis: 'Zoophobia', symptoms: 'Fear of animals', inpatient: false }
+	];
+
+	private selectedPersonId = 0;
+
+	initCalendar() {
+		this.calendar.min = new Date(new Date().setDate(new Date().getDate() - 1));
+		this.calendar.max = new Date();
+		this.calendar.clearSelection();
+	}
+
+	initChart() {
+		const sampleData = [
+			{ type: 'Circulatory', inpatients: 55, outpatients: 80 },
+			{ type: 'Digestive', inpatients: 35, outpatients: 55 },
+			{ type: 'Endocrine', inpatients: 85, outpatients: 50 },
+			{ type: 'Nervous', inpatients: 62, outpatients: 58 },
+			{ type: 'Renal', inpatients: 45, outpatients: 65 },
+			{ type: 'Respiratory', inpatients: 75, outpatients: 55 }
+		];
+		
+		this.chart.caption = 'Total visits';
+		this.chart.description = '';
+		this.chart.showLegend = true;
+		this.chart.showBorderLine = false;
+		this.chart.padding = { left: 5, top: 5, right: 5, bottom: 5 };
+		this.chart.titlePadding =  { left: 90, top: 0, right: 0, bottom: 10 };
+		this.chart.dataSource = sampleData;
+		this.chart.xAxis = {
+			dataField: 'type',
+			visible: false
+		};
+		
+		if (document.body.hasAttribute("theme") && document.body.getAttribute("theme").indexOf('dark') >= 0) {
+			this.chart.theme = 'dark';
+		}
+		
+		this.chart.colorScheme = 'scheme29';
+		this.chart.seriesGroups = [
+			{
+				type: 'column',
+				columnsGapPercent: 50,
+				seriesGapPercent: 0,
+				valueAxis:
+					{
+						unitInterval: 15,
+						minValue: 0,
+						maxValue: 90,
+						displayValueAxis: true,
+						axisSize: 'auto',
+						tickMarksColor: '#888888'
+					},
+				series: [
+					{ dataField: 'inpatients', displayText: 'Inpatients' },
+					{ dataField: 'outpatients', displayText: 'Outpatients' }
+				]
+			}
+		];
+	}
+
+	initGrid() {
+		this.grid.columns = [
+			{ label: '', dataField: 'inpatient', template: 'checkBox', width: '3%' },
+			{ label: 'Date', dataField: 'date', cellsFormat: 'dd MMMM' },
+			{ label: 'Name', dataField: 'name' },
+			{ label: 'Email', dataField: 'email' },
+			{ label: 'Diagnosis', dataField: 'diagnosis' },
+			{ label: 'Symptoms', dataField: 'symptoms' }
+		];
+		this.grid.appearance.showRowHeaderNumber = true;
+		this.grid.selection.enabled = true;
+		this.grid.selection.mode = 'one';
+		this.grid.dataSource = new Smart.DataAdapter(
+		{
+			dataSource: this.data,
+			dataFields:
+			[
+				'date: date',
+				'name: string',
+				'email: string',
+				'diagnosis: string',
+				'symptoms: string',
+				'inpatient: bool'
+			]
+		});
+		
+		this.grid.select(0);
+	}
+
+	 initListBox() {
+		this.listbox.dataSource = this.data.map(x => {
+			return { id: x.id, name: x.name, image: x.image }
+		});
+		
+		this.listbox.nativeElement.whenRendered(() => {
+			const items = this.listbox.nativeElement.items as unknown as HTMLElement[];
+			for (let i = 0; i < this.listbox.dataSource.length; i++) {
+				items[i].querySelector('img').src = `https://www.htmlelements.com/demos/images/people/${this.listbox.dataSource[i].image}.jpg`
+			}
+		});
+	}
+	
+	template(item, data) {
+		item.innerHTML = `
+		<div class="list-item">
+				<img height="53px" class="icon" src="https://www.htmlelements.com/demos/images/people/nancy.jpg" />
+				${data.label};
+		</div>`;
+	}
+	
+	attachEvents() {
+		const that = this;
+		
+		this.listbox.addEventListener('change', e => {
+			that.changeSelectedPerson(that.listbox.selectedValues[0], true);
+		});
+
+		this.grid.addEventListener('change', async function(e: CustomEvent) {
+			const selection: any = await that.grid.getSelection();
+			const id = selection.rows[0].id;
+			that.changeSelectedPerson(id);
+		});
+
+		this.save.addEventListener('click', () => {
+			that.updatePersonData();
+		});
+
+		this.reset.addEventListener('click', () => {
+			that.resetForm();
+		});
+
+		this.calendar.addEventListener('change', function(e: CustomEvent) {
+			if (e.detail.value.length) {
+				that.grid.addFilter('date', '= ' + e.detail.value[0].toLocaleDateString());
+			} else {
+				that.grid.clearFilter();
+			}
+		});
+	}
+
+	changeSelectedPerson(id: any, updateGrid?: boolean) {
+		if (this.selectedPersonId === id) {
+			return;
+		}
+		
+		this.selectedPersonId = id;
+		const personData = this.data[id];
+		const imgSrc = `https://www.htmlelements.com/demos/images/people/${personData.image}.jpg`;
+	
+		document.querySelector('.dashboard-header .header-name').innerHTML = personData.name;
+		(document.querySelector('.icon-holder') as HTMLImageElement).src = imgSrc;
+		(document.querySelector('.header-logo') as HTMLImageElement).src = imgSrc;
+
+		const personInfo = document.getElementById('personInfo');
+		this.name.value = personData.name;
+		this.datetimepicker.value = personData.date;
+		this.email.value = personData.email;
+		personInfo.querySelector('img').src = imgSrc;
+
+		if (personData.inpatient) {
+			this.inpatient.checked = true;
+		} else {
+			this.outpatient.checked = true;
+		}
+
+		if (updateGrid) {
+			this.grid.select(personData.id);
+		} else {
+			this.listbox.selectedIndexes = [personData.id];
+		}
+	}
+
+	updatePersonData() {
+		const selectedPerson = this.data[this.selectedPersonId];
+		selectedPerson.name = this.name.value;
+		selectedPerson.date = this.datetimepicker.value;
+		selectedPerson.email = this.email.value;
+		selectedPerson.inpatient = this.inpatient.checked ? true : false;
+
+		// update grid data
+		const grid = this.grid;
+		const gridData = grid.rows[this.selectedPersonId].data;
+		gridData.name = selectedPerson.name;
+		gridData.date = selectedPerson.date;
+		gridData.email = selectedPerson.email;
+		gridData.inpatient = selectedPerson.inpatient;
+		grid.nativeElement.refreshView();
+
+		// update listbox data
+		this.listbox.update(this.selectedPersonId, selectedPerson.name);
+		const items = this.listbox.items;
+		(items[this.selectedPersonId] as unknown as HTMLElement).querySelector('img').src = `https://www.htmlelements.com/demos/images/people/${this.data[this.selectedPersonId].image}.jpg`;
+	}
+
+	resetForm() {
+		const selectedPerson = this.data[this.selectedPersonId];
+		this.name.value = selectedPerson.name;
+		this.datetimepicker.value = selectedPerson.date;
+		this.email.value = selectedPerson.email;
+		
+		(document.querySelector('#personInfo img') as HTMLImageElement).src = `https://www.htmlelements.com/demos/images/people/${selectedPerson.image}.jpg`;
+
+		if (selectedPerson.inpatient) {
+			this.inpatient.checked = true;
+		} else {
+			this.outpatient.checked = true;
+		}
+	}
+
+	ngOnInit() {
+	}
+
+	ngAfterViewInit() {
+		this.initCalendar();
+		this.initChart();
+		this.initGrid();
+		this.initListBox();
+		this.resetForm();
+		this.attachEvents();
+	}
+}

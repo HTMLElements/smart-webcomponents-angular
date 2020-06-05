@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-grid.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-grid.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-grid.js",
+  "esm5": "../esm5/grid/smart-webcomponents-angular-grid.js",
+  "esm2015": "../esm2015/grid/smart-webcomponents-angular-grid.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-grid.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-grid.js",
+  "typings": "smart-webcomponents-angular-grid.d.ts",
+  "metadata": "smart-webcomponents-angular-grid.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/grid"
+}

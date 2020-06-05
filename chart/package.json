@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-chart.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-chart.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-chart.js",
+  "esm5": "../esm5/chart/smart-webcomponents-angular-chart.js",
+  "esm2015": "../esm2015/chart/smart-webcomponents-angular-chart.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-chart.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-chart.js",
+  "typings": "smart-webcomponents-angular-chart.d.ts",
+  "metadata": "smart-webcomponents-angular-chart.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/chart"
+}

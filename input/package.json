@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-input.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-input.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-input.js",
+  "esm5": "../esm5/input/smart-webcomponents-angular-input.js",
+  "esm2015": "../esm2015/input/smart-webcomponents-angular-input.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-input.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-input.js",
+  "typings": "smart-webcomponents-angular-input.d.ts",
+  "metadata": "smart-webcomponents-angular-input.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/input"
+}

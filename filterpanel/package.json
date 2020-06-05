@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-filterpanel.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-filterpanel.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-filterpanel.js",
+  "esm5": "../esm5/filterpanel/smart-webcomponents-angular-filterpanel.js",
+  "esm2015": "../esm2015/filterpanel/smart-webcomponents-angular-filterpanel.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-filterpanel.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-filterpanel.js",
+  "typings": "smart-webcomponents-angular-filterpanel.d.ts",
+  "metadata": "smart-webcomponents-angular-filterpanel.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/filterpanel"
+}

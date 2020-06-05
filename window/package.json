@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-window.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-window.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-window.js",
+  "esm5": "../esm5/window/smart-webcomponents-angular-window.js",
+  "esm2015": "../esm2015/window/smart-webcomponents-angular-window.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-window.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-window.js",
+  "typings": "smart-webcomponents-angular-window.d.ts",
+  "metadata": "smart-webcomponents-angular-window.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/window"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-switchbutton.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-switchbutton.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-switchbutton.js",
+  "esm5": "../esm5/switchbutton/smart-webcomponents-angular-switchbutton.js",
+  "esm2015": "../esm2015/switchbutton/smart-webcomponents-angular-switchbutton.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-switchbutton.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-switchbutton.js",
+  "typings": "smart-webcomponents-angular-switchbutton.d.ts",
+  "metadata": "smart-webcomponents-angular-switchbutton.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/switchbutton"
+}

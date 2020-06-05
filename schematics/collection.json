@@ -1,0 +1,34 @@
+// This is the root config file where the schematics are defined.
+{
+  "$schema": "./node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    // Adds Smart Angular Material to an application without changing any templates
+    "ng-add": {
+      "description": "Adds Angular Smart to the application without affecting any templates",
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "aliases": ["smart-shell", "install"]
+    },
+    // Creates a dashboard component
+    "dashboard": {
+      "description": "Create a Dashboard component",
+      "factory": "./ng-generate/dashboard/index",
+      "schema": "./ng-generate/dashboard/schema.json",
+      "aliases": ["smart-dashboard"]
+    },
+    // Creates a grid component
+    "grid": {
+      "description": "Create a component that displays data with a data-grid",
+      "factory": "./ng-generate/grid/index",
+      "schema": "./ng-generate/grid/schema.json",
+      "aliases": ["smart-grid"]
+    },
+    // Creates a tree component
+    "tree": {
+      "description": "Create a component that displays data with a tree",
+      "factory": "./ng-generate/tree/index",
+      "schema": "./ng-generate/tree/schema.json",
+      "aliases": ["smart-tree"]
+    }
+  }
+}

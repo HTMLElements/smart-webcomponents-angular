@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-rating.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-rating.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-rating.js",
+  "esm5": "../esm5/rating/smart-webcomponents-angular-rating.js",
+  "esm2015": "../esm2015/rating/smart-webcomponents-angular-rating.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-rating.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-rating.js",
+  "typings": "smart-webcomponents-angular-rating.d.ts",
+  "metadata": "smart-webcomponents-angular-rating.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/rating"
+}

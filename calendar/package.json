@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-calendar.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-calendar.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-calendar.js",
+  "esm5": "../esm5/calendar/smart-webcomponents-angular-calendar.js",
+  "esm2015": "../esm2015/calendar/smart-webcomponents-angular-calendar.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-calendar.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-calendar.js",
+  "typings": "smart-webcomponents-angular-calendar.d.ts",
+  "metadata": "smart-webcomponents-angular-calendar.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/calendar"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-daterangeinput.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-daterangeinput.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-daterangeinput.js",
+  "esm5": "../esm5/daterangeinput/smart-webcomponents-angular-daterangeinput.js",
+  "esm2015": "../esm2015/daterangeinput/smart-webcomponents-angular-daterangeinput.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-daterangeinput.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-daterangeinput.js",
+  "typings": "smart-webcomponents-angular-daterangeinput.d.ts",
+  "metadata": "smart-webcomponents-angular-daterangeinput.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/daterangeinput"
+}

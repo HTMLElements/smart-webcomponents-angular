@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-maskedtextbox.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-maskedtextbox.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-maskedtextbox.js",
+  "esm5": "../esm5/maskedtextbox/smart-webcomponents-angular-maskedtextbox.js",
+  "esm2015": "../esm2015/maskedtextbox/smart-webcomponents-angular-maskedtextbox.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-maskedtextbox.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-maskedtextbox.js",
+  "typings": "smart-webcomponents-angular-maskedtextbox.d.ts",
+  "metadata": "smart-webcomponents-angular-maskedtextbox.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/maskedtextbox"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-sortable.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-sortable.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-sortable.js",
+  "esm5": "../esm5/sortable/smart-webcomponents-angular-sortable.js",
+  "esm2015": "../esm2015/sortable/smart-webcomponents-angular-sortable.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-sortable.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-sortable.js",
+  "typings": "smart-webcomponents-angular-sortable.d.ts",
+  "metadata": "smart-webcomponents-angular-sortable.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/sortable"
+}

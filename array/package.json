@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-array.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-array.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-array.js",
+  "esm5": "../esm5/array/smart-webcomponents-angular-array.js",
+  "esm2015": "../esm2015/array/smart-webcomponents-angular-array.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-array.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-array.js",
+  "typings": "smart-webcomponents-angular-array.d.ts",
+  "metadata": "smart-webcomponents-angular-array.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/array"
+}

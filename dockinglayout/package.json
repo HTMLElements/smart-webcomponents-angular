@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-dockinglayout.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-dockinglayout.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-dockinglayout.js",
+  "esm5": "../esm5/dockinglayout/smart-webcomponents-angular-dockinglayout.js",
+  "esm2015": "../esm2015/dockinglayout/smart-webcomponents-angular-dockinglayout.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-dockinglayout.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-dockinglayout.js",
+  "typings": "smart-webcomponents-angular-dockinglayout.d.ts",
+  "metadata": "smart-webcomponents-angular-dockinglayout.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/dockinglayout"
+}

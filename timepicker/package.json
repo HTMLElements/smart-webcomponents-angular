@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-timepicker.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-timepicker.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-timepicker.js",
+  "esm5": "../esm5/timepicker/smart-webcomponents-angular-timepicker.js",
+  "esm2015": "../esm2015/timepicker/smart-webcomponents-angular-timepicker.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-timepicker.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-timepicker.js",
+  "typings": "smart-webcomponents-angular-timepicker.d.ts",
+  "metadata": "smart-webcomponents-angular-timepicker.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/timepicker"
+}

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-led.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-led.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-led.js",
+  "esm5": "../esm5/led/smart-webcomponents-angular-led.js",
+  "esm2015": "../esm2015/led/smart-webcomponents-angular-led.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-led.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-led.js",
+  "typings": "smart-webcomponents-angular-led.d.ts",
+  "metadata": "smart-webcomponents-angular-led.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/led"
+}

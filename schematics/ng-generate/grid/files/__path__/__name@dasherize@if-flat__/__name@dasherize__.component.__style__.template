@@ -1,0 +1,10 @@
+body[theme="dark"],
+body[theme="dark-red"],
+body[theme="dark-green"],
+body[theme="dark-pink"],
+body[theme="dark-purple"],
+body[theme="dark-turquoise"],
+body[theme="dark-orange"] {
+	background: #333;
+	color: white;
+}
