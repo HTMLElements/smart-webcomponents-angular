@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-form.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-form.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-form.js",
+  "esm5": "../esm5/form/smart-webcomponents-angular-form.js",
+  "esm2015": "../esm2015/form/smart-webcomponents-angular-form.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-form.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-form.js",
+  "typings": "smart-webcomponents-angular-form.d.ts",
+  "metadata": "smart-webcomponents-angular-form.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/form"
+}

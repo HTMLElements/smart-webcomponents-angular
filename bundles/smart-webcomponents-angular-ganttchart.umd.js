@@ -358,12 +358,43 @@ import './../source/modules/smart.ganttchart';
         function GanttChartComponent(ref) {
             var _this = _super.call(this, ref) || this;
             _this.eventHandlers = [];
+            /** @description This event is triggered when a batch update was started after executing the beginUpdate method.
+            *  @param event. The custom event. 	*/
+            _this.onBeginUpdate = new core.EventEmitter();
+            /** @description This event is triggered when a batch update was ended from after executing the endUpdate method.
+            *  @param event. The custom event. 	*/
+            _this.onEndUpdate = new core.EventEmitter();
             /** @description This event is triggered when a Task is selected/unselected.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
             *   value - The index of the new selected task.
             *   oldValue - The index of the previously selected task.
             */
             _this.onChange = new core.EventEmitter();
+            /** @description This event is triggered when a task, resource or connection is clicked inside the Timeline or the Tree columns.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	originalEvent)
+            *   item - The item that was clicked. It cam be a task, resource or connection.
+            *   type - The type of item. Possible values are: 'task', 'resource', 'connection'.
+            *   originalEvent - The original DOM event.
+            */
+            _this.onItemClick = new core.EventEmitter();
+            /** @description This event is triggered when a Task/Resource/Connection is inserted.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+            *   type - The type of item that has been modified.
+            *   item - An object that represents the actual item with it's attributes.
+            */
+            _this.onItemInsert = new core.EventEmitter();
+            /** @description This event is triggered when a Task/Resource/Connection is removed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+            *   type - The type of item that has been modified.
+            *   item - An object that represents the actual item with it's attributes.
+            */
+            _this.onItemRemove = new core.EventEmitter();
+            /** @description This event is triggered when a Task/Resource/Connection is updated.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+            *   type - The type of item that has been modified.
+            *   item - An object that represents the actual item with it's attributes.
+            */
+            _this.onItemUpdate = new core.EventEmitter();
             /** @description This event is triggered when the progress of a task bar starts to change as a result of user interaction. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	progress)
             *   index - The index of the task which progress is going to be changed.
@@ -655,6 +686,17 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "hideTimelineHeaderDetails", {
+            /** @description By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ). */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.hideTimelineHeaderDetails : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.hideTimelineHeaderDetails = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "hideResourcePanel", {
             /** @description Hides the Resource panel regardless of the resources availability By default the Resource panel is visible if resources are added to the GanttChart. This property allows to hide the Resource panel permanently. */
             get: function () {
@@ -787,6 +829,17 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "progressLabelFormatFunction", {
+            /** @description A format function for the Timeline task progress label. The expected result from the function is a string. The label is hidden by default can be shown with the showProgressLabel property. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.progressLabelFormatFunction : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.progressLabelFormatFunction = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "resources", {
             /** @description A getter that returns a flat structure as an array of all resources inside the element. */
             get: function () {
@@ -908,6 +961,17 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "showProgressLabel", {
+            /** @description Shows the progress label inside the progress bars of the Timeline tasks. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.showProgressLabel : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.showProgressLabel = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "snapToNearest", {
             /** @description If set the dateStart/dateEnd of the tasks will be coerced to the nearest timeline cell date ( according to the view ). Affects the dragging operation as well. */
             get: function () {
@@ -1019,7 +1083,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "timelineHeaderFormatFunction", {
-            /** @description A format function for the Header of the Timeline. */
+            /** @description A format function for the Header of the Timeline. The function provides the following arguments: date - a Date object that represets the date for the current cell.type - a string that represents the type of date that the cell is showing, e.g. 'month', 'week', 'day', etc.isHeaderDetails - a boolean that indicates whether the current cell is part of the Header Details Container or not.value - a string that represents the default value for the cell provided by the element. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.timelineHeaderFormatFunction : undefined;
             },
@@ -1345,8 +1409,35 @@ import './../source/modules/smart.ganttchart';
                 });
             });
         };
+        /** @description Returns the Tree path of a task/resource.
+        * @param {GanttChartTask | GanttChartResource | number} item. A GattChartTask/GanttChartResource item object or index.
+        * @returns {string}
+      */
+        GanttChartComponent.prototype.getItemPath = function (item) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getItemPath(item);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Returns the index of a task.
-        * @param {HTMLElement} task. A GattChartTask object.
+        * @param {GanttChartTask} task. A GattChartTask object.
         * @returns {number}
       */
         GanttChartComponent.prototype.getTaskIndex = function (task) {
@@ -1373,7 +1464,7 @@ import './../source/modules/smart.ganttchart';
             });
         };
         /** @description Returns the tree path of a task.
-        * @param {GanttChartTask} task. Returns the Tree path of the task as a string.
+        * @param {GanttChartTask} task. A GanttChartTask object.
         * @returns {string}
       */
         GanttChartComponent.prototype.getTaskPath = function (task) {
@@ -1387,6 +1478,33 @@ import './../source/modules/smart.ganttchart';
                                 return new Promise(function (resolve) {
                                     _this.nativeElement.whenRendered(function () {
                                         var result = _this.nativeElement.getTaskPath(task);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns teh Project of a task if any.
+        * @param {GanttChartTask} task. A GantChartTask object.
+        * @returns {GanttChartTask | undefined}
+      */
+        GanttChartComponent.prototype.getTaskProject = function (task) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getTaskProject(task);
                                         resolve(result);
                                     });
                                 });
@@ -1414,6 +1532,33 @@ import './../source/modules/smart.ganttchart';
                                 return new Promise(function (resolve) {
                                     _this.nativeElement.whenRendered(function () {
                                         var result = _this.nativeElement.getResourceIndex(resource);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the tasks that are assigned to the resource.
+        * @param {any} resource. A GanttChartResource object.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getResourceTasks = function (resource) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getResourceTasks(resource);
                                         resolve(result);
                                     });
                                 });
@@ -1496,7 +1641,7 @@ import './../source/modules/smart.ganttchart';
             }
         };
         /** @description Updates a task inside the timeline.
-        * @param {string | number} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+        * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
         * @param {any} taskObject. An object describing a Gantt Chart task. The properties of this object will be applied to the desired task.
         */
         GanttChartComponent.prototype.updateTask = function (index, taskObject) {
@@ -1511,7 +1656,7 @@ import './../source/modules/smart.ganttchart';
             }
         };
         /** @description Removes a task from the timeline.
-        * @param {string | number} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+        * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
         */
         GanttChartComponent.prototype.removeTask = function (index) {
             var _this = this;
@@ -1653,8 +1798,20 @@ import './../source/modules/smart.ganttchart';
         /** @description Add event listeners. */
         GanttChartComponent.prototype.listen = function () {
             var that = this;
+            that.eventHandlers['beginUpdateHandler'] = function (event) { that.onBeginUpdate.emit(event); };
+            that.nativeElement.addEventListener('beginUpdate', that.eventHandlers['beginUpdateHandler']);
+            that.eventHandlers['endUpdateHandler'] = function (event) { that.onEndUpdate.emit(event); };
+            that.nativeElement.addEventListener('endUpdate', that.eventHandlers['endUpdateHandler']);
             that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+            that.eventHandlers['itemClickHandler'] = function (event) { that.onItemClick.emit(event); };
+            that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
+            that.eventHandlers['itemInsertHandler'] = function (event) { that.onItemInsert.emit(event); };
+            that.nativeElement.addEventListener('itemInsert', that.eventHandlers['itemInsertHandler']);
+            that.eventHandlers['itemRemoveHandler'] = function (event) { that.onItemRemove.emit(event); };
+            that.nativeElement.addEventListener('itemRemove', that.eventHandlers['itemRemoveHandler']);
+            that.eventHandlers['itemUpdateHandler'] = function (event) { that.onItemUpdate.emit(event); };
+            that.nativeElement.addEventListener('itemUpdate', that.eventHandlers['itemUpdateHandler']);
             that.eventHandlers['progressChangeStartHandler'] = function (event) { that.onProgressChangeStart.emit(event); };
             that.nativeElement.addEventListener('progressChangeStart', that.eventHandlers['progressChangeStartHandler']);
             that.eventHandlers['progressChangeEndHandler'] = function (event) { that.onProgressChangeEnd.emit(event); };
@@ -1691,8 +1848,26 @@ import './../source/modules/smart.ganttchart';
         /** @description Remove event listeners. */
         GanttChartComponent.prototype.unlisten = function () {
             var that = this;
+            if (that.eventHandlers['beginUpdateHandler']) {
+                that.nativeElement.removeEventListener('beginUpdate', that.eventHandlers['beginUpdateHandler']);
+            }
+            if (that.eventHandlers['endUpdateHandler']) {
+                that.nativeElement.removeEventListener('endUpdate', that.eventHandlers['endUpdateHandler']);
+            }
             if (that.eventHandlers['changeHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+            }
+            if (that.eventHandlers['itemClickHandler']) {
+                that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
+            }
+            if (that.eventHandlers['itemInsertHandler']) {
+                that.nativeElement.removeEventListener('itemInsert', that.eventHandlers['itemInsertHandler']);
+            }
+            if (that.eventHandlers['itemRemoveHandler']) {
+                that.nativeElement.removeEventListener('itemRemove', that.eventHandlers['itemRemoveHandler']);
+            }
+            if (that.eventHandlers['itemUpdateHandler']) {
+                that.nativeElement.removeEventListener('itemUpdate', that.eventHandlers['itemUpdateHandler']);
             }
             if (that.eventHandlers['progressChangeStartHandler']) {
                 that.nativeElement.removeEventListener('progressChangeStart', that.eventHandlers['progressChangeStartHandler']);
@@ -1799,6 +1974,9 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "headerTemplate", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "hideTimelineHeaderDetails", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "hideResourcePanel", null);
         __decorate([
             core.Input()
@@ -1835,6 +2013,9 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "popupWindowCustomizationFunction", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "progressLabelFormatFunction", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "resources", null);
         __decorate([
             core.Input()
@@ -1866,6 +2047,9 @@ import './../source/modules/smart.ganttchart';
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "selectedIndexes", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "showProgressLabel", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "snapToNearest", null);
@@ -1919,7 +2103,25 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "unfocusable", null);
         __decorate([
             core.Output()
+        ], GanttChartComponent.prototype, "onBeginUpdate", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onEndUpdate", void 0);
+        __decorate([
+            core.Output()
         ], GanttChartComponent.prototype, "onChange", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onItemClick", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onItemInsert", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onItemRemove", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onItemUpdate", void 0);
         __decorate([
             core.Output()
         ], GanttChartComponent.prototype, "onProgressChangeStart", void 0);

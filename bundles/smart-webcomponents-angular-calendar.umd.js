@@ -399,6 +399,18 @@ import './../source/modules/smart.calendar';
             *   type - The view type - 'month', 'decade' or 'year'.
             */
             _this.onNavigationChange = new core.EventEmitter();
+            /** @description This event is triggered when the tooltip for the important date is opened.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	value)
+            *   target - The event target - tooltip.
+            *   value - The important date of the hovered cell.
+            */
+            _this.onOpen = new core.EventEmitter();
+            /** @description This event is triggered when the tooltip for the important date is closed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	value)
+            *   target - The event target - tooltip.
+            *   value - The important date of the hovered cell.
+            */
+            _this.onClose = new core.EventEmitter();
             _this._initialChange = true;
             _this.nativeElement = ref.nativeElement;
             return _this;
@@ -1135,6 +1147,10 @@ import './../source/modules/smart.calendar';
             that.nativeElement.addEventListener('navigationChanging', that.eventHandlers['navigationChangingHandler']);
             that.eventHandlers['navigationChangeHandler'] = function (event) { that.onNavigationChange.emit(event); };
             that.nativeElement.addEventListener('navigationChange', that.eventHandlers['navigationChangeHandler']);
+            that.eventHandlers['openHandler'] = function (event) { that.onOpen.emit(event); };
+            that.nativeElement.addEventListener('open', that.eventHandlers['openHandler']);
+            that.eventHandlers['closeHandler'] = function (event) { that.onClose.emit(event); };
+            that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
             that.eventHandlers['changeModelHandler'] = function (event) {
                 that._initialChange = false;
                 that._onChange(that.nativeElement.selectedDates.length > 0 ? (that.nativeElement.selectedDates.length > 1 ? that.nativeElement.selectedDates : that.nativeElement.selectedDates[0]) : null);
@@ -1170,6 +1186,12 @@ import './../source/modules/smart.calendar';
             }
             if (that.eventHandlers['navigationChangeHandler']) {
                 that.nativeElement.removeEventListener('navigationChange', that.eventHandlers['navigationChangeHandler']);
+            }
+            if (that.eventHandlers['openHandler']) {
+                that.nativeElement.removeEventListener('open', that.eventHandlers['openHandler']);
+            }
+            if (that.eventHandlers['closeHandler']) {
+                that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
             }
             if (that.eventHandlers['changeModelHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -1349,6 +1371,12 @@ import './../source/modules/smart.calendar';
         __decorate([
             core.Output()
         ], CalendarComponent.prototype, "onNavigationChange", void 0);
+        __decorate([
+            core.Output()
+        ], CalendarComponent.prototype, "onOpen", void 0);
+        __decorate([
+            core.Output()
+        ], CalendarComponent.prototype, "onClose", void 0);
         CalendarComponent = __decorate([
             core.Directive({
                 selector: 'smart-calendar, [smart-calendar]',

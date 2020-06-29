@@ -72,8 +72,8 @@ export declare class DateRangeInputComponent extends BaseElement implements OnIn
     theme: string;
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
-    /** @description Sets or gets the value of the element. */
-    value: string;
+    /** @description Sets or gets the value of the element. The type of the value depends on the valueType property. */
+    value: any;
     /** @description Determines the value type returned from the `value` property. */
     valueType: DateRangeInputValueType;
     /** @description This event is triggered when the selection is changed.

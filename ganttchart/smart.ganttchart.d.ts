@@ -47,6 +47,8 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     durationUnit: Duration;
     /** @description Allows to create a custom header content for the Task Panel. The attribute accepts an HTMLTemplate element, it's id or a function. */
     headerTemplate: any;
+    /** @description By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ). */
+    hideTimelineHeaderDetails: boolean;
     /** @description Hides the Resource panel regardless of the resources availability By default the Resource panel is visible if resources are added to the GanttChart. This property allows to hide the Resource panel permanently. */
     hideResourcePanel: boolean;
     /** @description Determines weather or not horizontal scrollbar is shown. */
@@ -71,6 +73,8 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     nonworkingHours: number[];
     /** @description A function that can be used to completly customize the popup Window that is used to interact width tasks by changing their properties. The function as three arguments: target - the target popup Window that is about to be opened.type - the type of the window. The type determines the purpose of the window. Three possible values: 'task' (task editing), 'confirm' ( confirmation window), 'connection' (used when deleting a connection between tasks). taskIndex - the index of the task that is being edited. It will be undefined if the type of the window is not 'task'. */
     popupWindowCustomizationFunction: any;
+    /** @description A format function for the Timeline task progress label. The expected result from the function is a string. The label is hidden by default can be shown with the showProgressLabel property. */
+    progressLabelFormatFunction: any;
     /** @description A getter that returns a flat structure as an array of all resources inside the element. */
     resources: GanttChartResource[];
     /** @description Deteremines the columns that will be visible in the Resource Tree. Each entry in the value of this property must be of type Object.  It should contain the label and value keys. The value of label determines the column header label inside the Task Tree. The value of value determines the content of the cells in the column. By default, one column with all resource labels is visible.  Additional properties: formatFunction - a function that allows to customize the content of each record in the column. The function accepts two arguments - the actual label as string that is going to be inserted and the index of the resource. The function must return a string as the new content. min - controls the min size of the column max - controls the max size of the columnsize - controls the actual size of the column */
@@ -93,6 +97,8 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     rightToLeft: boolean;
     /** @description Determines the selected task(s). If empty no tasks are selected. */
     selectedIndexes: number[];
+    /** @description Shows the progress label inside the progress bars of the Timeline tasks. */
+    showProgressLabel: boolean;
     /** @description If set the dateStart/dateEnd of the tasks will be coerced to the nearest timeline cell date ( according to the view ). Affects the dragging operation as well. */
     snapToNearest: boolean;
     /** @description Determines whether the GanttChart can be sorted or not. */
@@ -113,7 +119,7 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     treeMin: any;
     /** @description Determines the size(width) of the task tree. */
     treeSize: any;
-    /** @description A format function for the Header of the Timeline. */
+    /** @description A format function for the Header of the Timeline. The function provides the following arguments: date - a Date object that represets the date for the current cell.type - a string that represents the type of date that the cell is showing, e.g. 'month', 'week', 'day', etc.isHeaderDetails - a boolean that indicates whether the current cell is part of the Header Details Container or not.value - a string that represents the default value for the cell provided by the element. */
     timelineHeaderFormatFunction: any;
     /** @description Determines weather or not vertical scrollbar is shown. */
     verticalScrollBarVisibility: VerticalScrollBarVisibility;
@@ -127,12 +133,43 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     theme: string;
     /** @description Sets or gets if the element can be focused. */
     unfocusable: boolean;
+    /** @description This event is triggered when a batch update was started after executing the beginUpdate method.
+    *  @param event. The custom event. 	*/
+    onBeginUpdate: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a batch update was ended from after executing the endUpdate method.
+    *  @param event. The custom event. 	*/
+    onEndUpdate: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a Task is selected/unselected.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
     *   value - The index of the new selected task.
     *   oldValue - The index of the previously selected task.
     */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a task, resource or connection is clicked inside the Timeline or the Tree columns.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	originalEvent)
+    *   item - The item that was clicked. It cam be a task, resource or connection.
+    *   type - The type of item. Possible values are: 'task', 'resource', 'connection'.
+    *   originalEvent - The original DOM event.
+    */
+    onItemClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a Task/Resource/Connection is inserted.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+    *   type - The type of item that has been modified.
+    *   item - An object that represents the actual item with it's attributes.
+    */
+    onItemInsert: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a Task/Resource/Connection is removed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+    *   type - The type of item that has been modified.
+    *   item - An object that represents the actual item with it's attributes.
+    */
+    onItemRemove: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a Task/Resource/Connection is updated.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+    *   type - The type of item that has been modified.
+    *   item - An object that represents the actual item with it's attributes.
+    */
+    onItemUpdate: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the progress of a task bar starts to change as a result of user interaction. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	progress)
     *   index - The index of the task which progress is going to be changed.
@@ -287,21 +324,36 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     * @returns {any[]}
   */
     getState(): Promise<any>;
+    /** @description Returns the Tree path of a task/resource.
+    * @param {GanttChartTask | GanttChartResource | number} item. A GattChartTask/GanttChartResource item object or index.
+    * @returns {string}
+  */
+    getItemPath(item: any): Promise<any>;
     /** @description Returns the index of a task.
-    * @param {HTMLElement} task. A GattChartTask object.
+    * @param {GanttChartTask} task. A GattChartTask object.
     * @returns {number}
   */
     getTaskIndex(task: any): Promise<any>;
     /** @description Returns the tree path of a task.
-    * @param {GanttChartTask} task. Returns the Tree path of the task as a string.
+    * @param {GanttChartTask} task. A GanttChartTask object.
     * @returns {string}
   */
     getTaskPath(task: any): Promise<any>;
+    /** @description Returns teh Project of a task if any.
+    * @param {GanttChartTask} task. A GantChartTask object.
+    * @returns {GanttChartTask | undefined}
+  */
+    getTaskProject(task: any): Promise<any>;
     /** @description Returns the index of a resource.
     * @param {any} resource. A GanttChartResource object.
     * @returns {number}
   */
     getResourceIndex(resource: any): Promise<any>;
+    /** @description Returns the tasks that are assigned to the resource.
+    * @param {any} resource. A GanttChartResource object.
+    * @returns {any}
+  */
+    getResourceTasks(resource: any): Promise<any>;
     /** @description Unselects all currently selected items inside the GanttChart including Tasks and Resources. It also clears the assignment highlgihters.
     */
     clearSelection(): void;
@@ -322,14 +374,14 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     */
     insertTask(index: string | number, taskObject: any): void;
     /** @description Updates a task inside the timeline.
-    * @param {string | number} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+    * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
     * @param {any} taskObject. An object describing a Gantt Chart task. The properties of this object will be applied to the desired task.
     */
-    updateTask(index: string | number, taskObject: any): void;
+    updateTask(index: any, taskObject: any): void;
     /** @description Removes a task from the timeline.
-    * @param {string | number} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+    * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
     */
-    removeTask(index: string | number): void;
+    removeTask(index: any): void;
     /** @description Inserts a new resource.
     * @param {string | number} resourceId. A string that represents the id of a resource or it's hierarchical position, e.g. '0' ( following jqxTree syntax), or a number that represents the index of a resource.
     * @param {any} resourceObject?. An object describing a Gantt Chart resource.

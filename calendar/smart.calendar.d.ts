@@ -59,7 +59,7 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Hides the arrow of the tooltip. */
     hideTooltipArrow: boolean;
     /** @description Sets the dates that will be displayed as important. */
-    importantDates: string[];
+    importantDates: string[] | Date[];
     /** @description Sets a template for the important dates. Accepts the id of an HTMLTemplate element inside the DOM of or a reference to it. */
     importantDatesTemplate: any;
     /** @description  Determines the language of the Calendar.  */
@@ -89,7 +89,7 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description  Determines the position of the navigation buttons located inside the header.  */
     scrollButtonsPosition: LayoutPosition;
     /** @description Sets the dates that will be selected. Selected dates are styled differently than the rest. The dates can be Date objects or strings in a valid date format. */
-    selectedDates: string[];
+    selectedDates: string[] | Date[];
     /** @description Determines the date selection mode. */
     selectionMode: CalendarSelectionMode;
     /** @description Sets the delay between clicks of the date navigation buttons located in the header of the Calendar.  */
@@ -150,6 +150,18 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     *   type - The view type - 'month', 'decade' or 'year'.
     */
     onNavigationChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the tooltip for the important date is opened.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	value)
+    *   target - The event target - tooltip.
+    *   value - The important date of the hovered cell.
+    */
+    onOpen: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the tooltip for the important date is closed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	value)
+    *   target - The event target - tooltip.
+    *   value - The important date of the hovered cell.
+    */
+    onClose: EventEmitter<CustomEvent>;
     /** @description Clears the selection. Removes all seleceted dates.
     */
     clearSelection(): void;

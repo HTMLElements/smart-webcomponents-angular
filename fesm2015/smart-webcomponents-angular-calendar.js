@@ -154,6 +154,18 @@ let CalendarComponent = class CalendarComponent extends BaseElement {
         *   type - The view type - 'month', 'decade' or 'year'.
         */
         this.onNavigationChange = new EventEmitter();
+        /** @description This event is triggered when the tooltip for the important date is opened.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	value)
+        *   target - The event target - tooltip.
+        *   value - The important date of the hovered cell.
+        */
+        this.onOpen = new EventEmitter();
+        /** @description This event is triggered when the tooltip for the important date is closed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	value)
+        *   target - The event target - tooltip.
+        *   value - The important date of the hovered cell.
+        */
+        this.onClose = new EventEmitter();
         this._initialChange = true;
         this.nativeElement = ref.nativeElement;
     }
@@ -659,6 +671,10 @@ let CalendarComponent = class CalendarComponent extends BaseElement {
         that.nativeElement.addEventListener('navigationChanging', that.eventHandlers['navigationChangingHandler']);
         that.eventHandlers['navigationChangeHandler'] = (event) => { that.onNavigationChange.emit(event); };
         that.nativeElement.addEventListener('navigationChange', that.eventHandlers['navigationChangeHandler']);
+        that.eventHandlers['openHandler'] = (event) => { that.onOpen.emit(event); };
+        that.nativeElement.addEventListener('open', that.eventHandlers['openHandler']);
+        that.eventHandlers['closeHandler'] = (event) => { that.onClose.emit(event); };
+        that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
         that.eventHandlers['changeModelHandler'] = (event) => {
             that._initialChange = false;
             that._onChange(that.nativeElement.selectedDates.length > 0 ? (that.nativeElement.selectedDates.length > 1 ? that.nativeElement.selectedDates : that.nativeElement.selectedDates[0]) : null);
@@ -694,6 +710,12 @@ let CalendarComponent = class CalendarComponent extends BaseElement {
         }
         if (that.eventHandlers['navigationChangeHandler']) {
             that.nativeElement.removeEventListener('navigationChange', that.eventHandlers['navigationChangeHandler']);
+        }
+        if (that.eventHandlers['openHandler']) {
+            that.nativeElement.removeEventListener('open', that.eventHandlers['openHandler']);
+        }
+        if (that.eventHandlers['closeHandler']) {
+            that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
         }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -874,6 +896,12 @@ __decorate([
 __decorate([
     Output()
 ], CalendarComponent.prototype, "onNavigationChange", void 0);
+__decorate([
+    Output()
+], CalendarComponent.prototype, "onOpen", void 0);
+__decorate([
+    Output()
+], CalendarComponent.prototype, "onClose", void 0);
 CalendarComponent = __decorate([
     Directive({
         selector: 'smart-calendar, [smart-calendar]',

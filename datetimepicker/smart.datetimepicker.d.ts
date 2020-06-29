@@ -77,7 +77,7 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     /** @description Sets additional helper text below the element that appears only when the element is focused. */
     hint: string;
     /** @description Sets dates, displayed as important in the calendar pop-up. */
-    importantDates: string[];
+    importantDates: string[] | Date[];
     /** @description Sets a template for the important dates of the calendar pop-up. Accepts the id of or a reference to an HTMLTemplateElement. */
     importantDatesTemplate: string | HTMLTemplateElement;
     /** @description Sets or gets the increment/decrement interval when a date/time segment inside the input has not been highlighted. The default interval is 1 second. If a numeric value is passed, it represents milliseconds. */

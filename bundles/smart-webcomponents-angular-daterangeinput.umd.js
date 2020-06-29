@@ -661,7 +661,7 @@ import './../source/modules/smart.daterangeinput';
             configurable: true
         });
         Object.defineProperty(DateRangeInputComponent.prototype, "value", {
-            /** @description Sets or gets the value of the element. */
+            /** @description Sets or gets the value of the element. The type of the value depends on the valueType property. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.value : undefined;
             },
