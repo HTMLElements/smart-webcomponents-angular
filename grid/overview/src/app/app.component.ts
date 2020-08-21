@@ -123,7 +123,7 @@ export function GetData(rowscount?: number, last?: number, hasNullValues?: boole
 
 
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
@@ -160,7 +160,14 @@ export class AppComponent  {
     };
 
     dataSource = new Smart.DataAdapter({
-        dataSource: GetData(1000),
+        dataSource: GetData(30),
+        virtualDataSource: function (resultCallbackFunction) {
+            setTimeout(function () {
+                resultCallbackFunction({
+                    dataSource: GetData(30)
+                });
+            }, 100);
+        },
         dataFields: [
             'id: number',
             'firstName: string',
