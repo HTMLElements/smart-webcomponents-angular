@@ -376,6 +376,9 @@ import './../source/modules/smart.table';
             *   row - The new data of the cell's row.
             */
             _this.onCellEndEdit = new core.EventEmitter();
+            /** @description This event is triggered when the selection is changed.
+            *  @param event. The custom event. 	*/
+            _this.onChange = new core.EventEmitter();
             /** @description This event is triggered when a column header cell has been clicked.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
             *   dataField - The data field of the cell's column.
@@ -429,13 +432,35 @@ import './../source/modules/smart.table';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(TableComponent.prototype, "columns", {
-            /** @description Describes the columns properties. */
+        Object.defineProperty(TableComponent.prototype, "autoLoadState", {
+            /** @description Enables or disables auto load state from the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property. */
             get: function () {
-                return this.nativeElement ? this.nativeElement.columns : undefined;
+                return this.nativeElement ? this.nativeElement.autoLoadState : undefined;
             },
             set: function (value) {
-                this.nativeElement ? this.nativeElement.columns = value : undefined;
+                this.nativeElement ? this.nativeElement.autoLoadState = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "autoSaveState", {
+            /** @description Enables or disables auto save state to the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and   sorted columns is saved, based on the value of the stateSettings property. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.autoSaveState : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.autoSaveState = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "columnMinWidth", {
+            /** @description Sets or gets the min width of columns when columnSizeMode is 'auto'. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.columnMinWidth : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.columnMinWidth = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -451,6 +476,50 @@ import './../source/modules/smart.table';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(TableComponent.prototype, "columns", {
+            /** @description Describes the columns properties. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.columns : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.columns = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "conditionalFormatting", {
+            /** @description Sets or gets details about conditional formatting to be applied to the Table's cells. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.conditionalFormatting : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "columnSizeMode", {
+            /** @description Sets or gets the column sizing behavior. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.columnSizeMode : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.columnSizeMode = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "conditionalFormattingButton", {
+            /** @description Sets or gets whether the "Conditional Formatting" button appears in the Table's header (toolbar). Clicking this button opens a dialog with formatting options. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.conditionalFormattingButton : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.conditionalFormattingButton = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(TableComponent.prototype, "dataSource", {
             /** @description Determines the data source of the table component. */
             get: function () {
@@ -458,6 +527,17 @@ import './../source/modules/smart.table';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "dataTransform", {
+            /** @description A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument). */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.dataTransform : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.dataTransform = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -715,6 +795,28 @@ import './../source/modules/smart.table';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(TableComponent.prototype, "selectionMode", {
+            /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.selectionMode : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "sort", {
+            /** @description A callback function executed when a column is sorted that can be used to override the default sorting behavior. The function is passed four parameters: dataSource - the Table's data sourcesortColumns - an array of the data fields of columns to be sorted bydirections - an array of sort directions to be sorted by (corresponding to sortColumns)defaultCompareFunctions - an array of default compare functions to be sorted by (corresponding to sortColumns), useful if the sorting of some columns does not have to be overridden */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.sort : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.sort = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(TableComponent.prototype, "sortMode", {
             /** @description Determines the sorting mode of the Table. */
             get: function () {
@@ -726,6 +828,17 @@ import './../source/modules/smart.table';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(TableComponent.prototype, "stateSettings", {
+            /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.stateSettings : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.stateSettings = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(TableComponent.prototype, "theme", {
             /** @description Determines the theme. Theme defines the look of the element */
             get: function () {
@@ -733,6 +846,17 @@ import './../source/modules/smart.table';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.theme = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "tooltip", {
+            /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.tooltip : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.tooltip = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -873,7 +997,7 @@ import './../source/modules/smart.table';
                 });
             }
         };
-        /** @description Collapses a group.
+        /** @description Collapses a row (in tree mode).
         * @param {string | number} rowId. The id of the row to collapse.
         */
         TableComponent.prototype.collapseRow = function (rowId) {
@@ -997,6 +1121,32 @@ import './../source/modules/smart.table';
                 });
             });
         };
+        /** @description Returns the Table's state, containing information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns. It can then be stored or passed to the method loadState.
+        * @returns {any}
+      */
+        TableComponent.prototype.getState = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getState();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Returns the value of a cell.
         * @param {string | number} row. The id of the cell's row.
         * @param {string} dataField. The dataField of the cell's column.
@@ -1024,6 +1174,20 @@ import './../source/modules/smart.table';
                     }
                 });
             });
+        };
+        /** @description Loads the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property.
+        * @param {any} state?. An object returned by one of the methods <strong>getState</strong> or <strong>saveState</strong>. If a state is not passed, the method tries to load the state from the browser's localStorage.
+        */
+        TableComponent.prototype.loadState = function (state) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.loadState(state);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.loadState(state);
+                });
+            }
         };
         /** @description Navigates to a page.
         * @param {number} pageIndex. The zero-based page index to navigate to.
@@ -1080,6 +1244,32 @@ import './../source/modules/smart.table';
                 });
             }
         };
+        /** @description Saves the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is saved, based on the value of the stateSettings property.
+        * @returns {any}
+      */
+        TableComponent.prototype.saveState = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.saveState();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Selects a row.
         * @param {string | number} rowId. The id of the row to select.
         */
@@ -1112,7 +1302,7 @@ import './../source/modules/smart.table';
         };
         /** @description Sorts the Table by a column.
         * @param {string} columnDataField. Column field name.
-        * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending) and 'desc' (descending).
+        * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending), 'desc' (descending), and null (removes sorting by column). If not provided, toggles the sorting.
         */
         TableComponent.prototype.sortBy = function (columnDataField, sortOrder) {
             var _this = this;
@@ -1176,6 +1366,8 @@ import './../source/modules/smart.table';
             that.nativeElement.addEventListener('cellClick', that.eventHandlers['cellClickHandler']);
             that.eventHandlers['cellEndEditHandler'] = function (event) { that.onCellEndEdit.emit(event); };
             that.nativeElement.addEventListener('cellEndEdit', that.eventHandlers['cellEndEditHandler']);
+            that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
+            that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
             that.eventHandlers['columnClickHandler'] = function (event) { that.onColumnClick.emit(event); };
             that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
             that.eventHandlers['filterHandler'] = function (event) { that.onFilter.emit(event); };
@@ -1198,6 +1390,9 @@ import './../source/modules/smart.table';
             }
             if (that.eventHandlers['cellEndEditHandler']) {
                 that.nativeElement.removeEventListener('cellEndEdit', that.eventHandlers['cellEndEditHandler']);
+            }
+            if (that.eventHandlers['changeHandler']) {
+                that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
             }
             if (that.eventHandlers['columnClickHandler']) {
                 that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
@@ -1223,13 +1418,34 @@ import './../source/modules/smart.table';
         ], TableComponent.prototype, "animation", null);
         __decorate([
             core.Input()
-        ], TableComponent.prototype, "columns", null);
+        ], TableComponent.prototype, "autoLoadState", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "autoSaveState", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "columnMinWidth", null);
         __decorate([
             core.Input()
         ], TableComponent.prototype, "columnReorder", null);
         __decorate([
             core.Input()
+        ], TableComponent.prototype, "columns", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "conditionalFormatting", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "columnSizeMode", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "conditionalFormattingButton", null);
+        __decorate([
+            core.Input()
         ], TableComponent.prototype, "dataSource", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "dataTransform", null);
         __decorate([
             core.Input()
         ], TableComponent.prototype, "disabled", null);
@@ -1301,10 +1517,22 @@ import './../source/modules/smart.table';
         ], TableComponent.prototype, "selection", null);
         __decorate([
             core.Input()
+        ], TableComponent.prototype, "selectionMode", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "sort", null);
+        __decorate([
+            core.Input()
         ], TableComponent.prototype, "sortMode", null);
         __decorate([
             core.Input()
+        ], TableComponent.prototype, "stateSettings", null);
+        __decorate([
+            core.Input()
         ], TableComponent.prototype, "theme", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "tooltip", null);
         __decorate([
             core.Output()
         ], TableComponent.prototype, "onCellBeginEdit", void 0);
@@ -1314,6 +1542,9 @@ import './../source/modules/smart.table';
         __decorate([
             core.Output()
         ], TableComponent.prototype, "onCellEndEdit", void 0);
+        __decorate([
+            core.Output()
+        ], TableComponent.prototype, "onChange", void 0);
         __decorate([
             core.Output()
         ], TableComponent.prototype, "onColumnClick", void 0);

@@ -130,6 +130,9 @@ let TableComponent = class TableComponent extends BaseElement {
         *   row - The new data of the cell's row.
         */
         this.onCellEndEdit = new EventEmitter();
+        /** @description This event is triggered when the selection is changed.
+        *  @param event. The custom event. 	*/
+        this.onChange = new EventEmitter();
         /** @description This event is triggered when a column header cell has been clicked.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
         *   dataField - The data field of the cell's column.
@@ -177,12 +180,26 @@ let TableComponent = class TableComponent extends BaseElement {
     set animation(value) {
         this.nativeElement ? this.nativeElement.animation = value : undefined;
     }
-    /** @description Describes the columns properties. */
-    get columns() {
-        return this.nativeElement ? this.nativeElement.columns : undefined;
+    /** @description Enables or disables auto load state from the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property. */
+    get autoLoadState() {
+        return this.nativeElement ? this.nativeElement.autoLoadState : undefined;
     }
-    set columns(value) {
-        this.nativeElement ? this.nativeElement.columns = value : undefined;
+    set autoLoadState(value) {
+        this.nativeElement ? this.nativeElement.autoLoadState = value : undefined;
+    }
+    /** @description Enables or disables auto save state to the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and   sorted columns is saved, based on the value of the stateSettings property. */
+    get autoSaveState() {
+        return this.nativeElement ? this.nativeElement.autoSaveState : undefined;
+    }
+    set autoSaveState(value) {
+        this.nativeElement ? this.nativeElement.autoSaveState = value : undefined;
+    }
+    /** @description Sets or gets the min width of columns when columnSizeMode is 'auto'. */
+    get columnMinWidth() {
+        return this.nativeElement ? this.nativeElement.columnMinWidth : undefined;
+    }
+    set columnMinWidth(value) {
+        this.nativeElement ? this.nativeElement.columnMinWidth = value : undefined;
     }
     /** @description Sets or gets whether the reordering of columns is enabled. */
     get columnReorder() {
@@ -191,12 +208,47 @@ let TableComponent = class TableComponent extends BaseElement {
     set columnReorder(value) {
         this.nativeElement ? this.nativeElement.columnReorder = value : undefined;
     }
+    /** @description Describes the columns properties. */
+    get columns() {
+        return this.nativeElement ? this.nativeElement.columns : undefined;
+    }
+    set columns(value) {
+        this.nativeElement ? this.nativeElement.columns = value : undefined;
+    }
+    /** @description Sets or gets details about conditional formatting to be applied to the Table's cells. */
+    get conditionalFormatting() {
+        return this.nativeElement ? this.nativeElement.conditionalFormatting : undefined;
+    }
+    set conditionalFormatting(value) {
+        this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
+    }
+    /** @description Sets or gets the column sizing behavior. */
+    get columnSizeMode() {
+        return this.nativeElement ? this.nativeElement.columnSizeMode : undefined;
+    }
+    set columnSizeMode(value) {
+        this.nativeElement ? this.nativeElement.columnSizeMode = value : undefined;
+    }
+    /** @description Sets or gets whether the "Conditional Formatting" button appears in the Table's header (toolbar). Clicking this button opens a dialog with formatting options. */
+    get conditionalFormattingButton() {
+        return this.nativeElement ? this.nativeElement.conditionalFormattingButton : undefined;
+    }
+    set conditionalFormattingButton(value) {
+        this.nativeElement ? this.nativeElement.conditionalFormattingButton = value : undefined;
+    }
     /** @description Determines the data source of the table component. */
     get dataSource() {
         return this.nativeElement ? this.nativeElement.dataSource : undefined;
     }
     set dataSource(value) {
         this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+    }
+    /** @description A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument). */
+    get dataTransform() {
+        return this.nativeElement ? this.nativeElement.dataTransform : undefined;
+    }
+    set dataTransform(value) {
+        this.nativeElement ? this.nativeElement.dataTransform = value : undefined;
     }
     /** @description Disables the interaction with the element. */
     get disabled() {
@@ -359,6 +411,20 @@ let TableComponent = class TableComponent extends BaseElement {
     set selection(value) {
         this.nativeElement ? this.nativeElement.selection = value : undefined;
     }
+    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+    get selectionMode() {
+        return this.nativeElement ? this.nativeElement.selectionMode : undefined;
+    }
+    set selectionMode(value) {
+        this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
+    }
+    /** @description A callback function executed when a column is sorted that can be used to override the default sorting behavior. The function is passed four parameters: dataSource - the Table's data sourcesortColumns - an array of the data fields of columns to be sorted bydirections - an array of sort directions to be sorted by (corresponding to sortColumns)defaultCompareFunctions - an array of default compare functions to be sorted by (corresponding to sortColumns), useful if the sorting of some columns does not have to be overridden */
+    get sort() {
+        return this.nativeElement ? this.nativeElement.sort : undefined;
+    }
+    set sort(value) {
+        this.nativeElement ? this.nativeElement.sort = value : undefined;
+    }
     /** @description Determines the sorting mode of the Table. */
     get sortMode() {
         return this.nativeElement ? this.nativeElement.sortMode : undefined;
@@ -366,12 +432,26 @@ let TableComponent = class TableComponent extends BaseElement {
     set sortMode(value) {
         this.nativeElement ? this.nativeElement.sortMode = value : undefined;
     }
+    /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
+    get stateSettings() {
+        return this.nativeElement ? this.nativeElement.stateSettings : undefined;
+    }
+    set stateSettings(value) {
+        this.nativeElement ? this.nativeElement.stateSettings = value : undefined;
+    }
     /** @description Determines the theme. Theme defines the look of the element */
     get theme() {
         return this.nativeElement ? this.nativeElement.theme : undefined;
     }
     set theme(value) {
         this.nativeElement ? this.nativeElement.theme = value : undefined;
+    }
+    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+    get tooltip() {
+        return this.nativeElement ? this.nativeElement.tooltip : undefined;
+    }
+    set tooltip(value) {
+        this.nativeElement ? this.nativeElement.tooltip = value : undefined;
     }
     /** @description Adds a filter to a specific column.
     * @param {string} dataField. The column's data field.
@@ -499,7 +579,7 @@ let TableComponent = class TableComponent extends BaseElement {
             });
         }
     }
-    /** @description Collapses a group.
+    /** @description Collapses a row (in tree mode).
     * @param {string | number} rowId. The id of the row to collapse.
     */
     collapseRow(rowId) {
@@ -600,6 +680,23 @@ let TableComponent = class TableComponent extends BaseElement {
             return result;
         });
     }
+    /** @description Returns the Table's state, containing information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns. It can then be stored or passed to the method loadState.
+    * @returns {any}
+  */
+    getState() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getState();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Returns the value of a cell.
     * @param {string | number} row. The id of the cell's row.
     * @param {string} dataField. The dataField of the cell's column.
@@ -618,6 +715,19 @@ let TableComponent = class TableComponent extends BaseElement {
             const result = yield getResultOnRender();
             return result;
         });
+    }
+    /** @description Loads the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property.
+    * @param {any} state?. An object returned by one of the methods <strong>getState</strong> or <strong>saveState</strong>. If a state is not passed, the method tries to load the state from the browser's localStorage.
+    */
+    loadState(state) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.loadState(state);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.loadState(state);
+            });
+        }
     }
     /** @description Navigates to a page.
     * @param {number} pageIndex. The zero-based page index to navigate to.
@@ -670,6 +780,23 @@ let TableComponent = class TableComponent extends BaseElement {
             });
         }
     }
+    /** @description Saves the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is saved, based on the value of the stateSettings property.
+    * @returns {any}
+  */
+    saveState() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.saveState();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Selects a row.
     * @param {string | number} rowId. The id of the row to select.
     */
@@ -700,7 +827,7 @@ let TableComponent = class TableComponent extends BaseElement {
     }
     /** @description Sorts the Table by a column.
     * @param {string} columnDataField. Column field name.
-    * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending) and 'desc' (descending).
+    * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending), 'desc' (descending), and null (removes sorting by column). If not provided, toggles the sorting.
     */
     sortBy(columnDataField, sortOrder) {
         if (this.nativeElement.isRendered) {
@@ -758,6 +885,8 @@ let TableComponent = class TableComponent extends BaseElement {
         that.nativeElement.addEventListener('cellClick', that.eventHandlers['cellClickHandler']);
         that.eventHandlers['cellEndEditHandler'] = (event) => { that.onCellEndEdit.emit(event); };
         that.nativeElement.addEventListener('cellEndEdit', that.eventHandlers['cellEndEditHandler']);
+        that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
+        that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['columnClickHandler'] = (event) => { that.onColumnClick.emit(event); };
         that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
         that.eventHandlers['filterHandler'] = (event) => { that.onFilter.emit(event); };
@@ -780,6 +909,9 @@ let TableComponent = class TableComponent extends BaseElement {
         }
         if (that.eventHandlers['cellEndEditHandler']) {
             that.nativeElement.removeEventListener('cellEndEdit', that.eventHandlers['cellEndEditHandler']);
+        }
+        if (that.eventHandlers['changeHandler']) {
+            that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
         }
         if (that.eventHandlers['columnClickHandler']) {
             that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
@@ -806,13 +938,34 @@ __decorate([
 ], TableComponent.prototype, "animation", null);
 __decorate([
     Input()
-], TableComponent.prototype, "columns", null);
+], TableComponent.prototype, "autoLoadState", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "autoSaveState", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "columnMinWidth", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "columnReorder", null);
 __decorate([
     Input()
+], TableComponent.prototype, "columns", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "conditionalFormatting", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "columnSizeMode", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "conditionalFormattingButton", null);
+__decorate([
+    Input()
 ], TableComponent.prototype, "dataSource", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "dataTransform", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "disabled", null);
@@ -884,10 +1037,22 @@ __decorate([
 ], TableComponent.prototype, "selection", null);
 __decorate([
     Input()
+], TableComponent.prototype, "selectionMode", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "sort", null);
+__decorate([
+    Input()
 ], TableComponent.prototype, "sortMode", null);
 __decorate([
     Input()
+], TableComponent.prototype, "stateSettings", null);
+__decorate([
+    Input()
 ], TableComponent.prototype, "theme", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "tooltip", null);
 __decorate([
     Output()
 ], TableComponent.prototype, "onCellBeginEdit", void 0);
@@ -897,6 +1062,9 @@ __decorate([
 __decorate([
     Output()
 ], TableComponent.prototype, "onCellEndEdit", void 0);
+__decorate([
+    Output()
+], TableComponent.prototype, "onChange", void 0);
 __decorate([
     Output()
 ], TableComponent.prototype, "onColumnClick", void 0);

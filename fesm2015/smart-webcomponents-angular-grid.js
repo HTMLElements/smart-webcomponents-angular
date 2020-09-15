@@ -340,6 +340,13 @@ let GridComponent = class GridComponent extends BaseElement {
     set columnGroups(value) {
         this.nativeElement ? this.nativeElement.columnGroups = value : undefined;
     }
+    /** @description Sets or gets details about conditional formatting to be applied to the Grid's cells. */
+    get conditionalFormatting() {
+        return this.nativeElement ? this.nativeElement.conditionalFormatting : undefined;
+    }
+    set conditionalFormatting(value) {
+        this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
+    }
     /** @description Sets the Grid Charting Data Visualization. */
     get charting() {
         return this.nativeElement ? this.nativeElement.charting : undefined;
@@ -1459,6 +1466,9 @@ __decorate([
 __decorate([
     Input()
 ], GridComponent.prototype, "columnGroups", null);
+__decorate([
+    Input()
+], GridComponent.prototype, "conditionalFormatting", null);
 __decorate([
     Input()
 ], GridComponent.prototype, "charting", null);

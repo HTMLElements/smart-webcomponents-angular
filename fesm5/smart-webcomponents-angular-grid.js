@@ -394,6 +394,17 @@ var GridComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(GridComponent.prototype, "conditionalFormatting", {
+        /** @description Sets or gets details about conditional formatting to be applied to the Grid's cells. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.conditionalFormatting : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(GridComponent.prototype, "charting", {
         /** @description Sets the Grid Charting Data Visualization. */
         get: function () {
@@ -1814,6 +1825,9 @@ var GridComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], GridComponent.prototype, "columnGroups", null);
+    __decorate([
+        Input()
+    ], GridComponent.prototype, "conditionalFormatting", null);
     __decorate([
         Input()
     ], GridComponent.prototype, "charting", null);

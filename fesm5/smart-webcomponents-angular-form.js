@@ -466,13 +466,13 @@ var FormControlComponent = /** @class */ (function (_super) {
         }
         return this.nativeElement;
     };
-    Object.defineProperty(FormControlComponent.prototype, "append", {
+    Object.defineProperty(FormControlComponent.prototype, "appendHTML", {
         /** @description HTML Content displayed after the Form Control */
         get: function () {
-            return this.nativeElement ? this.nativeElement.append : undefined;
+            return this.nativeElement ? this.nativeElement.appendHTML : undefined;
         },
         set: function (value) {
-            this.nativeElement ? this.nativeElement.append = value : undefined;
+            this.nativeElement ? this.nativeElement.appendHTML = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -642,13 +642,13 @@ var FormControlComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FormControlComponent.prototype, "prepend", {
+    Object.defineProperty(FormControlComponent.prototype, "prependHTML", {
         /** @description HTML Content displayed before the Form Control */
         get: function () {
-            return this.nativeElement ? this.nativeElement.prepend : undefined;
+            return this.nativeElement ? this.nativeElement.prependHTML : undefined;
         },
         set: function (value) {
-            this.nativeElement ? this.nativeElement.prepend = value : undefined;
+            this.nativeElement ? this.nativeElement.prependHTML = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -782,7 +782,7 @@ var FormControlComponent = /** @class */ (function (_super) {
     ]; };
     __decorate([
         Input()
-    ], FormControlComponent.prototype, "append", null);
+    ], FormControlComponent.prototype, "appendHTML", null);
     __decorate([
         Input()
     ], FormControlComponent.prototype, "controlOptions", null);
@@ -830,7 +830,7 @@ var FormControlComponent = /** @class */ (function (_super) {
     ], FormControlComponent.prototype, "backButtonLabel", null);
     __decorate([
         Input()
-    ], FormControlComponent.prototype, "prepend", null);
+    ], FormControlComponent.prototype, "prependHTML", null);
     __decorate([
         Input()
     ], FormControlComponent.prototype, "readonly", null);

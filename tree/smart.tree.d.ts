@@ -1,8 +1,8 @@
 import { Tree } from './../index';
-import { Animation, FilterMode, VerticalAlignment, Overflow, TreeScrollMode, TreeSelectionDisplayMode, TreeSelectionMode, TreeSortDirection, Position, TreeToggleMode } from './../index';
+import { Animation, TreeExpandMode, FilterMode, VerticalAlignment, Overflow, TreeScrollMode, TreeSelectionDisplayMode, TreeSelectionMode, TreeSelectionTarget, TreeSortDirection, Position, TreeToggleMode } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, FilterMode, VerticalAlignment, Overflow, TreeScrollMode, TreeSelectionDisplayMode, TreeSelectionMode, TreeSortDirection, Position, TreeToggleMode, ElementRenderMode } from './../index';
+export { Animation, TreeExpandMode, FilterMode, VerticalAlignment, Overflow, TreeScrollMode, TreeSelectionDisplayMode, TreeSelectionMode, TreeSelectionTarget, TreeSortDirection, Position, TreeToggleMode, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Tree } from './../index';
 export declare class TreeComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -41,6 +41,8 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     dragOffset: number[];
     /** @description Enables or disables item's editting. An edit operation can be initiated by double-clicking a tree item or pressing F2 while an item is selected. */
     editable: boolean;
+    /** @description Determines the expand behavior of TreeItemsGroups in the Tree. */
+    expandMode: TreeExpandMode;
     /** @description Enables or disables filtering. Shows or hides filter input. */
     filterable: boolean;
     /** @description Sets custom text for placeholder in the filter input. */
@@ -75,6 +77,8 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     selectionDisplayMode: TreeSelectionDisplayMode;
     /** @description Determines selection mode. */
     selectionMode: TreeSelectionMode;
+    /** @description Determines whether smart-tree-items-groups can be selected. */
+    selectionTarget: TreeSelectionTarget;
     /** @description Shows or hides lines, displaying the relation between elements in group. */
     showLines: boolean;
     /** @description Shows or hides lines starting from the root node. Enabled when 'showLines' is set to true. */

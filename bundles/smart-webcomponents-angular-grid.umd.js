@@ -616,6 +616,17 @@ import './../source/modules/smart.grid';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GridComponent.prototype, "conditionalFormatting", {
+            /** @description Sets or gets details about conditional formatting to be applied to the Grid's cells. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.conditionalFormatting : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GridComponent.prototype, "charting", {
             /** @description Sets the Grid Charting Data Visualization. */
             get: function () {
@@ -2036,6 +2047,9 @@ import './../source/modules/smart.grid';
         __decorate([
             core.Input()
         ], GridComponent.prototype, "columnGroups", null);
+        __decorate([
+            core.Input()
+        ], GridComponent.prototype, "conditionalFormatting", null);
         __decorate([
             core.Input()
         ], GridComponent.prototype, "charting", null);

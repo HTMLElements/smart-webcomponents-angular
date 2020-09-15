@@ -1,0 +1,178 @@
+import { PivotTable } from './../index';
+import { Animation, PivotTableColumnTotalsPosition, PivotTableDesignerPosition, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting } from './../index';
+import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
+import { BaseElement } from './smart.element';
+export { Animation, PivotTableColumnAlign, PivotTableColumnDataType, PivotTableColumnSummary, PivotTableColumnTotalsPosition, PivotTableConditionalFormattingCondition, PivotTableConditionalFormattingFontFamily, PivotTableConditionalFormattingFontSize, PivotTableDesignerPosition, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting, ElementRenderMode } from './../index';
+export { Smart } from './smart.element';
+export { PivotTable } from './../index';
+export declare class PivotTableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+    constructor(ref: ElementRef<PivotTable>);
+    private eventHandlers;
+    nativeElement: PivotTable;
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    createComponent(properties?: {}): any;
+    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
+    animation: Animation;
+    /** @description Sets or gets whether the reordering of columns is enabled. */
+    columnReorder: boolean;
+    /** @description Describes the columns of the PivotTable's original tabular data. Based on these settings and the data source, the actual columns of the PivotTable are dynamically generated. */
+    columns: PivotTableColumn[];
+    /** @description Sets or gets whether to show total columns for each pivot data point. When enabled, all summary columns must have the same summary function set by which total columns are calculated. */
+    columnTotals: boolean;
+    /** @description Sets or gets the position of total columns (shown when columnTotals is enabled). */
+    columnTotalsPosition: PivotTableColumnTotalsPosition;
+    /** @description Sets or gets details about conditional formatting to be applied to the PivotTable's cells. */
+    conditionalFormatting: PivotTableConditionalFormatting[];
+    /** @description Determines the original tabular data source of the PivotTable. */
+    dataSource: any;
+    /** @description Sets or gets whether to display the PivotTable's designer alongside the table itself. The designer allows for configuring column settings and applying filtering. */
+    designer: boolean;
+    /** @description Sets or gets the position of the PivotTable's designer (shown when designer is enabled). */
+    designerPosition: PivotTableDesignerPosition;
+    /** @description Disables the interaction with the element. */
+    disabled: boolean;
+    /** @description If enabled, shows the original tabular data that has been aggregated in a PivotTable summary cell when the cell is double-clicked or F2 is pressed. */
+    drillDown: boolean;
+    /** @description Sets or gets whether the PivotTable's column header is sticky/frozen. */
+    freezeHeader: boolean;
+    /** @description A callback function that returns the default summary function of a summary column when it is dynamically assigned as such (e.g. by drag-drop in the designer). */
+    getDefaultSummaryFunction: {
+        (column: PivotTableColumn): string;
+    };
+    /** @description Sets or gets whether to show a Grand total row aggregating the data of all rows. */
+    grandTotal: boolean;
+    /** @description Sets or gets the way row nesting (based on rowGroup columns) is displayed. */
+    groupLayout: PivotTableGroupLayout;
+    /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
+    keyboardNavigation: boolean;
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    locale: string;
+    /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
+    messages: any;
+    /** @description A callback function executed each time a PivotTable cell is rendered. */
+    onCellRender: any;
+    /** @description A callback function executed each time a PivotTable column header cell is rendered. */
+    onColumnRender: any;
+    /** @description A callback function executed when the PivotTable is being initialized. */
+    onInit: {
+        (): void;
+    };
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    rightToLeft: boolean;
+    /** @description Sets or gets whether to show row total columns for each summary column. */
+    rowTotals: boolean;
+    /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
+    rowTotalsPosition: PivotTableRowTotalsPosition;
+    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+    selection: boolean;
+    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+    selectionMode: PivotTableSelectionMode;
+    /** @description Determines the sorting mode of the PivotTable. */
+    sortMode: PivotTableSortMode;
+    /** @description Determines the theme. Theme defines the look of the element */
+    theme: string;
+    /** @description Sets or gets whether the PivotTable's toolbar is shown. It contains two breadcrumb components that allow the modification of the row group and pivot columns, as well as the "Conditional Formatting" and "Fields" buttons that open a dialog with additional settings. */
+    toolbar: boolean;
+    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+    tooltip: boolean;
+    /** @description This event is triggered when a cell has been clicked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
+    *   dataField - The data field of the cell's dynamic column.
+    *   row - The data of the cell's row.
+    */
+    onCellClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the selection is changed.
+    *  @param event. The custom event. 	*/
+    onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a summary column header cell has been clicked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition, 	dataField)
+    *   columnDefinition - An object detailing the clicked dynamic column.
+    *   dataField - The data field of the cell's original column.
+    */
+    onColumnClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a filtering-related action is made.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	filters)
+    *   action - The filtering action. Possible actions: 'add', 'remove'.
+    *   filters - The added filters. Only when action is 'add'.
+    */
+    onFilter: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column header cell has been clicked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	columns)
+    *   columns - An array with information about the dynamic columns the PivotTable has been sorted by.
+    */
+    onSort: EventEmitter<CustomEvent>;
+    /** @description Adds a filter to a specific column.
+    * @param {string} dataField. The column's data field.
+    * @param {any} filter. FilterGroup object.
+    */
+    addFilter(dataField: string, filter: any): void;
+    /** @description Clears applied filters.
+    */
+    clearFilters(): void;
+    /** @description Clears selection.
+    */
+    clearSelection(): void;
+    /** @description Clears the PivotTable sorting.
+    */
+    clearSort(): void;
+    /** @description Collapses all rows (when multiple row groups are applied).
+    */
+    collapseAllRows(): void;
+    /** @description Collapses a row (when multiple row groups are applied).
+    * @param {string | number} rowId. The id of the row to collapse. Can be retrieved from the <strong>rows</strong> collection.
+    */
+    collapseRow(rowId: string | number): void;
+    /** @description Expands all rows (when multiple row groups are applied).
+    */
+    expandAllRows(): void;
+    /** @description Expands a row (when multiple row groups are applied).
+    * @param {string | number} rowId. The id of the row to expand. Can be retrieved from the <strong>rows</strong> collection.
+    */
+    expandRow(rowId: string | number): void;
+    /** @description Exports the PivotTable's data.
+    * @param {string} dataFormat. The file format to export to. Supported formats: 'csv', 'html', 'json', 'pdf', 'tsv', 'xlsx', 'xml'.
+    * @param {string} fileName?. The name of the file to export to
+    * @param {Function} callback?. A callback function to pass the exported data to (if fileName is not provided)
+    * @returns {any}
+  */
+    exportData(dataFormat: any, fileName?: any, callback?: any): Promise<any>;
+    /** @description Returns the current dynamic pivot columns.
+    * @returns {any}
+  */
+    getDynamicColumns(): Promise<any>;
+    /** @description Returns an array of selected row ids.
+    * @returns {(string | number)[]}
+  */
+    getSelection(): Promise<any>;
+    /** @description Refreshes the PivotTable.
+    */
+    refresh(): void;
+    /** @description Removes filters applied to a specific column.
+    * @param {string} dataField. The column's data field.
+    */
+    removeFilter(dataField: string): void;
+    /** @description Selects a row.
+    * @param {string | number} rowId. The id of the row to select. Can be retrieved from the <strong>rows</strong> collection.
+    */
+    select(rowId: string | number): void;
+    /** @description Sorts by a summary or group column.
+    * @param {any} columnDefinition. The dynamic column's definition. Can be retrieved from the method <strong>getDynamicColumns</strong>.
+    * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending), 'desc' (descending), and null (removes sorting by column). If not provided, toggles the sorting.
+    */
+    sortBy(columnDefinition: any, sortOrder?: string): void;
+    /** @description Unselects a row.
+    * @param {string | number} rowId. The id of the row to unselect. Can be retrieved from the <strong>rows</strong> collection.
+    */
+    unselect(rowId: string | number): void;
+    readonly isRendered: boolean;
+    ngOnInit(): void;
+    ngAfterViewInit(): void;
+    ngOnDestroy(): void;
+    ngOnChanges(changes: SimpleChanges): void;
+    /** @description Add event listeners. */
+    private listen;
+    /** @description Remove event listeners. */
+    private unlisten;
+}

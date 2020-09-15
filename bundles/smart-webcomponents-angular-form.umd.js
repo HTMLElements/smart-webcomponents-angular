@@ -688,13 +688,13 @@ import './../source/modules/smart.form';
             }
             return this.nativeElement;
         };
-        Object.defineProperty(FormControlComponent.prototype, "append", {
+        Object.defineProperty(FormControlComponent.prototype, "appendHTML", {
             /** @description HTML Content displayed after the Form Control */
             get: function () {
-                return this.nativeElement ? this.nativeElement.append : undefined;
+                return this.nativeElement ? this.nativeElement.appendHTML : undefined;
             },
             set: function (value) {
-                this.nativeElement ? this.nativeElement.append = value : undefined;
+                this.nativeElement ? this.nativeElement.appendHTML = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -864,13 +864,13 @@ import './../source/modules/smart.form';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(FormControlComponent.prototype, "prepend", {
+        Object.defineProperty(FormControlComponent.prototype, "prependHTML", {
             /** @description HTML Content displayed before the Form Control */
             get: function () {
-                return this.nativeElement ? this.nativeElement.prepend : undefined;
+                return this.nativeElement ? this.nativeElement.prependHTML : undefined;
             },
             set: function (value) {
-                this.nativeElement ? this.nativeElement.prepend = value : undefined;
+                this.nativeElement ? this.nativeElement.prependHTML = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1004,7 +1004,7 @@ import './../source/modules/smart.form';
         ]; };
         __decorate([
             core.Input()
-        ], FormControlComponent.prototype, "append", null);
+        ], FormControlComponent.prototype, "appendHTML", null);
         __decorate([
             core.Input()
         ], FormControlComponent.prototype, "controlOptions", null);
@@ -1052,7 +1052,7 @@ import './../source/modules/smart.form';
         ], FormControlComponent.prototype, "backButtonLabel", null);
         __decorate([
             core.Input()
-        ], FormControlComponent.prototype, "prepend", null);
+        ], FormControlComponent.prototype, "prependHTML", null);
         __decorate([
             core.Input()
         ], FormControlComponent.prototype, "readonly", null);

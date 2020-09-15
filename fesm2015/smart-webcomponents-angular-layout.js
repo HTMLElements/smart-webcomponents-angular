@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.layout';
+
 import { __decorate, __awaiter } from 'tslib';
 import { EventEmitter, Output, Input, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 

@@ -1,8 +1,8 @@
 import { Table } from './../index';
-import { Animation, TableEditMode, TablePageSize, TableSortMode, TableColumn } from './../index';
+import { Animation, TableColumnSizeMode, TableEditMode, TablePageSize, TableSelectionMode, TableSortMode, TableColumn, TableConditionalFormatting } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, TableColumnDataType, TableColumnFreeze, TableColumnResponsivePriority, TableEditMode, TablePageSize, TableSortMode, TableColumn, ElementRenderMode } from './../index';
+export { Animation, TableColumnDataType, TableColumnFreeze, TableColumnResponsivePriority, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableEditMode, TablePageSize, TableSelectionMode, TableSortMode, TableColumn, TableConditionalFormatting, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Table } from './../index';
 export declare class TableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -15,12 +15,26 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
-    /** @description Describes the columns properties. */
-    columns: TableColumn[];
+    /** @description Enables or disables auto load state from the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property. */
+    autoLoadState: boolean;
+    /** @description Enables or disables auto save state to the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and   sorted columns is saved, based on the value of the stateSettings property. */
+    autoSaveState: boolean;
+    /** @description Sets or gets the min width of columns when columnSizeMode is 'auto'. */
+    columnMinWidth: string | number;
     /** @description Sets or gets whether the reordering of columns is enabled. */
     columnReorder: boolean;
+    /** @description Describes the columns properties. */
+    columns: TableColumn[];
+    /** @description Sets or gets details about conditional formatting to be applied to the Table's cells. */
+    conditionalFormatting: TableConditionalFormatting[];
+    /** @description Sets or gets the column sizing behavior. */
+    columnSizeMode: TableColumnSizeMode;
+    /** @description Sets or gets whether the "Conditional Formatting" button appears in the Table's header (toolbar). Clicking this button opens a dialog with formatting options. */
+    conditionalFormattingButton: boolean;
     /** @description Determines the data source of the table component. */
     dataSource: any;
+    /** @description A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument). */
+    dataTransform: any;
     /** @description Disables the interaction with the element. */
     disabled: boolean;
     /** @description Sets or gets whether the Table can be edited. */
@@ -71,10 +85,18 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     rowDetailTemplate: string;
     /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
     selection: boolean;
+    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+    selectionMode: TableSelectionMode;
+    /** @description A callback function executed when a column is sorted that can be used to override the default sorting behavior. The function is passed four parameters: dataSource - the Table's data sourcesortColumns - an array of the data fields of columns to be sorted bydirections - an array of sort directions to be sorted by (corresponding to sortColumns)defaultCompareFunctions - an array of default compare functions to be sorted by (corresponding to sortColumns), useful if the sorting of some columns does not have to be overridden */
+    sort: any;
     /** @description Determines the sorting mode of the Table. */
     sortMode: TableSortMode;
+    /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
+    stateSettings: string[];
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
+    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+    tooltip: boolean;
     /** @description This event is triggered when a cell edit operation has been initiated.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
     *   dataField - The data field of the cell's column.
@@ -93,6 +115,9 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     *   row - The new data of the cell's row.
     */
     onCellEndEdit: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the selection is changed.
+    *  @param event. The custom event. 	*/
+    onChange: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a column header cell has been clicked.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
     *   dataField - The data field of the cell's column.
@@ -157,7 +182,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     * @param {string} index. The group's hierarchical index.
     */
     collapseGroup(index: string): void;
-    /** @description Collapses a group.
+    /** @description Collapses a row (in tree mode).
     * @param {string | number} rowId. The id of the row to collapse.
     */
     collapseRow(rowId: string | number): void;
@@ -187,12 +212,20 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     * @returns {(string | number)[]}
   */
     getSelection(): Promise<any>;
+    /** @description Returns the Table's state, containing information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns. It can then be stored or passed to the method loadState.
+    * @returns {any}
+  */
+    getState(): Promise<any>;
     /** @description Returns the value of a cell.
     * @param {string | number} row. The id of the cell's row.
     * @param {string} dataField. The dataField of the cell's column.
     * @returns {any}
   */
     getValue(row: any, dataField: any): Promise<any>;
+    /** @description Loads the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property.
+    * @param {any} state?. An object returned by one of the methods <strong>getState</strong> or <strong>saveState</strong>. If a state is not passed, the method tries to load the state from the browser's localStorage.
+    */
+    loadState(state?: any): void;
     /** @description Navigates to a page.
     * @param {number} pageIndex. The zero-based page index to navigate to.
     */
@@ -208,6 +241,10 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     * @param {string} dataField. The column's data field.
     */
     removeGroup(dataField: string): void;
+    /** @description Saves the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is saved, based on the value of the stateSettings property.
+    * @returns {any}
+  */
+    saveState(): Promise<any>;
     /** @description Selects a row.
     * @param {string | number} rowId. The id of the row to select.
     */
@@ -220,7 +257,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     setValue(row: string | number, dataField: string, value: any): void;
     /** @description Sorts the Table by a column.
     * @param {string} columnDataField. Column field name.
-    * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending) and 'desc' (descending).
+    * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending), 'desc' (descending), and null (removes sorting by column). If not provided, toggles the sorting.
     */
     sortBy(columnDataField: string, sortOrder?: string): void;
     /** @description Unselects a row.

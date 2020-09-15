@@ -361,9 +361,15 @@ import './../source/modules/smart.tooltip';
             /** @description This event is triggered when the tooltip is opened.
             *  @param event. The custom event. 	*/
             _this.onOpen = new core.EventEmitter();
+            /** @description This event is triggered before the tooltip is opened. The event can be prevented via event.preventDefault().
+            *  @param event. The custom event. 	*/
+            _this.onOpening = new core.EventEmitter();
             /** @description This event is triggered when the tooltip is closed.
             *  @param event. The custom event. 	*/
             _this.onClose = new core.EventEmitter();
+            /** @description This event is triggered before the tooltip is closed. The event can be prevented via event.preventDefault().
+            *  @param event. The custom event. 	*/
+            _this.onClosing = new core.EventEmitter();
             _this.nativeElement = ref.nativeElement;
             return _this;
         }
@@ -604,6 +610,19 @@ import './../source/modules/smart.tooltip';
                 });
             }
         };
+        /** @description Clears the content of the Tooltip.
+        */
+        TooltipComponent.prototype.clear = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clear();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clear();
+                });
+            }
+        };
         Object.defineProperty(TooltipComponent.prototype, "isRendered", {
             get: function () {
                 return this.nativeElement ? this.nativeElement.isRendered : false;
@@ -637,8 +656,12 @@ import './../source/modules/smart.tooltip';
             var that = this;
             that.eventHandlers['openHandler'] = function (event) { that.onOpen.emit(event); };
             that.nativeElement.addEventListener('open', that.eventHandlers['openHandler']);
+            that.eventHandlers['openingHandler'] = function (event) { that.onOpening.emit(event); };
+            that.nativeElement.addEventListener('opening', that.eventHandlers['openingHandler']);
             that.eventHandlers['closeHandler'] = function (event) { that.onClose.emit(event); };
             that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
+            that.eventHandlers['closingHandler'] = function (event) { that.onClosing.emit(event); };
+            that.nativeElement.addEventListener('closing', that.eventHandlers['closingHandler']);
         };
         /** @description Remove event listeners. */
         TooltipComponent.prototype.unlisten = function () {
@@ -646,8 +669,14 @@ import './../source/modules/smart.tooltip';
             if (that.eventHandlers['openHandler']) {
                 that.nativeElement.removeEventListener('open', that.eventHandlers['openHandler']);
             }
+            if (that.eventHandlers['openingHandler']) {
+                that.nativeElement.removeEventListener('opening', that.eventHandlers['openingHandler']);
+            }
             if (that.eventHandlers['closeHandler']) {
                 that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
+            }
+            if (that.eventHandlers['closingHandler']) {
+                that.nativeElement.removeEventListener('closing', that.eventHandlers['closingHandler']);
             }
         };
         TooltipComponent.ctorParameters = function () { return [
@@ -709,7 +738,13 @@ import './../source/modules/smart.tooltip';
         ], TooltipComponent.prototype, "onOpen", void 0);
         __decorate([
             core.Output()
+        ], TooltipComponent.prototype, "onOpening", void 0);
+        __decorate([
+            core.Output()
         ], TooltipComponent.prototype, "onClose", void 0);
+        __decorate([
+            core.Output()
+        ], TooltipComponent.prototype, "onClosing", void 0);
         TooltipComponent = __decorate([
             core.Directive({
                 selector: 'smart-tooltip, [smart-tooltip]'

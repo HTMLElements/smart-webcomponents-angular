@@ -388,6 +388,17 @@ var TreeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TreeComponent.prototype, "expandMode", {
+        /** @description Determines the expand behavior of TreeItemsGroups in the Tree. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.expandMode : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.expandMode = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TreeComponent.prototype, "filterable", {
         /** @description Enables or disables filtering. Shows or hides filter input. */
         get: function () {
@@ -571,6 +582,17 @@ var TreeComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TreeComponent.prototype, "selectionTarget", {
+        /** @description Determines whether smart-tree-items-groups can be selected. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.selectionTarget : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.selectionTarget = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1165,6 +1187,9 @@ var TreeComponent = /** @class */ (function (_super) {
     ], TreeComponent.prototype, "editable", null);
     __decorate([
         Input()
+    ], TreeComponent.prototype, "expandMode", null);
+    __decorate([
+        Input()
     ], TreeComponent.prototype, "filterable", null);
     __decorate([
         Input()
@@ -1214,6 +1239,9 @@ var TreeComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], TreeComponent.prototype, "selectionMode", null);
+    __decorate([
+        Input()
+    ], TreeComponent.prototype, "selectionTarget", null);
     __decorate([
         Input()
     ], TreeComponent.prototype, "showLines", null);

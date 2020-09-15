@@ -378,11 +378,11 @@ let FormControlComponent = class FormControlComponent extends BaseElement {
         return this.nativeElement;
     }
     /** @description HTML Content displayed after the Form Control */
-    get append() {
-        return this.nativeElement ? this.nativeElement.append : undefined;
+    get appendHTML() {
+        return this.nativeElement ? this.nativeElement.appendHTML : undefined;
     }
-    set append(value) {
-        this.nativeElement ? this.nativeElement.append = value : undefined;
+    set appendHTML(value) {
+        this.nativeElement ? this.nativeElement.appendHTML = value : undefined;
     }
     /** @description JSON object with initialization properties of the UI component. Example: { dataSource: ['item 1', 'item 2', 'item 3'] } will set the dataSource property of the Form control. */
     get controlOptions() {
@@ -490,11 +490,11 @@ let FormControlComponent = class FormControlComponent extends BaseElement {
         this.nativeElement ? this.nativeElement.backButtonLabel = value : undefined;
     }
     /** @description HTML Content displayed before the Form Control */
-    get prepend() {
-        return this.nativeElement ? this.nativeElement.prepend : undefined;
+    get prependHTML() {
+        return this.nativeElement ? this.nativeElement.prependHTML : undefined;
     }
-    set prepend(value) {
-        this.nativeElement ? this.nativeElement.prepend = value : undefined;
+    set prependHTML(value) {
+        this.nativeElement ? this.nativeElement.prependHTML = value : undefined;
     }
     /** @description Gets or Sets the Form control readonly mode. */
     get readonly() {
@@ -590,7 +590,7 @@ FormControlComponent.ctorParameters = () => [
 ];
 __decorate([
     Input()
-], FormControlComponent.prototype, "append", null);
+], FormControlComponent.prototype, "appendHTML", null);
 __decorate([
     Input()
 ], FormControlComponent.prototype, "controlOptions", null);
@@ -638,7 +638,7 @@ __decorate([
 ], FormControlComponent.prototype, "backButtonLabel", null);
 __decorate([
     Input()
-], FormControlComponent.prototype, "prepend", null);
+], FormControlComponent.prototype, "prependHTML", null);
 __decorate([
     Input()
 ], FormControlComponent.prototype, "readonly", null);

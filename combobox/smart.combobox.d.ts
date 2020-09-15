@@ -203,6 +203,9 @@ export declare class ComboBoxComponent extends BaseElement implements OnInit, Af
     /** @description This event is triggered when user scrolls to the start of the dropDown list.
     *  @param event. The custom event. 	*/
     onScrollTopReached: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a token item(pill) has been clicked. This event allows to cancel the opening operation calling event.preventDefault() in the event handler function.
+    *  @param event. The custom event. 	*/
+    onTokenClick: EventEmitter<CustomEvent>;
     /** @description Appends a ListItem to the end of the list of items inside element.
     * @param {Node} node. A ListItem element that should be added to the rest of the items as the last item.
     * @returns {Node}

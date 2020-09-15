@@ -200,6 +200,9 @@ var ComboBoxComponent = /** @class */ (function (_super) {
         /** @description This event is triggered when user scrolls to the start of the dropDown list.
         *  @param event. The custom event. 	*/
         _this.onScrollTopReached = new EventEmitter();
+        /** @description This event is triggered when a token item(pill) has been clicked. This event allows to cancel the opening operation calling event.preventDefault() in the event handler function.
+        *  @param event. The custom event. 	*/
+        _this.onTokenClick = new EventEmitter();
         _this._initialChange = true;
         _this.nativeElement = ref.nativeElement;
         return _this;
@@ -1269,6 +1272,8 @@ var ComboBoxComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('scrollBottomReached', that.eventHandlers['scrollBottomReachedHandler']);
         that.eventHandlers['scrollTopReachedHandler'] = function (event) { that.onScrollTopReached.emit(event); };
         that.nativeElement.addEventListener('scrollTopReached', that.eventHandlers['scrollTopReachedHandler']);
+        that.eventHandlers['tokenClickHandler'] = function (event) { that.onTokenClick.emit(event); };
+        that.nativeElement.addEventListener('tokenClick', that.eventHandlers['tokenClickHandler']);
         that.eventHandlers['changeModelHandler'] = function (event) {
             that._initialChange = false;
             that._onChange(that.nativeElement.selectedValues.length > 0 ? (that.nativeElement.selectedValues.length > 1 ? that.nativeElement.selectedValues : that.nativeElement.selectedValues[0]) : that.nativeElement.querySelector('input').value);
@@ -1319,6 +1324,9 @@ var ComboBoxComponent = /** @class */ (function (_super) {
         }
         if (that.eventHandlers['scrollTopReachedHandler']) {
             that.nativeElement.removeEventListener('scrollTopReached', that.eventHandlers['scrollTopReachedHandler']);
+        }
+        if (that.eventHandlers['tokenClickHandler']) {
+            that.nativeElement.removeEventListener('tokenClick', that.eventHandlers['tokenClickHandler']);
         }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -1555,6 +1563,9 @@ var ComboBoxComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], ComboBoxComponent.prototype, "onScrollTopReached", void 0);
+    __decorate([
+        Output()
+    ], ComboBoxComponent.prototype, "onTokenClick", void 0);
     ComboBoxComponent = __decorate([
         Directive({
             selector: 'smart-combo-box, [smart-combo-box]',

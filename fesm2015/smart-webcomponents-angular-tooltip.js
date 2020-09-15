@@ -115,9 +115,15 @@ let TooltipComponent = class TooltipComponent extends BaseElement {
         /** @description This event is triggered when the tooltip is opened.
         *  @param event. The custom event. 	*/
         this.onOpen = new EventEmitter();
+        /** @description This event is triggered before the tooltip is opened. The event can be prevented via event.preventDefault().
+        *  @param event. The custom event. 	*/
+        this.onOpening = new EventEmitter();
         /** @description This event is triggered when the tooltip is closed.
         *  @param event. The custom event. 	*/
         this.onClose = new EventEmitter();
+        /** @description This event is triggered before the tooltip is closed. The event can be prevented via event.preventDefault().
+        *  @param event. The custom event. 	*/
+        this.onClosing = new EventEmitter();
         this.nativeElement = ref.nativeElement;
     }
     /** @description Creates the component on demand.
@@ -285,6 +291,18 @@ let TooltipComponent = class TooltipComponent extends BaseElement {
             });
         }
     }
+    /** @description Clears the content of the Tooltip.
+    */
+    clear() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.clear();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.clear();
+            });
+        }
+    }
     get isRendered() {
         return this.nativeElement ? this.nativeElement.isRendered : false;
     }
@@ -314,8 +332,12 @@ let TooltipComponent = class TooltipComponent extends BaseElement {
         const that = this;
         that.eventHandlers['openHandler'] = (event) => { that.onOpen.emit(event); };
         that.nativeElement.addEventListener('open', that.eventHandlers['openHandler']);
+        that.eventHandlers['openingHandler'] = (event) => { that.onOpening.emit(event); };
+        that.nativeElement.addEventListener('opening', that.eventHandlers['openingHandler']);
         that.eventHandlers['closeHandler'] = (event) => { that.onClose.emit(event); };
         that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
+        that.eventHandlers['closingHandler'] = (event) => { that.onClosing.emit(event); };
+        that.nativeElement.addEventListener('closing', that.eventHandlers['closingHandler']);
     }
     /** @description Remove event listeners. */
     unlisten() {
@@ -323,8 +345,14 @@ let TooltipComponent = class TooltipComponent extends BaseElement {
         if (that.eventHandlers['openHandler']) {
             that.nativeElement.removeEventListener('open', that.eventHandlers['openHandler']);
         }
+        if (that.eventHandlers['openingHandler']) {
+            that.nativeElement.removeEventListener('opening', that.eventHandlers['openingHandler']);
+        }
         if (that.eventHandlers['closeHandler']) {
             that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
+        }
+        if (that.eventHandlers['closingHandler']) {
+            that.nativeElement.removeEventListener('closing', that.eventHandlers['closingHandler']);
         }
     }
 };
@@ -387,7 +415,13 @@ __decorate([
 ], TooltipComponent.prototype, "onOpen", void 0);
 __decorate([
     Output()
+], TooltipComponent.prototype, "onOpening", void 0);
+__decorate([
+    Output()
 ], TooltipComponent.prototype, "onClose", void 0);
+__decorate([
+    Output()
+], TooltipComponent.prototype, "onClosing", void 0);
 TooltipComponent = __decorate([
     Directive({
         selector: 'smart-tooltip, [smart-tooltip]'

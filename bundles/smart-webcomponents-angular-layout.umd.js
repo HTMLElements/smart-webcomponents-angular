@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.layout';
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
     typeof define === 'function' && define.amd ? define('smart-webcomponents-angular/layout', ['exports', '@angular/core'], factory) :

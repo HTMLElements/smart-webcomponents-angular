@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-pivottable.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-pivottable.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-pivottable.js",
+  "esm5": "../esm5/pivottable/smart-webcomponents-angular-pivottable.js",
+  "esm2015": "../esm2015/pivottable/smart-webcomponents-angular-pivottable.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-pivottable.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-pivottable.js",
+  "typings": "smart-webcomponents-angular-pivottable.d.ts",
+  "metadata": "smart-webcomponents-angular-pivottable.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/pivottable"
+}

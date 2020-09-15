@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.input';
+
 import { __decorate, __extends } from 'tslib';
 import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';

@@ -306,6 +306,13 @@ let TreeComponent = class TreeComponent extends BaseElement {
     set editable(value) {
         this.nativeElement ? this.nativeElement.editable = value : undefined;
     }
+    /** @description Determines the expand behavior of TreeItemsGroups in the Tree. */
+    get expandMode() {
+        return this.nativeElement ? this.nativeElement.expandMode : undefined;
+    }
+    set expandMode(value) {
+        this.nativeElement ? this.nativeElement.expandMode = value : undefined;
+    }
     /** @description Enables or disables filtering. Shows or hides filter input. */
     get filterable() {
         return this.nativeElement ? this.nativeElement.filterable : undefined;
@@ -424,6 +431,13 @@ let TreeComponent = class TreeComponent extends BaseElement {
     }
     set selectionMode(value) {
         this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
+    }
+    /** @description Determines whether smart-tree-items-groups can be selected. */
+    get selectionTarget() {
+        return this.nativeElement ? this.nativeElement.selectionTarget : undefined;
+    }
+    set selectionTarget(value) {
+        this.nativeElement ? this.nativeElement.selectionTarget = value : undefined;
     }
     /** @description Shows or hides lines, displaying the relation between elements in group. */
     get showLines() {
@@ -927,6 +941,9 @@ __decorate([
 ], TreeComponent.prototype, "editable", null);
 __decorate([
     Input()
+], TreeComponent.prototype, "expandMode", null);
+__decorate([
+    Input()
 ], TreeComponent.prototype, "filterable", null);
 __decorate([
     Input()
@@ -976,6 +993,9 @@ __decorate([
 __decorate([
     Input()
 ], TreeComponent.prototype, "selectionMode", null);
+__decorate([
+    Input()
+], TreeComponent.prototype, "selectionTarget", null);
 __decorate([
     Input()
 ], TreeComponent.prototype, "showLines", null);

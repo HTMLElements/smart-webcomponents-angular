@@ -5,7 +5,7 @@ if (!window['Smart']) {
 else {
 	window['Smart'].RenderMode = 'manual';
 }
-import './../source/modules/smart.daterangeinput';
+import './../source/modules/smart.input';
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
@@ -408,7 +408,7 @@ import './../source/modules/smart.daterangeinput';
             configurable: true
         });
         Object.defineProperty(DateRangeInputComponent.prototype, "dateFormat", {
-            /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date foramt is determined by the 'locale' property. */
+            /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.dateFormat : undefined;
             },

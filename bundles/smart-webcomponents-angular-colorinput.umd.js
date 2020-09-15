@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.input';
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
     typeof define === 'function' && define.amd ? define('smart-webcomponents-angular/colorinput', ['exports', '@angular/core', '@angular/forms'], factory) :

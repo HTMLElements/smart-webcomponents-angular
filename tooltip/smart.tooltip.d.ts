@@ -50,9 +50,15 @@ export declare class TooltipComponent extends BaseElement implements OnInit, Aft
     /** @description This event is triggered when the tooltip is opened.
     *  @param event. The custom event. 	*/
     onOpen: EventEmitter<CustomEvent>;
+    /** @description This event is triggered before the tooltip is opened. The event can be prevented via event.preventDefault().
+    *  @param event. The custom event. 	*/
+    onOpening: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the tooltip is closed.
     *  @param event. The custom event. 	*/
     onClose: EventEmitter<CustomEvent>;
+    /** @description This event is triggered before the tooltip is closed. The event can be prevented via event.preventDefault().
+    *  @param event. The custom event. 	*/
+    onClosing: EventEmitter<CustomEvent>;
     /** @description Closes smart-tooltip.
     */
     close(): void;
@@ -62,6 +68,9 @@ export declare class TooltipComponent extends BaseElement implements OnInit, Aft
     /** @description Toggles smart-tooltip.
     */
     toggle(): void;
+    /** @description Clears the content of the Tooltip.
+    */
+    clear(): void;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

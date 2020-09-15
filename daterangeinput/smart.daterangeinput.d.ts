@@ -26,7 +26,7 @@ export declare class DateRangeInputComponent extends BaseElement implements OnIn
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
-    /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date foramt is determined by the 'locale' property. */
+    /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. */
     dateFormat: DateRangeInputDateFormat;
     /** @description Enables or disables the element. */
     disabled: boolean;

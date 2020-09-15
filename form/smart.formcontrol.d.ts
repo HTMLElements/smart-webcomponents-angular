@@ -14,7 +14,7 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
      */
     createComponent(properties?: {}): any;
     /** @description HTML Content displayed after the Form Control */
-    append: string;
+    appendHTML: any;
     /** @description JSON object with initialization properties of the UI component. Example: { dataSource: ['item 1', 'item 2', 'item 3'] } will set the dataSource property of the Form control. */
     controlOptions: any;
     /** @description The type of the control. */
@@ -46,7 +46,7 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets the back button label. */
     backButtonLabel: string;
     /** @description HTML Content displayed before the Form Control */
-    prepend: string;
+    prependHTML: any;
     /** @description Gets or Sets the Form control readonly mode. */
     readonly: boolean;
     /** @description Gets whether the Form control is not touched by the user. This flag is changed usually on blur, after the user interacted with the Form control */
