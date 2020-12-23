@@ -87,9 +87,11 @@ export declare class ToastComponent extends BaseElement implements OnInit, After
     */
     closeLast(): void;
     /** @description Opens a new toast item and returns the opened smart-toast-item instance.
+    * @param {HTMLElement | string} value?. The value for the toast item. If not set, the value property will be used.
+    * @param {string} iconType?. The icon name for the toast item. If not set, the type property determines the icon type that will be used.
     * @returns {HTMLElement}
   */
-    open(): Promise<any>;
+    open(value?: any, iconType?: any): Promise<any>;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

@@ -27,6 +27,8 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     conditionalFormatting: PivotTableConditionalFormatting[];
     /** @description Determines the original tabular data source of the PivotTable. */
     dataSource: any;
+    /** @description Sets or gets whether the original tabular data sourse of the PivotTable will be pre-sorted based on columns with the rowGroup property (and their order). */
+    defaultSortByRowGroups: boolean;
     /** @description Sets or gets whether to display the PivotTable's designer alongside the table itself. The designer allows for configuring column settings and applying filtering. */
     designer: boolean;
     /** @description Sets or gets the position of the PivotTable's designer (shown when designer is enabled). */
@@ -45,12 +47,18 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     grandTotal: boolean;
     /** @description Sets or gets the way row nesting (based on rowGroup columns) is displayed. */
     groupLayout: PivotTableGroupLayout;
+    /** @description Sets or gets whether to hide the tooltip that displays details when multiple summary cells with non-null values are selected. */
+    hideCellSelectionTooltip: boolean;
+    /** @description Sets or gets whether to hide rows that contain only 0 or null values. Applicable only when there are rowGroup columns. */
+    hideEmptyRows: boolean;
     /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
     keyboardNavigation: boolean;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
     messages: any;
+    /** @description Sets or gets what value is shown in cells that do not have aggregated data to display. By default (null), such cells are empty. */
+    nullDefaultValue: number;
     /** @description A callback function executed each time a PivotTable cell is rendered. */
     onCellRender: any;
     /** @description A callback function executed each time a PivotTable column header cell is rendered. */
@@ -61,6 +69,8 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     };
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
+    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
+    rowSort: boolean;
     /** @description Sets or gets whether to show row total columns for each summary column. */
     rowTotals: boolean;
     /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
@@ -84,7 +94,9 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     */
     onCellClick: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the selection is changed.
-    *  @param event. The custom event. 	*/
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
+    *   type - The type of action that initiated the selection change. Possible types: 'programmatic', 'interaction', 'remove'.
+    */
     onChange: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a summary column header cell has been clicked.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition, 	dataField)
@@ -92,6 +104,26 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     *   dataField - The data field of the cell's original column.
     */
     onColumnClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a row has been collapsed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+    *   record - The (aggregated) data of the collapsed row.
+    */
+    onCollapse: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a total column has been collapsed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition)
+    *   columnDefinition - The definition of the collapsed total column.
+    */
+    onCollapseTotalColumn: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a row has been expanded.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+    *   record - The (aggregated) data of the expanded row.
+    */
+    onExpand: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a total column has been expanded.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition)
+    *   columnDefinition - The definition of the expanded total column.
+    */
+    onExpandTotalColumn: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a filtering-related action is made.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	filters)
     *   action - The filtering action. Possible actions: 'add', 'remove'.
@@ -142,8 +174,8 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     * @returns {any}
   */
     getDynamicColumns(): Promise<any>;
-    /** @description Returns an array of selected row ids.
-    * @returns {(string | number)[]}
+    /** @description Returns an array of selected row ids (when selectionMode is 'many' or 'extended') or an array of selected cell details (when selectionMode is 'cell').
+    * @returns {(string | number)[] | { dataField: string, rowId: string | number }[]}
   */
     getSelection(): Promise<any>;
     /** @description Refreshes the PivotTable.
@@ -153,19 +185,21 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     * @param {string} dataField. The column's data field.
     */
     removeFilter(dataField: string): void;
-    /** @description Selects a row.
-    * @param {string | number} rowId. The id of the row to select. Can be retrieved from the <strong>rows</strong> collection.
+    /** @description Selects one or more rows (when selectionMode is 'many' or 'extended') or a single cell (when selectionMode is 'cell' and the second argument is passed).
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select (or of the cell's parent row when <strong>selectionMode</strong> is <em>'cell'</em>). Can be retrieved from the <strong>rows</strong> collection.
+    * @param {string} dataField?. The dataField of the dynamic column (can be retrieved by calling <strong>getDynamicColumns</strong>) of the cell to select (only applicable when <strong>selectionMode</strong> is <em>'cell'</em>).
     */
-    select(rowId: string | number): void;
+    select(rowId: string | number | (string | number)[], dataField?: string): void;
     /** @description Sorts by a summary or group column.
     * @param {any} columnDefinition. The dynamic column's definition. Can be retrieved from the method <strong>getDynamicColumns</strong>.
     * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending), 'desc' (descending), and null (removes sorting by column). If not provided, toggles the sorting.
     */
     sortBy(columnDefinition: any, sortOrder?: string): void;
-    /** @description Unselects a row.
-    * @param {string | number} rowId. The id of the row to unselect. Can be retrieved from the <strong>rows</strong> collection.
+    /** @description Unselects one or more rows (when selectionMode is 'many' or 'extended') or a single cell (when selectionMode is 'cell' and the second argument is passed).
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select (or of the cell's parent row when <strong>selectionMode</strong> is <em>'cell'</em>). Can be retrieved from the <strong>rows</strong> collection.
+    * @param {string} dataField?. The dataField of the dynamic column (can be retrieved by calling <strong>getDynamicColumns</strong>) of the cell to select (only applicable when <strong>selectionMode</strong> is <em>'cell'</em>).
     */
-    unselect(rowId: string | number): void;
+    unselect(rowId: string | number | (string | number)[], dataField?: string): void;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

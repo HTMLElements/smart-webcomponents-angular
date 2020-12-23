@@ -468,6 +468,17 @@ var MenuComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(MenuComponent.prototype, "preventCloseOnCheck", {
+        /** @description If set to true, prevents the closing of the Menu or its dropdowns when Menu items are checked/unchecked. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.preventCloseOnCheck : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.preventCloseOnCheck = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(MenuComponent.prototype, "readonly", {
         /** @description If the element is readonly, users cannot interact with it. */
         get: function () {
@@ -875,6 +886,9 @@ var MenuComponent = /** @class */ (function (_super) {
     ], MenuComponent.prototype, "overflow", null);
     __decorate([
         Input()
+    ], MenuComponent.prototype, "preventCloseOnCheck", null);
+    __decorate([
+        Input()
     ], MenuComponent.prototype, "readonly", null);
     __decorate([
         Input()
@@ -1037,7 +1051,6 @@ var MenuItemComponent = /** @class */ (function (_super) {
     MenuItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     MenuItemComponent.prototype.ngOnDestroy = function () { };
@@ -1223,7 +1236,6 @@ var MenuItemsGroupComponent = /** @class */ (function (_super) {
     MenuItemsGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     MenuItemsGroupComponent.prototype.ngOnDestroy = function () { };

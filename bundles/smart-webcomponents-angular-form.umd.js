@@ -688,6 +688,28 @@ import './../source/modules/smart.form';
             }
             return this.nativeElement;
         };
+        Object.defineProperty(FormControlComponent.prototype, "action", {
+            /** @description Gets or Sets the FormControl Action. This property is used when the 'controlType' is 'button' or 'submit' */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.action : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.action = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormControlComponent.prototype, "align", {
+            /** @description Sets or Gets the alignment of the FormControl */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.align : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.align = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(FormControlComponent.prototype, "appendHTML", {
             /** @description HTML Content displayed after the Form Control */
             get: function () {
@@ -864,6 +886,17 @@ import './../source/modules/smart.form';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(FormControlComponent.prototype, "placeholder", {
+            /** @description Gets or Sets the FormControl placeholder. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.placeholder : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.placeholder = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(FormControlComponent.prototype, "prependHTML", {
             /** @description HTML Content displayed before the Form Control */
             get: function () {
@@ -882,6 +915,17 @@ import './../source/modules/smart.form';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.readonly = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(FormControlComponent.prototype, "required", {
+            /** @description Gets or Sets whether this field is required. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.required : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.required = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -975,7 +1019,6 @@ import './../source/modules/smart.form';
         FormControlComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1002,6 +1045,12 @@ import './../source/modules/smart.form';
         FormControlComponent.ctorParameters = function () { return [
             { type: core.ElementRef }
         ]; };
+        __decorate([
+            core.Input()
+        ], FormControlComponent.prototype, "action", null);
+        __decorate([
+            core.Input()
+        ], FormControlComponent.prototype, "align", null);
         __decorate([
             core.Input()
         ], FormControlComponent.prototype, "appendHTML", null);
@@ -1052,10 +1101,16 @@ import './../source/modules/smart.form';
         ], FormControlComponent.prototype, "backButtonLabel", null);
         __decorate([
             core.Input()
+        ], FormControlComponent.prototype, "placeholder", null);
+        __decorate([
+            core.Input()
         ], FormControlComponent.prototype, "prependHTML", null);
         __decorate([
             core.Input()
         ], FormControlComponent.prototype, "readonly", null);
+        __decorate([
+            core.Input()
+        ], FormControlComponent.prototype, "required", null);
         __decorate([
             core.Input()
         ], FormControlComponent.prototype, "untouched", null);
@@ -1285,7 +1340,6 @@ import './../source/modules/smart.form';
         FormGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };

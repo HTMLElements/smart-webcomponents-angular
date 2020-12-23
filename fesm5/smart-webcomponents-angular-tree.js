@@ -1435,7 +1435,6 @@ var TreeItemComponent = /** @class */ (function (_super) {
     TreeItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     TreeItemComponent.prototype.ngOnDestroy = function () { };
@@ -1602,7 +1601,6 @@ var TreeItemsGroupComponent = /** @class */ (function (_super) {
     TreeItemsGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     TreeItemsGroupComponent.prototype.ngOnDestroy = function () { };

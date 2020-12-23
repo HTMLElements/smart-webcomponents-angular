@@ -330,14 +330,16 @@ let ToastComponent = class ToastComponent extends BaseElement {
         }
     }
     /** @description Opens a new toast item and returns the opened smart-toast-item instance.
+    * @param {HTMLElement | string} value?. The value for the toast item. If not set, the value property will be used.
+    * @param {string} iconType?. The icon name for the toast item. If not set, the type property determines the icon type that will be used.
     * @returns {HTMLElement}
   */
-    open() {
+    open(value, iconType) {
         return __awaiter(this, void 0, void 0, function* () {
             const getResultOnRender = () => {
                 return new Promise(resolve => {
                     this.nativeElement.whenRendered(() => {
-                        const result = this.nativeElement.open();
+                        const result = this.nativeElement.open(value, iconType);
                         resolve(result);
                     });
                 });

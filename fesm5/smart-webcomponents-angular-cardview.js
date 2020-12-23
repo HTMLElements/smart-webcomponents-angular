@@ -331,28 +331,6 @@ var CardViewComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CardViewComponent.prototype, "onRecordInserted", {
-        /** @description Callback function, used when record is inserted. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.onRecordInserted : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.onRecordInserted = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CardViewComponent.prototype, "onRecordRemoved", {
-        /** @description Callback function, used when record is removed. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.onRecordRemoved : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.onRecordRemoved = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(CardViewComponent.prototype, "scrolling", {
         /** @description Describes the scrolling behavior of the element. */
         get: function () {
@@ -720,12 +698,6 @@ var CardViewComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], CardViewComponent.prototype, "messages", null);
-    __decorate([
-        Input()
-    ], CardViewComponent.prototype, "onRecordInserted", null);
-    __decorate([
-        Input()
-    ], CardViewComponent.prototype, "onRecordRemoved", null);
     __decorate([
         Input()
     ], CardViewComponent.prototype, "scrolling", null);

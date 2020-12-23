@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-scheduler.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-scheduler.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-scheduler.js",
+  "esm5": "../esm5/scheduler/smart-webcomponents-angular-scheduler.js",
+  "esm2015": "../esm2015/scheduler/smart-webcomponents-angular-scheduler.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-scheduler.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-scheduler.js",
+  "typings": "smart-webcomponents-angular-scheduler.d.ts",
+  "metadata": "smart-webcomponents-angular-scheduler.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/scheduler"
+}

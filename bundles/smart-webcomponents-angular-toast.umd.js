@@ -665,9 +665,11 @@ import './../source/modules/smart.toast';
             }
         };
         /** @description Opens a new toast item and returns the opened smart-toast-item instance.
+        * @param {HTMLElement | string} value?. The value for the toast item. If not set, the value property will be used.
+        * @param {string} iconType?. The icon name for the toast item. If not set, the type property determines the icon type that will be used.
         * @returns {HTMLElement}
       */
-        ToastComponent.prototype.open = function () {
+        ToastComponent.prototype.open = function (value, iconType) {
             return __awaiter(this, void 0, void 0, function () {
                 var getResultOnRender, result;
                 var _this = this;
@@ -677,7 +679,7 @@ import './../source/modules/smart.toast';
                             getResultOnRender = function () {
                                 return new Promise(function (resolve) {
                                     _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.open();
+                                        var result = _this.nativeElement.open(value, iconType);
                                         resolve(result);
                                     });
                                 });

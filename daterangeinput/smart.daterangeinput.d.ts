@@ -1,8 +1,8 @@
 import { DateRangeInput } from './../index';
-import { Animation, DropDownButtonPosition, DateRangeInputValueType, DateRangeInputDateFormat, DateRangeInputTimeFormat } from './../index';
+import { Animation, DropDownButtonPosition, DateRangeInputValueType, DateRangeFormat, TimeRangeFormat } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, DropDownButtonPosition, DateRangeInputValueType, DateRangeInputDateFormat, DateRangeInputTimeFormat, ElementRenderMode } from './../index';
+export { Animation, DropDownButtonPosition, DateRangeInputValueType, DateRangeFormat, TimeRangeFormat, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { DateRangeInput } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -27,7 +27,7 @@ export declare class DateRangeInputComponent extends BaseElement implements OnIn
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
     /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. */
-    dateFormat: DateRangeInputDateFormat;
+    dateFormat: DateRangeFormat;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Determines the position of the drop down button. */
@@ -65,7 +65,7 @@ export declare class DateRangeInputComponent extends BaseElement implements OnIn
     /** @description Determines the delimiter between the selected dates in the input. This delimiter is ued to distinguish the starting date from the ending date. */
     separator: string;
     /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date foramt is determined by the 'locale' property. */
-    timeFormat: DateRangeInputTimeFormat;
+    timeFormat: TimeRangeFormat;
     /** @description Determines whether time selection is available or not. */
     timepicker: boolean;
     /** @description Determines the theme for the element. Themes define the look of the elements. */

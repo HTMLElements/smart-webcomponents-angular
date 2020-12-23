@@ -544,6 +544,19 @@ var SplitterComponent = /** @class */ (function (_super) {
             });
         });
     };
+    /** @description Refreshes the Splitter
+    */
+    SplitterComponent.prototype.refresh = function () {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.refresh();
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.refresh();
+            });
+        }
+    };
     /** @description Unhides a Splitter Bar
     * @param {number} splitterBar. An instance of a splitter bar.
     */
@@ -903,7 +916,6 @@ var SplitterItemComponent = /** @class */ (function (_super) {
     SplitterItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     SplitterItemComponent.prototype.ngOnDestroy = function () { };

@@ -249,20 +249,6 @@ let CardViewComponent = class CardViewComponent extends BaseElement {
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
     }
-    /** @description Callback function, used when record is inserted. */
-    get onRecordInserted() {
-        return this.nativeElement ? this.nativeElement.onRecordInserted : undefined;
-    }
-    set onRecordInserted(value) {
-        this.nativeElement ? this.nativeElement.onRecordInserted = value : undefined;
-    }
-    /** @description Callback function, used when record is removed. */
-    get onRecordRemoved() {
-        return this.nativeElement ? this.nativeElement.onRecordRemoved : undefined;
-    }
-    set onRecordRemoved(value) {
-        this.nativeElement ? this.nativeElement.onRecordRemoved = value : undefined;
-    }
     /** @description Describes the scrolling behavior of the element. */
     get scrolling() {
         return this.nativeElement ? this.nativeElement.scrolling : undefined;
@@ -596,12 +582,6 @@ __decorate([
 __decorate([
     Input()
 ], CardViewComponent.prototype, "messages", null);
-__decorate([
-    Input()
-], CardViewComponent.prototype, "onRecordInserted", null);
-__decorate([
-    Input()
-], CardViewComponent.prototype, "onRecordRemoved", null);
 __decorate([
     Input()
 ], CardViewComponent.prototype, "scrolling", null);

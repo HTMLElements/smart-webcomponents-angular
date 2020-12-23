@@ -42,10 +42,6 @@ export declare class CardViewComponent extends BaseElement implements OnInit, Af
     locale: string;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
-    /** @description Callback function, used when record is inserted. */
-    onRecordInserted: any;
-    /** @description Callback function, used when record is removed. */
-    onRecordRemoved: any;
     /** @description Describes the scrolling behavior of the element. */
     scrolling: Scrolling;
     /** @description Describes which data field to be set as title. */

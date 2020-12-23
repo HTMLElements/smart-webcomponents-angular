@@ -16,6 +16,8 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     createComponent(properties?: {}): any;
     /** @description Toggles the visibility of the column buttons for adding tasks. A particular button can be disabled by setting addNewButton in the column's definition to false. */
     addNewButton: boolean;
+    /** @description Sets or gets whether a column with a button for adding new status columns to the Kanban will be displayed. */
+    addNewColumn: boolean;
     /** @description Allows the dragging of tasks. */
     allowDrag: boolean;
     /** @description Allows the dropping of tasks. */
@@ -34,6 +36,22 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     currentUser: string | number;
     /** @description Determines the data source to be visualized in the kanban board. */
     dataSource: KanbanDataSource[];
+    /** @description Determines the the relation (mapping) between the Kanban's default fields (keywords) and the data fields from the data source. Not necessary if both match. Only some of the default mapping can be overwritten. */
+    dataSourceMap: {
+        checklist: string;
+        color: string;
+        comments: string;
+        dueDate: string;
+        id: string;
+        priority: string;
+        progress: string;
+        startDate: string;
+        status: string;
+        swimlane: string;
+        tags: string;
+        text: string;
+        userId: string;
+    };
     /** @description Determines the offset of the drag feedback element from the mouse cursor when dragging tasks. The first member of the array is the horizontal offset and the second one - the vertical offset. If set to 'auto', the offset is based on the mouse position when the dragging started. */
     dragOffset: boolean;
     /** @description Sets or gets whether tasks can be edited (including the assigning of users to tasks). */

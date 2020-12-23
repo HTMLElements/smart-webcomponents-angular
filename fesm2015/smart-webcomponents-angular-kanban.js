@@ -189,6 +189,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set addNewButton(value) {
         this.nativeElement ? this.nativeElement.addNewButton = value : undefined;
     }
+    /** @description Sets or gets whether a column with a button for adding new status columns to the Kanban will be displayed. */
+    get addNewColumn() {
+        return this.nativeElement ? this.nativeElement.addNewColumn : undefined;
+    }
+    set addNewColumn(value) {
+        this.nativeElement ? this.nativeElement.addNewColumn = value : undefined;
+    }
     /** @description Allows the dragging of tasks. */
     get allowDrag() {
         return this.nativeElement ? this.nativeElement.allowDrag : undefined;
@@ -251,6 +258,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     set dataSource(value) {
         this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+    }
+    /** @description Determines the the relation (mapping) between the Kanban's default fields (keywords) and the data fields from the data source. Not necessary if both match. Only some of the default mapping can be overwritten. */
+    get dataSourceMap() {
+        return this.nativeElement ? this.nativeElement.dataSourceMap : undefined;
+    }
+    set dataSourceMap(value) {
+        this.nativeElement ? this.nativeElement.dataSourceMap = value : undefined;
     }
     /** @description Determines the offset of the drag feedback element from the mouse cursor when dragging tasks. The first member of the array is the horizontal offset and the second one - the vertical offset. If set to 'auto', the offset is based on the mouse position when the dragging started. */
     get dragOffset() {
@@ -834,6 +848,9 @@ __decorate([
 ], KanbanComponent.prototype, "addNewButton", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "addNewColumn", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "allowDrag", null);
 __decorate([
     Input()
@@ -859,6 +876,9 @@ __decorate([
 __decorate([
     Input()
 ], KanbanComponent.prototype, "dataSource", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "dataSourceMap", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "dragOffset", null);

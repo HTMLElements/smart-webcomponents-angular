@@ -1,8 +1,8 @@
 import { FormControl } from './../index';
-import { FormControlControlType, FormControlLabelPosition, FormControlViewMode } from './../index';
+import { FormControlAction, FormControlAlign, FormControlControlType, FormControlLabelPosition, FormControlViewMode } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { FormControlControlType, FormControlLabelPosition, FormControlViewMode, ElementRenderMode } from './../index';
+export { FormControlAction, FormControlAlign, FormControlControlType, FormControlLabelPosition, FormControlViewMode, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { FormControl } from './../index';
 export declare class FormControlComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -13,6 +13,10 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
     createComponent(properties?: {}): any;
+    /** @description Gets or Sets the FormControl Action. This property is used when the 'controlType' is 'button' or 'submit' */
+    action: FormControlAction;
+    /** @description Sets or Gets the alignment of the FormControl */
+    align: FormControlAlign;
     /** @description HTML Content displayed after the Form Control */
     appendHTML: any;
     /** @description JSON object with initialization properties of the UI component. Example: { dataSource: ['item 1', 'item 2', 'item 3'] } will set the dataSource property of the Form control. */
@@ -24,7 +28,7 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
     /** @description Sets the Form control column span. */
     columnSpan: number;
     /** @description Sets the Form control data field. The control's inner input's name is set to the dataField value and in the FormGroup it is accessible through the dataField value. */
-    dataField: boolean;
+    dataField: string;
     /** @description Sets the Form control disabled mode. */
     disabled: boolean;
     /** @description Gets whether the Form control is 'dirty' i.e its value is changed by the user. */
@@ -40,15 +44,19 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
     /** @description Gets or Sets the offset between the label and the control. */
     labelOffset: number;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets whether the navigation buttons are displayed. The property has effect when the viewMode property is set. */
-    labelAlign: string;
+    labelAlign: FormControlAlign;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets the next button label. */
     nextButtonLabel: string;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets the back button label. */
     backButtonLabel: string;
+    /** @description Gets or Sets the FormControl placeholder. */
+    placeholder: string;
     /** @description HTML Content displayed before the Form Control */
     prependHTML: any;
     /** @description Gets or Sets the Form control readonly mode. */
     readonly: boolean;
+    /** @description Gets or Sets whether this field is required. */
+    required: boolean;
     /** @description Gets whether the Form control is not touched by the user. This flag is changed usually on blur, after the user interacted with the Form control */
     untouched: boolean;
     /** @description Gets or Sets whether colon is displayed after the label. */

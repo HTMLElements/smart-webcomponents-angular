@@ -59,6 +59,8 @@ export declare class MenuComponent extends BaseElement implements OnInit, AfterV
     opened: boolean;
     /** @description Sets or gets the menu's scroll buttons behavior. Applicable only when dropDownAppendTo is not null. */
     overflow: Overflow;
+    /** @description If set to true, prevents the closing of the Menu or its dropdowns when Menu items are checked/unchecked. */
+    preventCloseOnCheck: boolean;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */

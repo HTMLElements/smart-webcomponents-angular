@@ -1180,7 +1180,6 @@ import './../source/modules/smart.listmenu';
         MenuItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         MenuItemComponent.prototype.ngOnDestroy = function () { };
@@ -1366,7 +1365,6 @@ import './../source/modules/smart.listmenu';
         MenuItemsGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         MenuItemsGroupComponent.prototype.ngOnDestroy = function () { };

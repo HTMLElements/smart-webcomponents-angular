@@ -7,7 +7,7 @@ else {
 }
 import './../source/modules/smart.layout';
 
-import { __decorate, __extends, __awaiter, __generator } from 'tslib';
+import { __decorate, __extends } from 'tslib';
 import { EventEmitter, Output, Input, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 var BaseElement = /** @class */ (function () {
@@ -136,12 +136,9 @@ var LayoutComponent = /** @class */ (function (_super) {
     function LayoutComponent(ref) {
         var _this = _super.call(this, ref) || this;
         _this.eventHandlers = [];
-        /** @description This event is triggered when resizing begins.
+        /** @description This event is triggered after resizing is completed.
         *  @param event. The custom event. 	*/
-        _this.onResizeStart = new EventEmitter();
-        /** @description This event is triggered when resizing finishes.
-        *  @param event. The custom event. 	*/
-        _this.onResizeEnd = new EventEmitter();
+        _this.onResize = new EventEmitter();
         /** @description This event is triggered when a change regarding the Layout's state has occured, such as inserting a new item, removing an item, etc.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type)
         *   item - The Splitter item that was the target of a change.
@@ -232,39 +229,6 @@ var LayoutComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(LayoutComponent.prototype, "itemLabel", {
-        /** @description Optional. A label for all Splitter items inside the Layout. Usefull when exporting the dataSource and reusing it in other elements, for example, tree, etc. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.itemLabel : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.itemLabel = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LayoutComponent.prototype, "itemGroupLabel", {
-        /** @description Optional. A label for all Splitters inside the Layout. Usefull when exporting the dataSource and reusing it in other elements, for example, tree, etc. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.itemGroupLabel : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.itemGroupLabel = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LayoutComponent.prototype, "items", {
-        /** @description A getter that returns an array of all Splitter items inside the Layout. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.items : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.items = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(LayoutComponent.prototype, "locale", {
         /** @description Sets or gets the language. Used in conjunction with the property messages.  */
         get: function () {
@@ -272,17 +236,6 @@ var LayoutComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.locale = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LayoutComponent.prototype, "localizeFormatFunction", {
-        /** @description Callback, related to localization module.  */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.localizeFormatFunction : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.localizeFormatFunction = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -320,35 +273,13 @@ var LayoutComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(LayoutComponent.prototype, "resizeStep", {
-        /** @description Determines the resize step during reisizing */
+    Object.defineProperty(LayoutComponent.prototype, "allowLiveSplit", {
+        /** @description Determines whether splitting is live or not. */
         get: function () {
-            return this.nativeElement ? this.nativeElement.resizeStep : undefined;
+            return this.nativeElement ? this.nativeElement.allowLiveSplit : undefined;
         },
         set: function (value) {
-            this.nativeElement ? this.nativeElement.resizeStep = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LayoutComponent.prototype, "liveResize", {
-        /** @description When enabled the resizing operation happens live. By default this feature is not enabled and the user sees a hightlighted bar while dragging instead of the actual splitter bar. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.liveResize : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.liveResize = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(LayoutComponent.prototype, "placeholder", {
-        /** @description Determines the placeholder text of the empty items. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.placeholder : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.placeholder = value : undefined;
+            this.nativeElement ? this.nativeElement.allowLiveSplit = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -365,7 +296,7 @@ var LayoutComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(LayoutComponent.prototype, "selectedIndex", {
-        /** @description Determines the selected item. When an item is selected the buttons for creating nested items are displayed inside it. */
+        /** @description Determines the selected item. */
         get: function () {
             return this.nativeElement ? this.nativeElement.selectedIndex : undefined;
         },
@@ -397,90 +328,8 @@ var LayoutComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    /** @description Appends a new node.
-    * @param {Node} node. The node to append
-    * @returns {Node}
-  */
-    LayoutComponent.prototype.appendChild = function (node) {
-        return __awaiter(this, void 0, void 0, function () {
-            var getResultOnRender, result;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        getResultOnRender = function () {
-                            return new Promise(function (resolve) {
-                                _this.nativeElement.whenRendered(function () {
-                                    var result = _this.nativeElement.appendChild(node);
-                                    resolve(result);
-                                });
-                            });
-                        };
-                        return [4 /*yield*/, getResultOnRender()];
-                    case 1:
-                        result = _a.sent();
-                        return [2 /*return*/, result];
-                }
-            });
-        });
-    };
-    /** @description Inserts the specified "smart-splitter-item" node before the reference "smart-splitter-item" node.
-    * @param {Node} newNode. The  "smart-splitter-item" node to insert.
-    * @param {Node | null} referenceNode?. The "smart-splitter-item" node before which newNode is inserted.
-    * @returns {Node}
-  */
-    LayoutComponent.prototype.insertBefore = function (newNode, referenceNode) {
-        return __awaiter(this, void 0, void 0, function () {
-            var getResultOnRender, result;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        getResultOnRender = function () {
-                            return new Promise(function (resolve) {
-                                _this.nativeElement.whenRendered(function () {
-                                    var result = _this.nativeElement.insertBefore(newNode, referenceNode);
-                                    resolve(result);
-                                });
-                            });
-                        };
-                        return [4 /*yield*/, getResultOnRender()];
-                    case 1:
-                        result = _a.sent();
-                        return [2 /*return*/, result];
-                }
-            });
-        });
-    };
-    /** @description Removes a child "smart-splitter-item" node from the Layout.
-    * @param {Node} node. The "smart-splitter-item" node to remove.
-    * @returns {Node}
-  */
-    LayoutComponent.prototype.removeChild = function (node) {
-        return __awaiter(this, void 0, void 0, function () {
-            var getResultOnRender, result;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        getResultOnRender = function () {
-                            return new Promise(function (resolve) {
-                                _this.nativeElement.whenRendered(function () {
-                                    var result = _this.nativeElement.removeChild(node);
-                                    resolve(result);
-                                });
-                            });
-                        };
-                        return [4 /*yield*/, getResultOnRender()];
-                    case 1:
-                        result = _a.sent();
-                        return [2 /*return*/, result];
-                }
-            });
-        });
-    };
-    /** @description Returns a Splitter Item according to the index that is passed as an argument.
-    * @param {any} index. The index of an item.
+    /** @description Returns a Layout item according to the index that is passed.
+    * @param {number | string} index. The index of an item.
     */
     LayoutComponent.prototype.getItem = function (index) {
         var _this = this;
@@ -493,155 +342,46 @@ var LayoutComponent = /** @class */ (function (_super) {
             });
         }
     };
-    /** @description Returns the index of a Splitter Item that is passed as an argument.
-    * @param {any} item. The index of the Splitter item that is passed as an argument.
+    /** @description Refreshes the Layout
     */
-    LayoutComponent.prototype.getItemIndex = function (item) {
+    LayoutComponent.prototype.refresh = function () {
         var _this = this;
         if (this.nativeElement.isRendered) {
-            this.nativeElement.getItemIndex(item);
+            this.nativeElement.refresh();
         }
         else {
             this.nativeElement.whenRendered(function () {
-                _this.nativeElement.getItemIndex(item);
+                _this.nativeElement.refresh();
             });
         }
     };
-    /** @description Insert a new Splitter item at a given position.
-    * @param {any} item. A Splitter Item or an object defining a Splitter item to be inserted.
-    * @param {number | string} index. The index at which a new item will be inserted.
-    * @param {string} position?. The postition at which the new item will be inseted - top, bottom, left, right.
+    /** @description Inserts a new item inside the Layout.
+    * @param {any} type. The index of an item to be removed or an instance of JQX.SplitterItem.
+    * @param {string | undefined} position?. A string that represents the position where the new item will be created.
     */
-    LayoutComponent.prototype.insert = function (item, index, position) {
+    LayoutComponent.prototype.createLayoutItem = function (type, position) {
         var _this = this;
         if (this.nativeElement.isRendered) {
-            this.nativeElement.insert(item, index, position);
+            this.nativeElement.createLayoutItem(type, position);
         }
         else {
             this.nativeElement.whenRendered(function () {
-                _this.nativeElement.insert(item, index, position);
+                _this.nativeElement.createLayoutItem(type, position);
             });
         }
     };
-    /** @description Removes a Splitter item from the Layout.
-    * @param {any} index. The index of an item to be removed or an instance of JQX.SplitterItem.
+    /** @description Moves all children from one item to another.
+    * @param {any} oldItem. The source item that will have it's content removed.
+    * @param {any} newItem. The host item that will have it's content replaced.
     */
-    LayoutComponent.prototype.removeItem = function (index) {
+    LayoutComponent.prototype.moveChildren = function (oldItem, newItem) {
         var _this = this;
         if (this.nativeElement.isRendered) {
-            this.nativeElement.removeItem(index);
+            this.nativeElement.moveChildren(oldItem, newItem);
         }
         else {
             this.nativeElement.whenRendered(function () {
-                _this.nativeElement.removeItem(index);
-            });
-        }
-    };
-    /** @description Removes all items from the Layout
-    */
-    LayoutComponent.prototype.removeAll = function () {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.removeAll();
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.removeAll();
-            });
-        }
-    };
-    /** @description Selects a Splitter item from the Layout.
-    * @param {any} index. The index of an item to be removed or an instance of JQX.SplitterItem.
-    */
-    LayoutComponent.prototype.select = function (index) {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.select(index);
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.select(index);
-            });
-        }
-    };
-    /** @description Unselects the selected item inside the element.
-    */
-    LayoutComponent.prototype.unselect = function () {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.unselect();
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.unselect();
-            });
-        }
-    };
-    /** @description Updates a Splitter item that is inside the Layout.
-    * @param {any} index. The index of an item to be removed or an instance of JQX.SplitterItem.
-    * @param {any} settings. An object containing properties with new values for the Splitter item that should be updated.
-    */
-    LayoutComponent.prototype.updateItem = function (index, settings) {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.updateItem(index, settings);
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.updateItem(index, settings);
-            });
-        }
-    };
-    /** @description Clears the localStorage of any previous cached states of the element according to it's id.
-    */
-    LayoutComponent.prototype.clearState = function () {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.clearState();
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.clearState();
-            });
-        }
-    };
-    /** @description Saves the current state of the element to LocalStorage. Requires an id to be set to the element.
-    * @returns {any}
-  */
-    LayoutComponent.prototype.saveState = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var getResultOnRender, result;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        getResultOnRender = function () {
-                            return new Promise(function (resolve) {
-                                _this.nativeElement.whenRendered(function () {
-                                    var result = _this.nativeElement.saveState();
-                                    resolve(result);
-                                });
-                            });
-                        };
-                        return [4 /*yield*/, getResultOnRender()];
-                    case 1:
-                        result = _a.sent();
-                        return [2 /*return*/, result];
-                }
-            });
-        });
-    };
-    /** @description Loads a previously saved state of the element. If no state is provided as an argument the method will do a localStorage lookup according to the id of the element.
-    * @param {any[]} state?. An array of objects that represents a cached state of the element. The result of calling the 'saveState' method.
-    */
-    LayoutComponent.prototype.loadState = function (state) {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.loadState(state);
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.loadState(state);
+                _this.nativeElement.moveChildren(oldItem, newItem);
             });
         }
     };
@@ -676,10 +416,8 @@ var LayoutComponent = /** @class */ (function (_super) {
     /** @description Add event listeners. */
     LayoutComponent.prototype.listen = function () {
         var that = this;
-        that.eventHandlers['resizeStartHandler'] = function (event) { that.onResizeStart.emit(event); };
-        that.nativeElement.addEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
-        that.eventHandlers['resizeEndHandler'] = function (event) { that.onResizeEnd.emit(event); };
-        that.nativeElement.addEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
+        that.eventHandlers['resizeHandler'] = function (event) { that.onResize.emit(event); };
+        that.nativeElement.addEventListener('resize', that.eventHandlers['resizeHandler']);
         that.eventHandlers['stateChangeHandler'] = function (event) { that.onStateChange.emit(event); };
         that.nativeElement.addEventListener('stateChange', that.eventHandlers['stateChangeHandler']);
         that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
@@ -698,11 +436,8 @@ var LayoutComponent = /** @class */ (function (_super) {
     /** @description Remove event listeners. */
     LayoutComponent.prototype.unlisten = function () {
         var that = this;
-        if (that.eventHandlers['resizeStartHandler']) {
-            that.nativeElement.removeEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
-        }
-        if (that.eventHandlers['resizeEndHandler']) {
-            that.nativeElement.removeEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
+        if (that.eventHandlers['resizeHandler']) {
+            that.nativeElement.removeEventListener('resize', that.eventHandlers['resizeHandler']);
         }
         if (that.eventHandlers['stateChangeHandler']) {
             that.nativeElement.removeEventListener('stateChange', that.eventHandlers['stateChangeHandler']);
@@ -743,19 +478,7 @@ var LayoutComponent = /** @class */ (function (_super) {
     ], LayoutComponent.prototype, "dataSource", null);
     __decorate([
         Input()
-    ], LayoutComponent.prototype, "itemLabel", null);
-    __decorate([
-        Input()
-    ], LayoutComponent.prototype, "itemGroupLabel", null);
-    __decorate([
-        Input()
-    ], LayoutComponent.prototype, "items", null);
-    __decorate([
-        Input()
     ], LayoutComponent.prototype, "locale", null);
-    __decorate([
-        Input()
-    ], LayoutComponent.prototype, "localizeFormatFunction", null);
     __decorate([
         Input()
     ], LayoutComponent.prototype, "messages", null);
@@ -767,13 +490,7 @@ var LayoutComponent = /** @class */ (function (_super) {
     ], LayoutComponent.prototype, "readonly", null);
     __decorate([
         Input()
-    ], LayoutComponent.prototype, "resizeStep", null);
-    __decorate([
-        Input()
-    ], LayoutComponent.prototype, "liveResize", null);
-    __decorate([
-        Input()
-    ], LayoutComponent.prototype, "placeholder", null);
+    ], LayoutComponent.prototype, "allowLiveSplit", null);
     __decorate([
         Input()
     ], LayoutComponent.prototype, "rightToLeft", null);
@@ -788,10 +505,7 @@ var LayoutComponent = /** @class */ (function (_super) {
     ], LayoutComponent.prototype, "unfocusable", null);
     __decorate([
         Output()
-    ], LayoutComponent.prototype, "onResizeStart", void 0);
-    __decorate([
-        Output()
-    ], LayoutComponent.prototype, "onResizeEnd", void 0);
+    ], LayoutComponent.prototype, "onResize", void 0);
     __decorate([
         Output()
     ], LayoutComponent.prototype, "onStateChange", void 0);
@@ -821,14 +535,667 @@ var LayoutComponent = /** @class */ (function (_super) {
     return LayoutComponent;
 }(BaseElement));
 
+var LayoutItemComponent = /** @class */ (function (_super) {
+    __extends(LayoutItemComponent, _super);
+    function LayoutItemComponent(ref) {
+        var _this = _super.call(this, ref) || this;
+        _this.eventHandlers = [];
+        _this.nativeElement = ref.nativeElement;
+        return _this;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    LayoutItemComponent.prototype.createComponent = function (properties) {
+        if (properties === void 0) { properties = {}; }
+        this.nativeElement = document.createElement('smart-layout-item');
+        for (var propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    };
+    Object.defineProperty(LayoutItemComponent.prototype, "disabled", {
+        /** @description Enables or disables the element. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.disabled : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.disabled = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutItemComponent.prototype, "modifiers", {
+        /** @description Sets or gets the modifiers of the Layout item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.modifiers : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutItemComponent.prototype, "min", {
+        /** @description Determines the min size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.min : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.min = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutItemComponent.prototype, "label", {
+        /** @description Determines the label of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.label : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.label = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutItemComponent.prototype, "size", {
+        /** @description Determines the size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.size : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.size = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutItemComponent.prototype, "unfocusable", {
+        /** @description If is set to true, the element cannot be focused. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutItemComponent.prototype, "isRendered", {
+        get: function () {
+            return this.nativeElement ? this.nativeElement.isRendered : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LayoutItemComponent.prototype.ngOnInit = function () {
+    };
+    LayoutItemComponent.prototype.ngAfterViewInit = function () {
+        var that = this;
+        that.onCreate.emit(that.nativeElement);
+        this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    };
+    LayoutItemComponent.prototype.ngOnDestroy = function () {
+        this.unlisten();
+    };
+    LayoutItemComponent.prototype.ngOnChanges = function (changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (var propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    };
+    /** @description Add event listeners. */
+    LayoutItemComponent.prototype.listen = function () {
+        var that = this;
+    };
+    /** @description Remove event listeners. */
+    LayoutItemComponent.prototype.unlisten = function () {
+        var that = this;
+    };
+    LayoutItemComponent.ctorParameters = function () { return [
+        { type: ElementRef }
+    ]; };
+    __decorate([
+        Input()
+    ], LayoutItemComponent.prototype, "disabled", null);
+    __decorate([
+        Input()
+    ], LayoutItemComponent.prototype, "modifiers", null);
+    __decorate([
+        Input()
+    ], LayoutItemComponent.prototype, "min", null);
+    __decorate([
+        Input()
+    ], LayoutItemComponent.prototype, "label", null);
+    __decorate([
+        Input()
+    ], LayoutItemComponent.prototype, "size", null);
+    __decorate([
+        Input()
+    ], LayoutItemComponent.prototype, "unfocusable", null);
+    LayoutItemComponent = __decorate([
+        Directive({
+            selector: 'smart-layout-item, [smart-layout-item]'
+        })
+    ], LayoutItemComponent);
+    return LayoutItemComponent;
+}(BaseElement));
+
+var LayoutGroupComponent = /** @class */ (function (_super) {
+    __extends(LayoutGroupComponent, _super);
+    function LayoutGroupComponent(ref) {
+        var _this = _super.call(this, ref) || this;
+        _this.eventHandlers = [];
+        _this.nativeElement = ref.nativeElement;
+        return _this;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    LayoutGroupComponent.prototype.createComponent = function (properties) {
+        if (properties === void 0) { properties = {}; }
+        this.nativeElement = document.createElement('smart-layout-group');
+        for (var propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    };
+    Object.defineProperty(LayoutGroupComponent.prototype, "disabled", {
+        /** @description Enables or disables the element. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.disabled : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.disabled = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutGroupComponent.prototype, "modifiers", {
+        /** @description Sets or gets the modifiers of the Layout item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.modifiers : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutGroupComponent.prototype, "min", {
+        /** @description Determines the min size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.min : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.min = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutGroupComponent.prototype, "label", {
+        /** @description Determines the label of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.label : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.label = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutGroupComponent.prototype, "orientation", {
+        /** @description Determines the group orientation. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.orientation : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.orientation = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutGroupComponent.prototype, "size", {
+        /** @description Determines the size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.size : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.size = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutGroupComponent.prototype, "unfocusable", {
+        /** @description If is set to true, the element cannot be focused. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LayoutGroupComponent.prototype, "isRendered", {
+        get: function () {
+            return this.nativeElement ? this.nativeElement.isRendered : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    LayoutGroupComponent.prototype.ngOnInit = function () {
+    };
+    LayoutGroupComponent.prototype.ngAfterViewInit = function () {
+        var that = this;
+        that.onCreate.emit(that.nativeElement);
+        Smart.Render();
+        this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    };
+    LayoutGroupComponent.prototype.ngOnDestroy = function () {
+        this.unlisten();
+    };
+    LayoutGroupComponent.prototype.ngOnChanges = function (changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (var propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    };
+    /** @description Add event listeners. */
+    LayoutGroupComponent.prototype.listen = function () {
+        var that = this;
+    };
+    /** @description Remove event listeners. */
+    LayoutGroupComponent.prototype.unlisten = function () {
+        var that = this;
+    };
+    LayoutGroupComponent.ctorParameters = function () { return [
+        { type: ElementRef }
+    ]; };
+    __decorate([
+        Input()
+    ], LayoutGroupComponent.prototype, "disabled", null);
+    __decorate([
+        Input()
+    ], LayoutGroupComponent.prototype, "modifiers", null);
+    __decorate([
+        Input()
+    ], LayoutGroupComponent.prototype, "min", null);
+    __decorate([
+        Input()
+    ], LayoutGroupComponent.prototype, "label", null);
+    __decorate([
+        Input()
+    ], LayoutGroupComponent.prototype, "orientation", null);
+    __decorate([
+        Input()
+    ], LayoutGroupComponent.prototype, "size", null);
+    __decorate([
+        Input()
+    ], LayoutGroupComponent.prototype, "unfocusable", null);
+    LayoutGroupComponent = __decorate([
+        Directive({
+            selector: 'smart-layout-group, [smart-layout-group]'
+        })
+    ], LayoutGroupComponent);
+    return LayoutGroupComponent;
+}(BaseElement));
+
+var TabLayoutItemComponent = /** @class */ (function (_super) {
+    __extends(TabLayoutItemComponent, _super);
+    function TabLayoutItemComponent(ref) {
+        var _this = _super.call(this, ref) || this;
+        _this.eventHandlers = [];
+        _this.nativeElement = ref.nativeElement;
+        return _this;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    TabLayoutItemComponent.prototype.createComponent = function (properties) {
+        if (properties === void 0) { properties = {}; }
+        this.nativeElement = document.createElement('smart-tab-layout-item');
+        for (var propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    };
+    Object.defineProperty(TabLayoutItemComponent.prototype, "disabled", {
+        /** @description Enables or disables the element. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.disabled : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.disabled = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutItemComponent.prototype, "modifiers", {
+        /** @description Sets or gets the modifiers of the Layout item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.modifiers : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutItemComponent.prototype, "min", {
+        /** @description Determines the min size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.min : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.min = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutItemComponent.prototype, "label", {
+        /** @description Determines the label of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.label : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.label = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutItemComponent.prototype, "orientation", {
+        /** @description Determines the group orientation. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.orientation : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.orientation = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutItemComponent.prototype, "size", {
+        /** @description Determines the size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.size : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.size = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutItemComponent.prototype, "unfocusable", {
+        /** @description If is set to true, the element cannot be focused. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutItemComponent.prototype, "isRendered", {
+        get: function () {
+            return this.nativeElement ? this.nativeElement.isRendered : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TabLayoutItemComponent.prototype.ngOnInit = function () {
+    };
+    TabLayoutItemComponent.prototype.ngAfterViewInit = function () {
+        var that = this;
+        that.onCreate.emit(that.nativeElement);
+        this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    };
+    TabLayoutItemComponent.prototype.ngOnDestroy = function () {
+        this.unlisten();
+    };
+    TabLayoutItemComponent.prototype.ngOnChanges = function (changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (var propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    };
+    /** @description Add event listeners. */
+    TabLayoutItemComponent.prototype.listen = function () {
+        var that = this;
+    };
+    /** @description Remove event listeners. */
+    TabLayoutItemComponent.prototype.unlisten = function () {
+        var that = this;
+    };
+    TabLayoutItemComponent.ctorParameters = function () { return [
+        { type: ElementRef }
+    ]; };
+    __decorate([
+        Input()
+    ], TabLayoutItemComponent.prototype, "disabled", null);
+    __decorate([
+        Input()
+    ], TabLayoutItemComponent.prototype, "modifiers", null);
+    __decorate([
+        Input()
+    ], TabLayoutItemComponent.prototype, "min", null);
+    __decorate([
+        Input()
+    ], TabLayoutItemComponent.prototype, "label", null);
+    __decorate([
+        Input()
+    ], TabLayoutItemComponent.prototype, "orientation", null);
+    __decorate([
+        Input()
+    ], TabLayoutItemComponent.prototype, "size", null);
+    __decorate([
+        Input()
+    ], TabLayoutItemComponent.prototype, "unfocusable", null);
+    TabLayoutItemComponent = __decorate([
+        Directive({
+            selector: 'smart-tab-layout-item, [smart-tab-layout-item]'
+        })
+    ], TabLayoutItemComponent);
+    return TabLayoutItemComponent;
+}(BaseElement));
+
+var TabLayoutGroupComponent = /** @class */ (function (_super) {
+    __extends(TabLayoutGroupComponent, _super);
+    function TabLayoutGroupComponent(ref) {
+        var _this = _super.call(this, ref) || this;
+        _this.eventHandlers = [];
+        _this.nativeElement = ref.nativeElement;
+        return _this;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    TabLayoutGroupComponent.prototype.createComponent = function (properties) {
+        if (properties === void 0) { properties = {}; }
+        this.nativeElement = document.createElement('smart-tab-layout-group');
+        for (var propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    };
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "disabled", {
+        /** @description Enables or disables the element. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.disabled : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.disabled = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "modifiers", {
+        /** @description Sets or gets the modifiers of the Layout item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.modifiers : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "min", {
+        /** @description Determines the min size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.min : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.min = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "label", {
+        /** @description Determines the label of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.label : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.label = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "orientation", {
+        /** @description Determines the group orientation. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.orientation : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.orientation = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "position", {
+        /** @description Determines the position of the tab items group. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.position : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.position = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "size", {
+        /** @description Determines the size of the item. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.size : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.size = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "unfocusable", {
+        /** @description If is set to true, the element cannot be focused. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TabLayoutGroupComponent.prototype, "isRendered", {
+        get: function () {
+            return this.nativeElement ? this.nativeElement.isRendered : false;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TabLayoutGroupComponent.prototype.ngOnInit = function () {
+    };
+    TabLayoutGroupComponent.prototype.ngAfterViewInit = function () {
+        var that = this;
+        that.onCreate.emit(that.nativeElement);
+        this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    };
+    TabLayoutGroupComponent.prototype.ngOnDestroy = function () {
+        this.unlisten();
+    };
+    TabLayoutGroupComponent.prototype.ngOnChanges = function (changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (var propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    };
+    /** @description Add event listeners. */
+    TabLayoutGroupComponent.prototype.listen = function () {
+        var that = this;
+    };
+    /** @description Remove event listeners. */
+    TabLayoutGroupComponent.prototype.unlisten = function () {
+        var that = this;
+    };
+    TabLayoutGroupComponent.ctorParameters = function () { return [
+        { type: ElementRef }
+    ]; };
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "disabled", null);
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "modifiers", null);
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "min", null);
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "label", null);
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "orientation", null);
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "position", null);
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "size", null);
+    __decorate([
+        Input()
+    ], TabLayoutGroupComponent.prototype, "unfocusable", null);
+    TabLayoutGroupComponent = __decorate([
+        Directive({
+            selector: 'smart-tab-layout-group, [smart-tab-layout-group]'
+        })
+    ], TabLayoutGroupComponent);
+    return TabLayoutGroupComponent;
+}(BaseElement));
+
 var LayoutModule = /** @class */ (function () {
     function LayoutModule() {
     }
     LayoutModule = __decorate([
         NgModule({
-            declarations: [LayoutComponent],
+            declarations: [LayoutComponent, LayoutItemComponent, LayoutGroupComponent, TabLayoutItemComponent, TabLayoutGroupComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            exports: [LayoutComponent]
+            exports: [LayoutComponent, LayoutItemComponent, LayoutGroupComponent, TabLayoutItemComponent, TabLayoutGroupComponent]
         })
     ], LayoutModule);
     return LayoutModule;
@@ -838,5 +1205,5 @@ var LayoutModule = /** @class */ (function () {
  * Generated bundle index. Do not edit.
  */
 
-export { LayoutComponent, LayoutModule, Smart, BaseElement as ɵa };
+export { LayoutComponent, LayoutGroupComponent, LayoutItemComponent, LayoutModule, Smart, TabLayoutGroupComponent, TabLayoutItemComponent, BaseElement as ɵa };
 //# sourceMappingURL=smart-webcomponents-angular-layout.js.map

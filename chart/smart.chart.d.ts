@@ -40,7 +40,7 @@ export declare class ChartComponent extends BaseElement implements OnInit, After
     /** @description Gets or sets the width of the crosshairs lines. */
     crosshairsLineWidth: number;
     /** @description Sets the chart's data source. */
-    dataSource: any;
+    dataSource: any[];
     /** @description Sets the description text of the chart. */
     description: string;
     /** @description Enables or disables the chart. */

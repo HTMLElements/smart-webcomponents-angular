@@ -1,8 +1,8 @@
 import { Table } from './../index';
-import { Animation, TableColumnSizeMode, TableEditMode, TablePageSize, TableSelectionMode, TableSortMode, TableColumn, TableConditionalFormatting } from './../index';
+import { Animation, TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, TableColumnDataType, TableColumnFreeze, TableColumnResponsivePriority, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableEditMode, TablePageSize, TableSelectionMode, TableSortMode, TableColumn, TableConditionalFormatting, ElementRenderMode } from './../index';
+export { Animation, TableColumnDataType, TableColumnFreeze, TableColumnResponsivePriority, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Table } from './../index';
 export declare class TableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -19,10 +19,16 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     autoLoadState: boolean;
     /** @description Enables or disables auto save state to the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and   sorted columns is saved, based on the value of the stateSettings property. */
     autoSaveState: boolean;
-    /** @description Sets or gets the min width of columns when columnSizeMode is 'auto'. */
+    /** @description Sets or gets a list of column groups that constitute the column header hierarchy. Note: when column header hierarchy is created, column resizing and auto-sizing is not supported. */
+    columnGroups: TableColumnGroup[];
+    /** @description Sets or gets the min width of columns when columnSizeMode is 'auto' or when resizing columns. This property has no effect on columns with programmatically set width. */
     columnMinWidth: string | number;
     /** @description Sets or gets whether the reordering of columns is enabled. */
     columnReorder: boolean;
+    /** @description Sets or gets whether the resizing of columns is enabled. Note: column sizes continue to adhere to the behavior of the standard HTML table element's table-layout: fixed, upon which smart-table is based. */
+    columnResize: boolean;
+    /** @description Sets or gets whether when resizing a column, a feedback showing the new column width in px will be displayed. */
+    columnResizeFeedback: boolean;
     /** @description Describes the columns properties. */
     columns: TableColumn[];
     /** @description Sets or gets details about conditional formatting to be applied to the Table's cells. */
@@ -31,6 +37,8 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     columnSizeMode: TableColumnSizeMode;
     /** @description Sets or gets whether the "Conditional Formatting" button appears in the Table's header (toolbar). Clicking this button opens a dialog with formatting options. */
     conditionalFormattingButton: boolean;
+    /** @description When binding the dataSource property directly to an array (as opposed to an instance of JQX.DataAdapter), sets or gets the name of the data field in the source array to bind row ids to. */
+    dataRowId: string;
     /** @description Determines the data source of the table component. */
     dataSource: any;
     /** @description A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument). */
@@ -49,6 +57,8 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     filterTemplate: string;
     /** @description Sets or gets the id of an HTML template element to be applied as footer row(s). */
     footerRow: string;
+    /** @description Sets or gets whether Excel-like formulas can be passed as cell values. Formulas are always preceded by the = sign and are re-evaluated when cell values are changed. This feature depends on the third-party free plug-in formula-parser (the file formula-parser.min.js has to be referenced). */
+    formulas: boolean;
     /** @description Sets or gets whether the Table's footer is sticky/frozen. */
     freezeFooter: boolean;
     /** @description Sets or gets whether the Table's column header is sticky/frozen. */
@@ -59,6 +69,8 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     headerRow: string;
     /** @description Sets or gets whether navigation with the keyboard is enabled in the Table. */
     keyboardNavigation: boolean;
+    /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
+    loadColumnStateBehavior: TableLoadColumnStateBehavior;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
@@ -83,6 +95,8 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     rightToLeft: boolean;
     /** @description Sets or gets a string template to be applied as row detail template. Each cell value in the master row can be placed in the detail row by specifying the cell's data field in double curly brackets (e.g. {{price}}. The details can then be displayed by expanding the row by clicking it. */
     rowDetailTemplate: string;
+    /** @description Sets or gets an array of the Table's selected row's ids. */
+    selected: any[];
     /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
     selection: boolean;
     /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
@@ -97,32 +111,58 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     theme: string;
     /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
     tooltip: boolean;
+    /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
+    virtualization: boolean;
     /** @description This event is triggered when a cell edit operation has been initiated.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row, 	value)
     *   dataField - The data field of the cell's column.
     *   row - The data of the cell's row.
+    *   value - The data value of the cell.
     */
     onCellBeginEdit: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a cell has been clicked.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	value, 	originalEvent)
+    *   id - The cell's row id.
     *   dataField - The data field of the cell's column.
     *   row - The data of the cell's row.
+    *   value - The data value of the cell.
+    *   originalEvent - The 'click' event object.
     */
     onCellClick: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a cell has been edited.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row, 	value)
     *   dataField - The data field of the cell's column.
     *   row - The new data of the cell's row.
+    *   value - The data value of the cell.
     */
     onCellEndEdit: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the selection is changed.
-    *  @param event. The custom event. 	*/
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
+    *   type - The type of action that initiated the selection change. Possible types: 'programmatic', 'interaction', 'remove'.
+    */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a row has been collapsed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+    *   record - The data of the collapsed row.
+    */
+    onCollapse: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a row has been expanded.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+    *   record - The (aggregated) data of the expanded row.
+    */
+    onExpand: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a column header cell has been clicked.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
     *   dataField - The data field of the cell's column.
     */
     onColumnClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column has been resized via dragging or double-click.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	headerCellElement, 	width)
+    *   dataField - The data field of the column.
+    *   headerCellElement - The column's header cell HTML element.
+    *   width - The new width of the column.
+    */
+    onColumnResize: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a filtering-related action is made.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	filters)
     *   action - The filtering action. Possible actions: 'add', 'remove'.
@@ -141,6 +181,16 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     *   action - The paging action. Possible actions: 'pageIndexChange', 'pageSizeChange'.
     */
     onPage: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a row edit operation has been initiated (only when editMode is 'row').
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	row)
+    *   row - The data of the row.
+    */
+    onRowBeginEdit: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a row has been edited (only when editMode is 'row').
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	row)
+    *   row - The new data of the row.
+    */
+    onRowEndEdit: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a column header cell has been clicked.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	columns)
     *   columns - An array with information about the columns the Table has been sorted by.
@@ -245,10 +295,10 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     * @returns {any}
   */
     saveState(): Promise<any>;
-    /** @description Selects a row.
-    * @param {string | number} rowId. The id of the row to select.
+    /** @description Selects one or more rows.
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select.
     */
-    select(rowId: string | number): void;
+    select(rowId: string | number | (string | number)[]): void;
     /** @description Sets the value of a cell.
     * @param {string | number} row. The id of the cell's row.
     * @param {string} dataField. The dataField of the cell's column.
@@ -260,10 +310,10 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending), 'desc' (descending), and null (removes sorting by column). If not provided, toggles the sorting.
     */
     sortBy(columnDataField: string, sortOrder?: string): void;
-    /** @description Unselects a row.
-    * @param {string | number} rowId. The id of the row to unselect.
+    /** @description Unselects one or more rows.
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to unselect.
     */
-    unselect(rowId: string | number): void;
+    unselect(rowId: string | number | (string | number)[]): void;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

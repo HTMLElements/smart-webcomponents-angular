@@ -1657,7 +1657,6 @@ import './../source/modules/smart.tree';
         TreeItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         TreeItemComponent.prototype.ngOnDestroy = function () { };
@@ -1824,7 +1823,6 @@ import './../source/modules/smart.tree';
         TreeItemsGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         TreeItemsGroupComponent.prototype.ngOnDestroy = function () { };

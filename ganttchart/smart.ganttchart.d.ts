@@ -2,7 +2,7 @@ import { GanttChart } from './../index';
 import { GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDataSource, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskColumn } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { GanttChartDataExportItemType, GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, GanttChartTaskType, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDataSource, GanttChartDataSourceConnection, GanttChartDataSourceResource, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskConnection, GanttChartTaskResource, GanttChartTaskColumn, ElementRenderMode } from './../index';
+export { GanttChartDataExportItemType, GanttChartTaskType, GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDataSource, GanttChartDataSourceResource, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskColumn, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { GanttChart } from './../index';
 export declare class GanttChartComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -261,10 +261,10 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     */
     onExpand: EventEmitter<CustomEvent>;
     /** @description Adds a task as the last item of a Project.
-    * @param {string | number} taskIndex. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+    * @param {any} taskIndex. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
     * @param {string | number} projectIndex. A number that represents the index of a project or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
     */
-    addTaskTo(taskIndex: string | number, projectIndex: string | number): void;
+    addTaskTo(taskIndex: any, projectIndex: string | number): void;
     /** @description Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
     */
     beginUpdate(): void;
@@ -325,23 +325,23 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
   */
     getState(): Promise<any>;
     /** @description Returns the Tree path of a task/resource.
-    * @param {GanttChartTask | GanttChartResource | number} item. A GattChartTask/GanttChartResource item object or index.
+    * @param {any} item. A GattChartTask/GanttChartResource item object or index.
     * @returns {string}
   */
     getItemPath(item: any): Promise<any>;
     /** @description Returns the index of a task.
-    * @param {GanttChartTask} task. A GattChartTask object.
+    * @param {any} task. A GattChartTask object.
     * @returns {number}
   */
     getTaskIndex(task: any): Promise<any>;
     /** @description Returns the tree path of a task.
-    * @param {GanttChartTask} task. A GanttChartTask object.
+    * @param {any} task. A GanttChartTask object.
     * @returns {string}
   */
     getTaskPath(task: any): Promise<any>;
     /** @description Returns teh Project of a task if any.
-    * @param {GanttChartTask} task. A GantChartTask object.
-    * @returns {GanttChartTask | undefined}
+    * @param {any} task. A GantChartTask object.
+    * @returns {any}
   */
     getTaskProject(task: any): Promise<any>;
     /** @description Returns the index of a resource.

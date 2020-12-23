@@ -137,31 +137,55 @@ var TableComponent = /** @class */ (function (_super) {
         var _this = _super.call(this, ref) || this;
         _this.eventHandlers = [];
         /** @description This event is triggered when a cell edit operation has been initiated.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row, 	value)
         *   dataField - The data field of the cell's column.
         *   row - The data of the cell's row.
+        *   value - The data value of the cell.
         */
         _this.onCellBeginEdit = new EventEmitter();
         /** @description This event is triggered when a cell has been clicked.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	value, 	originalEvent)
+        *   id - The cell's row id.
         *   dataField - The data field of the cell's column.
         *   row - The data of the cell's row.
+        *   value - The data value of the cell.
+        *   originalEvent - The 'click' event object.
         */
         _this.onCellClick = new EventEmitter();
         /** @description This event is triggered when a cell has been edited.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row, 	value)
         *   dataField - The data field of the cell's column.
         *   row - The new data of the cell's row.
+        *   value - The data value of the cell.
         */
         _this.onCellEndEdit = new EventEmitter();
         /** @description This event is triggered when the selection is changed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
+        *   type - The type of action that initiated the selection change. Possible types: 'programmatic', 'interaction', 'remove'.
+        */
         _this.onChange = new EventEmitter();
+        /** @description This event is triggered when a row has been collapsed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+        *   record - The data of the collapsed row.
+        */
+        _this.onCollapse = new EventEmitter();
+        /** @description This event is triggered when a row has been expanded.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+        *   record - The (aggregated) data of the expanded row.
+        */
+        _this.onExpand = new EventEmitter();
         /** @description This event is triggered when a column header cell has been clicked.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
         *   dataField - The data field of the cell's column.
         */
         _this.onColumnClick = new EventEmitter();
+        /** @description This event is triggered when a column has been resized via dragging or double-click.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	headerCellElement, 	width)
+        *   dataField - The data field of the column.
+        *   headerCellElement - The column's header cell HTML element.
+        *   width - The new width of the column.
+        */
+        _this.onColumnResize = new EventEmitter();
         /** @description This event is triggered when a filtering-related action is made.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	filters)
         *   action - The filtering action. Possible actions: 'add', 'remove'.
@@ -180,6 +204,16 @@ var TableComponent = /** @class */ (function (_super) {
         *   action - The paging action. Possible actions: 'pageIndexChange', 'pageSizeChange'.
         */
         _this.onPage = new EventEmitter();
+        /** @description This event is triggered when a row edit operation has been initiated (only when editMode is 'row').
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row)
+        *   row - The data of the row.
+        */
+        _this.onRowBeginEdit = new EventEmitter();
+        /** @description This event is triggered when a row has been edited (only when editMode is 'row').
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row)
+        *   row - The new data of the row.
+        */
+        _this.onRowEndEdit = new EventEmitter();
         /** @description This event is triggered when a column header cell has been clicked.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	columns)
         *   columns - An array with information about the columns the Table has been sorted by.
@@ -232,8 +266,19 @@ var TableComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TableComponent.prototype, "columnGroups", {
+        /** @description Sets or gets a list of column groups that constitute the column header hierarchy. Note: when column header hierarchy is created, column resizing and auto-sizing is not supported. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnGroups : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnGroups = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TableComponent.prototype, "columnMinWidth", {
-        /** @description Sets or gets the min width of columns when columnSizeMode is 'auto'. */
+        /** @description Sets or gets the min width of columns when columnSizeMode is 'auto' or when resizing columns. This property has no effect on columns with programmatically set width. */
         get: function () {
             return this.nativeElement ? this.nativeElement.columnMinWidth : undefined;
         },
@@ -250,6 +295,28 @@ var TableComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.columnReorder = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "columnResize", {
+        /** @description Sets or gets whether the resizing of columns is enabled. Note: column sizes continue to adhere to the behavior of the standard HTML table element's table-layout: fixed, upon which smart-table is based. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnResize : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnResize = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "columnResizeFeedback", {
+        /** @description Sets or gets whether when resizing a column, a feedback showing the new column width in px will be displayed. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnResizeFeedback : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnResizeFeedback = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -294,6 +361,17 @@ var TableComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.conditionalFormattingButton = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "dataRowId", {
+        /** @description When binding the dataSource property directly to an array (as opposed to an instance of JQX.DataAdapter), sets or gets the name of the data field in the source array to bind row ids to. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.dataRowId : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.dataRowId = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -397,6 +475,17 @@ var TableComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TableComponent.prototype, "formulas", {
+        /** @description Sets or gets whether Excel-like formulas can be passed as cell values. Formulas are always preceded by the = sign and are re-evaluated when cell values are changed. This feature depends on the third-party free plug-in formula-parser (the file formula-parser.min.js has to be referenced). */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.formulas : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.formulas = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TableComponent.prototype, "freezeFooter", {
         /** @description Sets or gets whether the Table's footer is sticky/frozen. */
         get: function () {
@@ -448,6 +537,17 @@ var TableComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.keyboardNavigation = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "loadColumnStateBehavior", {
+        /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.loadColumnStateBehavior : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.loadColumnStateBehavior = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -562,6 +662,17 @@ var TableComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TableComponent.prototype, "selected", {
+        /** @description Sets or gets an array of the Table's selected row's ids. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.selected : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.selected = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TableComponent.prototype, "selection", {
         /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
         get: function () {
@@ -635,6 +746,17 @@ var TableComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.tooltip = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "virtualization", {
+        /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.virtualization : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.virtualization = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1048,8 +1170,8 @@ var TableComponent = /** @class */ (function (_super) {
             });
         });
     };
-    /** @description Selects a row.
-    * @param {string | number} rowId. The id of the row to select.
+    /** @description Selects one or more rows.
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select.
     */
     TableComponent.prototype.select = function (rowId) {
         var _this = this;
@@ -1093,8 +1215,8 @@ var TableComponent = /** @class */ (function (_super) {
             });
         }
     };
-    /** @description Unselects a row.
-    * @param {string | number} rowId. The id of the row to unselect.
+    /** @description Unselects one or more rows.
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to unselect.
     */
     TableComponent.prototype.unselect = function (rowId) {
         var _this = this;
@@ -1146,14 +1268,24 @@ var TableComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('cellEndEdit', that.eventHandlers['cellEndEditHandler']);
         that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['collapseHandler'] = function (event) { that.onCollapse.emit(event); };
+        that.nativeElement.addEventListener('collapse', that.eventHandlers['collapseHandler']);
+        that.eventHandlers['expandHandler'] = function (event) { that.onExpand.emit(event); };
+        that.nativeElement.addEventListener('expand', that.eventHandlers['expandHandler']);
         that.eventHandlers['columnClickHandler'] = function (event) { that.onColumnClick.emit(event); };
         that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+        that.eventHandlers['columnResizeHandler'] = function (event) { that.onColumnResize.emit(event); };
+        that.nativeElement.addEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
         that.eventHandlers['filterHandler'] = function (event) { that.onFilter.emit(event); };
         that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
         that.eventHandlers['groupHandler'] = function (event) { that.onGroup.emit(event); };
         that.nativeElement.addEventListener('group', that.eventHandlers['groupHandler']);
         that.eventHandlers['pageHandler'] = function (event) { that.onPage.emit(event); };
         that.nativeElement.addEventListener('page', that.eventHandlers['pageHandler']);
+        that.eventHandlers['rowBeginEditHandler'] = function (event) { that.onRowBeginEdit.emit(event); };
+        that.nativeElement.addEventListener('rowBeginEdit', that.eventHandlers['rowBeginEditHandler']);
+        that.eventHandlers['rowEndEditHandler'] = function (event) { that.onRowEndEdit.emit(event); };
+        that.nativeElement.addEventListener('rowEndEdit', that.eventHandlers['rowEndEditHandler']);
         that.eventHandlers['sortHandler'] = function (event) { that.onSort.emit(event); };
         that.nativeElement.addEventListener('sort', that.eventHandlers['sortHandler']);
     };
@@ -1172,8 +1304,17 @@ var TableComponent = /** @class */ (function (_super) {
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
         }
+        if (that.eventHandlers['collapseHandler']) {
+            that.nativeElement.removeEventListener('collapse', that.eventHandlers['collapseHandler']);
+        }
+        if (that.eventHandlers['expandHandler']) {
+            that.nativeElement.removeEventListener('expand', that.eventHandlers['expandHandler']);
+        }
         if (that.eventHandlers['columnClickHandler']) {
             that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+        }
+        if (that.eventHandlers['columnResizeHandler']) {
+            that.nativeElement.removeEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
         }
         if (that.eventHandlers['filterHandler']) {
             that.nativeElement.onfilterHandler = null;
@@ -1183,6 +1324,12 @@ var TableComponent = /** @class */ (function (_super) {
         }
         if (that.eventHandlers['pageHandler']) {
             that.nativeElement.removeEventListener('page', that.eventHandlers['pageHandler']);
+        }
+        if (that.eventHandlers['rowBeginEditHandler']) {
+            that.nativeElement.removeEventListener('rowBeginEdit', that.eventHandlers['rowBeginEditHandler']);
+        }
+        if (that.eventHandlers['rowEndEditHandler']) {
+            that.nativeElement.removeEventListener('rowEndEdit', that.eventHandlers['rowEndEditHandler']);
         }
         if (that.eventHandlers['sortHandler']) {
             that.nativeElement.removeEventListener('sort', that.eventHandlers['sortHandler']);
@@ -1202,10 +1349,19 @@ var TableComponent = /** @class */ (function (_super) {
     ], TableComponent.prototype, "autoSaveState", null);
     __decorate([
         Input()
+    ], TableComponent.prototype, "columnGroups", null);
+    __decorate([
+        Input()
     ], TableComponent.prototype, "columnMinWidth", null);
     __decorate([
         Input()
     ], TableComponent.prototype, "columnReorder", null);
+    __decorate([
+        Input()
+    ], TableComponent.prototype, "columnResize", null);
+    __decorate([
+        Input()
+    ], TableComponent.prototype, "columnResizeFeedback", null);
     __decorate([
         Input()
     ], TableComponent.prototype, "columns", null);
@@ -1218,6 +1374,9 @@ var TableComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], TableComponent.prototype, "conditionalFormattingButton", null);
+    __decorate([
+        Input()
+    ], TableComponent.prototype, "dataRowId", null);
     __decorate([
         Input()
     ], TableComponent.prototype, "dataSource", null);
@@ -1247,6 +1406,9 @@ var TableComponent = /** @class */ (function (_super) {
     ], TableComponent.prototype, "footerRow", null);
     __decorate([
         Input()
+    ], TableComponent.prototype, "formulas", null);
+    __decorate([
+        Input()
     ], TableComponent.prototype, "freezeFooter", null);
     __decorate([
         Input()
@@ -1260,6 +1422,9 @@ var TableComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], TableComponent.prototype, "keyboardNavigation", null);
+    __decorate([
+        Input()
+    ], TableComponent.prototype, "loadColumnStateBehavior", null);
     __decorate([
         Input()
     ], TableComponent.prototype, "locale", null);
@@ -1292,6 +1457,9 @@ var TableComponent = /** @class */ (function (_super) {
     ], TableComponent.prototype, "rowDetailTemplate", null);
     __decorate([
         Input()
+    ], TableComponent.prototype, "selected", null);
+    __decorate([
+        Input()
     ], TableComponent.prototype, "selection", null);
     __decorate([
         Input()
@@ -1312,6 +1480,9 @@ var TableComponent = /** @class */ (function (_super) {
         Input()
     ], TableComponent.prototype, "tooltip", null);
     __decorate([
+        Input()
+    ], TableComponent.prototype, "virtualization", null);
+    __decorate([
         Output()
     ], TableComponent.prototype, "onCellBeginEdit", void 0);
     __decorate([
@@ -1325,7 +1496,16 @@ var TableComponent = /** @class */ (function (_super) {
     ], TableComponent.prototype, "onChange", void 0);
     __decorate([
         Output()
+    ], TableComponent.prototype, "onCollapse", void 0);
+    __decorate([
+        Output()
+    ], TableComponent.prototype, "onExpand", void 0);
+    __decorate([
+        Output()
     ], TableComponent.prototype, "onColumnClick", void 0);
+    __decorate([
+        Output()
+    ], TableComponent.prototype, "onColumnResize", void 0);
     __decorate([
         Output()
     ], TableComponent.prototype, "onFilter", void 0);
@@ -1335,6 +1515,12 @@ var TableComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], TableComponent.prototype, "onPage", void 0);
+    __decorate([
+        Output()
+    ], TableComponent.prototype, "onRowBeginEdit", void 0);
+    __decorate([
+        Output()
+    ], TableComponent.prototype, "onRowEndEdit", void 0);
     __decorate([
         Output()
     ], TableComponent.prototype, "onSort", void 0);

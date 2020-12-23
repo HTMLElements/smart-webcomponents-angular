@@ -219,6 +219,17 @@ var KanbanComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(KanbanComponent.prototype, "addNewColumn", {
+        /** @description Sets or gets whether a column with a button for adding new status columns to the Kanban will be displayed. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.addNewColumn : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.addNewColumn = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(KanbanComponent.prototype, "allowDrag", {
         /** @description Allows the dragging of tasks. */
         get: function () {
@@ -314,6 +325,17 @@ var KanbanComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "dataSourceMap", {
+        /** @description Determines the the relation (mapping) between the Kanban's default fields (keywords) and the data fields from the data source. Not necessary if both match. Only some of the default mapping can be overwritten. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.dataSourceMap : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.dataSourceMap = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1047,6 +1069,9 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "addNewButton", null);
     __decorate([
         Input()
+    ], KanbanComponent.prototype, "addNewColumn", null);
+    __decorate([
+        Input()
     ], KanbanComponent.prototype, "allowDrag", null);
     __decorate([
         Input()
@@ -1072,6 +1097,9 @@ var KanbanComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], KanbanComponent.prototype, "dataSource", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "dataSourceMap", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "dragOffset", null);

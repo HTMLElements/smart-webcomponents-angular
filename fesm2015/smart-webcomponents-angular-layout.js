@@ -7,7 +7,7 @@ else {
 }
 import './../source/modules/smart.layout';
 
-import { __decorate, __awaiter } from 'tslib';
+import { __decorate } from 'tslib';
 import { EventEmitter, Output, Input, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 class BaseElement {
@@ -112,12 +112,9 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
     constructor(ref) {
         super(ref);
         this.eventHandlers = [];
-        /** @description This event is triggered when resizing begins.
+        /** @description This event is triggered after resizing is completed.
         *  @param event. The custom event. 	*/
-        this.onResizeStart = new EventEmitter();
-        /** @description This event is triggered when resizing finishes.
-        *  @param event. The custom event. 	*/
-        this.onResizeEnd = new EventEmitter();
+        this.onResize = new EventEmitter();
         /** @description This event is triggered when a change regarding the Layout's state has occured, such as inserting a new item, removing an item, etc.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type)
         *   item - The Splitter item that was the target of a change.
@@ -190,40 +187,12 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
     set dataSource(value) {
         this.nativeElement ? this.nativeElement.dataSource = value : undefined;
     }
-    /** @description Optional. A label for all Splitter items inside the Layout. Usefull when exporting the dataSource and reusing it in other elements, for example, tree, etc. */
-    get itemLabel() {
-        return this.nativeElement ? this.nativeElement.itemLabel : undefined;
-    }
-    set itemLabel(value) {
-        this.nativeElement ? this.nativeElement.itemLabel = value : undefined;
-    }
-    /** @description Optional. A label for all Splitters inside the Layout. Usefull when exporting the dataSource and reusing it in other elements, for example, tree, etc. */
-    get itemGroupLabel() {
-        return this.nativeElement ? this.nativeElement.itemGroupLabel : undefined;
-    }
-    set itemGroupLabel(value) {
-        this.nativeElement ? this.nativeElement.itemGroupLabel = value : undefined;
-    }
-    /** @description A getter that returns an array of all Splitter items inside the Layout. */
-    get items() {
-        return this.nativeElement ? this.nativeElement.items : undefined;
-    }
-    set items(value) {
-        this.nativeElement ? this.nativeElement.items = value : undefined;
-    }
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     get locale() {
         return this.nativeElement ? this.nativeElement.locale : undefined;
     }
     set locale(value) {
         this.nativeElement ? this.nativeElement.locale = value : undefined;
-    }
-    /** @description Callback, related to localization module.  */
-    get localizeFormatFunction() {
-        return this.nativeElement ? this.nativeElement.localizeFormatFunction : undefined;
-    }
-    set localizeFormatFunction(value) {
-        this.nativeElement ? this.nativeElement.localizeFormatFunction = value : undefined;
     }
     /** @description Sets an object with string values, related to the different states of passwords strength. */
     get messages() {
@@ -246,26 +215,12 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
     set readonly(value) {
         this.nativeElement ? this.nativeElement.readonly = value : undefined;
     }
-    /** @description Determines the resize step during reisizing */
-    get resizeStep() {
-        return this.nativeElement ? this.nativeElement.resizeStep : undefined;
+    /** @description Determines whether splitting is live or not. */
+    get allowLiveSplit() {
+        return this.nativeElement ? this.nativeElement.allowLiveSplit : undefined;
     }
-    set resizeStep(value) {
-        this.nativeElement ? this.nativeElement.resizeStep = value : undefined;
-    }
-    /** @description When enabled the resizing operation happens live. By default this feature is not enabled and the user sees a hightlighted bar while dragging instead of the actual splitter bar. */
-    get liveResize() {
-        return this.nativeElement ? this.nativeElement.liveResize : undefined;
-    }
-    set liveResize(value) {
-        this.nativeElement ? this.nativeElement.liveResize = value : undefined;
-    }
-    /** @description Determines the placeholder text of the empty items. */
-    get placeholder() {
-        return this.nativeElement ? this.nativeElement.placeholder : undefined;
-    }
-    set placeholder(value) {
-        this.nativeElement ? this.nativeElement.placeholder = value : undefined;
+    set allowLiveSplit(value) {
+        this.nativeElement ? this.nativeElement.allowLiveSplit = value : undefined;
     }
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get rightToLeft() {
@@ -274,7 +229,7 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
-    /** @description Determines the selected item. When an item is selected the buttons for creating nested items are displayed inside it. */
+    /** @description Determines the selected item. */
     get selectedIndex() {
         return this.nativeElement ? this.nativeElement.selectedIndex : undefined;
     }
@@ -295,63 +250,8 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
     set unfocusable(value) {
         this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
     }
-    /** @description Appends a new node.
-    * @param {Node} node. The node to append
-    * @returns {Node}
-  */
-    appendChild(node) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const getResultOnRender = () => {
-                return new Promise(resolve => {
-                    this.nativeElement.whenRendered(() => {
-                        const result = this.nativeElement.appendChild(node);
-                        resolve(result);
-                    });
-                });
-            };
-            const result = yield getResultOnRender();
-            return result;
-        });
-    }
-    /** @description Inserts the specified "smart-splitter-item" node before the reference "smart-splitter-item" node.
-    * @param {Node} newNode. The  "smart-splitter-item" node to insert.
-    * @param {Node | null} referenceNode?. The "smart-splitter-item" node before which newNode is inserted.
-    * @returns {Node}
-  */
-    insertBefore(newNode, referenceNode) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const getResultOnRender = () => {
-                return new Promise(resolve => {
-                    this.nativeElement.whenRendered(() => {
-                        const result = this.nativeElement.insertBefore(newNode, referenceNode);
-                        resolve(result);
-                    });
-                });
-            };
-            const result = yield getResultOnRender();
-            return result;
-        });
-    }
-    /** @description Removes a child "smart-splitter-item" node from the Layout.
-    * @param {Node} node. The "smart-splitter-item" node to remove.
-    * @returns {Node}
-  */
-    removeChild(node) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const getResultOnRender = () => {
-                return new Promise(resolve => {
-                    this.nativeElement.whenRendered(() => {
-                        const result = this.nativeElement.removeChild(node);
-                        resolve(result);
-                    });
-                });
-            };
-            const result = yield getResultOnRender();
-            return result;
-        });
-    }
-    /** @description Returns a Splitter Item according to the index that is passed as an argument.
-    * @param {any} index. The index of an item.
+    /** @description Returns a Layout item according to the index that is passed.
+    * @param {number | string} index. The index of an item.
     */
     getItem(index) {
         if (this.nativeElement.isRendered) {
@@ -363,137 +263,43 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
             });
         }
     }
-    /** @description Returns the index of a Splitter Item that is passed as an argument.
-    * @param {any} item. The index of the Splitter item that is passed as an argument.
+    /** @description Refreshes the Layout
     */
-    getItemIndex(item) {
+    refresh() {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.getItemIndex(item);
+            this.nativeElement.refresh();
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.getItemIndex(item);
+                this.nativeElement.refresh();
             });
         }
     }
-    /** @description Insert a new Splitter item at a given position.
-    * @param {any} item. A Splitter Item or an object defining a Splitter item to be inserted.
-    * @param {number | string} index. The index at which a new item will be inserted.
-    * @param {string} position?. The postition at which the new item will be inseted - top, bottom, left, right.
+    /** @description Inserts a new item inside the Layout.
+    * @param {any} type. The index of an item to be removed or an instance of JQX.SplitterItem.
+    * @param {string | undefined} position?. A string that represents the position where the new item will be created.
     */
-    insert(item, index, position) {
+    createLayoutItem(type, position) {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.insert(item, index, position);
+            this.nativeElement.createLayoutItem(type, position);
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.insert(item, index, position);
+                this.nativeElement.createLayoutItem(type, position);
             });
         }
     }
-    /** @description Removes a Splitter item from the Layout.
-    * @param {any} index. The index of an item to be removed or an instance of JQX.SplitterItem.
+    /** @description Moves all children from one item to another.
+    * @param {any} oldItem. The source item that will have it's content removed.
+    * @param {any} newItem. The host item that will have it's content replaced.
     */
-    removeItem(index) {
+    moveChildren(oldItem, newItem) {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.removeItem(index);
+            this.nativeElement.moveChildren(oldItem, newItem);
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.removeItem(index);
-            });
-        }
-    }
-    /** @description Removes all items from the Layout
-    */
-    removeAll() {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.removeAll();
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.removeAll();
-            });
-        }
-    }
-    /** @description Selects a Splitter item from the Layout.
-    * @param {any} index. The index of an item to be removed or an instance of JQX.SplitterItem.
-    */
-    select(index) {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.select(index);
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.select(index);
-            });
-        }
-    }
-    /** @description Unselects the selected item inside the element.
-    */
-    unselect() {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.unselect();
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.unselect();
-            });
-        }
-    }
-    /** @description Updates a Splitter item that is inside the Layout.
-    * @param {any} index. The index of an item to be removed or an instance of JQX.SplitterItem.
-    * @param {any} settings. An object containing properties with new values for the Splitter item that should be updated.
-    */
-    updateItem(index, settings) {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.updateItem(index, settings);
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.updateItem(index, settings);
-            });
-        }
-    }
-    /** @description Clears the localStorage of any previous cached states of the element according to it's id.
-    */
-    clearState() {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.clearState();
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.clearState();
-            });
-        }
-    }
-    /** @description Saves the current state of the element to LocalStorage. Requires an id to be set to the element.
-    * @returns {any}
-  */
-    saveState() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const getResultOnRender = () => {
-                return new Promise(resolve => {
-                    this.nativeElement.whenRendered(() => {
-                        const result = this.nativeElement.saveState();
-                        resolve(result);
-                    });
-                });
-            };
-            const result = yield getResultOnRender();
-            return result;
-        });
-    }
-    /** @description Loads a previously saved state of the element. If no state is provided as an argument the method will do a localStorage lookup according to the id of the element.
-    * @param {any[]} state?. An array of objects that represents a cached state of the element. The result of calling the 'saveState' method.
-    */
-    loadState(state) {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.loadState(state);
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.loadState(state);
+                this.nativeElement.moveChildren(oldItem, newItem);
             });
         }
     }
@@ -524,10 +330,8 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
     /** @description Add event listeners. */
     listen() {
         const that = this;
-        that.eventHandlers['resizeStartHandler'] = (event) => { that.onResizeStart.emit(event); };
-        that.nativeElement.addEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
-        that.eventHandlers['resizeEndHandler'] = (event) => { that.onResizeEnd.emit(event); };
-        that.nativeElement.addEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
+        that.eventHandlers['resizeHandler'] = (event) => { that.onResize.emit(event); };
+        that.nativeElement.addEventListener('resize', that.eventHandlers['resizeHandler']);
         that.eventHandlers['stateChangeHandler'] = (event) => { that.onStateChange.emit(event); };
         that.nativeElement.addEventListener('stateChange', that.eventHandlers['stateChangeHandler']);
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
@@ -546,11 +350,8 @@ let LayoutComponent = class LayoutComponent extends BaseElement {
     /** @description Remove event listeners. */
     unlisten() {
         const that = this;
-        if (that.eventHandlers['resizeStartHandler']) {
-            that.nativeElement.removeEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
-        }
-        if (that.eventHandlers['resizeEndHandler']) {
-            that.nativeElement.removeEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
+        if (that.eventHandlers['resizeHandler']) {
+            that.nativeElement.removeEventListener('resize', that.eventHandlers['resizeHandler']);
         }
         if (that.eventHandlers['stateChangeHandler']) {
             that.nativeElement.removeEventListener('stateChange', that.eventHandlers['stateChangeHandler']);
@@ -592,19 +393,7 @@ __decorate([
 ], LayoutComponent.prototype, "dataSource", null);
 __decorate([
     Input()
-], LayoutComponent.prototype, "itemLabel", null);
-__decorate([
-    Input()
-], LayoutComponent.prototype, "itemGroupLabel", null);
-__decorate([
-    Input()
-], LayoutComponent.prototype, "items", null);
-__decorate([
-    Input()
 ], LayoutComponent.prototype, "locale", null);
-__decorate([
-    Input()
-], LayoutComponent.prototype, "localizeFormatFunction", null);
 __decorate([
     Input()
 ], LayoutComponent.prototype, "messages", null);
@@ -616,13 +405,7 @@ __decorate([
 ], LayoutComponent.prototype, "readonly", null);
 __decorate([
     Input()
-], LayoutComponent.prototype, "resizeStep", null);
-__decorate([
-    Input()
-], LayoutComponent.prototype, "liveResize", null);
-__decorate([
-    Input()
-], LayoutComponent.prototype, "placeholder", null);
+], LayoutComponent.prototype, "allowLiveSplit", null);
 __decorate([
     Input()
 ], LayoutComponent.prototype, "rightToLeft", null);
@@ -637,10 +420,7 @@ __decorate([
 ], LayoutComponent.prototype, "unfocusable", null);
 __decorate([
     Output()
-], LayoutComponent.prototype, "onResizeStart", void 0);
-__decorate([
-    Output()
-], LayoutComponent.prototype, "onResizeEnd", void 0);
+], LayoutComponent.prototype, "onResize", void 0);
 __decorate([
     Output()
 ], LayoutComponent.prototype, "onStateChange", void 0);
@@ -668,13 +448,522 @@ LayoutComponent = __decorate([
     })
 ], LayoutComponent);
 
+let LayoutItemComponent = class LayoutItemComponent extends BaseElement {
+    constructor(ref) {
+        super(ref);
+        this.eventHandlers = [];
+        this.nativeElement = ref.nativeElement;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    createComponent(properties = {}) {
+        this.nativeElement = document.createElement('smart-layout-item');
+        for (let propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    }
+    /** @description Enables or disables the element. */
+    get disabled() {
+        return this.nativeElement ? this.nativeElement.disabled : undefined;
+    }
+    set disabled(value) {
+        this.nativeElement ? this.nativeElement.disabled = value : undefined;
+    }
+    /** @description Sets or gets the modifiers of the Layout item. */
+    get modifiers() {
+        return this.nativeElement ? this.nativeElement.modifiers : undefined;
+    }
+    set modifiers(value) {
+        this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+    }
+    /** @description Determines the min size of the item. */
+    get min() {
+        return this.nativeElement ? this.nativeElement.min : undefined;
+    }
+    set min(value) {
+        this.nativeElement ? this.nativeElement.min = value : undefined;
+    }
+    /** @description Determines the label of the item. */
+    get label() {
+        return this.nativeElement ? this.nativeElement.label : undefined;
+    }
+    set label(value) {
+        this.nativeElement ? this.nativeElement.label = value : undefined;
+    }
+    /** @description Determines the size of the item. */
+    get size() {
+        return this.nativeElement ? this.nativeElement.size : undefined;
+    }
+    set size(value) {
+        this.nativeElement ? this.nativeElement.size = value : undefined;
+    }
+    /** @description If is set to true, the element cannot be focused. */
+    get unfocusable() {
+        return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+    }
+    set unfocusable(value) {
+        this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+    }
+    get isRendered() {
+        return this.nativeElement ? this.nativeElement.isRendered : false;
+    }
+    ngOnInit() {
+    }
+    ngAfterViewInit() {
+        const that = this;
+        that.onCreate.emit(that.nativeElement);
+        this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    }
+    ngOnDestroy() {
+        this.unlisten();
+    }
+    ngOnChanges(changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (const propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    }
+    /** @description Add event listeners. */
+    listen() {
+        const that = this;
+    }
+    /** @description Remove event listeners. */
+    unlisten() {
+        const that = this;
+    }
+};
+LayoutItemComponent.ctorParameters = () => [
+    { type: ElementRef }
+];
+__decorate([
+    Input()
+], LayoutItemComponent.prototype, "disabled", null);
+__decorate([
+    Input()
+], LayoutItemComponent.prototype, "modifiers", null);
+__decorate([
+    Input()
+], LayoutItemComponent.prototype, "min", null);
+__decorate([
+    Input()
+], LayoutItemComponent.prototype, "label", null);
+__decorate([
+    Input()
+], LayoutItemComponent.prototype, "size", null);
+__decorate([
+    Input()
+], LayoutItemComponent.prototype, "unfocusable", null);
+LayoutItemComponent = __decorate([
+    Directive({
+        selector: 'smart-layout-item, [smart-layout-item]'
+    })
+], LayoutItemComponent);
+
+let LayoutGroupComponent = class LayoutGroupComponent extends BaseElement {
+    constructor(ref) {
+        super(ref);
+        this.eventHandlers = [];
+        this.nativeElement = ref.nativeElement;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    createComponent(properties = {}) {
+        this.nativeElement = document.createElement('smart-layout-group');
+        for (let propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    }
+    /** @description Enables or disables the element. */
+    get disabled() {
+        return this.nativeElement ? this.nativeElement.disabled : undefined;
+    }
+    set disabled(value) {
+        this.nativeElement ? this.nativeElement.disabled = value : undefined;
+    }
+    /** @description Sets or gets the modifiers of the Layout item. */
+    get modifiers() {
+        return this.nativeElement ? this.nativeElement.modifiers : undefined;
+    }
+    set modifiers(value) {
+        this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+    }
+    /** @description Determines the min size of the item. */
+    get min() {
+        return this.nativeElement ? this.nativeElement.min : undefined;
+    }
+    set min(value) {
+        this.nativeElement ? this.nativeElement.min = value : undefined;
+    }
+    /** @description Determines the label of the item. */
+    get label() {
+        return this.nativeElement ? this.nativeElement.label : undefined;
+    }
+    set label(value) {
+        this.nativeElement ? this.nativeElement.label = value : undefined;
+    }
+    /** @description Determines the group orientation. */
+    get orientation() {
+        return this.nativeElement ? this.nativeElement.orientation : undefined;
+    }
+    set orientation(value) {
+        this.nativeElement ? this.nativeElement.orientation = value : undefined;
+    }
+    /** @description Determines the size of the item. */
+    get size() {
+        return this.nativeElement ? this.nativeElement.size : undefined;
+    }
+    set size(value) {
+        this.nativeElement ? this.nativeElement.size = value : undefined;
+    }
+    /** @description If is set to true, the element cannot be focused. */
+    get unfocusable() {
+        return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+    }
+    set unfocusable(value) {
+        this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+    }
+    get isRendered() {
+        return this.nativeElement ? this.nativeElement.isRendered : false;
+    }
+    ngOnInit() {
+    }
+    ngAfterViewInit() {
+        const that = this;
+        that.onCreate.emit(that.nativeElement);
+        Smart.Render();
+        this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    }
+    ngOnDestroy() {
+        this.unlisten();
+    }
+    ngOnChanges(changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (const propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    }
+    /** @description Add event listeners. */
+    listen() {
+        const that = this;
+    }
+    /** @description Remove event listeners. */
+    unlisten() {
+        const that = this;
+    }
+};
+LayoutGroupComponent.ctorParameters = () => [
+    { type: ElementRef }
+];
+__decorate([
+    Input()
+], LayoutGroupComponent.prototype, "disabled", null);
+__decorate([
+    Input()
+], LayoutGroupComponent.prototype, "modifiers", null);
+__decorate([
+    Input()
+], LayoutGroupComponent.prototype, "min", null);
+__decorate([
+    Input()
+], LayoutGroupComponent.prototype, "label", null);
+__decorate([
+    Input()
+], LayoutGroupComponent.prototype, "orientation", null);
+__decorate([
+    Input()
+], LayoutGroupComponent.prototype, "size", null);
+__decorate([
+    Input()
+], LayoutGroupComponent.prototype, "unfocusable", null);
+LayoutGroupComponent = __decorate([
+    Directive({
+        selector: 'smart-layout-group, [smart-layout-group]'
+    })
+], LayoutGroupComponent);
+
+let TabLayoutItemComponent = class TabLayoutItemComponent extends BaseElement {
+    constructor(ref) {
+        super(ref);
+        this.eventHandlers = [];
+        this.nativeElement = ref.nativeElement;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    createComponent(properties = {}) {
+        this.nativeElement = document.createElement('smart-tab-layout-item');
+        for (let propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    }
+    /** @description Enables or disables the element. */
+    get disabled() {
+        return this.nativeElement ? this.nativeElement.disabled : undefined;
+    }
+    set disabled(value) {
+        this.nativeElement ? this.nativeElement.disabled = value : undefined;
+    }
+    /** @description Sets or gets the modifiers of the Layout item. */
+    get modifiers() {
+        return this.nativeElement ? this.nativeElement.modifiers : undefined;
+    }
+    set modifiers(value) {
+        this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+    }
+    /** @description Determines the min size of the item. */
+    get min() {
+        return this.nativeElement ? this.nativeElement.min : undefined;
+    }
+    set min(value) {
+        this.nativeElement ? this.nativeElement.min = value : undefined;
+    }
+    /** @description Determines the label of the item. */
+    get label() {
+        return this.nativeElement ? this.nativeElement.label : undefined;
+    }
+    set label(value) {
+        this.nativeElement ? this.nativeElement.label = value : undefined;
+    }
+    /** @description Determines the group orientation. */
+    get orientation() {
+        return this.nativeElement ? this.nativeElement.orientation : undefined;
+    }
+    set orientation(value) {
+        this.nativeElement ? this.nativeElement.orientation = value : undefined;
+    }
+    /** @description Determines the size of the item. */
+    get size() {
+        return this.nativeElement ? this.nativeElement.size : undefined;
+    }
+    set size(value) {
+        this.nativeElement ? this.nativeElement.size = value : undefined;
+    }
+    /** @description If is set to true, the element cannot be focused. */
+    get unfocusable() {
+        return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+    }
+    set unfocusable(value) {
+        this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+    }
+    get isRendered() {
+        return this.nativeElement ? this.nativeElement.isRendered : false;
+    }
+    ngOnInit() {
+    }
+    ngAfterViewInit() {
+        const that = this;
+        that.onCreate.emit(that.nativeElement);
+        this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    }
+    ngOnDestroy() {
+        this.unlisten();
+    }
+    ngOnChanges(changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (const propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    }
+    /** @description Add event listeners. */
+    listen() {
+        const that = this;
+    }
+    /** @description Remove event listeners. */
+    unlisten() {
+        const that = this;
+    }
+};
+TabLayoutItemComponent.ctorParameters = () => [
+    { type: ElementRef }
+];
+__decorate([
+    Input()
+], TabLayoutItemComponent.prototype, "disabled", null);
+__decorate([
+    Input()
+], TabLayoutItemComponent.prototype, "modifiers", null);
+__decorate([
+    Input()
+], TabLayoutItemComponent.prototype, "min", null);
+__decorate([
+    Input()
+], TabLayoutItemComponent.prototype, "label", null);
+__decorate([
+    Input()
+], TabLayoutItemComponent.prototype, "orientation", null);
+__decorate([
+    Input()
+], TabLayoutItemComponent.prototype, "size", null);
+__decorate([
+    Input()
+], TabLayoutItemComponent.prototype, "unfocusable", null);
+TabLayoutItemComponent = __decorate([
+    Directive({
+        selector: 'smart-tab-layout-item, [smart-tab-layout-item]'
+    })
+], TabLayoutItemComponent);
+
+let TabLayoutGroupComponent = class TabLayoutGroupComponent extends BaseElement {
+    constructor(ref) {
+        super(ref);
+        this.eventHandlers = [];
+        this.nativeElement = ref.nativeElement;
+    }
+    /** @description Creates the component on demand.
+     * @param properties An optional object of properties, which will be added to the template binded ones.
+     */
+    createComponent(properties = {}) {
+        this.nativeElement = document.createElement('smart-tab-layout-group');
+        for (let propertyName in properties) {
+            this.nativeElement[propertyName] = properties[propertyName];
+        }
+        return this.nativeElement;
+    }
+    /** @description Enables or disables the element. */
+    get disabled() {
+        return this.nativeElement ? this.nativeElement.disabled : undefined;
+    }
+    set disabled(value) {
+        this.nativeElement ? this.nativeElement.disabled = value : undefined;
+    }
+    /** @description Sets or gets the modifiers of the Layout item. */
+    get modifiers() {
+        return this.nativeElement ? this.nativeElement.modifiers : undefined;
+    }
+    set modifiers(value) {
+        this.nativeElement ? this.nativeElement.modifiers = value : undefined;
+    }
+    /** @description Determines the min size of the item. */
+    get min() {
+        return this.nativeElement ? this.nativeElement.min : undefined;
+    }
+    set min(value) {
+        this.nativeElement ? this.nativeElement.min = value : undefined;
+    }
+    /** @description Determines the label of the item. */
+    get label() {
+        return this.nativeElement ? this.nativeElement.label : undefined;
+    }
+    set label(value) {
+        this.nativeElement ? this.nativeElement.label = value : undefined;
+    }
+    /** @description Determines the group orientation. */
+    get orientation() {
+        return this.nativeElement ? this.nativeElement.orientation : undefined;
+    }
+    set orientation(value) {
+        this.nativeElement ? this.nativeElement.orientation = value : undefined;
+    }
+    /** @description Determines the position of the tab items group. */
+    get position() {
+        return this.nativeElement ? this.nativeElement.position : undefined;
+    }
+    set position(value) {
+        this.nativeElement ? this.nativeElement.position = value : undefined;
+    }
+    /** @description Determines the size of the item. */
+    get size() {
+        return this.nativeElement ? this.nativeElement.size : undefined;
+    }
+    set size(value) {
+        this.nativeElement ? this.nativeElement.size = value : undefined;
+    }
+    /** @description If is set to true, the element cannot be focused. */
+    get unfocusable() {
+        return this.nativeElement ? this.nativeElement.unfocusable : undefined;
+    }
+    set unfocusable(value) {
+        this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+    }
+    get isRendered() {
+        return this.nativeElement ? this.nativeElement.isRendered : false;
+    }
+    ngOnInit() {
+    }
+    ngAfterViewInit() {
+        const that = this;
+        that.onCreate.emit(that.nativeElement);
+        this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
+        this.listen();
+    }
+    ngOnDestroy() {
+        this.unlisten();
+    }
+    ngOnChanges(changes) {
+        if (this.nativeElement && this.nativeElement.isRendered) {
+            for (const propName in changes) {
+                if (changes.hasOwnProperty(propName)) {
+                    this.nativeElement[propName] = changes[propName].currentValue;
+                }
+            }
+        }
+    }
+    /** @description Add event listeners. */
+    listen() {
+        const that = this;
+    }
+    /** @description Remove event listeners. */
+    unlisten() {
+        const that = this;
+    }
+};
+TabLayoutGroupComponent.ctorParameters = () => [
+    { type: ElementRef }
+];
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "disabled", null);
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "modifiers", null);
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "min", null);
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "label", null);
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "orientation", null);
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "position", null);
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "size", null);
+__decorate([
+    Input()
+], TabLayoutGroupComponent.prototype, "unfocusable", null);
+TabLayoutGroupComponent = __decorate([
+    Directive({
+        selector: 'smart-tab-layout-group, [smart-tab-layout-group]'
+    })
+], TabLayoutGroupComponent);
+
 let LayoutModule = class LayoutModule {
 };
 LayoutModule = __decorate([
     NgModule({
-        declarations: [LayoutComponent],
+        declarations: [LayoutComponent, LayoutItemComponent, LayoutGroupComponent, TabLayoutItemComponent, TabLayoutGroupComponent],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        exports: [LayoutComponent]
+        exports: [LayoutComponent, LayoutItemComponent, LayoutGroupComponent, TabLayoutItemComponent, TabLayoutGroupComponent]
     })
 ], LayoutModule);
 
@@ -682,5 +971,5 @@ LayoutModule = __decorate([
  * Generated bundle index. Do not edit.
  */
 
-export { LayoutComponent, LayoutModule, Smart, BaseElement as ɵa };
+export { LayoutComponent, LayoutGroupComponent, LayoutItemComponent, LayoutModule, Smart, TabLayoutGroupComponent, TabLayoutItemComponent, BaseElement as ɵa };
 //# sourceMappingURL=smart-webcomponents-angular-layout.js.map

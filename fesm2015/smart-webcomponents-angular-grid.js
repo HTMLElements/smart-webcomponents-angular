@@ -368,7 +368,7 @@ let GridComponent = class GridComponent extends BaseElement {
     set dataExport(value) {
         this.nativeElement ? this.nativeElement.dataExport = value : undefined;
     }
-    /** @description Sets the grid's data source. The value of dataSource can be an instance of JQX.DataAdapter. */
+    /** @description Sets the grid's data source. The value of dataSource can be an instance of JQX.DataAdapter or an Array. */
     get dataSource() {
         return this.nativeElement ? this.nativeElement.dataSource : undefined;
     }
@@ -634,6 +634,21 @@ let GridComponent = class GridComponent extends BaseElement {
     set sorting(value) {
         this.nativeElement ? this.nativeElement.sorting = value : undefined;
     }
+    /** @description Adds a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {any} data. row data matching the data source
+    * @param {boolean} insertAtBottom?. Determines whether to add the new row to the bottom or top of the collection. The default value is 'true'
+    * @param {any} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
+    */
+    addRow(data, insertAtBottom, callback) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addRow(data, insertAtBottom, callback);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.addRow(data, insertAtBottom, callback);
+            });
+        }
+    }
     /** @description Adds a new row and puts it into edit mode. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string} position?. 'near' or 'far'
     * @returns {boolean}
@@ -853,7 +868,7 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Creates a Chart, when charting is enabled.
     * @param {string} type. Chart's type
-    * @param {any[]} dataSource?. Chart's data source
+    * @param {any} dataSource?. Chart's data source
     */
     createChart(type, dataSource) {
         if (this.nativeElement.isRendered) {
@@ -867,14 +882,15 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Delete a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string | number} rowId. row bound id
+    * @param {any} callback?. Sets a callback function, which is called after the row is deleted. The callback's argument is the deleted row.
     */
-    deleteRow(rowId) {
+    deleteRow(rowId, callback) {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.deleteRow(rowId);
+            this.nativeElement.deleteRow(rowId, callback);
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.deleteRow(rowId);
+                this.nativeElement.deleteRow(rowId, callback);
             });
         }
     }
@@ -986,6 +1002,23 @@ let GridComponent = class GridComponent extends BaseElement {
                 return new Promise(resolve => {
                     this.nativeElement.whenRendered(() => {
                         const result = this.nativeElement.getSelection();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the selected row ids.
+    * @returns {any[]}
+  */
+    getSelectedRows() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getSelectedRows();
                         resolve(result);
                     });
                 });
@@ -1181,6 +1214,21 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Saves the batch edit changes. This method confirms the editing changes made by the end-user.
     * @param {string | number} rowId. row bound id
+    * @param {any} data. row data matching the data source
+    * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
+    */
+    updateRow(rowId, data, callback) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateRow(rowId, data, callback);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.updateRow(rowId, data, callback);
+            });
+        }
+    }
+    /** @description Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {string | number} rowId. row bound id
     * @param {string} dataField?. column bound data field
     */
     select(rowId, dataField) {
@@ -1210,6 +1258,46 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Selects a range of rows, cells or columns. The result of the method depends on the selection configuration of the Grid.
+    * @param {string | number} rowId. row bound id
+    * @param {string | number} endRowId. row bound id
+    */
+    selectRowsRange(rowId, endRowId) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectRowsRange(rowId, endRowId);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.selectRowsRange(rowId, endRowId);
+            });
+        }
+    }
+    /** @description Selects a range of rows.
+    * @param {(string | number)[]} rowId. Array of row ids
+    */
+    selectRows(rowId) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectRows(rowId);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.selectRows(rowId);
+            });
+        }
+    }
+    /** @description Selects multiple rows by their ids.
+    * @param {number[]} rowIndex. Array of row indexes
+    */
+    selectRowsByIndex(rowIndex) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectRowsByIndex(rowIndex);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.selectRowsByIndex(rowIndex);
+            });
+        }
+    }
+    /** @description Selects multiple rows by their index.
     * @param {string | number} rowId. row bound id
     */
     showDetail(rowId) {

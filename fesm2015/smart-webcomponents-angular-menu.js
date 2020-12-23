@@ -350,6 +350,13 @@ let MenuComponent = class MenuComponent extends BaseElement {
     set overflow(value) {
         this.nativeElement ? this.nativeElement.overflow = value : undefined;
     }
+    /** @description If set to true, prevents the closing of the Menu or its dropdowns when Menu items are checked/unchecked. */
+    get preventCloseOnCheck() {
+        return this.nativeElement ? this.nativeElement.preventCloseOnCheck : undefined;
+    }
+    set preventCloseOnCheck(value) {
+        this.nativeElement ? this.nativeElement.preventCloseOnCheck = value : undefined;
+    }
     /** @description If the element is readonly, users cannot interact with it. */
     get readonly() {
         return this.nativeElement ? this.nativeElement.readonly : undefined;
@@ -710,6 +717,9 @@ __decorate([
 ], MenuComponent.prototype, "overflow", null);
 __decorate([
     Input()
+], MenuComponent.prototype, "preventCloseOnCheck", null);
+__decorate([
+    Input()
 ], MenuComponent.prototype, "readonly", null);
 __decorate([
     Input()
@@ -835,7 +845,6 @@ let MenuItemComponent = class MenuItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }
@@ -973,7 +982,6 @@ let MenuItemsGroupComponent = class MenuItemsGroupComponent extends BaseElement 
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

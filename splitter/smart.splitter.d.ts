@@ -108,6 +108,9 @@ export declare class SplitterComponent extends BaseElement implements OnInit, Af
     * @returns {Node}
   */
     removeChild(node: any): Promise<any>;
+    /** @description Refreshes the Splitter
+    */
+    refresh(): void;
     /** @description Unhides a Splitter Bar
     * @param {number} splitterBar. An instance of a splitter bar.
     */

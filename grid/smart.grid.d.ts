@@ -1,9 +1,8 @@
 import { Grid } from './../index';
 import { Scrolling, GridAppearance, GridBehavior, GridLayout, GridClipboard, GridColumn, GridColumnMenu, GridColumnGroup, GridConditionalFormatting, GridCharting, GridCheckBoxes, GridDataExport, GridEditing, GridFiltering, GridGrouping, GridPaging, GridPager, GridRowDetail, GridColumnHeader, GridSummaryRow, GridGroupHeader, GridHeader, GridFooter, GridRow, GridCell, GridSelection, GridSorting } from './../index';
-import { DataAdapter } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { GridResizeMode, GridClipboardAutoFillMode, HorizontalAlignment, VerticalAlignment, Position, GridColumnSortOrder, GridConditionalFormattingCondition, GridConditionalFormattingFontFamily, GridConditionalFormattingFontSize, GridEditingAction, LayoutPosition, GridCommandDisplayMode, GridEditingMode, GridFilteringFilterRowApplyMode, GridGroupingExpandMode, GridGroupingRenderMode, GridPagerAutoEllipsis, Scrolling, GridSelectionMode, GridSelectionAction, GridSelectionCheckBoxesSelectAllMode, GridSortingMode, GridAppearance, GridBehavior, GridLayout, GridClipboard, GridColumn, GridColumnMenu, GridColumnMenuDataSource, GridCommand, GridColumnGroup, GridConditionalFormatting, GridCharting, Dialog, GridCheckBoxes, GridDataExport, GridEditing, GridEditingCommandKeys, GridCommandKey, GridEditingCommandBar, GridEditingCommandBarDataSource, GridEditingCommandColumn, GridEditingCommandColumnDataSource, GridEditingAddNewRow, GridFiltering, GridFilteringFilterRow, GridFilteringFilterMenu, GridFilteringFilterBuilder, GridGrouping, GridGroupingGroupBar, GridGroupingSummaryRow, GridPaging, GridPagingSpinner, GridPager, GridPagerPageSizeSelector, GridPagerSummary, GridPagerNavigationButtons, GridPagerNavigationButtonsPrevNextButtons, GridPagerNavigationButtonsFirstLastButtons, GridPagerNavigationButtonsLabels, GridPagerNavigationInput, GridPagerPageIndexSelectors, GridRowDetail, GridColumnHeader, GridSummaryRow, GridGroupHeader, GridHeader, GridFooter, GridRow, GridCell, GridSelection, GridSelectionCheckBoxes, GridSorting, ElementRenderMode } from './../index';
+export { GridAppearanceAutoGenerateRowLabelMode, GridAppearanceAutoGenerateColumnLabelMode, GridResizeMode, GridClipboardAutoFillMode, HorizontalAlignment, VerticalAlignment, Position, GridColumnSortOrder, GridConditionalFormattingCondition, GridDataExportPageOrientation, GridEditingAction, LayoutPosition, GridCommandDisplayMode, GridEditingMode, GridFilteringFilterRowApplyMode, GridFilteringFilterMenuMode, GridGroupingExpandMode, GridGroupingRenderMode, GridPagerAutoEllipsis, Scrolling, GridSelectionMode, GridSelectionAction, GridSelectionCheckBoxesSelectAllMode, GridSortingMode, GridAppearance, GridBehavior, GridLayout, GridClipboard, GridColumn, GridColumnMenu, GridColumnMenuDataSource, GridCommand, GridColumnGroup, GridConditionalFormatting, GridCharting, Dialog, GridCheckBoxes, GridDataExport, GridEditing, GridEditingCommandKeys, GridCommandKey, GridEditingCommandBar, GridEditingCommandBarDataSource, GridEditingCommandColumn, GridEditingCommandColumnDataSource, GridEditingAddNewRow, GridFiltering, GridFilteringFilterRow, GridFilteringFilterMenu, GridFilteringFilterBuilder, GridGrouping, GridGroupingGroupBar, GridGroupingSummaryRow, GridPaging, GridPagingSpinner, GridPager, GridPagerPageSizeSelector, GridPagerSummary, GridPagerNavigationButtons, GridPagerNavigationButtonsPrevNextButtons, GridPagerNavigationButtonsFirstLastButtons, GridPagerNavigationButtonsLabels, GridPagerNavigationInput, GridPagerPageIndexSelectors, GridRowDetail, GridColumnHeader, GridSummaryRow, GridGroupHeader, GridHeader, GridFooter, GridRow, GridCell, GridSelection, GridSelectionCheckBoxes, GridSorting, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Grid } from './../index';
 export { DataAdapter, Chart } from './../index';
@@ -40,8 +39,8 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     checkBoxes: GridCheckBoxes;
     /** @description Sets the Grid Data Export options. */
     dataExport: GridDataExport;
-    /** @description Sets the grid's data source. The value of dataSource can be an instance of JQX.DataAdapter. */
-    dataSource: DataAdapter;
+    /** @description Sets the grid's data source. The value of dataSource can be an instance of JQX.DataAdapter or an Array. */
+    dataSource: any;
     /** @description Describes the grid's editing settings. */
     editing: GridEditing;
     /** @description Describes the grid's filtering settings. */
@@ -325,6 +324,12 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     /** @description This event is triggered, when the user reaches the top of the grid.
     *  @param event. The custom event. 	*/
     onScrollTopReached: EventEmitter<CustomEvent>;
+    /** @description Adds a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {any} data. row data matching the data source
+    * @param {boolean} insertAtBottom?. Determines whether to add the new row to the bottom or top of the collection. The default value is 'true'
+    * @param {any} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
+    */
+    addRow(data: any, insertAtBottom?: boolean, callback?: any): void;
     /** @description Adds a new row and puts it into edit mode. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string} position?. 'near' or 'far'
     * @returns {boolean}
@@ -388,13 +393,14 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     collapseAllRows(): void;
     /** @description Creates a Chart, when charting is enabled.
     * @param {string} type. Chart's type
-    * @param {any[]} dataSource?. Chart's data source
+    * @param {any} dataSource?. Chart's data source
     */
-    createChart(type: string, dataSource?: any[]): void;
+    createChart(type: string, dataSource?: any): void;
     /** @description Delete a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string | number} rowId. row bound id
+    * @param {any} callback?. Sets a callback function, which is called after the row is deleted. The callback's argument is the deleted row.
     */
-    deleteRow(rowId: string | number): void;
+    deleteRow(rowId: string | number, callback?: any): void;
     /** @description Scrolls to a row or cell. This method scrolls to a row or cell, when scrolling is necessary. If pagination is enabled, it will automatically change the page.
     * @param {string | number} rowId. row bound id
     * @param {string} dataField?. column bound data field
@@ -427,6 +433,10 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     * @returns {any}
   */
     getSelection(): Promise<any>;
+    /** @description Gets the selected row ids.
+    * @returns {any[]}
+  */
+    getSelectedRows(): Promise<any>;
     /** @description Gets an array of columns with applied filters.
     * @returns {any}
   */
@@ -477,6 +487,12 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     saveBatchEdit(): void;
     /** @description Saves the batch edit changes. This method confirms the editing changes made by the end-user.
     * @param {string | number} rowId. row bound id
+    * @param {any} data. row data matching the data source
+    * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
+    */
+    updateRow(rowId: string | number, data: any, callback?: any): void;
+    /** @description Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {string | number} rowId. row bound id
     * @param {string} dataField?. column bound data field
     */
     select(rowId: string | number, dataField?: string): void;
@@ -488,6 +504,19 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     selectRange(rowId: string | number, dataField: string, endRowId: string | number, endDataField: string): void;
     /** @description Selects a range of rows, cells or columns. The result of the method depends on the selection configuration of the Grid.
+    * @param {string | number} rowId. row bound id
+    * @param {string | number} endRowId. row bound id
+    */
+    selectRowsRange(rowId: string | number, endRowId: string | number): void;
+    /** @description Selects a range of rows.
+    * @param {(string | number)[]} rowId. Array of row ids
+    */
+    selectRows(rowId: (string | number)[]): void;
+    /** @description Selects multiple rows by their ids.
+    * @param {number[]} rowIndex. Array of row indexes
+    */
+    selectRowsByIndex(rowIndex: number[]): void;
+    /** @description Selects multiple rows by their index.
     * @param {string | number} rowId. row bound id
     */
     showDetail(rowId: string | number): void;

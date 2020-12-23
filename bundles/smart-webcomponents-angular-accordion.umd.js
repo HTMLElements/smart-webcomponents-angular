@@ -847,7 +847,6 @@ import './../source/modules/smart.accordion';
         AccordionItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };

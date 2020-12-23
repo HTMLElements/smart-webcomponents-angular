@@ -751,7 +751,6 @@ let MenuItemComponent = class MenuItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }
@@ -889,7 +888,6 @@ let MenuItemsGroupComponent = class MenuItemsGroupComponent extends BaseElement 
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

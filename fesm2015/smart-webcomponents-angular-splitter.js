@@ -415,6 +415,18 @@ let SplitterComponent = class SplitterComponent extends BaseElement {
             return result;
         });
     }
+    /** @description Refreshes the Splitter
+    */
+    refresh() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.refresh();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.refresh();
+            });
+        }
+    }
     /** @description Unhides a Splitter Bar
     * @param {number} splitterBar. An instance of a splitter bar.
     */
@@ -722,7 +734,6 @@ let SplitterItemComponent = class SplitterItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

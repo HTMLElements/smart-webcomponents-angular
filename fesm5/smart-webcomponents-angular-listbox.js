@@ -1524,7 +1524,6 @@ var ListItemComponent = /** @class */ (function (_super) {
     ListItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     ListItemComponent.prototype.ngOnDestroy = function () { };
@@ -1623,7 +1622,6 @@ var ListItemsGroupComponent = /** @class */ (function (_super) {
     ListItemsGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     ListItemsGroupComponent.prototype.ngOnDestroy = function () { };

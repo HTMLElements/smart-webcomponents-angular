@@ -119,7 +119,9 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
         */
         this.onCellClick = new EventEmitter();
         /** @description This event is triggered when the selection is changed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
+        *   type - The type of action that initiated the selection change. Possible types: 'programmatic', 'interaction', 'remove'.
+        */
         this.onChange = new EventEmitter();
         /** @description This event is triggered when a summary column header cell has been clicked.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition, 	dataField)
@@ -127,6 +129,26 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
         *   dataField - The data field of the cell's original column.
         */
         this.onColumnClick = new EventEmitter();
+        /** @description This event is triggered when a row has been collapsed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+        *   record - The (aggregated) data of the collapsed row.
+        */
+        this.onCollapse = new EventEmitter();
+        /** @description This event is triggered when a total column has been collapsed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition)
+        *   columnDefinition - The definition of the collapsed total column.
+        */
+        this.onCollapseTotalColumn = new EventEmitter();
+        /** @description This event is triggered when a row has been expanded.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+        *   record - The (aggregated) data of the expanded row.
+        */
+        this.onExpand = new EventEmitter();
+        /** @description This event is triggered when a total column has been expanded.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition)
+        *   columnDefinition - The definition of the expanded total column.
+        */
+        this.onExpandTotalColumn = new EventEmitter();
         /** @description This event is triggered when a filtering-related action is made.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	filters)
         *   action - The filtering action. Possible actions: 'add', 'remove'.
@@ -199,6 +221,13 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
     set dataSource(value) {
         this.nativeElement ? this.nativeElement.dataSource = value : undefined;
     }
+    /** @description Sets or gets whether the original tabular data sourse of the PivotTable will be pre-sorted based on columns with the rowGroup property (and their order). */
+    get defaultSortByRowGroups() {
+        return this.nativeElement ? this.nativeElement.defaultSortByRowGroups : undefined;
+    }
+    set defaultSortByRowGroups(value) {
+        this.nativeElement ? this.nativeElement.defaultSortByRowGroups = value : undefined;
+    }
     /** @description Sets or gets whether to display the PivotTable's designer alongside the table itself. The designer allows for configuring column settings and applying filtering. */
     get designer() {
         return this.nativeElement ? this.nativeElement.designer : undefined;
@@ -255,6 +284,20 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
     set groupLayout(value) {
         this.nativeElement ? this.nativeElement.groupLayout = value : undefined;
     }
+    /** @description Sets or gets whether to hide the tooltip that displays details when multiple summary cells with non-null values are selected. */
+    get hideCellSelectionTooltip() {
+        return this.nativeElement ? this.nativeElement.hideCellSelectionTooltip : undefined;
+    }
+    set hideCellSelectionTooltip(value) {
+        this.nativeElement ? this.nativeElement.hideCellSelectionTooltip = value : undefined;
+    }
+    /** @description Sets or gets whether to hide rows that contain only 0 or null values. Applicable only when there are rowGroup columns. */
+    get hideEmptyRows() {
+        return this.nativeElement ? this.nativeElement.hideEmptyRows : undefined;
+    }
+    set hideEmptyRows(value) {
+        this.nativeElement ? this.nativeElement.hideEmptyRows = value : undefined;
+    }
     /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
     get keyboardNavigation() {
         return this.nativeElement ? this.nativeElement.keyboardNavigation : undefined;
@@ -275,6 +318,13 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
     }
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
+    }
+    /** @description Sets or gets what value is shown in cells that do not have aggregated data to display. By default (null), such cells are empty. */
+    get nullDefaultValue() {
+        return this.nativeElement ? this.nativeElement.nullDefaultValue : undefined;
+    }
+    set nullDefaultValue(value) {
+        this.nativeElement ? this.nativeElement.nullDefaultValue = value : undefined;
     }
     /** @description A callback function executed each time a PivotTable cell is rendered. */
     get onCellRender() {
@@ -303,6 +353,13 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
     }
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
+    }
+    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
+    get rowSort() {
+        return this.nativeElement ? this.nativeElement.rowSort : undefined;
+    }
+    set rowSort(value) {
+        this.nativeElement ? this.nativeElement.rowSort = value : undefined;
     }
     /** @description Sets or gets whether to show row total columns for each summary column. */
     get rowTotals() {
@@ -497,8 +554,8 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
             return result;
         });
     }
-    /** @description Returns an array of selected row ids.
-    * @returns {(string | number)[]}
+    /** @description Returns an array of selected row ids (when selectionMode is 'many' or 'extended') or an array of selected cell details (when selectionMode is 'cell').
+    * @returns {(string | number)[] | { dataField: string, rowId: string | number }[]}
   */
     getSelection() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -539,16 +596,17 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
             });
         }
     }
-    /** @description Selects a row.
-    * @param {string | number} rowId. The id of the row to select. Can be retrieved from the <strong>rows</strong> collection.
+    /** @description Selects one or more rows (when selectionMode is 'many' or 'extended') or a single cell (when selectionMode is 'cell' and the second argument is passed).
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select (or of the cell's parent row when <strong>selectionMode</strong> is <em>'cell'</em>). Can be retrieved from the <strong>rows</strong> collection.
+    * @param {string} dataField?. The dataField of the dynamic column (can be retrieved by calling <strong>getDynamicColumns</strong>) of the cell to select (only applicable when <strong>selectionMode</strong> is <em>'cell'</em>).
     */
-    select(rowId) {
+    select(rowId, dataField) {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.select(rowId);
+            this.nativeElement.select(rowId, dataField);
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.select(rowId);
+                this.nativeElement.select(rowId, dataField);
             });
         }
     }
@@ -566,16 +624,17 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
             });
         }
     }
-    /** @description Unselects a row.
-    * @param {string | number} rowId. The id of the row to unselect. Can be retrieved from the <strong>rows</strong> collection.
+    /** @description Unselects one or more rows (when selectionMode is 'many' or 'extended') or a single cell (when selectionMode is 'cell' and the second argument is passed).
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select (or of the cell's parent row when <strong>selectionMode</strong> is <em>'cell'</em>). Can be retrieved from the <strong>rows</strong> collection.
+    * @param {string} dataField?. The dataField of the dynamic column (can be retrieved by calling <strong>getDynamicColumns</strong>) of the cell to select (only applicable when <strong>selectionMode</strong> is <em>'cell'</em>).
     */
-    unselect(rowId) {
+    unselect(rowId, dataField) {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.unselect(rowId);
+            this.nativeElement.unselect(rowId, dataField);
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.unselect(rowId);
+                this.nativeElement.unselect(rowId, dataField);
             });
         }
     }
@@ -612,6 +671,14 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['columnClickHandler'] = (event) => { that.onColumnClick.emit(event); };
         that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+        that.eventHandlers['collapseHandler'] = (event) => { that.onCollapse.emit(event); };
+        that.nativeElement.addEventListener('collapse', that.eventHandlers['collapseHandler']);
+        that.eventHandlers['collapseTotalColumnHandler'] = (event) => { that.onCollapseTotalColumn.emit(event); };
+        that.nativeElement.addEventListener('collapseTotalColumn', that.eventHandlers['collapseTotalColumnHandler']);
+        that.eventHandlers['expandHandler'] = (event) => { that.onExpand.emit(event); };
+        that.nativeElement.addEventListener('expand', that.eventHandlers['expandHandler']);
+        that.eventHandlers['expandTotalColumnHandler'] = (event) => { that.onExpandTotalColumn.emit(event); };
+        that.nativeElement.addEventListener('expandTotalColumn', that.eventHandlers['expandTotalColumnHandler']);
         that.eventHandlers['filterHandler'] = (event) => { that.onFilter.emit(event); };
         that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
         that.eventHandlers['sortHandler'] = (event) => { that.onSort.emit(event); };
@@ -628,6 +695,18 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
         }
         if (that.eventHandlers['columnClickHandler']) {
             that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+        }
+        if (that.eventHandlers['collapseHandler']) {
+            that.nativeElement.removeEventListener('collapse', that.eventHandlers['collapseHandler']);
+        }
+        if (that.eventHandlers['collapseTotalColumnHandler']) {
+            that.nativeElement.removeEventListener('collapseTotalColumn', that.eventHandlers['collapseTotalColumnHandler']);
+        }
+        if (that.eventHandlers['expandHandler']) {
+            that.nativeElement.removeEventListener('expand', that.eventHandlers['expandHandler']);
+        }
+        if (that.eventHandlers['expandTotalColumnHandler']) {
+            that.nativeElement.removeEventListener('expandTotalColumn', that.eventHandlers['expandTotalColumnHandler']);
         }
         if (that.eventHandlers['filterHandler']) {
             that.nativeElement.onfilterHandler = null;
@@ -663,6 +742,9 @@ __decorate([
 ], PivotTableComponent.prototype, "dataSource", null);
 __decorate([
     Input()
+], PivotTableComponent.prototype, "defaultSortByRowGroups", null);
+__decorate([
+    Input()
 ], PivotTableComponent.prototype, "designer", null);
 __decorate([
     Input()
@@ -687,6 +769,12 @@ __decorate([
 ], PivotTableComponent.prototype, "groupLayout", null);
 __decorate([
     Input()
+], PivotTableComponent.prototype, "hideCellSelectionTooltip", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "hideEmptyRows", null);
+__decorate([
+    Input()
 ], PivotTableComponent.prototype, "keyboardNavigation", null);
 __decorate([
     Input()
@@ -694,6 +782,9 @@ __decorate([
 __decorate([
     Input()
 ], PivotTableComponent.prototype, "messages", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "nullDefaultValue", null);
 __decorate([
     Input()
 ], PivotTableComponent.prototype, "onCellRender", null);
@@ -706,6 +797,9 @@ __decorate([
 __decorate([
     Input()
 ], PivotTableComponent.prototype, "rightToLeft", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "rowSort", null);
 __decorate([
     Input()
 ], PivotTableComponent.prototype, "rowTotals", null);
@@ -739,6 +833,18 @@ __decorate([
 __decorate([
     Output()
 ], PivotTableComponent.prototype, "onColumnClick", void 0);
+__decorate([
+    Output()
+], PivotTableComponent.prototype, "onCollapse", void 0);
+__decorate([
+    Output()
+], PivotTableComponent.prototype, "onCollapseTotalColumn", void 0);
+__decorate([
+    Output()
+], PivotTableComponent.prototype, "onExpand", void 0);
+__decorate([
+    Output()
+], PivotTableComponent.prototype, "onExpandTotalColumn", void 0);
 __decorate([
     Output()
 ], PivotTableComponent.prototype, "onFilter", void 0);

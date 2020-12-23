@@ -1160,7 +1160,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         /** @description Adds a task as the last item of a Project.
-        * @param {string | number} taskIndex. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+        * @param {any} taskIndex. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
         * @param {string | number} projectIndex. A number that represents the index of a project or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
         */
         GanttChartComponent.prototype.addTaskTo = function (taskIndex, projectIndex) {
@@ -1410,7 +1410,7 @@ import './../source/modules/smart.ganttchart';
             });
         };
         /** @description Returns the Tree path of a task/resource.
-        * @param {GanttChartTask | GanttChartResource | number} item. A GattChartTask/GanttChartResource item object or index.
+        * @param {any} item. A GattChartTask/GanttChartResource item object or index.
         * @returns {string}
       */
         GanttChartComponent.prototype.getItemPath = function (item) {
@@ -1437,7 +1437,7 @@ import './../source/modules/smart.ganttchart';
             });
         };
         /** @description Returns the index of a task.
-        * @param {GanttChartTask} task. A GattChartTask object.
+        * @param {any} task. A GattChartTask object.
         * @returns {number}
       */
         GanttChartComponent.prototype.getTaskIndex = function (task) {
@@ -1464,7 +1464,7 @@ import './../source/modules/smart.ganttchart';
             });
         };
         /** @description Returns the tree path of a task.
-        * @param {GanttChartTask} task. A GanttChartTask object.
+        * @param {any} task. A GanttChartTask object.
         * @returns {string}
       */
         GanttChartComponent.prototype.getTaskPath = function (task) {
@@ -1491,8 +1491,8 @@ import './../source/modules/smart.ganttchart';
             });
         };
         /** @description Returns teh Project of a task if any.
-        * @param {GanttChartTask} task. A GantChartTask object.
-        * @returns {GanttChartTask | undefined}
+        * @param {any} task. A GantChartTask object.
+        * @returns {any}
       */
         GanttChartComponent.prototype.getTaskProject = function (task) {
             return __awaiter(this, void 0, void 0, function () {

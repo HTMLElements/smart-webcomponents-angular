@@ -514,7 +514,6 @@ let AccordionItemComponent = class AccordionItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

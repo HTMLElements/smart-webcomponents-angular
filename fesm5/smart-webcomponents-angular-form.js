@@ -466,6 +466,28 @@ var FormControlComponent = /** @class */ (function (_super) {
         }
         return this.nativeElement;
     };
+    Object.defineProperty(FormControlComponent.prototype, "action", {
+        /** @description Gets or Sets the FormControl Action. This property is used when the 'controlType' is 'button' or 'submit' */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.action : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.action = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FormControlComponent.prototype, "align", {
+        /** @description Sets or Gets the alignment of the FormControl */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.align : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.align = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(FormControlComponent.prototype, "appendHTML", {
         /** @description HTML Content displayed after the Form Control */
         get: function () {
@@ -642,6 +664,17 @@ var FormControlComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(FormControlComponent.prototype, "placeholder", {
+        /** @description Gets or Sets the FormControl placeholder. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.placeholder : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.placeholder = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(FormControlComponent.prototype, "prependHTML", {
         /** @description HTML Content displayed before the Form Control */
         get: function () {
@@ -660,6 +693,17 @@ var FormControlComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.readonly = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FormControlComponent.prototype, "required", {
+        /** @description Gets or Sets whether this field is required. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.required : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.required = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -753,7 +797,6 @@ var FormControlComponent = /** @class */ (function (_super) {
     FormControlComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -780,6 +823,12 @@ var FormControlComponent = /** @class */ (function (_super) {
     FormControlComponent.ctorParameters = function () { return [
         { type: ElementRef }
     ]; };
+    __decorate([
+        Input()
+    ], FormControlComponent.prototype, "action", null);
+    __decorate([
+        Input()
+    ], FormControlComponent.prototype, "align", null);
     __decorate([
         Input()
     ], FormControlComponent.prototype, "appendHTML", null);
@@ -830,10 +879,16 @@ var FormControlComponent = /** @class */ (function (_super) {
     ], FormControlComponent.prototype, "backButtonLabel", null);
     __decorate([
         Input()
+    ], FormControlComponent.prototype, "placeholder", null);
+    __decorate([
+        Input()
     ], FormControlComponent.prototype, "prependHTML", null);
     __decorate([
         Input()
     ], FormControlComponent.prototype, "readonly", null);
+    __decorate([
+        Input()
+    ], FormControlComponent.prototype, "required", null);
     __decorate([
         Input()
     ], FormControlComponent.prototype, "untouched", null);
@@ -1063,7 +1118,6 @@ var FormGroupComponent = /** @class */ (function (_super) {
     FormGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };

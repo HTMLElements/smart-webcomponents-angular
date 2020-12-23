@@ -700,7 +700,6 @@ let TabItemComponent = class TabItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }
@@ -779,7 +778,6 @@ let TabItemsGroupComponent = class TabItemsGroupComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

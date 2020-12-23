@@ -1,8 +1,8 @@
 import { MultilineTextBox } from './../index';
-import { Animation, MultilineTextBoxAutoCapitalize, AutoComplete, TextBoxDisplayMode, MultilineTextBoxEnterKeyBehavior, HorizontalScrollBarVisibility, VerticalScrollBarVisibility, MultilineTextBoxWrap } from './../index';
+import { Animation, MultilineTextBoxAutoCapitalize, MultiLineTextBoxAutoComplete, TextBoxDisplayMode, MultilineTextBoxEnterKeyBehavior, HorizontalScrollBarVisibility, VerticalScrollBarVisibility, MultilineTextBoxWrap } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, MultilineTextBoxAutoCapitalize, AutoComplete, TextBoxDisplayMode, MultilineTextBoxEnterKeyBehavior, HorizontalScrollBarVisibility, VerticalScrollBarVisibility, MultilineTextBoxWrap, ElementRenderMode } from './../index';
+export { Animation, MultilineTextBoxAutoCapitalize, MultiLineTextBoxAutoComplete, TextBoxDisplayMode, MultilineTextBoxEnterKeyBehavior, HorizontalScrollBarVisibility, VerticalScrollBarVisibility, MultilineTextBoxWrap, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { MultilineTextBox } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -29,7 +29,7 @@ export declare class MultilineTextBoxComponent extends BaseElement implements On
     /** @description Determines whether and how the value should be automatically capitalized as it is entered/edited by the user. */
     autoCapitalize: MultilineTextBoxAutoCapitalize;
     /** @description Determines whether the value of the control can be automatically completed by the browser. */
-    autoComplete: AutoComplete;
+    autoComplete: MultiLineTextBoxAutoComplete;
     /** @description Determines whether element will auto expand when the input overflows vertically. */
     autoExpand: boolean;
     /** @description Determines whether the input should be focused when the page is loaded. */

@@ -690,6 +690,17 @@ import './../source/modules/smart.menu';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(MenuComponent.prototype, "preventCloseOnCheck", {
+            /** @description If set to true, prevents the closing of the Menu or its dropdowns when Menu items are checked/unchecked. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.preventCloseOnCheck : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.preventCloseOnCheck = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(MenuComponent.prototype, "readonly", {
             /** @description If the element is readonly, users cannot interact with it. */
             get: function () {
@@ -1097,6 +1108,9 @@ import './../source/modules/smart.menu';
         ], MenuComponent.prototype, "overflow", null);
         __decorate([
             core.Input()
+        ], MenuComponent.prototype, "preventCloseOnCheck", null);
+        __decorate([
+            core.Input()
         ], MenuComponent.prototype, "readonly", null);
         __decorate([
             core.Input()
@@ -1259,7 +1273,6 @@ import './../source/modules/smart.menu';
         MenuItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         MenuItemComponent.prototype.ngOnDestroy = function () { };
@@ -1445,7 +1458,6 @@ import './../source/modules/smart.menu';
         MenuItemsGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
-            Smart.Render();
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         MenuItemsGroupComponent.prototype.ngOnDestroy = function () { };

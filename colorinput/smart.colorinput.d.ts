@@ -1,8 +1,8 @@
 import { ColorInput } from './../index';
-import { Animation, ColorDisplayMode, DropDownButtonPosition, ColorQueryMode, ColorValueDisplayMode, ColorValueFormat } from './../index';
+import { Animation, ColorInputDisplayMode, DropDownButtonPosition, ColorQueryMode, ColorValueDisplayMode, ColorValueFormat } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, ColorDisplayMode, DropDownButtonPosition, ColorQueryMode, ColorValueDisplayMode, ColorValueFormat, ElementRenderMode } from './../index';
+export { Animation, ColorInputDisplayMode, DropDownButtonPosition, ColorQueryMode, ColorValueDisplayMode, ColorValueFormat, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { ColorInput } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -33,7 +33,7 @@ export declare class ColorInputComponent extends BaseElement implements OnInit, 
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Determines the colors that will be displayed and their layout. */
-    displayMode: ColorDisplayMode;
+    displayMode: ColorInputDisplayMode;
     /** @description Determines the position of the drop down button. */
     dropDownButtonPosition: DropDownButtonPosition;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */

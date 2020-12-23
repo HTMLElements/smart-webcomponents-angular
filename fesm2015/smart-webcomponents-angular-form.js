@@ -377,6 +377,20 @@ let FormControlComponent = class FormControlComponent extends BaseElement {
         }
         return this.nativeElement;
     }
+    /** @description Gets or Sets the FormControl Action. This property is used when the 'controlType' is 'button' or 'submit' */
+    get action() {
+        return this.nativeElement ? this.nativeElement.action : undefined;
+    }
+    set action(value) {
+        this.nativeElement ? this.nativeElement.action = value : undefined;
+    }
+    /** @description Sets or Gets the alignment of the FormControl */
+    get align() {
+        return this.nativeElement ? this.nativeElement.align : undefined;
+    }
+    set align(value) {
+        this.nativeElement ? this.nativeElement.align = value : undefined;
+    }
     /** @description HTML Content displayed after the Form Control */
     get appendHTML() {
         return this.nativeElement ? this.nativeElement.appendHTML : undefined;
@@ -489,6 +503,13 @@ let FormControlComponent = class FormControlComponent extends BaseElement {
     set backButtonLabel(value) {
         this.nativeElement ? this.nativeElement.backButtonLabel = value : undefined;
     }
+    /** @description Gets or Sets the FormControl placeholder. */
+    get placeholder() {
+        return this.nativeElement ? this.nativeElement.placeholder : undefined;
+    }
+    set placeholder(value) {
+        this.nativeElement ? this.nativeElement.placeholder = value : undefined;
+    }
     /** @description HTML Content displayed before the Form Control */
     get prependHTML() {
         return this.nativeElement ? this.nativeElement.prependHTML : undefined;
@@ -502,6 +523,13 @@ let FormControlComponent = class FormControlComponent extends BaseElement {
     }
     set readonly(value) {
         this.nativeElement ? this.nativeElement.readonly = value : undefined;
+    }
+    /** @description Gets or Sets whether this field is required. */
+    get required() {
+        return this.nativeElement ? this.nativeElement.required : undefined;
+    }
+    set required(value) {
+        this.nativeElement ? this.nativeElement.required = value : undefined;
     }
     /** @description Gets whether the Form control is not touched by the user. This flag is changed usually on blur, after the user interacted with the Form control */
     get untouched() {
@@ -560,7 +588,6 @@ let FormControlComponent = class FormControlComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -588,6 +615,12 @@ let FormControlComponent = class FormControlComponent extends BaseElement {
 FormControlComponent.ctorParameters = () => [
     { type: ElementRef }
 ];
+__decorate([
+    Input()
+], FormControlComponent.prototype, "action", null);
+__decorate([
+    Input()
+], FormControlComponent.prototype, "align", null);
 __decorate([
     Input()
 ], FormControlComponent.prototype, "appendHTML", null);
@@ -638,10 +671,16 @@ __decorate([
 ], FormControlComponent.prototype, "backButtonLabel", null);
 __decorate([
     Input()
+], FormControlComponent.prototype, "placeholder", null);
+__decorate([
+    Input()
 ], FormControlComponent.prototype, "prependHTML", null);
 __decorate([
     Input()
 ], FormControlComponent.prototype, "readonly", null);
+__decorate([
+    Input()
+], FormControlComponent.prototype, "required", null);
 __decorate([
     Input()
 ], FormControlComponent.prototype, "untouched", null);
@@ -814,7 +853,6 @@ let FormGroupComponent = class FormGroupComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

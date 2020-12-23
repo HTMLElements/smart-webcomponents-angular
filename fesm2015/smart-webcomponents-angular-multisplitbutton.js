@@ -805,7 +805,6 @@ let ListItemComponent = class ListItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }
@@ -892,7 +891,6 @@ let ListItemsGroupComponent = class ListItemsGroupComponent extends BaseElement 
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-numberinput.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-numberinput.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-numberinput.js",
+  "esm5": "../esm5/numberinput/smart-webcomponents-angular-numberinput.js",
+  "esm2015": "../esm2015/numberinput/smart-webcomponents-angular-numberinput.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-numberinput.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-numberinput.js",
+  "typings": "smart-webcomponents-angular-numberinput.d.ts",
+  "metadata": "smart-webcomponents-angular-numberinput.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/numberinput"
+}

@@ -365,7 +365,9 @@ import './../source/modules/smart.pivottable';
             */
             _this.onCellClick = new core.EventEmitter();
             /** @description This event is triggered when the selection is changed.
-            *  @param event. The custom event. 	*/
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
+            *   type - The type of action that initiated the selection change. Possible types: 'programmatic', 'interaction', 'remove'.
+            */
             _this.onChange = new core.EventEmitter();
             /** @description This event is triggered when a summary column header cell has been clicked.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition, 	dataField)
@@ -373,6 +375,26 @@ import './../source/modules/smart.pivottable';
             *   dataField - The data field of the cell's original column.
             */
             _this.onColumnClick = new core.EventEmitter();
+            /** @description This event is triggered when a row has been collapsed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+            *   record - The (aggregated) data of the collapsed row.
+            */
+            _this.onCollapse = new core.EventEmitter();
+            /** @description This event is triggered when a total column has been collapsed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition)
+            *   columnDefinition - The definition of the collapsed total column.
+            */
+            _this.onCollapseTotalColumn = new core.EventEmitter();
+            /** @description This event is triggered when a row has been expanded.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+            *   record - The (aggregated) data of the expanded row.
+            */
+            _this.onExpand = new core.EventEmitter();
+            /** @description This event is triggered when a total column has been expanded.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	columnDefinition)
+            *   columnDefinition - The definition of the expanded total column.
+            */
+            _this.onExpandTotalColumn = new core.EventEmitter();
             /** @description This event is triggered when a filtering-related action is made.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	filters)
             *   action - The filtering action. Possible actions: 'add', 'remove'.
@@ -475,6 +497,17 @@ import './../source/modules/smart.pivottable';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(PivotTableComponent.prototype, "defaultSortByRowGroups", {
+            /** @description Sets or gets whether the original tabular data sourse of the PivotTable will be pre-sorted based on columns with the rowGroup property (and their order). */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.defaultSortByRowGroups : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.defaultSortByRowGroups = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(PivotTableComponent.prototype, "designer", {
             /** @description Sets or gets whether to display the PivotTable's designer alongside the table itself. The designer allows for configuring column settings and applying filtering. */
             get: function () {
@@ -563,6 +596,28 @@ import './../source/modules/smart.pivottable';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(PivotTableComponent.prototype, "hideCellSelectionTooltip", {
+            /** @description Sets or gets whether to hide the tooltip that displays details when multiple summary cells with non-null values are selected. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.hideCellSelectionTooltip : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.hideCellSelectionTooltip = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PivotTableComponent.prototype, "hideEmptyRows", {
+            /** @description Sets or gets whether to hide rows that contain only 0 or null values. Applicable only when there are rowGroup columns. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.hideEmptyRows : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.hideEmptyRows = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(PivotTableComponent.prototype, "keyboardNavigation", {
             /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
             get: function () {
@@ -592,6 +647,17 @@ import './../source/modules/smart.pivottable';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.messages = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PivotTableComponent.prototype, "nullDefaultValue", {
+            /** @description Sets or gets what value is shown in cells that do not have aggregated data to display. By default (null), such cells are empty. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.nullDefaultValue : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.nullDefaultValue = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -636,6 +702,17 @@ import './../source/modules/smart.pivottable';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PivotTableComponent.prototype, "rowSort", {
+            /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.rowSort : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.rowSort = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -891,8 +968,8 @@ import './../source/modules/smart.pivottable';
                 });
             });
         };
-        /** @description Returns an array of selected row ids.
-        * @returns {(string | number)[]}
+        /** @description Returns an array of selected row ids (when selectionMode is 'many' or 'extended') or an array of selected cell details (when selectionMode is 'cell').
+        * @returns {(string | number)[] | { dataField: string, rowId: string | number }[]}
       */
         PivotTableComponent.prototype.getSelection = function () {
             return __awaiter(this, void 0, void 0, function () {
@@ -944,17 +1021,18 @@ import './../source/modules/smart.pivottable';
                 });
             }
         };
-        /** @description Selects a row.
-        * @param {string | number} rowId. The id of the row to select. Can be retrieved from the <strong>rows</strong> collection.
+        /** @description Selects one or more rows (when selectionMode is 'many' or 'extended') or a single cell (when selectionMode is 'cell' and the second argument is passed).
+        * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select (or of the cell's parent row when <strong>selectionMode</strong> is <em>'cell'</em>). Can be retrieved from the <strong>rows</strong> collection.
+        * @param {string} dataField?. The dataField of the dynamic column (can be retrieved by calling <strong>getDynamicColumns</strong>) of the cell to select (only applicable when <strong>selectionMode</strong> is <em>'cell'</em>).
         */
-        PivotTableComponent.prototype.select = function (rowId) {
+        PivotTableComponent.prototype.select = function (rowId, dataField) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.select(rowId);
+                this.nativeElement.select(rowId, dataField);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.select(rowId);
+                    _this.nativeElement.select(rowId, dataField);
                 });
             }
         };
@@ -973,17 +1051,18 @@ import './../source/modules/smart.pivottable';
                 });
             }
         };
-        /** @description Unselects a row.
-        * @param {string | number} rowId. The id of the row to unselect. Can be retrieved from the <strong>rows</strong> collection.
+        /** @description Unselects one or more rows (when selectionMode is 'many' or 'extended') or a single cell (when selectionMode is 'cell' and the second argument is passed).
+        * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select (or of the cell's parent row when <strong>selectionMode</strong> is <em>'cell'</em>). Can be retrieved from the <strong>rows</strong> collection.
+        * @param {string} dataField?. The dataField of the dynamic column (can be retrieved by calling <strong>getDynamicColumns</strong>) of the cell to select (only applicable when <strong>selectionMode</strong> is <em>'cell'</em>).
         */
-        PivotTableComponent.prototype.unselect = function (rowId) {
+        PivotTableComponent.prototype.unselect = function (rowId, dataField) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.unselect(rowId);
+                this.nativeElement.unselect(rowId, dataField);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.unselect(rowId);
+                    _this.nativeElement.unselect(rowId, dataField);
                 });
             }
         };
@@ -1024,6 +1103,14 @@ import './../source/modules/smart.pivottable';
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
             that.eventHandlers['columnClickHandler'] = function (event) { that.onColumnClick.emit(event); };
             that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+            that.eventHandlers['collapseHandler'] = function (event) { that.onCollapse.emit(event); };
+            that.nativeElement.addEventListener('collapse', that.eventHandlers['collapseHandler']);
+            that.eventHandlers['collapseTotalColumnHandler'] = function (event) { that.onCollapseTotalColumn.emit(event); };
+            that.nativeElement.addEventListener('collapseTotalColumn', that.eventHandlers['collapseTotalColumnHandler']);
+            that.eventHandlers['expandHandler'] = function (event) { that.onExpand.emit(event); };
+            that.nativeElement.addEventListener('expand', that.eventHandlers['expandHandler']);
+            that.eventHandlers['expandTotalColumnHandler'] = function (event) { that.onExpandTotalColumn.emit(event); };
+            that.nativeElement.addEventListener('expandTotalColumn', that.eventHandlers['expandTotalColumnHandler']);
             that.eventHandlers['filterHandler'] = function (event) { that.onFilter.emit(event); };
             that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
             that.eventHandlers['sortHandler'] = function (event) { that.onSort.emit(event); };
@@ -1040,6 +1127,18 @@ import './../source/modules/smart.pivottable';
             }
             if (that.eventHandlers['columnClickHandler']) {
                 that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+            }
+            if (that.eventHandlers['collapseHandler']) {
+                that.nativeElement.removeEventListener('collapse', that.eventHandlers['collapseHandler']);
+            }
+            if (that.eventHandlers['collapseTotalColumnHandler']) {
+                that.nativeElement.removeEventListener('collapseTotalColumn', that.eventHandlers['collapseTotalColumnHandler']);
+            }
+            if (that.eventHandlers['expandHandler']) {
+                that.nativeElement.removeEventListener('expand', that.eventHandlers['expandHandler']);
+            }
+            if (that.eventHandlers['expandTotalColumnHandler']) {
+                that.nativeElement.removeEventListener('expandTotalColumn', that.eventHandlers['expandTotalColumnHandler']);
             }
             if (that.eventHandlers['filterHandler']) {
                 that.nativeElement.onfilterHandler = null;
@@ -1074,6 +1173,9 @@ import './../source/modules/smart.pivottable';
         ], PivotTableComponent.prototype, "dataSource", null);
         __decorate([
             core.Input()
+        ], PivotTableComponent.prototype, "defaultSortByRowGroups", null);
+        __decorate([
+            core.Input()
         ], PivotTableComponent.prototype, "designer", null);
         __decorate([
             core.Input()
@@ -1098,6 +1200,12 @@ import './../source/modules/smart.pivottable';
         ], PivotTableComponent.prototype, "groupLayout", null);
         __decorate([
             core.Input()
+        ], PivotTableComponent.prototype, "hideCellSelectionTooltip", null);
+        __decorate([
+            core.Input()
+        ], PivotTableComponent.prototype, "hideEmptyRows", null);
+        __decorate([
+            core.Input()
         ], PivotTableComponent.prototype, "keyboardNavigation", null);
         __decorate([
             core.Input()
@@ -1105,6 +1213,9 @@ import './../source/modules/smart.pivottable';
         __decorate([
             core.Input()
         ], PivotTableComponent.prototype, "messages", null);
+        __decorate([
+            core.Input()
+        ], PivotTableComponent.prototype, "nullDefaultValue", null);
         __decorate([
             core.Input()
         ], PivotTableComponent.prototype, "onCellRender", null);
@@ -1117,6 +1228,9 @@ import './../source/modules/smart.pivottable';
         __decorate([
             core.Input()
         ], PivotTableComponent.prototype, "rightToLeft", null);
+        __decorate([
+            core.Input()
+        ], PivotTableComponent.prototype, "rowSort", null);
         __decorate([
             core.Input()
         ], PivotTableComponent.prototype, "rowTotals", null);
@@ -1150,6 +1264,18 @@ import './../source/modules/smart.pivottable';
         __decorate([
             core.Output()
         ], PivotTableComponent.prototype, "onColumnClick", void 0);
+        __decorate([
+            core.Output()
+        ], PivotTableComponent.prototype, "onCollapse", void 0);
+        __decorate([
+            core.Output()
+        ], PivotTableComponent.prototype, "onCollapseTotalColumn", void 0);
+        __decorate([
+            core.Output()
+        ], PivotTableComponent.prototype, "onExpand", void 0);
+        __decorate([
+            core.Output()
+        ], PivotTableComponent.prototype, "onExpandTotalColumn", void 0);
         __decorate([
             core.Output()
         ], PivotTableComponent.prototype, "onFilter", void 0);

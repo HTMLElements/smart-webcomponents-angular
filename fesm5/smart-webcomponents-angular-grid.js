@@ -439,7 +439,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "dataSource", {
-        /** @description Sets the grid's data source. The value of dataSource can be an instance of JQX.DataAdapter. */
+        /** @description Sets the grid's data source. The value of dataSource can be an instance of JQX.DataAdapter or an Array. */
         get: function () {
             return this.nativeElement ? this.nativeElement.dataSource : undefined;
         },
@@ -856,6 +856,22 @@ var GridComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    /** @description Adds a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {any} data. row data matching the data source
+    * @param {boolean} insertAtBottom?. Determines whether to add the new row to the bottom or top of the collection. The default value is 'true'
+    * @param {any} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
+    */
+    GridComponent.prototype.addRow = function (data, insertAtBottom, callback) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addRow(data, insertAtBottom, callback);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.addRow(data, insertAtBottom, callback);
+            });
+        }
+    };
     /** @description Adds a new row and puts it into edit mode. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string} position?. 'near' or 'far'
     * @returns {boolean}
@@ -1115,7 +1131,7 @@ var GridComponent = /** @class */ (function (_super) {
     };
     /** @description Creates a Chart, when charting is enabled.
     * @param {string} type. Chart's type
-    * @param {any[]} dataSource?. Chart's data source
+    * @param {any} dataSource?. Chart's data source
     */
     GridComponent.prototype.createChart = function (type, dataSource) {
         var _this = this;
@@ -1130,15 +1146,16 @@ var GridComponent = /** @class */ (function (_super) {
     };
     /** @description Delete a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string | number} rowId. row bound id
+    * @param {any} callback?. Sets a callback function, which is called after the row is deleted. The callback's argument is the deleted row.
     */
-    GridComponent.prototype.deleteRow = function (rowId) {
+    GridComponent.prototype.deleteRow = function (rowId, callback) {
         var _this = this;
         if (this.nativeElement.isRendered) {
-            this.nativeElement.deleteRow(rowId);
+            this.nativeElement.deleteRow(rowId, callback);
         }
         else {
             this.nativeElement.whenRendered(function () {
-                _this.nativeElement.deleteRow(rowId);
+                _this.nativeElement.deleteRow(rowId, callback);
             });
         }
     };
@@ -1278,6 +1295,32 @@ var GridComponent = /** @class */ (function (_super) {
                             return new Promise(function (resolve) {
                                 _this.nativeElement.whenRendered(function () {
                                     var result = _this.nativeElement.getSelection();
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Gets the selected row ids.
+    * @returns {any[]}
+  */
+    GridComponent.prototype.getSelectedRows = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getSelectedRows();
                                     resolve(result);
                                 });
                             });
@@ -1530,6 +1573,22 @@ var GridComponent = /** @class */ (function (_super) {
     };
     /** @description Saves the batch edit changes. This method confirms the editing changes made by the end-user.
     * @param {string | number} rowId. row bound id
+    * @param {any} data. row data matching the data source
+    * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
+    */
+    GridComponent.prototype.updateRow = function (rowId, data, callback) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateRow(rowId, data, callback);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.updateRow(rowId, data, callback);
+            });
+        }
+    };
+    /** @description Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {string | number} rowId. row bound id
     * @param {string} dataField?. column bound data field
     */
     GridComponent.prototype.select = function (rowId, dataField) {
@@ -1561,6 +1620,49 @@ var GridComponent = /** @class */ (function (_super) {
         }
     };
     /** @description Selects a range of rows, cells or columns. The result of the method depends on the selection configuration of the Grid.
+    * @param {string | number} rowId. row bound id
+    * @param {string | number} endRowId. row bound id
+    */
+    GridComponent.prototype.selectRowsRange = function (rowId, endRowId) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectRowsRange(rowId, endRowId);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.selectRowsRange(rowId, endRowId);
+            });
+        }
+    };
+    /** @description Selects a range of rows.
+    * @param {(string | number)[]} rowId. Array of row ids
+    */
+    GridComponent.prototype.selectRows = function (rowId) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectRows(rowId);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.selectRows(rowId);
+            });
+        }
+    };
+    /** @description Selects multiple rows by their ids.
+    * @param {number[]} rowIndex. Array of row indexes
+    */
+    GridComponent.prototype.selectRowsByIndex = function (rowIndex) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectRowsByIndex(rowIndex);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.selectRowsByIndex(rowIndex);
+            });
+        }
+    };
+    /** @description Selects multiple rows by their index.
     * @param {string | number} rowId. row bound id
     */
     GridComponent.prototype.showDetail = function (rowId) {

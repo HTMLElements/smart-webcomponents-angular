@@ -625,7 +625,6 @@ var AccordionItemComponent = /** @class */ (function (_super) {
     AccordionItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
-        Smart.Render();
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };

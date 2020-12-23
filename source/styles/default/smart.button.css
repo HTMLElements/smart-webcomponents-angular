@@ -16,10 +16,12 @@ smart-button, smart-toggle-button, smart-repeat-button {
     border-bottom-right-radius: var(--smart-border-bottom-right-radius);
     border-width: var(--smart-border-width);
     border-style: solid;
+    visibility: hidden;
 }
 
 smart-button.smart-element, smart-toggle-button.smart-element, smart-repeat-button.smart-element {
     display: inline-flex;
+    visibility: inherit;
 }
 
 smart-button.primary, smart-toggle-button.primary, smart-repeat-button.primary {
@@ -126,7 +128,7 @@ button.smart-button {
     -webkit-font-smoothing: antialiased;
     opacity: var(--smart-button-opacity);
     white-space: nowrap;
-    line-height: 1.2;
+    line-height: 1rem;
     border-radius: inherit;
 }
 
