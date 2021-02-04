@@ -49,7 +49,7 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     /** @description Determines the type of the month/year view in the calendar pop-up when calendarMode is set to Default. */
     displayModeView: CalendarDisplayModeView;
     /** @description Sets custom container to append the pop-up to. By default, it is in the DateTimePicker. The value of the property can be an HTML element or the id of an HTML element. */
-    dropDownAppendTo: any;
+    dropDownAppendTo: string;
     /** @description Sets or gets the pop-up display mode (what components appear in it, and its behaviour). */
     dropDownDisplayMode: DateTimePickerDropDownDisplayMode;
     /** @description If this property is enabled, when the element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */

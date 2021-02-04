@@ -190,7 +190,7 @@ let MultiSplitButtonComponent = class MultiSplitButtonComponent extends BaseElem
     set displayMember(value) {
         this.nativeElement ? this.nativeElement.displayMember = value : undefined;
     }
-    /** @description Sets the parent container of the button's dropDown list (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown list. */
+    /** @description Sets the parent container of the button's dropDown list (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown list. */
     get dropDownAppendTo() {
         return this.nativeElement ? this.nativeElement.dropDownAppendTo : undefined;
     }

@@ -16,7 +16,7 @@ export declare class CarouselComponent extends BaseElement implements OnInit, Af
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
     /** @description The items switch automatically if set to true or to a custom number(representing the timeout in milliseconds). This property works if slideShow property is enabled. */
-    autoPlay: any;
+    autoPlay: boolean;
     /** @description An array of objects. Each object defines an item. The following object properties are available: label - a string representing the label of the item.content - a string representing the content of the itemimage - a string representing a url link to an image.HTMLcontent - a string representing some HTML structure taht will be generated inside the item. */
     dataSource: any[];
     /** @description Specifies the timeout before a slide changes when a navigation button is pressed. Navigation buttons are repeat buttons that will repeat the oepration after the delay is passed. */

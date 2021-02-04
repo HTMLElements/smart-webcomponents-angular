@@ -16,7 +16,7 @@ export declare class ToastComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
     /** @description Specifies the container where new openned toast items will be displayed. The value can be an HTMLElement or element's id. This property is in relation with modal(lower priority than modal) and position(higher priority than position) properties. */
-    appendTo: any;
+    appendTo: string;
     /** @description Sets or gets whether the toast will automatically close after duration equal to the autoCloseDelay property. */
     autoClose: boolean;
     /** @description Sets or gets the duration after which the toast automatically closes (works only if the autoClose property is set to true). */

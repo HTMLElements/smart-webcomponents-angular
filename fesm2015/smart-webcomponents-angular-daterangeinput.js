@@ -156,7 +156,7 @@ let DateRangeInputComponent = class DateRangeInputComponent extends BaseElement 
     set animation(value) {
         this.nativeElement ? this.nativeElement.animation = value : undefined;
     }
-    /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. */
+    /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. Intl.DateTimeFormat is used to format date strings in JavaScript */
     get dateFormat() {
         return this.nativeElement ? this.nativeElement.dateFormat : undefined;
     }

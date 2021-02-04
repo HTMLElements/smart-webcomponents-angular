@@ -20,7 +20,7 @@ export declare class DropDownButtonComponent extends BaseElement implements OnIn
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Sets the parent container of the dropDown (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. */
-    dropDownAppendTo: any;
+    dropDownAppendTo: string;
     /** @description Determines the position of the drop down button. */
     dropDownButtonPosition: DropDownButtonPosition;
     /** @description Sets the height of the drop down. Default value of empty string means that CSS variables are used. This property should be used when the browser doesn't support CSS variables. */

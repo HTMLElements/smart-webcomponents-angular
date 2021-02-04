@@ -60,9 +60,9 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description  Determines the language of the GanttChart.  */
     locale: string;
     /** @description Detetmines the maximum possible date of the Timeline. */
-    max: any;
+    max: string | Date;
     /** @description Detetmines the minimum possible date of the Timeline. */
-    min: any;
+    min: string | Date;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Determines the format of the dates the timeline header when they represent months. */
@@ -110,15 +110,15 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description Deteremines the columns that will be visible in the Task Tree. Each entry in the value of this property must be of type Object.  It should contain the label and value keys. The value of label determines the column header label inside the Task Tree. The value of value determines the content of the cells in the column. It should reference a task attribute from the dataSource. By default, one column with all task labels is visible.  Additional properties: formatFunction - a function that allows to customize the content of each record in the column. The function accepts one argument - the actual label as string that is going to be inserted and must return some content. min - controls the min size of the column max - controls the max size of the column size - controls the actual size of the columncustomEditor - a callback that can be used to set a custom editor for the column when editing via the window. It accepts two arguments label - the label of the columnvalue - the value of the column. The callback must return the editor.setCustomEditorValue - a callback that is used to set the value of the custom editor.getCustomEditorValue - a callback that is used to get the value of the custom editor. */
     taskColumns: GanttChartTaskColumn[];
     /** @description Determines the min size of the Task Panel. Used when Resource Panel is visible. */
-    taskPanelMin: any;
+    taskPanelMin: string | number;
     /** @description Determines the size of the Task Panel. Used when Resource Panel is visible. */
-    taskPanelSize: any;
+    taskPanelSize: string | number;
     /** @description Determines the min width of the timeline. */
-    timelineMin: any;
+    timelineMin: string | number;
     /** @description Determines the min width of the task tree. */
-    treeMin: any;
+    treeMin: string | number;
     /** @description Determines the size(width) of the task tree. */
-    treeSize: any;
+    treeSize: string | number;
     /** @description A format function for the Header of the Timeline. The function provides the following arguments: date - a Date object that represets the date for the current cell.type - a string that represents the type of date that the cell is showing, e.g. 'month', 'week', 'day', etc.isHeaderDetails - a boolean that indicates whether the current cell is part of the Header Details Container or not.value - a string that represents the default value for the cell provided by the element. */
     timelineHeaderFormatFunction: any;
     /** @description Determines weather or not vertical scrollbar is shown. */

@@ -40,8 +40,8 @@ export declare class ColorPickerComponent extends BaseElement implements OnInit,
     disabled: boolean;
     /** @description By default clicking on color panel's preview container returns the color value to it's previous state. 'disableUndo' prevents this functionality. */
     disableUndo: boolean;
-    /** @description Sets the parent container of the dropDown (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. */
-    dropDownAppendTo: any;
+    /** @description Sets the parent container of the dropDown (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. Example: 'body'. */
+    dropDownAppendTo: string;
     /** @description Determines how the drop down is going to open. */
     dropDownOpenMode: DropDownOpenMode;
     /** @description Determines the position of the drop down button. */

@@ -384,7 +384,7 @@ import './../source/modules/smart.form';
             configurable: true
         });
         Object.defineProperty(FormComponent.prototype, "controls", {
-            /** @description  */
+            /** @description Sets or gets the form controls. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.controls : undefined;
             },
@@ -986,7 +986,7 @@ import './../source/modules/smart.form';
             configurable: true
         });
         Object.defineProperty(FormControlComponent.prototype, "validationRules", {
-            /** @description Validation rules array. Accepts any JQX.Validator rules. */
+            /** @description Sets or gets the column's validation rules. The expected value is an Array of Objects. Each object should have a 'type' property that can be set to 'required', 'min', 'max', 'minLength', 'maxLength', 'email', 'null', 'requiredTrue', 'minData', 'maxDate', 'pattern'. The 'value' property should be set, too. For validation rule types 'required', 'requiredTrue' and 'null' you can skip the 'value' property. Optional property is 'message', which determines the error message. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.validationRules : undefined;
             },

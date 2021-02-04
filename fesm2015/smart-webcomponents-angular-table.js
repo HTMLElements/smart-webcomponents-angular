@@ -298,12 +298,19 @@ let TableComponent = class TableComponent extends BaseElement {
     set dataRowId(value) {
         this.nativeElement ? this.nativeElement.dataRowId = value : undefined;
     }
-    /** @description Determines the data source of the table component. */
+    /** @description Determines the data source of the table component. The data source of the Table can be a regular Array or a DataAdapter instance. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
     get dataSource() {
         return this.nativeElement ? this.nativeElement.dataSource : undefined;
     }
     set dataSource(value) {
         this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+    }
+    /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+    get dataSourceSettings() {
+        return this.nativeElement ? this.nativeElement.dataSourceSettings : undefined;
+    }
+    set dataSourceSettings(value) {
+        this.nativeElement ? this.nativeElement.dataSourceSettings = value : undefined;
     }
     /** @description A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument). */
     get dataTransform() {
@@ -388,6 +395,13 @@ let TableComponent = class TableComponent extends BaseElement {
     }
     set grouping(value) {
         this.nativeElement ? this.nativeElement.grouping = value : undefined;
+    }
+    /** @description A callback function that can be used to modify the contents of a grouping header row. By changing the 'label' you modify the rendered grouping value. By changing the 'template' you can modify the entire content including the column and count information. */
+    get groupFormatFunction() {
+        return this.nativeElement ? this.nativeElement.groupFormatFunction : undefined;
+    }
+    set groupFormatFunction(value) {
+        this.nativeElement ? this.nativeElement.groupFormatFunction = value : undefined;
     }
     /** @description Sets or gets the id of an HTML template element to be applied as additional column header(s). */
     get headerRow() {
@@ -1092,6 +1106,9 @@ __decorate([
 ], TableComponent.prototype, "dataSource", null);
 __decorate([
     Input()
+], TableComponent.prototype, "dataSourceSettings", null);
+__decorate([
+    Input()
 ], TableComponent.prototype, "dataTransform", null);
 __decorate([
     Input()
@@ -1126,6 +1143,9 @@ __decorate([
 __decorate([
     Input()
 ], TableComponent.prototype, "grouping", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "groupFormatFunction", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "headerRow", null);

@@ -65,8 +65,22 @@ export declare class SwitchButtonComponent extends BaseElement implements OnInit
     /** @description Sets or gets the widget's value. */
     value: string;
     /** @description This event is triggered when the widget is checked/unchecked.
-    *  @param event. The custom event. 	*/
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue, 	changeType)
+    *   value - A boolean value indicating the new state of the button ( checked or not ).
+    *   oldValue - A boolean value indicating the previous state of the button ( checked or not ).
+    *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+    */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the widget is checked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	changeType)
+    *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+    */
+    onCheckValue: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the widget is unchecked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	changeType)
+    *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+    */
+    onUncheckValue: EventEmitter<CustomEvent>;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

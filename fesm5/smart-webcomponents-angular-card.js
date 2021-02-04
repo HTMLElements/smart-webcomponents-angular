@@ -207,7 +207,7 @@ var CardComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CardComponent.prototype, "itemTemplate", {
-        /** @description Sets custom card template. The template can be the id of an HTMLTemplate element inside the DOM or it's reference. The content of the template may hold one or many property placeholders in format {{property}}. These placeholders will be replaced with the values of the corresponding properties defined in the dataSource object. */
+        /** @description Sets custom card template. The template can be the ID of an HTMLTemplate element inside the DOM or it's reference. The content of the template may hold one or many property placeholders in format {{property}}. These placeholders will be replaced with the values of the corresponding properties defined in the dataSource object. When setting the property to template ID, the property type is 'string'. */
         get: function () {
             return this.nativeElement ? this.nativeElement.itemTemplate : undefined;
         },

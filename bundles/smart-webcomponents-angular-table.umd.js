@@ -599,12 +599,23 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "dataSource", {
-            /** @description Determines the data source of the table component. */
+            /** @description Determines the data source of the table component. The data source of the Table can be a regular Array or a DataAdapter instance. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.dataSource : undefined;
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "dataSourceSettings", {
+            /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.dataSourceSettings : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.dataSourceSettings = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -737,6 +748,17 @@ import './../source/modules/smart.table';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.grouping = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "groupFormatFunction", {
+            /** @description A callback function that can be used to modify the contents of a grouping header row. By changing the 'label' you modify the rendered grouping value. By changing the 'template' you can modify the entire content including the column and count information. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.groupFormatFunction : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.groupFormatFunction = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1604,6 +1626,9 @@ import './../source/modules/smart.table';
         ], TableComponent.prototype, "dataSource", null);
         __decorate([
             core.Input()
+        ], TableComponent.prototype, "dataSourceSettings", null);
+        __decorate([
+            core.Input()
         ], TableComponent.prototype, "dataTransform", null);
         __decorate([
             core.Input()
@@ -1638,6 +1663,9 @@ import './../source/modules/smart.table';
         __decorate([
             core.Input()
         ], TableComponent.prototype, "grouping", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "groupFormatFunction", null);
         __decorate([
             core.Input()
         ], TableComponent.prototype, "headerRow", null);

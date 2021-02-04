@@ -408,7 +408,7 @@ import './../source/modules/smart.input';
             configurable: true
         });
         Object.defineProperty(DateRangeInputComponent.prototype, "dateFormat", {
-            /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. */
+            /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. Intl.DateTimeFormat is used to format date strings in JavaScript */
             get: function () {
                 return this.nativeElement ? this.nativeElement.dateFormat : undefined;
             },

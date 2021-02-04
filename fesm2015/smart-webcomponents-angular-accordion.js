@@ -179,6 +179,13 @@ let AccordionComponent = class AccordionComponent extends BaseElement {
     set animation(value) {
         this.nativeElement ? this.nativeElement.animation = value : undefined;
     }
+    /** @description Determines the data source that will be loaded to the Accordion. */
+    get dataSource() {
+        return this.nativeElement ? this.nativeElement.dataSource : undefined;
+    }
+    set dataSource(value) {
+        this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+    }
     /** @description Enables or disables the accordion. Disabled elements can not be interacted with. */
     get disabled() {
         return this.nativeElement ? this.nativeElement.disabled : undefined;
@@ -392,6 +399,9 @@ AccordionComponent.ctorParameters = () => [
 __decorate([
     Input()
 ], AccordionComponent.prototype, "animation", null);
+__decorate([
+    Input()
+], AccordionComponent.prototype, "dataSource", null);
 __decorate([
     Input()
 ], AccordionComponent.prototype, "disabled", null);

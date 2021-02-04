@@ -353,6 +353,13 @@ let ListMenuComponent = class ListMenuComponent extends BaseElement {
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
+    /** @description Determines whether to use scrollbar or scrollButtons when content overflows an element's box. */
+    get scrollMode() {
+        return this.nativeElement ? this.nativeElement.scrollMode : undefined;
+    }
+    set scrollMode(value) {
+        this.nativeElement ? this.nativeElement.scrollMode = value : undefined;
+    }
     /** @description Determines the theme. Theme defines the look of the element */
     get theme() {
         return this.nativeElement ? this.nativeElement.theme : undefined;
@@ -645,6 +652,9 @@ __decorate([
 __decorate([
     Input()
 ], ListMenuComponent.prototype, "rightToLeft", null);
+__decorate([
+    Input()
+], ListMenuComponent.prototype, "scrollMode", null);
 __decorate([
     Input()
 ], ListMenuComponent.prototype, "theme", null);

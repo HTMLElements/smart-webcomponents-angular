@@ -41,7 +41,7 @@ export declare class SliderComponent extends BaseElement implements OnInit, Afte
     /** @description Enables or disables incrementing/decrementing the value using the mouse wheel in jqxSlider.  */
     enableMouseWheelAction: boolean;
     /** @description Determines what values the thumb snaps to.  */
-    interval: any;
+    interval: string | number;
     /** @description Sets the direction of the slider. If is true - positions of the slider's begin and end are changed.  */
     inverted: boolean;
     /** @description A callback function that can be used to format the values displayed on the slider labels and tooltip. */
@@ -55,13 +55,13 @@ export declare class SliderComponent extends BaseElement implements OnInit, Afte
     /** @description Enables or disables the usage of logarithmic scale in the widget.  */
     logarithmicScale: boolean;
     /** @description Sets or gets the maximum value of the widget.  */
-    max: any;
+    max: string | number;
     /** @description Sets or gets the type of used mechanical action.  */
     mechanicalAction: DragMechanicalAction;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Sets or gets the minimum value of the widget.  */
-    min: any;
+    min: string | number;
     /** @description Sets or gets whether the widget works with numbers or dates. */
     mode: ScaleMode;
     /** @description Sets or gets the element's name, which is used as a reference when the data is submitted. */

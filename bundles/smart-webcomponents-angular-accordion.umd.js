@@ -431,6 +431,17 @@ import './../source/modules/smart.accordion';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(AccordionComponent.prototype, "dataSource", {
+            /** @description Determines the data source that will be loaded to the Accordion. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.dataSource : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(AccordionComponent.prototype, "disabled", {
             /** @description Enables or disables the accordion. Disabled elements can not be interacted with. */
             get: function () {
@@ -696,6 +707,9 @@ import './../source/modules/smart.accordion';
         __decorate([
             core.Input()
         ], AccordionComponent.prototype, "animation", null);
+        __decorate([
+            core.Input()
+        ], AccordionComponent.prototype, "dataSource", null);
         __decorate([
             core.Input()
         ], AccordionComponent.prototype, "disabled", null);

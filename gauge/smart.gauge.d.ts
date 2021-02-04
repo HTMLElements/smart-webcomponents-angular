@@ -51,7 +51,7 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets Gauge's end angle. This property specifies the end of the gauge's scale and is measured in degrees. */
     endAngle: number;
     /** @description When cooerce property is true, all values coerce to the interval's value. */
-    interval: any;
+    interval: number;
     /** @description Sets the direction of the gauge. If true - the positions of the gauge's start and end are switched. */
     inverted: boolean;
     /** @description A callback function that can be used to format the values displayed inside the gauge labels. */
@@ -65,13 +65,13 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     /** @description Enables or disables the usage of logarithmic scale in the element. */
     logarithmicScale: boolean;
     /** @description Determines the maximum value for the scale of the element. */
-    max: any;
+    max: number;
     /** @description Determines when the value of the element is updated. */
     mechanicalAction: DragMechanicalAction;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Determines the minimum value for the scale of the element.  */
-    min: any;
+    min: number;
     /** @description Determines whether the element works with numbers or dates. */
     mode: ScaleMode;
     /** @description Sets or gets the element's name, which is used as a reference when the data is submitted. */

@@ -918,9 +918,23 @@ import './../source/modules/smart.button';
         function ToggleButtonComponent(ref) {
             var _this = _super.call(this, ref) || this;
             _this.eventHandlers = [];
-            /** @description This event is triggered when the state of the element is changed.
-            *  @param event. The custom event. 	*/
+            /** @description This event is triggered when the widget is checked/unchecked.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue, 	changeType)
+            *   value - A boolean value indicating the new state of the button ( checked or not ).
+            *   oldValue - A boolean value indicating the previous state of the button ( checked or not ).
+            *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+            */
             _this.onChange = new core.EventEmitter();
+            /** @description This event is triggered when the widget is checked.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	changeType)
+            *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+            */
+            _this.onCheckValue = new core.EventEmitter();
+            /** @description This event is triggered when the widget is unchecked.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	changeType)
+            *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+            */
+            _this.onUncheckValue = new core.EventEmitter();
             _this.nativeElement = ref.nativeElement;
             return _this;
         }
@@ -1111,12 +1125,22 @@ import './../source/modules/smart.button';
             var that = this;
             that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+            that.eventHandlers['checkValueHandler'] = function (event) { that.onCheckValue.emit(event); };
+            that.nativeElement.addEventListener('checkValue', that.eventHandlers['checkValueHandler']);
+            that.eventHandlers['uncheckValueHandler'] = function (event) { that.onUncheckValue.emit(event); };
+            that.nativeElement.addEventListener('uncheckValue', that.eventHandlers['uncheckValueHandler']);
         };
         /** @description Remove event listeners. */
         ToggleButtonComponent.prototype.unlisten = function () {
             var that = this;
             if (that.eventHandlers['changeHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+            }
+            if (that.eventHandlers['checkValueHandler']) {
+                that.nativeElement.removeEventListener('checkValue', that.eventHandlers['checkValueHandler']);
+            }
+            if (that.eventHandlers['uncheckValueHandler']) {
+                that.nativeElement.removeEventListener('uncheckValue', that.eventHandlers['uncheckValueHandler']);
             }
         };
         ToggleButtonComponent.ctorParameters = function () { return [
@@ -1164,6 +1188,12 @@ import './../source/modules/smart.button';
         __decorate([
             core.Output()
         ], ToggleButtonComponent.prototype, "onChange", void 0);
+        __decorate([
+            core.Output()
+        ], ToggleButtonComponent.prototype, "onCheckValue", void 0);
+        __decorate([
+            core.Output()
+        ], ToggleButtonComponent.prototype, "onUncheckValue", void 0);
         ToggleButtonComponent = __decorate([
             core.Directive({
                 selector: 'smart-toggle-button, [smart-toggle-button]'

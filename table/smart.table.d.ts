@@ -1,8 +1,8 @@
 import { Table } from './../index';
-import { Animation, TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting } from './../index';
+import { Animation, TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, TableColumnDataType, TableColumnFreeze, TableColumnResponsivePriority, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, ElementRenderMode } from './../index';
+export { Animation, TableColumnDataType, TableColumnFreeze, TableColumnResponsivePriority, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableDataSourceSettingsDataFieldDataType, TableDataSourceSettingsDataSourceType, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings, TableDataSourceSettingsDataField, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Table } from './../index';
 export declare class TableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -39,8 +39,10 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     conditionalFormattingButton: boolean;
     /** @description When binding the dataSource property directly to an array (as opposed to an instance of JQX.DataAdapter), sets or gets the name of the data field in the source array to bind row ids to. */
     dataRowId: string;
-    /** @description Determines the data source of the table component. */
+    /** @description Determines the data source of the table component. The data source of the Table can be a regular Array or a DataAdapter instance. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
     dataSource: any;
+    /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+    dataSourceSettings: TableDataSourceSettings;
     /** @description A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument). */
     dataTransform: any;
     /** @description Disables the interaction with the element. */
@@ -65,6 +67,8 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     freezeHeader: boolean;
     /** @description Sets or gets whether grouping the Table is enabled. */
     grouping: boolean;
+    /** @description A callback function that can be used to modify the contents of a grouping header row. By changing the 'label' you modify the rendered grouping value. By changing the 'template' you can modify the entire content including the column and count information. */
+    groupFormatFunction: any;
     /** @description Sets or gets the id of an HTML template element to be applied as additional column header(s). */
     headerRow: string;
     /** @description Sets or gets whether navigation with the keyboard is enabled in the Table. */

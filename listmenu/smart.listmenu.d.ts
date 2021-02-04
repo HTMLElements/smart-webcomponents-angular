@@ -1,8 +1,8 @@
 import { ListMenu } from './../index';
-import { Animation, MenuCheckMode, MenuDropDownPosition, FilterMode, VerticalAlignment, Overflow } from './../index';
+import { Animation, MenuCheckMode, MenuDropDownPosition, FilterMode, VerticalAlignment, Overflow, ListMenuScrollMode } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, MenuCheckMode, MenuDropDownPosition, FilterMode, VerticalAlignment, Overflow, ElementRenderMode } from './../index';
+export { Animation, MenuCheckMode, MenuDropDownPosition, FilterMode, VerticalAlignment, Overflow, ListMenuScrollMode, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { ListMenu } from './../index';
 export declare class ListMenuComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -69,6 +69,8 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
+    /** @description Determines whether to use scrollbar or scrollButtons when content overflows an element's box. */
+    scrollMode: ListMenuScrollMode;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */

@@ -43,9 +43,9 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Determines the type of the month/year view when calendarMode is set to Default. */
     displayModeView: CalendarDisplayModeView;
     /** @description Determines the height of the month's drop down inside the Calendar. */
-    dropDownHeight: string;
+    dropDownHeight: string | number;
     /** @description Determines the width of the month's drop down inside the Calendar. */
-    dropDownWidth: string;
+    dropDownWidth: string | number;
     /** @description Determines the first day of the week. From 0(Sunday) to 6(Saturday) */
     firstDayOfWeek: number;
     /** @description Sets a custom footer template. Accepts the id of an HTMLTemplateElement or a reference ot it. */
@@ -67,11 +67,11 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Callback used to customize the format of the messages that are returned from the Localization Module. */
     localizeFormatFunction: any;
     /** @description Determines the max date for the Calendar. Accepts date objects and valid date string formats. */
-    max: any;
+    max: string | Date;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Determines the min date for the Calendar. Accepts date objects and valid date string formats. */
-    min: any;
+    min: string | Date;
     /** @description Determines the number of months to be displayed inside the calendar. The maximum amount of months that can be shown is 12. By default only 1 month is shown. */
     months: number;
     /** @description Determines the format of the month names in the header when DisplayMode is set to Default or when Months property is greater than 1.  */
@@ -81,7 +81,7 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Sets restricted dates. Restricted dates are dates that cannot be selected/hovered/focused. They are visualy styled as restricted. The dates can be javascript date objects or strings representing a valid date. */
-    restrictedDates: string[];
+    restrictedDates: string[] | Date[];
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description  Determines the direction of the navigation buttons located in the header and the animation. */

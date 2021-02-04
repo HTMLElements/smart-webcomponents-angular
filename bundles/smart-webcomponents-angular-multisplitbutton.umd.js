@@ -463,7 +463,7 @@ import './../source/modules/smart.multisplitbutton';
             configurable: true
         });
         Object.defineProperty(MultiSplitButtonComponent.prototype, "dropDownAppendTo", {
-            /** @description Sets the parent container of the button's dropDown list (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown list. */
+            /** @description Sets the parent container of the button's dropDown list (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown list. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.dropDownAppendTo : undefined;
             },

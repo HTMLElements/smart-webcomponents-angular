@@ -301,7 +301,7 @@ var ColorPickerComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ColorPickerComponent.prototype, "dropDownAppendTo", {
-        /** @description Sets the parent container of the dropDown (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. */
+        /** @description Sets the parent container of the dropDown (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. Example: 'body'. */
         get: function () {
             return this.nativeElement ? this.nativeElement.dropDownAppendTo : undefined;
         },

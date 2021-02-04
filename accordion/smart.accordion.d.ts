@@ -15,6 +15,8 @@ export declare class AccordionComponent extends BaseElement implements OnInit, A
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
+    /** @description Determines the data source that will be loaded to the Accordion. */
+    dataSource: any;
     /** @description Enables or disables the accordion. Disabled elements can not be interacted with. */
     disabled: boolean;
     /** @description Sets or gets the expanded item indexes. Using this property items can be expanded by passing in their indexes. The number of expanded items is limited by the expandMode. */

@@ -350,6 +350,17 @@ var GridComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(GridComponent.prototype, "locale", {
+        /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.locale : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.locale = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(GridComponent.prototype, "clipboard", {
         /** @description The clipboard property is used to enable/disable clipboard operations with Ctrl+C, Ctrl+X and Ctrl+V keyboard navigations.. */
         get: function () {
@@ -445,6 +456,17 @@ var GridComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GridComponent.prototype, "dataSourceSettings", {
+        /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.dataSourceSettings : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.dataSourceSettings = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -615,7 +637,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowDetailUpdated", {
-        /** @description The rows property is used to describe all rows displayed in the grid. */
+        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowDetailUpdated : undefined;
         },
@@ -626,7 +648,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowInserted", {
-        /** @description Describes the selection settings. */
+        /** @description The rows property is used to describe all rows displayed in the grid. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowInserted : undefined;
         },
@@ -637,7 +659,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowRemoved", {
-        /** @description Describes sorting settings. */
+        /** @description Describes the selection settings. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowRemoved : undefined;
         },
@@ -648,7 +670,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowUpdate", {
-        /** @description undefined */
+        /** @description Describes sorting settings. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowUpdate : undefined;
         },
@@ -819,6 +841,17 @@ var GridComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.footer = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GridComponent.prototype, "rightToLeft", {
+        /** @description undefined */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1917,6 +1950,9 @@ var GridComponent = /** @class */ (function (_super) {
     ], GridComponent.prototype, "layout", null);
     __decorate([
         Input()
+    ], GridComponent.prototype, "locale", null);
+    __decorate([
+        Input()
     ], GridComponent.prototype, "clipboard", null);
     __decorate([
         Input()
@@ -1942,6 +1978,9 @@ var GridComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], GridComponent.prototype, "dataSource", null);
+    __decorate([
+        Input()
+    ], GridComponent.prototype, "dataSourceSettings", null);
     __decorate([
         Input()
     ], GridComponent.prototype, "editing", null);
@@ -2044,6 +2083,9 @@ var GridComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], GridComponent.prototype, "footer", null);
+    __decorate([
+        Input()
+    ], GridComponent.prototype, "rightToLeft", null);
     __decorate([
         Input()
     ], GridComponent.prototype, "rows", null);

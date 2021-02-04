@@ -15,7 +15,7 @@ export declare class FormComponent extends BaseElement implements OnInit, AfterV
     createComponent(properties?: {}): any;
     /** @description Sets or gets the form columns. */
     columns: number;
-    /** @description  */
+    /** @description Sets or gets the form controls. */
     controls: Control[];
     /** @description Callback function for handling status changes */
     onStatusChanges: any;

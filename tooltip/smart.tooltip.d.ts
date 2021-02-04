@@ -36,7 +36,7 @@ export declare class TooltipComponent extends BaseElement implements OnInit, Aft
     /** @description Gets or sets the position of the tooltip. */
     position: TooltipPosition;
     /** @description Sets the element which triggers the tooltip. */
-    selector: any;
+    selector: string | HTMLElement;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description Sets custom tooltip template. */

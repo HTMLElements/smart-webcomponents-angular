@@ -18,7 +18,7 @@ export declare class FileUploadComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
     /** @description Appends the list with selected files to a new custom container specified by the user. If the value of the property is a string it must represent a valid id of an HTML element inside the DOM that will be used as the new container for the uploaded files list. */
-    appendTo: any;
+    appendTo: string;
     /** @description Sets or gets whether files will be automatically uploaded after selection. */
     autoUpload: boolean;
     /** @description Allows to upload a directory. Files in all subfolders will be uploaded also. This option is supported only in Firefox and Chrome. */

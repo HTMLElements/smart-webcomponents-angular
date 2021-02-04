@@ -1,8 +1,8 @@
 import { Chart } from './../index';
-import { Animation, ChartColorScheme, ChartRenderEngine, ChartLocalization, Padding, ChartLegendPosition, ChartSeriesGroup, ChartValueAxis, ChartXAxis } from './../index';
+import { Animation, ChartColorScheme, ChartRenderEngine, ChartLocalization, Padding, ChartSeriesGroup, ChartValueAxis, ChartXAxis } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, ChartColorScheme, ChartRenderEngine, HorizontalAlignment, ChartRotationPoint, VerticalAlignment, ChartAnnotationType, ChartUnselectMode, Orientation, ChartSeriesGroupSerieEmptyPointsDisplay, ChartSymbolType, ChartType, AxisPosition, ChartBaseUnit, ChartXAxisType, ChartLocalization, Padding, ChartLegendPosition, ChartSeriesGroup, ChartAnnotation, Offset, ChartAnnotationText, ChartBand, ChartFormatSettings, ChartSeriesGroupSerie, ChartLabels, ChartValueAxis, ChartLines, ChartLine, ChartTitle, ChartXAxis, ChartRangeSelector, ElementRenderMode } from './../index';
+export { Animation, ChartColorScheme, ChartRenderEngine, HorizontalAlignment, ChartRotationPoint, VerticalAlignment, ChartAnnotationType, ChartUnselectMode, Orientation, ChartSeriesGroupSerieEmptyPointsDisplay, ChartSymbolType, ChartType, AxisPosition, ChartBaseUnit, ChartXAxisType, ChartLocalization, Padding, ChartSeriesGroup, ChartAnnotation, Offset, ChartAnnotationText, ChartBand, ChartFormatSettings, ChartSeriesGroupSerie, ChartLabels, ChartValueAxis, ChartLines, ChartLine, ChartTitle, ChartXAxis, ChartRangeSelector, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Chart } from './../index';
 export declare class ChartComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -17,11 +17,11 @@ export declare class ChartComponent extends BaseElement implements OnInit, After
     animation: Animation;
     /** @description Determines the animation duration in milliseconds. The value must be between 0 and 5000. If it is outside of this range jqxChart will reset it to the default value. */
     animationDuration: number;
-    /** @description Sets the chart's background color. */
+    /** @description Sets the chart's background color. For example: '#DDFFE8' */
     backgroundColor: string | null;
-    /** @description Sets the chart's background image. */
+    /** @description Sets the chart's background image. For example: 'https://www.htmlelements.com/demos/images/carousel-large-1.jpg' */
     backgroundImage: string;
-    /** @description Sets the chart's border color. */
+    /** @description Sets the chart's border color. For example: '#098700' */
     borderLineColor: string | null;
     /** @description Sets the chart's border line width. */
     borderLineWidth: number;
@@ -33,11 +33,11 @@ export declare class ChartComponent extends BaseElement implements OnInit, After
     colorScheme: ChartColorScheme;
     /** @description Enables or disables overlapping of the column series. */
     columnSeriesOverlap: boolean;
-    /** @description Gets or sets the color of the crosshairs lines. */
+    /** @description Gets or sets the color of the crosshairs lines. The 'enableCrosshairs' property should be 'true'. */
     crosshairsColor: string | null;
-    /** @description Gets or sets the dash style of the crosshairs lines. The style is a series of numbers indicating line length followed by space length. */
+    /** @description Gets or sets the dash style of the crosshairs lines. The style is a series of numbers indicating line length followed by space length. The 'enableCrosshairs' property should be 'true'. For example: '3,3' */
     crosshairsDashStyle: string;
-    /** @description Gets or sets the width of the crosshairs lines. */
+    /** @description Gets or sets the width of the crosshairs lines. The 'enableCrosshairs' property should be 'true' */
     crosshairsLineWidth: number;
     /** @description Sets the chart's data source. */
     dataSource: any[];
@@ -65,8 +65,6 @@ export declare class ChartComponent extends BaseElement implements OnInit, After
     messages: any;
     /** @description Sets the left, top, right and bottom padding of the Chart. */
     padding: Padding;
-    /** @description Sets the legend bar position in the Chart. */
-    legendPosition: ChartLegendPosition;
     /** @description Determines the rendering engine used to display the chart. When the property is set to an empty string, jqxChart will automatically select an optimal rendering engine depending on the browser capabilities. */
     renderEngine: ChartRenderEngine;
     /** @description Sets or gets a value indicating whether the Chart's layout is mirrored. */

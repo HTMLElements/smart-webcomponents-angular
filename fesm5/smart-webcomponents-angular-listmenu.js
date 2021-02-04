@@ -491,6 +491,17 @@ var ListMenuComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ListMenuComponent.prototype, "scrollMode", {
+        /** @description Determines whether to use scrollbar or scrollButtons when content overflows an element's box. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.scrollMode : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.scrollMode = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ListMenuComponent.prototype, "theme", {
         /** @description Determines the theme. Theme defines the look of the element */
         get: function () {
@@ -815,6 +826,9 @@ var ListMenuComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], ListMenuComponent.prototype, "rightToLeft", null);
+    __decorate([
+        Input()
+    ], ListMenuComponent.prototype, "scrollMode", null);
     __decorate([
         Input()
     ], ListMenuComponent.prototype, "theme", null);

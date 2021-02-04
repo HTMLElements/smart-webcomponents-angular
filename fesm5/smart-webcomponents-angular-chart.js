@@ -206,7 +206,7 @@ var ChartComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ChartComponent.prototype, "backgroundColor", {
-        /** @description Sets the chart's background color. */
+        /** @description Sets the chart's background color. For example: '#DDFFE8' */
         get: function () {
             return this.nativeElement ? this.nativeElement.backgroundColor : undefined;
         },
@@ -217,7 +217,7 @@ var ChartComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ChartComponent.prototype, "backgroundImage", {
-        /** @description Sets the chart's background image. */
+        /** @description Sets the chart's background image. For example: 'https://www.htmlelements.com/demos/images/carousel-large-1.jpg' */
         get: function () {
             return this.nativeElement ? this.nativeElement.backgroundImage : undefined;
         },
@@ -228,7 +228,7 @@ var ChartComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ChartComponent.prototype, "borderLineColor", {
-        /** @description Sets the chart's border color. */
+        /** @description Sets the chart's border color. For example: '#098700' */
         get: function () {
             return this.nativeElement ? this.nativeElement.borderLineColor : undefined;
         },
@@ -294,7 +294,7 @@ var ChartComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ChartComponent.prototype, "crosshairsColor", {
-        /** @description Gets or sets the color of the crosshairs lines. */
+        /** @description Gets or sets the color of the crosshairs lines. The 'enableCrosshairs' property should be 'true'. */
         get: function () {
             return this.nativeElement ? this.nativeElement.crosshairsColor : undefined;
         },
@@ -305,7 +305,7 @@ var ChartComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ChartComponent.prototype, "crosshairsDashStyle", {
-        /** @description Gets or sets the dash style of the crosshairs lines. The style is a series of numbers indicating line length followed by space length. */
+        /** @description Gets or sets the dash style of the crosshairs lines. The style is a series of numbers indicating line length followed by space length. The 'enableCrosshairs' property should be 'true'. For example: '3,3' */
         get: function () {
             return this.nativeElement ? this.nativeElement.crosshairsDashStyle : undefined;
         },
@@ -316,7 +316,7 @@ var ChartComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ChartComponent.prototype, "crosshairsLineWidth", {
-        /** @description Gets or sets the width of the crosshairs lines. */
+        /** @description Gets or sets the width of the crosshairs lines. The 'enableCrosshairs' property should be 'true' */
         get: function () {
             return this.nativeElement ? this.nativeElement.crosshairsLineWidth : undefined;
         },
@@ -465,17 +465,6 @@ var ChartComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.padding = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ChartComponent.prototype, "legendPosition", {
-        /** @description Sets the legend bar position in the Chart. */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.legendPosition : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.legendPosition = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1251,9 +1240,6 @@ var ChartComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], ChartComponent.prototype, "padding", null);
-    __decorate([
-        Input()
-    ], ChartComponent.prototype, "legendPosition", null);
     __decorate([
         Input()
     ], ChartComponent.prototype, "renderEngine", null);

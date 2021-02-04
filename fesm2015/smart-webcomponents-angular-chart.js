@@ -171,21 +171,21 @@ let ChartComponent = class ChartComponent extends BaseElement {
     set animationDuration(value) {
         this.nativeElement ? this.nativeElement.animationDuration = value : undefined;
     }
-    /** @description Sets the chart's background color. */
+    /** @description Sets the chart's background color. For example: '#DDFFE8' */
     get backgroundColor() {
         return this.nativeElement ? this.nativeElement.backgroundColor : undefined;
     }
     set backgroundColor(value) {
         this.nativeElement ? this.nativeElement.backgroundColor = value : undefined;
     }
-    /** @description Sets the chart's background image. */
+    /** @description Sets the chart's background image. For example: 'https://www.htmlelements.com/demos/images/carousel-large-1.jpg' */
     get backgroundImage() {
         return this.nativeElement ? this.nativeElement.backgroundImage : undefined;
     }
     set backgroundImage(value) {
         this.nativeElement ? this.nativeElement.backgroundImage = value : undefined;
     }
-    /** @description Sets the chart's border color. */
+    /** @description Sets the chart's border color. For example: '#098700' */
     get borderLineColor() {
         return this.nativeElement ? this.nativeElement.borderLineColor : undefined;
     }
@@ -227,21 +227,21 @@ let ChartComponent = class ChartComponent extends BaseElement {
     set columnSeriesOverlap(value) {
         this.nativeElement ? this.nativeElement.columnSeriesOverlap = value : undefined;
     }
-    /** @description Gets or sets the color of the crosshairs lines. */
+    /** @description Gets or sets the color of the crosshairs lines. The 'enableCrosshairs' property should be 'true'. */
     get crosshairsColor() {
         return this.nativeElement ? this.nativeElement.crosshairsColor : undefined;
     }
     set crosshairsColor(value) {
         this.nativeElement ? this.nativeElement.crosshairsColor = value : undefined;
     }
-    /** @description Gets or sets the dash style of the crosshairs lines. The style is a series of numbers indicating line length followed by space length. */
+    /** @description Gets or sets the dash style of the crosshairs lines. The style is a series of numbers indicating line length followed by space length. The 'enableCrosshairs' property should be 'true'. For example: '3,3' */
     get crosshairsDashStyle() {
         return this.nativeElement ? this.nativeElement.crosshairsDashStyle : undefined;
     }
     set crosshairsDashStyle(value) {
         this.nativeElement ? this.nativeElement.crosshairsDashStyle = value : undefined;
     }
-    /** @description Gets or sets the width of the crosshairs lines. */
+    /** @description Gets or sets the width of the crosshairs lines. The 'enableCrosshairs' property should be 'true' */
     get crosshairsLineWidth() {
         return this.nativeElement ? this.nativeElement.crosshairsLineWidth : undefined;
     }
@@ -338,13 +338,6 @@ let ChartComponent = class ChartComponent extends BaseElement {
     }
     set padding(value) {
         this.nativeElement ? this.nativeElement.padding = value : undefined;
-    }
-    /** @description Sets the legend bar position in the Chart. */
-    get legendPosition() {
-        return this.nativeElement ? this.nativeElement.legendPosition : undefined;
-    }
-    set legendPosition(value) {
-        this.nativeElement ? this.nativeElement.legendPosition = value : undefined;
     }
     /** @description Determines the rendering engine used to display the chart. When the property is set to an empty string, jqxChart will automatically select an optimal rendering engine depending on the browser capabilities. */
     get renderEngine() {
@@ -957,9 +950,6 @@ __decorate([
 __decorate([
     Input()
 ], ChartComponent.prototype, "padding", null);
-__decorate([
-    Input()
-], ChartComponent.prototype, "legendPosition", null);
 __decorate([
     Input()
 ], ChartComponent.prototype, "renderEngine", null);

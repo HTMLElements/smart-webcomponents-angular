@@ -2,7 +2,7 @@ import { DateRangeInput } from './../index';
 import { Animation, DropDownButtonPosition, DateRangeInputValueType, DateRangeFormat, TimeRangeFormat } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, DropDownButtonPosition, DateRangeInputValueType, DateRangeFormat, TimeRangeFormat, ElementRenderMode } from './../index';
+export { Animation, DateRangeFormatDay, DateRangeFormatMonth, DateRangeFormatYear, DropDownButtonPosition, TimeRangeFormatHour, TimeRangeFormatMinute, DateRangeInputValueType, DateRangeFormat, TimeRangeFormat, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { DateRangeInput } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -26,7 +26,7 @@ export declare class DateRangeInputComponent extends BaseElement implements OnIn
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
-    /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. */
+    /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. Intl.DateTimeFormat is used to format date strings in JavaScript */
     dateFormat: DateRangeFormat;
     /** @description Enables or disables the element. */
     disabled: boolean;

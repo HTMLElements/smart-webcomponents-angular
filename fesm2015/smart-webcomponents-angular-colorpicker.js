@@ -242,7 +242,7 @@ let ColorPickerComponent = class ColorPickerComponent extends BaseElement {
     set disableUndo(value) {
         this.nativeElement ? this.nativeElement.disableUndo = value : undefined;
     }
-    /** @description Sets the parent container of the dropDown (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. */
+    /** @description Sets the parent container of the dropDown (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. Example: 'body'. */
     get dropDownAppendTo() {
         return this.nativeElement ? this.nativeElement.dropDownAppendTo : undefined;
     }

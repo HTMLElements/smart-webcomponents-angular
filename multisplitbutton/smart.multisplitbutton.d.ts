@@ -25,8 +25,8 @@ export declare class MultiSplitButtonComponent extends BaseElement implements On
     displayLoadingIndicator: boolean;
     /** @description Sets or gets the displayMember. The displayMember specifies the name of an object property to display. The name is contained in the collection specified by the 'dataSource' property. */
     displayMember: string;
-    /** @description Sets the parent container of the button's dropDown list (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown list. */
-    dropDownAppendTo: any;
+    /** @description Sets the parent container of the button's dropDown list (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown list. */
+    dropDownAppendTo: string;
     /** @description Determines position of the drop down button. */
     dropDownButtonPosition: DropDownButtonPosition;
     /** @description Defines how element's drop down behaves. In 'none' mode drop down never opens. In 'dropDownButton' mode drop down is opened only via elelent's drop down button. In 'auto' mode drop down is opened on click on the whole top section. */

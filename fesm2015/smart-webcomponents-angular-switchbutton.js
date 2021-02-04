@@ -129,8 +129,22 @@ let SwitchButtonComponent = class SwitchButtonComponent extends BaseElement {
         */
         this._onTouched = () => { };
         /** @description This event is triggered when the widget is checked/unchecked.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue, 	changeType)
+        *   value - A boolean value indicating the new state of the button ( checked or not ).
+        *   oldValue - A boolean value indicating the previous state of the button ( checked or not ).
+        *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+        */
         this.onChange = new EventEmitter();
+        /** @description This event is triggered when the widget is checked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	changeType)
+        *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+        */
+        this.onCheckValue = new EventEmitter();
+        /** @description This event is triggered when the widget is unchecked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	changeType)
+        *   changeType - A string flag indicating whether the change event was triggered via API or an event.
+        */
+        this.onUncheckValue = new EventEmitter();
         this._initialChange = true;
         this.nativeElement = ref.nativeElement;
     }
@@ -341,6 +355,10 @@ let SwitchButtonComponent = class SwitchButtonComponent extends BaseElement {
         const that = this;
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['checkValueHandler'] = (event) => { that.onCheckValue.emit(event); };
+        that.nativeElement.addEventListener('checkValue', that.eventHandlers['checkValueHandler']);
+        that.eventHandlers['uncheckValueHandler'] = (event) => { that.onUncheckValue.emit(event); };
+        that.nativeElement.addEventListener('uncheckValue', that.eventHandlers['uncheckValueHandler']);
         that.eventHandlers['changeModelHandler'] = (event) => {
             that._initialChange = false;
             that._onChange(that.nativeElement.checked);
@@ -364,6 +382,12 @@ let SwitchButtonComponent = class SwitchButtonComponent extends BaseElement {
         const that = this;
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
+        if (that.eventHandlers['checkValueHandler']) {
+            that.nativeElement.removeEventListener('checkValue', that.eventHandlers['checkValueHandler']);
+        }
+        if (that.eventHandlers['uncheckValueHandler']) {
+            that.nativeElement.removeEventListener('uncheckValue', that.eventHandlers['uncheckValueHandler']);
         }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -442,6 +466,12 @@ __decorate([
 __decorate([
     Output()
 ], SwitchButtonComponent.prototype, "onChange", void 0);
+__decorate([
+    Output()
+], SwitchButtonComponent.prototype, "onCheckValue", void 0);
+__decorate([
+    Output()
+], SwitchButtonComponent.prototype, "onUncheckValue", void 0);
 SwitchButtonComponent = __decorate([
     Directive({
         selector: 'smart-switch-button, [smart-switch-button]',

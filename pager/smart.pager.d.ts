@@ -30,7 +30,7 @@ export declare class PagerComponent extends BaseElement implements OnInit, After
     /** @description Gets/sets current page index. */
     pageIndex: number;
     /** @description Defines the number of page index selectors. */
-    pageIndexSelectors: any;
+    pageIndexSelectors: number;
     /** @description Gets/sets total number of items displayed on page. */
     pageSize: number;
     /** @description Defines the data source of the element's page size selector drop down. */

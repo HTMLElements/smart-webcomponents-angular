@@ -312,6 +312,13 @@ let GridComponent = class GridComponent extends BaseElement {
     set layout(value) {
         this.nativeElement ? this.nativeElement.layout = value : undefined;
     }
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    get locale() {
+        return this.nativeElement ? this.nativeElement.locale : undefined;
+    }
+    set locale(value) {
+        this.nativeElement ? this.nativeElement.locale = value : undefined;
+    }
     /** @description The clipboard property is used to enable/disable clipboard operations with Ctrl+C, Ctrl+X and Ctrl+V keyboard navigations.. */
     get clipboard() {
         return this.nativeElement ? this.nativeElement.clipboard : undefined;
@@ -374,6 +381,13 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     set dataSource(value) {
         this.nativeElement ? this.nativeElement.dataSource = value : undefined;
+    }
+    /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+    get dataSourceSettings() {
+        return this.nativeElement ? this.nativeElement.dataSourceSettings : undefined;
+    }
+    set dataSourceSettings(value) {
+        this.nativeElement ? this.nativeElement.dataSourceSettings = value : undefined;
     }
     /** @description Describes the grid's editing settings. */
     get editing() {
@@ -480,28 +494,28 @@ let GridComponent = class GridComponent extends BaseElement {
     set onRowDetailInit(value) {
         this.nativeElement ? this.nativeElement.onRowDetailInit = value : undefined;
     }
-    /** @description The rows property is used to describe all rows displayed in the grid. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get onRowDetailUpdated() {
         return this.nativeElement ? this.nativeElement.onRowDetailUpdated : undefined;
     }
     set onRowDetailUpdated(value) {
         this.nativeElement ? this.nativeElement.onRowDetailUpdated = value : undefined;
     }
-    /** @description Describes the selection settings. */
+    /** @description The rows property is used to describe all rows displayed in the grid. */
     get onRowInserted() {
         return this.nativeElement ? this.nativeElement.onRowInserted : undefined;
     }
     set onRowInserted(value) {
         this.nativeElement ? this.nativeElement.onRowInserted = value : undefined;
     }
-    /** @description Describes sorting settings. */
+    /** @description Describes the selection settings. */
     get onRowRemoved() {
         return this.nativeElement ? this.nativeElement.onRowRemoved : undefined;
     }
     set onRowRemoved(value) {
         this.nativeElement ? this.nativeElement.onRowRemoved = value : undefined;
     }
-    /** @description undefined */
+    /** @description Describes sorting settings. */
     get onRowUpdate() {
         return this.nativeElement ? this.nativeElement.onRowUpdate : undefined;
     }
@@ -612,6 +626,13 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     set footer(value) {
         this.nativeElement ? this.nativeElement.footer = value : undefined;
+    }
+    /** @description undefined */
+    get rightToLeft() {
+        return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
+    }
+    set rightToLeft(value) {
+        this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
     /** @description undefined */
     get rows() {
@@ -1544,6 +1565,9 @@ __decorate([
 ], GridComponent.prototype, "layout", null);
 __decorate([
     Input()
+], GridComponent.prototype, "locale", null);
+__decorate([
+    Input()
 ], GridComponent.prototype, "clipboard", null);
 __decorate([
     Input()
@@ -1569,6 +1593,9 @@ __decorate([
 __decorate([
     Input()
 ], GridComponent.prototype, "dataSource", null);
+__decorate([
+    Input()
+], GridComponent.prototype, "dataSourceSettings", null);
 __decorate([
     Input()
 ], GridComponent.prototype, "editing", null);
@@ -1671,6 +1698,9 @@ __decorate([
 __decorate([
     Input()
 ], GridComponent.prototype, "footer", null);
+__decorate([
+    Input()
+], GridComponent.prototype, "rightToLeft", null);
 __decorate([
     Input()
 ], GridComponent.prototype, "rows", null);

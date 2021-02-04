@@ -49,11 +49,11 @@ export declare class NumericTextBoxComponent extends BaseElement implements OnIn
     /** @description Callback, related to localization module.  */
     localizeFormatFunction: any;
     /** @description Sets or gets the maximum value of the widget.  */
-    max: any;
+    max: number | string;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Sets or gets the minimum value of the widget.  */
-    min: any;
+    min: number | string;
     /** @description The name of the control. */
     name: string;
     /** @description Enables or disables the setting of the value property to null or empty string.  */
@@ -93,7 +93,7 @@ export declare class NumericTextBoxComponent extends BaseElement implements OnIn
     /** @description Sets or gets the position of the spin buttons of the jqxNumericTextBox.  */
     spinButtonsPosition: NumericTextBoxDisplayPosition;
     /** @description Sets or gets the increase/decrease step.  */
-    spinButtonsStep: any;
+    spinButtonsStep: number | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */

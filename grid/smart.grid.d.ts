@@ -1,8 +1,8 @@
 import { Grid } from './../index';
-import { Scrolling, GridAppearance, GridBehavior, GridLayout, GridClipboard, GridColumn, GridColumnMenu, GridColumnGroup, GridConditionalFormatting, GridCharting, GridCheckBoxes, GridDataExport, GridEditing, GridFiltering, GridGrouping, GridPaging, GridPager, GridRowDetail, GridColumnHeader, GridSummaryRow, GridGroupHeader, GridHeader, GridFooter, GridRow, GridCell, GridSelection, GridSorting } from './../index';
+import { Scrolling, GridAppearance, GridBehavior, GridLayout, GridClipboard, GridColumn, GridColumnMenu, GridColumnGroup, GridConditionalFormatting, GridCharting, GridCheckBoxes, GridDataExport, GridDataSourceSettings, GridEditing, GridFiltering, GridGrouping, GridPaging, GridPager, GridRowDetail, GridColumnHeader, GridSummaryRow, GridGroupHeader, GridHeader, GridFooter, GridRow, GridCell, GridSelection, GridSorting } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { GridAppearanceAutoGenerateRowLabelMode, GridAppearanceAutoGenerateColumnLabelMode, GridResizeMode, GridClipboardAutoFillMode, HorizontalAlignment, VerticalAlignment, Position, GridColumnSortOrder, GridConditionalFormattingCondition, GridDataExportPageOrientation, GridEditingAction, LayoutPosition, GridCommandDisplayMode, GridEditingMode, GridFilteringFilterRowApplyMode, GridFilteringFilterMenuMode, GridGroupingExpandMode, GridGroupingRenderMode, GridPagerAutoEllipsis, Scrolling, GridSelectionMode, GridSelectionAction, GridSelectionCheckBoxesSelectAllMode, GridSortingMode, GridAppearance, GridBehavior, GridLayout, GridClipboard, GridColumn, GridColumnMenu, GridColumnMenuDataSource, GridCommand, GridColumnGroup, GridConditionalFormatting, GridCharting, Dialog, GridCheckBoxes, GridDataExport, GridEditing, GridEditingCommandKeys, GridCommandKey, GridEditingCommandBar, GridEditingCommandBarDataSource, GridEditingCommandColumn, GridEditingCommandColumnDataSource, GridEditingAddNewRow, GridFiltering, GridFilteringFilterRow, GridFilteringFilterMenu, GridFilteringFilterBuilder, GridGrouping, GridGroupingGroupBar, GridGroupingSummaryRow, GridPaging, GridPagingSpinner, GridPager, GridPagerPageSizeSelector, GridPagerSummary, GridPagerNavigationButtons, GridPagerNavigationButtonsPrevNextButtons, GridPagerNavigationButtonsFirstLastButtons, GridPagerNavigationButtonsLabels, GridPagerNavigationInput, GridPagerPageIndexSelectors, GridRowDetail, GridColumnHeader, GridSummaryRow, GridGroupHeader, GridHeader, GridFooter, GridRow, GridCell, GridSelection, GridSelectionCheckBoxes, GridSorting, ElementRenderMode } from './../index';
+export { GridAppearanceAutoGenerateRowLabelMode, GridAppearanceAutoGenerateColumnLabelMode, GridResizeMode, GridClipboardAutoFillMode, HorizontalAlignment, VerticalAlignment, Position, GridColumnSortOrder, GridColumnSummary, GridConditionalFormattingCondition, GridDataExportPageOrientation, GridDataSourceSettingsDataFieldDataType, GridDataSourceSettingsDataSourceType, GridEditingAction, LayoutPosition, GridCommandDisplayMode, GridEditingMode, GridEditingAddNewRowDisplayMode, GridFilteringFilterRowApplyMode, GridFilteringFilterMenuMode, GridGroupingExpandMode, GridGroupingRenderMode, GridPagerAutoEllipsis, Scrolling, GridSelectionMode, GridSelectionAction, GridSelectionCheckBoxesSelectAllMode, GridSortingMode, GridAppearance, GridBehavior, GridLayout, GridClipboard, GridColumn, GridColumnMenu, GridColumnMenuDataSource, GridCommand, GridColumnGroup, GridConditionalFormatting, GridCharting, Dialog, GridCheckBoxes, GridDataExport, GridDataSourceSettings, GridDataSourceSettingsDataField, GridEditing, GridEditingCommandKeys, GridCommandKey, GridEditingCommandBar, GridEditingCommandBarDataSource, GridEditingCommandColumn, GridEditingCommandColumnDataSource, GridEditingAddNewRow, GridEditingAddNewColumn, GridFiltering, GridFilteringFilterRow, GridFilteringFilterMenu, GridFilteringFilterBuilder, GridGrouping, GridGroupingGroupBar, GridGroupingSummaryRow, GridPaging, GridPagingSpinner, GridPager, GridPagerPageSizeSelector, GridPagerSummary, GridPagerNavigationButtons, GridPagerNavigationButtonsPrevNextButtons, GridPagerNavigationButtonsFirstLastButtons, GridPagerNavigationButtonsLabels, GridPagerNavigationInput, GridPagerPageIndexSelectors, GridRowDetail, GridColumnHeader, GridSummaryRow, GridGroupHeader, GridHeader, GridFooter, GridRow, GridCell, GridSelection, GridSelectionCheckBoxes, GridSorting, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Grid } from './../index';
 export { DataAdapter, Chart } from './../index';
@@ -20,6 +20,8 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     behavior: GridBehavior;
     /** @description An object containing settings related to the grid's layout. */
     layout: GridLayout;
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    locale: string;
     /** @description The clipboard property is used to enable/disable clipboard operations with Ctrl+C, Ctrl+X and Ctrl+V keyboard navigations.. */
     clipboard: GridClipboard;
     /** @description The columns property is used to describe all columns displayed in the grid.  */
@@ -41,6 +43,8 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     dataExport: GridDataExport;
     /** @description Sets the grid's data source. The value of dataSource can be an instance of JQX.DataAdapter or an Array. */
     dataSource: any;
+    /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+    dataSourceSettings: GridDataSourceSettings;
     /** @description Describes the grid's editing settings. */
     editing: GridEditing;
     /** @description Describes the grid's filtering settings. */
@@ -91,19 +95,19 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     onRowDetailInit: {
         (index: number, row: GridRow, details: HTMLElement): void;
     };
-    /** @description The rows property is used to describe all rows displayed in the grid. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     onRowDetailUpdated: {
         (index: number, row: GridRow, details: HTMLElement): void;
     };
-    /** @description Describes the selection settings. */
+    /** @description The rows property is used to describe all rows displayed in the grid. */
     onRowInserted: {
         (index: number, row: GridRow): void;
     };
-    /** @description Describes sorting settings. */
+    /** @description Describes the selection settings. */
     onRowRemoved: {
         (index: number, row: GridRow): void;
     };
-    /** @description undefined */
+    /** @description Describes sorting settings. */
     onRowUpdate: {
         (index: number, row: GridRow, oldValues: any[], values: any[], confirm: {
             (commit: boolean): void;
@@ -151,6 +155,8 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     header: GridHeader;
     /** @description undefined */
     footer: GridFooter;
+    /** @description undefined */
+    rightToLeft: boolean;
     /** @description undefined */
     rows: GridRow[];
     /** @description undefined */

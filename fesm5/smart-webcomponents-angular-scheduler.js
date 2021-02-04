@@ -179,6 +179,12 @@ var SchedulerComponent = /** @class */ (function (_super) {
         *   value - The value of the new selected view.
         */
         _this.onViewChange = new EventEmitter();
+        /** @description This event is triggered before the view is changed via user interaction. The view change action can be canceled if event.preventDefault() is called on the event.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+        *   oldValue - The value of the previously selected view.
+        *   value - The value of the new selected view.
+        */
+        _this.onViewChanging = new EventEmitter();
         /** @description This event is triggered when a shortcut key for an event is pressed. By default only 'Delete' key is used.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	key, 	target, 	eventObj)
         *   key - The shortcut key that was pressed.
@@ -407,6 +413,17 @@ var SchedulerComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.contextMenuDataSource = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SchedulerComponent.prototype, "contextMenuClipboardActions", {
+        /** @description Determines whether the clipboard shortcuts for copy/paste/cut action of events are visible in the Scheduler context menu or not. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.contextMenuClipboardActions : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.contextMenuClipboardActions = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -664,6 +681,39 @@ var SchedulerComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SchedulerComponent.prototype, "filter", {
+        /** @description Determines the filtering condition for the events.The filter property takes an array of objects or a function. Each object represents a single filtering condition with the following attributes: name - the name of the Scheduler event property that will be filtered by.value - the filtering condition value. The value will be used to compare the events based on the filterMode, for example: [{ name: 'price', value: 25 }]. The value can also be a function. The function accepts a single arguemnt - the value that corresponds to the filtered attribute. The function allows to apply custom condition that is different from the default filter modes. It should return true ( if the evnet passes the filtering condition ) or false ( if the event does not meet the filtering condition ). Here's an example: [{ name: 'roomId', value: (id) => ['2', '3'].indexOf(id + '') > -1 }]. In the example the events that do not have a 'roomId' property that is equal to '2' or '3' will be filtered out.. If a function is set to the filter property instead, it allows to completely customize the filtering logic. The function passes a single argument - each Scheduler event that will be displayed. The function should return true ( if the condition is met ) or false ( if not ). */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.filter : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.filter = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SchedulerComponent.prototype, "filterable", {
+        /** @description Determines whether Scheduler's filtering is enabled or not. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.filterable : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.filterable = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SchedulerComponent.prototype, "filterMode", {
+        /** @description Determines the filter mode. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.filterMode : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.filterMode = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SchedulerComponent.prototype, "events", {
         /** @description A getter that returns  an array of all Scheduler events. */
         get: function () {
@@ -682,6 +732,17 @@ var SchedulerComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.firstDayOfWeek = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SchedulerComponent.prototype, "footerTemplate", {
+        /** @description Allows to customize the footer of the Scheduler. It can be an HTMLTemplateElement, it's id as a string or a function with the following parameters: footerContainer - the footer container.. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.footerTemplate : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.footerTemplate = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -862,6 +923,28 @@ var SchedulerComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SchedulerComponent.prototype, "legendLocation", {
+        /** @description Determines the location of the legend inside the Scheduler. By default the location is inside the footer but it can also reside in the header. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.legendLocation : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.legendLocation = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SchedulerComponent.prototype, "legendPosition", {
+        /** @description Determines the position of the legend. By default it's positioned to the near side but setting it to 'far' will change that. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.legendPosition : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.legendPosition = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SchedulerComponent.prototype, "horizontalScrollBarVisibility", {
         /** @description Determines weather or not horizontal scrollbar is shown. */
         get: function () {
@@ -1016,6 +1099,17 @@ var SchedulerComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SchedulerComponent.prototype, "restrictedHours", {
+        /** @description Defines an array of hours that are not allowed to have events on. Events that overlap restricted Hours or start/end on them will not be displayed. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.restrictedHours : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.restrictedHours = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SchedulerComponent.prototype, "rightToLeft", {
         /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
         get: function () {
@@ -1045,6 +1139,17 @@ var SchedulerComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.shadeUntilCurrentTime = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SchedulerComponent.prototype, "showLegend", {
+        /** @description Determines whether the resource legend is visible or not. The Legend shows the resources and their items in the footer section of the Scheduler. If filterable is enabled it is possible to filter by resource items by clicking on the corresponding resource item from the legend. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.showLegend : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.showLegend = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1127,7 +1232,7 @@ var SchedulerComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(SchedulerComponent.prototype, "timeZone", {
-        /** @description Determines the timeZone that the dates will be displayed in. Accepts values from the IANA time zone database. By default it uses the local time zone. */
+        /** @description Determines the timeZone for the element. By default if the local time zone is used if the property is not set. */
         get: function () {
             return this.nativeElement ? this.nativeElement.timeZone : undefined;
         },
@@ -1138,7 +1243,7 @@ var SchedulerComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(SchedulerComponent.prototype, "timeZones", {
-        /** @description Allows to display multiple timeZones at once. Accepts an array values from the IANA time zone database. By default it uses the local time zone. */
+        /** @description Allows to display additional timeZones at once along with the default that is set via the timeZone property. Accepts an array values that represent the ids of valid time zones. The possbile time zones can be viewed in the timeZone property description. By default the local time zone is displayed. */
         get: function () {
             return this.nativeElement ? this.nativeElement.timeZones : undefined;
         },
@@ -1204,7 +1309,7 @@ var SchedulerComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(SchedulerComponent.prototype, "views", {
-        /** @description Determines the viewing date range of the timeline. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view. */
+        /** @description Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view. */
         get: function () {
             return this.nativeElement ? this.nativeElement.views : undefined;
         },
@@ -1254,6 +1359,17 @@ var SchedulerComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(SchedulerComponent.prototype, "undoRedoSteps", {
+        /** @description Determines the maximum number of redo/undo steps that will be remembered by the Scheduler. When the number is reached the oldest records are removed in order to add new. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.undoRedoSteps : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.undoRedoSteps = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1504,15 +1620,16 @@ var SchedulerComponent = /** @class */ (function (_super) {
     };
     /** @description Scrolls the Scheduler to a Date.
     * @param {Date} date. The date to scroll to.
+    * @param {boolean} strictScroll?. Determines whether to scroll strictly to the date or not. This mean sthat the Scheduler wll scroll to the begining of the cell that corresponds to the target date.
     */
-    SchedulerComponent.prototype.scrollToDate = function (date) {
+    SchedulerComponent.prototype.scrollToDate = function (date, strictScroll) {
         var _this = this;
         if (this.nativeElement.isRendered) {
-            this.nativeElement.scrollToDate(date);
+            this.nativeElement.scrollToDate(date, strictScroll);
         }
         else {
             this.nativeElement.whenRendered(function () {
-                _this.nativeElement.scrollToDate(date);
+                _this.nativeElement.scrollToDate(date, strictScroll);
             });
         }
     };
@@ -1604,7 +1721,7 @@ var SchedulerComponent = /** @class */ (function (_super) {
             });
         }
     };
-    /** @description Returns the first occurance of an event before a date.
+    /** @description Returns the last occurance of an event before a date.
     * @param {any} eventObj. A Scheduler event object.
     * @param {number} date. The date before which the first occurance of the event will be returned.
     */
@@ -1674,7 +1791,7 @@ var SchedulerComponent = /** @class */ (function (_super) {
         }
     };
     /** @description Returns true or false whether the date is restricted or not.
-    * @param {Date} date. A Scheduler event object or it's index.
+    * @param {Date} date. A Date object.
     * @returns {boolean}
   */
     SchedulerComponent.prototype.isDateRestricted = function (date) {
@@ -1688,6 +1805,33 @@ var SchedulerComponent = /** @class */ (function (_super) {
                             return new Promise(function (resolve) {
                                 _this.nativeElement.whenRendered(function () {
                                     var result = _this.nativeElement.isDateRestricted(date);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Returns true or false whether the hour is restricted or not.
+    * @param {number | Date} hour. A number that represents an hour ( 0 to 23 ) or a Date object.
+    * @returns {boolean}
+  */
+    SchedulerComponent.prototype.isHourRestricted = function (hour) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.isHourRestricted(hour);
                                     resolve(result);
                                 });
                             });
@@ -1715,6 +1859,138 @@ var SchedulerComponent = /** @class */ (function (_super) {
                             return new Promise(function (resolve) {
                                 _this.nativeElement.whenRendered(function () {
                                     var result = _this.nativeElement.isEventRestricted(eventObj);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Deletes the current undo/redo history.
+    * @returns {boolean}
+  */
+    SchedulerComponent.prototype.deleteUndoRedoHistory = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.deleteUndoRedoHistory();
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Indicates whether it is possible to redo an action.
+    * @returns {boolean}
+  */
+    SchedulerComponent.prototype.canRedo = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.canRedo();
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Indicates whether it is possbile to undo an action.
+    * @returns {boolean}
+  */
+    SchedulerComponent.prototype.canUndo = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.canUndo();
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Redo the next event modification.
+    * @param {number} step?. A step to redo to.
+    * @returns {boolean}
+  */
+    SchedulerComponent.prototype.redo = function (step) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.redo(step);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Undo the last event modification.
+    * @param {number} step?. A step to undo to.
+    * @returns {boolean}
+  */
+    SchedulerComponent.prototype.undo = function (step) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.undo(step);
                                     resolve(result);
                                 });
                             });
@@ -1774,6 +2050,8 @@ var SchedulerComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('itemUpdate', that.eventHandlers['itemUpdateHandler']);
         that.eventHandlers['viewChangeHandler'] = function (event) { that.onViewChange.emit(event); };
         that.nativeElement.addEventListener('viewChange', that.eventHandlers['viewChangeHandler']);
+        that.eventHandlers['viewChangingHandler'] = function (event) { that.onViewChanging.emit(event); };
+        that.nativeElement.addEventListener('viewChanging', that.eventHandlers['viewChangingHandler']);
         that.eventHandlers['eventShortcutKeyHandler'] = function (event) { that.onEventShortcutKey.emit(event); };
         that.nativeElement.addEventListener('eventShortcutKey', that.eventHandlers['eventShortcutKeyHandler']);
         that.eventHandlers['dateChangeHandler'] = function (event) { that.onDateChange.emit(event); };
@@ -1849,6 +2127,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
         }
         if (that.eventHandlers['viewChangeHandler']) {
             that.nativeElement.removeEventListener('viewChange', that.eventHandlers['viewChangeHandler']);
+        }
+        if (that.eventHandlers['viewChangingHandler']) {
+            that.nativeElement.removeEventListener('viewChanging', that.eventHandlers['viewChangingHandler']);
         }
         if (that.eventHandlers['eventShortcutKeyHandler']) {
             that.nativeElement.removeEventListener('eventShortcutKey', that.eventHandlers['eventShortcutKeyHandler']);
@@ -1943,6 +2224,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "contextMenuDataSource", null);
     __decorate([
         Input()
+    ], SchedulerComponent.prototype, "contextMenuClipboardActions", null);
+    __decorate([
+        Input()
     ], SchedulerComponent.prototype, "eventTemplate", null);
     __decorate([
         Input()
@@ -2012,10 +2296,22 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "dragOffset", null);
     __decorate([
         Input()
+    ], SchedulerComponent.prototype, "filter", null);
+    __decorate([
+        Input()
+    ], SchedulerComponent.prototype, "filterable", null);
+    __decorate([
+        Input()
+    ], SchedulerComponent.prototype, "filterMode", null);
+    __decorate([
+        Input()
     ], SchedulerComponent.prototype, "events", null);
     __decorate([
         Input()
     ], SchedulerComponent.prototype, "firstDayOfWeek", null);
+    __decorate([
+        Input()
+    ], SchedulerComponent.prototype, "footerTemplate", null);
     __decorate([
         Input()
     ], SchedulerComponent.prototype, "groupByDate", null);
@@ -2066,6 +2362,12 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "hideWeekend", null);
     __decorate([
         Input()
+    ], SchedulerComponent.prototype, "legendLocation", null);
+    __decorate([
+        Input()
+    ], SchedulerComponent.prototype, "legendPosition", null);
+    __decorate([
+        Input()
     ], SchedulerComponent.prototype, "horizontalScrollBarVisibility", null);
     __decorate([
         Input()
@@ -2108,6 +2410,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "restrictedDates", null);
     __decorate([
         Input()
+    ], SchedulerComponent.prototype, "restrictedHours", null);
+    __decorate([
+        Input()
     ], SchedulerComponent.prototype, "rightToLeft", null);
     __decorate([
         Input()
@@ -2115,6 +2420,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], SchedulerComponent.prototype, "shadeUntilCurrentTime", null);
+    __decorate([
+        Input()
+    ], SchedulerComponent.prototype, "showLegend", null);
     __decorate([
         Input()
     ], SchedulerComponent.prototype, "spinButtonsDelay", null);
@@ -2174,6 +2482,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "unfocusable", null);
     __decorate([
         Input()
+    ], SchedulerComponent.prototype, "undoRedoSteps", null);
+    __decorate([
+        Input()
     ], SchedulerComponent.prototype, "windowCustomizationFunction", null);
     __decorate([
         Output()
@@ -2199,6 +2510,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], SchedulerComponent.prototype, "onViewChange", void 0);
+    __decorate([
+        Output()
+    ], SchedulerComponent.prototype, "onViewChanging", void 0);
     __decorate([
         Output()
     ], SchedulerComponent.prototype, "onEventShortcutKey", void 0);

@@ -67,8 +67,8 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
     value: any;
     /** @description Gets whether the Form control is valid. */
     valid: boolean;
-    /** @description Validation rules array. Accepts any JQX.Validator rules. */
-    validationRules: any[];
+    /** @description Sets or gets the column's validation rules. The expected value is an Array of Objects. Each object should have a 'type' property that can be set to 'required', 'min', 'max', 'minLength', 'maxLength', 'email', 'null', 'requiredTrue', 'minData', 'maxDate', 'pattern'. The 'value' property should be set, too. For validation rule types 'required', 'requiredTrue' and 'null' you can skip the 'value' property. Optional property is 'message', which determines the error message. */
+    validationRules: [] | null;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets the form'group view mode. */
     viewMode: FormControlViewMode;
     readonly isRendered: boolean;

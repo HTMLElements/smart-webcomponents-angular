@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-map.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-map.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-map.js",
+  "esm5": "../esm5/map/smart-webcomponents-angular-map.js",
+  "esm2015": "../esm2015/map/smart-webcomponents-angular-map.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-map.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-map.js",
+  "typings": "smart-webcomponents-angular-map.d.ts",
+  "metadata": "smart-webcomponents-angular-map.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/map"
+}
