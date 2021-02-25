@@ -30,7 +30,7 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~5.4.3",
     "rxjs": "~6.5.4",
-    "smart-webcomponents-angular": "^9.1.12",
+    "smart-webcomponents-angular": "^9.1.0",
     "ts-node": "~8.3.0",
     "tslib": "^1.10.0",
     "tslint": "~5.18.0",
