@@ -1,5 +1,6 @@
 {
   "name": "angular-template",
+  "homepage": "https://stackblitz.com/edit/e8czwv.run",
   "description": "Angular Accordion Overview | Smart UI Angular Components",
   "dependencies": {
    "@angular-devkit/build-angular": "^0.1101.4",
