@@ -43,7 +43,7 @@
                 "extractLicenses": true,
                 "vendorChunk": false,
                 "buildOptimizer": false
-            
+            }
             }
         },
         "serve": {
