@@ -22,7 +22,7 @@
                 "src/assets"
             ],
             "styles": [
-              "src/assets/smart.default.css"    
+              "./node_modules/smart-webcomponents-angular/source/styles/smart.default.css"    
             ],
             "scripts": []
             },
