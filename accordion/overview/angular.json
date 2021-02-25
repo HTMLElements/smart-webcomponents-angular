@@ -22,7 +22,7 @@
                 "src/assets"
             ],
             "styles": [
-              "./src/assets/smart.default.css"    
+              "src/assets/smart.default.css"    
             ],
             "scripts": []
             },
