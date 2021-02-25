@@ -1,0 +1,10 @@
+@font-face {
+  font-family: smart-icons;
+  src: local("./font/smart-icons"),
+    url("./font/smart-icons.woff2") format("woff2"),
+    url("./font/smart-icons.woff") format("woff"),
+    url("./font/smart-icons.ttf") format("truetype"),
+    url("./font/smart-icons.eot") format("embedded-opentype");
+  font-weight: normal;
+  font-style: normal;
+}
