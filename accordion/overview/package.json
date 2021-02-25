@@ -16,6 +16,8 @@
     "@angular/platform-browser": "11.0.8",
     "@angular/platform-browser-dynamic": "11.0.8",
     "@angular/http": "7.2.16",
+    "smart-webcomponents-angular": "^7.6.0",
+    "@angular/elements": "11.0.8",
     "rxjs-compat": "6.6.6"
   },
   "scripts": {
