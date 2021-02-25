@@ -1,6 +1,6 @@
 {
   "name": "angular-template",
-  "description": "",
+  "description": "Angular Accordion Overview | Smart UI Angular Components",
   "dependencies": {
    "@angular-devkit/build-angular": "^0.1101.4",
     "@angular/animations": "^11.1.2",
