@@ -22,7 +22,7 @@
                 "src/assets"
             ],
             "styles": [
-              "./node_modules/smart-webcomponents-angular/source/styles/smart.default.css"    
+              "./src/assets/smart.default.css"    
             ],
             "scripts": []
             },
@@ -34,7 +34,7 @@
                     "with": "src/environments/environment.prod.ts"
                 }
                 ],
-                "optimization": true,
+                "optimization": false,
                 "outputHashing": "all",
                 "sourceMap": false,
                 "extractCss": true,
@@ -42,7 +42,7 @@
                 "aot": true,
                 "extractLicenses": true,
                 "vendorChunk": false,
-                "buildOptimizer": true
+                "buildOptimizer": false
             }
             }
         },
