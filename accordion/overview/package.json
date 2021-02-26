@@ -18,7 +18,6 @@
     "core-js": "^3.9.0",
     "moment": "^2.29.1",
     "rxjs": "^6.6.6",
-    "smart-webcomponents-angular": "^9.1.17",
     "zone.js": "^0.11.4"
   },
   "scripts": {
