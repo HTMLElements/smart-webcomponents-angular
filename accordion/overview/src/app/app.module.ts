@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AccordionModule } from 'smart-webcomponents-angular/accordion';
+import { AccordionModule } from 'smart-webcomponents-angular-dev/accordion';
 
 import { AppComponent } from './app.component';
 
