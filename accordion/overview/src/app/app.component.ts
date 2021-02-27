@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild } from '@angular/core';
-import { AccordionComponent, AccordionItemComponent, AccordionExpandMode } from 'smart-webcomponents-angular/accordion';
+import { AccordionComponent, AccordionItemComponent, AccordionExpandMode } from 'smart-webcomponents-angular-dev/accordion';
 
 @Component({
     selector: 'app-root',
