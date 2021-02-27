@@ -16,7 +16,7 @@
     "@types/jasmine": "^3.6.4",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^14.14.31",
-    "core-js": "^2.6.9",
+    "core-js": "2.6.9",
     "moment": "^2.29.1",
     "smart-webcomponents-angular-dev": "9.1.18",
     "rxjs": "^6.6.6",
