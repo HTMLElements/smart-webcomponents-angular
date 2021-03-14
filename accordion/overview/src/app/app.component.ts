@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild } from '@angular/core';
-import { AccordionComponent, AccordionItemComponent, AccordionExpandMode } from 'smart-webcomponents-angular-dev/accordion';
+import { AccordionComponent, AccordionItemComponent, AccordionExpandMode } from '@smart-webcomponents-angular/accordion';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +13,7 @@ export class AppComponent {
     ngOnInit(): void {
 
     }
+    
     ngAfterViewInit(): void {
         this.accordion.expandMode = "multiple";
         this.accordion.expand(1);
