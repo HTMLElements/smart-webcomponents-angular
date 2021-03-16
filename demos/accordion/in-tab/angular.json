@@ -25,7 +25,7 @@
                	"./node_modules/@smart-webcomponents-angular/accordion/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/accordion/styles/smart.accordion.css",
 				"./node_modules/@smart-webcomponents-angular/tabs/styles/smart.tabs.css",
-				"./node_modules/@smart-webcomponents-angular/accordion/styles/smart.common.css"
+				"./node_modules/@smart-webcomponents-angular/accordion/styles/smart.common.css",
                 "src/assets/fonts.css"
             ],
             "scripts": []

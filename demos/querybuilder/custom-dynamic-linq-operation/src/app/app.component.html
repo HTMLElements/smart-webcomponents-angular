@@ -1,0 +1,21 @@
+<smart-drop-down-list #dropdownlist id="linqSelector" [dropDownWidth]="'auto'" [label]="'Select a Linq Expression:'">
+    <smart-list-item>
+        operatorObject["Michael"].Contains("employee") && (programName.StartsWith("SpaceX") && price < @minPrice && price < 100)
+        <smart-list-item [selected]="true">
+            (partNumber = "PN-5478" && programName = "Voltage Test") && (startedWithin <="90.00:00:00" || operator.Contains( "John"))
+        </smart-list-item>
+        <smart-list-item>(productName.StartsWith("ABC"))</smart-list-item>
+        <smart-list-item>
+            (price = "25" || id.Any(!it.Contains("Alpha"))) && productName.StartsWith("ABC") || productName.StartsWith("W")
+        </smart-list-item>
+        <smart-list-item>
+            (partNumber = "PN-5478") && (programName = "Voltage Test" && startedWithin <="90.00:00:00") && operator.Contains( "John")
+        </smart-list-item>
+        <smart-list-item>(asdasd) && price = "25" && sadasda</smart-list-item>
+        <smart-list-item>""</smart-list-item>
+</smart-drop-down-list>
+<smart-query-builder #querybuilder id="queryBuilder"></smart-query-builder>
+<div id="log">
+    <h3>LINQ: </h3>
+    <div id="linqValue" #linqValue></div>
+</div>
