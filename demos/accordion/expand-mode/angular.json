@@ -22,8 +22,11 @@
                 "src/assets"
             ],
             "styles": [
-              "./node_modules/@smart-webcomponents-angular/accordion/styles/smart.accordion.css",
-               "src/assets/fonts.css"
+               	"./node_modules/@smart-webcomponents-angular/accordion/styles/smart.base.css",
+				"./node_modules/@smart-webcomponents-angular/accordion/styles/smart.accordion.css",
+				"./node_modules/@smart-webcomponents-angular/dropdownlist/styles/smart.dropdownlist.css",
+				"./node_modules/@smart-webcomponents-angular/accordion/styles/smart.common.css"
+                "src/assets/fonts.css"
             ],
             "scripts": []
             },
