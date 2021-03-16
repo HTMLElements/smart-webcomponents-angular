@@ -2,7 +2,7 @@
   "name": "angular-accordion-expand-mode",
   "description": "",
   "homepage": "https://stackblitz.com/edit/e8czwv.run",
-   "dependencies": {
+  "dependencies": {
     "@angular/animations": "^11.2.3",
     "@angular/elements": "^11.2.3",
     "@angular/common": "^11.2.3",
@@ -19,7 +19,7 @@
     "core-js": "2.6.9",
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/accordion": "9.1.62",
-	"@smart-webcomponents-angular/dropdownlist": "9.1.62",
+    "@smart-webcomponents-angular/dropdownlist": "9.1.62",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
