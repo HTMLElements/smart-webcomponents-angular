@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
 import { DataAdapter } from '@smart-webcomponents-angular/grid';
-import { GetData } from './../../common/data';
+import { GetData } from '../assets/data';
 
 @Component({
     selector: 'app-root',

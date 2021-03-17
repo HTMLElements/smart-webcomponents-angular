@@ -3,7 +3,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 import { MenuComponent } from '@smart-webcomponents-angular/menu';
-import { GetData } from '../../common/data';
+import { GetData } from '../assets/data';
 
 
 @Component({

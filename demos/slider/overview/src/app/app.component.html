@@ -81,20 +81,20 @@
                 <table>
                     <tr>
                         <td>
-                            <smart-slider #slider4 labels-visibility="endPoints" interval="10" coerce
+                            <smart-slider #slider4 labels-visibility="endPoints" interval="10" [coerce]="true"
                             ticks-visibility="major" show-thumb-label scale-type="integer" scale-position="far"></smart-slider>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <smart-slider #slider5 labels-visibility="endPoints" interval="10" coerce
+                            <smart-slider #slider5 labels-visibility="endPoints" interval="10" [coerce]="true"
                             ticks-visibility="major" show-thumb-label scale-type="integer" scale-position="far"
                             value="50"></smart-slider>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <smart-slider #slider6 labels-visibility="endPoints" interval="10" coerce
+                            <smart-slider #slider6 labels-visibility="endPoints" interval="10" [coerce]="true"
                             ticks-visibility="major" show-thumb-label scale-type="integer" scale-position="far"
                             value="100"></smart-slider>
                         </td>
@@ -135,7 +135,7 @@
             </div>
             <div class="module discreteScaleSlider">
                 <div>
-                    <smart-slider #slider10 coerce interval="20" show-thumb-label scale-type="integer"
+                    <smart-slider #slider10 [coerce]="true" interval="20" show-thumb-label scale-type="integer"
                     scale-position="both" ticks-visibility="major"></smart-slider>
                 </div>
                 <p>Discrete slider</p>
@@ -161,17 +161,17 @@
                 <div>
                     <smart-slider #slider12 orientation="vertical" scale-position="none" value="50"></smart-slider>
                     <smart-slider #slider13 orientation="vertical" scale-position="none"
-                    value="75" inverted></smart-slider>
+                    value="75" [inverted]="true"></smart-slider>
                 </div>
                 <p>Vertical continuous slider / Vertical continuous slider inverted</p>
             </div>
             <div class="module">
                 <div>
-                    <smart-slider #slider14 coerce interval="20" orientation="vertical" show-thumb-label
+                    <smart-slider #slider14 [coerce]="true" interval="20" orientation="vertical" show-thumb-label
                     scale-type="integer" scale-position="both" value="50"></smart-slider>
-                    <smart-slider #slider15 coerce interval="20" orientation="vertical"
+                    <smart-slider #slider15 [coerce]="true" interval="20" orientation="vertical"
                     show-thumb-label scale-type="integer" scale-position="both" value="25"
-                    inverted></smart-slider>
+                    [inverted]="true"></smart-slider>
                 </div>
                 <p>Vertical discrete slider / Vertical discrete slider inverted</p>
             </div>

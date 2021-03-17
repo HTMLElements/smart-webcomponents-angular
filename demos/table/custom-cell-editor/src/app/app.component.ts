@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
 import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
-import { GetData } from '../../common/data';
+import { GetData } from '../assets/data';
 
 @Component({
     selector: 'app-root',

@@ -2,7 +2,7 @@
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
 import { TableComponent } from '@smart-webcomponents-angular/table';
 import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
-import { GetData } from './../../common/data';
+import { GetData } from '../assets/data';
 
 @Component({
     selector: 'app-root',

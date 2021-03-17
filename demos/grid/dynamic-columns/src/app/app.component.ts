@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
-import { GetCountriesData } from '../../common/data';
+import { GetCountriesData } from '../assets/data';
 
 
 @Component({

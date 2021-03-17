@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
-import { GetCountriesCodesData } from './../../common/data';
+import { GetCountriesCodesData } from '../assets/data';
 
 
 @Component({

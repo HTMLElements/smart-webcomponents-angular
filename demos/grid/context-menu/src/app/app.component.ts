@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
 import { MenuComponent } from '@smart-webcomponents-angular/menu';
-import { GetData } from '../../common/data';
+import { GetData } from '../assets/data';
 
 
 @Component({

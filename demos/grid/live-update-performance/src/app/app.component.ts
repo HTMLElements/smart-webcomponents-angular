@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
-import { GetStockData } from '../../common/data';
+import { GetStockData } from '../assets/data';
 
 
 @Component({

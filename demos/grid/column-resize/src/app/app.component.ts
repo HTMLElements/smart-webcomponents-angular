@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
-import { GetData } from '../../common/data';
+import { GetData } from '../assets/data';
 
 
 @Component({

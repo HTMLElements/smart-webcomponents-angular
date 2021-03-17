@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
-import { GetCountriesCodesData } from './../../common/data';
+import { GetCountriesCodesData } from '../assets/data';
 
 @Component({
     selector: 'app-root',

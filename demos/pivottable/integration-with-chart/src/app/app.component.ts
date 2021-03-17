@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ChartComponent } from '@smart-webcomponents-angular/chart';
 import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
-import { GeneratePivotData } from './../../common/data';
+import { GeneratePivotData } from '../assets/data';
 
 @Component({
     selector: 'app-root',

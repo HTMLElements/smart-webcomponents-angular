@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
-import { GetCountriesData } from './../../common/data';
+import { GetCountriesData } from '../assets/data';
 
 @Component({
     selector: 'app-root',

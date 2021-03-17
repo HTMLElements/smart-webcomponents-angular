@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
-import { GeneratePivotData } from './../../common/data';
+import { GeneratePivotData } from '../assets/data';
 
 @Component({
     selector: 'app-root',

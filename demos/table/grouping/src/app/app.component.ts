@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
-import { GetData } from './../../common/data';
+import { GetData } from '../assets/data';
 
 @Component({
 	selector: 'app-root',

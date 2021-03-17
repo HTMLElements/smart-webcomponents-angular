@@ -2,7 +2,7 @@
 import { ButtonComponent, Button } from '@smart-webcomponents-angular/button';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
 import { SplitterComponent } from '@smart-webcomponents-angular/splitter';
-import { GetData } from '../../common/data';
+import { GetData } from '../assets/data';
 
 
 @Component({

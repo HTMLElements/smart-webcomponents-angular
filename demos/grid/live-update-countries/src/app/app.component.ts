@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
-import { GetCountriesCurrencyData, GetCountriesCodesData } from '../../common/data';
+import { GetCountriesCurrencyData, GetCountriesCodesData } from '../assets/data';
 
 
 @Component({
