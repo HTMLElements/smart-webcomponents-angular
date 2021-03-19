@@ -22,10 +22,9 @@
                 "src/assets"
             ],
             "styles": [
-               	"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.base.css",
-				"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.splitter.css",
-				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
-				"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.common.css",
+               	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
+				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
                 "src/assets/fonts.css"
             ],
             "scripts": []

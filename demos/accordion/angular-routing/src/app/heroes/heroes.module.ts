@@ -5,8 +5,8 @@ import { FormsModule }    from '@angular/forms';
 import { HeroListComponent }    from './hero-list/hero-list.component';
 import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 
-import { ButtonModule } from 'smart-webcomponents-angular/button';
-import { TextBoxModule } from 'smart-webcomponents-angular/textbox';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
 
 import { HeroesRoutingModule } from './heroes-routing.module';
 
