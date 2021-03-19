@@ -26,7 +26,8 @@
 				"./node_modules/@smart-webcomponents-angular/window/styles/smart.window.css",
 				"./node_modules/@smart-webcomponents-angular/scheduler/styles/smart.scheduler.css",
 				"./node_modules/@smart-webcomponents-angular/window/styles/smart.common.css",
-                "src/assets/fonts.css"
+                "src/assets/fonts.css",
+			    "src/assets/styles.css"
             ],
             "scripts": []
             },

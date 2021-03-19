@@ -27,7 +27,8 @@
 				"./node_modules/@smart-webcomponents-angular/maskedtextbox/styles/smart.maskedtextbox.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.common.css",
-                "src/assets/fonts.css"
+                "src/assets/fonts.css",
+			    "src/assets/styles.css"
             ],
             "scripts": []
             },

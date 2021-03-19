@@ -25,7 +25,8 @@
                	"./node_modules/@smart-webcomponents-angular/scrollbar/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/scrollbar/styles/smart.scrollbar.css",
 				"./node_modules/@smart-webcomponents-angular/scrollbar/styles/smart.common.css",
-                "src/assets/fonts.css"
+                "src/assets/fonts.css",
+			    "src/assets/styles.css"
             ],
             "scripts": []
             },

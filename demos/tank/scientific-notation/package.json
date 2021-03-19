@@ -1,7 +1,8 @@
 {
   "name": "angular-tank-scientific-notation",
-  "description": "",
-  "homepage": "https://stackblitz.com/edit/e8czwv.run",
+  "description": "Angular tank scientific-notation example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
+  "version": "1.0.0",
+  "homepage": "https://www.htmlelements.com/",
    "dependencies": {
     "@angular/animations": "^11.2.3",
     "@angular/elements": "^11.2.3",

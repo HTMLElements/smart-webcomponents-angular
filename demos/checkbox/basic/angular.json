@@ -25,7 +25,8 @@
                	"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.checkbox.css",
 				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.common.css",
-                "src/assets/fonts.css"
+                "src/assets/fonts.css",
+			    "src/assets/styles.css"
             ],
             "scripts": []
             },

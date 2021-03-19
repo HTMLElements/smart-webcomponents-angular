@@ -27,7 +27,8 @@
 				"./node_modules/@smart-webcomponents-angular/gauge/styles/smart.gauge.css",
 				"./node_modules/@smart-webcomponents-angular/radiobutton/styles/smart.radiobutton.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
-                "src/assets/fonts.css"
+                "src/assets/fonts.css",
+			    "src/assets/styles.css"
             ],
             "scripts": []
             },

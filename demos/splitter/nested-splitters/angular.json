@@ -25,7 +25,8 @@
                	"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.splitter.css",
 				"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.common.css",
-                "src/assets/fonts.css"
+                "src/assets/fonts.css",
+			    "src/assets/styles.css"
             ],
             "scripts": []
             },

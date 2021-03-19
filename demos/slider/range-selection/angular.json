@@ -26,7 +26,8 @@
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/slider/styles/smart.slider.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
-                "src/assets/fonts.css"
+                "src/assets/fonts.css",
+			    "src/assets/styles.css"
             ],
             "scripts": []
             },
