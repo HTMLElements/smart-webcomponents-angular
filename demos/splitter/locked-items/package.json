@@ -18,7 +18,7 @@
     "@types/node": "^14.14.31",
     "core-js": "3.9.1",
     "moment": "^2.29.1",
-    "@smart-webcomponents-angular/splitter": "^9.2.6",
+    "@smart-webcomponents-angular/splitter": "9.2.7",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
