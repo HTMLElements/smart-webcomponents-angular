@@ -28,7 +28,6 @@
 				"./node_modules/@smart-webcomponents-angular/input/styles/smart.input.css",
 				"./node_modules/@smart-webcomponents-angular/maskedtextbox/styles/smart.maskedtextbox.css",
 				"./node_modules/@smart-webcomponents-angular/passwordtextbox/styles/smart.passwordtextbox.css",
-				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/validator/styles/smart.validator.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",

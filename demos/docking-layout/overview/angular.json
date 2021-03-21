@@ -28,7 +28,6 @@
 				"./node_modules/@smart-webcomponents-angular/multilinetextbox/styles/smart.multilinetextbox.css",
 				"./node_modules/@smart-webcomponents-angular/slider/styles/smart.slider.css",
 				"./node_modules/@smart-webcomponents-angular/tabs/styles/smart.tabs.css",
-				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/dockinglayout/styles/smart.common.css",
                 "src/assets/fonts.css",

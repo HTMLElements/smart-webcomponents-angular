@@ -59,7 +59,7 @@
         </div>
         <div class="module module-wide">
             <div id="menu2Container">
-                <smart-menu #menu2 id="menu2" class="material animation" checkboxes>
+                <smart-menu #menu2 id="menu2" class="material animation" [checkboxes]="true">
                     <smart-menu-items-group>File
                         <smart-menu-item shortcut="Ctrl+N">New</smart-menu-item>
                         <smart-menu-item shortcut="Ctrl+0">Open</smart-menu-item>
@@ -175,7 +175,7 @@
         <div class="module">
             <div class="vertical-menu-container">
                 <smart-menu #menu4 id="menu4" class="material animation" mode="vertical"
-                checkboxes>
+                [checkboxes]="true">
                     <smart-menu-items-group label="File">
                         <smart-menu-item label="New" shortcut="Ctrl+N"></smart-menu-item>
                         <smart-menu-item label="Open" shortcut="Ctrl+0"></smart-menu-item>
@@ -233,7 +233,7 @@
         <div class="module module-wide">
             <div class="vertical-menu-container">
                 <smart-menu #menu5 id="menu5" class="material animation" mode="vertical"
-                checkboxes drop-down-position="top-left">
+                [checkboxes]="true" drop-down-position="top-left">
                     <smart-menu-items-group label="File">
                         <smart-menu-item label="New" shortcut="Ctrl+N"></smart-menu-item>
                         <smart-menu-item label="Open" shortcut="Ctrl+0"></smart-menu-item>
