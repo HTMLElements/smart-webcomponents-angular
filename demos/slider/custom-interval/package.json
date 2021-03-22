@@ -1,7 +1,7 @@
 {
   "name": "angular-slider-custom-interval",
   "description": "Angular slider custom-interval example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://www.htmlelements.com/",
    "dependencies": {
     "@angular/animations": "^11.2.3",
@@ -18,8 +18,8 @@
     "@types/node": "^14.14.31",
     "core-js": "3.9.1",
     "moment": "^2.29.1",
-    "@smart-webcomponents-angular/checkbox": "9.2.20",
-	"@smart-webcomponents-angular/slider": "9.2.20",
+    "@smart-webcomponents-angular/checkbox": "9.2.22",
+	"@smart-webcomponents-angular/slider": "9.2.22",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
