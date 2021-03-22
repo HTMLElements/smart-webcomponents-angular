@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ProgressBarModule } from '@smart-webcomponents-angular/progressbar';import { ToggleButtonModule } from '@smart-webcomponents-angular/togglebutton';
+import { ProgressBarModule } from '@smart-webcomponents-angular/progressbar';
+import { ToggleButtonModule } from '@smart-webcomponents-angular/button';
 
 import { AppComponent } from './app.component';
 

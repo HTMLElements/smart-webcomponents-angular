@@ -25,7 +25,7 @@
                     <div>
                         <smart-toggle-button #togglebutton class="primary" group="A"><i class="material-icons">format_align_left</i>
                         </smart-toggle-button>
-                        <smart-toggle-button #togglebutton2 class="secondary" group="A" checked><i class="material-icons">format_align_center</i>
+                        <smart-toggle-button #togglebutton2 class="secondary" group="A" [checked]="true"><i class="material-icons">format_align_center</i>
                         </smart-toggle-button>
                         <smart-toggle-button #togglebutton3 class="error" group="A"><i class="material-icons">format_align_right</i>
                         </smart-toggle-button>
@@ -58,11 +58,11 @@
             <div>
                 <div class="toggle-button-container toggle-button-multiple-selection">
                     <div>
-                        <smart-toggle-button #togglebutton5 checked><i class="material-icons">format_bold</i>
+                        <smart-toggle-button #togglebutton5 [checked]="true"><i class="material-icons">format_bold</i>
                         </smart-toggle-button>
-                        <smart-toggle-button #togglebutton6 checked><i class="material-icons">format_italic</i>
+                        <smart-toggle-button #togglebutton6 [checked]="true"><i class="material-icons">format_italic</i>
                         </smart-toggle-button>
-                        <smart-toggle-button #togglebutton7 checked><i class="material-icons">format_underlined</i>
+                        <smart-toggle-button #togglebutton7 [checked]="true"><i class="material-icons">format_underlined</i>
                         </smart-toggle-button>
                         <smart-toggle-button><i class="material-icons">format_color_fill</i>  <i class="material-icons">arrow_drop_down</i>
                         </smart-toggle-button>
@@ -78,7 +78,7 @@
                         <smart-toggle-button #togglebutton8 class="primary raised exclusive-selection"> <i class="material-icons">format_bold</i>
                         </smart-toggle-button>
                         <smart-toggle-button #togglebutton9 class="primary raised exclusive-selection"
-                        checked><i class="material-icons">format_italic</i>
+                        [checked]="true"><i class="material-icons">format_italic</i>
                         </smart-toggle-button>
                         <smart-toggle-button #togglebutton10 class="primary raised exclusive-selection"><i class="material-icons">format_underlined</i>
                         </smart-toggle-button>
@@ -137,7 +137,7 @@
             <div class="toggle-button-icons-themes">
                 <div>
                     <p>icon</p>
-                    <smart-toggle-button #togglebutton17 checked><i class="material-icons">favorite</i>
+                    <smart-toggle-button #togglebutton17 [checked]="true"><i class="material-icons">favorite</i>
                     </smart-toggle-button>
                 </div>
             </div>

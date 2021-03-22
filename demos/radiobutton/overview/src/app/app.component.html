@@ -9,7 +9,7 @@
                 all options.</p>
         </div>
         <div class="module">
-            <smart-radio-button #radiobutton group-name="A" checked></smart-radio-button>
+            <smart-radio-button #radiobutton group-name="A" [checked]="true"></smart-radio-button>
             <smart-radio-button #radiobutton2 group-name="A"></smart-radio-button>
         </div>
     </section>
@@ -46,10 +46,10 @@
                                 <smart-radio-button #radiobutton4 focus></smart-radio-button>
                             </td>
                             <td colspan="1" rowspan="1">
-                                <smart-radio-button #radiobutton5 checked></smart-radio-button>
+                                <smart-radio-button #radiobutton5 [checked]="true"></smart-radio-button>
                             </td>
                             <td colspan="1" rowspan="1">
-                                <smart-radio-button #radiobutton6 disabled></smart-radio-button>
+                                <smart-radio-button #radiobutton6 [disabled]="true"></smart-radio-button>
                             </td>
                         </tr>
                     </tbody>

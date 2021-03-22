@@ -1,6 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { ToggleButtonComponent } from '@smart-webcomponents-angular/togglebutton';
+import { ToggleButtonComponent, ButtonComponent } from '@smart-webcomponents-angular/button';
 import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 
 

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ToggleButtonModule } from '@smart-webcomponents-angular/togglebutton';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [ AppComponent ],
-    imports: [ BrowserModule, ToggleButtonModule ],
+    imports: [ BrowserModule, ButtonModule ],
     bootstrap: [ AppComponent ],
 	entryComponents: [ AppComponent ]
 })

@@ -26,7 +26,6 @@
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/numerictextbox/styles/smart.numerictextbox.css",
 				"./node_modules/@smart-webcomponents-angular/slider/styles/smart.slider.css",
-				"./node_modules/@smart-webcomponents-angular/togglebutton/styles/smart.togglebutton.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
                 "src/assets/fonts.css",

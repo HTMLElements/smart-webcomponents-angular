@@ -63,7 +63,7 @@
             <p>Move the pointer over the icon</p> <i style="margin-left:100px;" id="quickAdd"
             class="material-icons">&#xE145;</i>
             <smart-tooltip #tooltip2 id="tooltipQuickAdd"
-            selector="quickAdd" position="bottom" offset="[0,20]" class="animation material">Quick add</smart-tooltip>
+            selector="quickAdd" position="bottom" [offset]="[0,20]" class="animation material">Quick add</smart-tooltip>
         </div>
         <div class="module">
             <br/>
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <smart-tooltip #tooltip3 id="commonSmallMenuTooltip" position="bottom"
-            offset="[0,10]" class="animation material"></smart-tooltip>
+            [offset]="[0,10]" class="animation material"></smart-tooltip>
         </div>
     </section>
     <section id="tooltip-interaction">
@@ -101,28 +101,28 @@
             <br/>
             <br/>
             <smart-tooltip #tooltip4 id="tooltip300ms" selector="button300ms" position="bottom"
-            delay="300" offset="[0,10]" class="animation material">300ms delay</smart-tooltip>
+            [delay]="300" [offset]="[0,10]" class="animation material">300ms delay</smart-tooltip>
             <br/>
             <br/>
             <smart-button #button3 id="button500ms" class="material">500ms</smart-button>
             <br/>
             <br/>
             <smart-tooltip #tooltip5 id="tooltip500ms" selector="button500ms" position="bottom"
-            delay="500" offset="[0,10]" class="animation material">500ms delay</smart-tooltip>
+            [delay]="500" [offset]="[0,10]" class="animation material">500ms delay</smart-tooltip>
             <br/>
             <br/>
             <smart-button #button4 id="button1000ms" class="material">1000ms</smart-button>
             <br/>
             <br/>
             <smart-tooltip #tooltip6 id="tooltip1000ms" selector="button1000ms" position="bottom"
-            delay="1000" offset="[0,10]" class="animation material">1000ms delay</smart-tooltip>
+            [delay]="1000" [offset]="[0,10]" class="animation material">1000ms delay</smart-tooltip>
             <br/>
             <br/>
             <smart-button #button5 id="button1500ms" class="material">1500ms</smart-button>
             <br/>
             <br/>
             <smart-tooltip #tooltip7 id="toolti1500ms" selector="button1500ms" position="bottom"
-            delay="1500" offset="[0,10]" class="animation material">1500ms delay</smart-tooltip>
+            [delay]="1500" [offset]="[0,10]" class="animation material">1500ms delay</smart-tooltip>
         </div>
     </section>
     <section id="tooltip-desktop">
@@ -147,7 +147,7 @@
                 </div>
             </div>
             <smart-tooltip #tooltip8 id="commonLargeMenuTooltip" selector="btnAlignJustify"
-            position="bottom" offset="[0,10]" class="animation material">Align Justify</smart-tooltip>
+            position="bottom" [offset]="[0,10]" class="animation material">Align Justify</smart-tooltip>
         </div>
     </section>
     <section id="tooltip-mobile">
@@ -160,7 +160,7 @@
                 <br/>
                 <br/>
                 <smart-tooltip #tooltip9 id="tooltip4a" selector="button4a" position="bottom"
-                offset="[0,10]" class="animation mobile">Refresh</smart-tooltip>
+                [offset]="[0,10]" class="animation mobile">Refresh</smart-tooltip>
             </div>
         </div>
     </section>
