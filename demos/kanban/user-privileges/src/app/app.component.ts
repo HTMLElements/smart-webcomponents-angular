@@ -33,12 +33,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     taskComments = true;
     userList = true;
     users = [
-        { id: 0, name: 'Andrew', image: './../../../src/images/people/andrew.png' },
-        { id: 1, name: 'Anne', image: './../../../src/images/people/anne.png', allowAdd: true, allowComment: true, allowDrag: true, allowEdit: true, allowRemove: true },
-        { id: 2, name: 'Janet', image: './../../../src/images/people/janet.png' },
-        { id: 3, name: 'John', image: './../../../src/images/people/john.png' },
-        { id: 4, name: 'Laura', image: './../../../src/images/people/laura.png' },
-        { id: 5, name: 'Robert', image: './../../../src/images/people/robert.png', allowAdd: true, allowComment: false, allowDrag: true, allowEdit: false, allowRemove: false },
+        { id: 0, name: 'Andrew', image: 'https://htmlelements.com/demos/images/people/andrew.png' },
+        { id: 1, name: 'Anne', image: 'https://htmlelements.com/demos/images/people/anne.png', allowAdd: true, allowComment: true, allowDrag: true, allowEdit: true, allowRemove: true },
+        { id: 2, name: 'Janet', image: 'https://htmlelements.com/demos/images/people/janet.png' },
+        { id: 3, name: 'John', image: 'https://htmlelements.com/demos/images/people/john.png' },
+        { id: 4, name: 'Laura', image: 'https://htmlelements.com/demos/images/people/laura.png' },
+        { id: 5, name: 'Robert', image: 'https://htmlelements.com/demos/images/people/robert.png', allowAdd: true, allowComment: false, allowDrag: true, allowEdit: false, allowRemove: false },
         { id: 6, name: 'Guest', allowAdd: false, allowComment: false, allowDrag: false, allowEdit: false, allowRemove: false }
     ];
     columns = [
@@ -63,13 +63,13 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.kanban.currentUser = 1;
             that.window.close();
             that.loginInfo.nativeElement.innerHTML = 'Logged in as Anne';
-            that.pic.nativeElement.style.backgroundImage = 'url("./../../../src/images/people/anne.png")';
+            that.pic.nativeElement.style.backgroundImage = 'url("https://htmlelements.com/demos/images/people/anne.png")';
         }
         else if (that.input.value === 'Robert' && that.passwordtextbox.value === '123') {
             that.kanban.currentUser = 5;
             that.window.close();
             that.loginInfo.nativeElement.innerHTML = 'Logged in as Robert';
-            that.pic.nativeElement.style.backgroundImage = 'url("./../../../src/images/people/robert.png")';
+            that.pic.nativeElement.style.backgroundImage = 'url("https://htmlelements.com/demos/images/people/robert.png")';
         }
         else {
             const promptFooter = that.window.nativeElement.querySelector('.smart-footer');

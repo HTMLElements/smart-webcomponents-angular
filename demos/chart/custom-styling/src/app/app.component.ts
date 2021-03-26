@@ -22,7 +22,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { Day: 'Sunday', 'Oklahoma City': 42, Sofia: 8, Bruges: 21 }
     ];
     borderLineColor = '#808080';
-    backgroundImage = './../../../src/images/chart-custom-element-background.png';
+    backgroundImage = 'https://htmlelements.com/demos/images/chart-custom-element-background.png';
     caption = 'Wind Speed';
     description = 'around the world';
     showLegend = true;

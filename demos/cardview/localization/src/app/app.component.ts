@@ -32,7 +32,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             row.attachments = [];
             const maxAttachments = Math.floor(Math.random() * Math.floor(3)) + 1;
             for (let i = 0; i < maxAttachments; i++) {
-                row.attachments.push(`../../../images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
+                row.attachments.push(`https://htmlelements.com/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
             }
             row.attachments = row.attachments.join(',');
             sampleData[i] = row;

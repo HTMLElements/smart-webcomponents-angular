@@ -72,11 +72,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     };
     userList = true;
     users: KanbanUser[] = [
-        { id: '0', name: 'Andrew', image: './../../../src/images/people/andrew.png' },
-        { id: '1', name: 'Anne', image: './../../../src/images/people/anne.png', allowComment: true },
-        { id: '2', name: 'Janet', image: './../../../src/images/people/janet.png' },
-        { id: '3', name: 'John', image: './../../../src/images/people/john.png' },
-        { id: '4', name: 'Laura', image: './../../../src/images/people/laura.png' }
+        { id: '0', name: 'Andrew', image: 'https://htmlelements.com/demos/images/people/andrew.png' },
+        { id: '1', name: 'Anne', image: 'https://htmlelements.com/demos/images/people/anne.png', allowComment: true },
+        { id: '2', name: 'Janet', image: 'https://htmlelements.com/demos/images/people/janet.png' },
+        { id: '3', name: 'John', image: 'https://htmlelements.com/demos/images/people/john.png' },
+        { id: '4', name: 'Laura', image: 'https://htmlelements.com/demos/images/people/laura.png' }
     ];
     columns: KanbanColumn[] = [
         { label: 'To do', dataField: 'toDo' },

@@ -84,10 +84,10 @@ export class AppComponent implements AfterViewInit, OnInit {
             text: 'Improve performance',
             status: 'inProgress',
             checklist: [
-                { text: './../../../src/images/card-demo-chart-1.png', completed: true },
-                { text: './../../../src/images/card-demo-chart-2.png', completed: false },
-                { text: './../../../src/images/card-demo-chart-3.png', completed: true },
-                { text: './../../../src/images/card-demo-chart-4.png', completed: true }
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-1.png', completed: true },
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-2.png', completed: false },
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-3.png', completed: true },
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-4.png', completed: true }
             ]
         });
     }

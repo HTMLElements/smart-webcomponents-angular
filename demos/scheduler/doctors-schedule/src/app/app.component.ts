@@ -232,19 +232,19 @@ export class AppComponent implements AfterViewInit, OnInit {
                     label: 'Andrew Johnson',
                     id: 1,
                     speciality: 'Anesthesiology',
-                    image: './../../../src/images/phonebook/andrew.png',
+                    image: 'https://htmlelements.com/demos/images/phonebook/andrew.png',
                     backgroundColor: '#28a745'
                 }, {
                     label: 'Steven Mcilroy',
                     id: 2,
                     speciality: 'Dermatology',
-                    image: './../../../src/images/phonebook/steven.png',
+                    image: 'https://htmlelements.com/demos/images/phonebook/steven.png',
                     backgroundColor: '#8f73af'
                 }, {
                     label: 'Michael Dawson',
                     id: 3,
                     speciality: 'Neurology',
-                    image: './../../../src/images/phonebook/michael.png',
+                    image: 'https://htmlelements.com/demos/images/phonebook/michael.png',
                     backgroundColor: '#BF8F00'
                 }
             ]

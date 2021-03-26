@@ -35,9 +35,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
         that.charts.dataSource = {
             title: 'Progress',
-            image1: '../../../images/card-demo-chart-1.png',
-            image2: '../../../images/card-demo-chart-2.png',
-            image3: '../../../images/card-demo-chart-3.png'
+            image1: 'https://htmlelements.com/demos/images/card-demo-chart-1.png',
+            image2: 'https://htmlelements.com/demos/images/card-demo-chart-2.png',
+            image3: 'https://htmlelements.com/demos/images/card-demo-chart-3.png'
         };
         that.charts.contentHandler = function (card) {
             const pager = card.querySelector('smart-pager'), slides = card.querySelectorAll('.slide');
@@ -55,13 +55,13 @@ export class AppComponent implements AfterViewInit, OnInit {
             title: 'Conversion',
             content: '537',
             percentage: '+22',
-            image: '../../../images/card-demo-chart-4.png'
+            image: 'https://htmlelements.com/demos/images/card-demo-chart-4.png'
         };
         that.impressions.dataSource = {
             title: 'Impressions',
             content: '123.4M',
             percentage: '+12.3',
-            image: '../../../images/card-demo-chart-5.png'
+            image: 'https://htmlelements.com/demos/images/card-demo-chart-5.png'
         };
         that.sales.dataSource = {
             title: 'Sales',

@@ -23,7 +23,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 	    
     
-        const basePath = '../../../images/', carousel = document.querySelector('smart-carousel');
+        const basePath = 'https://htmlelements.com/demos/images/', carousel = document.querySelector('smart-carousel');
         carousel.dataSource = generateDataSource(6);
         function generateDataSource(items) {
             const dataSource = Array(items).fill({});

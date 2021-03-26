@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         label.innerHTML = 'Project images';
                         const value = document.createElement('img');
                         value.style.width = '100px';
-                        value.src = `./../../../src/images/${row.data[key]}.jpg`;
+                        value.src = `https://htmlelements.com/demos/images/${row.data[key]}.jpg`;
                         element.appendChild(label);
                         element.appendChild(value);
                     }
@@ -82,7 +82,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         span.className = 'person-template';
                         const image = document.createElement('img');
                         const name = row.data[key].split(' ')[0].toLowerCase();
-                        image.src = `./../../../src/images/phonebook/${name}.png`;
+                        image.src = `https://htmlelements.com/demos/images/phonebook/${name}.png`;
                         const value = document.createElement('div');
                         value.innerHTML = row.data[key];
                         span.appendChild(image);
@@ -103,7 +103,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                             span.className = 'person-template';
                             const image = document.createElement('img');
                             const name = people[i].split(' ')[0].toLowerCase();
-                            image.src = `./../../../src/images/phonebook/${name}.png`;
+                            image.src = `https://htmlelements.com/demos/images/phonebook/${name}.png`;
                             const value = document.createElement('div');
                             value.innerHTML = people[i];
                             value.style.display = 'contents';
@@ -191,7 +191,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Project images', width: 200, dataField: 'projectImages', allowResize: true,
             template: function (formatObject: any) {
-                formatObject.template = `<img style="width: 75px;" src="./../../../src/images/${formatObject.value}.jpg">`;
+                formatObject.template = `<img style="width: 75px;" src="https://htmlelements.com/demos/images/${formatObject.value}.jpg">`;
             }
         },
         {

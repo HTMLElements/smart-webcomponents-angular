@@ -62,7 +62,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'First Name', dataField: 'FirstName', width: '25%',
             formatFunction(formatSettings) {
                 const firstName = formatSettings.value.split(' ')[0].toLowerCase();
-                formatSettings.template = '<div style="display: flex; align-items: center;"><img style="width: 24px; height: 24px; margin-right: 6px; border-radius: 50%;" class="logo" src="./../../../src/images/phonebook/' + firstName + '.png"/>' + formatSettings.value + '</div>';
+                formatSettings.template = '<div style="display: flex; align-items: center;"><img style="width: 24px; height: 24px; margin-right: 6px; border-radius: 50%;" class="logo" src="https://htmlelements.com/demos/images/phonebook/' + firstName + '.png"/>' + formatSettings.value + '</div>';
             }
         },
         { label: 'Last Name', dataField: 'LastName', width: '25%' },

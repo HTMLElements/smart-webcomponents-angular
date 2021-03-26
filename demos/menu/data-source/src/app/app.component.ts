@@ -60,7 +60,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 ]
             },
             {
-                label: '<img id="helpIcon" src="./../../../src/images/help-icon.png" title="Help" />'
+                label: '<img id="helpIcon" src="https://htmlelements.com/demos/images/help-icon.png" title="Help" />'
             },
             {
                 label: '<div class="planetIcon" title="Planet"></div>'

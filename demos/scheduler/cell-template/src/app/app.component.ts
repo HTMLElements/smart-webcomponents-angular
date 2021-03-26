@@ -184,7 +184,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         if (holiday) {
             cell.classList.add('custom-cell');
             cell.setAttribute('holiday-name', holiday.label);
-            cell.style.setProperty('--cell-icon', `url(./../../../src/images/icons/${holiday.icon}.svg)`);
+            cell.style.setProperty('--cell-icon', `url(https://htmlelements.com/demos/images/icons/${holiday.icon}.svg)`);
         }
         else {
             cell.removeAttribute('holiday-name');

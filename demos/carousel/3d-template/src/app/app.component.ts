@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-        const basePath = './../../../src/images/';
+        const basePath = 'https://htmlelements.com/demos/images/';
 
         this.carousel.dataSource = generateDataSource(6, 30, 250);
 

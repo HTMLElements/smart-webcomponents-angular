@@ -176,7 +176,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Commit', dataField: 'Photo', width: '5%', cellsVerticalAlign: 'middle', verticalAlign: 'middle', align: 'center', cellsAlign: 'center', allowHide: false, formatFunction(settings) {
                 if (settings.row.grid.isInitialized && settings.row.data && settings.row.data.author) {
-                    settings.template = '<img style="width: 32px" class="logo" src="./../../../src/images/phonebook/' + settings.row.data.author + '.png"/>';
+                    settings.template = '<img style="width: 32px" class="logo" src="https://htmlelements.com/demos/images/phonebook/' + settings.row.data.author + '.png"/>';
                 }
             }
         },

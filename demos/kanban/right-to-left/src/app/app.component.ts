@@ -203,11 +203,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     taskUserIcon = true;
     userList = true;
     users = [
-        { id: 0, name: 'אנדרו', image: './../../../src/images/people/andrew.png' },
-        { id: 1, name: 'אן', image: './../../../src/images/people/anne.png' },
-        { id: 2, name: 'חוה', image: './../../../src/images/people/janet.png' },
-        { id: 3, name: 'האנס', image: './../../../src/images/people/john.png' },
-        { id: 4, name: 'לורה', image: './../../../src/images/people/laura.png' }
+        { id: 0, name: 'אנדרו', image: 'https://htmlelements.com/demos/images/people/andrew.png' },
+        { id: 1, name: 'אן', image: 'https://htmlelements.com/demos/images/people/anne.png' },
+        { id: 2, name: 'חוה', image: 'https://htmlelements.com/demos/images/people/janet.png' },
+        { id: 3, name: 'האנס', image: 'https://htmlelements.com/demos/images/people/john.png' },
+        { id: 4, name: 'לורה', image: 'https://htmlelements.com/demos/images/people/laura.png' }
     ];
     columns = [
         { label: 'לעשות', dataField: 'toDo' },

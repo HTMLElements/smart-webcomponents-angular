@@ -29,7 +29,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.	    
         const that = this,
-            basePath = './../../../src/images/',
+            basePath = 'https://htmlelements.com/demos/images/',
             carousels = [that.carousel, that.carousel2, that.carousel3, that.carousel4, that.carousel5, that.carousel6];
 
         function generateDataSource(items: number) {
