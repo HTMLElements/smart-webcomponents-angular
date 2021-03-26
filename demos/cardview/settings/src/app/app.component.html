@@ -1,16 +1,16 @@
 <div class="options" style="position: absolute; right: 10px;">
-    <smart-check-box #collapsible id="collapsible" checked>Collapsible cards</smart-check-box>
+    <smart-check-box #collapsible id="collapsible" [checked]="true">Collapsible cards</smart-check-box>
     <smart-check-box #icons id="icons"
-    checked>Icons</smart-check-box>
+    [checked]="true">Icons</smart-check-box>
     <div>
         <p>Cell orientation:</p>
         <smart-radio-button #horizontal id="horizontal"
-        checked>horizontal</smart-radio-button>
+        [checked]="true">horizontal</smart-radio-button>
         <smart-radio-button #vertical id="vertical">vertical</smart-radio-button>
     </div>
     <div>
         <p>Cover mode:</p>
-        <smart-radio-button #crop id="crop" checked>crop</smart-radio-button>
+        <smart-radio-button #crop id="crop" [checked]="true">crop</smart-radio-button>
         <smart-radio-button #fit id="fit">fit</smart-radio-button>
     </div>
     <p>Title:</p>

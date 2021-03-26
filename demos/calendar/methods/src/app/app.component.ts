@@ -51,8 +51,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         });
         
         that.selectDate.addEventListener('click', function () {
-            that.calendar.select(that.dateInput.value);
-        });
+			if (that.dateInput.value) {
+				that.calendar.select(that.dateInput.value);
+			}
+		});
 
         that.disabled.addEventListener('click', function () {
             that.calendar.disabled = !that.calendar.disabled;

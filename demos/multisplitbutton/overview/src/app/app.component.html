@@ -92,7 +92,7 @@
                         </td>
                         <td>
                             <smart-multi-split-button #multisplitbutton6 buttons-data-source="['Get', 'Set']"
-                            drop-down-position="bottom" disabled>
+                            drop-down-position="bottom" [disabled]="true">
                                 <smart-list-item>Home</smart-list-item>
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
@@ -243,7 +243,7 @@
                         </div>
                         <div class="buttons">
                             <smart-button #button2 class="material flat">Cancel</smart-button>
-                            <smart-button #button3 class="material flat" disabled>Done</smart-button>
+                            <smart-button #button3 class="material flat" [disabled]="true">Done</smart-button>
                         </div>
                     </div>
                 </div>

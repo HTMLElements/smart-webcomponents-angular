@@ -6,9 +6,9 @@ value="Chip with image avatar"></smart-chip>
 value="Chip with close button" close-button></smart-chip>
 <smart-chip>Basic chip</smart-chip>
  <h1>Disabled</h1>
-<smart-chip #chip4 avatar="A" value="Chip with text avatar" disabled></smart-chip>
+<smart-chip #chip4 avatar="A" value="Chip with text avatar" [disabled]="true"></smart-chip>
 <smart-chip #chip5 avatar="../../images/phonebook/mark.jpeg"
-value="Chip with image avatar" disabled></smart-chip>
+value="Chip with image avatar" [disabled]="true"></smart-chip>
 <smart-chip #chip6 avatar="../../images/phonebook/margaret.png"
-value="Chip with close button" close-button disabled></smart-chip>
-<smart-chip #chip7 disabled>Basic chip</smart-chip>
+value="Chip with close button" close-button [disabled]="true"></smart-chip>
+<smart-chip #chip7 [disabled]="true">Basic chip</smart-chip>

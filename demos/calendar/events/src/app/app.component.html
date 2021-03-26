@@ -1,5 +1,5 @@
-<smart-calendar #calendar id="calendar"></smart-calendar>
-<div class="options">
-    <div class="caption">Events</div>
-    <div class="option" id="log"></div>
+<smart-calendar (change)="onChange($event)" #calendar id="calendar"></smart-calendar>
+<div>
+  <h3>Event Log:</h3>
+  {{eventLog}}
 </div>
