@@ -116,8 +116,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 switchWifi.checked = true;
                 settingsMenu.itemTemplate = 'itemTemplate';
                 const icons = document.getElementsByClassName('primaryAction');
-                settingsMenu.getElementsByClassName('secondaryAction')[0].appendChild(switchWifi);
-                settingsMenu.getElementsByClassName('secondaryAction')[1].appendChild(switchBluetooth);
+            
                 for (let i = 0; i < icons.length; i++) {
                     icons[i].children[0].textContent = iconLabels[i];
                 }
@@ -126,7 +125,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                     button = document.createElement('smart-button');
                     button.classList.add('material', 'flat');
                     button.innerHTML = '<i class="material-icons">&#xE0C9;</i>';
-                    people[i].getElementsByClassName('secondaryAction')[0].appendChild(button);
                 }
                 twoLineList.itemTemplate = 'multiLineTemplate';
                 let twoLineListItems = twoLineList.items, secondLineContent = [
@@ -149,7 +147,13 @@ export class AppComponent implements AfterViewInit, OnInit {
                     'Software Developer',
                 ];
                 for (let i = 0; i < twoLineListItems.length; i++) {
-                    twoLineListItems[i].getElementsByClassName('secondLine')[0].textContent = secondLineContent[i];
+                    const item = twoLineListItems[i].getElementsByClassName('secondLine')[0];
+                    
+                    if (!item) {
+                      continue;
+                    }
+
+                    item.textContent = secondLineContent[i];
                 }
                 twoLineCheckList.itemTemplate = 'multiLineTemplate';
                 let twoLineCheckListItems = twoLineCheckList.items;
@@ -173,7 +177,11 @@ export class AppComponent implements AfterViewInit, OnInit {
                     '1.7MB'
                 ];
                 for (let i = 0; i < twoLineCheckListItems.length; i++) {
-                    twoLineCheckListItems[i].getElementsByClassName('secondLine')[0].textContent = secondLineContent[i];
+                    const item =  twoLineCheckListItems[i].getElementsByClassName('secondLine')[0];
+
+                    if (item) {
+                      item.textContent = secondLineContent[i];
+                    }
                 }
                 twoLineCheckList.addEventListener('change', function () {
                     if (twoLineCheckList.selectedIndexes.length > 0) {
@@ -208,24 +216,26 @@ export class AppComponent implements AfterViewInit, OnInit {
                 switchVibration.checked = switchNotificationLight.checked = switchNotificationLightDark.checked = true;
                 listBoxLight.itemTemplate = 'multiLineTemplate';
                 // Light themed list box
-                listBoxLightSecondaryAction[2].innerHTML = '<i class="material-icons">&#xE050;</i>';
-                listBoxLightSecondaryAction[2].appendChild(mediaSlider);
-                listBoxLightSecondaryAction[3].innerHTML = '<i class="material-icons">&#xE855;</i>';
-                listBoxLightSecondaryAction[3].appendChild(alarmSlider);
-                listBoxLightSecondaryAction[4].innerHTML = '<i class="material-icons">&#xE7F4;</i>';
-                listBoxLightSecondaryAction[4].appendChild(ringSlider);
-                listBoxLightSecondaryAction[5].parentElement.classList.add('single-line');
-                listBoxLightSecondaryAction[5].appendChild(switchVibration);
-                listBoxLightSecondaryAction[8].parentElement.classList.add('single-line');
-                listBoxLightSecondaryAction[8].appendChild(switchRingtone);
-                listBoxLightSecondaryAction[11].parentElement.classList.add('single-line');
-                listBoxLightSecondaryAction[11].appendChild(switchNotificationLight);
-                listBoxLightSecondaryAction[14].parentElement.classList.add('single-line');
-                listBoxLightSecondaryAction[14].appendChild(switchNotificationsLockScreen);
-                //Additional text
-                listBoxLightSecondaryAction[7].textContent = 'Breeze';
-                listBoxLightSecondaryAction[9].textContent = 'Notification';
-                listBoxLightSecondaryAction[15].textContent = 'No apps can read notifications';
+                if (listBoxLightSecondaryAction[2]) {
+                  listBoxLightSecondaryAction[2].innerHTML = '<i class="material-icons">&#xE050;</i>';
+                  listBoxLightSecondaryAction[2].appendChild(mediaSlider);
+                  listBoxLightSecondaryAction[3].innerHTML = '<i class="material-icons">&#xE855;</i>';
+                  listBoxLightSecondaryAction[3].appendChild(alarmSlider);
+                  listBoxLightSecondaryAction[4].innerHTML = '<i class="material-icons">&#xE7F4;</i>';
+                  listBoxLightSecondaryAction[4].appendChild(ringSlider);
+                  listBoxLightSecondaryAction[5].parentElement.classList.add('single-line');
+                  listBoxLightSecondaryAction[5].appendChild(switchVibration);
+                  listBoxLightSecondaryAction[8].parentElement.classList.add('single-line');
+                  listBoxLightSecondaryAction[8].appendChild(switchRingtone);
+                  listBoxLightSecondaryAction[11].parentElement.classList.add('single-line');
+                  listBoxLightSecondaryAction[11].appendChild(switchNotificationLight);
+                  listBoxLightSecondaryAction[14].parentElement.classList.add('single-line');
+                  listBoxLightSecondaryAction[14].appendChild(switchNotificationsLockScreen);
+                  //Additional text
+                  listBoxLightSecondaryAction[7].textContent = 'Breeze';
+                  listBoxLightSecondaryAction[9].textContent = 'Notification';
+                  listBoxLightSecondaryAction[15].textContent = 'No apps can read notifications';
+                }
                 const sliderControl = function (event) {
                     const slider = event.target;
                     switch (slider) {

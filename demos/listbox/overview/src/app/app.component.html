@@ -176,7 +176,7 @@
                 <p>List tiles can also contain avatars.</p>
             </div>
             <div class="module">
-                <smart-list-box #listbox5 id="phoneBook" sorted>
+                <smart-list-box #listbox5 id="phoneBook" [sorted]="true">
                     <smart-list-item>Andrew Watson</smart-list-item>
                     <smart-list-item>Anne Kean</smart-list-item>
                     <smart-list-item>Avril Janin</smart-list-item>
@@ -199,8 +199,8 @@
                 <p>Alphabetical sorting makes information easier to find.</p>
             </div>
             <div class="module">
-                <smart-list-box #listbox6 id="settingsMenu" selection-mode="none" filterable
-                filter-input-placeholder="Searching ...">
+                <smart-list-box #listbox6 id="settingsMenu" [selectionMode]="'none'" [filterable]="true"
+                [filterInputPlaceholder]="'Searching ...'">
                     <smart-list-items-group label="Wireless & Networks">
                         <smart-list-item>Wi-Fi</smart-list-item>
                         <smart-list-item>Bluetooth</smart-list-item>
@@ -246,7 +246,7 @@
                  <h2>Demo usage</h2>
             </div>
             <div class="module">
-                <smart-list-box #listbox7 id="twoLineList" sorted>
+                <smart-list-box #listbox7 id="twoLineList" [sorted]="true">
                     <smart-list-item>Andrew Watson</smart-list-item>
                     <smart-list-item>Anne Kean</smart-list-item>
                     <smart-list-item>Avril Janin</smart-list-item>
@@ -269,7 +269,7 @@
                 <p>Example of a two-line list.</p>
             </div>
             <div class="module checkList">
-                <smart-list-box #listbox8 id="twoLineCheckList" sorted selection-mode="checkBox">
+                <smart-list-box #listbox8 id="twoLineCheckList" [sorted]="true" [selectionMode]="'checkBox'">
                     <smart-list-item>Alarms</smart-list-item>
                     <smart-list-item>Android</smart-list-item>
                     <smart-list-item>DCIM</smart-list-item>
@@ -297,13 +297,13 @@
         <section id="appearance">
              <h2>Appearance</h2>
             <div class="module">
-                <smart-list-box #listbox9 selection-mode="none" id="listBoxLight">
+                <smart-list-box #listbox9 [selectionMode]="'none'" id="listBoxLight">
                     <smart-list-items-group label="Sound">
                         <smart-list-item>Audio settings</smart-list-item>
                         <smart-list-item>Accessory settings</smart-list-item>
-                        <smart-list-item readonly>Media volume</smart-list-item>
-                        <smart-list-item readonly>Alarm volume</smart-list-item>
-                        <smart-list-item readonly>Ring volume</smart-list-item>
+                        <smart-list-item [readonly]="true">Media volume</smart-list-item>
+                        <smart-list-item [readonly]="true">Alarm volume</smart-list-item>
+                        <smart-list-item [readonly]="true">Ring volume</smart-list-item>
                         <smart-list-item>Also vibrate for calls</smart-list-item>
                         <smart-list-item>Do not disturb</smart-list-item>
                         <smart-list-item>Phone ringtone</smart-list-item>

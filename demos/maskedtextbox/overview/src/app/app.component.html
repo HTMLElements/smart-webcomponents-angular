@@ -15,25 +15,25 @@
             </div>
             <div class="module">
                 <div class="light-theme">
-                    <smart-masked-text-box #maskedtextbox hint="Idle & empty" mask="###-###-##-##"></smart-masked-text-box>
+                    <smart-masked-text-box #maskedtextbox hint="Idle & empty" [mask]="'###-###-##-##'"></smart-masked-text-box>
                     <br/>
                     <label>Idle & empty</label>
                     <br/>
                     <br/>
-                    <smart-masked-text-box #maskedtextbox2 hint="Press" mask="###-###-##-##"
-                    placeholder="Placeholder"></smart-masked-text-box>
+                    <smart-masked-text-box #maskedtextbox2 hint="Press" [mask]="'###-###-##-##'"
+                    ></smart-masked-text-box>
                     <br/>
                     <label>Placeholder</label>
                     <br/>
                     <br/>
-                    <smart-masked-text-box #maskedtextbox3 hint="Focus" mask="###-###-##-##"
-                    auto-show-mask></smart-masked-text-box>
+                    <smart-masked-text-box #maskedtextbox3 hint="Focus" [mask]="'###-###-##-##'"
+                    [autoShowMask]="true"></smart-masked-text-box>
                     <br/>
                     <label>Auto-show mask</label>
                     <br/>
                     <br/>
-                    <smart-masked-text-box #maskedtextbox4 hint="Disabled" mask="###-###-##-##"
-                    disabled></smart-masked-text-box>
+                    <smart-masked-text-box #maskedtextbox4 hint="Disabled" [mask]="'###-###-##-##'"
+                    [disabled]="true"></smart-masked-text-box>
                     <br/>
                     <label>Disabled</label>
                     <br/>
@@ -51,14 +51,14 @@
             </div>
             <div class="module">
                 <div class="light-theme">
-                    <smart-masked-text-box #maskedtextbox5 hint="" value="6503036565" mask="(###) ### - ####"></smart-masked-text-box>
+                    <smart-masked-text-box #maskedtextbox5 hint="" [value]="'6503036565'"[mask]="'(###) ### - ####'"></smart-masked-text-box>
                 </div>
                 <p>Input text grouped and formatted for a phone number</p>
             </div>
             <div class="module">
                 <div class="light-theme">
-                    <smart-masked-text-box #maskedtextbox6 hint="" value="4147968713856921"
-                    mask="#### - #### - #### - ####"></smart-masked-text-box>
+                    <smart-masked-text-box #maskedtextbox6 hint="" [value]="'4147968713856921'"
+                    [mask]="'#### - #### - #### - ####'"></smart-masked-text-box>
                 </div>
                 <p>Input text grouped and formatted for a credit card number</p>
             </div>

@@ -1,35 +1,28 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
-
+﻿import { Component, ViewChild, OnInit, AfterViewInit } from "@angular/core";
+import { ButtonComponent } from "@smart-webcomponents-angular/button";
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
+export class AppComponent implements AfterViewInit, OnInit {
+  @ViewChild("button", { read: ButtonComponent, static: false })
+  button: ButtonComponent;
+  log: string;
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+  clickMe() {
+    this.button.disabled = true;
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
-    }
-		
-	init(): void {
-		// init code.
-	    
-    function clickMe() {
-        const button = document.querySelector("smart-button");
-        button.disabled = true;
-        const attributeName = button.getAttribute("disabled");
-        document.getElementById("log").innerHTML = "Disabled: " + attributeName;
-    }
+    const hasAttribute = this.button.nativeElement.hasAttribute("disabled");
+    this.log = "Disabled: " + hasAttribute;
+  }
 
-	}	
+  ngOnInit(): void {
+    // onInit code.
+  }
+
+  ngAfterViewInit(): void {
+    // afterViewInit code.
+  }
 }

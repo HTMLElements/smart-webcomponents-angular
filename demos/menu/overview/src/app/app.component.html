@@ -67,24 +67,24 @@
                             <smart-menu-item>Explorer</smart-menu-item>
                             <smart-menu-item>cmd</smart-menu-item>
                         </smart-menu-items-group>
-                        <smart-menu-item shortcut="Ctrl+S" disabled>Save</smart-menu-item>
-                        <smart-menu-item shortcut="Ctrl+Alt+S" separator>Save As...</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+S" [disabled]="true">Save</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+Alt+S" [separator]="true">Save As...</smart-menu-item>
                         <smart-menu-item shortcut="Alt+F4">Exit</smart-menu-item>
                     </smart-menu-items-group>
                     <smart-menu-items-group>Edit
                         <smart-menu-item shortcut="Ctrl+Z">Undo</smart-menu-item>
-                        <smart-menu-item shortcut="Ctrl+Y" separator>Redo</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+Y" [separator]="true">Redo</smart-menu-item>
                         <smart-menu-item shortcut="Ctrl+X">Cut</smart-menu-item>
                         <smart-menu-item shortcut="Ctrl+C">Copy</smart-menu-item>
-                        <smart-menu-item shortcut="Ctrl+V" disabled>Paste</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+V" [disabled]="true">Paste</smart-menu-item>
                     </smart-menu-items-group>
-                    <smart-menu-items-group checkable check-mode="checkbox">View
-                        <smart-menu-item shortcut="Ctrl+W, S" checked>Solution Explorer</smart-menu-item>
+                    <smart-menu-items-group [checkable]="true" check-mode="checkbox">View
+                        <smart-menu-item shortcut="Ctrl+W, S" [checked]="true">Solution Explorer</smart-menu-item>
                         <smart-menu-item shortcut="Ctrl+\, Ctrl+M"
-                        checked>Team Explorer</smart-menu-item>
+                        [checked]="true">Team Explorer</smart-menu-item>
                         <smart-menu-item shortcut="Ctrl+W, L">Server Explorer</smart-menu-item>
                     </smart-menu-items-group>
-                    <smart-menu-items-group checkable check-mode="radioButton">Encoding
+                    <smart-menu-items-group [checkable]="true" check-mode="radioButton">Encoding
                         <smart-menu-item>Encode in ANSI</smart-menu-item>
                         <smart-menu-item>Encode in UTF-8</smart-menu-item>
                         <smart-menu-item>Encode in UTF-8-BOM</smart-menu-item>
@@ -129,10 +129,10 @@
                     <smart-menu-item label="<i class='material-icons'>&#xE417;</i> Preview"></smart-menu-item>
                     <smart-menu-item label="<i class='material-icons'>&#xE80D;</i> Share"></smart-menu-item>
                     <smart-menu-item label="<i class='material-icons'>&#xE157;</i> Get link"
-                    separator></smart-menu-item>
+                    [separator]="true"></smart-menu-item>
                     <smart-menu-item label="<i class='material-icons'>&#xE14D;</i> Make a copy"></smart-menu-item>
                     <smart-menu-item label="<i class='material-icons'>&#xE2C4;</i> Download"
-                    separator></smart-menu-item>
+                    [separator]="true"></smart-menu-item>
                     <smart-menu-item label="<i class='material-icons'>&#xE872;</i> Remove"></smart-menu-item>
                 </smart-menu>
             </div>
@@ -183,24 +183,24 @@
                             <smart-menu-item label="Explorer"></smart-menu-item>
                             <smart-menu-item label="cmd"></smart-menu-item>
                         </smart-menu-items-group>
-                        <smart-menu-item label="Save" shortcut="Ctrl+S" disabled></smart-menu-item>
+                        <smart-menu-item label="Save" shortcut="Ctrl+S" [disabled]="true"></smart-menu-item>
                         <smart-menu-item label="Save As..." shortcut="Ctrl+Alt+S"
-                        separator></smart-menu-item>
+                        [separator]="true"></smart-menu-item>
                         <smart-menu-item label="Exit" shortcut="Alt+F4"></smart-menu-item>
                     </smart-menu-items-group>
                     <smart-menu-items-group label="Edit">
                         <smart-menu-item label="Undo" shortcut="Ctrl+Z"></smart-menu-item>
-                        <smart-menu-item label="Redo" shortcut="Ctrl+Y" separator></smart-menu-item>
+                        <smart-menu-item label="Redo" shortcut="Ctrl+Y" [separator]="true"></smart-menu-item>
                         <smart-menu-item label="Cut" shortcut="Ctrl+X"></smart-menu-item>
                         <smart-menu-item label="Copy" shortcut="Ctrl+C"></smart-menu-item>
-                        <smart-menu-item label="Paste" shortcut="Ctrl+V" disabled></smart-menu-item>
+                        <smart-menu-item label="Paste" shortcut="Ctrl+V" [disabled]="true"></smart-menu-item>
                     </smart-menu-items-group>
                     <smart-menu-items-group label="Encoding">
                         <smart-menu-item label="Encode in ANSI"></smart-menu-item>
                         <smart-menu-item label="Encode in UTF-8"></smart-menu-item>
                         <smart-menu-item label="Encode in UTF-8-BOM"></smart-menu-item>
                         <smart-menu-item label="Encode in UTCS-2 BE BOM"></smart-menu-item>
-                        <smart-menu-item label="Encode in UTCS-2 LE BOM" separator></smart-menu-item>
+                        <smart-menu-item label="Encode in UTCS-2 LE BOM" [separator]="true"></smart-menu-item>
                         <smart-menu-items-group label="Character sets">
                             <smart-menu-items-group label="Cyrillic">
                                 <smart-menu-item label="ISO 8859-5"></smart-menu-item>
@@ -220,10 +220,10 @@
                             </smart-menu-items-group>
                         </smart-menu-items-group>
                     </smart-menu-items-group>
-                    <smart-menu-items-group label="Show" checkable check-mode="checkbox">
-                        <smart-menu-item label="Grid lines" checked></smart-menu-item>
+                    <smart-menu-items-group label="Show" [checkable]="true" check-mode="checkbox">
+                        <smart-menu-item label="Grid lines" [checked]="true"></smart-menu-item>
                         <smart-menu-item label="Page breaks"></smart-menu-item>
-                        <smart-menu-item label="Rules" checked></smart-menu-item>
+                        <smart-menu-item label="Rules" [checked]="true"></smart-menu-item>
                     </smart-menu-items-group>
                 </smart-menu>
             </div>
@@ -237,24 +237,24 @@
                     <smart-menu-items-group label="File">
                         <smart-menu-item label="New" shortcut="Ctrl+N"></smart-menu-item>
                         <smart-menu-item label="Open" shortcut="Ctrl+0"></smart-menu-item>
-                        <smart-menu-item label="Save" shortcut="Ctrl+S" disabled></smart-menu-item>
+                        <smart-menu-item label="Save" shortcut="Ctrl+S" [disabled]="true"></smart-menu-item>
                         <smart-menu-item label="Save As..." shortcut="Ctrl+Alt+S"
-                        separator></smart-menu-item>
+                        [separator]="true"></smart-menu-item>
                         <smart-menu-item label="Exit" shortcut="Alt+F4"></smart-menu-item>
                     </smart-menu-items-group>
                     <smart-menu-items-group label="Edit">
                         <smart-menu-item label="Undo" shortcut="Ctrl+Z"></smart-menu-item>
-                        <smart-menu-item label="Redo" shortcut="Ctrl+Y" separator></smart-menu-item>
+                        <smart-menu-item label="Redo" shortcut="Ctrl+Y" [separator]="true"></smart-menu-item>
                         <smart-menu-item label="Cut" shortcut="Ctrl+X"></smart-menu-item>
                         <smart-menu-item label="Copy" shortcut="Ctrl+C"></smart-menu-item>
-                        <smart-menu-item label="Paste" shortcut="Ctrl+V" disabled></smart-menu-item>
+                        <smart-menu-item label="Paste" shortcut="Ctrl+V" [disabled]="true"></smart-menu-item>
                     </smart-menu-items-group>
                     <smart-menu-items-group label="Encoding">
                         <smart-menu-item label="Encode in ANSI"></smart-menu-item>
                         <smart-menu-item label="Encode in UTF-8"></smart-menu-item>
                         <smart-menu-item label="Encode in UTF-8-BOM"></smart-menu-item>
                         <smart-menu-item label="Encode in UTCS-2 BE BOM"></smart-menu-item>
-                        <smart-menu-item label="Encode in UTCS-2 LE BOM" separator></smart-menu-item>
+                        <smart-menu-item label="Encode in UTCS-2 LE BOM" [separator]="true"></smart-menu-item>
                     </smart-menu-items-group>
                 </smart-menu>
             </div>
@@ -275,23 +275,23 @@
                             <smart-menu-item>Explorer</smart-menu-item>
                             <smart-menu-item>cmd</smart-menu-item>
                         </smart-menu-items-group>
-                        <smart-menu-item shortcut="Ctrl+S" disabled>Save</smart-menu-item>
-                        <smart-menu-item shortcut="Ctrl+Alt+S" separator>Save As...</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+S" [disabled]="true">Save</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+Alt+S" [separator]="true">Save As...</smart-menu-item>
                         <smart-menu-item shortcut="Alt+F4">Exit</smart-menu-item>
                     </smart-menu-items-group>
                     <smart-menu-items-group>Edit
                         <smart-menu-item shortcut="Ctrl+Z">Undo</smart-menu-item>
-                        <smart-menu-item shortcut="Ctrl+Y" separator>Redo</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+Y" [separator]="true">Redo</smart-menu-item>
                         <smart-menu-item shortcut="Ctrl+X">Cut</smart-menu-item>
                         <smart-menu-item shortcut="Ctrl+C">Copy</smart-menu-item>
-                        <smart-menu-item shortcut="Ctrl+V" disabled>Paste</smart-menu-item>
+                        <smart-menu-item shortcut="Ctrl+V" [disabled]="true">Paste</smart-menu-item>
                     </smart-menu-items-group>
                     <smart-menu-items-group>Encoding
                         <smart-menu-item>Encode in ANSI</smart-menu-item>
                         <smart-menu-item>Encode in UTF-8</smart-menu-item>
                         <smart-menu-item>Encode in UTF-8-BOM</smart-menu-item>
                         <smart-menu-item>Encode in UTCS-2 BE BOM</smart-menu-item>
-                        <smart-menu-item separator>Encode in UTCS-2 LE BOM</smart-menu-item>
+                        <smart-menu-item [separator]="true">Encode in UTCS-2 LE BOM</smart-menu-item>
                         <smart-menu-items-group>Character sets
                             <smart-menu-items-group>Cyrillic
                                 <smart-menu-item>ISO 8859-5</smart-menu-item>

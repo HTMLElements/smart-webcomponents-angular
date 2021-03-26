@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { ComboBoxModule } from '@smart-webcomponents-angular/combobox';
+import { ComboBoxModule } from "@smart-webcomponents-angular/combobox";
+import { ButtonModule } from "@smart-webcomponents-angular/button";
 
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
 
 @NgModule({
-    declarations: [ AppComponent ],
-    imports: [ BrowserModule, ComboBoxModule ],
-    bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+  declarations: [AppComponent],
+  imports: [BrowserModule, ButtonModule, ComboBoxModule],
+  bootstrap: [AppComponent],
+  entryComponents: [AppComponent]
 })
-
-export class AppModule { }
+export class AppModule {}

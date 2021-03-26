@@ -24,29 +24,30 @@
                     </smart-button>
                     <div id="textFields"> <span>Name</span>
                         <div class="group"> <span>Phone</span>
-                            <smart-drop-down-list #dropdownlist selected-indexes="[0]"
-                            drop-down-position="bottom" selection-mode="one" class="combos1 ">
+                            <smart-drop-down-list #dropdownlist [selectedIndexes]="[0]"
+                            [dropDownPosition]="'bottom'" [selectionMode]="'one'" class="combos1 ">
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Home</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
                             </smart-drop-down-list>
                         </div>
                         <div class="group"> <span>Email</span>
-                            <smart-drop-down-list #dropdownlist2 selected-indexes="[0]"
-                            drop-down-position="bottom" selection-mode="one" class="combos1 ">
+                            <smart-drop-down-list #dropdownlist2 [selectedIndexes]="[0]"
+                            [dropDownPosition]="'bottom'" [selectionMode]="'one'" class="combos1 ">
                                 <smart-list-item>Work</smart-list-item>
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Home</smart-list-item>
                             </smart-drop-down-list>
                         </div>
                         <div class="group"> <span>Address</span>
-                            <smart-drop-down-list #dropdownlist3 selected-indexes="[0]"
-                            drop-down-position="bottom" selection-mode="one" class="combos1">
+                            <smart-drop-down-list #dropdownlist3 [selectedIndexes]="[0]"
+                            [dropDownPosition]="'bottom'" [selectionMode]="'one'" class="combos1">
                                 <smart-list-item>Home</smart-list-item>
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
                             </smart-drop-down-list>
-                        </div> <span>Ringtone</span> <span>Add note</span>
+                        </div> <span>Ringtone</span>
+ <span>Add note</span>
                     </div>
                 </div>
                 <div class="module"></div>
@@ -57,7 +58,7 @@
                 button is pressed, the menu appears. Pressing an option on the menu navigates
                 to further settings for that option.</p>
             <br />
-            <smart-drop-down-list #dropdownlist4 selected-indexes="[0]" drop-down-position="bottom">
+            <smart-drop-down-list #dropdownlist4 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'">
                 <smart-list-item>Arial</smart-list-item>
                 <smart-list-item>Calibri</smart-list-item>
                 <smart-list-item>Courier</smart-list-item>
@@ -74,7 +75,7 @@
                             <p>Normal</p>
                         </td>
                         <td>
-                            <smart-drop-down-list #dropdownlist5 selected-indexes="[0]" drop-down-position="bottom">
+                            <smart-drop-down-list #dropdownlist5 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'">
                                 <smart-list-item>Home</smart-list-item>
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
@@ -85,11 +86,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <p>Disabled</p>
+                            <p>[disabled]="true"</p>
                         </td>
                         <td>
-                            <smart-drop-down-list #dropdownlist6 selected-indexes="[0]" drop-down-position="bottom"
-                            disabled>
+                            <smart-drop-down-list #dropdownlist6 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'"
+                            [disabled]="true">
                                 <smart-list-item>Home</smart-list-item>
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
@@ -113,7 +114,7 @@
                         <tr>
                             <td>Bottom</td>
                             <td>
-                                <smart-drop-down-list #dropdownlist7 selected-indexes="[0]" drop-down-position="bottom">
+                                <smart-drop-down-list #dropdownlist7 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'">
                                     <smart-list-item>Africa</smart-list-item>
                                     <smart-list-item>America</smart-list-item>
                                     <smart-list-item>Asia</smart-list-item>
@@ -124,7 +125,7 @@
                         <tr>
                             <td>Overlay-center</td>
                             <td>
-                                <smart-drop-down-list #dropdownlist8 selected-indexes="[0]" drop-down-position="overlay-center">
+                                <smart-drop-down-list #dropdownlist8 [selectedIndexes]="[0]" [dropDownPosition]="'overlay-center'">
                                     <smart-list-item>Yogurt</smart-list-item>
                                     <smart-list-item>Honey</smart-list-item>
                                     <smart-list-item>Strawberries</smart-list-item>
@@ -134,7 +135,7 @@
                         <tr>
                             <td>Top</td>
                             <td>
-                                <smart-drop-down-list #dropdownlist9 selected-indexes="[0]" drop-down-position="top">
+                                <smart-drop-down-list #dropdownlist9 [selectedIndexes]="[0]" [dropDownPosition]="'top'">
                                     <smart-list-item>Peanuts</smart-list-item>
                                     <smart-list-item>Hazelnuts</smart-list-item>
                                     <smart-list-item>Almonds</smart-list-item>
@@ -153,7 +154,7 @@
             </div>
             <div>One(Selection of single item)</div>
             <br/>
-            <smart-drop-down-list #dropdownlist10 selected-indexes="[0]" drop-down-position="bottom">
+            <smart-drop-down-list #dropdownlist10 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'">
                 <smart-list-item>State 1</smart-list-item>
                 <smart-list-item>State 2</smart-list-item>
                 <smart-list-item>State 3</smart-list-item>
@@ -161,8 +162,8 @@
             <br/>
             <div>oneOrManyExtended - allows selection with shift and ctrl.</div>
             <br/>
-            <smart-drop-down-list #dropdownlist11 selected-indexes="[0]" drop-down-position="bottom"
-            selection-mode="oneOrManyExtended">
+            <smart-drop-down-list #dropdownlist11 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'"
+            [selectionMode]="'oneOrManyExtended'">
                 <smart-list-item>State 1</smart-list-item>
                 <smart-list-item>State 2</smart-list-item>
                 <smart-list-item>State 3</smart-list-item>
@@ -170,8 +171,8 @@
             <br/>
             <div>checkBox</div>
             <br/>
-            <smart-drop-down-list #dropdownlist12 selected-indexes="[0]" drop-down-position="bottom"
-            selection-mode="checkBox">
+            <smart-drop-down-list #dropdownlist12 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'"
+            [selectionMode]="'checkBox'">
                 <smart-list-item>Item 1</smart-list-item>
                 <smart-list-item>Item 2</smart-list-item>
                 <smart-list-item>Item 3</smart-list-item>
@@ -179,8 +180,8 @@
             <br/>
             <div>radioButton</div>
             <br/>
-            <smart-drop-down-list #dropdownlist13 selected-indexes="[0]" drop-down-position="bottom"
-            selection-mode="radioButton">
+            <smart-drop-down-list #dropdownlist13 [selectedIndexes]="[0]" [dropDownPosition]="'bottom'"
+            [selectionMode]="'radioButton'">
                 <smart-list-item>Item 1</smart-list-item>
                 <smart-list-item>Item 2</smart-list-item>
                 <smart-list-item>Item 3</smart-list-item>
@@ -199,16 +200,18 @@
                 <div>
                      <h2>Edit shipping info</h2>
                     <div>
-                        <div class="name"> <i class="material-icons">&#xE7FD;</i> <span>John Williams</span>
+                        <div class="name"> <i class="material-icons">&#xE7FD;</i>
+ <span>John Williams</span>
                         </div>
                         <div class="address">
-                            <div> <i class="material-icons">&#xE55F;</i> <span>2000 Main Street</span> 
+                            <div> <i class="material-icons">&#xE55F;</i>
+ <span>2000 Main Street</span> 
                                 <br
                                 />
                             </div>
                             <div> <span>Hoboken</span>
-                                <smart-drop-down-list #dropdownlist14 selected-indexes="[0]"
-                                drop-down-position="overlay-center">
+                                <smart-drop-down-list #dropdownlist14 [selectedIndexes]="[0]"
+                                [dropDownPosition]="'overlay-center'">
                                     <smart-list-item>NJ</smart-list-item>
                                     <smart-list-item>DE</smart-list-item>
                                     <smart-list-item>FL</smart-list-item>
@@ -232,11 +235,12 @@
                                 </smart-drop-down-list> <span>94122</span>
                             </div>
                         </div>
-                        <div class="email"> <i class="material-icons">&#xE0BE;</i> <span>Email</span>
+                        <div class="email"> <i class="material-icons">&#xE0BE;</i>
+ <span>Email</span>
                         </div>
                         <div class="buttons">
                             <smart-button #button2 class="material flat">Cancel</smart-button>
-                            <smart-button #button3 class="material flat" disabled>Done</smart-button>
+                            <smart-button #button3 class="material flat" [disabled]="true">Done</smart-button>
                         </div>
                     </div>
                 </div>
@@ -246,8 +250,8 @@
             <div class="module welcome">
                 <div>
                      <h2>Welcome</h2>
-                    <smart-drop-down-list #dropdownlist15 selected-indexes="[0]" drop-down-position="overlay-center"
-                    selection-mode="zeroOrOne" placeholder="Select Language">
+                    <smart-drop-down-list #dropdownlist15 [selectedIndexes]="[0]" [dropDownPosition]="'overlay-center'"
+                    [selectionMode]="'zeroOrOne'" placeholder="Select Language">
                         <smart-list-item>English(US)</smart-list-item>
                         <smart-list-item>English(UK)</smart-list-item>
                         <smart-list-item>English(AU)</smart-list-item>

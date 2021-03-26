@@ -45,9 +45,9 @@
         <div class="module progress-bar-animations">
             <div>
                  <h3>Determinate</h3>
-                <smart-progress-bar #progressbar value="50" class="determinate"></smart-progress-bar>
+                <smart-progress-bar #progressbar [value]="50" class="determinate"></smart-progress-bar>
                  <h3>Indeterminate</h3>
-                <smart-progress-bar #progressbar2 indeterminate class=""></smart-progress-bar>
+                <smart-progress-bar #progressbar2 [indeterminate]="true" class=""></smart-progress-bar>
             </div>
             <p>Linear progress indicators Light Theme</p>
         </div>
@@ -59,13 +59,13 @@
             <div>
                 <p>Getting your files</p>
                 <smart-progress-bar #progressbar3 class="determinate"
-                indeterminate inverted></smart-progress-bar>
+                [indeterminate]="true" [inverted]="true"></smart-progress-bar>
             </div>
             <p>Loading content for the first time</p>
         </div>
         <div class="module page-loading-progress">
             <div>
-                <smart-progress-bar #progressbar4 indeterminate></smart-progress-bar>
+                <smart-progress-bar #progressbar4 [indeterminate]="true"></smart-progress-bar>
             </div>
             <p>Query indicator on a webpage</p>
         </div>
@@ -79,16 +79,16 @@
                  <h3>Determinate</h3>
                 <smart-circular-progress-bar class="determinate"></smart-circular-progress-bar>
                  <h3>Indeterminate</h3>
-                <smart-circular-progress-bar indeterminate></smart-circular-progress-bar>
+                <smart-circular-progress-bar [indeterminate]="true"></smart-circular-progress-bar>
             </div>
             <p>Circular progress indicators Light Theme</p>
         </div>
         <div class="module ">
             <div>
                  <h3>Determinate</h3>
-                <smart-circular-progress-bar value=50 class="determinate"></smart-circular-progress-bar>
+                <smart-circular-progress-bar [value]=50 class="determinate"></smart-circular-progress-bar>
                  <h3>Indeterminate</h3>
-                <smart-circular-progress-bar indeterminate></smart-circular-progress-bar>
+                <smart-circular-progress-bar [indeterminate]="true"></smart-circular-progress-bar>
             </div>
             <p>Circular progress indicators Dark Theme</p>
         </div>
@@ -107,7 +107,7 @@
         <div class="module page-refresh-progress">
             <div>
                 <smart-circular-progress-bar id="refreshing" class="smart-visibility-hidden"
-                indeterminate></smart-circular-progress-bar>
+                [indeterminate]="true"></smart-circular-progress-bar>
             </div>
             <p>A circular loader may be used to load something on hover.</p>
         </div>

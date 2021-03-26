@@ -22,13 +22,8 @@
   </style>
   <script>
     console.log('****************************************************************************************************************');
-	console.log('****************************************************************************************************************');
-	console.log('****************************************************************************************************************');
-	console.log('*jQWidgets License Key Not Found.');
 	console.log('*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
-	console.log('*if you want to hide this message, please send an email to: sales@jqwidgets.com for a license.');
-	console.log('****************************************************************************************************************');
-	console.log('****************************************************************************************************************');
+	console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
 	console.log('****************************************************************************************************************');
   </script>  
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,8 +37,35 @@
 
 <body>
 	<app-root>Loading...</app-root>
-	 <div style="position: absolute; bottom: 5px; right: 5px;">
+	 <div style="position: fixed; bottom: 5px; right: 5px;">
          <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/" title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png"/></a>
 	</div>
 </body>
 </html>
+<template id="headerTemplate">
+        <div class="calendar-header">
+            <div class="view-selection">
+                <smart-button id="month" class="primary">Month</smart-button>
+                <smart-button id="year">Year</smart-button>
+                <smart-button id="decade">Decade</smart-button>
+            </div>
+            <div class="year-selector">{{date}}</div>
+            <div class="navigation-buttons">
+                <smart-button id="previous" class="flat rounded">&#xe902;</smart-button>
+                <smart-button id="today" class="flat">Today</smart-button>
+                <smart-button id="next" class="flat rounded">&#xe903;</smart-button>
+            </div>
+        </div>
+    </template>
+    <template id="tooltipTemplate">
+        <div class="tooltip-content">
+            <smart-button class="event-window-button button-icon floating primary"></smart-button> <span>{{day}}</span>
+        </div>
+    </template>
+    <template id="windowFooterTemplate">
+        <div class="window-footer-buttons">
+            <smart-button id="buttonDelete">Delete</smart-button>
+            <smart-button id="buttonCancel">Cancel</smart-button>
+            <smart-button id="buttonSave">Save</smart-button>
+        </div>
+    </template>

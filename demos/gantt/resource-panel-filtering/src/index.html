@@ -22,21 +22,34 @@
   </style>
   <script>
     console.log('****************************************************************************************************************');
-	console.log('****************************************************************************************************************');
-	console.log('****************************************************************************************************************');
-	console.log('*jQWidgets License Key Not Found.');
 	console.log('*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
-	console.log('*if you want to hide this message, please send an email to: sales@jqwidgets.com for a license.');
-	console.log('****************************************************************************************************************');
-	console.log('****************************************************************************************************************');
+	console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
 	console.log('****************************************************************************************************************');
   </script>  
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<app-root>Loading...</app-root>
-	 <div style="position: absolute; bottom: 5px; right: 5px;">
+	 <div style="position: fixed; bottom: 5px; right: 5px;">
          <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/" title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png"/></a>
 	</div>
 </body>
 </html>
+<template id="headerTemplate">
+        <div class="custom-resource-panel-header">
+            <div class="treeHeader">
+                <label>Resources Type: </label>
+                <smart-drop-down-list id="resourceFilter" drop-down-append-to="body">
+                    <smart-list-item value="all" selected>All</smart-list-item>
+                    <smart-list-item value="investor">Investors</smart-list-item>
+                    <smart-list-item value="manager">Managers</smart-list-item>
+                    <smart-list-item value="worker">Workers</smart-list-item>
+                    <smart-list-item value="outsource">External Company</smart-list-item>
+                </smart-drop-down-list>
+            </div>
+            <div class="timelineHeader">
+                <smart-radio-button checked value="hours">Hours per week</smart-radio-button>
+                <smart-radio-button value="tasks">Tasks per week</smart-radio-button>
+            </div>
+        </div>
+    </template>
