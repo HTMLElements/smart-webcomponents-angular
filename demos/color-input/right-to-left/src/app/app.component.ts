@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ColorInputComponent } from 'smart-webcomponents-angular/colorinput';
+import { ColorInputComponent } from '@smart-webcomponents-angular/colorinput';
 
 
 @Component({
