@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+﻿import { Component, ViewEncapsulation, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
 export class Hero {
@@ -23,6 +23,7 @@ export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
+	encapsulation: ViewEncapsulation.None,
 	styleUrls: ['./app.component.css']
 })
 
