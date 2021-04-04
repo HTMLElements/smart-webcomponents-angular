@@ -43,7 +43,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				let k = 0;
 				for (let i = 0; i < firstNames.length; i++) {
 					let row = {};
-					row["Photo"] = `../../images/phonebook/${firstNames[k].toLowerCase()}.png`;
+					row["Photo"] = `https://htmlelements.com/demos/images/phonebook/${firstNames[k].toLowerCase()}.png`;
 					row["First Name"] = firstNames[k];
 					row["Last Name"] = lastNames[k];
 					row["Title"] = titles[k];

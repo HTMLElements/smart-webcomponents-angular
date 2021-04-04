@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 						controlType: 'group',
 						label: 'Photo',
 						controls: [{
-							template: '<div style=" overflow: hidden;"><img width="90" src="../../images/people/john.png"/></div>',
+							template: '<div style=" overflow: hidden;"><img width="90" src="https://htmlelements.com/demos/images/people/john.png"/></div>',
 							controlType: 'template'
 						}]
 					},

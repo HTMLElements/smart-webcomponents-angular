@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 					controls: [
 						{
 							label: 'Photo',
-							template: '<div style=" overflow: hidden;"><img src="../../images/phonebook/maya.png"/></div>',
+							template: '<div style=" overflow: hidden;"><img src="https://htmlelements.com/demos/images/phonebook/maya.png"/></div>',
 							controlType: 'template'
 						},
 						{
@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 							placeholder: 'Username',
 							cssClass: 'underlined',
 							prepend: '@',
-							append: '<img width=30 src="../../images/avatar.png"/>'
+							append: '<img width=30 src="https://htmlelements.com/demos/images/avatar.png"/>'
 						},
 						{
 							dataField: 'firstName',
@@ -65,7 +65,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 							placeholder: 'url',
 							cssClass: 'underlined',
 							prepend: 'https://example.com/users/',
-							append: '<img width=30 src="../../images/earth.png"/>'
+							append: '<img width=30 src="https://htmlelements.com/demos/images/earth.png"/>'
 						},
 						{
 							dataField: 'tax',
