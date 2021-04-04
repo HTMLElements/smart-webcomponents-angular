@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
-import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
-import { App } from '@smart-webcomponents-angular/source/smart.core';
+import { MultilineTextBoxComponent } from 'smart-webcomponents-angular/multilinetextbox';
+import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
+import { App } from 'smart-webcomponents-angular/source/smart.core';
 
 
 

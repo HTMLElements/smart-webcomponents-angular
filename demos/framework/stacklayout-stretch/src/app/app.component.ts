@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
-import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
+import { ButtonComponent } from 'smart-webcomponents-angular/button';
+import { CheckBoxComponent } from 'smart-webcomponents-angular/checkbox';
+import { RadioButtonComponent } from 'smart-webcomponents-angular/radiobutton';
 
 
 @Component({

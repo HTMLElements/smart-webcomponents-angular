@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
-import { App } from '@smart-webcomponents-angular/source/smart.core';
+import { CheckBoxComponent } from 'smart-webcomponents-angular/checkbox';
+import { App } from 'smart-webcomponents-angular/source/smart.core';
 
 
 @Component({

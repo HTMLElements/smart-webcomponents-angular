@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
-import { App } from '@smart-webcomponents-angular/source/smart.core';
+import { DropDownListComponent } from 'smart-webcomponents-angular/dropdownlist';
+import { App } from 'smart-webcomponents-angular/source/smart.core';
 
 
 @Component({

@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { Smart } from '@smart-webcomponents-angular/button';
+import { Smart } from 'smart-webcomponents-angular/button';
 
 Smart('smart-greeting', class SmartGreeting extends Smart.BaseElement {
     // Declare properties

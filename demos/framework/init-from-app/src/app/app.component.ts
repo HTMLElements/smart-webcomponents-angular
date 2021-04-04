@@ -1,10 +1,10 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
-import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
+import { GridComponent, GridColumn, DataAdapter, Smart } from 'smart-webcomponents-angular/grid';
+import { DropDownListComponent } from 'smart-webcomponents-angular/dropdownlist';
 import { GetData } from '../assets/data';
-import { App } from '@smart-webcomponents-angular/source/smart.core';
-import { smartGrid } from '@smart-webcomponents-angular/source/modules/smart.grid';
-import { smartDropDownList } from '@smart-webcomponents-angular/source/modules/smart.dropDownList';
+import { App } from 'smart-webcomponents-angular/source/smart.core';
+import { smartGrid } from 'smart-webcomponents-angular/source/modules/smart.grid';
+import { smartDropDownList } from 'smart-webcomponents-angular/source/modules/smart.dropDownList';
 
 
 @Component({

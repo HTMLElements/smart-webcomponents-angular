@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
-import { App } from '@smart-webcomponents-angular/source/smart.core';
+import { ButtonComponent } from 'smart-webcomponents-angular/button';
+import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
+import { App } from 'smart-webcomponents-angular/source/smart.core';
 
 
 @Component({
