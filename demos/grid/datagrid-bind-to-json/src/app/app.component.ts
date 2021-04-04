@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new Smart.DataAdapter({
-	dataSource: './assets/beverages.json',
+	dataSource: '../assets/beverages.json',
 		dataFields: [
 			{ name: 'name', dataType: 'string' },
 			{ name: 'type', dataType: 'string' },

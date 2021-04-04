@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new Smart.DataAdapter({
-	    dataSource: './assets/customers.xml',
+	    dataSource: '../assets/customers.xml',
 		root: 'entry',
 		record: 'content',
 		id: 'CustomerID',

@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new Smart.DataAdapter({
-		dataSource: './assets/employees.csv',
+		dataSource: '../assets/employees.csv',
 		dataFields: [
 			{ name: 'EmployeeKey', dataType: 'number' },
 			{ name: 'ParentEmployeeKey', dataType: 'number' },

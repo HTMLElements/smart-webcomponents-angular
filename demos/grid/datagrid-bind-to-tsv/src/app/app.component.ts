@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new Smart.DataAdapter({
-		dataSource: './assets/homeprices.tsv',
+		dataSource: '../assets/homeprices.tsv',
 		dataFields: [
 			{ name: 'Year', dataType: 'int' },
 			{ name: 'HPI', dataType: 'float' },
