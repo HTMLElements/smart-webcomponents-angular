@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { NumericTextBoxModule } from '@smart-webcomponents-angular/numerictextbox';
-import { ToggleButtonModule } from '@smart-webcomponents-angular/togglebutton';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [ AppComponent ],
-    imports: [ BrowserModule, NumericTextBoxModule, ToggleButtonModule ],
+    imports: [ BrowserModule, NumericTextBoxModule, ButtonModule ],
     bootstrap: [ AppComponent ],
 	entryComponents: [ AppComponent ]
 })

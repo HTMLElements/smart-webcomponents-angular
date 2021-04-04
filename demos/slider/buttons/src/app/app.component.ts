@@ -1,7 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { SliderComponent } from '@smart-webcomponents-angular/slider';
-import { ToggleButtonComponent } from '@smart-webcomponents-angular/togglebutton';
-
+import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 
 @Component({
     selector: 'app-root',

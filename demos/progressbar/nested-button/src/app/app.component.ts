@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { ToggleButtonComponent } from '@smart-webcomponents-angular/togglebutton';
+import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 import { CircularProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
 
 @Component({

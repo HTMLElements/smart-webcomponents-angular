@@ -2,7 +2,7 @@
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { NumericTextBoxComponent } from '@smart-webcomponents-angular/numerictextbox';
 import { SliderComponent } from '@smart-webcomponents-angular/slider';
-import { ToggleButtonComponent } from '@smart-webcomponents-angular/togglebutton';
+import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 
 
 @Component({
