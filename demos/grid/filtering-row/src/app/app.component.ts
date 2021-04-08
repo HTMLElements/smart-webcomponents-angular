@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		mode: 'one'
 	}
 	
-	filtering: {
+	filtering = {
 		enabled: true,
 		filterRow: {
 			visible: true

@@ -29,7 +29,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		mode: 'one'
 	}
 	
-	filtering: {
+	filtering = {
 		enabled: true,
 		filterMenu: {
 			mode: 'excel'

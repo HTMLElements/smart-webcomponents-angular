@@ -53,14 +53,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 	columns = [
 		{
 			label: '#', width: 200, dataField: 'id'
-		}
+		},
 		{
 			label: 'First Name', dataField: 'firstName'
-		}
-		{ label: 'Last Name', dataField: 'lastName' }
-		{ label: 'Product', dataField: 'productName' }
-		{ label: 'Quantity', dataField: 'quantity', align: 'right', cellsAlign: 'right', }
-		{ label: 'Unit Price', dataField: 'price', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' }
+		},
+		{ label: 'Last Name', dataField: 'lastName' },
+		{ label: 'Product', dataField: 'productName' },
+		{ label: 'Quantity', dataField: 'quantity', align: 'right', cellsAlign: 'right', },
+		{ label: 'Unit Price', dataField: 'price', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' },
 		{
 			label: 'Total', dataField: 'total', align: 'right', cellsAlign: 'right', cellsFormat: 'c2'
 		}

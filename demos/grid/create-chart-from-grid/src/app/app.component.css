@@ -49,49 +49,49 @@
         }
 
 #column {
-    background-image: url("../../images/create-column.png");
+    background-image: url("https://htmlelements.com/demos/images/create-column.png");
 }
 
 #line {
-    background-image: url("../../images/create-line.png");
+    background-image: url("https://htmlelements.com/demos/images/create-line.png");
 }
 
 #pie {
-    background-image: url("../../images/create-pie.png");
+    background-image: url("https://htmlelements.com/demos/images/create-pie.png");
 }
 
 #bar {
-    background-image: url("../../images/create-bar.png");
+    background-image: url("https://htmlelements.com/demos/images/create-bar.png");
 }
 
 #area {
-    background-image: url("../../images/create-area.png");
+    background-image: url("https://htmlelements.com/demos/images/create-area.png");
 }
 
 #scatter {
-    background-image: url("../../images/create-scatter.png");
+    background-image: url("https://htmlelements.com/demos/images/create-scatter.png");
 }
 
 [theme="dark"] #column {
-    background-image: url("../../images/create-column-dark.png");
+    background-image: url("https://htmlelements.com/demos/images/create-column-dark.png");
 }
 
 [theme="dark"] #line {
-    background-image: url("../../images/create-line-dark.png");
+    background-image: url("https://htmlelements.com/demos/images/create-line-dark.png");
 }
 
 [theme="dark"] #pie {
-    background-image: url("../../images/create-pie-dark.png");
+    background-image: url("https://htmlelements.com/demos/images/create-pie-dark.png");
 }
 
 [theme="dark"] #bar {
-    background-image: url("../../images/create-bar-dark.png");
+    background-image: url("https://htmlelements.com/demos/images/create-bar-dark.png");
 }
 
 [theme="dark"] #area {
-    background-image: url("../../images/create-area-dark.png");
+    background-image: url("https://htmlelements.com/demos/images/create-area-dark.png");
 }
 
 [theme="dark"] #scatter {
-    background-image: url("../../images/create-scatter-dark.png");
+    background-image: url("https://htmlelements.com/demos/images/create-scatter-dark.png");
 }
