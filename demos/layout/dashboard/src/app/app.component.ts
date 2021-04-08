@@ -154,7 +154,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const items = listbox.items as Array<ListItem>;
 
         for (let i = 0; i < listbox.dataSource.length; i++) {
-            items[i].querySelector('img').src = `../../images/people/${listbox.dataSource[i].image}.jpg`
+            items[i].querySelector('img').src = `https://htmlelements.com/demos/images/people/${listbox.dataSource[i].image}.jpg`
         }
     }
 
@@ -216,7 +216,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         document.querySelector('.dashboard-header .header-name').innerHTML = personData.name;
 
-        const imgSrc = `../../images/people/${personData.image}.jpg`;
+        const imgSrc = `https://htmlelements.com/demos/images/people/${personData.image}.jpg`;
 
         (document.querySelector('.icon-holder .header-logo') as HTMLImageElement).src = imgSrc;
 
@@ -269,7 +269,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const items = listbox.items;
 
-        (items[that.selectedPersonId] as ListItem).querySelector('img').src = `../../images/people/${that.data[that.selectedPersonId].image}.jpg`;
+        (items[that.selectedPersonId] as ListItem).querySelector('img').src = `https://htmlelements.com/demos/images/people/${that.data[that.selectedPersonId].image}.jpg`;
     }
 
     resetForm() {
@@ -279,7 +279,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.textbox.value = selectedPerson.name;
         that.datetimepicker.value = selectedPerson.date;
         that.textbox.value = selectedPerson.email;
-        (document.querySelector('#personInfo img') as HTMLImageElement).src = `../../images/people/${selectedPerson.image}.jpg`;
+        (document.querySelector('#personInfo img') as HTMLImageElement).src = `https://htmlelements.com/demos/images/people/${selectedPerson.image}.jpg`;
 
         if (selectedPerson.inpatient) {
             that.radiobutton.checked = true;
