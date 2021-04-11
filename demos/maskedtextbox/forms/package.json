@@ -22,9 +22,8 @@
 	"@smart-webcomponents-angular/dropdownlist": "9.2.22",
 	"@smart-webcomponents-angular/input": "9.2.22",
 	"@smart-webcomponents-angular/maskedtextbox": "9.2.22",
-	"@smart-webcomponents-angular/passwordtextbox": "9.2.22",
-	"@smart-webcomponents-angular/textbox": "9.2.22",
-	"@smart-webcomponents-angular/validator": "9.2.22",
+	"@smart-webcomponents-angular/passwordtextbox": "9.2.75",
+	"@smart-webcomponents-angular/textbox": "9.2.22"
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
