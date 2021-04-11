@@ -8,6 +8,6 @@ smart-menu {
 }
 
 .planetIcon {
-    background-image: url("./../../../src/images/earth.png");
+    background-image: url("https://htmlelements.com/demos/images/earth.png");
     background-position: center;
 }
