@@ -12,7 +12,7 @@ body {
     --smart-scheduler-event-border-radius: 2px;
     --smart-scheduler-timeline-weekend-color: transparent;
     --smart-background: transparent;
-    --smart-scheduler-view-background: url('./../../../src/images/cloud.png') no-repeat center/cover;
+    --smart-scheduler-view-background: url('https://htmlelements.com/demos/images/cloud.png') no-repeat center/cover;
     --smart-scheduler-view-horizontal-line-color: transparent;
     --smart-scheduler-view-vertical-line-color:  transparent;
 }
