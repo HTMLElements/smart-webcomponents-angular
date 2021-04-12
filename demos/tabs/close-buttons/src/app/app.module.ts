@@ -3,13 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ButtonModule } from '@smart-webcomponents-angular/button';
 import { TabsModule } from '@smart-webcomponents-angular/tabs';
-import { ToggleButtonModule } from '@smart-webcomponents-angular/togglebutton';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, ButtonModule, TabsModule, ToggleButtonModule],
+    imports: [BrowserModule, ButtonModule, TabsModule],
     bootstrap: [AppComponent],
     entryComponents: [AppComponent]
 })
