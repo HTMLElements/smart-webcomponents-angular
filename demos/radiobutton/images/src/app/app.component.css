@@ -6,7 +6,7 @@ smart-radio-button {
 }
 
 smart-radio-button.heart .smart-input {
-    background-image: url(./../../../src/images/check-mark-heart-empty.svg);
+    background-image: url(https://www.htmlelements.com/demos/images/check-mark-heart-empty.svg);
     background-repeat: no-repeat;
 	border-color: transparent;
 	background-color: transparent;	
@@ -22,12 +22,12 @@ smart-radio-button.heart .smart-overlay {
 } 
 
 smart-radio-button.heart[checked] .smart-input {
-    background-image: url(./../../../src/images/check-mark-heart.svg);
+    background-image: url(https://www.htmlelements.com/demos/images/check-mark-heart.svg);
     background-repeat: no-repeat;
 	color: var(--smart-error);
 }
 
 smart-radio-button.heart[checked="null"] .smart-input {
-    background-image: url(./../../../src/images/check-mark-heart-indetermined.svg);
+    background-image: url(https://www.htmlelements.com/demos/images/check-mark-heart-indetermined.svg);
     background-repeat: no-repeat;
 }

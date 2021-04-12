@@ -13,7 +13,15 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
     @ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder: QueryBuilderComponent;
     @ViewChild('linqValue', { read: ElementRef, static: false }) linqValue: QueryBuilderComponent;
-
+    items: string[] = [
+    'operatorObject["Michael"].Contains("employee") && (programName.StartsWith("SpaceX") && price < @minPrice && price < 100)',
+    '(partNumber = "PN-5478" && programName = "Voltage Test") && (startedWithin <="90.00:00:00" operator.Contains( "John" ))',
+    '>(productName.StartsWith("ABC"))',
+    '(price = "25" || id.Any(!it.Contains("Alpha"))) && productName.StartsWith("ABC") ||  productName.StartsWith("W")',
+    '(partNumber = "PN-5478") && (programName = "Voltage Test" && startedWithin <="90.00:00:00") &&  operator.Contains( "John" )',
+    '(asdasd) && price = "25" && sadasda'
+	];
+	
     ngOnInit(): void {
         // onInit code.
     }
