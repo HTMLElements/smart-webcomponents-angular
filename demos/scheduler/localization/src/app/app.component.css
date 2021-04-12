@@ -73,15 +73,15 @@ body {
 }
 
 .demo-header .person-a {
-    background-image: url(./../../../src/images/people/steven.png);
+    background-image: url(https://htmlelements.com/demos/images/people/steven.png);
 }
 
 .demo-header .person-b {
-    background-image: url(./../../../src/images/people/mark.png);
+    background-image: url(https://htmlelements.com/demos/images/people/mark.png);
 }
 
 .demo-header .person-c {
-    background-image: url(./../../../src/images/people/janet.png);
+    background-image: url(https://htmlelements.com/demos/images/people/janet.png);
 }
 
 @media (max-width: 750px) {
