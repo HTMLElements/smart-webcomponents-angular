@@ -143,7 +143,7 @@
         }
 
         .smart-demo-container .raised-demo-start {
-            background-image: url(../images/raised-button-demo.png);
+            background-image: url(https://htmlelements.com/demos/images/raised-button-demo.png);
         }
 
         .module-wide {
@@ -185,7 +185,7 @@
         #requiredExample{
             height:660px; 
             padding:0px; 
-            background-image:url('../images/required-example.png'); 
+            background-image:url('https://htmlelements.com/demos/images//required-example.png'); 
             background-repeat: no-repeat; 
             background-size: 100% auto;
         }
@@ -222,7 +222,7 @@
         #optionalExample{
             height:660px; 
             padding:0px;
-            background-image:url('../images/optional-example.png'); 
+            background-image:url('https://htmlelements.com/demos/images//optional-example.png'); 
             background-repeat: no-repeat; 
             background-size: 100% auto;
         }
@@ -259,7 +259,7 @@
         #singleFieldDemo2{
             height:660px; 
             padding:0px;
-            background-image:url('../images/single1.png'); 
+            background-image:url('https://htmlelements.com/demos/images//single1.png'); 
             background-repeat: no-repeat; 
             background-size: 100% auto;
         }
@@ -276,7 +276,7 @@
         }
 
         #singleFieldDemo2{
-            background-image:url('../images/single2.png'); 
+            background-image:url('https://htmlelements.com/demos/images//single2.png'); 
         }
 
         #singleFieldDemo2 smart-text-box{
@@ -322,13 +322,13 @@
             position:relative;
             height:660px; 
             padding:0px;
-            background-image:url('../images/multi2.png'); 
+            background-image:url('https://htmlelements.com/demos/images//multi2.png'); 
             background-repeat: no-repeat; 
             background-size: 100% auto;
         }
 
         #multiLineFieldDemo2{
-            background-image:url('../images/multi1.png'); 
+            background-image:url('https://htmlelements.com/demos/images//multi1.png'); 
         }
 
         #multiLineFieldDemo1 smart-multiline-text-box.material,
@@ -349,13 +349,13 @@
             position:relative;
             height:660px; 
             padding:0px;
-            background-image:url('../images/area1.png'); 
+            background-image:url('https://htmlelements.com/demos/images//area1.png'); 
             background-repeat: no-repeat; 
             background-size: 100% auto;
         }
 
         #textAreaDemo2{
-            background-image:url('../images/area2.png'); 
+            background-image:url('https://htmlelements.com/demos/images//area2.png'); 
         }
 
         #textareaMessage1,
