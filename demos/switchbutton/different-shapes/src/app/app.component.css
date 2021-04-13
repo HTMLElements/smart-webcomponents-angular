@@ -69,14 +69,14 @@ smart-switch-button.circle-theme {
     }
 
     smart-switch-button.heart-theme .smart-thumb {
-        background: url('./../../../src/images/switch-mark-heart-gray.svg') no-repeat center center;
+        background: url('https://htmlelements.com/demos/images/switch-mark-heart-gray.svg') no-repeat center center;
         background-color: transparent !important;
         border-radius: 0;
         background-size: 70% 70%;
     }
 
     smart-switch-button.heart-theme[checked] .smart-thumb {
-        background: url('./../../../src/images/switch-mark-heart-red.svg') no-repeat center center;
+        background: url('https://htmlelements.com/demos/images/switch-mark-heart-red.svg') no-repeat center center;
         background-color: transparent !important;
         border-radius: 0;
         background-size: 70% 70%;
