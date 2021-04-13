@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
 import { GetData } from '../assets/data';
-import { Utilities } from '@smart-webcomponents-angular/source/modules/smart.element';
+import { Utilities } from 'smart-webcomponents-angular/source/modules/smart.element';
 
 @Component({
 	selector: 'app-root',

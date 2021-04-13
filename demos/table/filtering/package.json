@@ -19,6 +19,7 @@
     "core-js": "3.9.1",
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/table": "9.2.22",
+	"smart-webcomponents-angular": "9.1.67",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
