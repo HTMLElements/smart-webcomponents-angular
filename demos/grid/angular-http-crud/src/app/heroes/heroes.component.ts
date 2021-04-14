@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation } from '
 import { Hero } from './hero';
 import { HeroesService } from './heroes.service';
 
-import { GridComponent, Smart, DataAdapter } from 'smart-webcomponents-angular/grid';
+import { GridComponent, Smart, DataAdapter } from '@smart-webcomponents-angular/grid';
 
 @Component({
   selector: 'app-heroes',
