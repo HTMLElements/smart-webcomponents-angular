@@ -26,7 +26,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             'GDP_Services: number',
             'GDP_Total: number'
         ]
-    }),
+    })
+	
     columns = [
         'Country',
         'Area',
