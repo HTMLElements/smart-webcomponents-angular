@@ -1,63 +1,23 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
+import { Component }       from '@angular/core';
 
+import { QuestionService } from './question.service';
+import { QuestionBase }    from './question-base';
+import { Observable }      from 'rxjs';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  template: `
+    <div>
+      <h2>Job Application for Heroes</h2>
+      <app-dynamic-form [questions]="questions$ | async"></app-dynamic-form>
+    </div>
+  `,
+  providers:  [QuestionService]
 })
+export class AppComponent {
+  questions$: Observable<QuestionBase<any>[]>;
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
-
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
-    }
-		
-	init(): void {
-		// init code.
-	    
-    
-        this.dropdownlist.dataSource =
-            [
-                "Affogato",
-                "Americano",
-                "Bicerin",
-                "Breve",
-                "Café Bombón",
-                "Café au lait",
-                "Caffé Corretto",
-                "Café Crema",
-                "Caffé Latte",
-                "Caffé macchiato",
-                "Café mélange",
-                "Coffee milk",
-                "Cafe mocha",
-                "Cappuccino",
-                "Carajillo",
-                "Cortado",
-                "Cuban espresso",
-                "Espresso",
-                "Eiskaffee",
-                "The Flat White",
-                "Frappuccino",
-                "Galao",
-                "Greek frappé coffee",
-                "Alabala",
-                "Indian filter coffee",
-                "Instant coffee",
-                "Irish coffee",
-                "Liqueur coffee"
-            ];
-    
-
-	}	
+  constructor(service: QuestionService) {
+    this.questions$ = service.getQuestions();
+  }
 }
