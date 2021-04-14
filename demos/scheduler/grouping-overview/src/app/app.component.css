@@ -96,15 +96,15 @@ body {
 }
 
 .smart-scheduler [clientId="1"] .resource-content .avatar::before {
-    background-image: url('../../images/people/andrew.png');
+    background-image: url('https://htmlelements.com/demos/images/people/andrew.png');
 }
 
 .smart-scheduler [clientId="2"] .resource-content .avatar::before {
-    background-image: url('../../images/people/nancy.png');
+    background-image: url('https://htmlelements.com/demos/images/people/nancy.png');
 }
 
 .smart-scheduler [clientId="3"] .resource-content .avatar::before {
-    background-image: url('../../images/people/anne.png');
+    background-image: url('https://htmlelements.com/demos/images/people/anne.png');
 }
 
 .smart-scheduler .resource-content>div,

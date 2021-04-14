@@ -19,7 +19,7 @@
     "core-js": "3.9.1",
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "9.2.22",
-	"@smart-webcomponents-angular/colorinput": "9.2.75",
+	"@smart-webcomponents-angular/colorinput": "9.2.22",
 	"@smart-webcomponents-angular/input": "9.2.22",
 	"@smart-webcomponents-angular/switchbutton": "9.2.22",
 	"@smart-webcomponents-angular/scheduler": "9.2.22",

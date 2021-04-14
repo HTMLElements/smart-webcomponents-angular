@@ -313,8 +313,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     views: string[] = ['day', 'week', 'month'];
 
-    timeZones: object | string[] = [{ id: 'America/Chicago', label: 'US/Chicago' }, 'UTC'];
+	timeZones: object | string[] = [{ id: 'Pacific SA Standard Time', label: '(UTC-04:00) Santiago' }, 'UTC'];
 
+   
     ngOnInit(): void {
         // onInit code.
     }
