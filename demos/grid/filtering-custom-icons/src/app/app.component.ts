@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		sortMode: 'one'
 	}
 	
-	filtering: {
+	filtering = {
 		enabled: true,
 		filter: [
 			['firstName', 'contains Andrew or contains Nancy'],
