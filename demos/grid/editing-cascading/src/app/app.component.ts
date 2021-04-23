@@ -38,7 +38,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	columns = [
 		{
 			label: 'Country', dataField: 'Country', editor: {
-				template: '<jqx-drop-down-list></jqx-drop-down-list>',
+				template: '<smart-drop-down-list></smart-drop-down-list>',
 				onInit: (row: number, column: string, editor: HTMLElement) => {
 					const that = this,
 						dropDownList = (editor.firstElementChild as DropDownList);
@@ -61,7 +61,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		},
 		{
 			label: 'City', dataField: 'City', editor: {
-				template: '<jqx-drop-down-list></jqx-drop-down-list>',
+				template: '<smart-drop-down-list></smart-drop-down-list>',
 				onInit(row: number, column: string, editor: HTMLElement) {
 					const dropDownList = (editor.firstElementChild as DropDownList);
 
