@@ -13,8 +13,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
 
     dataSource = new Smart.DataAdapter({
-        dataSource: '../assets/data.xlsx',
-        async: false,
+        dataSource: "https://raw.githubusercontent.com/HTMLElements/smart-webcomponents/master/common/data.xlsx", 
         dataFields: [
             'id: number',
             'firstName: string',
