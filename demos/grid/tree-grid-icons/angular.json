@@ -27,7 +27,8 @@
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
 				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.common.css",
                 "src/assets/fonts.css",
-			    "src/assets/styles.css"
+			    "src/assets/styles.css",
+				"src/assets/fontawesome.min.css"
             ],
             "scripts": []
             },

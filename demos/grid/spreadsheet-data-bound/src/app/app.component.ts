@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         enabled: true
     }
 
-    layout: {
+    layout = {
         rowHeight: 40
     }
 
