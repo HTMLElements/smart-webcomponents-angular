@@ -109,21 +109,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 	}
 
-	onCommand = function (args) {
+	onCommand = (args) => {
 		if (args.name === 'commandColumnRowMenuCommand') {
 			const row = args.details;
 			const menu = this.menu;
 			args.event.preventDefault();
-			menu.setAttribute('data-row-id', row.id);
-			const cell = row.getCell('Notification');
-			if (cell.value) {
-				menu.items[0].disabled = true;
-				menu.items[1].disabled = false;
-			}
-			else {
-				menu.items[0].disabled = false;
-				menu.items[1].disabled = true;
-			}
+			
 			menu.open(args.event.pageX - 150, args.event.pageY + 20);
 			args.handled = true;
 		}
