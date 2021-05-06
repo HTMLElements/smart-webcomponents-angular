@@ -295,7 +295,7 @@
 	height: 700px;
 	background-color: #EEEEEE;
 	text-align: center;
-	background-image: url(../../images/flat-button-demo.png);
+	background-image: url(https://htmlelements.com/demos/images/flat-button-demo.png);
 	background-size: cover;
 	background-position: center;
 }
@@ -316,7 +316,7 @@
 		}
 
 .smart-demo-container #button-flat-demo .flat-demo2 {
-	background-image: url(../../images/flat-button-demo2.png);
+	background-image: url(https://htmlelements.com/demos/images/flat-button-demo2.png);
 }
 
 	.smart-demo-container #button-flat-demo .flat-demo2 smart-button {
@@ -344,7 +344,7 @@
 	height: 700px;
 	background-color: #EEEEEE;
 	text-align: center;
-	background-image: url(../../images/raised-button-demo.png);
+	background-image: url(https://htmlelements.com/demos/images/raised-button-demo.png);
 	background-size: cover;
 	background-position: center;
 }
@@ -370,7 +370,7 @@
 		}
 
 .smart-demo-container #button-raised-demo .raised-demo2 {
-	background-image: url(../../images/raised-button-demo2.png);
+	background-image: url(https://htmlelements.com/demos/images/raised-button-demo2.png);
 }
 
 	.smart-demo-container #button-raised-demo .raised-demo2 smart-button {
@@ -394,7 +394,7 @@
 		}
 
 .smart-demo-container #button-floating-demo .floating-action-area {
-	background-image: url(../../images/Album.png);
+	background-image: url(https://htmlelements.com/demos/images/Album.png);
 }
 
 	.smart-demo-container #button-floating-demo .floating-action-area div h2 {
@@ -470,7 +470,7 @@
 }
 
 .smart-demo-container .floating-demo-start {
-	background-image: url(../../images/floating-demo-start.png);
+	background-image: url(https://htmlelements.com/demos/images/floating-demo-start.png);
 }
 
 	.smart-demo-container .floating-demo-start smart-button {
@@ -483,11 +483,11 @@
 
 
 .smart-demo-container .raised-demo-start {
-	background-image: url(../../images/raised-button-demo.png);
+	background-image: url(https://htmlelements.com/demos/images/raised-button-demo.png);
 }
 
 .smart-demo-container .flat-demo-start {
-	background-image: url(../../images/flat-demo-start.png);
+	background-image: url(https://htmlelements.com/demos/images/flat-demo-start.png);
 }
 
 	.smart-demo-container .flat-demo-start smart-button {
