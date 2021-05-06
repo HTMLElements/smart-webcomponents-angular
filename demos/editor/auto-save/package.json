@@ -20,7 +20,7 @@
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "9.3.43",
 	"@smart-webcomponents-angular/checkbox": "9.3.43",
-	"@smart-webcomponents-angular/editor": "9.3.43",
+	"@smart-webcomponents-angular/editor": "9.3.45",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
