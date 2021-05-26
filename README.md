@@ -1,6 +1,6 @@
 ﻿# [Smart Angular Modules](https://www.htmlelements.com/docs/angular-cli/)
 
-[![Price](https://img.shields.io/badge/price-COMMERCIAL-0098f7.svg)](https://jqwidgets.com/license/) [![Build Status](https://www.travis-ci.com/HTMLElements/Team.svg?token=4VSAagStBB3xmHF2Epxz&branch=master)](https://www.travis-ci.com/HTMLElements/Team)
+[![Price](https://img.shields.io/badge/price-COMMERCIAL-0098f7.svg)](https://jqwidgets.com/license/)
 
 You can view them online here: https://www.htmlelements.com/demos/.
 
