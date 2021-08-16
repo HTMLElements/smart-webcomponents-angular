@@ -1,176 +1,153 @@
 "use strict";
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.addTypographyClass = exports.addThemeToAppStyles = void 0;
 const core_1 = require("@angular-devkit/core");
 const schematics_1 = require("@angular-devkit/schematics");
 const schematics_2 = require("@angular/cdk/schematics");
 const change_1 = require("@schematics/angular/utility/change");
-const config_1 = require("@schematics/angular/utility/config");
+const workspace_1 = require("@schematics/angular/utility/workspace");
 const path_1 = require("path");
-const parse5_1 = require("../parse5");
 const create_custom_theme_1 = require("./create-custom-theme");
 /** Path segment that can be found in paths that refer to a prebuilt theme. */
 let prebuiltThemePathSegment = 'smart-webcomponents-angular/source/styles';
 /** Default file name of the custom theme that can be generated. */
-const defaultCustomThemeFilename = 'custom-theme.css';
+const defaultCustomThemeFilename = 'custom-theme.scss';
 /** Add pre-built styles to the main project style file. */
 function addThemeToAppStyles(options) {
-    return function (host, context) {
-        const workspace = config_1.getWorkspace(host);
-        const project = schematics_2.getProjectFromWorkspace(workspace, options.project);
+    return (host, context) => {
         const themeName = options.theme || 'default';
-        const projectIndexFiles = typeof schematics_2.getProjectIndexFiles === 'function' ? schematics_2.getProjectIndexFiles(project) : null;
-        if (projectIndexFiles && !projectIndexFiles.length) {
-            throw new schematics_1.SchematicsException('No project index HTML file could be found.');
-        }
-        if (themeName !== 'default') {
-            insertPrebuiltTheme(project, host, "smart.default", workspace, context.logger);
-            console.log('Adds default theme');
-            if (projectIndexFiles) {
-                projectIndexFiles.forEach(path => addThemeAttribute(host, path, themeName));
-            }
-            prebuiltThemePathSegment += "/" + themeName;
-        }
-        if (themeName === 'custom') {
-            insertCustomTheme(project, options.project, host, workspace, context.logger);
-            console.log('Adds custom theme');
-            if (projectIndexFiles) {
-                projectIndexFiles.forEach(path => addThemeAttribute(host, path, 'custom'));
-            }
-        }
-        else {
-            insertPrebuiltTheme(project, host, 'smart.' + themeName, workspace, context.logger);
-            console.log('Adds ' + themeName + ' theme');
-        }
-        return host;
+				
+        return themeName === 'custom' ?
+            insertCustomTheme(options.project, host, context.logger) :
+            insertPrebuiltTheme(options.project, 'smart.' + themeName, context.logger);
     };
 }
 exports.addThemeToAppStyles = addThemeToAppStyles;
-function getElementByTagName(tagName, htmlContent) {
-    const document = parse5_1.parse(htmlContent, { sourceCodeLocationInfo: true });
-    const nodeQueue = [...document.childNodes];
-    while (nodeQueue.length) {
-        const node = nodeQueue.shift();
-        if (node.nodeName.toLowerCase() === tagName) {
-            return node;
-        }
-        else if (node.childNodes) {
-            nodeQueue.push(...node.childNodes);
-        }
-    }
-    return null;
-}
-function addThemeAttribute(host, htmlFilePath, themeName) {
-    const htmlFileBuffer = host.read(htmlFilePath);
-    if (!htmlFileBuffer) {
-        throw new Error(`Could not read file for path: ${htmlFilePath}`);
-    }
-    const htmlContent = htmlFileBuffer.toString();
-    const body = getElementByTagName('body', htmlContent);
-    if (!body) {
-        throw Error(`Could not find <body> element in HTML file: ${htmlFileBuffer}`);
-    }
-    const themeAttribute = body.attrs.find(attribute => attribute.name === 'theme');
-    if (themeAttribute) {
-        delete body.attrs["theme"];
-        const recordedChange = host
-            .beginUpdate(htmlFilePath)
-            .insertRight(body.sourceCodeLocation.startTag.endOffset - 1, ` theme="${themeName}"`);
-        host.commitUpdate(recordedChange);
-    }
-    else {
-        const recordedChange = host
-            .beginUpdate(htmlFilePath)
-            .insertRight(body.sourceCodeLocation.startTag.endOffset - 1, ` theme="${themeName}"`);
-        host.commitUpdate(recordedChange);
-    }
-}
 /** Adds the global typography class to the body element. */
 function addTypographyClass(options) {
-    return function (host) {
-        const workspace = config_1.getWorkspace(host);
+    return (host) => __awaiter(this, void 0, void 0, function* () {
+        const workspace = yield workspace_1.getWorkspace(host);
         const project = schematics_2.getProjectFromWorkspace(workspace, options.project);
         const projectIndexFiles = schematics_2.getProjectIndexFiles(project);
         if (!projectIndexFiles.length) {
             throw new schematics_1.SchematicsException('No project index HTML file could be found.');
         }
         if (options.typography) {
-            projectIndexFiles.forEach(path => schematics_2.addBodyClass(host, path, 'smart-typography'));
+            projectIndexFiles.forEach(path => schematics_2.addBodyClass(host, path, 'mat-typography'));
         }
-        return host;
-    };
+    });
 }
 exports.addTypographyClass = addTypographyClass;
 /**
  * Insert a custom theme to project style file. If no valid style file could be found, a new
  * Scss file for the custom theme will be created.
  */
-function insertCustomTheme(project, projectName, host, workspace, logger) {
-    const stylesPath = schematics_2.getProjectStyleFile(project, 'css');
-    const themeContent = create_custom_theme_1.createCustomTheme(projectName);
-    if (!stylesPath) {
-        if (!project.sourceRoot) {
-            throw new schematics_1.SchematicsException(`Could not find source root for project: "${projectName}". ` +
-                `Please make sure that the "sourceRoot" property is set in the workspace config.`);
-        }
-        // Normalize the path through the devkit utilities because we want to avoid having
-        // unnecessary path segments and windows backslash delimiters.
-        const customThemePath = core_1.normalize(path_1.join(project.sourceRoot, defaultCustomThemeFilename));
-        if (host.exists(customThemePath)) {
-            logger.warn(`Cannot create a custom Angular Smart Material theme because
+function insertCustomTheme(projectName, host, logger) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const workspace = yield workspace_1.getWorkspace(host);
+        const project = schematics_2.getProjectFromWorkspace(workspace, projectName);
+        const stylesPath = schematics_2.getProjectStyleFile(project, 'scss');
+        const themeContent = create_custom_theme_1.createCustomTheme(projectName);
+        if (!stylesPath) {
+            if (!project.sourceRoot) {
+                throw new schematics_1.SchematicsException(`Could not find source root for project: "${projectName}". ` +
+                    `Please make sure that the "sourceRoot" property is set in the workspace config.`);
+            }
+            // Normalize the path through the devkit utilities because we want to avoid having
+            // unnecessary path segments and windows backslash delimiters.
+            const customThemePath = core_1.normalize(path_1.join(project.sourceRoot, defaultCustomThemeFilename));
+            if (host.exists(customThemePath)) {
+                logger.warn(`Cannot create a custom Angular Material theme because
           ${customThemePath} already exists. Skipping custom theme generation.`);
-            return;
+                return schematics_1.noop();
+            }
+            host.create(customThemePath, themeContent);
+            return addThemeStyleToTarget(projectName, 'build', customThemePath, logger);
         }
-        host.create(customThemePath, themeContent);
-        addThemeStyleToTarget(project, 'build', host, customThemePath, workspace, logger);
-        return;
-    }
-    const insertion = new change_1.InsertChange(stylesPath, 0, themeContent);
-    const recorder = host.beginUpdate(stylesPath);
-    recorder.insertLeft(insertion.pos, insertion.toAdd);
-    host.commitUpdate(recorder);
+        const insertion = new change_1.InsertChange(stylesPath, 0, themeContent);
+        const recorder = host.beginUpdate(stylesPath);
+        recorder.insertLeft(insertion.pos, insertion.toAdd);
+        host.commitUpdate(recorder);
+        return schematics_1.noop();
+    });
 }
 /** Insert a pre-built theme into the angular.json file. */
-function insertPrebuiltTheme(project, host, theme, workspace, logger) {
+function insertPrebuiltTheme(project, theme, logger) {
     // Path needs to be always relative to the `package.json` or workspace root.
-    const themePath = `./node_modules/smart-webcomponents-angular/source/styles/${theme}.css`;
-    addThemeStyleToTarget(project, 'build', host, themePath, workspace, logger);
-    addThemeStyleToTarget(project, 'test', host, themePath, workspace, logger);
+	const baseThemePath = `./node_modules/smart-webcomponents-angular/source/styles/smart.default.css`;
+	const themePath = `./node_modules/smart-webcomponents-angular/source/styles/${theme}.css`;
+	
+	if (theme === 'smart.default') {
+		return schematics_1.chain([
+			addThemeStyleToTarget(project, 'build', themePath, logger),
+			addThemeStyleToTarget(project, 'test', themePath, logger)
+		]);
+	}
+	else {
+	    prebuiltThemePathSegment += "/" + theme;
+     
+		return schematics_1.chain([
+			addThemeStyleToTarget(project, 'build', baseThemePath, logger),
+			addThemeStyleToTarget(project, 'test', baseThemePath, logger),
+			addThemeStyleToTarget(project, 'build', themePath, logger),
+			addThemeStyleToTarget(project, 'test', themePath, logger)
+		]);
+	}
 }
 /** Adds a theming style entry to the given project target options. */
-function addThemeStyleToTarget(project, targetName, host, assetPath, workspace, logger) {
-    // Do not update the builder options in case the target does not use the default CLI builder.
-    if (!validateDefaultTargetBuilder(project, targetName, logger)) {
-        return;
-    }
-    const targetOptions = schematics_2.getProjectTargetOptions(project, targetName);
-    if (!targetOptions.styles) {
-        targetOptions.styles = [assetPath];
-    }
-    else {
-        const existingStyles = targetOptions.styles.map(s => typeof s === 'string' ? s : s.input);
-        for (let [index, stylePath] of existingStyles.entries()) {
-            // If the given asset is already specified in the styles, we don't need to do anything.
-            if (stylePath === assetPath) {
-                return;
-            }
-            // In case a prebuilt theme is already set up, we can safely replace the theme with the new
-            // theme file. If a custom theme is set up, we are not able to safely replace the custom
-            // theme because these files can contain custom styles, while prebuilt themes are
-            // always packaged and considered replaceable.
-            if (stylePath.includes(defaultCustomThemeFilename)) {
-                logger.error(`Could not add the selected theme to the CLI project ` +
-                    `configuration because there is already a custom theme file referenced.`);
-                logger.info(`Please manually add the following style file to your configuration:`);
-                logger.info(`    ${assetPath}`);
-                return;
-            }
-            else if (stylePath.includes(prebuiltThemePathSegment)) {
-                targetOptions.styles.splice(index, 1);
-            }
+function addThemeStyleToTarget(projectName, targetName, assetPath, logger) {
+    return workspace_1.updateWorkspace(workspace => {
+        const project = schematics_2.getProjectFromWorkspace(workspace, projectName);
+        // Do not update the builder options in case the target does not use the default CLI builder.
+        if (!validateDefaultTargetBuilder(project, targetName, logger)) {
+            return;
         }
-        targetOptions.styles.unshift(assetPath);
-    }
-    host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
+        const targetOptions = schematics_2.getProjectTargetOptions(project, targetName);
+        const styles = targetOptions.styles;
+        if (!styles) {
+            targetOptions.styles = [assetPath];
+        }
+        else {
+            const existingStyles = styles.map(s => typeof s === 'string' ? s : s.input);
+            for (let [index, stylePath] of existingStyles.entries()) {
+                // If the given asset is already specified in the styles, we don't need to do anything.
+                if (stylePath === assetPath) {
+                    return;
+                }
+                // In case a prebuilt theme is already set up, we can safely replace the theme with the new
+                // theme file. If a custom theme is set up, we are not able to safely replace the custom
+                // theme because these files can contain custom styles, while prebuilt themes are
+                // always packaged and considered replaceable.
+                if (stylePath.includes(defaultCustomThemeFilename)) {
+                    logger.error(`Could not add the selected theme to the CLI project ` +
+                        `configuration because there is already a custom theme file referenced.`);
+                    logger.info(`Please manually add the following style file to your configuration:`);
+                    logger.info(`    ${assetPath}`);
+                    return;
+                }
+                else if (stylePath.includes(prebuiltThemePathSegment)) {
+                    styles.splice(index, 1);
+                }
+            }
+            styles.push(assetPath);
+        }
+    });
 }
 /**
  * Validates that the specified project target is configured with the default builders which are
@@ -179,8 +156,7 @@ function addThemeStyleToTarget(project, targetName, host, assetPath, workspace, 
  */
 function validateDefaultTargetBuilder(project, targetName, logger) {
     const defaultBuilder = schematics_2.defaultTargetBuilders[targetName];
-    const targetConfig = project.architect && project.architect[targetName] ||
-        project.targets && project.targets[targetName];
+    const targetConfig = project.targets && project.targets.get(targetName);
     const isDefaultBuilder = targetConfig && targetConfig['builder'] === defaultBuilder;
     // Because the build setup for the Angular CLI can be customized by developers, we can't know
     // where to put the theme file in the workspace configuration if custom builders are being
@@ -201,4 +177,3 @@ function validateDefaultTargetBuilder(project, targetName, logger) {
     }
     return isDefaultBuilder;
 }
-//# sourceMappingURL=theming.js.map

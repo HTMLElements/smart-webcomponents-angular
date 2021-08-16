@@ -372,6 +372,12 @@ window.rrule = { RRule:  pkg.default };
             *   oldValue - The previously selected Date.
             */
             _this.onChange = new core.EventEmitter();
+            /** @description This event is triggered when an Event has been updated/inserted/removed/dragged/resized.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+            *   type - The type of change that is being done to the item.
+            *   item - An object that represents the actual item with it's attributes.
+            */
+            _this.onItemChange = new core.EventEmitter();
             /** @description This event is triggered when en event, event item or a context menu item is clicked.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	itemObj)
             *   item - The HTMLElement for the event.
@@ -1112,6 +1118,17 @@ window.rrule = { RRule:  pkg.default };
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(SchedulerComponent.prototype, "hideOtherMonthDays", {
+            /** @description Determines whether other month days are visible when view is set to month. When enabled, events that start on other month days are not displayed and the cells that represent such days do not allow the creation of new events on them. Also dragging and droping an event on other month days is not allowed. Reszing is also affected. Events can end on other month days, but cannot start on one. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.hideOtherMonthDays : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.hideOtherMonthDays = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(SchedulerComponent.prototype, "hideTodayButton", {
             /** @description Determines whether the 'Today' button is hidden or not. */
             get: function () {
@@ -1196,6 +1213,17 @@ window.rrule = { RRule:  pkg.default };
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.max = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SchedulerComponent.prototype, "maxEventsPerCell", {
+            /** @description Detetmines the maximum number of events per Scheduler cell. By default this property is null which means that the number of events per cell is automatically determined by the size of the events. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.maxEventsPerCell : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.maxEventsPerCell = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1531,7 +1559,7 @@ window.rrule = { RRule:  pkg.default };
             configurable: true
         });
         Object.defineProperty(SchedulerComponent.prototype, "views", {
-            /** @description Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view. */
+            /** @description Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view.hideHours - an Optional property applicable only to timelineWeek view that allows to hide the hour cells and only show the day cells. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.views : undefined;
             },
@@ -2238,6 +2266,7 @@ window.rrule = { RRule:  pkg.default };
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -2262,6 +2291,8 @@ window.rrule = { RRule:  pkg.default };
             that.nativeElement.addEventListener('endUpdate', that.eventHandlers['endUpdateHandler']);
             that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+            that.eventHandlers['itemChangeHandler'] = function (event) { that.onItemChange.emit(event); };
+            that.nativeElement.addEventListener('itemChange', that.eventHandlers['itemChangeHandler']);
             that.eventHandlers['itemClickHandler'] = function (event) { that.onItemClick.emit(event); };
             that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
             that.eventHandlers['itemInsertHandler'] = function (event) { that.onItemInsert.emit(event); };
@@ -2334,6 +2365,9 @@ window.rrule = { RRule:  pkg.default };
             }
             if (that.eventHandlers['changeHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+            }
+            if (that.eventHandlers['itemChangeHandler']) {
+                that.nativeElement.removeEventListener('itemChange', that.eventHandlers['itemChangeHandler']);
             }
             if (that.eventHandlers['itemClickHandler']) {
                 that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
@@ -2575,6 +2609,9 @@ window.rrule = { RRule:  pkg.default };
         ], SchedulerComponent.prototype, "hideNonworkingWeekdays", null);
         __decorate([
             core.Input()
+        ], SchedulerComponent.prototype, "hideOtherMonthDays", null);
+        __decorate([
+            core.Input()
         ], SchedulerComponent.prototype, "hideTodayButton", null);
         __decorate([
             core.Input()
@@ -2597,6 +2634,9 @@ window.rrule = { RRule:  pkg.default };
         __decorate([
             core.Input()
         ], SchedulerComponent.prototype, "max", null);
+        __decorate([
+            core.Input()
+        ], SchedulerComponent.prototype, "maxEventsPerCell", null);
         __decorate([
             core.Input()
         ], SchedulerComponent.prototype, "min", null);
@@ -2717,6 +2757,9 @@ window.rrule = { RRule:  pkg.default };
         __decorate([
             core.Output()
         ], SchedulerComponent.prototype, "onChange", void 0);
+        __decorate([
+            core.Output()
+        ], SchedulerComponent.prototype, "onItemChange", void 0);
         __decorate([
             core.Output()
         ], SchedulerComponent.prototype, "onItemClick", void 0);

@@ -7,7 +7,7 @@ else {
 }
 import './../source/modules/smart.rating';
 
-import { __decorate } from 'tslib';
+import { __decorate, __awaiter } from 'tslib';
 import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -128,6 +128,12 @@ let RatingComponent = class RatingComponent extends BaseElement {
         * The registered callback function called when a blur event occurs on the form elements.
         */
         this._onTouched = () => { };
+        /** @description This event is triggered when the value of the slider is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
+        *   value - A numeric value indicating the scroll position.
+        *   oldValue - A numeric value indicating the previous scroll position.
+        */
+        this.onChange = new EventEmitter();
         this._initialChange = true;
         this.nativeElement = ref.nativeElement;
     }
@@ -218,6 +224,36 @@ let RatingComponent = class RatingComponent extends BaseElement {
     set value(value) {
         this.nativeElement ? this.nativeElement.value = value : undefined;
     }
+    /** @description Get the value of the rating.
+    * @returns {number}
+  */
+    getValue() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getValue();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Sets the value of the rating.
+    * @param {number} value. Sets the value of the rating
+    */
+    setValue(value) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setValue(value);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setValue(value);
+            });
+        }
+    }
     get isRendered() {
         return this.nativeElement ? this.nativeElement.isRendered : false;
     }
@@ -227,6 +263,7 @@ let RatingComponent = class RatingComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -273,6 +310,8 @@ let RatingComponent = class RatingComponent extends BaseElement {
     /** @description Add event listeners. */
     listen() {
         const that = this;
+        that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
+        that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['changeModelHandler'] = (event) => {
             that._initialChange = false;
             that._onChange(that.nativeElement.value);
@@ -294,6 +333,9 @@ let RatingComponent = class RatingComponent extends BaseElement {
     /** @description Remove event listeners. */
     unlisten() {
         const that = this;
+        if (that.eventHandlers['changeHandler']) {
+            that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
             if (that.nativeElement.querySelector('input')) {
@@ -341,6 +383,9 @@ __decorate([
 __decorate([
     Input()
 ], RatingComponent.prototype, "value", null);
+__decorate([
+    Output()
+], RatingComponent.prototype, "onChange", void 0);
 RatingComponent = __decorate([
     Directive({
         selector: 'smart-rating, [smart-rating]',

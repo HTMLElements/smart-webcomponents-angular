@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-textarea.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-textarea.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-textarea.js",
+  "esm5": "../esm5/textarea/smart-webcomponents-angular-textarea.js",
+  "esm2015": "../esm2015/textarea/smart-webcomponents-angular-textarea.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-textarea.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-textarea.js",
+  "typings": "smart-webcomponents-angular-textarea.d.ts",
+  "metadata": "smart-webcomponents-angular-textarea.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/textarea"
+}

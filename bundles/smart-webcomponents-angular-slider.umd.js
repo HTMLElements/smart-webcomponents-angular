@@ -374,7 +374,10 @@ import './../source/modules/smart.slider';
             */
             _this._onTouched = function () { };
             /** @description This event is triggered when the value of the slider is changed.
-            *  @param event. The custom event. 	*/
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
+            *   value - A numeric value indicating the scroll position.
+            *   oldValue - A numeric value indicating the previous scroll position.
+            */
             _this.onChange = new core.EventEmitter();
             _this._initialChange = true;
             _this.nativeElement = ref.nativeElement;
@@ -965,6 +968,7 @@ import './../source/modules/smart.slider';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };

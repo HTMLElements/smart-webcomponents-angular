@@ -739,6 +739,7 @@ var MenuComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -1051,6 +1052,7 @@ var MenuItemComponent = /** @class */ (function (_super) {
     MenuItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     MenuItemComponent.prototype.ngOnDestroy = function () { };
@@ -1236,6 +1238,7 @@ var MenuItemsGroupComponent = /** @class */ (function (_super) {
     MenuItemsGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     MenuItemsGroupComponent.prototype.ngOnDestroy = function () { };

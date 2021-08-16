@@ -129,7 +129,10 @@ let SliderComponent = class SliderComponent extends BaseElement {
         */
         this._onTouched = () => { };
         /** @description This event is triggered when the value of the slider is changed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
+        *   value - A numeric value indicating the scroll position.
+        *   oldValue - A numeric value indicating the previous scroll position.
+        */
         this.onChange = new EventEmitter();
         this._initialChange = true;
         this.nativeElement = ref.nativeElement;
@@ -515,6 +518,7 @@ let SliderComponent = class SliderComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

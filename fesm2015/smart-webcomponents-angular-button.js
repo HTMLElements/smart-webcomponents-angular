@@ -242,6 +242,7 @@ let ButtonComponent = class ButtonComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -454,6 +455,7 @@ let RepeatButtonComponent = class RepeatButtonComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -670,6 +672,7 @@ let ToggleButtonComponent = class ToggleButtonComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -894,6 +897,7 @@ let PowerButtonComponent = class PowerButtonComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

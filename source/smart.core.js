@@ -1,6 +1,1868 @@
 
-/* Smart UI v9.1.1 (2021-Feb) 
+/* Smart UI v10.0.1 (2021-08-16) 
 Copyright (c) 2011-2021 jQWidgets. 
 License: https://htmlelements.com/license/ */ //
 
-!function(e){var t={};function n(o){if(t[o])return t[o].exports;var r=t[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)n.d(o,r,function(t){return e[t]}.bind(null,r));return o},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=25)}({25:function(e,t,n){"use strict";n.r(t),n.d(t,"App",(function(){return r}));class o{static get moduleName(){return"BindingModule"}getBindings(e,t){const n=this;let o=0,r={},i=(e=>{if(e instanceof HTMLElement)return n.parseAttributes(e);{let t=n.parseProperty(e.data?e.data.trim():null,"textContent",e);if(t)return n.ownerElement&&e.parentNode===n.ownerElement.$.content&&(t.value=""!==n.ownerElement.$.html?n.ownerElement.$.html:void 0,n.ownerElement.innerHTML=""),{textContent:t}}})(e);i&&(r.data=i),t||(r.mapping=[],t=r),e.getAttribute&&(r.nodeId=e.getAttribute("smart-id"),t&&i&&(t.mapping[r.nodeId]=i)),r.node=e,e.firstChild&&(r.children={});for(let i=e.firstChild;i;i=i.nextSibling)r.children[o++]=n.getBindings(i,t);return r}_addRemovePropertyBinding(e,t,n,o,r){if(!e||!t||!n)return;const i=this,a=i.ownerElement.bindings,d=n.getAttribute("smart-id"),l=e.indexOf("{{")>=0;let s=!1;(e=e.replace("{{","").replace("}}","").replace("[[","").replace("]]","")).indexOf("!")>=0&&(e=e.replace("!",""),s=!0);const c=i.ownerElement._properties[e],u={name:e,reflectToAttribute:c.reflectToAttribute,twoWay:l,type:c.type,not:s};if(r&&!o){const n={},o={name:e,targetPropertyName:t,reflectToAttribute:c.reflectToAttribute,twoWay:l,type:c.type,not:s};n[e]=o,a.mapping[d]=n}const p=function(e){for(let r in e){const a=e[r];if(a.nodeId===d){a.data||(a.data={}),o?(a.data[t]=null,delete a.data[t]):a.data[t]=u;break}if(a.children)p(a.children);else if(a.node&&a.node.children&&a.node===n.parentElement){const e=a.node;if(!e.firstChild)continue;a.children={};let t=0;for(let n=e.firstChild;n;n=n.nextSibling)a.children[t++]=i.getBindings(n);p(a.children)}}};p(a.children),o?delete i.ownerElement.boundProperties[e]:i.ownerElement.boundProperties[e]=!0,i.updateBoundNodes(e)}addPropertyBinding(e,t,n,o){this._addRemovePropertyBinding(e,t,n,!1,o)}removePropertyBinding(e,t,n,o){this._addRemovePropertyBinding(e,t,n,!0,o)}parseAttributes(e){const t=this;let n=void 0;for(let r=0;r<e.attributes.length;r++){const i=e.attributes[r],a=i.name,d=i.value;o.cache["toCamelCase"+a]||(o.cache["toCamelCase"+a]=window.Smart.Utilities.Core.toCamelCase(a));const l=o.cache["toCamelCase"+a];if(a.indexOf("(")>=0){let o=a.substring(1,a.length-1);if(t.ownerElement&&!t.ownerElement.dataContext){t.ownerElement.templateListeners[e.getAttribute("smart-id")+"."+o]=d,e.removeAttribute(a);continue}{n||(n={});const e=d.substring(0,d.indexOf("("));n[l]={isEvent:!0,name:o,value:e};continue}}let s=t.parseProperty(d,a,e);s&&(n||(n={}),n[l]=s)}return n}parseProperty(e,t){if(!e||!e.length)return;const n=this;let o,r=e.length,i=0,a=0,d=0,l=!0;for(;a<r;){i=e.indexOf("{{",a);let t=e.indexOf("[[",a),n="}}";if(t>=0&&(i<0||t<i)&&(i=t,l=!1,n="]]"),d=i<0?-1:e.indexOf(n,i+2),d<0)return;o=o||{};let r=e.slice(i+2,d).trim();o.name=r,a=d+2}const s=o.name,c=n.ownerElement?n.ownerElement._properties[s]:null;if(o.twoWay=l,o.ready=!1,n.ownerElement&&(s.indexOf("::")>=0?n.ownerElement.boundProperties[s.substring(0,s.indexOf("::"))]=!0:n.ownerElement.boundProperties[s]=!0),c)o.type=c.type,o.reflectToAttribute=c.reflectToAttribute;else{["checked","selected","async","autofocus","autoplay","controls","defer","disabled","hidden","ismap","loop","multiple","open","readonly","required","scoped"].indexOf(t)>=0?o.type="boolean":o.type="string",o.reflectToAttribute=!0}return o}updateTextNodes(){this.updateTextNode(this.ownerElement.shadowRoot||this.ownerElement,this.ownerElement.bindings,this.ownerElement)}updateTextNode(e,t,n){const o=this;if(!t)return;let r=0;for(let i=e.firstChild;i&&t.children;i=i.nextSibling)o.updateTextNode(i,t.children[r++],n);if(t&&t.data)for(let e in t.data){const o=t.data[e],r=o.name;"textContent"===e&&o.twoWay&&!o.updating&&void 0!==o.value&&(n[r]=o.value)}}updateBoundProperty(e,t){if(t.updating)return;const n=this.ownerElement;t.updating=!0,n[e]=t.value,t.updating=!1}updateBoundNodes(e){const t=this;if(t.updateBoundNode(t.ownerElement.shadowRoot||t.ownerElement,t.ownerElement.bindings,t.ownerElement,e),t.ownerElement.detachedChildren.length>0)for(let n=0;n<t.ownerElement.detachedChildren.length;n++){const o=t.ownerElement.detachedChildren[n],r=o.getAttribute("smart-id"),i=function(e){if(e.nodeId===r)return e;for(let t in e.children){const n=e.children[t];if((n.getAttribute?n.getAttribute("smart-id"):"")===r)return e;if(n.children){const e=i(n);if(e)return e}}return null},a=i(t.ownerElement.bindings);if(a)t.updateBoundNode(o,a,t.ownerElement,e,!0);else if(o.getAttribute&&t.ownerElement.bindings.mapping){const n=t.ownerElement,o=t.ownerElement.bindings;if(o)for(let r in o.mapping){const i=n.querySelector('[smart-id="'+r+'"]');if(i){const a=o.mapping[r];t.updateBoundData(i,a,n,e)}}}}}updateBoundMappedNodes(){const e=this,t=e.ownerElement.bindings,n=e.ownerElement;if(t.mapping)for(let o in t.mapping){let r=n.querySelector('[smart-id="'+o+'"]');if(n.shadowRoot&&(r=n.querySelector('[id="'+o+'"]'),r||(r=n.shadowRoot.querySelector('[id="'+o+'"]')||n.shadowRoot.querySelector('[smart-id="'+o+'"]'))),r){const i=t.mapping[o];e.updateBoundData(r,i,n)}else if(n.getAttribute("aria-controls")){let i=document.getElementById(n.getAttribute("aria-controls"));if(!i&&n.shadowRoot&&(i=n.shadowRoot.getElementById(n.getAttribute("aria-controls"))),r=i.querySelector('[smart-id="'+o+'"]'),r){const i=t.mapping[o];e.updateBoundData(r,i,n)}}}}updateBoundNode(e,t,n,o,r){const i=this;if(!t)return;let a=0;if(r){if(r&&!t.data)for(let d=e.firstChild;d&&t.children;d=d.nextSibling)if(d.getAttribute){const e=d.getAttribute("smart-id"),r=function(){for(let n in t.children)if(t.children[n].nodeId===e)return t.children[n]}();i.updateBoundNode(d,r,n,o),a++}else i.updateBoundNode(d,t.children[a++],n,o,r)}else for(let r=e.firstChild;r&&t.children;r=r.nextSibling)if(r.getAttribute){const e=r.getAttribute("smart-id"),d=function(){for(let n in t.children)if(t.children[n].nodeId===e)return t.children[n]}();i.updateBoundNode(r,d,n,o),a++}else i.updateBoundNode(r,t.children[a++],n,o);if(!t||!t.data)return;const d=t.data;i.updateBoundData(e,d,n,o)}updateBoundData(e,t,n,r){const i=this;for(let a in t){const d=t[a];let l=d.name;if(!d.updating&&(l.indexOf("::")>=0&&(l=l.substring(0,l.indexOf("::"))),void 0===r||r===l)){if(l.indexOf("(")>=0){let e=l.substring(l.indexOf("("));const t=l.substring(0,l.indexOf("("));if(e=e.substring(1,e.length-1),e=e.replace(/ /gi,""),e=e.split(","),e.length>0&&""!==e[0]){let o=[];for(let t=0;t<e.length;t++)o.push(n[e[t]]);d.value=n[t].apply(n,o)}else d.value=n[t]();d.type=typeof d.value}else d.value=n[l];if("innerHTML"===l?e[a].toString().trim()!==n[l].toString().trim()&&(d.ready||n._properties[l].defaultValue!==d.value)&&(e[a]=d.value.toString().trim()):d.not?(e[a]=!d.value,d.targetPropertyName&&(e[d.targetPropertyName]=!d.value)):(e[a]=d.value,d.targetPropertyName&&(e[d.targetPropertyName]=d.value)),e.$&&e.$.isNativeElement){o.cache["toDash"+a]||(o.cache["toDash"+a]=window.Smart.Utilities.Core.toDash(a));const t=o.cache["toDash"+a],n=e.$.getAttributeValue(t,d.type);!d.reflectToAttribute||n===d.value&&d.ready||e.$.setAttributeValue(t,d.value,d.type),d.reflectToAttribute||e.$.setAttributeValue(t,null,d.type)}if(!d.ready){if(e.$&&e.$.isCustomElement){o.cache["toDash"+a]||(o.cache["toDash"+a]=window.Smart.Utilities.Core.toDash(a));const t=o.cache["toDash"+a];e._properties||(e._beforeCreatedProperties=e._properties=e.propertyByAttributeName=[]),e._properties[a]||(e._properties[a]={attributeName:t},e._beforeCreatedProperties&&(e._beforeCreatedProperties[a]=e._properties[a]),e.propertyByAttributeName[t]=e._properties[a]);const n=e._properties[a];n.isUpdating=!0,d.reflectToAttribute&&(d.not?e.$.setAttributeValue(n.attributeName,!d.value,d.type):e.$.setAttributeValue(n.attributeName,d.value,d.type)),d.reflectToAttribute||e.$.setAttributeValue(n.attributeName,null,d.type),n.isUpdating=!1}if(d.twoWay){const t=function(t){if(d.value=t,e.$&&e.$.isNativeElement){o.cache["toDash"+a]||(o.cache["toDash"+a]=window.Smart.Utilities.Core.toDash(a));const t=o.cache["toDash"+a],n=e.$.getAttributeValue(t,d.type);d.reflectToAttribute&&n!==d.value&&e.$.setAttributeValue(t,d.value,d.type),d.reflectToAttribute||e.$.setAttributeValue(t,null,d.type)}};if(d.name.indexOf("::")>=0){const n=d.name.indexOf("::"),o=d.name.substring(n+2);i.ownerElement["$"+e.getAttribute("smart-id")].listen(o,(function(){t(e[a]);const n=d.name.substring(0,d.name.indexOf("::"));i.updateBoundProperty(n,d)}))}if(e.$&&e.$.isCustomElement){e._properties[a]&&(e._properties[a].notify=!0),o.cache["toDash"+a]||(o.cache["toDash"+a]=window.Smart.Utilities.Core.toDash(a));const n=o.cache["toDash"+a];i.ownerElement["$"+e.getAttribute("smart-id")].listen(n+"-changed",(function(e){let n=e.detail;t(n.value);const o=i.ownerElement.context;e.context!==document&&(i.ownerElement.context=i.ownerElement),i.updateBoundProperty(d.name,d),i.ownerElement.context=o}))}}}d.ready=!0}}}static clearCache(){this.cache={}}}o.cache={};class r{constructor(e){const t=this;t._id=e.id,e.id?t._appRoot=document.getElementById(t._id):t._id=window.Smart.Utilities.Core.createGUID(),e.selector&&(t._id=window.Smart.Utilities.Core.createGUID(),t._appRoot=document.querySelector(e.selector)),t._appRoot||(t._appRoot=document.body),t._appRoot.classList.add("smart-visibility-hidden");const n={};if(e.render){const t=e.render(),o=e.components;(function(){const r=document.createDocumentFragment(),i=document.implementation.createDocument("http://www.w3.org/1999/xhtml","html",null),a=document.createElementNS("http://www.w3.org/1999/xhtml","body"),d=document.createElement("div");i.documentElement.appendChild(a),a.appendChild(d),d.innerHTML=t;for(let e=0;e<o.length;e++){const t=o[e],r=t.name,a=window.Smart.Utilities.Core.toDash(r),l=i.querySelectorAll(r);t.tagName=a;for(let e=0;e<l.length;e++){const t=l[e],o=t.getAttribute("id")||window.Smart.Utilities.Core.createGUID(),i=document.createElement("div");i.id=o,d.insertBefore(i,t),n["#"+o]={name:r,properties:[],rendered:!1},t.parentNode.removeChild(t)}}r.appendChild(d);const l=document.querySelector(e.selector);l&&l.appendChild(r)})()}t._template=e.template||{},t._data=e.data||{},t._components=n;const o=function(){t._addAttributeBindings(),t._renderForBindings(),t._addModelBindings(),t._observeData(),t.render(),t._appRoot.classList.remove("smart-visibility-hidden")};"complete"===document.readyState?o():window.addEventListener("load",o)}_addAttributeBindings(e,t){const n=this,r=new o,i=e?r.getBindings(e):r.getBindings(n._appRoot);t||(t="");const a=function(e){const o=function(e){if(e.data){let o=e.node.id;o||(e.node.id=o="id"+Math.floor(65536*(1+Math.random())).toString(16).substring(1));for(let r in e.data){const i=e.data[r];if("textContent"===r&&(e.node.parentNode.id?o=e.node.parentNode.id:(e.node.id="",e.node.parentNode.id=o)),i.isEvent){const e={};e[i.name]=i.value,n._addListenerBinding(o,e)}else{const e={};e[r]=t+i.name,n._addTemplateBinding(o,e)}}}};o(e);for(let t in e.children){const n=e.children[t];n.node&&n.node.getAttribute&&n.node.getAttribute("smart-for")&&null===n.node.getAttribute("smart-for-rendered")||(o(n),n.children&&a(n))}};a(i)}get template(){return this._template}set template(e){this._template=e,this.render()}get id(){return this._id}set id(e){this._id=e}get jsonData(){return this.toJSON()}get formData(){const e=new FormData,t=this.toJSON();if(!t)return e;const n=function(t,o){for(let r in t){const i=t[r];window.Smart.Utilities.Types.isFunction(i)||("object"!=typeof i||Array.isArray(i)||n(i,r),("object"!=typeof i||Array.isArray(i))&&(""===o?e.append(r,i):e.append(o+"."+r,i)))}};return n(t,""),e}toJSON(){const e=function(t,n){for(let o in t){if(o.startsWith("_")||"notifyFn"===o||"canNotify"===o||"name"===o)continue;if("propertyName"===o||"toString"===o||"propertyIsEnumerable"===o||"valueOf"===o||"toLocaleString"===o)continue;if("hasOwnProperty"===o||"isPrototypeOf"===o)continue;const r=t[o];if("observableArray"!==r.name)if("observable"!==r.name)if("object"!=typeof r||window.Smart.Utilities.Types.isFunction(r))n[o]=r;else{const t=e(r,{},o);n[o]=t}else{const t={};for(let n in r)if(!n.startsWith("_")&&"propertyIsEnumerable"!==n&&"notifyFn"!==n&&"canNotify"!==n&&"name"!==n&&!n.startsWith("_")&&"notifyFn"!==n&&"canNotify"!==n&&"name"!==n&&"propertyName"!==n&&"toString"!==n&&"valueOf"!==n&&"toLocaleString"!==n&&"hasOwnProperty"!==n&&"isPrototypeOf"!==n)if("object"!=typeof r||"object"!=typeof r[n]||window.Smart.Utilities.Types.isFunction(r))t[n]=r[n];else{const i=e(r[n],{},o+"."+n);t[n]=i}n[o]=t}else n[o]=r.toArray()}return n};return e(this._data,{},"")}get data(){const e=this;return e._data||(e._data={}),e._data}set data(e){this._data=e,this._observeData(),this.render()}_addTemplateBinding(e,t){const n=this;n.template["#"+e]?n.template["#"+e].bind?Object.assign(n.template["#"+e].bind,t):n.template["#"+e].bind=t:n.template["#"+e]={bind:t}}_addListenerBinding(e,t){const n=this;n.template["#"+e]?n.template["#"+e].listeners?Object.assign(n.template["#"+e].listeners,t):n.template["#"+e].listeners=t:n.template["#"+e]={listeners:t}}_updateDataFromBooleanElement(e,t){const n=this,o=t.checked,r=n._data[o];if(e.value&&"on"!==e.value)if(Array.isArray(r)||"observableArray"===r.name)if(e.checked)r.push(e.value);else{const t=r.indexOf(e.value);t>=0&&r.splice(t,1)}else"radio"!==e.type?e.checked?n._data[o]=e.value:n._data[o]="":e.checked&&(n._data[o]=e.value);else n._data[o]=e.checked}_updateDataFromNativeElement(e,t){const n=this;if("SELECT"===e.tagName&&e.addEventListener("change",(function(){const o=t.value;let r=n._data[o];if(e.__updating=!0,Array.isArray(r)||"observableArray"===r.name){if(r=new ObservableArray,e.selectedOptions)for(let t=0;t<e.selectedOptions.length;t++){const n=e.selectedOptions[t];r.push(n.value)}n._data[o]=r}else n._data[o]=e.value;e.__updating=!1})),"INPUT"===e.tagName||"TEXTAREA"===e.tagName){e.addEventListener("change",(function(){e.__updating=!0,o?n._updateDataFromBooleanElement(e,t):n._data.value=e.value,e.__updating=!1}));let o="checkbox"===e.type||"radio"===e.type;o||e.addEventListener("keyup",(function(){const o=t.value;n._data[o]=e.value}))}}_addModelBindings(e){const t=this,n=e?e.querySelectorAll("[smart-model]"):t._appRoot.querySelectorAll("[smart-model]");for(let e=0;e<n.length;e++){const o=n[e];let r={value:o.getAttribute("smart-model")};"list"===o.type&&(r={selectedValues:o.getAttribute("smart-model")}),"checkbox"!==o.type&&"radio"!==o.type||(r={checked:o.getAttribute("smart-model")}),o.id||(o.id="id"+window.Smart.Utilities.Core.createGUID().replace(/-/gi,"")),t._updateDataFromNativeElement(o,r),t._addTemplateBinding(o.id,r)}}_renderForBindings(e){const t=this,n=t._appRoot.querySelectorAll("[smart-for]");for(let e=0;e<n.length;e++){const o=n[e],r=o.getAttribute("smart-for"),i=t._data[r];o.id||(o.id="id"+window.Smart.Utilities.Core.createGUID().replace(/-/gi,"")),o.setAttribute("smart-for-rendered","");const a=null!==o.getAttribute("smart-for-self"),d=a?o.parentNode.querySelectorAll(".smart-for-item-"+o.id):o.querySelectorAll(".smart-for-item-"+o.id);for(let e=0;e<d.length;e++)t.template[d[e].id]&&delete t.template[d[e].id],d[e].remove();const l=a?o:o.firstElementChild,s=document.createDocumentFragment();for(let e=0;e<i.length;e++){const t=l.cloneNode(!0);t.style.display="",t.id=o.id+"_"+e,t.classList.add("smart-for-item"),t.classList.add("smart-for-item-"+o.id),t.removeAttribute("smart-for"),s.appendChild(t)}l.style.display="none",a?o.parentNode.insertBefore(s,o.nextSibling):o.appendChild(s);let c=t._appRoot.querySelectorAll(".smart-for-item-"+o.id);for(let e=0;e<c.length;e++){const n=c[e];t._addAttributeBindings(n,r+"."+e+".")}}e&&n.length>0&&t.render()}notify(e){const t=this;t.notifyFn=function(n){n.owner=t,e(n)}}_notify(e){const t=this;if("length"===e.propertyName)return;t.notifyFn&&t.notifyFn(e);let n=e.propertyName;e.object&&(n=e.object.propertyName);for(let e in t.template){const o=t.template[e];let r=null;for(let e in o.bind)if("function"!=typeof o.bind[e]&&o.bind[e].indexOf(n)>=0){r=e;break}r&&t._setPropertyFromData(o,r)}t._renderForBindings(!0)}_observeData(){const e=this;e._data=new window.Smart.Observable(e._data),e._data.canNotify=!1,e._data.notify(e._notify.bind(e));const t=function(n){n.canNotify=!1;for(let o in n){if("function"==typeof n[o]){n[o]=n[o].bind(n);continue}if(o.startsWith("_")||"notifyFn"===o||"canNotify"===o||"name"===o)continue;const r=n[o];Array.isArray(r)?(n[o]=new window.Smart.ObservableArray(n[o]),n[o].canNotify=!1,n[o].notify(e._notify.bind(e)),n[o].canNotify=!0,n[o].propertyName=o):r&&"object"==typeof r&&r.constructor===window.Smart.DataAdapter||r&&"object"==typeof r&&r instanceof Date?n[o].propertyName=o:r&&"object"==typeof r&&(n[o]=new window.Smart.Observable(n[o]),n[o].canNotify=!1,n[o].notify(e._notify.bind(e)),n[o].canNotify=!0,n[o].propertyName=o,t(n[o]))}n.canNotify=!0};for(let n in e._data){if("function"==typeof e._data[n]){e._data[n]=e._data[n].bind(e._data);continue}if(n.startsWith("_")||"notifyFn"===n||"canNotify"===n||"name"===n)continue;const o=e._data[n];Array.isArray(o)?(e._data[n]=new window.Smart.ObservableArray(e._data[n]),e._data[n].canNotify=!1,e._data[n].notify(e._notify.bind(e)),e._data[n].canNotify=!0,e._data[n].propertyName=n):"object"==typeof o&&o.constructor===window.Smart.DataAdapter||"object"==typeof o&&o instanceof Date?e._data[n].propertyName=n:"object"==typeof o&&(e._data[n]=new window.Smart.Observable(e._data[n]),e._data[n].canNotify=!1,e._data[n].notify(e._notify.bind(e)),e._data[n].canNotify=!0,e._data[n].propertyName=n,t(e._data[n]))}e._data.canNotify=!0}_setPropertyFromData(e,t){const n=this;if(e.element.__updating||!e.bind)return;const o=e.bind[t];if("function"==typeof o)return;const r=o?o.split("."):[];let i=n._data;for(let e=0;e<r.length;e++){const t=r[e];if("string"==typeof i)break;if(void 0===i[t]){i=void 0;break}i=i[t]}if(e.bind.computed){const t={item:e,name:o,value:i};e.bind.computed(t),t.value!==i&&(i=t.value)}if(e.element.__updatingProperties=!0,o&&void 0!==i){if("observableArray"===i.name)"checkbox"===e.element.type?e.element[t]=i.indexOf(e.element.value)>=0:e.element[t]=i.toArray().slice(0);else if("observable"===i.name){const n=function(e){let t=null;for(let r in e){if("function"==typeof e[r])continue;if(r.startsWith("_")||"notifyFn"===r||"canNotify"===r||"name"===r)continue;const i=e[r];if(void 0!==i&&!(i&&Array.isArray(i)||i&&"object"==typeof i&&i.constructor===window.Smart.DataAdapter)){if(i&&"object"==typeof i&&(t=n(e[r])),r===o){t=i;break}if(t)return t}}return t},r=n(i);e.element[t]=r||i}else"radio"===e.element.type?e.element.value===i?e.element[t]=!0:e.element[t]=!1:e.element[t]=i;n._components[e.selector]&&!n._components[e.selector].rendered&&(n._components[e.selector].properties[t]=i)}else e.properties&&(e.element[t]=e.properties[t],n._components[e.selector]&&!n._components[e.selector].rendered&&(n._components[e.selector].properties[t]=e.properties[t]));e.element.__updatingProperties=!1}render(){const e=this;for(let t in e.template){const n=e.template[t],o=n.element?n.element:document.querySelector(t),r=n.properties,i=n.listeners,a=n.bind;if(!o)continue;n.selector=t,n.element=o,o._properties||(o._properties=[]);for(let t in r){const r=o._properties?o._properties[t]:null;r&&(r.notify=!0),e._setPropertyFromData(n,t)}for(let t in a){const r=o._properties?o._properties[t]:null;r&&(r.notify=!0),e._setPropertyFromData(n,t)}if(e._components&&e._components[t]&&!1===e._components[t].rendered){const o=e._components[t];n.element=o.instance=new window[o.name](t,o.properties),o.rendered=!0}const d=function(t){const o=n.element;for(let n in i)o.$||(o.$=window.Smart.Utilities.Extend(o)),o.$[t](n,(function(t){const o=i[n];if(o.indexOf(".")>=0){const n=o.split(".");let r=e._data[n[0]];for(let e=1;e<n.length;e++)r=r[n[e]];void 0!==r&&r(t)}else e._data[o]&&e._data[o](t)}));for(let n in a){const r=o._properties?o._properties[n]:null;if(r){const i=function(t){if(o.__updatingProperties)return;o.__updating=!0;const r=function(e){if("radio"===o.type){const t=o.parentNode.querySelectorAll('[type="radio"]');for(let n=0;n<t.length;n++)t[n].__updating=e}};r(!0);const i=a[n];if("radio"===o.type||"toggle"===o.type||"checkbox"===o.type)e._updateDataFromBooleanElement(o,a);else{(function(e,t,n){var o;for(o=0;o<t.length-1;o++)e=e[t[o]];e[t[o]]=n})(e._data,i.split("."),t.detail.value)}o.__updating=!1,r(!1)};"textarea"===o.type&&o.$[t]("input.keyup",(function(e){const t=new CustomEvent("keyup",{detail:{originalEvent:e,value:o.$.input.value}});i(t)})),o.$[t](r.attributeName+"-changed",(function(e){i(e)}))}}};d("unlisten"),o.isAttached&&d("listen"),o.onAttached=function(){d("listen")},o.onDetached=function(){d("unlisten")}}}}window.Smart.App=r,window["Smart".toLowerCase()+"App"]=r,window.App=r}});
+const namespace = 'Smart';
+
+class BindingModule {
+
+	static get moduleName() {
+		return 'BindingModule';
+	}
+
+	/**
+	 * @typedef {Object} bindings
+	 * @property {Array<Node>} children The child nodes.
+	 * @property {Node} node The node.
+	 * @property {BindingData} data The node's binding data.
+	 */
+
+	/**
+	 * @typedef {Object} BindingData
+	 * @property {Boolean} twoWay - Deterimes whether it's one way or two way data binding.
+	 * @property {Boolean} updating - Determines whether the node is in update state.
+	 * @property {Object}  value - The bound property's value.
+	 * @property {String}  name - The bound property's name.
+	 */
+	getBindings(node, ownerMap) {
+		const that = this;
+
+		let index = 0;
+		let map = {
+		};
+		let boundData = (node => {
+			if (node instanceof HTMLElement) {
+				return that.parseAttributes(node);
+			}
+			else {
+				let boundProperty = that.parseProperty(node.data ? node.data.trim() : null, 'textContent', node);
+
+				if (boundProperty) {
+					if (that.ownerElement && node.parentNode === that.ownerElement.$.content) {
+						boundProperty.value = that.ownerElement.$.html !== '' ? that.ownerElement.$.html : undefined;
+						that.ownerElement.innerHTML = '';
+					}
+
+					return {
+						'textContent': boundProperty
+					};
+				}
+			}
+
+			return undefined;
+		})(node);
+
+		if (boundData) {
+			map.data = boundData;
+		}
+
+		if (!ownerMap) {
+			map.mapping = [];
+			ownerMap = map;
+		}
+
+		if (node.getAttribute) {
+			map.nodeId = node.getAttribute('smart-id');
+
+			if (ownerMap && boundData) {
+				ownerMap.mapping[map.nodeId] = boundData;
+			}
+		}
+
+		map.node = node;
+
+		if (node.firstChild) {
+			map.children = {
+			};
+		}
+
+		for (let child = node.firstChild; child; child = child.nextSibling) {
+			map.children[index++] = that.getBindings(child, ownerMap);
+		}
+
+		return map;
+	}
+
+	_addRemovePropertyBinding(hostPropertyName, targetPropertyName, targetElement, removeBinding, parentElement) {
+		if (!hostPropertyName || !targetPropertyName || !targetElement) {
+			return;
+		}
+
+		const that = this;
+		const bindings = that.ownerElement.bindings;
+		const id = targetElement.getAttribute('smart-id');
+		const twoWayBinding = hostPropertyName.indexOf('{{') >= 0;
+
+		hostPropertyName = hostPropertyName.replace('{{', '').replace('}}', '').replace('[[', '').replace(']]', '');
+
+		let not = false;
+
+		if (hostPropertyName.indexOf('!') >= 0) {
+			hostPropertyName = hostPropertyName.replace('!', '');
+			not = true;
+		}
+
+		const hostProperty = that.ownerElement._properties[hostPropertyName];
+		const boundProperty = {
+			name: hostPropertyName, reflectToAttribute: hostProperty.reflectToAttribute, twoWay: twoWayBinding, type: hostProperty.type, not: not
+		};
+
+		if (parentElement && !removeBinding) {
+			const map = {};
+
+			const targetBoundProperty = {
+				name: hostPropertyName, targetPropertyName: targetPropertyName, reflectToAttribute: hostProperty.reflectToAttribute, twoWay: twoWayBinding, type: hostProperty.type, not: not
+			};
+
+			map[hostPropertyName] = targetBoundProperty;
+			bindings.mapping[id] = map;
+		}
+
+		const setBinding = function (boundChildren) {
+			for (let childIndex in boundChildren) {
+				const child = boundChildren[childIndex];
+
+				if (child.nodeId === id) {
+					if (!child.data) {
+						child.data = {
+						};
+					}
+
+					if (removeBinding) {
+						child.data[targetPropertyName] = null;
+						delete child.data[targetPropertyName];
+					}
+					else {
+						child.data[targetPropertyName] = boundProperty;
+					}
+
+					break;
+				}
+
+				if (child.children) {
+					setBinding(child.children);
+				}
+				else if (child.node && child.node.children && child.node === targetElement.parentElement) {
+					const node = child.node;
+
+					if (node.firstChild) {
+						child.children = {
+						};
+					}
+					else {
+						continue;
+					}
+
+					let index = 0;
+
+					for (let currentChild = node.firstChild; currentChild; currentChild = currentChild.nextSibling) {
+						child.children[index++] = that.getBindings(currentChild);
+					}
+
+					setBinding(child.children);
+				}
+			}
+		}
+		setBinding(bindings.children);
+
+		if (!removeBinding) {
+			that.ownerElement.boundProperties[hostPropertyName] = true;
+		}
+		else {
+			delete that.ownerElement.boundProperties[hostPropertyName];
+		}
+
+		that.updateBoundNodes(hostPropertyName);
+	}
+
+	addPropertyBinding(hostPropertyName, targetPropertyName, targetElement, parentElement) {
+		const that = this;
+
+		that._addRemovePropertyBinding(hostPropertyName, targetPropertyName, targetElement, false, parentElement);
+	}
+
+	removePropertyBinding(hostPropertyName, targetPropertyName, targetElement, parentElement) {
+		const that = this;
+
+		that._addRemovePropertyBinding(hostPropertyName, targetPropertyName, targetElement, true, parentElement);
+	}
+
+	/**
+	 * Parses the element's attributes.
+	 * @param {HTMLElement} - html element.
+	 * @return {Array<BindingData>}
+	 */
+	parseAttributes(htmlElement) {
+		const that = this;
+
+		let boundProperties = undefined;
+
+		for (let i = 0; i < htmlElement.attributes.length; i++) {
+			const attribute = htmlElement.attributes[i];
+			const attributeName = attribute.name;
+			const attributeValue = attribute.value;
+			if (!BindingModule.cache['toCamelCase' + attributeName]) {
+				BindingModule.cache['toCamelCase' + attributeName] = window[namespace].Utilities.Core.toCamelCase(attributeName);
+			}
+
+			const propertyName = BindingModule.cache['toCamelCase' + attributeName];
+
+			if (attributeName.indexOf('(') >= 0) {
+				let eventName = attributeName.substring(1, attributeName.length - 1);
+				if (that.ownerElement && !that.ownerElement.dataContext) {
+					that.ownerElement.templateListeners[htmlElement.getAttribute('smart-id') + '.' + eventName] = attributeValue;
+					htmlElement.removeAttribute(attributeName);
+					continue;
+				}
+				else {
+					if (!boundProperties) {
+						boundProperties = {
+						};
+					}
+
+					const handlerName = attributeValue.substring(0, attributeValue.indexOf('('));
+
+					boundProperties[propertyName] = {
+						isEvent: true, name: eventName, value: handlerName
+					};
+					continue;
+				}
+			}
+
+			let boundProperty = that.parseProperty(attributeValue, attributeName, htmlElement);
+			if (!boundProperty) {
+				continue;
+			}
+
+			if (!boundProperties) {
+				boundProperties = {
+				};
+			}
+
+			boundProperties[propertyName] = boundProperty;
+		}
+
+		return boundProperties;
+	}
+
+	/**
+	 * Parses a property.
+	 * @param {String} - The string to parse.
+	 * @param {name} - property's name.
+	 * @param {Node} - the node.
+	 * @return {BindingData}
+	 */
+	parseProperty(text, elementAttributeName/*, name, node*/) {
+		if (!text || !text.length)
+			return;
+
+		const that = this;
+
+		let boundProperty;
+		let length = text.length;
+		let startIndex = 0, lastIndex = 0, endIndex = 0;
+		let twoWay = true;
+
+		while (lastIndex < length) {
+			startIndex = text.indexOf('{{', lastIndex);
+			let twoWayStart = text.indexOf('[[', lastIndex);
+			let terminator = '}}';
+
+			if (twoWayStart >= 0 &&
+				(startIndex < 0 || twoWayStart < startIndex)) {
+				startIndex = twoWayStart;
+				twoWay = false;
+				terminator = ']]';
+			}
+
+			endIndex = startIndex < 0 ? -1 : text.indexOf(terminator, startIndex + 2);
+
+			if (endIndex < 0) {
+				return;
+			}
+
+			boundProperty = boundProperty || {
+			};
+			let pathString = text.slice(startIndex + 2, endIndex).trim();
+			let attributeName = pathString;
+
+			/*   if (twoWay) {
+				   const updateToken = function (value) {
+					   boundProperty.value = value;
+
+					   if (node.$ && node.$.isNativeElement) {
+
+						   if (!BindingModule.cache['toDash' + name]) {
+							   BindingModule.cache['toDash' + name] = Utilities.Core.toDash(name);
+						   }
+
+						   const attributeName = BindingModule.cache['toDash' + name];
+						   const oldValue = node.$.getAttributeValue(attributeName, boundProperty.type);
+
+						   if (oldValue !== boundProperty.value) {
+							   node.$.setAttributeValue(attributeName, boundProperty.value, boundProperty.type);
+						   }
+					   }
+				   }
+
+				   if (pathString.indexOf('::') >= 0) {
+					   const eventIndex = pathString.indexOf('::');
+					   const eventName = pathString.substring(eventIndex + 2);
+
+					   that.ownerElement['$' + node.getAttribute('smart-id')].listen(eventName, function () {
+						   updateToken(node[name]);
+
+						   const boundPropertyName = boundProperty.name.substring(0, boundProperty.name.indexOf('::'));
+						   that.updateBoundProperty(boundPropertyName, boundProperty);
+					   });
+				   }
+
+				   if (node.$ && node.$.isCustomElement) {
+					   if (!BindingModule.cache['toDash' + name]) {
+						   BindingModule.cache['toDash' + name] = Utilities.Core.toDash(name);
+					   }
+
+					   const attributeName = BindingModule.cache['toDash' + name];
+					   const propertyName = Utilities.Core.toCamelCase(attributeName);
+
+					   if (node._properties && node._properties[propertyName]) {
+						   node._properties[propertyName].notify = true;
+					   }
+
+					   that.ownerElement['$' + node.getAttribute('smart-id')].listen(attributeName + '-changed', function (event) {
+						   const detail = event.detail;
+
+						   updateToken(detail.value);
+
+						   const context = that.ownerElement.context;
+
+						   if (event.context !== document) {
+							   that.ownerElement.context = that.ownerElement;
+						   }
+
+						   that.updateBoundProperty(name, boundProperty);
+
+						   that.ownerElement.context = context;
+					   });
+				   }
+			   }*/
+
+			boundProperty.name = attributeName;
+			lastIndex = endIndex + 2;
+		}
+
+		const propertyName = boundProperty.name;
+		const elementProperty = that.ownerElement ? that.ownerElement._properties[propertyName] : null;
+
+		boundProperty.twoWay = twoWay;
+		boundProperty.ready = false;
+
+		if (that.ownerElement) {
+			if (propertyName.indexOf('::') >= 0) {
+				that.ownerElement.boundProperties[propertyName.substring(0, propertyName.indexOf('::'))] = true;
+			}
+			else {
+				that.ownerElement.boundProperties[propertyName] = true;
+			}
+		}
+
+		if (elementProperty) {
+			boundProperty.type = elementProperty.type;
+			boundProperty.reflectToAttribute = elementProperty.reflectToAttribute;
+		}
+		else {
+			const booleans = ['checked', 'selected', 'async', 'autofocus', 'autoplay', 'controls', 'defer', 'disabled', 'hidden', 'ismap', 'loop', 'multiple', 'open', 'readonly', 'required', 'scoped'];
+			if (booleans.indexOf(elementAttributeName) >= 0) {
+				boundProperty.type = 'boolean';
+			}
+			else {
+				boundProperty.type = 'string';
+			}
+
+			boundProperty.reflectToAttribute = true;
+		}
+
+		return boundProperty;
+	}
+
+	/**
+	 * Updates element's data bound nodes.
+	 */
+	updateTextNodes() {
+		const that = this;
+
+		that.updateTextNode(that.ownerElement.shadowRoot || that.ownerElement, that.ownerElement.bindings, that.ownerElement);
+	}
+
+	/**
+	 * Updates a data bound node.
+	 * @param {Node} - The bound node.
+	 * @param {Array<BindingData>} - The node's binding data.
+	 * @param {Element} - The element to be updated.
+	 */
+	updateTextNode(node, bindings, element) {
+		const that = this;
+
+		if (!bindings) {
+			return;
+		}
+
+		let index = 0;
+		for (let child = node.firstChild; child; child = child.nextSibling) {
+			if (!bindings.children) {
+				break;
+			}
+
+			that.updateTextNode(child, bindings.children[index++], element);
+		}
+
+		if (!bindings || !bindings.data) {
+			return;
+		}
+
+		for (let name in bindings.data) {
+			const boundProperty = bindings.data[name];
+			const boundPropertyName = boundProperty.name;
+
+			if (name !== 'textContent' || !boundProperty.twoWay || boundProperty.updating || boundProperty.value === undefined) {
+				continue;
+			}
+
+			element[boundPropertyName] = boundProperty.value;
+		}
+	}
+
+	/**
+	 * Updates a data bound property.
+	 * @param {String} - The propery's name.
+	 * @param {Object} - The property's value.
+	 */
+	updateBoundProperty(propertyName, propertyConfig) {
+		if (propertyConfig.updating) {
+			return;
+		}
+
+		const that = this;
+		const element = that.ownerElement;
+
+		propertyConfig.updating = true;
+		element[propertyName] = propertyConfig.value;
+		propertyConfig.updating = false;
+	}
+
+	/**
+	 * Updates element's data bound nodes.
+	 */
+	updateBoundNodes(propertyName) {
+		const that = this;
+
+		that.updateBoundNode(that.ownerElement.shadowRoot || that.ownerElement, that.ownerElement.bindings, that.ownerElement, propertyName);
+		if (that.ownerElement.detachedChildren.length > 0) {
+			for (let i = 0; i < that.ownerElement.detachedChildren.length; i++) {
+				const node = that.ownerElement.detachedChildren[i];
+				const smartId = node.getAttribute('smart-id');
+
+				const getBindings = function (bindings) {
+					if (bindings.nodeId === smartId) {
+						return bindings;
+					}
+
+					for (let index in bindings.children) {
+						const node = bindings.children[index];
+						const attribute = node.getAttribute ? node.getAttribute('smart-id') : '';
+
+						if (attribute === smartId) {
+							return bindings;
+						}
+
+						if (node.children) {
+							const result = getBindings(node);
+							if (result) {
+								return result;
+							}
+						}
+					}
+
+					return null;
+				}
+
+				const bindings = getBindings(that.ownerElement.bindings);
+
+				if (bindings) {
+					that.updateBoundNode(node, bindings, that.ownerElement, propertyName, true);
+				}
+				else {
+					if (node.getAttribute && that.ownerElement.bindings.mapping) {
+						const element = that.ownerElement;
+						const bindings = that.ownerElement.bindings;
+
+						if (bindings) {
+							for (let mapping in bindings.mapping) {
+								const childNode = element.querySelector('[smart-id="' + mapping + '"]');
+
+								if (childNode) {
+									const dataBoundProperties = bindings.mapping[mapping];
+
+									that.updateBoundData(childNode, dataBoundProperties, element, propertyName);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	updateBoundMappedNodes() {
+		const that = this;
+		//const node = that.ownerElement.shadowRoot || that.ownerElement;
+		const bindings = that.ownerElement.bindings;
+		const element = that.ownerElement;
+
+		if (!bindings.mapping) {
+			return;
+		}
+
+		for (let mapping in bindings.mapping) {
+			let childNode = element.querySelector('[smart-id="' + mapping + '"]');
+
+			if (element.shadowRoot) {
+				childNode = element.querySelector('[id="' + mapping + '"]');
+
+				if (!childNode) {
+					childNode = element.shadowRoot.querySelector('[id="' + mapping + '"]') || element.shadowRoot.querySelector('[smart-id="' + mapping + '"]');
+				}
+			}
+
+			if (childNode) {
+				const dataBoundProperties = bindings.mapping[mapping];
+
+				that.updateBoundData(childNode, dataBoundProperties, element);
+			}
+			else if (element.getAttribute('aria-controls')) {
+				let detachedChildNode = document.getElementById(element.getAttribute('aria-controls'));
+
+				if (!detachedChildNode && element.shadowRoot) {
+					detachedChildNode = element.shadowRoot.getElementById(element.getAttribute('aria-controls'));
+				}
+
+				childNode = detachedChildNode.querySelector('[smart-id="' + mapping + '"]');
+
+				if (childNode) {
+					const dataBoundProperties = bindings.mapping[mapping];
+
+					that.updateBoundData(childNode, dataBoundProperties, element);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Updates a data bound node.
+	 * @param {Node} - The bound node.
+	 * @param {Array<BindingData>} - The node's binding data.
+	 * @param {Element} - The element to be updated.
+	 */
+	updateBoundNode(node, bindings, element, propertyName, detached) {
+		const that = this;
+
+		if (!bindings) {
+			return;
+		}
+
+		/*
+		if (node.getAttribute && bindings.mapping) {
+			for (let mapping in bindings.mapping) {
+				const childNode = element.querySelector('[smart-id="' + mapping + '"]');
+
+				if (childNode) {
+					const dataBoundProperties = bindings.mapping[mapping];
+
+					that.updateBoundData(childNode, dataBoundProperties, element, null);
+				}
+			}
+			return;
+		}
+		*/
+
+		let index = 0;
+		if (!detached) {
+			for (let child = node.firstChild; child; child = child.nextSibling) {
+				if (!bindings.children) {
+					break;
+				}
+				//       that.updateBoundNode(child, bindings.children[index++], element, propertyName);
+
+				if (child.getAttribute) {
+					const childId = child.getAttribute('smart-id');
+					const childBindings = function () {
+						for (let binding in bindings.children) {
+							if (bindings.children[binding].nodeId === childId) {
+								return bindings.children[binding];
+							}
+						}
+					}();
+
+					that.updateBoundNode(child, childBindings, element, propertyName);
+					index++;
+				}
+				else {
+					that.updateBoundNode(child, bindings.children[index++], element, propertyName);
+				}
+			}
+		}
+		else if (detached && !bindings.data) {
+			for (let child = node.firstChild; child; child = child.nextSibling) {
+				if (!bindings.children) {
+					break;
+				}
+
+				//   that.updateBoundNode(child, bindings.children[index++], element, propertyName, detached);
+
+				if (child.getAttribute) {
+					const childId = child.getAttribute('smart-id');
+					const childBindings = function () {
+						for (let binding in bindings.children) {
+							if (bindings.children[binding].nodeId === childId) {
+								return bindings.children[binding];
+							}
+						}
+					}();
+
+					that.updateBoundNode(child, childBindings, element, propertyName);
+					index++;
+				}
+				else {
+					that.updateBoundNode(child, bindings.children[index++], element, propertyName, detached);
+				}
+			}
+		}
+
+		if (!bindings || !bindings.data) {
+			return;
+		}
+
+		const dataBoundProperties = bindings.data;
+
+		that.updateBoundData(node, dataBoundProperties, element, propertyName);
+	}
+
+	updateBoundData(node, dataBoundProperties, element, propertyName) {
+		const that = this;
+
+		for (let name in dataBoundProperties) {
+			const boundProperty = dataBoundProperties[name];
+			let boundPropertyName = boundProperty.name;
+
+			if (boundProperty.updating) {
+				continue;
+			}
+
+			if (boundPropertyName.indexOf('::') >= 0) {
+				boundPropertyName = boundPropertyName.substring(0, boundPropertyName.indexOf('::'));
+			}
+
+			if (propertyName !== undefined && propertyName !== boundPropertyName) {
+				continue;
+			}
+
+			if (boundPropertyName.indexOf('(') >= 0) {
+				let args = boundPropertyName.substring(boundPropertyName.indexOf('('));
+
+				const methodName = boundPropertyName.substring(0, boundPropertyName.indexOf('('));
+
+				args = args.substring(1, args.length - 1);
+				args = args.replace(/ /ig, '');
+				args = args.split(',');
+				if (args.length > 0 && args[0] !== '') {
+					let values = [];
+					for (let i = 0; i < args.length; i++) {
+						values.push(element[args[i]]);
+					}
+
+					boundProperty.value = element[methodName].apply(element, values);
+				}
+				else {
+					boundProperty.value = element[methodName]();
+				}
+
+				boundProperty.type = typeof boundProperty.value;
+			}
+			else {
+				boundProperty.value = element[boundPropertyName];
+			}
+
+			if (boundPropertyName === 'innerHTML') {
+				if (node[name].toString().trim() !== element[boundPropertyName].toString().trim()) {
+					if (boundProperty.ready) {
+						node[name] = boundProperty.value.toString().trim();
+					}
+					else if (element._properties[boundPropertyName].defaultValue !== boundProperty.value) {
+						node[name] = boundProperty.value.toString().trim();
+					}
+				}
+			}
+			else {
+				if (boundProperty.not) {
+					node[name] = !boundProperty.value;
+
+					if (boundProperty.targetPropertyName) {
+						node[boundProperty.targetPropertyName] = !boundProperty.value;
+					}
+				}
+				else {
+					node[name] = boundProperty.value;
+
+					if (boundProperty.targetPropertyName) {
+						node[boundProperty.targetPropertyName] = boundProperty.value;
+					}
+				}
+			}
+
+			if (node.$ && node.$.isNativeElement) {
+				if (!BindingModule.cache['toDash' + name]) {
+					BindingModule.cache['toDash' + name] = window[namespace].Utilities.Core.toDash(name);
+				}
+
+				const attributeName = BindingModule.cache['toDash' + name];
+				const oldValue = node.$.getAttributeValue(attributeName, boundProperty.type);
+				if (boundProperty.reflectToAttribute && (oldValue !== boundProperty.value || !boundProperty.ready)) {
+					node.$.setAttributeValue(attributeName, boundProperty.value, boundProperty.type);
+				}
+				if (!boundProperty.reflectToAttribute) {
+					node.$.setAttributeValue(attributeName, null, boundProperty.type);
+				}
+			}
+
+			if (!boundProperty.ready) {
+				if (node.$ && node.$.isCustomElement) {
+					if (!BindingModule.cache['toDash' + name]) {
+						BindingModule.cache['toDash' + name] = window[namespace].Utilities.Core.toDash(name);
+					}
+
+					const attributeName = BindingModule.cache['toDash' + name];
+
+					if (!node._properties) {
+						node._beforeCreatedProperties = node._properties = node.propertyByAttributeName = [];
+					}
+
+					if (!node._properties[name]) {
+						node._properties[name] = {
+							attributeName: attributeName
+						}
+
+						if (node._beforeCreatedProperties) {
+							node._beforeCreatedProperties[name] = node._properties[name];
+						}
+
+						node.propertyByAttributeName[attributeName] = node._properties[name];
+					}
+
+					const propertyConfig = node._properties[name];
+
+					propertyConfig.isUpdating = true;
+
+					if (boundProperty.reflectToAttribute) {
+						if (boundProperty.not) {
+							node.$.setAttributeValue(propertyConfig.attributeName, !boundProperty.value, boundProperty.type);
+						}
+						else {
+							node.$.setAttributeValue(propertyConfig.attributeName, boundProperty.value, boundProperty.type);
+						}
+					}
+
+					if (!boundProperty.reflectToAttribute) {
+						node.$.setAttributeValue(propertyConfig.attributeName, null, boundProperty.type);
+					}
+
+					propertyConfig.isUpdating = false;
+				}
+
+				if (boundProperty.twoWay) {
+					const updateToken = function (value) {
+						boundProperty.value = value;
+
+						if (node.$ && node.$.isNativeElement) {
+							if (!BindingModule.cache['toDash' + name]) {
+								BindingModule.cache['toDash' + name] = window[namespace].Utilities.Core.toDash(name);
+							}
+
+							const attributeName = BindingModule.cache['toDash' + name];
+							const oldValue = node.$.getAttributeValue(attributeName, boundProperty.type);
+
+							if (boundProperty.reflectToAttribute && oldValue !== boundProperty.value) {
+								node.$.setAttributeValue(attributeName, boundProperty.value, boundProperty.type);
+							}
+							if (!boundProperty.reflectToAttribute) {
+								node.$.setAttributeValue(attributeName, null, boundProperty.type);
+							}
+						}
+					}
+
+					if (boundProperty.name.indexOf('::') >= 0) {
+						const eventIndex = boundProperty.name.indexOf('::');
+						const eventName = boundProperty.name.substring(eventIndex + 2);
+
+						that.ownerElement['$' + node.getAttribute('smart-id')].listen(eventName, function () {
+							updateToken(node[name]);
+
+							const boundPropertyName = boundProperty.name.substring(0, boundProperty.name.indexOf('::'));
+
+							that.updateBoundProperty(boundPropertyName, boundProperty);
+						});
+					}
+
+					if (node.$ && node.$.isCustomElement) {
+						if (node._properties[name]) {
+							node._properties[name].notify = true;
+						}
+
+						if (!BindingModule.cache['toDash' + name]) {
+							BindingModule.cache['toDash' + name] = window[namespace].Utilities.Core.toDash(name);
+						}
+
+						const attributeName = BindingModule.cache['toDash' + name];
+
+						that.ownerElement['$' + node.getAttribute('smart-id')].listen(attributeName + '-changed', function (event) {
+							let detail = event.detail;
+							updateToken(detail.value);
+
+							const context = that.ownerElement.context;
+
+							if (event.context !== document) {
+								that.ownerElement.context = that.ownerElement;
+							}
+
+							that.updateBoundProperty(boundProperty.name, boundProperty);
+
+							//    that.updateBoundProperty(name, boundProperty);
+
+							that.ownerElement.context = context;
+						});
+					}
+				}
+			}
+
+			boundProperty.ready = true;
+		}
+
+	}
+	static clearCache() {
+		const that = this;
+
+		that.cache = {
+		};
+	}
+}
+
+BindingModule.cache = {
+};
+
+export class App {
+	constructor(object) {
+		const that = this;
+
+		that._id = object.id;
+
+		if (object.id) {
+			that._appRoot = document.getElementById(that._id);
+		}
+		else {
+			that._id = window[namespace].Utilities.Core.createGUID();
+		}
+
+		if (object.selector) {
+			that._id = window[namespace].Utilities.Core.createGUID();
+			that._appRoot = document.querySelector(object.selector);
+		}
+
+		if (!that._appRoot) {
+			that._appRoot = document.body;
+		}
+
+		that._appRoot.classList.add('smart-visibility-hidden');
+
+		const componentsSettings = {
+		};
+
+		if (object.render) {
+			const template = object.render();
+			const components = object.components;
+
+			const prepareDOM = function () {
+				const fragment = document.createDocumentFragment();
+
+				const templateDoc = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);
+				const templateBody = document.createElementNS('http://www.w3.org/1999/xhtml', 'body');
+				const root = document.createElement('div');
+
+				templateDoc.documentElement.appendChild(templateBody);
+
+				templateBody.appendChild(root);
+				root.innerHTML = template;
+
+				for (let i = 0; i < components.length; i++) {
+					const component = components[i];
+					const name = component.name;
+					const tagName = window[namespace].Utilities.Core.toDash(name);
+					const elements = templateDoc.querySelectorAll(name);
+
+					component.tagName = tagName;
+
+					for (let j = 0; j < elements.length; j++) {
+						const element = elements[j];
+
+						const id = element.getAttribute('id') || window[namespace].Utilities.Core.createGUID();
+						const hostElement = document.createElement('div');
+
+						hostElement.id = id;
+
+						root.insertBefore(hostElement, element);
+						componentsSettings['#' + id] = {
+							name: name, properties: [], rendered: false
+						};
+						element.parentNode.removeChild(element);
+					}
+				}
+
+				fragment.appendChild(root);
+
+				const appRoot = document.querySelector(object.selector);
+
+				if (appRoot) {
+					appRoot.appendChild(fragment);
+				}
+			}
+
+			prepareDOM();
+		}
+
+
+		that._template = object.template || {
+		};
+		that._data = object.data || {
+		};
+
+		that._components = componentsSettings;
+
+		const init = function () {
+			that._addAttributeBindings();
+			that._renderForBindings();
+			that._addModelBindings();
+			that._observeData();
+			that.render();
+
+			that._appRoot.classList.remove('smart-visibility-hidden');
+		}
+
+		document.readyState === 'complete' ? init() : window.addEventListener('load', init);
+	}
+
+	_addAttributeBindings(ownerElement, ownerPropertyName) {
+		const that = this;
+		const bindingModule = new BindingModule();
+		const bindings = ownerElement ? bindingModule.getBindings(ownerElement) : bindingModule.getBindings(that._appRoot);
+
+		if (!ownerPropertyName) {
+			ownerPropertyName = '';
+		}
+
+		const createId = function () {
+			return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+		}
+
+		const traverseBindings = function (bindings) {
+			const addChildBinding = function (child) {
+				if (child.data) {
+					let id = child.node.id;
+
+					if (!id) {
+						child.node.id = id = 'id' + createId();
+					}
+
+					for (let dataItem in child.data) {
+						const dataItemValue = child.data[dataItem];
+
+						if (dataItem === 'textContent') {
+							if (child.node.parentNode.id) {
+								id = child.node.parentNode.id;
+							}
+							else {
+								child.node.id = '';
+								child.node.parentNode.id = id;
+							}
+						}
+
+						if (dataItemValue.isEvent) {
+							const listener = {
+							};
+
+							listener[dataItemValue.name] = dataItemValue.value;
+
+							that._addListenerBinding(id, listener);
+						}
+						else {
+							const binding = {
+							};
+
+							binding[dataItem] = ownerPropertyName + dataItemValue.name;
+
+							that._addTemplateBinding(id, binding);
+						}
+					}
+				}
+			}
+
+			addChildBinding(bindings);
+			for (let index in bindings.children) {
+				const child = bindings.children[index];
+
+				if (child.node && child.node.getAttribute && child.node.getAttribute('smart-for') && child.node.getAttribute('smart-for-rendered') === null) {
+					continue;
+				}
+
+				addChildBinding(child);
+
+				if (child.children) {
+					traverseBindings(child);
+				}
+			}
+		}
+
+		traverseBindings(bindings);
+	}
+
+	get template() {
+		return this._template;
+	}
+
+	set template(value) {
+		this._template = value;
+		this.render();
+	}
+
+	get id() {
+		return this._id;
+	}
+
+	set id(value) {
+		this._id = value;
+	}
+
+	get jsonData() {
+		const that = this;
+
+		return that.toJSON();
+	}
+
+	get formData() {
+		const that = this;
+
+		const formData = new FormData();
+		const data = that.toJSON();
+
+		if (!data) {
+			return formData;
+		}
+
+		//let path = '';
+
+		const traverseTree = function (data, path) {
+			for (let name in data) {
+				const value = data[name];
+
+				if (window[namespace].Utilities.Types.isFunction(value)) {
+					continue;
+				}
+				else if (typeof value === 'object' && !Array.isArray(value)) {
+					traverseTree(value, name);
+				}
+
+				if (typeof value !== 'object' || Array.isArray(value)) {
+					if (path === '') {
+						formData.append(name, value)
+					}
+					else {
+						formData.append(path + '.' + name, value)
+					}
+				}
+			}
+		}
+
+		traverseTree(data, '');
+
+		return formData;
+	}
+
+	toJSON() {
+		const that = this;
+
+		const processData = function (ownerData, targetData/*, path*/) {
+			for (let dataItem in ownerData) {
+				if (dataItem.startsWith('_') || dataItem === 'notifyFn' || dataItem === 'canNotify' || dataItem === 'name') {
+					continue;
+				}
+
+				if (dataItem === 'propertyName' || dataItem === 'toString' || dataItem === 'propertyIsEnumerable' || dataItem === 'valueOf' || dataItem === 'toLocaleString') {
+					continue;
+				}
+
+				if (dataItem === 'hasOwnProperty' || dataItem === 'isPrototypeOf') {
+					continue;
+				}
+
+				const item = ownerData[dataItem];
+
+				if (item.name === 'observableArray') {
+					targetData[dataItem] = item.toArray();
+					continue;
+				}
+
+				if (item.name === 'observable') {
+					const subItem = {
+					};
+
+					for (let subDataItem in item) {
+						if (subDataItem.startsWith('_') || subDataItem === 'propertyIsEnumerable' || subDataItem === 'notifyFn' || subDataItem === 'canNotify' || subDataItem === 'name') {
+							continue;
+						}
+
+						if (subDataItem.startsWith('_') || subDataItem === 'notifyFn' || subDataItem === 'canNotify' || subDataItem === 'name') {
+							continue;
+						}
+
+						if (subDataItem === 'propertyName' || subDataItem === 'toString' || subDataItem === 'valueOf' || subDataItem === 'toLocaleString') {
+							continue;
+						}
+
+						if (subDataItem === 'hasOwnProperty' || subDataItem === 'isPrototypeOf') {
+							continue;
+						}
+
+
+						if (typeof item === 'object' && typeof item[subDataItem] === 'object' && !window[namespace].Utilities.Types.isFunction(item)) {
+							const subData = processData(item[subDataItem], {}, dataItem + '.' + subDataItem);
+
+							subItem[subDataItem] = subData;
+
+							continue;
+						}
+
+						subItem[subDataItem] = item[subDataItem];
+					}
+
+					targetData[dataItem] = subItem;
+					continue;
+				}
+
+				if (typeof item === 'object' && !window[namespace].Utilities.Types.isFunction(item)) {
+					const subData = processData(item, {}, dataItem);
+
+
+					targetData[dataItem] = subData;
+					continue;
+				}
+
+				targetData[dataItem] = item;
+			}
+
+			return targetData;
+		}
+
+		const data = processData(that._data, {
+		}, '');
+
+		return data;
+	}
+
+	get data() {
+		const that = this;
+
+		if (!that._data) {
+			that._data = {
+			};
+		}
+
+		return that._data;
+	}
+	set data(value) {
+		const that = this;
+
+		that._data = value;
+		that._observeData();
+		that.render();
+	}
+
+	_addTemplateBinding(id, bind) {
+		const that = this;
+
+		if (that.template['#' + id]) {
+			if (!that.template['#' + id].bind) {
+				that.template['#' + id].bind = bind;
+			}
+			else {
+				Object.assign(that.template['#' + id].bind, bind);
+			}
+		}
+		else {
+			that.template['#' + id] = {
+				bind: bind
+			}
+		}
+	}
+
+	_addListenerBinding(id, listener) {
+		const that = this;
+
+		if (that.template['#' + id]) {
+			if (!that.template['#' + id].listeners) {
+				that.template['#' + id].listeners = listener;
+			}
+			else {
+				Object.assign(that.template['#' + id].listeners, listener);
+			}
+		}
+		else {
+			that.template['#' + id] = {
+				listeners: listener
+			}
+		}
+	}
+
+	_updateDataFromBooleanElement(element, bind) {
+		const that = this;
+
+		const boundPropertyName = bind['checked'];
+		const bindItem = that._data[boundPropertyName];
+
+		if (element.value && element.value !== 'on') {
+			if (Array.isArray(bindItem) || bindItem.name === 'observableArray') {
+				if (element.checked) {
+					bindItem.push(element.value);
+				}
+				else {
+					const removeIndex = bindItem.indexOf(element.value);
+
+					if (removeIndex >= 0) {
+						bindItem.splice(removeIndex, 1);
+					}
+				}
+			}
+			else {
+				if (element.type !== 'radio') {
+					if (element.checked) {
+						that._data[boundPropertyName] = element.value;
+					}
+					else {
+						that._data[boundPropertyName] = '';
+					}
+				}
+				else if (element.checked) {
+					that._data[boundPropertyName] = element.value;
+				}
+			}
+		}
+		else {
+			that._data[boundPropertyName] = element.checked;
+		}
+	}
+
+	_updateDataFromNativeElement(element, bind) {
+		const that = this;
+
+		if (element.tagName === 'SELECT') {
+			element.addEventListener('change', function () {
+				const boundPropertyName = bind['value'];
+				let dataItem = that._data[boundPropertyName];
+
+				element.__updating = true;
+
+				if (Array.isArray(dataItem) || dataItem.name === 'observableArray') {
+					dataItem = new window.Smart.ObservableArray();
+
+					if (element.selectedOptions) {
+						for (let i = 0; i < element.selectedOptions.length; i++) {
+							const option = element.selectedOptions[i];
+
+							dataItem.push(option.value);
+						}
+					}
+
+					that._data[boundPropertyName] = dataItem;
+				}
+				else {
+					that._data[boundPropertyName] = element.value;
+				}
+
+				element.__updating = false;
+			});
+		}
+
+		if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+			element.addEventListener('change', function () {
+				element.__updating = true;
+
+				if (isBoolean) {
+					that._updateDataFromBooleanElement(element, bind);
+				}
+				else {
+					that._data['value'] = element.value;
+				}
+
+				element.__updating = false;
+			});
+
+
+			let isBoolean = (element.type === 'checkbox' || element.type === 'radio');
+
+			if (!isBoolean) {
+				element.addEventListener('keyup', function () {
+					const boundPropertyName = bind['value'];
+
+					that._data[boundPropertyName] = element.value;
+				});
+			}
+		}
+	}
+
+	_addModelBindings(ownerElement) {
+		const that = this;
+
+		const elements = ownerElement ? ownerElement.querySelectorAll('[smart-model]') : that._appRoot.querySelectorAll('[smart-model]');
+
+		for (let i = 0; i < elements.length; i++) {
+			const element = elements[i];
+			let bind = {
+				value: element.getAttribute('smart-model')
+			};
+
+			if (element.type === 'list') {
+				bind = {
+					selectedValues: element.getAttribute('smart-model')
+				};
+			}
+
+			if (element.type === 'checkbox' || element.type === 'radio') {
+				bind = {
+					checked: element.getAttribute('smart-model')
+				};
+			}
+
+			if (!element.id) {
+				element.id = 'id' + window[namespace].Utilities.Core.createGUID().replace(/-/ig, '');
+			}
+
+
+			that._updateDataFromNativeElement(element, bind);
+			that._addTemplateBinding(element.id, bind);
+		}
+	}
+
+	_renderForBindings(invokeRender) {
+		const that = this;
+
+		const elements = that._appRoot.querySelectorAll('[smart-for]');
+
+		for (let i = 0; i < elements.length; i++) {
+			const element = elements[i];
+			const dataName = element.getAttribute('smart-for');
+			const array = that._data[dataName];
+
+			if (!element.id) {
+				element.id = 'id' + window[namespace].Utilities.Core.createGUID().replace(/-/ig, '');
+			}
+
+			element.setAttribute('smart-for-rendered', '');
+
+			const selfRepeat = element.getAttribute('smart-for-self') !== null;
+			const toRemove = !selfRepeat ? element.querySelectorAll('.smart-for-item-' + element.id) : element.parentNode.querySelectorAll('.smart-for-item-' + element.id);
+
+			for (let r = 0; r < toRemove.length; r++) {
+				if (that.template[toRemove[r].id]) {
+					delete that.template[toRemove[r].id];
+				}
+
+				toRemove[r].remove();
+			}
+
+			const node = selfRepeat ? element : element.firstElementChild;
+			const fragment = document.createDocumentFragment();
+
+			for (let j = 0; j < array.length; j++) {
+				const clonedNode = node.cloneNode(true);
+
+				clonedNode.style.display = '';
+
+				clonedNode.id = element.id + '_' + j;
+				clonedNode.classList.add('smart-for-item');
+				clonedNode.classList.add('smart-for-item-' + element.id);
+
+				clonedNode.removeAttribute('smart-for');
+				fragment.appendChild(clonedNode);
+			}
+
+			node.style.display = 'none';
+
+			if (!selfRepeat) {
+				element.appendChild(fragment);
+			}
+			else {
+				element.parentNode.insertBefore(fragment, element.nextSibling);
+			}
+
+			let children = that._appRoot.querySelectorAll('.smart-for-item-' + element.id);
+
+			for (let j = 0; j < children.length; j++) {
+				const childNode = children[j];
+
+				that._addAttributeBindings(childNode, dataName + '.' + j + '.');
+			}
+		}
+
+		if (invokeRender && elements.length > 0) {
+			that.render();
+		}
+	}
+
+	notify(notifyFn) {
+		const that = this;
+
+		that.notifyFn = function (changes) {
+			changes.owner = that;
+
+			notifyFn(changes);
+		}
+	}
+
+	_notify(changes) {
+		const that = this;
+
+		if (changes.propertyName === 'length') {
+			return;
+		}
+
+		if (that.notifyFn) {
+			that.notifyFn(changes);
+		}
+
+		let dataPropertyName = changes.propertyName;
+		if (changes.object) {
+			dataPropertyName = changes.object.propertyName;
+		}
+
+		for (let selector in that.template) {
+			const item = that.template[selector];
+
+			let elementProperty = null;
+
+			for (let property in item.bind) {
+				if (typeof item.bind[property] === 'function') {
+					continue;
+				}
+
+				if (item.bind[property].indexOf(dataPropertyName) >= 0) {
+					elementProperty = property;
+					break;
+				}
+			}
+
+			if (!elementProperty) {
+				continue;
+			}
+
+			that._setPropertyFromData(item, elementProperty);
+		}
+
+		that._renderForBindings(true);
+	}
+
+	_observeData() {
+		const that = this;
+
+		that._data = new window[namespace].Observable(that._data);
+		that._data.canNotify = false;
+		that._data.notify(that._notify.bind(that));
+
+		const observeSubData = function (data) {
+			data.canNotify = false;
+
+			for (let dataItem in data) {
+				if (typeof data[dataItem] === 'function') {
+					data[dataItem] = data[dataItem].bind(data);
+					continue;
+				}
+
+				if (dataItem.startsWith('_') || dataItem === 'notifyFn' || dataItem === 'canNotify' || dataItem === 'name') {
+					continue;
+				}
+
+				const dataItemValue = data[dataItem];
+
+				if (Array.isArray(dataItemValue)) {
+					data[dataItem] = new window[namespace].ObservableArray(data[dataItem]);
+					data[dataItem].canNotify = false;
+					data[dataItem].notify(that._notify.bind(that));
+					data[dataItem].canNotify = true;
+					data[dataItem].propertyName = dataItem;
+				}
+				else if (dataItemValue && typeof dataItemValue === 'object' && dataItemValue.constructor === window[namespace].DataAdapter) {
+					data[dataItem].propertyName = dataItem;
+				}
+				else if (dataItemValue && typeof dataItemValue === 'object' && dataItemValue instanceof Date) {
+					data[dataItem].propertyName = dataItem;
+				}
+				else if (dataItemValue && typeof dataItemValue === 'object') {
+					data[dataItem] = new window[namespace].Observable(data[dataItem]);
+					data[dataItem].canNotify = false;
+					data[dataItem].notify(that._notify.bind(that));
+					data[dataItem].canNotify = true;
+					data[dataItem].propertyName = dataItem;
+
+					observeSubData(data[dataItem]);
+				}
+			}
+
+			data.canNotify = true;
+		}
+
+		for (let dataItem in that._data) {
+			if (typeof that._data[dataItem] === 'function') {
+				that._data[dataItem] = that._data[dataItem].bind(that._data);
+				continue;
+			}
+
+			if (dataItem.startsWith('_') || dataItem === 'notifyFn' || dataItem === 'canNotify' || dataItem === 'name') {
+				continue;
+			}
+
+			const dataItemValue = that._data[dataItem];
+
+			if (Array.isArray(dataItemValue)) {
+				that._data[dataItem] = new window[namespace].ObservableArray(that._data[dataItem]);
+				that._data[dataItem].canNotify = false;
+				that._data[dataItem].notify(that._notify.bind(that));
+				that._data[dataItem].canNotify = true;
+				that._data[dataItem].propertyName = dataItem;
+			}
+			else if (typeof dataItemValue === 'object' && dataItemValue.constructor === window[namespace].DataAdapter) {
+				that._data[dataItem].propertyName = dataItem;
+			}
+			else if (typeof dataItemValue === 'object' && dataItemValue instanceof Date) {
+				that._data[dataItem].propertyName = dataItem;
+			}
+			else if (typeof dataItemValue === 'object') {
+				that._data[dataItem] = new window[namespace].Observable(that._data[dataItem]);
+				that._data[dataItem].canNotify = false;
+				that._data[dataItem].notify(that._notify.bind(that));
+				that._data[dataItem].canNotify = true;
+				that._data[dataItem].propertyName = dataItem;
+
+				observeSubData(that._data[dataItem]);
+			}
+		}
+
+		that._data.canNotify = true;
+	}
+
+	_setPropertyFromData(item, propertyName) {
+		const that = this;
+
+		if (item.element.__updating || !item.bind) {
+			return;
+		}
+
+		const boundPropertyName = item.bind[propertyName];
+
+		if (typeof boundPropertyName === 'function') {
+			return;
+		}
+
+		const boundArray = boundPropertyName ? boundPropertyName.split('.') : [];
+
+		let dataItem = that._data;
+
+		for (let i = 0; i < boundArray.length; i++) {
+			const name = boundArray[i];
+
+			if (typeof dataItem === 'string') {
+				break;
+			}
+
+			if (undefined === dataItem[name]) {
+				dataItem = undefined;
+				break;
+			}
+
+			dataItem = dataItem[name];
+		}
+
+		if (item.bind.computed) {
+			const computedObject = {
+				item: item, name: boundPropertyName, value: dataItem
+			};
+
+			item.bind.computed(computedObject);
+
+			if (computedObject.value !== dataItem) {
+				dataItem = computedObject.value;
+			}
+		}
+
+		item.element.__updatingProperties = true;
+		if (boundPropertyName && dataItem !== undefined) {
+			if (dataItem.name === 'observableArray') {
+				if (item.element.type === 'checkbox') {
+					item.element[propertyName] = dataItem.indexOf(item.element.value) >= 0;
+				}
+				else {
+					item.element[propertyName] = dataItem.toArray().slice(0);
+				}
+			}
+			else if (dataItem.name === 'observable') {
+				const findInSubData = function (data) {
+					let foundData = null;
+
+					for (let dataItem in data) {
+						if (typeof data[dataItem] === 'function') {
+							continue;
+						}
+
+						if (dataItem.startsWith('_') || dataItem === 'notifyFn' || dataItem === 'canNotify' || dataItem === 'name') {
+							continue;
+						}
+
+						const dataItemValue = data[dataItem];
+
+						if (dataItemValue === undefined) {
+							continue;
+						}
+
+						if (dataItemValue && Array.isArray(dataItemValue)) {
+							continue;
+						}
+						else if (dataItemValue && typeof dataItemValue === 'object' && dataItemValue.constructor === window[namespace].DataAdapter) {
+							continue;
+						}
+						else if (dataItemValue && typeof dataItemValue === 'object') {
+							foundData = findInSubData(data[dataItem]);
+						}
+
+						if (dataItem === boundPropertyName) {
+							foundData = dataItemValue;
+							break;
+						}
+
+						if (foundData) {
+							return foundData;
+						}
+					}
+
+					return foundData;
+				}
+
+				const subData = findInSubData(dataItem);
+				if (subData) {
+					item.element[propertyName] = subData;
+				}
+				else {
+					item.element[propertyName] = dataItem;
+				}
+			}
+			else if (item.element.type === 'radio') {
+				if (item.element.value === dataItem) {
+					item.element[propertyName] = true;
+				}
+				else {
+					item.element[propertyName] = false;
+				}
+			}
+			else {
+				item.element[propertyName] = dataItem;
+			}
+
+			if (that._components[item.selector] && !that._components[item.selector].rendered) {
+				that._components[item.selector].properties[propertyName] = dataItem;
+			}
+		}
+		else if (item.properties) {
+			item.element[propertyName] = item.properties[propertyName];
+
+			if (that._components[item.selector] && !that._components[item.selector].rendered) {
+				that._components[item.selector].properties[propertyName] = item.properties[propertyName];
+			}
+		}
+
+		item.element.__updatingProperties = false;
+	}
+
+	render() {
+		const that = this;
+
+		for (let selector in that.template) {
+			const item = that.template[selector];
+			const element = item.element ? item.element : document.querySelector(selector);
+			const properties = item.properties;
+			const listeners = item.listeners;
+			const bind = item.bind;
+
+			if (!element) {
+				continue;
+			}
+
+			item.selector = selector;
+			item.element = element;
+
+			if (!element._properties) {
+				element._properties = [];
+			}
+
+			for (let propertyName in properties) {
+				const property = element._properties ? element._properties[propertyName] : null;
+
+				if (property) {
+					property.notify = true;
+				}
+
+				that._setPropertyFromData(item, propertyName);
+			}
+
+			for (let propertyName in bind) {
+				const property = element._properties ? element._properties[propertyName] : null;
+
+				if (property) {
+					property.notify = true;
+				}
+
+				that._setPropertyFromData(item, propertyName);
+			}
+
+			if (that._components && that._components[selector] && that._components[selector].rendered === false) {
+				const component = that._components[selector];
+
+				item.element = component.instance = new window[component.name](selector, component.properties);
+
+				component.rendered = true;
+			}
+
+			const handleListeners = function (type) {
+				const element = item.element;
+
+				for (let listenerName in listeners) {
+					if (!element.$) {
+						element.$ = window[namespace].Utilities.Extend(element);
+					}
+
+					element.$[type](listenerName, function (event) {
+						const dataHandlerName = listeners[listenerName]
+
+						if (dataHandlerName.indexOf('.') >= 0) {
+							const path = dataHandlerName.split('.');
+							let eventHandler = that._data[path[0]];
+
+							for (let i = 1; i < path.length; i++) {
+								eventHandler = eventHandler[path[i]];
+							}
+
+							if (eventHandler !== undefined) {
+								eventHandler(event);
+							}
+						}
+						else {
+							if (that._data[dataHandlerName]) {
+								that._data[dataHandlerName](event);
+							}
+						}
+					});
+				}
+
+				for (let propertyName in bind) {
+					const property = element._properties ? element._properties[propertyName] : null;
+
+					if (property) {
+						const eventHandler = function (event) {
+							if (element.__updatingProperties) {
+								return;
+							}
+
+							element.__updating = true;
+
+							const toggleRadioButtonUpdates = function (update) {
+								if (element.type === 'radio') {
+									const radioButtons = element.parentNode.querySelectorAll('[type="radio"]');
+
+									for (let i = 0; i < radioButtons.length; i++) {
+										radioButtons[i].__updating = update;
+									}
+								}
+							}
+
+							toggleRadioButtonUpdates(true);
+
+							const boundPropertyName = bind[propertyName];
+
+							if (element.type === 'radio' || element.type === 'toggle' || element.type === 'checkbox') {
+								that._updateDataFromBooleanElement(element, bind);
+							}
+							else {
+								const setValue = function (obj, path, value) {
+									var i;
+									for (i = 0; i < path.length - 1; i++) {
+										obj = obj[path[i]];
+									}
+									obj[path[i]] = value;
+								}
+
+								setValue(that._data, boundPropertyName.split('.'), event.detail.value);
+
+							}
+
+							element.__updating = false;
+							toggleRadioButtonUpdates(false);
+						}
+
+						if (element.type === 'textarea') {
+							element.$[type]('input.keyup', function (event) {
+								const customEvent = new CustomEvent('keyup', {
+									detail: {
+										originalEvent: event, value: element.$.input.value
+									}
+								});
+
+								eventHandler(customEvent);
+							});
+						}
+
+						element.$[type](property.attributeName + '-changed', function (event) {
+							eventHandler(event);
+						});
+					}
+					else {
+						//
+					}
+				}
+			}
+
+
+			handleListeners('unlisten');
+
+			if (element.isAttached) {
+				handleListeners('listen');
+			}
+
+			element.onAttached = function () {
+				handleListeners('listen');
+			}
+
+			element.onDetached = function () {
+				handleListeners('unlisten');
+			}
+		}
+
+	}
+}
+
+
+window[namespace].App = App;
+window[namespace.toLowerCase() + 'App'] = App;
+window.App = App;

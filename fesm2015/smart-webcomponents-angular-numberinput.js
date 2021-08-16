@@ -5,7 +5,7 @@ if (!window['Smart']) {
 else {
 	window['Smart'].RenderMode = 'manual';
 }
-import './../source/modules/smart.input';
+import './../source/modules/smart.numberinput';
 
 import { __decorate } from 'tslib';
 import { EventEmitter, Output, Input, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -311,6 +311,7 @@ let NumberInputComponent = class NumberInputComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

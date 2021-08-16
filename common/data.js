@@ -38,7 +38,7 @@
 		data[i] = row;
 		k++;
 	}
-	
+
 	return data;
 }
 
@@ -87,17 +87,17 @@ function generateData(rowscount, hasNullValues) {
         }
         row["firstName"] = firstNames[Math.floor(Math.random() * firstNames.length)];
         row["lastName"] = lastNames[Math.floor(Math.random() * lastNames.length)];
-        row["name"] = row["firstName"] + " " + row["lastName"]; 
+        row["name"] = row["firstName"] + " " + row["lastName"];
         row["productName"] = productNames[productindex];
         row["price"] = price;
         row["quantity"] = quantity;
         row["total"] = price * quantity;
 
         var date = new Date();
-        date.setFullYear(2016, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
+        date.setFullYear(2021, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
         date.setHours(0, 0, 0, 0);
         row["date"] = date;
-       
+
         data[i] = row;
     }
 
@@ -129,13 +129,13 @@ function generateOrdersData(rowscount) {
 
     var companyNames = ["Dolor Foundation", "Vivamus Non Lorem LLP", "Vel Ltd", "Turpis Incorporated", "Egestas Nunc PC", "At Pretium Aliquet Associates", "Feugiat Inc.", "Lacus Industries", "Senectus Et Foundation", "Sed LLC", "Maecenas Mi Felis LLC", "Pede Blandit Ltd", "Pellentesque Habitant Morbi Institute"
 		, "Mollis Vitae Industries", "Malesuada Vel Convallis LLP", "Risus Duis Corp.", "Convallis LLP", "Lobortis Augue LLC", "Auctor LLP", "Neque Inc.", "Lorem Eu Corporation"];
-		
+
     for (var i = 0; i < rowscount; i++) {
         var row = {};
         var productindex = Math.floor(Math.random() * productNames.length);
         var price = parseFloat(priceValues[productindex]);
         var quantity = 2 + Math.round(Math.random() * 10);
-       
+
         row["id"] = i;
         row["parentid"] = null;
         row["name"] = "Order " + i;
@@ -145,7 +145,7 @@ function generateOrdersData(rowscount) {
         var date = new Date();
         var month = Math.floor(Math.random() * 11);
         var day = Math.floor(Math.random() * 27);
-        date.setFullYear(2016, month, day);
+        date.setFullYear(2021, month, day);
         date.setHours(0, 0, 0, 0);
         row["date"] = date;
         row["price"] = "";
@@ -166,7 +166,7 @@ function generateOrdersData(rowscount) {
             subRow["price"] = price;
             subRow["quantity"] = 1;
             var date = new Date();
-            date.setFullYear(2016, month, day);
+            date.setFullYear(2021, month, day);
             date.setHours(Math.floor(Math.random() * 23), Math.floor(Math.random() * 59), 0, 0);
             subRow["date"] = date;
             row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -183,110 +183,110 @@ function generateOrdersData(rowscount) {
     return data;
 }
 function generateCarsData() {
-    var makes = [{ value:"", label: "Any"}, 
-       {value:"140", label: "Abarth"},      
-       {value:"375", label: "Acura"},      
-       {value:"800", label: "Aixam"},      
-       {value:"900", label: "Alfa Romeo"},      
-       {value:"1100", label: "Alpina"},      
-       {value:"121", label: "Artega"},      
-       {value:"1750", label: "Asia Motors"},      
-       {value:"1700", label: "Aston Martin"},      
-       {value:"1900", label: "Audi"},      
-       {value:"2000", label: "Austin"},      
-       {value:"1950", label: "Austin Healey"},      
-       {value:"3100", label: "Bentley"},      
-       {value:"3500", label: "BMW"},      
-       {value:"3850", label: "Borgward"},      
-       {value:"4025", label: "Brilliance"},      
-       {value:"4350", label: "Bugatti"},      
-       {value:"4400", label: "Buick"},      
-       {value:"4700", label: "Cadillac"},      
-       {value:"112", label: "Casalini"},      
-       {value:"5300", label: "Caterham"},      
-       {value:"5600", label: "Chevrolet"},      
-       {value:"5700", label: "Chrysler"},      
-       {value:"5900", label: "Citroën"},      
-       {value:"6200", label: "Cobra"},      
-       {value:"6325", label: "Corvette"},      
-       {value:"6600", label: "Dacia"},      
-       {value:"6800", label: "Daewoo"},      
-       {value:"7000", label: "Daihatsu"},      
-       {value:"7400", label: "DeTomaso"},      
-       {value:"7700", label: "Dodge"},      
-       {value:"8600", label: "Ferrari"},      
-       {value:"8800", label: "Fiat"},      
-       {value:"172", label: "Fisker"},      
-       {value:"9000", label: "Ford"},      
-       {value:"9900", label: "GMC"},      
-       {value:"122", label: "Grecav"},      
-       {value:"10850", label: "Holden"},      
-       {value:"11000", label: "Honda"},      
-       {value:"11050", label: "Hummer"},      
-       {value:"11600", label: "Hyundai"},      
-       {value:"11650", label: "Infiniti"},      
-       {value:"11900", label: "Isuzu"},      
-       {value:"12100", label: "Iveco"},      
-       {value:"12400", label: "Jaguar"},      
-       {value:"12600", label: "Jeep"},      
-       {value:"13200", label: "Kia"},      
-       {value:"13450", label: "Königsegg"},      
-       {value:"13900", label: "KTM"},      
-       {value:"14400", label: "Lada"},      
-       {value:"14600", label: "Lamborghini"},      
-       {value:"14700", label: "Lancia"},      
-       {value:"14800", label: "Land Rover"},      
-       {value:"14845", label: "Landwind"},      
-       {value:"15200", label: "Lexus"},      
-       {value:"15400", label: "Ligier"},      
-       {value:"15500", label: "Lincoln"},      
-       {value:"15900", label: "Lotus"},      
-       {value:"16200", label: "Mahindra"},      
-       {value:"16600", label: "Maserati"},      
-       {value:"16700", label: "Maybach"},      
-       {value:"16800", label: "Mazda"},      
-       {value:"137", label: "McLaren"},      
-       {value:"17200", label: "Mercedes-Benz"},      
-       {value:"17300", label: "MG"},      
-       {value:"30011", label: "Microcar"},      
-       {value:"17500", label: "MINI"},      
-       {value:"17700", label: "Mitsubishi"},      
-       {value:"17900", label: "Morgan"},      
-       {value:"18700", label: "Nissan"},      
-       {value:"18875", label: "NSU"},      
-       {value:"18975", label: "Oldsmobile"},      
-       {value:"19000", label: "Opel"},      
-       {value:"149", label: "Pagani"},      
-       {value:"19300", label: "Peugeot"},      
-       {value:"19600", label: "Piaggio"},      
-       {value:"19800", label: "Plymouth"},      
-       {value:"20000", label: "Pontiac"},      
-       {value:"20100", label: "Porsche"},      
-       {value:"20200", label: "Proton"},      
-       {value:"20700", label: "Renault"},      
-       {value:"21600", label: "Rolls Royce"},      
-       {value:"21700", label: "Rover"},      
-       {value:"125", label: "Ruf"},      
-       {value:"21800", label: "Saab"},      
-       {value:"22000", label: "Santana"},      
-       {value:"22500", label: "Seat"},      
-       {value:"22900", label: "Skoda"},      
-       {value:"23000", label: "Smart"},      
-       {value:"100", label: "Spyker"},      
-       {value:"23100", label: "Ssangyong"},      
-       {value:"23500", label: "Subaru"},      
-       {value:"23600", label: "Suzuki"},      
-       {value:"23800", label: "Talbot"},      
-       {value:"23825", label: "Tata"},      
-       {value:"135", label: "Tesla"},      
-       {value:"24100", label: "Toyota"},      
-       {value:"24200", label: "Trabant"},      
-       {value:"24400", label: "Triumph"},      
-       {value:"24500", label: "TVR"},      
-       {value:"25200", label: "Volkswagen"},      
-       {value:"25100", label: "Volvo"},      
-       {value:"25300", label: "Wartburg"},      
-       {value:"113", label: "Westfield"},      
+    var makes = [{ value:"", label: "Any"},
+       {value:"140", label: "Abarth"},
+       {value:"375", label: "Acura"},
+       {value:"800", label: "Aixam"},
+       {value:"900", label: "Alfa Romeo"},
+       {value:"1100", label: "Alpina"},
+       {value:"121", label: "Artega"},
+       {value:"1750", label: "Asia Motors"},
+       {value:"1700", label: "Aston Martin"},
+       {value:"1900", label: "Audi"},
+       {value:"2000", label: "Austin"},
+       {value:"1950", label: "Austin Healey"},
+       {value:"3100", label: "Bentley"},
+       {value:"3500", label: "BMW"},
+       {value:"3850", label: "Borgward"},
+       {value:"4025", label: "Brilliance"},
+       {value:"4350", label: "Bugatti"},
+       {value:"4400", label: "Buick"},
+       {value:"4700", label: "Cadillac"},
+       {value:"112", label: "Casalini"},
+       {value:"5300", label: "Caterham"},
+       {value:"5600", label: "Chevrolet"},
+       {value:"5700", label: "Chrysler"},
+       {value:"5900", label: "Citroën"},
+       {value:"6200", label: "Cobra"},
+       {value:"6325", label: "Corvette"},
+       {value:"6600", label: "Dacia"},
+       {value:"6800", label: "Daewoo"},
+       {value:"7000", label: "Daihatsu"},
+       {value:"7400", label: "DeTomaso"},
+       {value:"7700", label: "Dodge"},
+       {value:"8600", label: "Ferrari"},
+       {value:"8800", label: "Fiat"},
+       {value:"172", label: "Fisker"},
+       {value:"9000", label: "Ford"},
+       {value:"9900", label: "GMC"},
+       {value:"122", label: "Grecav"},
+       {value:"10850", label: "Holden"},
+       {value:"11000", label: "Honda"},
+       {value:"11050", label: "Hummer"},
+       {value:"11600", label: "Hyundai"},
+       {value:"11650", label: "Infiniti"},
+       {value:"11900", label: "Isuzu"},
+       {value:"12100", label: "Iveco"},
+       {value:"12400", label: "Jaguar"},
+       {value:"12600", label: "Jeep"},
+       {value:"13200", label: "Kia"},
+       {value:"13450", label: "Königsegg"},
+       {value:"13900", label: "KTM"},
+       {value:"14400", label: "Lada"},
+       {value:"14600", label: "Lamborghini"},
+       {value:"14700", label: "Lancia"},
+       {value:"14800", label: "Land Rover"},
+       {value:"14845", label: "Landwind"},
+       {value:"15200", label: "Lexus"},
+       {value:"15400", label: "Ligier"},
+       {value:"15500", label: "Lincoln"},
+       {value:"15900", label: "Lotus"},
+       {value:"16200", label: "Mahindra"},
+       {value:"16600", label: "Maserati"},
+       {value:"16700", label: "Maybach"},
+       {value:"16800", label: "Mazda"},
+       {value:"137", label: "McLaren"},
+       {value:"17200", label: "Mercedes-Benz"},
+       {value:"17300", label: "MG"},
+       {value:"30011", label: "Microcar"},
+       {value:"17500", label: "MINI"},
+       {value:"17700", label: "Mitsubishi"},
+       {value:"17900", label: "Morgan"},
+       {value:"18700", label: "Nissan"},
+       {value:"18875", label: "NSU"},
+       {value:"18975", label: "Oldsmobile"},
+       {value:"19000", label: "Opel"},
+       {value:"149", label: "Pagani"},
+       {value:"19300", label: "Peugeot"},
+       {value:"19600", label: "Piaggio"},
+       {value:"19800", label: "Plymouth"},
+       {value:"20000", label: "Pontiac"},
+       {value:"20100", label: "Porsche"},
+       {value:"20200", label: "Proton"},
+       {value:"20700", label: "Renault"},
+       {value:"21600", label: "Rolls Royce"},
+       {value:"21700", label: "Rover"},
+       {value:"125", label: "Ruf"},
+       {value:"21800", label: "Saab"},
+       {value:"22000", label: "Santana"},
+       {value:"22500", label: "Seat"},
+       {value:"22900", label: "Skoda"},
+       {value:"23000", label: "Smart"},
+       {value:"100", label: "Spyker"},
+       {value:"23100", label: "Ssangyong"},
+       {value:"23500", label: "Subaru"},
+       {value:"23600", label: "Suzuki"},
+       {value:"23800", label: "Talbot"},
+       {value:"23825", label: "Tata"},
+       {value:"135", label: "Tesla"},
+       {value:"24100", label: "Toyota"},
+       {value:"24200", label: "Trabant"},
+       {value:"24400", label: "Triumph"},
+       {value:"24500", label: "TVR"},
+       {value:"25200", label: "Volkswagen"},
+       {value:"25100", label: "Volvo"},
+       {value:"25300", label: "Wartburg"},
+       {value:"113", label: "Westfield"},
        { value: "25650", label: "Wiesmann" }];
 
     var fuelType = ["Any", "Diesel", "Electric", "Ethanol (FFV, E85, etc.)", "Gas", "LPG", "Natural Gas", "Hybrid", "Hydrogen", "Petrol"];
@@ -443,7 +443,7 @@ function getCountriesData() {
 
 
 function getStockData() {
-	var data = 
+	var data =
 	 [
         {
             "symbol": "BA",
@@ -556,7 +556,7 @@ function getStockData() {
             "matchScore": "0.1538"
         }
     ];
-	
+
 	return data;
 }
 
@@ -1085,7 +1085,7 @@ function getCountriesCurrencyData() {
 	  ["ZIMBABWE","Zimbabwe Dollar","ZWL",932  ],
 	  ["ÅLAND ISLANDS","Euro","EUR",978  ]
 	];
-	
+
 	return data;
 }
 
@@ -1363,4 +1363,88 @@ function getKanbanHierarchicalData() {
 
     data = data.concat(getKanbanData());
     return data;
+}
+
+function generatePivotData(numberOfRecords, numberOfYears = 4) {
+    const continents = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'],
+        cities = {
+            Africa: ['Cairo', 'Lagos', 'Kinshasa', 'Luanda', 'Khartoum'],
+            Asia: ['Tokyo', 'Delhi', 'Shanghai', 'Mumbai', 'Beijing'],
+            Australia: ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide'],
+            Europe: ['Istanbul', 'Moscow', 'Paris', 'London', 'Madrid'],
+            'North America': ['Mexico City', 'New York City', 'Los Angeles', 'Chicago', 'Houston'],
+            'South America': ['São Paulo', 'Buenos Aires', 'Rio de Janeiro', 'Bogotá', 'Lima']
+        },
+        allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        months = {
+            Q1: ['January', 'February', 'March'],
+            Q2: ['April', 'May', 'June'],
+            Q3: ['July', 'August', 'September'],
+            Q4: ['October', 'November', 'December']
+        },
+        maxYear = new Date().getFullYear(),
+        minYear = maxYear - numberOfYears + 1;
+    let result = [];
+
+    for (let i = 0; i < numberOfRecords; i++) {
+        const dataPoint = {};
+
+        dataPoint.continent = continents[Math.floor(Math.random() * continents.length)];
+        dataPoint.city = cities[dataPoint.continent][Math.floor(Math.random() * cities[dataPoint.continent].length)];
+        dataPoint.year = Math.floor(Math.random() * (maxYear - minYear + 1)) + minYear;
+        dataPoint.quarter = ['Q1', 'Q2', 'Q3', 'Q4'][Math.floor(Math.random() * 4)];
+        dataPoint.month = months[dataPoint.quarter][[Math.floor(Math.random() * 3)]];
+        dataPoint.revenue = Math.floor(Math.random() * (10000 - 1001)) + 1000;
+        dataPoint.expense = -1 * Math.floor(Math.random() * (10000 - 1001)) + 1000;
+
+        result.push(dataPoint);
+    }
+
+    if (window.JQX && window.JQX.DataAdapter) {
+        result = new window.JQX.DataAdapter({
+            dataSource: result,
+            dataFields: [
+                'continent: string',
+                'city: string',
+                'year: number',
+                'quarter: string',
+                'month: string',
+                'revenue: number',
+                'expense: number'
+            ]
+        });
+
+        result._sort(result.boundSource, ['year', 'quarter', 'month'], ['asc', 'asc', 'asc'], ['number', 'string', 'string'],
+            function (dataSource, sortColumns, directions, compareFunctions) {
+                dataSource.sort(function (a, b) {
+                    for (let i = 0; i < sortColumns.length; i++) {
+                        if (i === 2) {
+                            return allMonths.indexOf(a.month) - allMonths.indexOf(b.month);
+                        }
+
+                        const result = compareFunctions[i](a[sortColumns[i]], b[sortColumns[i]]);
+
+                        if (result === 0) {
+                            if (sortColumns[i + 1]) {
+                                continue;
+                            }
+                            else if (a.$.index !== undefined) {
+                                // makes sorting stable
+                                return (a.$.index - b.$.index) * (directions[i] === 'asc' ? 1 : -1);
+                            }
+
+                            return 0;
+                        }
+
+                        return result * (directions[i] === 'asc' ? 1 : -1);
+                    }
+                });
+
+                for (let i = 0; i < dataSource.length; i++) {
+                    result[i] = dataSource[i];
+                }
+            });
+    }
+
+    return result;
 }

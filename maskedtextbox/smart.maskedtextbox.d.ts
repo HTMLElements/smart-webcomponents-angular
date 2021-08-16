@@ -93,11 +93,17 @@ export declare class MaskedTextBoxComponent extends BaseElement implements OnIni
     /** @description Callback function that allows to set custom validation on the value. If the function returns false then the value of the input is treated as not valid. */
     validation: any;
     /** @description This event is triggered when the value of the Text Box is changed.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	newValue)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
     *   oldValue - The previous value before it was changed.
-    *   newValue - The new value.
+    *   value - The new value.
     */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered on each key up event of the MaskedTextBox, if the value is changed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+    *   oldValue - The previous value before it was changed.
+    *   value - The new value.
+    */
+    onChanging: EventEmitter<CustomEvent>;
     /** @description This event is triggered if the validation property is set. Indicates whether valiation has passed successfully or not.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	success)
     *   success - A flag inidicating whether the validation was successfull or not.

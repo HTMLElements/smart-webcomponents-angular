@@ -383,6 +383,7 @@ var FormComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -797,6 +798,7 @@ var FormControlComponent = /** @class */ (function (_super) {
     FormControlComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -1118,6 +1120,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
     FormGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };

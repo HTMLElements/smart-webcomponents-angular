@@ -605,6 +605,7 @@ import './../source/modules/smart.form';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1019,6 +1020,7 @@ import './../source/modules/smart.form';
         FormControlComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1340,6 +1342,7 @@ import './../source/modules/smart.form';
         FormGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };

@@ -626,6 +626,17 @@ import './../source/modules/smart.datetimepicker';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(DateTimePickerComponent.prototype, "footer", {
+            /** @description Determines whether to display a footer. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.footer : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.footer = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(DateTimePickerComponent.prototype, "formatString", {
             /** @description Determines the pattern that is used to display the value in. */
             get: function () {
@@ -1098,6 +1109,7 @@ import './../source/modules/smart.datetimepicker';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1269,6 +1281,9 @@ import './../source/modules/smart.datetimepicker';
         __decorate([
             core.Input()
         ], DateTimePickerComponent.prototype, "footerTemplate", null);
+        __decorate([
+            core.Input()
+        ], DateTimePickerComponent.prototype, "footer", null);
         __decorate([
             core.Input()
         ], DateTimePickerComponent.prototype, "formatString", null);

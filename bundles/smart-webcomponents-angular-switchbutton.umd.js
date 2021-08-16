@@ -638,6 +638,7 @@ import './../source/modules/smart.button';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -649,7 +650,7 @@ import './../source/modules/smart.button';
                 if (!this.nativeElement) {
                     return null;
                 }
-                var value = this.nativeElement.value;
+                var value = this.nativeElement.checked;
                 return value;
             },
             set: function (value) {
@@ -664,7 +665,8 @@ import './../source/modules/smart.button';
             var that = this;
             var normalizedValue = value == null ? '' : value;
             that.nativeElement.whenRendered(function () {
-                that.value = normalizedValue;
+                that.checked = normalizedValue;
+                that.value = '' + normalizedValue;
                 if (that._initialChange === false) {
                     that._onChange(that.value);
                 }

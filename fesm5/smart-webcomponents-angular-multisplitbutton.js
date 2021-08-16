@@ -136,8 +136,19 @@ var MultiSplitButtonComponent = /** @class */ (function (_super) {
     function MultiSplitButtonComponent(ref) {
         var _this = _super.call(this, ref) || this;
         _this.eventHandlers = [];
-        /** @description This event is triggered when button's dropDown selection is changed.
+        /** @description This event is triggered when action button is clicked.
         *  @param event. The custom event. 	*/
+        _this.onButtonClick = new EventEmitter();
+        /** @description This event is triggered when the selection is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	addedItems, 	disabled, 	index, 	label, 	removedItems, 	selected, 	value)
+        *   addedItems - An array of List items that have been selected.
+        *   disabled - A flag indicating whether or not the item that caused the change event is disabled.
+        *   index - The index of the List item that triggered the event.
+        *   label - The label of the List item that triggered the event.
+        *   removedItems - An array of List items that have been unselected before the event was fired.
+        *   selected - The selected state of the List item that triggered the event. If an item was selected the value will be true and vice versa.
+        *   value - The value of the List item that triggered the event.
+        */
         _this.onChange = new EventEmitter();
         /** @description This event is triggered when button's dropDown list is closed.
         *  @param event. The custom event. 	*/
@@ -145,8 +156,14 @@ var MultiSplitButtonComponent = /** @class */ (function (_super) {
         /** @description This event is triggered when button's dropDown list is closing.
         *  @param event. The custom event. 	*/
         _this.onClosing = new EventEmitter();
-        /** @description This event is triggered when user clicks any of the element's buttons or button's dropDown items.
-        *  @param event. The custom event. 	*/
+        /** @description This event is triggered when an item is clicked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	disabled, 	index, 	label, 	selected, 	value)
+        *   disabled - Indicates whether the List item that was clicked is disabled or not.
+        *   index - Indicates the index of the List item that was clicked.
+        *   label - The label of the List item that was clicked.
+        *   selected - Indicates whether the List item that was clicked is selected or not.
+        *   value - The value of the List item that was clicked.
+        */
         _this.onItemClick = new EventEmitter();
         /** @description This event is triggered when button's dropDown list is opened.
         *  @param event. The custom event. 	*/
@@ -695,6 +712,7 @@ var MultiSplitButtonComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -713,6 +731,8 @@ var MultiSplitButtonComponent = /** @class */ (function (_super) {
     /** @description Add event listeners. */
     MultiSplitButtonComponent.prototype.listen = function () {
         var that = this;
+        that.eventHandlers['buttonClickHandler'] = function (event) { that.onButtonClick.emit(event); };
+        that.nativeElement.addEventListener('buttonClick', that.eventHandlers['buttonClickHandler']);
         that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['closeHandler'] = function (event) { that.onClose.emit(event); };
@@ -733,6 +753,9 @@ var MultiSplitButtonComponent = /** @class */ (function (_super) {
     /** @description Remove event listeners. */
     MultiSplitButtonComponent.prototype.unlisten = function () {
         var that = this;
+        if (that.eventHandlers['buttonClickHandler']) {
+            that.nativeElement.removeEventListener('buttonClick', that.eventHandlers['buttonClickHandler']);
+        }
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
         }
@@ -866,6 +889,9 @@ var MultiSplitButtonComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], MultiSplitButtonComponent.prototype, "virtualized", null);
+    __decorate([
+        Output()
+    ], MultiSplitButtonComponent.prototype, "onButtonClick", void 0);
     __decorate([
         Output()
     ], MultiSplitButtonComponent.prototype, "onChange", void 0);
@@ -1050,6 +1076,7 @@ var ListItemComponent = /** @class */ (function (_super) {
     ListItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     ListItemComponent.prototype.ngOnDestroy = function () { };
@@ -1148,6 +1175,7 @@ var ListItemsGroupComponent = /** @class */ (function (_super) {
     ListItemsGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     ListItemsGroupComponent.prototype.ngOnDestroy = function () { };

@@ -570,6 +570,17 @@ import './../source/modules/smart.listmenu';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(ListMenuComponent.prototype, "filterMember", {
+            /** @description Determines the MenuItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the 'value' property or 'textContent' if the user wants to filter by text inside the MenuItem's content or any other property. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.filterMember : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.filterMember = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(ListMenuComponent.prototype, "filterMode", {
             /** @description Determines the filtering mode. */
             get: function () {
@@ -908,6 +919,7 @@ import './../source/modules/smart.listmenu';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1009,6 +1021,9 @@ import './../source/modules/smart.listmenu';
         __decorate([
             core.Input()
         ], ListMenuComponent.prototype, "filterInputPlaceholder", null);
+        __decorate([
+            core.Input()
+        ], ListMenuComponent.prototype, "filterMember", null);
         __decorate([
             core.Input()
         ], ListMenuComponent.prototype, "filterMode", null);
@@ -1194,6 +1209,7 @@ import './../source/modules/smart.listmenu';
         MenuItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         MenuItemComponent.prototype.ngOnDestroy = function () { };
@@ -1379,6 +1395,7 @@ import './../source/modules/smart.listmenu';
         MenuItemsGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         MenuItemsGroupComponent.prototype.ngOnDestroy = function () { };

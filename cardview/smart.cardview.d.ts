@@ -1,8 +1,8 @@
 import { CardView } from './../index';
-import { Animation, Orientation, CardViewCoverMode, CardViewHeaderPosition, Scrolling, CardViewColumn } from './../index';
+import { Animation, Orientation, CardViewCoverMode, CardViewHeaderPosition, Scrolling, CardViewColumn, DataSourceSettings } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, Orientation, CardViewCoverMode, CardViewHeaderPosition, Scrolling, CardViewColumn, ElementRenderMode } from './../index';
+export { Animation, Orientation, CardViewColumnDataType, CardViewCoverMode, DataSourceSettingsSanitizeHTML, DataSourceSettingsDataFieldDataType, DataSourceSettingsDataSourceType, CardViewHeaderPosition, Scrolling, CardViewColumn, DataSourceSettings, DataSourceSettingsDataField, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { CardView } from './../index';
 export { DataAdapter } from './../index';
@@ -34,6 +34,8 @@ export declare class CardViewComponent extends BaseElement implements OnInit, Af
     coverMode: CardViewCoverMode;
     /** @description Determines the data source for the item that will be displayed inside the card. */
     dataSource: any;
+    /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+    dataSourceSettings: DataSourceSettings;
     /** @description Allows the edit option for the cards. */
     editable: boolean;
     /** @description Sets or gets the header position. The header contains the Customize, Filter, Sort, and Search buttons. */
@@ -42,6 +44,10 @@ export declare class CardViewComponent extends BaseElement implements OnInit, Af
     locale: string;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    rightToLeft: boolean;
+    /** @description Determines the theme. Theme defines the look of the element */
+    theme: string;
     /** @description Describes the scrolling behavior of the element. */
     scrolling: Scrolling;
     /** @description Describes which data field to be set as title. */

@@ -256,161 +256,203 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
     set drillDown(value) {
         this.nativeElement ? this.nativeElement.drillDown = value : undefined;
     }
+    /** @description If set, shows an export button in the drill down dialog. */
+    get drillDownDataExport() {
+        return this.nativeElement ? this.nativeElement.drillDownDataExport : undefined;
+    }
+    set drillDownDataExport(value) {
+        this.nativeElement ? this.nativeElement.drillDownDataExport = value : undefined;
+    }
+    /** @description Sets or gets the drill down table export file name. */
+    get drillDownDataExportName() {
+        return this.nativeElement ? this.nativeElement.drillDownDataExportName : undefined;
+    }
+    set drillDownDataExportName(value) {
+        this.nativeElement ? this.nativeElement.drillDownDataExportName = value : undefined;
+    }
+    /** @description Sets or gets whether sorting based on columns in classic row groups layout mode is enabled. */
+    get drillDownTableInit() {
+        return this.nativeElement ? this.nativeElement.drillDownTableInit : undefined;
+    }
+    set drillDownTableInit(value) {
+        this.nativeElement ? this.nativeElement.drillDownTableInit = value : undefined;
+    }
     /** @description Sets or gets whether the PivotTable's column header is sticky/frozen. */
+    get drillDownCustomAction() {
+        return this.nativeElement ? this.nativeElement.drillDownCustomAction : undefined;
+    }
+    set drillDownCustomAction(value) {
+        this.nativeElement ? this.nativeElement.drillDownCustomAction = value : undefined;
+    }
+    /** @description Sets or gets whether to show a Grand total row aggregating the data of all rows. */
+    get enableSortByRowGroups() {
+        return this.nativeElement ? this.nativeElement.enableSortByRowGroups : undefined;
+    }
+    set enableSortByRowGroups(value) {
+        this.nativeElement ? this.nativeElement.enableSortByRowGroups = value : undefined;
+    }
+    /** @description Sets or gets the way row nesting (based on rowGroup columns) is displayed. */
     get freezeHeader() {
         return this.nativeElement ? this.nativeElement.freezeHeader : undefined;
     }
     set freezeHeader(value) {
         this.nativeElement ? this.nativeElement.freezeHeader = value : undefined;
     }
-    /** @description A callback function that returns the default summary function of a summary column when it is dynamically assigned as such (e.g. by drag-drop in the designer). */
+    /** @description Sets or gets whether to hide the tooltip that displays details when multiple summary cells with non-null values are selected. */
     get getDefaultSummaryFunction() {
         return this.nativeElement ? this.nativeElement.getDefaultSummaryFunction : undefined;
     }
     set getDefaultSummaryFunction(value) {
         this.nativeElement ? this.nativeElement.getDefaultSummaryFunction = value : undefined;
     }
-    /** @description Sets or gets whether to show a Grand total row aggregating the data of all rows. */
+    /** @description Sets or gets whether to hide rows that contain only 0 or null values. Applicable only when there are rowGroup columns. */
     get grandTotal() {
         return this.nativeElement ? this.nativeElement.grandTotal : undefined;
     }
     set grandTotal(value) {
         this.nativeElement ? this.nativeElement.grandTotal = value : undefined;
     }
-    /** @description Sets or gets the way row nesting (based on rowGroup columns) is displayed. */
+    /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
     get groupLayout() {
         return this.nativeElement ? this.nativeElement.groupLayout : undefined;
     }
     set groupLayout(value) {
         this.nativeElement ? this.nativeElement.groupLayout = value : undefined;
     }
-    /** @description Sets or gets whether to hide the tooltip that displays details when multiple summary cells with non-null values are selected. */
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     get hideCellSelectionTooltip() {
         return this.nativeElement ? this.nativeElement.hideCellSelectionTooltip : undefined;
     }
     set hideCellSelectionTooltip(value) {
         this.nativeElement ? this.nativeElement.hideCellSelectionTooltip = value : undefined;
     }
-    /** @description Sets or gets whether to hide rows that contain only 0 or null values. Applicable only when there are rowGroup columns. */
+    /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
     get hideEmptyRows() {
         return this.nativeElement ? this.nativeElement.hideEmptyRows : undefined;
     }
     set hideEmptyRows(value) {
         this.nativeElement ? this.nativeElement.hideEmptyRows = value : undefined;
     }
-    /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
+    /** @description Sets or gets what value is shown in cells that do not have aggregated data to display. By default (null), such cells are empty. */
     get keyboardNavigation() {
         return this.nativeElement ? this.nativeElement.keyboardNavigation : undefined;
     }
     set keyboardNavigation(value) {
         this.nativeElement ? this.nativeElement.keyboardNavigation = value : undefined;
     }
-    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get locale() {
         return this.nativeElement ? this.nativeElement.locale : undefined;
     }
     set locale(value) {
         this.nativeElement ? this.nativeElement.locale = value : undefined;
     }
-    /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
+    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
     get messages() {
         return this.nativeElement ? this.nativeElement.messages : undefined;
     }
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
     }
-    /** @description Sets or gets what value is shown in cells that do not have aggregated data to display. By default (null), such cells are empty. */
+    /** @description Sets or gets whether row summaries are displayed in the row headers. Example: Peterson(40) vs Peterson, when rowSummary is set to false. */
     get nullDefaultValue() {
         return this.nativeElement ? this.nativeElement.nullDefaultValue : undefined;
     }
     set nullDefaultValue(value) {
         this.nativeElement ? this.nativeElement.nullDefaultValue = value : undefined;
     }
-    /** @description A callback function executed each time a PivotTable cell is rendered. */
+    /** @description Sets or gets whether to show row total columns for each summary column. */
     get onCellRender() {
         return this.nativeElement ? this.nativeElement.onCellRender : undefined;
     }
     set onCellRender(value) {
         this.nativeElement ? this.nativeElement.onCellRender = value : undefined;
     }
-    /** @description A callback function executed each time a PivotTable column header cell is rendered. */
+    /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
     get onColumnRender() {
         return this.nativeElement ? this.nativeElement.onColumnRender : undefined;
     }
     set onColumnRender(value) {
         this.nativeElement ? this.nativeElement.onColumnRender = value : undefined;
     }
-    /** @description A callback function executed when the PivotTable is being initialized. */
+    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
     get onInit() {
         return this.nativeElement ? this.nativeElement.onInit : undefined;
     }
     set onInit(value) {
         this.nativeElement ? this.nativeElement.onInit = value : undefined;
     }
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
     get rightToLeft() {
         return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
     }
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
-    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
+    /** @description Determines the sorting mode of the PivotTable. */
     get rowSort() {
         return this.nativeElement ? this.nativeElement.rowSort : undefined;
     }
     set rowSort(value) {
         this.nativeElement ? this.nativeElement.rowSort = value : undefined;
     }
-    /** @description Sets or gets whether to show row total columns for each summary column. */
+    /** @description Determines the theme. Theme defines the look of the element */
+    get rowSummary() {
+        return this.nativeElement ? this.nativeElement.rowSummary : undefined;
+    }
+    set rowSummary(value) {
+        this.nativeElement ? this.nativeElement.rowSummary = value : undefined;
+    }
+    /** @description Sets or gets whether the PivotTable's toolbar is shown. It contains two breadcrumb components that allow the modification of the row group and pivot columns, as well as the "Conditional Formatting" and "Fields" buttons that open a dialog with additional settings. */
     get rowTotals() {
         return this.nativeElement ? this.nativeElement.rowTotals : undefined;
     }
     set rowTotals(value) {
         this.nativeElement ? this.nativeElement.rowTotals = value : undefined;
     }
-    /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
+    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
     get rowTotalsPosition() {
         return this.nativeElement ? this.nativeElement.rowTotalsPosition : undefined;
     }
     set rowTotalsPosition(value) {
         this.nativeElement ? this.nativeElement.rowTotalsPosition = value : undefined;
     }
-    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+    /** @description undefined */
     get selection() {
         return this.nativeElement ? this.nativeElement.selection : undefined;
     }
     set selection(value) {
         this.nativeElement ? this.nativeElement.selection = value : undefined;
     }
-    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+    /** @description undefined */
     get selectionMode() {
         return this.nativeElement ? this.nativeElement.selectionMode : undefined;
     }
     set selectionMode(value) {
         this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
     }
-    /** @description Determines the sorting mode of the PivotTable. */
+    /** @description undefined */
     get sortMode() {
         return this.nativeElement ? this.nativeElement.sortMode : undefined;
     }
     set sortMode(value) {
         this.nativeElement ? this.nativeElement.sortMode = value : undefined;
     }
-    /** @description Determines the theme. Theme defines the look of the element */
+    /** @description undefined */
     get theme() {
         return this.nativeElement ? this.nativeElement.theme : undefined;
     }
     set theme(value) {
         this.nativeElement ? this.nativeElement.theme = value : undefined;
     }
-    /** @description Sets or gets whether the PivotTable's toolbar is shown. It contains two breadcrumb components that allow the modification of the row group and pivot columns, as well as the "Conditional Formatting" and "Fields" buttons that open a dialog with additional settings. */
+    /** @description undefined */
     get toolbar() {
         return this.nativeElement ? this.nativeElement.toolbar : undefined;
     }
     set toolbar(value) {
         this.nativeElement ? this.nativeElement.toolbar = value : undefined;
     }
-    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+    /** @description undefined */
     get tooltip() {
         return this.nativeElement ? this.nativeElement.tooltip : undefined;
     }
@@ -647,6 +689,7 @@ let PivotTableComponent = class PivotTableComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -757,6 +800,21 @@ __decorate([
 ], PivotTableComponent.prototype, "drillDown", null);
 __decorate([
     Input()
+], PivotTableComponent.prototype, "drillDownDataExport", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "drillDownDataExportName", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "drillDownTableInit", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "drillDownCustomAction", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "enableSortByRowGroups", null);
+__decorate([
+    Input()
 ], PivotTableComponent.prototype, "freezeHeader", null);
 __decorate([
     Input()
@@ -800,6 +858,9 @@ __decorate([
 __decorate([
     Input()
 ], PivotTableComponent.prototype, "rowSort", null);
+__decorate([
+    Input()
+], PivotTableComponent.prototype, "rowSummary", null);
 __decorate([
     Input()
 ], PivotTableComponent.prototype, "rowTotals", null);

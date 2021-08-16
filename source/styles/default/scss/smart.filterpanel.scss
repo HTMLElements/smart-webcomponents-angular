@@ -1,0 +1,281 @@
+smart-filter-panel {
+  width: var(--smart-filter-panel-default-width);
+  height: var(--smart-filter-panel-default-height);
+
+  &.smart-element {
+    padding: var(--smart-filter-panel-padding);
+    border: none;
+  }
+}
+
+.smart-filter-panel {
+  .smart-filter-panel-input:focus,
+  .smart-filter-panel-input:active
+   {
+     border-color: var(--smart-primary);
+  }
+
+  smart-numeric-text-box {
+    &.smart-filter-panel-input {
+      input {
+        text-align: right;
+      }
+    }
+  }
+
+  smart-tree,
+  smart-filter-builder {
+    width: 100%;
+    height: var(--smart-filter-panel-main-element-height);
+    margin-bottom: var(--smart-filter-panel-vertical-offset);
+  }
+
+  smart-tree {
+    &.date-excel {
+      smart-tree-items-group[level="1"]>.smart-tree-item-label-container>.smart-tree-items-group-arrow {
+        visibility: hidden;
+      }
+    }
+
+    &.standard-excel {
+      .smart-tree-items-group-arrow {
+        visibility: hidden;
+      }
+
+      smart-tree-item:not([level="1"])>.smart-tree-item-label-container {
+        margin-left: -30px;
+      }
+    }
+  }
+
+  smart-filter-builder {
+    --smart-filter-builder-item-width: 150px;
+    display: block;
+
+    .smart-filter-field-name {
+      display: none;
+    }
+
+    .smart-scroll-viewer-content-container {
+      padding: 0;
+    }
+
+    .smart-content-container {
+      >.smart-filter-group>.smart-filter-group-operator {
+        margin-left: 15px;
+      }
+    }
+
+    .smart-filter-group-condition-container {
+      padding-left: 15px;
+    }
+  }
+
+  smart-menu-item {
+
+    &[value="notand"],
+    &[value="notor"] {
+      display: none;
+    }
+  }
+
+  .smart-filter-panel-label {
+    margin-bottom: var(--smart-filter-panel-vertical-offset);
+  }
+
+  .smart-filter-panel-list {
+    width: 100%;
+    margin-bottom: var(--smart-filter-panel-vertical-offset);
+  }
+
+  .smart-filter-panel-operator-list {
+    width: 80px;
+    margin-bottom: var(--smart-filter-panel-vertical-offset);
+  }
+
+  .smart-filter-panel-button-container {
+    width: 100%;
+    min-height: 33px;
+    height: var(--smart-editor-height);
+    display: flex;
+    justify-content: space-around;
+
+    >smart-button {
+      width: 80px;
+
+      button {
+        padding: 8px;
+      }
+    }
+  }
+
+  .smart-filter-panel-input {
+    height: var(--smart-editor-height);
+    width: 100%;
+    display: block;
+    margin-bottom: var(--smart-filter-panel-vertical-offset);
+
+    &.case-sensitive {
+      width: calc(100% - 32px);
+      display: inline-block;
+    }
+  }
+
+  &[filter-type="string"] {
+    smart-filter-builder {
+      height: calc(var(--smart-filter-panel-main-element-height) - var(--smart-editor-height));
+      margin-bottom: 0;
+    }
+
+    .case-sensitive {
+      display: block;
+      margin-top: 5px;
+      margin-bottom: calc(var(--smart-filter-panel-vertical-offset) - 5px);
+    }
+  }
+
+  &[filter-type="boolean"] {
+    smart-filter-builder {
+      --smart-filter-builder-item-width: 34px;
+
+      .smart-filter-value,
+      .smart-editors-container {
+        min-width: initial;
+      }
+
+      .smart-value-container {
+        width: 100px;
+      }
+
+      .smart-editors-container[open] {
+        .smart-check-box-editor {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &[right-to-left] {
+    direction: rtl;
+
+    smart-tree.standard-excel {
+      smart-tree-item:not([level="1"])>.smart-tree-item-label-container {
+        margin-right: -30px;
+        margin-left: unset;
+      }
+    }
+  }
+
+  span.case-sensitive.smart-icon {
+      font-family: var(--smart-font-family-icon);
+      font-size: 16px;
+      position: relative;
+      margin-left: 5px;
+      padding: 5px;
+      border: 1px solid transparent;
+      border-radius: var(--smart-border-radius);
+
+      &.smart-icon-font-size:after {
+        content: var(--smart-icon-fontsize);
+      }
+
+      &:hover {
+        background: var(--smart-ui-state-hover);
+        color: var(--smart-ui-state-color-hover);
+        border: 1px solid var(--smart-ui-state-border-hover);
+      }
+
+      &:active, &.active {
+        background: var(--smart-ui-state-active);
+        color: var(--smart-ui-state-color-active);
+        border: 1px solid var(--smart-ui-state-border-active);
+      }
+  }
+}
+
+
+.smart-filter-panel-list-drop-down-menu {
+  &.smart-input-drop-down-menu {
+    ul li a.has-prefix {}
+
+    ul li span.smart-icon {
+      font-family: var(--smart-font-family-icon);
+      margin-right: 5px;
+      font-size: 16px;
+      position: relative;
+      left: -3px;
+
+      &.smart-icon-contains:after {
+        content: var(--smart-icon-contains);
+      }
+
+      &.smart-icon-starts-with:after {
+        content: var(--smart-icon-starts_with);
+      }
+
+      &.smart-icon-ends-with:after {
+        content: var(--smart-icon-ends_with);
+      }
+
+      &.smart-icon-does-not-contain:after {
+        content: var(--smart-icon-does_not_contain);
+      }
+
+      &.smart-icon-equal:after {
+        content: var(--smart-icon-equals);
+      }
+
+      &.smart-icon-greater-than:after {
+        content: var(--smart-icon-greater-than);
+      }
+
+      &.smart-icon-greater-than-equal:after {
+        content: var(--smart-icon-greater-than-equal);
+      }
+
+      &.smart-icon-less-than:after {
+        content: var(--smart-icon-less-than);
+      }
+
+      &.smart-icon-less-than-equal:after {
+        content: var(--smart-icon-less-than-equal);
+      }
+
+      &.smart-icon-not-equal:after {
+        content: var(--smart-icon-not-equal);
+      }
+
+      &.smart-icon-between:after {
+        content: var(--smart-icon-between);
+      }
+
+      &.smart-icon-empty:after {
+        content: var(--smart-icon-check-empty);
+        position: relative;
+        top: 1px;
+      }
+
+      &.smart-icon-not-empty:after {
+        content: var(--smart-icon-check-empty);
+        position: relative;
+        top: 1px;
+      }
+
+      &.smart-icon-not-empty:before {
+        content: var(--smart-icon-close);
+        font-size: 10px;
+        left: calc(50% - 4px);
+        top: calc(50% - 5px);
+        position: absolute;
+      }
+
+      &.smart-icon-null:after {
+        content: var(--smart-icon-circle-empty);
+      }
+
+      &.smart-icon-not-null:after {
+        content: var(--smart-icon-circle);
+      }
+    }
+  }
+}

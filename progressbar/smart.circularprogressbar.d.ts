@@ -17,31 +17,33 @@ export declare class CircularProgressBarComponent extends BaseElement implements
     animation: Animation;
     /** @description Enables or disables the element.  */
     disabled: boolean;
-    /** @description A callback function defining the new format for the label of the Progress Bar. */
-    formatFunction: any;
     /** @description Sets the value of the Circular Progress bar to indeterminate state(null) and starts the animation. */
-    indeterminate: boolean;
+    formatFunction: {
+        (value: number): string;
+    };
     /** @description Sets the filling direction of the Circular Progress Bar. */
-    inverted: boolean;
+    indeterminate: boolean;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
-    locale: string;
+    inverted: boolean;
     /** @description Callback, related to localization module.  */
-    localizeFormatFunction: any;
+    locale: string;
     /** @description Sets progress bars maximum possible value. */
-    max: number;
+    localizeFormatFunction: any;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
-    messages: any;
+    max: number;
     /** @description Sets progress bars minimum possible value. */
-    min: number;
+    messages: any;
     /** @description Enables/Disabled the label for the Progress Bar. */
-    showProgressValue: boolean;
+    min: number;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
-    rightToLeft: boolean;
+    showProgressValue: boolean;
     /** @description Determines the theme. Theme defines the look of the element */
-    theme: string;
+    rightToLeft: boolean;
     /** @description If is set to true, the element cannot be focused. */
-    unfocusable: boolean;
+    theme: string;
     /** @description Sets or gets the value of the progress bar */
+    unfocusable: boolean;
+    /** @description undefined */
     value: number;
     /** @description This event is triggered when the value is changed.
     *  @param event. The custom event. 	*/

@@ -1,6 +1,6 @@
 import { Rating } from './../index';
 import { Animation } from './../index';
-import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
 export { Animation, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
@@ -46,6 +46,20 @@ export declare class RatingComponent extends BaseElement implements OnInit, Afte
     unfocusable: boolean;
     /** @description Determines the number of stars that will be marked as active. */
     value: number;
+    /** @description This event is triggered when the value of the slider is changed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
+    *   value - A numeric value indicating the scroll position.
+    *   oldValue - A numeric value indicating the previous scroll position.
+    */
+    onChange: EventEmitter<CustomEvent>;
+    /** @description Get the value of the rating.
+    * @returns {number}
+  */
+    getValue(): Promise<any>;
+    /** @description Sets the value of the rating.
+    * @param {number} value. Sets the value of the rating
+    */
+    setValue(value: number): void;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

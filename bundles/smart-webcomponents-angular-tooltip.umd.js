@@ -395,6 +395,17 @@ import './../source/modules/smart.tooltip';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(TooltipComponent.prototype, "align", {
+            /** @description Determines how to align the tooltip. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.align : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.align = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(TooltipComponent.prototype, "arrow", {
             /** @description Gets or sets whether a tooltip's arrow will be shown. */
             get: function () {
@@ -636,6 +647,7 @@ import './../source/modules/smart.tooltip';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -685,6 +697,9 @@ import './../source/modules/smart.tooltip';
         __decorate([
             core.Input()
         ], TooltipComponent.prototype, "animation", null);
+        __decorate([
+            core.Input()
+        ], TooltipComponent.prototype, "align", null);
         __decorate([
             core.Input()
         ], TooltipComponent.prototype, "arrow", null);

@@ -87,6 +87,11 @@ export interface TreeProperties {
    */
   filterInputPlaceholder?: string;
   /**
+   * Determines the TreeItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the value property or 'textContent' if the user wants to filter by text inside the TreeItem's content or any other property.
+   * Default value: "label"
+   */
+  filterMember?: string;
+  /**
    * Sets filter mode.
    * Default value: containsIgnoreCase
    */
@@ -469,7 +474,7 @@ export declare type TreeScrollMode = 'scrollbar' | 'scrollButtons';
 /**Determines the way selected items are highlighted. */
 export declare type TreeSelectionDisplayMode = 'row' | 'label';
 /**Determines selection mode. */
-export declare type TreeSelectionMode = 'none' | 'oneOrManyExtended' | 'zeroOrMany' | 'oneOrMany' | 'zeroOrOne' | 'one' | 'checkBox' | 'radioButton';
+export declare type TreeSelectionMode = 'none' | 'oneOrManyExtended' | 'zeroOrMany' | 'oneOrMany' | 'zeroAndOne' | 'zeroOrOne' | 'one' | 'checkBox' | 'radioButton';
 /**Determines whether jqx-tree-items-groups can be selected. */
 export declare type TreeSelectionTarget = 'all' | 'leaf';
 /**Determines sort direction - ascending or descending. */

@@ -17,6 +17,11 @@ export interface QueryBuilderProperties {
    */
   applyMode?: QueryBuilderApplyMode;
   /**
+   * Determines whether QueryBuilder will automatically prompt the user to enter a condition value when a new condition is created. When 'applyMode' is set to 'immediately', the operation field is automatically populated if empty when the selected condition operator is changed. The input field prompts the user when the operation or operator of the condition is changed.
+   * Default value: false
+   */
+  autoPrompt?: boolean;
+  /**
    * Adds more operations that can be used to the query bilder's conditions structure. Each custom operation can have the following fields:label - label to be displayed in the operator box. Multiple operations with the same label can exist.name - unique name of the operationeditorTemplate - callback function that creates a custom value editorvalueTemplate - callback function that displays the value after the edior has been closedhandleValue - callback function that handles the value returned by the editor when it is closed. If the dataType is 'object' the expected result from the function should contain a 'label' and 'value' attributes. Where the label will be used for displaying purposes while 'value' will be used as the actual value. hideValue - a boolean condition that specifies whether the operation requires a value or notexpressionTemplate - a string representing a custom Linq expression template. If the value of the element is a string it will be considered as a Linq expression and it will be checked against all expressionTemplates to find a match.expressionReaderCallback - a callback that is used to specify which arguments from the expression are used for the fieldName and value. Used when converting a Linq expression to QueryBuilder value. Takes two arguments: expression - the LinQ expression defined in the expressionTemplate of the customOperator. Type stringbindings - an array of expression parameters based on the expression template of the customOperator. Type Array[string]expressionBuilderCallback - a callback function that is used to specify which arguments from the Linq expression are used for the fieldName and value when building the Linq expression from the current value of the element. Takes three arguments: name - the name of the dataField. Type string.operation - the name of the operation. Type stringvalue - the value of the operation. Type any( depends on the dataField). 
    * Default value: 
    */
@@ -134,6 +139,11 @@ export interface QueryBuilderProperties {
    */
   showIcons?: boolean;
   /**
+   * Shows/Hides the drop down icon for the operator field name of the conditions.
+   * Default value: false
+   */
+  showFieldNameArrow?: boolean;
+  /**
    * Determines the theme. Theme defines the look of the element
    * Default value: ""
    */
@@ -144,12 +154,22 @@ export interface QueryBuilderProperties {
    */
   unfocusable?: boolean;
   /**
+   * Determines whether the value of the condition is validated on key up or not. By default the value is validated when the user blur's the value input. The validationTimeout determines the time interval after the user has ended typing that triggers the value validation.
+   * Default value: false
+   */
+  validateOnInput?: boolean;
+  /**
+   * Determines the timeout (starting after the user has finished typing in the value field) before the validation is applied to the condition value. This property works along validationOnInput.
+   * Default value: 100
+   */
+  validationTimeout?: number;
+  /**
    * The value is represented by multidimensional array. The array contains group operators with conditions. Each group can contain multiple conditions.
    * Default value: 
    */
   value?: any;
   /**
-   * Callback used to format the content of the value fields.
+   * Callback used to format the content of the condition value fields.
    * Default value: null
    */
   valueFormatFunction?: any;
@@ -235,9 +255,9 @@ export interface QueryBuilderField {
   dataField?: string;
   /**
    * Sets or gets the data type.
-   * Default value: string
+   * Default value: "string"
    */
-  dataType?: QueryBuilderFieldDataType;
+  dataType?: string;
   /**
    * Sets or gets the filter format.
    * Default value: ""
@@ -262,7 +282,5 @@ declare global {
 
 /**Determines when the value of the element is updated with the new changes. */
 export declare type QueryBuilderApplyMode = 'change' | 'immediately';
-/**Sets or gets the data type. */
-export declare type QueryBuilderFieldDataType = 'number' | 'string' | 'boolean' | 'date';
 /**Determines whether new fields can be dynamically added by typing in the field (property) box. */
 export declare type QueryBuilderFieldsMode = 'dynamic' | 'static';

@@ -1,8 +1,8 @@
 import { Scheduler } from './../index';
-import { SchedulerEventRenderMode, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerScrollButtonsPosition, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerDataSource, SchedulerEvent, SchedulerResource, SchedulerStatuse } from './../index';
+import { SchedulerEventRenderMode, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerScrollButtonsPosition, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerEvent, SchedulerResource, SchedulerStatuse } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { SchedulerEventRenderMode, SchedulerRepeatFreq, SchedulerNotificationType, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerScrollButtonsPosition, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerDataSource, SchedulerDataSourceRepeat, SchedulerNotification, SchedulerEvent, SchedulerEventRepeat, SchedulerResource, SchedulerStatuse, ElementRenderMode } from './../index';
+export { SchedulerEventRenderMode, SchedulerRepeatFreq, SchedulerNotificationType, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerScrollButtonsPosition, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerEvent, SchedulerEventRepeat, SchedulerNotification, SchedulerResource, SchedulerStatuse, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Scheduler } from './../index';
 export { DataAdapter } from './../index';
@@ -41,7 +41,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Sets the Schedulers's Data Export options. */
     dataExport: SchedulerDataExport;
     /** @description Determines the events that will be loaded inside the Timeline. Each event represents an object that should contain the following properties: */
-    dataSource: SchedulerDataSource[];
+    dataSource: SchedulerEvent[];
     /** @description A callback that can be used to customize the text inside the date selector located in the header. The callback has one parameter - the current date. */
     dateSelectorFormatFunction: any;
     /** @description Determines the day format of the dates in the timeline. */
@@ -110,6 +110,8 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     hideAllDay: boolean;
     /** @description Determines whether the days set by 'nonworkingDays' property are hidden or not. */
     hideNonworkingWeekdays: boolean;
+    /** @description Determines whether other month days are visible when view is set to month. When enabled, events that start on other month days are not displayed and the cells that represent such days do not allow the creation of new events on them. Also dragging and droping an event on other month days is not allowed. Reszing is also affected. Events can end on other month days, but cannot start on one. */
+    hideOtherMonthDays: boolean;
     /** @description Determines whether the 'Today' button is hidden or not. */
     hideTodayButton: boolean;
     /** @description Determines whether the checkable items in the view selection menu are hidden or not. */
@@ -126,6 +128,8 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     locale: string;
     /** @description Detetmines the maximum view date for the Scheduler. */
     max: string | Date;
+    /** @description Detetmines the maximum number of events per Scheduler cell. By default this property is null which means that the number of events per cell is automatically determined by the size of the events. */
+    maxEventsPerCell: number | null;
     /** @description Detetmines the minimum view date for the Scheduler. */
     min: string | Date;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
@@ -186,7 +190,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     view: string;
     /** @description Indicates the current Scheduler viewType. Custom views must contain a valid type property that corresponds to one of the view types. This property should not be set. */
     viewType: SchedulerViewType;
-    /** @description Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view. */
+    /** @description Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view.hideHours - an Optional property applicable only to timelineWeek view that allows to hide the hour cells and only show the day cells. */
     views: SchedulerViews;
     /** @description Determines type of the view selector located in the header of the element. */
     viewSelectorType: SchedulerViewSelectorType;
@@ -212,6 +216,12 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     *   oldValue - The previously selected Date.
     */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when an Event has been updated/inserted/removed/dragged/resized.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
+    *   type - The type of change that is being done to the item.
+    *   item - An object that represents the actual item with it's attributes.
+    */
+    onItemChange: EventEmitter<CustomEvent>;
     /** @description This event is triggered when en event, event item or a context menu item is clicked.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	itemObj)
     *   item - The HTMLElement for the event.

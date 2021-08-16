@@ -192,6 +192,7 @@ let BootstrapButtonComponent = class BootstrapButtonComponent extends BaseElemen
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -346,6 +347,7 @@ let BootstrapCheckBoxComponent = class BootstrapCheckBoxComponent extends BaseEl
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -485,6 +487,7 @@ let BootstrapCircularComponent = class BootstrapCircularComponent extends BaseEl
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -690,6 +693,7 @@ let BootstrapDropDownComponent = class BootstrapDropDownComponent extends BaseEl
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -848,6 +852,7 @@ let BootstrapFileInputComponent = class BootstrapFileInputComponent extends Base
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -988,6 +993,7 @@ let BootstrapInputComponent = class BootstrapInputComponent extends BaseElement 
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1151,6 +1157,7 @@ let BootstrapInputGroupComponent = class BootstrapInputGroupComponent extends Ba
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1338,6 +1345,7 @@ let BootstrapModalComponent = class BootstrapModalComponent extends BaseElement 
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1485,6 +1493,7 @@ let BootstrapProgressBarComponent = class BootstrapProgressBarComponent extends 
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1629,6 +1638,7 @@ let BootstrapRadioButtonComponent = class BootstrapRadioButtonComponent extends 
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1751,6 +1761,7 @@ let BootstrapRangeComponent = class BootstrapRangeComponent extends BaseElement 
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1950,6 +1961,7 @@ let BootstrapSplitButtonComponent = class BootstrapSplitButtonComponent extends 
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -2134,6 +2146,7 @@ let BootstrapSwitchButtonComponent = class BootstrapSwitchButtonComponent extend
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -2293,6 +2306,7 @@ let BootstrapTabsComponent = class BootstrapTabsComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -2442,6 +2456,7 @@ let BootstrapTextareaComponent = class BootstrapTextareaComponent extends BaseEl
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -2589,6 +2604,7 @@ let BootstrapToggleButtonComponent = class BootstrapToggleButtonComponent extend
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

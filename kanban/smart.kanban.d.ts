@@ -1,8 +1,8 @@
 import { Kanban } from './../index';
-import { Animation, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanUser } from './../index';
+import { Animation, KanbanColumnEditMode, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanUser } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, KanbanColumnOrientation, KanbanDataSourcePriority, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanUser, ElementRenderMode } from './../index';
+export { Animation, KanbanColumnOrientation, KanbanColumnEditMode, KanbanDataSourcePriority, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanUser, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Kanban } from './../index';
 export { DataAdapter } from './../index';
@@ -14,6 +14,12 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
     createComponent(properties?: {}): any;
+    /** @description Enables or disables column reordering. When this property is set to true and allowDrag is enabled, users will be able to reoder columns through drag & drop. For example: Click and drag the first column's header and drop it over another column. */
+    allowColumnReorder: boolean;
+    /** @description Enables or disables column editing. When this property is set to true, users will be able to dynamically change the column's header label by double clicking on it. */
+    allowColumnEdit: boolean;
+    /** @description Enables or disables column removing. When this property is set to true, users will be able to dynamically remove a column through the column actions menu. the 'columnActions' property should be true. */
+    allowColumnRemove: boolean;
     /** @description Toggles the visibility of the column buttons for adding tasks. A particular button can be disabled by setting addNewButton in the column's definition to false. */
     addNewButton: boolean;
     /** @description Sets or gets whether a column with a button for adding new status columns to the Kanban will be displayed. */
@@ -32,6 +38,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     collapsible: boolean;
     /** @description Describes the columns properties. */
     columns: KanbanColumn[];
+    /** @description Toggles the visibility of the column actions icon. */
+    columnActions: boolean;
+    /** @description Determines the column edit behavior. With the 'header' option, edit starts on double click on the column's label. In 'menu' mode, edit is allowed from the 'columnActions' menu. In 'headerAndMenu' option, column editing includes both options. */
+    columnEditMode: KanbanColumnEditMode;
     /** @description Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties. */
     currentUser: string | number;
     /** @description Determines the data source to be visualized in the kanban board. */
@@ -70,6 +80,8 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     messages: any;
     /** @description Determines selection mode. */
     selectionMode: KanbanSelectionMode;
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    rightToLeft: boolean;
     /** @description Describes the swimlanes in the kanban board. Sub-columns are not applicable when swimlanes are present. */
     swimlanes: KanbanSwimlane[];
     /** @description Sets or gets the index of the column at which to start the swimlanes. */
@@ -96,6 +108,8 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     taskUserIcon: boolean;
     /** @description Sets or gets a template to be applied to task text. Can be a string beginning with # and referencing the id of a template element on the page. Can also be a function that modifies the task text or the template itself. Finally, it can also be a string that will be parsed. */
     textTemplate: any;
+    /** @description Determines the theme. Theme defines the look of the element */
+    theme: string;
     /** @description Determines whether the user list (as defined by the users property) will be shown when clicking the user icon. Only applicable if editable privileges are enabled. */
     userList: boolean;
     /** @description Determines the users Kanban tasks can be assigned to and their characteristics and privileges. */
@@ -113,6 +127,48 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     /** @description This event is triggered when the edit/prompt dialog is about to be closed. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
     *  @param event. The custom event. 	*/
     onClosing: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is added.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+    *   label - The column label.
+    *   dataField - The column data field.
+    *   collapsed - The column's collapsed state.
+    */
+    onColumnAdd: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is removed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+    *   label - The column label.
+    *   dataField - The column data field.
+    *   collapsed - The column's collapsed state.
+    */
+    onColumnRemove: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is reordered.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldIndex, 	index, 	column)
+    *   oldIndex - The column's old index.
+    *   index - The column's new index.
+    *   column - The column's data object with 'label', 'dataField' and 'collapsed' fields.
+    */
+    onColumnReorder: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is updated.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+    *   label - The column label.
+    *   dataField - The column data field.
+    *   collapsed - The column's collapsed state.
+    */
+    onColumnUpdate: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column header is clicked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+    *   label - The column label.
+    *   dataField - The column data field.
+    *   collapsed - The column's collapsed state.
+    */
+    onColumnClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column header is double clicked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+    *   label - The column label.
+    *   dataField - The column data field.
+    *   collapsed - The column's collapsed state.
+    */
+    onColumnDoubleClick: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a task is dropped somewhere in the DOM. The dragging operation can be canceled by calling event.preventDefault() in the event handler function.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	container, 	data, 	item, 	items, 	originalEvent, 	previousContainer, 	target)
     *   container - the Kanban the dragged task(s) is dropped to
@@ -158,6 +214,16 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     /** @description This event is triggered when sorting has been applied.
     *  @param event. The custom event. 	*/
     onSort: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a new task is added.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+    *   value - The task data that is added to the Kanban.
+    */
+    onTaskAdd: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a task is removed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+    *   value - The task data that is removed from the Kanban.
+    */
+    onTaskRemove: EventEmitter<CustomEvent>;
     /** @description Adds filtering
     * @param {string[]} filters. Filter information
     * @param {string} operator?. Logical operator between the filters of different fields
@@ -172,6 +238,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     * @param {any} data?. An object containing the new task's data
     */
     addTask(data?: any): void;
+    /** @description Adds a column to a Kanban. If no data is specified, an empty column is added.
+    * @param {any} data?. An object containing the new column's data
+    */
+    addColumn(data?: any): void;
     /** @description Begins an edit operation
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     */
@@ -273,6 +343,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     * @param {boolean} prompt?. Whether or not to prompt the user before removing the task
     */
     removeTask(task: number | string | HTMLElement, prompt?: boolean): void;
+    /** @description Removes a column.
+    * @param {string} dataField. The column's data field
+    */
+    removeColumn(dataField: string): void;
     /** @description Saves the Kanban's state to the browser's localStorage.
     */
     saveState(): void;
@@ -281,6 +355,11 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     * @param {{}} newData. The new data to visualize in the task.
     */
     updateTask(task: number | string | HTMLElement, newData: {}): void;
+    /** @description Updates a column.
+    * @param {string} dataField. The new column's data field
+    * @param {{}} newData. The new data to visualize in the column.
+    */
+    updateColumn(dataField: string, newData: {}): void;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

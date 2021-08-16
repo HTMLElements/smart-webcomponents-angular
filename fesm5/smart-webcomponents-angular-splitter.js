@@ -627,6 +627,7 @@ var SplitterComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -916,6 +917,7 @@ var SplitterItemComponent = /** @class */ (function (_super) {
     SplitterItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     SplitterItemComponent.prototype.ngOnDestroy = function () { };
@@ -1047,6 +1049,7 @@ var SplitterBarComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     SplitterBarComponent.prototype.ngOnDestroy = function () { };

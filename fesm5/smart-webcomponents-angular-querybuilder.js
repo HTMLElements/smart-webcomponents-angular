@@ -226,6 +226,17 @@ var QueryBuilderComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(QueryBuilderComponent.prototype, "autoPrompt", {
+        /** @description Determines whether QueryBuilder will automatically prompt the user to enter a condition value when a new condition is created. When 'applyMode' is set to 'immediately', the operation field is automatically populated if empty when the selected condition operator is changed. The input field prompts the user when the operation or operator of the condition is changed. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.autoPrompt : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.autoPrompt = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(QueryBuilderComponent.prototype, "customOperations", {
         /** @description Adds more operations that can be used to the query bilder's conditions structure. Each custom operation can have the following fields:label - label to be displayed in the operator box. Multiple operations with the same label can exist.name - unique name of the operationeditorTemplate - callback function that creates a custom value editorvalueTemplate - callback function that displays the value after the edior has been closedhandleValue - callback function that handles the value returned by the editor when it is closed. If the dataType is 'object' the expected result from the function should contain a 'label' and 'value' attributes. Where the label will be used for displaying purposes while 'value' will be used as the actual value. hideValue - a boolean condition that specifies whether the operation requires a value or notexpressionTemplate - a string representing a custom Linq expression template. If the value of the element is a string it will be considered as a Linq expression and it will be checked against all expressionTemplates to find a match.expressionReaderCallback - a callback that is used to specify which arguments from the expression are used for the fieldName and value. Used when converting a Linq expression to QueryBuilder value. Takes two arguments: expression - the LinQ expression defined in the expressionTemplate of the customOperator. Type stringbindings - an array of expression parameters based on the expression template of the customOperator. Type Array[string]expressionBuilderCallback - a callback function that is used to specify which arguments from the Linq expression are used for the fieldName and value when building the Linq expression from the current value of the element. Takes three arguments: name - the name of the dataField. Type string.operation - the name of the operation. Type stringvalue - the value of the operation. Type any( depends on the dataField).  */
         get: function () {
@@ -402,6 +413,17 @@ var QueryBuilderComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(QueryBuilderComponent.prototype, "showFieldNameArrow", {
+        /** @description Shows/Hides the drop down icon for the operator field name of the conditions. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.showFieldNameArrow : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.showFieldNameArrow = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(QueryBuilderComponent.prototype, "theme", {
         /** @description Determines the theme. Theme defines the look of the element */
         get: function () {
@@ -424,6 +446,28 @@ var QueryBuilderComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(QueryBuilderComponent.prototype, "validateOnInput", {
+        /** @description Determines whether the value of the condition is validated on key up or not. By default the value is validated when the user blur's the value input. The validationTimeout determines the time interval after the user has ended typing that triggers the value validation. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.validateOnInput : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.validateOnInput = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(QueryBuilderComponent.prototype, "validationTimeout", {
+        /** @description Determines the timeout (starting after the user has finished typing in the value field) before the validation is applied to the condition value. This property works along validationOnInput. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.validationTimeout : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.validationTimeout = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(QueryBuilderComponent.prototype, "value", {
         /** @description The value is represented by multidimensional array. The array contains group operators with conditions. Each group can contain multiple conditions. */
         get: function () {
@@ -436,7 +480,7 @@ var QueryBuilderComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(QueryBuilderComponent.prototype, "valueFormatFunction", {
-        /** @description Callback used to format the content of the value fields. */
+        /** @description Callback used to format the content of the condition value fields. */
         get: function () {
             return this.nativeElement ? this.nativeElement.valueFormatFunction : undefined;
         },
@@ -496,6 +540,7 @@ var QueryBuilderComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -563,6 +608,9 @@ var QueryBuilderComponent = /** @class */ (function (_super) {
     ], QueryBuilderComponent.prototype, "applyMode", null);
     __decorate([
         Input()
+    ], QueryBuilderComponent.prototype, "autoPrompt", null);
+    __decorate([
+        Input()
     ], QueryBuilderComponent.prototype, "customOperations", null);
     __decorate([
         Input()
@@ -611,10 +659,19 @@ var QueryBuilderComponent = /** @class */ (function (_super) {
     ], QueryBuilderComponent.prototype, "showIcons", null);
     __decorate([
         Input()
+    ], QueryBuilderComponent.prototype, "showFieldNameArrow", null);
+    __decorate([
+        Input()
     ], QueryBuilderComponent.prototype, "theme", null);
     __decorate([
         Input()
     ], QueryBuilderComponent.prototype, "unfocusable", null);
+    __decorate([
+        Input()
+    ], QueryBuilderComponent.prototype, "validateOnInput", null);
+    __decorate([
+        Input()
+    ], QueryBuilderComponent.prototype, "validationTimeout", null);
     __decorate([
         Input()
     ], QueryBuilderComponent.prototype, "value", null);

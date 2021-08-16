@@ -134,6 +134,12 @@ let PasswordTextBoxComponent = class PasswordTextBoxComponent extends BaseElemen
         *   value - The new value of the element.
         */
         this.onChange = new EventEmitter();
+        /** @description This event is triggered on each key up event of the TextBox, if the value is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+        *   oldValue - The previous value before it was changed.
+        *   value - The new value.
+        */
+        this.onChanging = new EventEmitter();
         this._initialChange = true;
         this.nativeElement = ref.nativeElement;
     }
@@ -369,6 +375,7 @@ let PasswordTextBoxComponent = class PasswordTextBoxComponent extends BaseElemen
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -417,6 +424,8 @@ let PasswordTextBoxComponent = class PasswordTextBoxComponent extends BaseElemen
         const that = this;
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['changingHandler'] = (event) => { that.onChanging.emit(event); };
+        that.nativeElement.addEventListener('changing', that.eventHandlers['changingHandler']);
         that.eventHandlers['changeModelHandler'] = (event) => {
             that._initialChange = false;
             that._onChange(that.nativeElement.value);
@@ -440,6 +449,9 @@ let PasswordTextBoxComponent = class PasswordTextBoxComponent extends BaseElemen
         const that = this;
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
+        if (that.eventHandlers['changingHandler']) {
+            that.nativeElement.removeEventListener('changing', that.eventHandlers['changingHandler']);
         }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -539,6 +551,9 @@ __decorate([
 __decorate([
     Output()
 ], PasswordTextBoxComponent.prototype, "onChange", void 0);
+__decorate([
+    Output()
+], PasswordTextBoxComponent.prototype, "onChanging", void 0);
 PasswordTextBoxComponent = __decorate([
     Directive({
         selector: 'smart-password-text-box, [smart-password-text-box]',

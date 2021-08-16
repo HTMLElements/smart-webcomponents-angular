@@ -364,12 +364,83 @@ import './../source/modules/smart.ganttchart';
             /** @description This event is triggered when a batch update was ended from after executing the endUpdate method.
             *  @param event. The custom event. 	*/
             _this.onEndUpdate = new core.EventEmitter();
+            /** @description This event is triggered when the user starts connecting one task to another. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	startIndex)
+            *   startIndex - The index of the task that a connection is started from.
+            */
+            _this.onConnectionStart = new core.EventEmitter();
+            /** @description This event is triggered when the user completes a connection between two tasks.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	startIndex, 	endIndex, 	type)
+            *   id - The id of the connection that was created.
+            *   startIndex - The index of the task that a connection is started from.
+            *   endIndex - The index of the task that a connection is started from.
+            *   type - The type of connection. Fours types are available: <ul><li><b>0</b> - start-to-start</li><li><b>1</b> - end-to-start</li><li><b>2</b> - end-to-end</li><li><b>3</b> - start-to-end</li></ul>
+            */
+            _this.onConnectionEnd = new core.EventEmitter();
             /** @description This event is triggered when a Task is selected/unselected.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
             *   value - The index of the new selected task.
             *   oldValue - The index of the previously selected task.
             */
             _this.onChange = new core.EventEmitter();
+            /** @description This event is triggered when a Tree column is resized. Column resizing is controled by the columnResize property.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	headerCellElement, 	widthInPercentages, 	width)
+            *   dataField - The name of the column. Corresponds to the <b>value</b> attribute of a <b>taskColumns/resourceColumns</b> object.
+            *   headerCellElement - The HTMLElement column cell element that was resized.
+            *   widthInPercentages - The new width of the column in percentages.
+            *   width - The new width of the column in pixels.
+            */
+            _this.onColumnResize = new core.EventEmitter();
+            /** @description This event is triggered just before the window for task editing starts closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
+            *   target - The instance of the window that is going to close.
+            *   type - The type of window that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
+            */
+            _this.onClosing = new core.EventEmitter();
+            /** @description This event is triggered when the window for task editing is closed( hidden )
+            *  @param event. The custom event. 	*/
+            _this.onClose = new core.EventEmitter();
+            /** @description This event is triggered when an item is collapsed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	isGroup, 	item, 	index, 	label, 	value)
+            *   isGroup - A boolean flag indicating whether the collapsed item is a resource group. This is the case when <b>groupByResoruces</b> is enabled.
+            *   item - The object details of the collapsed item.
+            *   index - The index of the collapsed item.
+            *   label - The label of the collapsed item.
+            *   value - The value of the collapsed item.
+            */
+            _this.onCollapse = new core.EventEmitter();
+            /** @description This event is triggered when dragging of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *   id - The id of the task that is going to be dragged.
+            *   item - The object of the task that is going to be dragged.
+            *   dateStart - The start date of the task that is going to be dragged.
+            *   dateEnd - The end date of the task that is going to be dragged.
+            */
+            _this.onDragStart = new core.EventEmitter();
+            /** @description This event is triggered when dragging of a task finishes.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *   id - The id of the task that is was dragged.
+            *   item - The object of the task that is was dragged.
+            *   dateStart - The start date of the task that is was dragged.
+            *   dateEnd - The end date of the task that is was dragged.
+            */
+            _this.onDragEnd = new core.EventEmitter();
+            /** @description This event is triggered when an item is expanded.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	isGroup, 	item, 	index, 	label, 	value)
+            *   isGroup - A boolean flag indicating whether the collapsed item is a resource group. This is the case when <b>groupByResoruces</b> is enabled.
+            *   item - The index of the expanded item.
+            *   index - The index of the expanded item.
+            *   label - The label of the expanded item.
+            *   value - The value of the expanded item.
+            */
+            _this.onExpand = new core.EventEmitter();
+            /** @description This event is triggered when the GanttChart is filtered.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	action, 	filters)
+            *   type - The type of items that have been filtered ( task or resource ).
+            *   action - The name of the filtering action (whether filtering is added or removed).
+            *   filters - The filters that have been applied. Filters represent JQX.Utilities.FilterGroup objects.
+            */
+            _this.onFilter = new core.EventEmitter();
             /** @description This event is triggered when a task, resource or connection is clicked inside the Timeline or the Tree columns.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	originalEvent)
             *   item - The item that was clicked. It cam be a task, resource or connection.
@@ -395,6 +466,15 @@ import './../source/modules/smart.ganttchart';
             *   item - An object that represents the actual item with it's attributes.
             */
             _this.onItemUpdate = new core.EventEmitter();
+            /** @description This event is triggered just before the window for task editing starts opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
+            *   target - The instance of the window that is going to open.
+            *   type - The type of window that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
+            */
+            _this.onOpening = new core.EventEmitter();
+            /** @description This event is triggered when the window for task editing is opened( visible ).
+            *  @param event. The custom event. 	*/
+            _this.onOpen = new core.EventEmitter();
             /** @description This event is triggered when the progress of a task bar starts to change as a result of user interaction. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	progress)
             *   index - The index of the task which progress is going to be changed.
@@ -407,84 +487,43 @@ import './../source/modules/smart.ganttchart';
             *   progress - The progress of the task after it was changed.
             */
             _this.onProgressChangeEnd = new core.EventEmitter();
-            /** @description This event is triggered when dragging of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	dateStart, 	dateEnd)
-            *   index - The index of the task that is going to be dragged.
-            *   dateStart - The start date of the task that is going to be dragged.
-            *   dateEnd - The end date of the task that is going to be dragged.
-            */
-            _this.onDragStart = new core.EventEmitter();
-            /** @description This event is triggered when dragging of a task finishes.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	dateStart, 	dateEnd)
-            *   index - The index of the task that is was dragged.
-            *   dateStart - The start date of the task that is was dragged.
-            *   dateEnd - The end date of the task that is was dragged.
-            */
-            _this.onDragEnd = new core.EventEmitter();
             /** @description This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	dateStart, 	dateEnd)
-            *   index - The index of the task that is going to be resized.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *   id - The id of the task that is going to be resized.
+            *   item - The object of the task that is going to be resized.
             *   dateStart - The start date of the task that is going to be resized.
             *   dateEnd - The end date of the task that is going to be resized.
             */
             _this.onResizeStart = new core.EventEmitter();
             /** @description This event is triggered when the resizing of a task finishes.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	dateStart, 	dateEnd)
-            *   index - The index of the task that was resized.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *   id - The id of the task that was resized.
+            *   item - The object of the task that was resized.
             *   dateStart - The start date of the task that was resized.
             *   dateEnd - The end date of the task that was resized.
             */
             _this.onResizeEnd = new core.EventEmitter();
-            /** @description This event is triggered when the user starts connecting one task to another. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	startIndex)
-            *   startIndex - The index of the task that a connection is started from.
+            /** @description This event is triggered when the GanttChart is sorted by some column.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	columns, 	sortDataFields, 	sortOrders, 	sortDataTypes)
+            *   type - The type of columns that have been sorted ( task or resource column ).
+            *   columns - An array of objects that contains the currently sorted column objects.
+            *   sortDataFields - The dataFields of the columns that have been sorted. The dataField corresponds to the <b>value</b> property of a <b>taskColumns/resourceColumns</b> object.
+            *   sortOrders - The orders of the columns that have been sorted.
+            *   sortDataTypes - The data types of the columns that have been sorted.
             */
-            _this.onConnectionStart = new core.EventEmitter();
-            /** @description This event is triggered when the user completes a connection between two tasks.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	startIndex, 	endIndex, 	type)
-            *   startIndex - The index of the task that a connection is started from.
-            *   endIndex - The index of the task that a connection is started from.
-            *   type - The type of connection. Fours types are available: <ul><li><b>0</b> - start-to-start</li><li><b>1</b> - end-to-start</li><li><b>2</b> - end-to-end</li><li><b>3</b> - start-to-end</li></ul>
-            */
-            _this.onConnectionEnd = new core.EventEmitter();
+            _this.onSort = new core.EventEmitter();
             /** @description This event is triggered when the Timeline has been scrolled to the bottom.
             *  @param event. The custom event. 	*/
             _this.onScrollBottomReached = new core.EventEmitter();
             /** @description This event is triggered when the Timeline has been scrolled to the top.
             *  @param event. The custom event. 	*/
             _this.onScrollTopReached = new core.EventEmitter();
-            /** @description This event is triggered just before the window for task editing starts opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
-            *   target - The instance of the window that is going to open.
-            *   type - The type of window that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
-            */
-            _this.onOpening = new core.EventEmitter();
-            /** @description This event is triggered when the window for task editing is opened( visible ).
+            /** @description This event is triggered when the Timeline has been scrolled to the beginning (horizontally).
             *  @param event. The custom event. 	*/
-            _this.onOpen = new core.EventEmitter();
-            /** @description This event is triggered just before the window for task editing starts closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
-            *   target - The instance of the window that is going to close.
-            *   type - The type of window that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
-            */
-            _this.onClosing = new core.EventEmitter();
-            /** @description This event is triggered when the window for task editing is closed( hidden )
+            _this.onScrollLeftReached = new core.EventEmitter();
+            /** @description This event is triggered when the Timeline has been scrolled to the end (horizontally).
             *  @param event. The custom event. 	*/
-            _this.onClose = new core.EventEmitter();
-            /** @description This event is triggered when a Project is collapsed.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	label, 	value)
-            *   index - The index of the collapsed project.
-            *   label - The label of the collapsed project.
-            *   value - The value of the collapsed project.
-            */
-            _this.onCollapse = new core.EventEmitter();
-            /** @description This event is triggered when a Project is expanded.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	label, 	value)
-            *   item - The index of the expanded project.
-            *   label - The label of the expanded project.
-            *   value - The value of the expanded project.
-            */
-            _this.onExpand = new core.EventEmitter();
+            _this.onScrollRightReached = new core.EventEmitter();
             _this.nativeElement = ref.nativeElement;
             return _this;
         }
@@ -499,6 +538,17 @@ import './../source/modules/smart.ganttchart';
             }
             return this.nativeElement;
         };
+        Object.defineProperty(GanttChartComponent.prototype, "adjustToNonworkingTime", {
+            /** @description Determines whether nonworkingDays/nonworkingHours are taken into considuration when determining the dateEnd of the tasks. When this property is enabled the dateEnd of the tasks is calculated to include only the actual working time. By default it's disabled and only calendar time is used. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.adjustToNonworkingTime : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.adjustToNonworkingTime = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "autoSchedule", {
             /** @description Recalculates the tasks that are connected and re-schedules them according to their connections. If no connections are present, autoScheduling has no effect until a connection is created. Connection types determines the start/end date limits of the tasks. */
             get: function () {
@@ -532,6 +582,28 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "columnResize", {
+            /** @description Determines whether the Table columns are resizable or not. When enabled it is possible to resize the columns from the header cells of the Table in both Task and Resource timelines. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.columnResize : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.columnResize = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "columnResizeFeedback", {
+            /** @description Determines resize feedback is used during column resizing. This property is applicable only when columnResize is enabled. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.columnResizeFeedback : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.columnResizeFeedback = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "dataExport", {
             /** @description Sets the GanttChart's Data Export options. */
             get: function () {
@@ -544,7 +616,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "dataSource", {
-            /** @description Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks.. */
+            /** @description Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown. The duration always shows the calendar time whether it is in days/hours or other.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..  GanttChart also accepts a DataAdapter instance as dataSource. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.dataSource : undefined;
             },
@@ -675,6 +747,28 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "filterRow", {
+            /** @description Determines whether a dedicated filter row is used for Table filtering instead of the default filter input. This property has no effect if filtering is not enabled. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.filterRow : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.filterRow = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "groupByResources", {
+            /** @description Groups the tasks inside the Task timeline according to the resources they are assigned to. Unassigned tasks are placed in a default group labeled 'Unassigned'. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.groupByResources : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.groupByResources = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "headerTemplate", {
             /** @description Allows to create a custom header content for the Task Panel. The attribute accepts an HTMLTemplate element, it's id or a function. */
             get: function () {
@@ -730,6 +824,28 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "infiniteTimeline", {
+            /** @description When enabled, scrolling to the end of the horizotal timeline, triggers the creation of additional to extend the time range. The number of cells to be added when the scrollbar reaches the end position is determined by the infiniteTimelineStep. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.infiniteTimeline : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.infiniteTimeline = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "infiniteTimelineStep", {
+            /** @description Determines the number of cells to be added when the horizontal scroll bar of the Timeline reaches it's end position when infiniteTimeline is enabled. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.infiniteTimelineStep : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.infiniteTimelineStep = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "inverted", {
             /** @description When set the Timeline is positioned on the left side while the Task Tree is positioned on the right. By default it's vice versa. */
             get: function () {
@@ -737,6 +853,17 @@ import './../source/modules/smart.ganttchart';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.inverted = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "keyboardNavigation", {
+            /** @description Determines whether keyboard navigation inside the Table is enabled or not. Keyboard navigation affects both Task and Resource Tables. It allows to navigate between items. the following keyboard shortcut keys are available for focused tasks inside the Task Table: Enter - opens the Window editor to edit the currently focused task.Delete - opens a confirmation window regarding the deletion of the currently focused task. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.keyboardNavigation : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.keyboardNavigation = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -797,7 +924,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "nonworkingDays", {
-            /** @description Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be displayed with colored cells inside the timeline and will be ignored during task range calculations. */
+            /** @description Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be displayed with colored cells inside the timeline and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.nonworkingDays : undefined;
             },
@@ -808,7 +935,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "nonworkingHours", {
-            /** @description Determines the nonworking hours of a day. Hours are represented as numbers inside an array. In the timline the cells that represent nonworking days are colored differently from the rest. */
+            /** @description Determines the nonworking hours of a day. Hours are represented as numbers inside an array (e.g. [1,2,3] - means 1,2 and 3 AM) or number ranges represented as nested arrays(e.g. [[0,6]] - means from 0 to 6 AM). In the timline the cells that represent nonworking days are colored differently from the rest and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.nonworkingHours : undefined;
             },
@@ -858,6 +985,28 @@ import './../source/modules/smart.ganttchart';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.resourceColumns = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "resourceFiltering", {
+            /** @description Determines whether the Resource Table is filterable or not. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.resourceFiltering : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.resourceFiltering = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "resourceGroupFormatFunction", {
+            /** @description A format function that allows to re-format the group row labels when groupByResources is enabled. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.resourceGroupFormatFunction : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.resourceGroupFormatFunction = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -950,13 +1099,24 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(GanttChartComponent.prototype, "selectedIndexes", {
-            /** @description Determines the selected task(s). If empty no tasks are selected. */
+        Object.defineProperty(GanttChartComponent.prototype, "selectedTaskIds", {
+            /** @description Sets which tasks to select by their id or gets the currently selected task ids. If no id is provided for the task, an internal id is generated for each task according to it's index(tree path). */
             get: function () {
-                return this.nativeElement ? this.nativeElement.selectedIndexes : undefined;
+                return this.nativeElement ? this.nativeElement.selectedTaskIds : undefined;
             },
             set: function (value) {
-                this.nativeElement ? this.nativeElement.selectedIndexes = value : undefined;
+                this.nativeElement ? this.nativeElement.selectedTaskIds = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "selectedResourceIds", {
+            /** @description Sets which resources to select by their id or gets the currently selected resource ids. If no id is provided for the resource, an internal id is generated for each resource according to it's index(tree path). */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.selectedResourceIds : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.selectedResourceIds = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -983,19 +1143,8 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(GanttChartComponent.prototype, "sortable", {
-            /** @description Determines whether the GanttChart can be sorted or not. */
-            get: function () {
-                return this.nativeElement ? this.nativeElement.sortable : undefined;
-            },
-            set: function (value) {
-                this.nativeElement ? this.nativeElement.sortable = value : undefined;
-            },
-            enumerable: true,
-            configurable: true
-        });
         Object.defineProperty(GanttChartComponent.prototype, "sortMode", {
-            /** @description Determines whether the GanttChart can be sorted by one or more columns. */
+            /** @description Determines whether the GanttChart can be sorted by one, more then one or no columns. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.sortMode : undefined;
             },
@@ -1023,6 +1172,17 @@ import './../source/modules/smart.ganttchart';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.taskColumns = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "taskFiltering", {
+            /** @description Determines whether the Task Table is filterable or not. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.taskFiltering : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.taskFiltering = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1061,7 +1221,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "treeMin", {
-            /** @description Determines the min width of the task tree. */
+            /** @description Determines the min width of the task table. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.treeMin : undefined;
             },
@@ -1072,7 +1232,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "treeSize", {
-            /** @description Determines the size(width) of the task tree. */
+            /** @description Determines the size(width) of the task table. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.treeSize : undefined;
             },
@@ -1159,18 +1319,127 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
-        /** @description Adds a task as the last item of a Project.
-        * @param {any} taskIndex. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
-        * @param {string | number} projectIndex. A number that represents the index of a project or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+        /** @description Adds a custom filter to a specific column (task or resource column).
+        * @param {any} columns. An object or an array of objects with the following syntax: <ul><li><b>type</b> - indicates the type of column to filter. Possible values are 'task' or 'resource'.</li><li><b>value</b> - the value of the column that must match the value attribute of a taskColumns/resourceColumns object(e.g. 'label', 'dateStart', etc).</li></ul>.
+        * @param {any} filterGroup. A JQX.Utilities.FilterGroup object. Here's an example for creating a FilterGroup object: <pre>const filterGroup = new window.JQX.Utilities.FilterGroup(), filterObject = filterGroup.createFilter('string', 'Task B', 'STARTS_WITH_CASE_SENSITIVE'); filterGroup.addFilter('or', filterObject); gantt.addFilter({ type: 'task', value: 'label' }, filterGroup);</pre>
         */
-        GanttChartComponent.prototype.addTaskTo = function (taskIndex, projectIndex) {
+        GanttChartComponent.prototype.addFilter = function (columns, filterGroup) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.addTaskTo(taskIndex, projectIndex);
+                this.nativeElement.addFilter(columns, filterGroup);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.addTaskTo(taskIndex, projectIndex);
+                    _this.nativeElement.addFilter(columns, filterGroup);
+                });
+            }
+        };
+        /** @description Clears the currently applied filters.
+        */
+        GanttChartComponent.prototype.clearFilters = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearFilters();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearFilters();
+                });
+            }
+        };
+        /** @description Clears the currently applied column sorting.
+        */
+        GanttChartComponent.prototype.clearSort = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearSort();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearSort();
+                });
+            }
+        };
+        /** @description Unselects all currently selected items inside the GanttChart including Tasks and Resources. It also clears the assignment highlgihters.
+        */
+        GanttChartComponent.prototype.clearSelection = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearSelection();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearSelection();
+                });
+            }
+        };
+        /** @description Removes a previously saved state of the element form LocalStorage according to it's id. Requires an id to be set to the element.
+        */
+        GanttChartComponent.prototype.clearState = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearState();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearState();
+                });
+            }
+        };
+        /** @description Removes all tasks.
+        */
+        GanttChartComponent.prototype.clearTasks = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearTasks();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearTasks();
+                });
+            }
+        };
+        /** @description Removes all resources.
+        */
+        GanttChartComponent.prototype.clearResources = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearResources();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearResources();
+                });
+            }
+        };
+        /** @description Creates a connection between two tasks.
+        * @param {number | string} startTaskIndex. The id of the start task or the connection string like '2-3-0'. <b>If the complete connections string is provided as the first argument, the rest of the method arguments are not necessary</b>
+        * @param {number | string} taskEndIndex?. The id of the end task.
+        * @param {number} connectionType?. The type of the connection. A numeric value from 0 to 3. The connection type can be: <ul><li><b>0</b> - Start-to-Start connection.</li><li><b>1</b> - End-to-Start connection.</li><li><b>2</b> - End-to-End connection.</li><li><b>3</b> - Start-to-End connection.</li></ul>
+        * @param {number} lag?. The connection lag in miliseconds. Used by the Auto scheduling algorithm in order allow some slack time slack time before or after the next task begins/ends. Lag is measured in miliseconds. It can be a negative (lead) or a positive (lag) number.
+        */
+        GanttChartComponent.prototype.createConnection = function (startTaskIndex, taskEndIndex, connectionType, lag) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.createConnection(startTaskIndex, taskEndIndex, connectionType, lag);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.createConnection(startTaskIndex, taskEndIndex, connectionType, lag);
+                });
+            }
+        };
+        /** @description Collapses an expanded project.
+        * @param {string | number} id. The id of a project item that should be collapsed.
+        */
+        GanttChartComponent.prototype.collapse = function (id) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.collapse(id);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.collapse(id);
                 });
             }
         };
@@ -1211,6 +1480,475 @@ import './../source/modules/smart.ganttchart';
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.refresh(fullRefresh);
+                });
+            }
+        };
+        /** @description Makes sure a Task is visible by scrolling to it.
+        * @param {string | number} taskId. The id of the target Task.
+        */
+        GanttChartComponent.prototype.ensureVisible = function (taskId) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.ensureVisible(taskId);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.ensureVisible(taskId);
+                });
+            }
+        };
+        /** @description Expands a collapsed project with tasks.
+        * @param {string | number} id. The id of a project task that should be expanded.
+        */
+        GanttChartComponent.prototype.expand = function (id) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.expand(id);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.expand(id);
+                });
+            }
+        };
+        /** @description Exports the data of Tree of the GanttChart.
+        * @param {string} dataFormat. Determines the format of the exported file. Three possible values are available: <ul><li><b>pdf</b></li><li><b>xlsx</b></li><li><b>html</b></li><li><b>tsv</b></li><li><b>csv</b></li><li><b>xml</b></li></ul>
+        * @param {any} callback?. A callback that allows to format the exported data based on a condition. For additional details, refer ro the JQX Export Documentation.
+        */
+        GanttChartComponent.prototype.exportData = function (dataFormat, callback) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.exportData(dataFormat, callback);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.exportData(dataFormat, callback);
+                });
+            }
+        };
+        /** @description Returns a JSON representation of all tasks inside the element along with their connections and settings.
+        * @returns {any[]}
+      */
+        GanttChartComponent.prototype.getState = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getState();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the Tree path of a task/resource. The tree path is used as task/resource id if no id is provided by the user.
+        * @param {any} item. A GattChartTask/GanttChartResource item object.
+        * @returns {string}
+      */
+        GanttChartComponent.prototype.getItemPath = function (item) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getItemPath(item);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the task object that corresponds to the id/path.
+        * @param {string | number} itemId. The id/path of a task.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getTask = function (itemId) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getTask(itemId);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns an array of all GanttChart tasks.
+        * @returns {any[]}
+      */
+        GanttChartComponent.prototype.getTasks = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getTasks();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the index of a task.
+        * @param {any} task. A GattChartTask object.
+        * @returns {number}
+      */
+        GanttChartComponent.prototype.getTaskIndex = function (task) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getTaskIndex(task);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the connections definitions of a task.
+        * @param {any} taskId. A GanttChartTask object or it's id.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getTaskConnections = function (taskId) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getTaskConnections(taskId);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the Project of a task or undefined if it does not have one.
+        * @param {any} task. A GantChartTask object.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getTaskProject = function (task) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getTaskProject(task);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the resource object that corresponds to the id/path.
+        * @param {string | number} itemId. The id/path of a resource.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getResource = function (itemId) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getResource(itemId);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns an array of all GanttChart resources.
+        * @returns {any[]}
+      */
+        GanttChartComponent.prototype.getResources = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getResources();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the index of a resource.
+        * @param {any} resource. A GanttChartResource object.
+        * @returns {number}
+      */
+        GanttChartComponent.prototype.getResourceIndex = function (resource) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getResourceIndex(resource);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the tasks that are assigned to the resource.
+        * @param {any} resource. A GanttChartResource object or it's id.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getResourceTasks = function (resource) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getResourceTasks(resource);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the currently selected tasks/resource ids. If selection is disabled or no items are selected returns null.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getSelectedIds = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getSelectedIds();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the currently selected tasks.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getSelectedTasks = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getSelectedTasks();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the currently selected resources.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getSelectedResources = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getSelectedResources();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the working hours of the day as numbers.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getWorkingHours = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getWorkingHours();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Depending on the nonworkingDays property, returns true or false whether the target date is on a working day or not.
+        * @param {Date} date. A javascript Date object or a string/number which represents a valid JS Date.
+        */
+        GanttChartComponent.prototype.isWorkingDay = function (date) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.isWorkingDay(date);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.isWorkingDay(date);
+                });
+            }
+        };
+        /** @description Loads a previously saved state of the element or checks LocalStorage for any saved states if no argument is passed to the method.
+        * @param {any[]} state?. An Array containing a valid structure of Gantt Chart tasks.
+        */
+        GanttChartComponent.prototype.loadState = function (state) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.loadState(state);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.loadState(state);
                 });
             }
         };
@@ -1257,357 +1995,17 @@ import './../source/modules/smart.ganttchart';
             });
         };
         /** @description Removes all connections of a task or between two tasks if the second argument is provided and valid.
-        * @param {number} taskStartIndex. The index of the start task.
-        * @param {number} taskEndIndex?. The index of the end task.
-        * @returns {string}
-      */
-        GanttChartComponent.prototype.removeTaskConnection = function (taskStartIndex, taskEndIndex) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.removeTaskConnection(taskStartIndex, taskEndIndex);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Removes all tasks.
+        * @param {any} taskStart. The start task object or it's id.
+        * @param {any} taskEnd?. The end task object or it's id.
         */
-        GanttChartComponent.prototype.clearTasks = function () {
+        GanttChartComponent.prototype.removeTaskConnection = function (taskStart, taskEnd) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.clearTasks();
+                this.nativeElement.removeTaskConnection(taskStart, taskEnd);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.clearTasks();
-                });
-            }
-        };
-        /** @description Removes all resources.
-        */
-        GanttChartComponent.prototype.clearResources = function () {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.clearResources();
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.clearResources();
-                });
-            }
-        };
-        /** @description Creates a connection between two tasks.
-        * @param {number | string} startTaskIndex. The index of the start task or the connection string like '2-3-0.
-        * @param {number} taskEndIndex?. The index of the end task.
-        * @param {number} connectionType?. The type of the connection. A numeric value from 0 to 3.
-        */
-        GanttChartComponent.prototype.createConnection = function (startTaskIndex, taskEndIndex, connectionType) {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.createConnection(startTaskIndex, taskEndIndex, connectionType);
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.createConnection(startTaskIndex, taskEndIndex, connectionType);
-                });
-            }
-        };
-        /** @description Collapses an expanded project with tasks.
-        * @param {string | number} index. The index of a project task that should be collapsed.
-        */
-        GanttChartComponent.prototype.collapse = function (index) {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.collapse(index);
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.collapse(index);
-                });
-            }
-        };
-        /** @description Makes sure a Task is visible by scrolling to it.
-        * @param {string | number} item. The index of the target Task. Can be a string representing a Tree index ( similar to jqxTree )
-        */
-        GanttChartComponent.prototype.ensureVisible = function (item) {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.ensureVisible(item);
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.ensureVisible(item);
-                });
-            }
-        };
-        /** @description Expands a collapsed project with tasks.
-        * @param {string | number} index. The index of a project task that should be expanded.
-        */
-        GanttChartComponent.prototype.expand = function (index) {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.expand(index);
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.expand(index);
-                });
-            }
-        };
-        /** @description Exports the data of Tree of the GanttChart.
-        * @param {string} dataFormat. Determines the format of the exported file. Three possible values are available: <ul><li><b>pdf</b></li><li><b>xlsx</b></li><li><b>html</b></li></ul>
-        * @param {any} callback?. A callback that allows to format the exported data based on a condition. For additional details, refer ro the Smart Export Documentation.
-        */
-        GanttChartComponent.prototype.exportData = function (dataFormat, callback) {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.exportData(dataFormat, callback);
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.exportData(dataFormat, callback);
-                });
-            }
-        };
-        /** @description Returns a JSON representation of all tasks inside the element along with their connections and settings.
-        * @returns {any[]}
-      */
-        GanttChartComponent.prototype.getState = function () {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.getState();
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Returns the Tree path of a task/resource.
-        * @param {any} item. A GattChartTask/GanttChartResource item object or index.
-        * @returns {string}
-      */
-        GanttChartComponent.prototype.getItemPath = function (item) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.getItemPath(item);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Returns the index of a task.
-        * @param {any} task. A GattChartTask object.
-        * @returns {number}
-      */
-        GanttChartComponent.prototype.getTaskIndex = function (task) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.getTaskIndex(task);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Returns the tree path of a task.
-        * @param {any} task. A GanttChartTask object.
-        * @returns {string}
-      */
-        GanttChartComponent.prototype.getTaskPath = function (task) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.getTaskPath(task);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Returns teh Project of a task if any.
-        * @param {any} task. A GantChartTask object.
-        * @returns {any}
-      */
-        GanttChartComponent.prototype.getTaskProject = function (task) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.getTaskProject(task);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Returns the index of a resource.
-        * @param {any} resource. A GanttChartResource object.
-        * @returns {number}
-      */
-        GanttChartComponent.prototype.getResourceIndex = function (resource) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.getResourceIndex(resource);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Returns the tasks that are assigned to the resource.
-        * @param {any} resource. A GanttChartResource object.
-        * @returns {any}
-      */
-        GanttChartComponent.prototype.getResourceTasks = function (resource) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.getResourceTasks(resource);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
-        };
-        /** @description Unselects all currently selected items inside the GanttChart including Tasks and Resources. It also clears the assignment highlgihters.
-        */
-        GanttChartComponent.prototype.clearSelection = function () {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.clearSelection();
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.clearSelection();
-                });
-            }
-        };
-        /** @description Removes a previously saved state of the element form LocalStorage according to it's id. Requires an id to be set to the element.
-        */
-        GanttChartComponent.prototype.clearState = function () {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.clearState();
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.clearState();
-                });
-            }
-        };
-        /** @description Loads a previously saved state of the element or checks LocalStorage for any saved states if no argument is passed to the method.
-        * @param {any[]} state?. An Array containing a valid structure of Gantt Chart tasks.
-        */
-        GanttChartComponent.prototype.loadState = function (state) {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.loadState(state);
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.loadState(state);
+                    _this.nativeElement.removeTaskConnection(taskStart, taskEnd);
                 });
             }
         };
@@ -1625,47 +2023,61 @@ import './../source/modules/smart.ganttchart';
                 });
             }
         };
-        /** @description Inserts a new task in the timeline.
-        * @param {string | number} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+        /** @description Inserts a new task in the timeline. The new task can be inserted as a sub task of a project by passing the appropriate argument for the project id or as a root level item.
         * @param {any} taskObject. An object describing a Gantt Chart task.
-        */
-        GanttChartComponent.prototype.insertTask = function (index, taskObject) {
-            var _this = this;
-            if (this.nativeElement.isRendered) {
-                this.nativeElement.insertTask(index, taskObject);
-            }
-            else {
-                this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.insertTask(index, taskObject);
+        * @param {any} project?. A number or string that represents the id of a project (e.g. '0') or a project object definition present in the GanttChart. This parameter determines the parent project of the task that will be inserted. If <b>null</b> is passed as an arguemnt the new task will be inserted at root level without a parent project.
+        * @param {number} index?. The index where the new item should be inserted(e.g. 2). This index will determine the position of the newly inserted task.
+        * @returns {string | number | undefined}
+      */
+        GanttChartComponent.prototype.insertTask = function (taskObject, project, index) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.insertTask(taskObject, project, index);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
                 });
-            }
+            });
         };
-        /** @description Updates a task inside the timeline.
-        * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+        /** @description Updates a task/project/milestone.
+        * @param {any} taskId. A number or string that represents the id of a task/project(e.g. '0') or the object definition of the task/project.
         * @param {any} taskObject. An object describing a Gantt Chart task. The properties of this object will be applied to the desired task.
         */
-        GanttChartComponent.prototype.updateTask = function (index, taskObject) {
+        GanttChartComponent.prototype.updateTask = function (taskId, taskObject) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.updateTask(index, taskObject);
+                this.nativeElement.updateTask(taskId, taskObject);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.updateTask(index, taskObject);
+                    _this.nativeElement.updateTask(taskId, taskObject);
                 });
             }
         };
         /** @description Removes a task from the timeline.
-        * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following jqxTree syntax).
+        * @param {any} taskId. A number or string that represents the id of a task or the actual item object.
         */
-        GanttChartComponent.prototype.removeTask = function (index) {
+        GanttChartComponent.prototype.removeTask = function (taskId) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.removeTask(index);
+                this.nativeElement.removeTask(taskId);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.removeTask(index);
+                    _this.nativeElement.removeTask(taskId);
                 });
             }
         };
@@ -1713,17 +2125,17 @@ import './../source/modules/smart.ganttchart';
                 });
             }
         };
-        /** @description Opens the popup Window for specific task Editing.
-        * @param {string | number} index. A string or number that represents the index of a task that is going to be edited.
+        /** @description Opens the popup Window for specific task to edit or to delete a connection if a connection string is passed.
+        * @param {any} taskId. A string or number that represents the id of a task or the task object that is going to be edited or a connection string(e.g. '2-0-0').
         */
-        GanttChartComponent.prototype.openWindow = function (index) {
+        GanttChartComponent.prototype.openWindow = function (taskId) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.openWindow(index);
+                this.nativeElement.openWindow(taskId);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.openWindow(index);
+                    _this.nativeElement.openWindow(taskId);
                 });
             }
         };
@@ -1753,8 +2165,92 @@ import './../source/modules/smart.ganttchart';
                 });
             }
         };
+        /** @description Allows to sets the working days and hours at once.
+        * @param {{ days: (number | string | number[])[], hours: (number | string | number[])[] }} settings. An object definition that contains the days and hours that should be working. The days and hours can be defined as an array of numbers where each number is a day/hour, strings where each string represents a range of days/hours (e.g. '1-5' or '2:00-8:00') or nested array of numbers (e.g. [[1,5]] or [[2, 8]]) which means from 1 to 5 or 2 to 8.
+        */
+        GanttChartComponent.prototype.setWorkTime = function (settings) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.setWorkTime(settings);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.setWorkTime(settings);
+                });
+            }
+        };
+        /** @description Allows to select a task based on it's id.
+        * @param {string | number} id. The id of the task to select.
+        */
+        GanttChartComponent.prototype.selectTask = function (id) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.selectTask(id);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.selectTask(id);
+                });
+            }
+        };
+        /** @description Allows to select a resource based on it's id.
+        * @param {string | number} id. The id of the resource to select.
+        */
+        GanttChartComponent.prototype.selectResource = function (id) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.selectResource(id);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.selectResource(id);
+                });
+            }
+        };
+        /** @description Allows to unselect a task based on it's id.
+        * @param {string | number} id. The id of the task to unselect.
+        */
+        GanttChartComponent.prototype.unselectTask = function (id) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.unselectTask(id);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.unselectTask(id);
+                });
+            }
+        };
+        /** @description Allows to unselect a resource based on it's id.
+        * @param {string | number} id. The id of the resource to unselect.
+        */
+        GanttChartComponent.prototype.unselectResource = function (id) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.unselectResource(id);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.unselectResource(id);
+                });
+            }
+        };
+        /** @description Allows to unset previously set working time. The opposte method for setWorkingTime.
+        * @param {{ days: (number | string | number[])[], hours: (number | string | number[])[] }} settings. An object definition that contains the days and hours that should not be working. The days and hours can be defined as an array of numbers where each number is a day/hour, strings where each string represents a range of days/hours (e.g. '1-5' or '2:00-8:00') or nested array of numbers (e.g. [[1,5]] or [[2, 8]]) which means from 1 to 5 or 2 to 8.
+        */
+        GanttChartComponent.prototype.unsetWorkTime = function (settings) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.unsetWorkTime(settings);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.unsetWorkTime(settings);
+                });
+            }
+        };
         /** @description Sorts the GanttChart tasks/resources if sortable is enabled.
-        * @param {any} columns?. An Array of objects which determine which columns to be sorted, the sort order and the type of item to sort: task or resource. If no arguments are provided sorting will be removed. <br /> An object should have the following properties: <ul><li><b>value</b> - a string that represents the value of a <b>taskColumn</b> to sort.</li><li><b>sortOrder</b> - a string that represents the sorting order for the column: 'asc' (asscending sorting) or 'desc' (descending) are possible values. </li><li><b>type</b> - a string that represents the type of item to sort. This property determines which panel will be sorted. Two possible values: 'task', 'resource'.</li></ul>
+        * @param {any} columns. An Array of objects which determine which columns to be sorted, the sort order and the type of item to sort: task or resource. If no arguments are provided sorting will be removed. <br /> An object should have the following properties: <ul><li><b>value</b> - a string that represents the value of a <b>taskColumn</b> to sort.</li><li><b>sortOrder</b> - a string that represents the sorting order for the column: 'asc' (asscending sorting) or 'desc' (descending) are possible values. </li><li><b>type</b> - a string that represents the type of item to sort. This property determines which panel will be sorted. Two possible values: 'task', 'resource'.</li></ul>
         */
         GanttChartComponent.prototype.sort = function (columns) {
             var _this = this;
@@ -1780,6 +2276,7 @@ import './../source/modules/smart.ganttchart';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1802,8 +2299,28 @@ import './../source/modules/smart.ganttchart';
             that.nativeElement.addEventListener('beginUpdate', that.eventHandlers['beginUpdateHandler']);
             that.eventHandlers['endUpdateHandler'] = function (event) { that.onEndUpdate.emit(event); };
             that.nativeElement.addEventListener('endUpdate', that.eventHandlers['endUpdateHandler']);
+            that.eventHandlers['connectionStartHandler'] = function (event) { that.onConnectionStart.emit(event); };
+            that.nativeElement.addEventListener('connectionStart', that.eventHandlers['connectionStartHandler']);
+            that.eventHandlers['connectionEndHandler'] = function (event) { that.onConnectionEnd.emit(event); };
+            that.nativeElement.addEventListener('connectionEnd', that.eventHandlers['connectionEndHandler']);
             that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+            that.eventHandlers['columnResizeHandler'] = function (event) { that.onColumnResize.emit(event); };
+            that.nativeElement.addEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
+            that.eventHandlers['closingHandler'] = function (event) { that.onClosing.emit(event); };
+            that.nativeElement.addEventListener('closing', that.eventHandlers['closingHandler']);
+            that.eventHandlers['closeHandler'] = function (event) { that.onClose.emit(event); };
+            that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
+            that.eventHandlers['collapseHandler'] = function (event) { that.onCollapse.emit(event); };
+            that.nativeElement.addEventListener('collapse', that.eventHandlers['collapseHandler']);
+            that.eventHandlers['dragStartHandler'] = function (event) { that.onDragStart.emit(event); };
+            that.nativeElement.addEventListener('dragStart', that.eventHandlers['dragStartHandler']);
+            that.eventHandlers['dragEndHandler'] = function (event) { that.onDragEnd.emit(event); };
+            that.nativeElement.addEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
+            that.eventHandlers['expandHandler'] = function (event) { that.onExpand.emit(event); };
+            that.nativeElement.addEventListener('expand', that.eventHandlers['expandHandler']);
+            that.eventHandlers['filterHandler'] = function (event) { that.onFilter.emit(event); };
+            that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
             that.eventHandlers['itemClickHandler'] = function (event) { that.onItemClick.emit(event); };
             that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
             that.eventHandlers['itemInsertHandler'] = function (event) { that.onItemInsert.emit(event); };
@@ -1812,38 +2329,28 @@ import './../source/modules/smart.ganttchart';
             that.nativeElement.addEventListener('itemRemove', that.eventHandlers['itemRemoveHandler']);
             that.eventHandlers['itemUpdateHandler'] = function (event) { that.onItemUpdate.emit(event); };
             that.nativeElement.addEventListener('itemUpdate', that.eventHandlers['itemUpdateHandler']);
-            that.eventHandlers['progressChangeStartHandler'] = function (event) { that.onProgressChangeStart.emit(event); };
-            that.nativeElement.addEventListener('progressChangeStart', that.eventHandlers['progressChangeStartHandler']);
-            that.eventHandlers['progressChangeEndHandler'] = function (event) { that.onProgressChangeEnd.emit(event); };
-            that.nativeElement.addEventListener('progressChangeEnd', that.eventHandlers['progressChangeEndHandler']);
-            that.eventHandlers['dragStartHandler'] = function (event) { that.onDragStart.emit(event); };
-            that.nativeElement.addEventListener('dragStart', that.eventHandlers['dragStartHandler']);
-            that.eventHandlers['dragEndHandler'] = function (event) { that.onDragEnd.emit(event); };
-            that.nativeElement.addEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
-            that.eventHandlers['resizeStartHandler'] = function (event) { that.onResizeStart.emit(event); };
-            that.nativeElement.addEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
-            that.eventHandlers['resizeEndHandler'] = function (event) { that.onResizeEnd.emit(event); };
-            that.nativeElement.addEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
-            that.eventHandlers['connectionStartHandler'] = function (event) { that.onConnectionStart.emit(event); };
-            that.nativeElement.addEventListener('connectionStart', that.eventHandlers['connectionStartHandler']);
-            that.eventHandlers['connectionEndHandler'] = function (event) { that.onConnectionEnd.emit(event); };
-            that.nativeElement.addEventListener('connectionEnd', that.eventHandlers['connectionEndHandler']);
-            that.eventHandlers['scrollBottomReachedHandler'] = function (event) { that.onScrollBottomReached.emit(event); };
-            that.nativeElement.addEventListener('scrollBottomReached', that.eventHandlers['scrollBottomReachedHandler']);
-            that.eventHandlers['scrollTopReachedHandler'] = function (event) { that.onScrollTopReached.emit(event); };
-            that.nativeElement.addEventListener('scrollTopReached', that.eventHandlers['scrollTopReachedHandler']);
             that.eventHandlers['openingHandler'] = function (event) { that.onOpening.emit(event); };
             that.nativeElement.addEventListener('opening', that.eventHandlers['openingHandler']);
             that.eventHandlers['openHandler'] = function (event) { that.onOpen.emit(event); };
             that.nativeElement.addEventListener('open', that.eventHandlers['openHandler']);
-            that.eventHandlers['closingHandler'] = function (event) { that.onClosing.emit(event); };
-            that.nativeElement.addEventListener('closing', that.eventHandlers['closingHandler']);
-            that.eventHandlers['closeHandler'] = function (event) { that.onClose.emit(event); };
-            that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
-            that.eventHandlers['collapseHandler'] = function (event) { that.onCollapse.emit(event); };
-            that.nativeElement.addEventListener('collapse', that.eventHandlers['collapseHandler']);
-            that.eventHandlers['expandHandler'] = function (event) { that.onExpand.emit(event); };
-            that.nativeElement.addEventListener('expand', that.eventHandlers['expandHandler']);
+            that.eventHandlers['progressChangeStartHandler'] = function (event) { that.onProgressChangeStart.emit(event); };
+            that.nativeElement.addEventListener('progressChangeStart', that.eventHandlers['progressChangeStartHandler']);
+            that.eventHandlers['progressChangeEndHandler'] = function (event) { that.onProgressChangeEnd.emit(event); };
+            that.nativeElement.addEventListener('progressChangeEnd', that.eventHandlers['progressChangeEndHandler']);
+            that.eventHandlers['resizeStartHandler'] = function (event) { that.onResizeStart.emit(event); };
+            that.nativeElement.addEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
+            that.eventHandlers['resizeEndHandler'] = function (event) { that.onResizeEnd.emit(event); };
+            that.nativeElement.addEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
+            that.eventHandlers['sortHandler'] = function (event) { that.onSort.emit(event); };
+            that.nativeElement.addEventListener('sort', that.eventHandlers['sortHandler']);
+            that.eventHandlers['scrollBottomReachedHandler'] = function (event) { that.onScrollBottomReached.emit(event); };
+            that.nativeElement.addEventListener('scrollBottomReached', that.eventHandlers['scrollBottomReachedHandler']);
+            that.eventHandlers['scrollTopReachedHandler'] = function (event) { that.onScrollTopReached.emit(event); };
+            that.nativeElement.addEventListener('scrollTopReached', that.eventHandlers['scrollTopReachedHandler']);
+            that.eventHandlers['scrollLeftReachedHandler'] = function (event) { that.onScrollLeftReached.emit(event); };
+            that.nativeElement.addEventListener('scrollLeftReached', that.eventHandlers['scrollLeftReachedHandler']);
+            that.eventHandlers['scrollRightReachedHandler'] = function (event) { that.onScrollRightReached.emit(event); };
+            that.nativeElement.addEventListener('scrollRightReached', that.eventHandlers['scrollRightReachedHandler']);
         };
         /** @description Remove event listeners. */
         GanttChartComponent.prototype.unlisten = function () {
@@ -1854,8 +2361,38 @@ import './../source/modules/smart.ganttchart';
             if (that.eventHandlers['endUpdateHandler']) {
                 that.nativeElement.removeEventListener('endUpdate', that.eventHandlers['endUpdateHandler']);
             }
+            if (that.eventHandlers['connectionStartHandler']) {
+                that.nativeElement.removeEventListener('connectionStart', that.eventHandlers['connectionStartHandler']);
+            }
+            if (that.eventHandlers['connectionEndHandler']) {
+                that.nativeElement.removeEventListener('connectionEnd', that.eventHandlers['connectionEndHandler']);
+            }
             if (that.eventHandlers['changeHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+            }
+            if (that.eventHandlers['columnResizeHandler']) {
+                that.nativeElement.removeEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
+            }
+            if (that.eventHandlers['closingHandler']) {
+                that.nativeElement.removeEventListener('closing', that.eventHandlers['closingHandler']);
+            }
+            if (that.eventHandlers['closeHandler']) {
+                that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
+            }
+            if (that.eventHandlers['collapseHandler']) {
+                that.nativeElement.removeEventListener('collapse', that.eventHandlers['collapseHandler']);
+            }
+            if (that.eventHandlers['dragStartHandler']) {
+                that.nativeElement.removeEventListener('dragStart', that.eventHandlers['dragStartHandler']);
+            }
+            if (that.eventHandlers['dragEndHandler']) {
+                that.nativeElement.removeEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
+            }
+            if (that.eventHandlers['expandHandler']) {
+                that.nativeElement.removeEventListener('expand', that.eventHandlers['expandHandler']);
+            }
+            if (that.eventHandlers['filterHandler']) {
+                that.nativeElement.onfilterHandler = null;
             }
             if (that.eventHandlers['itemClickHandler']) {
                 that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
@@ -1869,17 +2406,17 @@ import './../source/modules/smart.ganttchart';
             if (that.eventHandlers['itemUpdateHandler']) {
                 that.nativeElement.removeEventListener('itemUpdate', that.eventHandlers['itemUpdateHandler']);
             }
+            if (that.eventHandlers['openingHandler']) {
+                that.nativeElement.removeEventListener('opening', that.eventHandlers['openingHandler']);
+            }
+            if (that.eventHandlers['openHandler']) {
+                that.nativeElement.removeEventListener('open', that.eventHandlers['openHandler']);
+            }
             if (that.eventHandlers['progressChangeStartHandler']) {
                 that.nativeElement.removeEventListener('progressChangeStart', that.eventHandlers['progressChangeStartHandler']);
             }
             if (that.eventHandlers['progressChangeEndHandler']) {
                 that.nativeElement.removeEventListener('progressChangeEnd', that.eventHandlers['progressChangeEndHandler']);
-            }
-            if (that.eventHandlers['dragStartHandler']) {
-                that.nativeElement.removeEventListener('dragStart', that.eventHandlers['dragStartHandler']);
-            }
-            if (that.eventHandlers['dragEndHandler']) {
-                that.nativeElement.removeEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
             }
             if (that.eventHandlers['resizeStartHandler']) {
                 that.nativeElement.removeEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
@@ -1887,11 +2424,8 @@ import './../source/modules/smart.ganttchart';
             if (that.eventHandlers['resizeEndHandler']) {
                 that.nativeElement.removeEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
             }
-            if (that.eventHandlers['connectionStartHandler']) {
-                that.nativeElement.removeEventListener('connectionStart', that.eventHandlers['connectionStartHandler']);
-            }
-            if (that.eventHandlers['connectionEndHandler']) {
-                that.nativeElement.removeEventListener('connectionEnd', that.eventHandlers['connectionEndHandler']);
+            if (that.eventHandlers['sortHandler']) {
+                that.nativeElement.removeEventListener('sort', that.eventHandlers['sortHandler']);
             }
             if (that.eventHandlers['scrollBottomReachedHandler']) {
                 that.nativeElement.removeEventListener('scrollBottomReached', that.eventHandlers['scrollBottomReachedHandler']);
@@ -1899,28 +2433,19 @@ import './../source/modules/smart.ganttchart';
             if (that.eventHandlers['scrollTopReachedHandler']) {
                 that.nativeElement.removeEventListener('scrollTopReached', that.eventHandlers['scrollTopReachedHandler']);
             }
-            if (that.eventHandlers['openingHandler']) {
-                that.nativeElement.removeEventListener('opening', that.eventHandlers['openingHandler']);
+            if (that.eventHandlers['scrollLeftReachedHandler']) {
+                that.nativeElement.removeEventListener('scrollLeftReached', that.eventHandlers['scrollLeftReachedHandler']);
             }
-            if (that.eventHandlers['openHandler']) {
-                that.nativeElement.removeEventListener('open', that.eventHandlers['openHandler']);
-            }
-            if (that.eventHandlers['closingHandler']) {
-                that.nativeElement.removeEventListener('closing', that.eventHandlers['closingHandler']);
-            }
-            if (that.eventHandlers['closeHandler']) {
-                that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
-            }
-            if (that.eventHandlers['collapseHandler']) {
-                that.nativeElement.removeEventListener('collapse', that.eventHandlers['collapseHandler']);
-            }
-            if (that.eventHandlers['expandHandler']) {
-                that.nativeElement.removeEventListener('expand', that.eventHandlers['expandHandler']);
+            if (that.eventHandlers['scrollRightReachedHandler']) {
+                that.nativeElement.removeEventListener('scrollRightReached', that.eventHandlers['scrollRightReachedHandler']);
             }
         };
         GanttChartComponent.ctorParameters = function () { return [
             { type: core.ElementRef }
         ]; };
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "adjustToNonworkingTime", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "autoSchedule", null);
@@ -1930,6 +2455,12 @@ import './../source/modules/smart.ganttchart';
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "autoScrollStep", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "columnResize", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "columnResizeFeedback", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "dataExport", null);
@@ -1971,6 +2502,12 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "durationUnit", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "filterRow", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "groupByResources", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "headerTemplate", null);
         __decorate([
             core.Input()
@@ -1986,7 +2523,16 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "hourFormat", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "infiniteTimeline", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "infiniteTimelineStep", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "inverted", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "keyboardNavigation", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "locale", null);
@@ -2022,6 +2568,12 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "resourceColumns", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "resourceFiltering", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "resourceGroupFormatFunction", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "resourcePanelHeaderTemplate", null);
         __decorate([
             core.Input()
@@ -2046,16 +2598,16 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "rightToLeft", null);
         __decorate([
             core.Input()
-        ], GanttChartComponent.prototype, "selectedIndexes", null);
+        ], GanttChartComponent.prototype, "selectedTaskIds", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "selectedResourceIds", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "showProgressLabel", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "snapToNearest", null);
-        __decorate([
-            core.Input()
-        ], GanttChartComponent.prototype, "sortable", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "sortMode", null);
@@ -2065,6 +2617,9 @@ import './../source/modules/smart.ganttchart';
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "taskColumns", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "taskFiltering", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "taskPanelMin", null);
@@ -2109,7 +2664,37 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "onEndUpdate", void 0);
         __decorate([
             core.Output()
+        ], GanttChartComponent.prototype, "onConnectionStart", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onConnectionEnd", void 0);
+        __decorate([
+            core.Output()
         ], GanttChartComponent.prototype, "onChange", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onColumnResize", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onClosing", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onClose", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onCollapse", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onDragStart", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onDragEnd", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onExpand", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onFilter", void 0);
         __decorate([
             core.Output()
         ], GanttChartComponent.prototype, "onItemClick", void 0);
@@ -2124,16 +2709,16 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "onItemUpdate", void 0);
         __decorate([
             core.Output()
+        ], GanttChartComponent.prototype, "onOpening", void 0);
+        __decorate([
+            core.Output()
+        ], GanttChartComponent.prototype, "onOpen", void 0);
+        __decorate([
+            core.Output()
         ], GanttChartComponent.prototype, "onProgressChangeStart", void 0);
         __decorate([
             core.Output()
         ], GanttChartComponent.prototype, "onProgressChangeEnd", void 0);
-        __decorate([
-            core.Output()
-        ], GanttChartComponent.prototype, "onDragStart", void 0);
-        __decorate([
-            core.Output()
-        ], GanttChartComponent.prototype, "onDragEnd", void 0);
         __decorate([
             core.Output()
         ], GanttChartComponent.prototype, "onResizeStart", void 0);
@@ -2142,10 +2727,7 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "onResizeEnd", void 0);
         __decorate([
             core.Output()
-        ], GanttChartComponent.prototype, "onConnectionStart", void 0);
-        __decorate([
-            core.Output()
-        ], GanttChartComponent.prototype, "onConnectionEnd", void 0);
+        ], GanttChartComponent.prototype, "onSort", void 0);
         __decorate([
             core.Output()
         ], GanttChartComponent.prototype, "onScrollBottomReached", void 0);
@@ -2154,22 +2736,10 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "onScrollTopReached", void 0);
         __decorate([
             core.Output()
-        ], GanttChartComponent.prototype, "onOpening", void 0);
+        ], GanttChartComponent.prototype, "onScrollLeftReached", void 0);
         __decorate([
             core.Output()
-        ], GanttChartComponent.prototype, "onOpen", void 0);
-        __decorate([
-            core.Output()
-        ], GanttChartComponent.prototype, "onClosing", void 0);
-        __decorate([
-            core.Output()
-        ], GanttChartComponent.prototype, "onClose", void 0);
-        __decorate([
-            core.Output()
-        ], GanttChartComponent.prototype, "onCollapse", void 0);
-        __decorate([
-            core.Output()
-        ], GanttChartComponent.prototype, "onExpand", void 0);
+        ], GanttChartComponent.prototype, "onScrollRightReached", void 0);
         GanttChartComponent = __decorate([
             core.Directive({
                 selector: 'smart-gantt-chart, [smart-gantt-chart]'

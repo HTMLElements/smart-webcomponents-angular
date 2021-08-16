@@ -1,8 +1,8 @@
 import { ListBox } from './../index';
-import { Animation, ListBoxDropAction, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ListSelectionMode, ListBoxSelectionChangeAction, VerticalScrollBarVisibility } from './../index';
+import { Animation, ListBoxDropAction, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ListSelectionMode, ListBoxSelectionChangeAction, VerticalScrollBarVisibility, ListBoxItem } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, ListBoxDropAction, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ListSelectionMode, ListBoxSelectionChangeAction, VerticalScrollBarVisibility, ElementRenderMode } from './../index';
+export { Animation, ListBoxDropAction, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ListSelectionMode, ListBoxSelectionChangeAction, VerticalScrollBarVisibility, ListBoxItem, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { ListBox } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -77,10 +77,7 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description Determines the item width measuring algorithm. */
     itemMeasureMode: ListItemMeasureMode;
     /** @description A getter that returns an array of all ListBox items. */
-    items: {
-        label: string;
-        value: string;
-    }[];
+    items: ListBoxItem[];
     /** @description A string that represents the id of an HTMLTemplateElement inside the DOM or a reference to the template itself. It's used to set a custom template for the list items. */
     itemTemplate: any;
     /** @description Determines the text that will be displayed next to the loading indicator when the loader is visible and it's position is top or bottom. */
@@ -218,6 +215,10 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     * @returns {HTMLElement}
   */
     getItem(value: any): Promise<any>;
+    /** @description Returns an array of ListBox items.
+    * @returns {{label: string, value: string}[]}
+  */
+    getItems(): Promise<any>;
     /** @description Inserts a new item at a specified index.
     * @param {number} index. The index where the item must be inserted.
     * @param {any} items. A single item/definition or an array of List Items/definitions of list items to be inserted. The format of the item definitions is the same as the format of the <strong>dataSource</strong> property.

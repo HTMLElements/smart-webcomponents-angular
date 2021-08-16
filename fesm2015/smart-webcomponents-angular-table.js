@@ -113,7 +113,8 @@ let TableComponent = class TableComponent extends BaseElement {
         super(ref);
         this.eventHandlers = [];
         /** @description This event is triggered when a cell edit operation has been initiated.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row, 	value)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	value)
+        *   id - The id of the row.
         *   dataField - The data field of the cell's column.
         *   row - The data of the cell's row.
         *   value - The data value of the cell.
@@ -129,24 +130,27 @@ let TableComponent = class TableComponent extends BaseElement {
         */
         this.onCellClick = new EventEmitter();
         /** @description This event is triggered when a cell has been edited.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row, 	value)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	value)
+        *   id - The id of the row.
         *   dataField - The data field of the cell's column.
         *   row - The new data of the cell's row.
         *   value - The data value of the cell.
         */
         this.onCellEndEdit = new EventEmitter();
-        /** @description This event is triggered when the selection is changed.
+        /** @description This event is triggered when the selection is changed. Within the event handler you can get the selection by using the 'getSelection' method.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
         *   type - The type of action that initiated the selection change. Possible types: 'programmatic', 'interaction', 'remove'.
         */
         this.onChange = new EventEmitter();
         /** @description This event is triggered when a row has been collapsed.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	record)
+        *   id - The id of the collapsed row.
         *   record - The data of the collapsed row.
         */
         this.onCollapse = new EventEmitter();
         /** @description This event is triggered when a row has been expanded.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	record)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	record)
+        *   id - The id of the expanded row.
         *   record - The (aggregated) data of the expanded row.
         */
         this.onExpand = new EventEmitter();
@@ -169,10 +173,11 @@ let TableComponent = class TableComponent extends BaseElement {
         */
         this.onFilter = new EventEmitter();
         /** @description This event is triggered when a grouping-related action is made.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	dataField, 	label)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	action, 	dataField, 	label, 	path)
         *   action - The grouping action. Possible actions: 'add', 'collapse', 'expand', 'remove'.
         *   dataField - The data field of the column whose grouping is modified.
         *   label - The label of the group (only when collapsing/expanding).
+        *   path - The group's path (only when collapsing/expanding). The path includes the path to the expanded/collapsed group starting from the root group. The indexes are joined with '.'. This parameter is available when the 'action' is 'expand' or 'collapse'.
         */
         this.onGroup = new EventEmitter();
         /** @description This event is triggered when a paging-related action is made.
@@ -181,18 +186,24 @@ let TableComponent = class TableComponent extends BaseElement {
         */
         this.onPage = new EventEmitter();
         /** @description This event is triggered when a row edit operation has been initiated (only when editMode is 'row').
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	row)
+        *   id - The id of the row.
         *   row - The data of the row.
         */
         this.onRowBeginEdit = new EventEmitter();
         /** @description This event is triggered when a row has been edited (only when editMode is 'row').
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	row)
+        *   id - The id of the row.
         *   row - The new data of the row.
         */
         this.onRowEndEdit = new EventEmitter();
-        /** @description This event is triggered when a column header cell has been clicked.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	columns)
+        /** @description This event is triggered when a column header cell has been clicked or sorting is applied programmatically using the Table API.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	columns, 	sortDataFields, 	sortOrders, 	sortDataTypes, 	type)
         *   columns - An array with information about the columns the Table has been sorted by.
+        *   sortDataFields - An array with information about the data fields the Table has been sorted by.
+        *   sortOrders - An array with information about the columns sort orders the Table has been sorted by.
+        *   sortDataTypes - An array with information about the columns data types the Table has been sorted by.
+        *   type - The type of action that initiated the data sort. Possible types: 'programmatic', 'interaction'
         */
         this.onSort = new EventEmitter();
         this.nativeElement = ref.nativeElement;
@@ -277,7 +288,7 @@ let TableComponent = class TableComponent extends BaseElement {
     set conditionalFormatting(value) {
         this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
     }
-    /** @description Sets or gets the column sizing behavior. */
+    /** @description Sets or gets the column sizing behavior. In 'auto' mode Columns are automatically sized based on their content and the value of the columnMinWidth property, unless there is not enough space in the Table, in which case ellipses are shown. User-set static column width is still respected. In 'default' mode Columns are sized according to the rules of the standard HTML table element's table-layout: fixed. Custom width can also be applied to columns in this case by setting the column width property. */
     get columnSizeMode() {
         return this.nativeElement ? this.nativeElement.columnSizeMode : undefined;
     }
@@ -290,6 +301,13 @@ let TableComponent = class TableComponent extends BaseElement {
     }
     set conditionalFormattingButton(value) {
         this.nativeElement ? this.nativeElement.conditionalFormattingButton = value : undefined;
+    }
+    /** @description This property determines the time in milliseconds after which the Table data is updated, when you vertically scroll. */
+    get deferredScrollDelay() {
+        return this.nativeElement ? this.nativeElement.deferredScrollDelay : undefined;
+    }
+    set deferredScrollDelay(value) {
+        this.nativeElement ? this.nativeElement.deferredScrollDelay = value : undefined;
     }
     /** @description When binding the dataSource property directly to an array (as opposed to an instance of JQX.DataAdapter), sets or gets the name of the data field in the source array to bind row ids to. */
     get dataRowId() {
@@ -312,28 +330,28 @@ let TableComponent = class TableComponent extends BaseElement {
     set dataSourceSettings(value) {
         this.nativeElement ? this.nativeElement.dataSourceSettings = value : undefined;
     }
-    /** @description A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument). */
+    /** @description Disables the interaction with the element. */
     get dataTransform() {
         return this.nativeElement ? this.nativeElement.dataTransform : undefined;
     }
     set dataTransform(value) {
         this.nativeElement ? this.nativeElement.dataTransform = value : undefined;
     }
-    /** @description Disables the interaction with the element. */
+    /** @description Sets or gets whether the Table can be edited. */
     get disabled() {
         return this.nativeElement ? this.nativeElement.disabled : undefined;
     }
     set disabled(value) {
         this.nativeElement ? this.nativeElement.disabled = value : undefined;
     }
-    /** @description Sets or gets whether the Table can be edited. */
+    /** @description Sets or gets the edit mode. */
     get editing() {
         return this.nativeElement ? this.nativeElement.editing : undefined;
     }
     set editing(value) {
         this.nativeElement ? this.nativeElement.editing = value : undefined;
     }
-    /** @description Sets or gets the edit mode. */
+    /** @description Sets or gets whether Row hierarchies are expanded by default, when created. Use this property when you want your groups to be expanded by default, when the Table is grouped or when you use the Table in tree mode. */
     get editMode() {
         return this.nativeElement ? this.nativeElement.editMode : undefined;
     }
@@ -341,221 +359,248 @@ let TableComponent = class TableComponent extends BaseElement {
         this.nativeElement ? this.nativeElement.editMode = value : undefined;
     }
     /** @description Sets or gets whether the Table can be filtered. By default, the Table can be filtered by all string and numeric columns through a filter input in the header. */
+    get expandHierarchy() {
+        return this.nativeElement ? this.nativeElement.expandHierarchy : undefined;
+    }
+    set expandHierarchy(value) {
+        this.nativeElement ? this.nativeElement.expandHierarchy = value : undefined;
+    }
+    /** @description Sets or gets whether the Table can be filtered via a filter row. */
     get filtering() {
         return this.nativeElement ? this.nativeElement.filtering : undefined;
     }
     set filtering(value) {
         this.nativeElement ? this.nativeElement.filtering = value : undefined;
     }
-    /** @description Sets or gets whether the Table can be filtered via a filter row. */
+    /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
     get filterRow() {
         return this.nativeElement ? this.nativeElement.filterRow : undefined;
     }
     set filterRow(value) {
         this.nativeElement ? this.nativeElement.filterRow = value : undefined;
     }
-    /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
+    /** @description Sets or gets the id of an HTML template element to be applied as footer row(s). */
     get filterTemplate() {
         return this.nativeElement ? this.nativeElement.filterTemplate : undefined;
     }
     set filterTemplate(value) {
         this.nativeElement ? this.nativeElement.filterTemplate = value : undefined;
     }
-    /** @description Sets or gets the id of an HTML template element to be applied as footer row(s). */
+    /** @description Sets or gets whether Excel-like formulas can be passed as cell values. Formulas are always preceded by the = sign and are re-evaluated when cell values are changed. This feature depends on the third-party free plug-in formula-parser (the file formula-parser.min.js has to be referenced). */
     get footerRow() {
         return this.nativeElement ? this.nativeElement.footerRow : undefined;
     }
     set footerRow(value) {
         this.nativeElement ? this.nativeElement.footerRow = value : undefined;
     }
-    /** @description Sets or gets whether Excel-like formulas can be passed as cell values. Formulas are always preceded by the = sign and are re-evaluated when cell values are changed. This feature depends on the third-party free plug-in formula-parser (the file formula-parser.min.js has to be referenced). */
+    /** @description Sets or gets whether the Table's footer is sticky/frozen. */
     get formulas() {
         return this.nativeElement ? this.nativeElement.formulas : undefined;
     }
     set formulas(value) {
         this.nativeElement ? this.nativeElement.formulas = value : undefined;
     }
-    /** @description Sets or gets whether the Table's footer is sticky/frozen. */
+    /** @description Sets or gets whether the Table's column header is sticky/frozen. */
     get freezeFooter() {
         return this.nativeElement ? this.nativeElement.freezeFooter : undefined;
     }
     set freezeFooter(value) {
         this.nativeElement ? this.nativeElement.freezeFooter = value : undefined;
     }
-    /** @description Sets or gets whether the Table's column header is sticky/frozen. */
+    /** @description Sets or gets whether grouping the Table is enabled. */
     get freezeHeader() {
         return this.nativeElement ? this.nativeElement.freezeHeader : undefined;
     }
     set freezeHeader(value) {
         this.nativeElement ? this.nativeElement.freezeHeader = value : undefined;
     }
-    /** @description Sets or gets whether grouping the Table is enabled. */
+    /** @description Sets or gets the id of an HTML template element to be applied as additional column header(s). */
     get grouping() {
         return this.nativeElement ? this.nativeElement.grouping : undefined;
     }
     set grouping(value) {
         this.nativeElement ? this.nativeElement.grouping = value : undefined;
     }
-    /** @description A callback function that can be used to modify the contents of a grouping header row. By changing the 'label' you modify the rendered grouping value. By changing the 'template' you can modify the entire content including the column and count information. */
+    /** @description Sets or gets whether navigation with the keyboard is enabled in the Table. */
     get groupFormatFunction() {
         return this.nativeElement ? this.nativeElement.groupFormatFunction : undefined;
     }
     set groupFormatFunction(value) {
         this.nativeElement ? this.nativeElement.groupFormatFunction = value : undefined;
     }
-    /** @description Sets or gets the id of an HTML template element to be applied as additional column header(s). */
+    /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
     get headerRow() {
         return this.nativeElement ? this.nativeElement.headerRow : undefined;
     }
     set headerRow(value) {
         this.nativeElement ? this.nativeElement.headerRow = value : undefined;
     }
-    /** @description Sets or gets whether navigation with the keyboard is enabled in the Table. */
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     get keyboardNavigation() {
         return this.nativeElement ? this.nativeElement.keyboardNavigation : undefined;
     }
     set keyboardNavigation(value) {
         this.nativeElement ? this.nativeElement.keyboardNavigation = value : undefined;
     }
-    /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
+    /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
     get loadColumnStateBehavior() {
         return this.nativeElement ? this.nativeElement.loadColumnStateBehavior : undefined;
     }
     set loadColumnStateBehavior(value) {
         this.nativeElement ? this.nativeElement.loadColumnStateBehavior = value : undefined;
     }
-    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    /** @description Sets or gets the page size (when paging is enabled). */
     get locale() {
         return this.nativeElement ? this.nativeElement.locale : undefined;
     }
     set locale(value) {
         this.nativeElement ? this.nativeElement.locale = value : undefined;
     }
-    /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
+    /** @description Sets or gets the current (zero-based) page index (when paging is enabled). */
     get messages() {
         return this.nativeElement ? this.nativeElement.messages : undefined;
     }
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
     }
-    /** @description A callback function executed each time a Table cell is rendered. */
+    /** @description Sets or gets whether paging is enabled. */
     get onCellRender() {
         return this.nativeElement ? this.nativeElement.onCellRender : undefined;
     }
     set onCellRender(value) {
         this.nativeElement ? this.nativeElement.onCellRender = value : undefined;
     }
-    /** @description A callback function executed each time a Table column header cell is rendered. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get onColumnRender() {
         return this.nativeElement ? this.nativeElement.onColumnRender : undefined;
     }
     set onColumnRender(value) {
         this.nativeElement ? this.nativeElement.onColumnRender = value : undefined;
     }
-    /** @description A callback function executed when the Table is being initialized. */
+    /** @description Sets or gets a string template to be applied as row detail template. Each cell value in the master row can be placed in the detail row by specifying the cell's data field in double curly brackets (e.g. {{price}}. The details can then be displayed by expanding the row by clicking it. */
     get onInit() {
         return this.nativeElement ? this.nativeElement.onInit : undefined;
     }
     set onInit(value) {
         this.nativeElement ? this.nativeElement.onInit = value : undefined;
     }
-    /** @description Sets or gets the page size (when paging is enabled). */
+    /** @description Sets or gets an array of the Table's selected row's ids. */
     get pageSize() {
         return this.nativeElement ? this.nativeElement.pageSize : undefined;
     }
     set pageSize(value) {
         this.nativeElement ? this.nativeElement.pageSize = value : undefined;
     }
-    /** @description Sets or gets the current (zero-based) page index (when paging is enabled). */
+    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
     get pageIndex() {
         return this.nativeElement ? this.nativeElement.pageIndex : undefined;
     }
     set pageIndex(value) {
         this.nativeElement ? this.nativeElement.pageIndex = value : undefined;
     }
-    /** @description Sets or gets whether paging is enabled. */
+    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
     get paging() {
         return this.nativeElement ? this.nativeElement.paging : undefined;
     }
     set paging(value) {
         this.nativeElement ? this.nativeElement.paging = value : undefined;
     }
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Sets or gets whether row selection (via checkboxes) is hierarchical. When a parent row is selected, all sub rows are selected, too. */
     get rightToLeft() {
         return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
     }
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
-    /** @description Sets or gets a string template to be applied as row detail template. Each cell value in the master row can be placed in the detail row by specifying the cell's data field in double curly brackets (e.g. {{price}}. The details can then be displayed by expanding the row by clicking it. */
+    /** @description Determines the sorting mode of the Table. */
     get rowDetailTemplate() {
         return this.nativeElement ? this.nativeElement.rowDetailTemplate : undefined;
     }
     set rowDetailTemplate(value) {
         this.nativeElement ? this.nativeElement.rowDetailTemplate = value : undefined;
     }
-    /** @description Sets or gets an array of the Table's selected row's ids. */
+    /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
     get selected() {
         return this.nativeElement ? this.nativeElement.selected : undefined;
     }
     set selected(value) {
         this.nativeElement ? this.nativeElement.selected = value : undefined;
     }
-    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+    /** @description Determines the theme. Theme defines the look of the element */
     get selection() {
         return this.nativeElement ? this.nativeElement.selection : undefined;
     }
     set selection(value) {
         this.nativeElement ? this.nativeElement.selection = value : undefined;
     }
-    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
     get selectionMode() {
         return this.nativeElement ? this.nativeElement.selectionMode : undefined;
     }
     set selectionMode(value) {
         this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
     }
-    /** @description A callback function executed when a column is sorted that can be used to override the default sorting behavior. The function is passed four parameters: dataSource - the Table's data sourcesortColumns - an array of the data fields of columns to be sorted bydirections - an array of sort directions to be sorted by (corresponding to sortColumns)defaultCompareFunctions - an array of default compare functions to be sorted by (corresponding to sortColumns), useful if the sorting of some columns does not have to be overridden */
+    /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
+    get selectionByHierarchy() {
+        return this.nativeElement ? this.nativeElement.selectionByHierarchy : undefined;
+    }
+    set selectionByHierarchy(value) {
+        this.nativeElement ? this.nativeElement.selectionByHierarchy = value : undefined;
+    }
+    /** @description undefined */
     get sort() {
         return this.nativeElement ? this.nativeElement.sort : undefined;
     }
     set sort(value) {
         this.nativeElement ? this.nativeElement.sort = value : undefined;
     }
-    /** @description Determines the sorting mode of the Table. */
+    /** @description undefined */
     get sortMode() {
         return this.nativeElement ? this.nativeElement.sortMode : undefined;
     }
     set sortMode(value) {
         this.nativeElement ? this.nativeElement.sortMode = value : undefined;
     }
-    /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
+    /** @description undefined */
     get stateSettings() {
         return this.nativeElement ? this.nativeElement.stateSettings : undefined;
     }
     set stateSettings(value) {
         this.nativeElement ? this.nativeElement.stateSettings = value : undefined;
     }
-    /** @description Determines the theme. Theme defines the look of the element */
+    /** @description undefined */
     get theme() {
         return this.nativeElement ? this.nativeElement.theme : undefined;
     }
     set theme(value) {
         this.nativeElement ? this.nativeElement.theme = value : undefined;
     }
-    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+    /** @description undefined */
     get tooltip() {
         return this.nativeElement ? this.nativeElement.tooltip : undefined;
     }
     set tooltip(value) {
         this.nativeElement ? this.nativeElement.tooltip = value : undefined;
     }
-    /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
+    /** @description undefined */
     get virtualization() {
         return this.nativeElement ? this.nativeElement.virtualization : undefined;
     }
     set virtualization(value) {
         this.nativeElement ? this.nativeElement.virtualization = value : undefined;
+    }
+    /** @description Adds a new row. When you invoke the method, pass a JSON object with the row's data.
+    * @param {any} data. JSON object with the new row's data. Sample JSON: {firstName: 'Peter', lastName: 'Fuller'}.
+    */
+    addRow(data) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addRow(data);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.addRow(data);
+            });
+        }
     }
     /** @description Adds a filter to a specific column.
     * @param {string} dataField. The column's data field.
@@ -595,6 +640,18 @@ let TableComponent = class TableComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.beginEdit(row, dataField);
+            });
+        }
+    }
+    /** @description Begins an update operation. Suspends all table refreshes and renders.
+    */
+    beginUpdate() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.beginUpdate();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.beginUpdate();
             });
         }
     }
@@ -670,6 +727,30 @@ let TableComponent = class TableComponent extends BaseElement {
             });
         }
     }
+    /** @description Collapses all groups (in tree mode).
+    */
+    collapseAllGroups() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.collapseAllGroups();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.collapseAllGroups();
+            });
+        }
+    }
+    /** @description Collapses all row details. Rows that have details defined via the rowDetailTemplate will be collapsed.
+    */
+    collapseAllRowDetails() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.collapseAllRowDetails();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.collapseAllRowDetails();
+            });
+        }
+    }
     /** @description Collapses a group.
     * @param {string} index. The group's hierarchical index.
     */
@@ -696,6 +777,32 @@ let TableComponent = class TableComponent extends BaseElement {
             });
         }
     }
+    /** @description Disables a selection of a row. When the 'selection' property is set to 'true', selection is enabled for all rows by default.
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select.
+    */
+    disableSelect(rowId) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.disableSelect(rowId);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.disableSelect(rowId);
+            });
+        }
+    }
+    /** @description Enables a selection of a row, if it was previously disabled through a 'disableSelect' method call. When the 'selection' property is set to 'true', selection is enabled for all rows by default.
+    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select.
+    */
+    enableSelect(rowId) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.enableSelect(rowId);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.enableSelect(rowId);
+            });
+        }
+    }
     /** @description Ends the current edit operation and saves changes.
     */
     endEdit() {
@@ -708,6 +815,19 @@ let TableComponent = class TableComponent extends BaseElement {
             });
         }
     }
+    /** @description Ends an update operation. Resumes all table refreshes and renders. Re-renders the Table.
+    * @param {boolean} refresh?. Optionally you can pass 'false' in case you need to manually call the 'refresh' method. By default, the table is re-rendered.
+    */
+    endUpdate(refresh) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.endUpdate(refresh);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.endUpdate(refresh);
+            });
+        }
+    }
     /** @description Expands all rows (in tree mode).
     */
     expandAllRows() {
@@ -717,6 +837,30 @@ let TableComponent = class TableComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.expandAllRows();
+            });
+        }
+    }
+    /** @description Expands all groups (in tree mode).
+    */
+    expandAllGroups() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.expandAllGroups();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.expandAllGroups();
+            });
+        }
+    }
+    /** @description Expands all row details. Rows that have details defined via rowDetailTemplate will be expanded.
+    */
+    expandAllRowDetails() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.expandAllRowDetails();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.expandAllRowDetails();
             });
         }
     }
@@ -820,6 +964,43 @@ let TableComponent = class TableComponent extends BaseElement {
             return result;
         });
     }
+    /** @description Gets a column property.
+    * @param {string} columnDataField. Column field name.
+    * @param {string} propertyName. Column property name.
+    * @returns {any}
+  */
+    getColumnProperty(columnDataField, propertyName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getColumnProperty(columnDataField, propertyName);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Checks whether a group is expanded and returns true or false. false is returned when the group index is undefined, too.
+    * @param {string} index. The group's hierarchical index.
+    * @returns {boolean}
+  */
+    isGroupExpanded(index) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.isGroupExpanded(index);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Loads the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property.
     * @param {any} state?. An object returned by one of the methods <strong>getState</strong> or <strong>saveState</strong>. If a state is not passed, the method tries to load the state from the browser's localStorage.
     */
@@ -884,6 +1065,19 @@ let TableComponent = class TableComponent extends BaseElement {
             });
         }
     }
+    /** @description Removes a row by its id.
+    * @param {string | number} row. The id of the cell's row.
+    */
+    removeRow(row) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.removeRow(row);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.removeRow(row);
+            });
+        }
+    }
     /** @description Saves the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is saved, based on the value of the stateSettings property.
     * @returns {any}
   */
@@ -943,6 +1137,35 @@ let TableComponent = class TableComponent extends BaseElement {
             });
         }
     }
+    /** @description Sets a column property.
+    * @param {string} columnDataField. Column field name.
+    * @param {string} propertyName. Column property name.
+    * @param {any} propertyValue. Property value.
+    */
+    setColumnProperty(columnDataField, propertyName, propertyValue) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setColumnProperty(columnDataField, propertyName, propertyValue);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setColumnProperty(columnDataField, propertyName, propertyValue);
+            });
+        }
+    }
+    /** @description Updates a table row. The method expects two parameters - row id and JSON object with the new row data.
+    * @param {string | number} rowId. The id of the row.
+    * @param {any} data. JSON object with the new row's data. Example: {firstName: 'Peter', lastName: 'Fuller'}.
+    */
+    updateRow(rowId, data) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateRow(rowId, data);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.updateRow(rowId, data);
+            });
+        }
+    }
     /** @description Unselects one or more rows.
     * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to unselect.
     */
@@ -965,6 +1188,7 @@ let TableComponent = class TableComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1100,6 +1324,9 @@ __decorate([
 ], TableComponent.prototype, "conditionalFormattingButton", null);
 __decorate([
     Input()
+], TableComponent.prototype, "deferredScrollDelay", null);
+__decorate([
+    Input()
 ], TableComponent.prototype, "dataRowId", null);
 __decorate([
     Input()
@@ -1119,6 +1346,9 @@ __decorate([
 __decorate([
     Input()
 ], TableComponent.prototype, "editMode", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "expandHierarchy", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "filtering", null);
@@ -1194,6 +1424,9 @@ __decorate([
 __decorate([
     Input()
 ], TableComponent.prototype, "selectionMode", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "selectionByHierarchy", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "sort", null);

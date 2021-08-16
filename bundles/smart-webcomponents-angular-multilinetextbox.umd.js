@@ -861,6 +861,7 @@ import './../source/modules/smart.textbox';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1219,6 +1220,7 @@ import './../source/modules/smart.textbox';
         ListItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         ListItemComponent.prototype.ngOnDestroy = function () { };
@@ -1317,6 +1319,7 @@ import './../source/modules/smart.textbox';
         ListItemsGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         ListItemsGroupComponent.prototype.ngOnDestroy = function () { };

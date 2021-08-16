@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const package_config_1 = require("./package-config");
 const schematics_1 = require("@angular-devkit/schematics");
 const schematics_2 = require("@angular/cdk/schematics");
-const config_1 = require("@schematics/angular/utility/config");
+const config_1 = require("@schematics/angular/utility/workspace");
 const material_fonts_1 = require("../fonts/material-fonts");
 const theming_1 = require("../theming/theming");
 /** Name of the Angular module that enables Angular browser animations. */
@@ -81,7 +81,6 @@ function default_1(options) {
         return schematics_1.chain([
             theming_1.addThemeToAppStyles(options),
             material_fonts_1.addFontsToIndex(options),
-            addMaterialAppStyles(options),
             theming_1.addTypographyClass(options),
         ]);
     };

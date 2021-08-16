@@ -15,7 +15,7 @@ import { GridComponent, Smart, DataAdapter } from 'smart-webcomponents-angular/g
   changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
 })
 export class <%= classify(name) %>Component implements AfterViewInit, OnInit {
-  @ViewChild('grid', {read: GridComponent, static: false}) grid: GridComponent;
+  @ViewChild('grid', {read: GridComponent, static: false}) grid!: GridComponent;
 
   ngOnInit() {
   }
@@ -23,7 +23,7 @@ export class <%= classify(name) %>Component implements AfterViewInit, OnInit {
   ngAfterViewInit() {
 	 this.grid.sorting.enabled = true;
 	 this.grid.selection.enabled = true;
-	 this.grid.selection.checkBoxes.enabled = true;
+	 this.grid.selection.checkBoxes!.enabled = true;
 	 this.grid.columns = [
 		{label: 'Id', dataField: 'id'},
 		{label: 'Name', dataField: 'name'}

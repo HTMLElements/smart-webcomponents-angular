@@ -152,13 +152,19 @@ var TextBoxComponent = /** @class */ (function (_super) {
         * The registered callback function called when a blur event occurs on the form elements.
         */
         _this._onTouched = function () { };
-        /** @description This event is triggered when the value of the Text Box is changed.
+        /** @description This event is triggered when the value of the Text Box is changed. This happens on blur and if 'Enter' is pressed.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value, 	type)
         *   oldValue - The previous value before it was changed.
         *   value - The new value.
         *   type - The type of the event.
         */
         _this.onChange = new EventEmitter();
+        /** @description This event is triggered on each key up event of the TextBox, if the value is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+        *   oldValue - The previous value before it was changed.
+        *   value - The new value.
+        */
+        _this.onChanging = new EventEmitter();
         _this._initialChange = true;
         _this.nativeElement = ref.nativeElement;
         return _this;
@@ -798,6 +804,7 @@ var TextBoxComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -850,6 +857,8 @@ var TextBoxComponent = /** @class */ (function (_super) {
         var that = this;
         that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['changingHandler'] = function (event) { that.onChanging.emit(event); };
+        that.nativeElement.addEventListener('changing', that.eventHandlers['changingHandler']);
         that.eventHandlers['changeModelHandler'] = function (event) {
             that._initialChange = false;
             that._onChange(that.nativeElement.value);
@@ -873,6 +882,9 @@ var TextBoxComponent = /** @class */ (function (_super) {
         var that = this;
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
+        if (that.eventHandlers['changingHandler']) {
+            that.nativeElement.removeEventListener('changing', that.eventHandlers['changingHandler']);
         }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -1046,6 +1058,9 @@ var TextBoxComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], TextBoxComponent.prototype, "onChange", void 0);
+    __decorate([
+        Output()
+    ], TextBoxComponent.prototype, "onChanging", void 0);
     TextBoxComponent = __decorate([
         Directive({
             selector: 'smart-text-box, [smart-text-box]',
@@ -1207,6 +1222,7 @@ var ListItemComponent = /** @class */ (function (_super) {
     ListItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     ListItemComponent.prototype.ngOnDestroy = function () { };
@@ -1305,6 +1321,7 @@ var ListItemsGroupComponent = /** @class */ (function (_super) {
     ListItemsGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     ListItemsGroupComponent.prototype.ngOnDestroy = function () { };

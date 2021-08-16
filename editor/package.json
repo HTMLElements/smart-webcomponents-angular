@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-editor.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-editor.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-editor.js",
+  "esm5": "../esm5/editor/smart-webcomponents-angular-editor.js",
+  "esm2015": "../esm2015/editor/smart-webcomponents-angular-editor.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-editor.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-editor.js",
+  "typings": "smart-webcomponents-angular-editor.d.ts",
+  "metadata": "smart-webcomponents-angular-editor.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/editor"
+}

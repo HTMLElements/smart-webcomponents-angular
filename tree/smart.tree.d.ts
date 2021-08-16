@@ -47,6 +47,8 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     filterable: boolean;
     /** @description Sets custom text for placeholder in the filter input. */
     filterInputPlaceholder: string;
+    /** @description Determines the TreeItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the value property or 'textContent' if the user wants to filter by text inside the TreeItem's content or any other property. */
+    filterMember: string;
     /** @description Sets filter mode. */
     filterMode: FilterMode;
     /** @description Sets or gets whether the tree checkboxes have three states - checked, unchecked and indeterminate. Whorks on selectionMode: 'checkBox' */

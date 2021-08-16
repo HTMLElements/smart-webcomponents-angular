@@ -113,7 +113,12 @@ let ScrollBarComponent = class ScrollBarComponent extends BaseElement {
         super(ref);
         this.eventHandlers = [];
         /** @description This event is triggered when the value is changed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue, 	min, 	max)
+        *   value - A numeric value indicating the scroll position.
+        *   oldValue - A numeric value indicating the previous scroll position.
+        *   min - A numeric value indicating the min scroll position.
+        *   max - A numeric value indicating the max scroll position.
+        */
         this.onChange = new EventEmitter();
         this.nativeElement = ref.nativeElement;
     }
@@ -267,6 +272,7 @@ let ScrollBarComponent = class ScrollBarComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

@@ -635,6 +635,23 @@ let ListBoxComponent = class ListBoxComponent extends BaseElement {
             return result;
         });
     }
+    /** @description Returns an array of ListBox items.
+    * @returns {{label: string, value: string}[]}
+  */
+    getItems() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getItems();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Inserts a new item at a specified index.
     * @param {number} index. The index where the item must be inserted.
     * @param {any} items. A single item/definition or an array of List Items/definitions of list items to be inserted. The format of the item definitions is the same as the format of the <strong>dataSource</strong> property.
@@ -748,6 +765,7 @@ let ListBoxComponent = class ListBoxComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1193,6 +1211,7 @@ let ListItemComponent = class ListItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }
@@ -1279,6 +1298,7 @@ let ListItemsGroupComponent = class ListItemsGroupComponent extends BaseElement 
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

@@ -327,6 +327,13 @@ let TreeComponent = class TreeComponent extends BaseElement {
     set filterInputPlaceholder(value) {
         this.nativeElement ? this.nativeElement.filterInputPlaceholder = value : undefined;
     }
+    /** @description Determines the TreeItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the value property or 'textContent' if the user wants to filter by text inside the TreeItem's content or any other property. */
+    get filterMember() {
+        return this.nativeElement ? this.nativeElement.filterMember : undefined;
+    }
+    set filterMember(value) {
+        this.nativeElement ? this.nativeElement.filterMember = value : undefined;
+    }
     /** @description Sets filter mode. */
     get filterMode() {
         return this.nativeElement ? this.nativeElement.filterMode : undefined;
@@ -810,6 +817,7 @@ let TreeComponent = class TreeComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -948,6 +956,9 @@ __decorate([
 __decorate([
     Input()
 ], TreeComponent.prototype, "filterInputPlaceholder", null);
+__decorate([
+    Input()
+], TreeComponent.prototype, "filterMember", null);
 __decorate([
     Input()
 ], TreeComponent.prototype, "filterMode", null);
@@ -1148,6 +1159,7 @@ let TreeItemComponent = class TreeItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }
@@ -1274,6 +1286,7 @@ let TreeItemsGroupComponent = class TreeItemsGroupComponent extends BaseElement 
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

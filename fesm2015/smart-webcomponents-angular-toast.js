@@ -114,7 +114,7 @@ let ToastComponent = class ToastComponent extends BaseElement {
         this.eventHandlers = [];
         /** @description This event is triggered when the toast item is clicked.
         *  @param event. The custom event. 	*/
-        this.onClick = new EventEmitter();
+        this.onItemClick = new EventEmitter();
         /** @description This event is triggered when the toast item is closed.
         *  @param event. The custom event. 	*/
         this.onClose = new EventEmitter();
@@ -357,6 +357,7 @@ let ToastComponent = class ToastComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -375,8 +376,8 @@ let ToastComponent = class ToastComponent extends BaseElement {
     /** @description Add event listeners. */
     listen() {
         const that = this;
-        that.eventHandlers['clickHandler'] = (event) => { that.onClick.emit(event); };
-        that.nativeElement.addEventListener('click', that.eventHandlers['clickHandler']);
+        that.eventHandlers['itemClickHandler'] = (event) => { that.onItemClick.emit(event); };
+        that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         that.eventHandlers['closeHandler'] = (event) => { that.onClose.emit(event); };
         that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
         that.eventHandlers['openHandler'] = (event) => { that.onOpen.emit(event); };
@@ -393,8 +394,8 @@ let ToastComponent = class ToastComponent extends BaseElement {
     /** @description Remove event listeners. */
     unlisten() {
         const that = this;
-        if (that.eventHandlers['clickHandler']) {
-            that.nativeElement.removeEventListener('click', that.eventHandlers['clickHandler']);
+        if (that.eventHandlers['itemClickHandler']) {
+            that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         }
         if (that.eventHandlers['closeHandler']) {
             that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
@@ -484,7 +485,7 @@ __decorate([
 ], ToastComponent.prototype, "value", null);
 __decorate([
     Output()
-], ToastComponent.prototype, "onClick", void 0);
+], ToastComponent.prototype, "onItemClick", void 0);
 __decorate([
     Output()
 ], ToastComponent.prototype, "onClose", void 0);

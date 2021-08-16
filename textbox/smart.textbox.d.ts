@@ -128,13 +128,19 @@ export declare class TextBoxComponent extends BaseElement implements OnInit, Aft
     valueMember: string;
     /** @description Determines the visibility of the vertical scroll bar that's inside the drop down. */
     verticalScrollBarVisibility: VerticalScrollBarVisibility;
-    /** @description This event is triggered when the value of the Text Box is changed.
+    /** @description This event is triggered when the value of the Text Box is changed. This happens on blur and if 'Enter' is pressed.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value, 	type)
     *   oldValue - The previous value before it was changed.
     *   value - The new value.
     *   type - The type of the event.
     */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered on each key up event of the TextBox, if the value is changed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+    *   oldValue - The previous value before it was changed.
+    *   value - The new value.
+    */
+    onChanging: EventEmitter<CustomEvent>;
     /** @description Closes the drop down. The drop down is used only when auto complete is enabled.
     */
     close(): void;

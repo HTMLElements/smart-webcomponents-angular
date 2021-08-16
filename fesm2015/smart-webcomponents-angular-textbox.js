@@ -128,13 +128,19 @@ let TextBoxComponent = class TextBoxComponent extends BaseElement {
         * The registered callback function called when a blur event occurs on the form elements.
         */
         this._onTouched = () => { };
-        /** @description This event is triggered when the value of the Text Box is changed.
+        /** @description This event is triggered when the value of the Text Box is changed. This happens on blur and if 'Enter' is pressed.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value, 	type)
         *   oldValue - The previous value before it was changed.
         *   value - The new value.
         *   type - The type of the event.
         */
         this.onChange = new EventEmitter();
+        /** @description This event is triggered on each key up event of the TextBox, if the value is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+        *   oldValue - The previous value before it was changed.
+        *   value - The new value.
+        */
+        this.onChanging = new EventEmitter();
         this._initialChange = true;
         this.nativeElement = ref.nativeElement;
     }
@@ -557,6 +563,7 @@ let TextBoxComponent = class TextBoxComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -605,6 +612,8 @@ let TextBoxComponent = class TextBoxComponent extends BaseElement {
         const that = this;
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['changingHandler'] = (event) => { that.onChanging.emit(event); };
+        that.nativeElement.addEventListener('changing', that.eventHandlers['changingHandler']);
         that.eventHandlers['changeModelHandler'] = (event) => {
             that._initialChange = false;
             that._onChange(that.nativeElement.value);
@@ -628,6 +637,9 @@ let TextBoxComponent = class TextBoxComponent extends BaseElement {
         const that = this;
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
+        if (that.eventHandlers['changingHandler']) {
+            that.nativeElement.removeEventListener('changing', that.eventHandlers['changingHandler']);
         }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -802,6 +814,9 @@ __decorate([
 __decorate([
     Output()
 ], TextBoxComponent.prototype, "onChange", void 0);
+__decorate([
+    Output()
+], TextBoxComponent.prototype, "onChanging", void 0);
 TextBoxComponent = __decorate([
     Directive({
         selector: 'smart-text-box, [smart-text-box]',
@@ -910,6 +925,7 @@ let ListItemComponent = class ListItemComponent extends BaseElement {
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }
@@ -996,6 +1012,7 @@ let ListItemsGroupComponent = class ListItemsGroupComponent extends BaseElement 
     ngAfterViewInit() {
         const that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
     }
     ngOnDestroy() { }

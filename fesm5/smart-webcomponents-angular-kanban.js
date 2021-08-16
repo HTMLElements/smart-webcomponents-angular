@@ -149,6 +149,48 @@ var KanbanComponent = /** @class */ (function (_super) {
         /** @description This event is triggered when the edit/prompt dialog is about to be closed. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
         *  @param event. The custom event. 	*/
         _this.onClosing = new EventEmitter();
+        /** @description This event is triggered when a column is added.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+        *   label - The column label.
+        *   dataField - The column data field.
+        *   collapsed - The column's collapsed state.
+        */
+        _this.onColumnAdd = new EventEmitter();
+        /** @description This event is triggered when a column is removed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+        *   label - The column label.
+        *   dataField - The column data field.
+        *   collapsed - The column's collapsed state.
+        */
+        _this.onColumnRemove = new EventEmitter();
+        /** @description This event is triggered when a column is reordered.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldIndex, 	index, 	column)
+        *   oldIndex - The column's old index.
+        *   index - The column's new index.
+        *   column - The column's data object with 'label', 'dataField' and 'collapsed' fields.
+        */
+        _this.onColumnReorder = new EventEmitter();
+        /** @description This event is triggered when a column is updated.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+        *   label - The column label.
+        *   dataField - The column data field.
+        *   collapsed - The column's collapsed state.
+        */
+        _this.onColumnUpdate = new EventEmitter();
+        /** @description This event is triggered when a column header is clicked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+        *   label - The column label.
+        *   dataField - The column data field.
+        *   collapsed - The column's collapsed state.
+        */
+        _this.onColumnClick = new EventEmitter();
+        /** @description This event is triggered when a column header is double clicked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
+        *   label - The column label.
+        *   dataField - The column data field.
+        *   collapsed - The column's collapsed state.
+        */
+        _this.onColumnDoubleClick = new EventEmitter();
         /** @description This event is triggered when a task is dropped somewhere in the DOM. The dragging operation can be canceled by calling event.preventDefault() in the event handler function.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	container, 	data, 	item, 	items, 	originalEvent, 	previousContainer, 	target)
         *   container - the Kanban the dragged task(s) is dropped to
@@ -194,6 +236,16 @@ var KanbanComponent = /** @class */ (function (_super) {
         /** @description This event is triggered when sorting has been applied.
         *  @param event. The custom event. 	*/
         _this.onSort = new EventEmitter();
+        /** @description This event is triggered when a new task is added.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+        *   value - The task data that is added to the Kanban.
+        */
+        _this.onTaskAdd = new EventEmitter();
+        /** @description This event is triggered when a task is removed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+        *   value - The task data that is removed from the Kanban.
+        */
+        _this.onTaskRemove = new EventEmitter();
         _this.nativeElement = ref.nativeElement;
         return _this;
     }
@@ -208,6 +260,39 @@ var KanbanComponent = /** @class */ (function (_super) {
         }
         return this.nativeElement;
     };
+    Object.defineProperty(KanbanComponent.prototype, "allowColumnReorder", {
+        /** @description Enables or disables column reordering. When this property is set to true and allowDrag is enabled, users will be able to reoder columns through drag & drop. For example: Click and drag the first column's header and drop it over another column. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.allowColumnReorder : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.allowColumnReorder = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "allowColumnEdit", {
+        /** @description Enables or disables column editing. When this property is set to true, users will be able to dynamically change the column's header label by double clicking on it. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.allowColumnEdit : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.allowColumnEdit = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "allowColumnRemove", {
+        /** @description Enables or disables column removing. When this property is set to true, users will be able to dynamically remove a column through the column actions menu. the 'columnActions' property should be true. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.allowColumnRemove : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.allowColumnRemove = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(KanbanComponent.prototype, "addNewButton", {
         /** @description Toggles the visibility of the column buttons for adding tasks. A particular button can be disabled by setting addNewButton in the column's definition to false. */
         get: function () {
@@ -303,6 +388,28 @@ var KanbanComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.columns = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "columnActions", {
+        /** @description Toggles the visibility of the column actions icon. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnActions : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnActions = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "columnEditMode", {
+        /** @description Determines the column edit behavior. With the 'header' option, edit starts on double click on the column's label. In 'menu' mode, edit is allowed from the 'columnActions' menu. In 'headerAndMenu' option, column editing includes both options. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnEditMode : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnEditMode = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -435,6 +542,17 @@ var KanbanComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "rightToLeft", {
+        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -582,6 +700,17 @@ var KanbanComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(KanbanComponent.prototype, "theme", {
+        /** @description Determines the theme. Theme defines the look of the element */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.theme : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.theme = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(KanbanComponent.prototype, "userList", {
         /** @description Determines whether the user list (as defined by the users property) will be shown when clicking the user icon. Only applicable if editable privileges are enabled. */
         get: function () {
@@ -645,6 +774,20 @@ var KanbanComponent = /** @class */ (function (_super) {
         else {
             this.nativeElement.whenRendered(function () {
                 _this.nativeElement.addTask(data);
+            });
+        }
+    };
+    /** @description Adds a column to a Kanban. If no data is specified, an empty column is added.
+    * @param {any} data?. An object containing the new column's data
+    */
+    KanbanComponent.prototype.addColumn = function (data) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addColumn(data);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.addColumn(data);
             });
         }
     };
@@ -947,6 +1090,20 @@ var KanbanComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Removes a column.
+    * @param {string} dataField. The column's data field
+    */
+    KanbanComponent.prototype.removeColumn = function (dataField) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.removeColumn(dataField);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.removeColumn(dataField);
+            });
+        }
+    };
     /** @description Saves the Kanban's state to the browser's localStorage.
     */
     KanbanComponent.prototype.saveState = function () {
@@ -975,6 +1132,21 @@ var KanbanComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Updates a column.
+    * @param {string} dataField. The new column's data field
+    * @param {{}} newData. The new data to visualize in the column.
+    */
+    KanbanComponent.prototype.updateColumn = function (dataField, newData) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateColumn(dataField, newData);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.updateColumn(dataField, newData);
+            });
+        }
+    };
     Object.defineProperty(KanbanComponent.prototype, "isRendered", {
         get: function () {
             return this.nativeElement ? this.nativeElement.isRendered : false;
@@ -988,6 +1160,7 @@ var KanbanComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -1012,6 +1185,18 @@ var KanbanComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
         that.eventHandlers['closingHandler'] = function (event) { that.onClosing.emit(event); };
         that.nativeElement.addEventListener('closing', that.eventHandlers['closingHandler']);
+        that.eventHandlers['columnAddHandler'] = function (event) { that.onColumnAdd.emit(event); };
+        that.nativeElement.addEventListener('columnAdd', that.eventHandlers['columnAddHandler']);
+        that.eventHandlers['columnRemoveHandler'] = function (event) { that.onColumnRemove.emit(event); };
+        that.nativeElement.addEventListener('columnRemove', that.eventHandlers['columnRemoveHandler']);
+        that.eventHandlers['columnReorderHandler'] = function (event) { that.onColumnReorder.emit(event); };
+        that.nativeElement.addEventListener('columnReorder', that.eventHandlers['columnReorderHandler']);
+        that.eventHandlers['columnUpdateHandler'] = function (event) { that.onColumnUpdate.emit(event); };
+        that.nativeElement.addEventListener('columnUpdate', that.eventHandlers['columnUpdateHandler']);
+        that.eventHandlers['columnClickHandler'] = function (event) { that.onColumnClick.emit(event); };
+        that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+        that.eventHandlers['columnDoubleClickHandler'] = function (event) { that.onColumnDoubleClick.emit(event); };
+        that.nativeElement.addEventListener('columnDoubleClick', that.eventHandlers['columnDoubleClickHandler']);
         that.eventHandlers['dragEndHandler'] = function (event) { that.onDragEnd.emit(event); };
         that.nativeElement.addEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
         that.eventHandlers['draggingHandler'] = function (event) { that.onDragging.emit(event); };
@@ -1026,6 +1211,10 @@ var KanbanComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('opening', that.eventHandlers['openingHandler']);
         that.eventHandlers['sortHandler'] = function (event) { that.onSort.emit(event); };
         that.nativeElement.addEventListener('sort', that.eventHandlers['sortHandler']);
+        that.eventHandlers['taskAddHandler'] = function (event) { that.onTaskAdd.emit(event); };
+        that.nativeElement.addEventListener('taskAdd', that.eventHandlers['taskAddHandler']);
+        that.eventHandlers['taskRemoveHandler'] = function (event) { that.onTaskRemove.emit(event); };
+        that.nativeElement.addEventListener('taskRemove', that.eventHandlers['taskRemoveHandler']);
     };
     /** @description Remove event listeners. */
     KanbanComponent.prototype.unlisten = function () {
@@ -1038,6 +1227,24 @@ var KanbanComponent = /** @class */ (function (_super) {
         }
         if (that.eventHandlers['closingHandler']) {
             that.nativeElement.removeEventListener('closing', that.eventHandlers['closingHandler']);
+        }
+        if (that.eventHandlers['columnAddHandler']) {
+            that.nativeElement.removeEventListener('columnAdd', that.eventHandlers['columnAddHandler']);
+        }
+        if (that.eventHandlers['columnRemoveHandler']) {
+            that.nativeElement.removeEventListener('columnRemove', that.eventHandlers['columnRemoveHandler']);
+        }
+        if (that.eventHandlers['columnReorderHandler']) {
+            that.nativeElement.removeEventListener('columnReorder', that.eventHandlers['columnReorderHandler']);
+        }
+        if (that.eventHandlers['columnUpdateHandler']) {
+            that.nativeElement.removeEventListener('columnUpdate', that.eventHandlers['columnUpdateHandler']);
+        }
+        if (that.eventHandlers['columnClickHandler']) {
+            that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+        }
+        if (that.eventHandlers['columnDoubleClickHandler']) {
+            that.nativeElement.removeEventListener('columnDoubleClick', that.eventHandlers['columnDoubleClickHandler']);
         }
         if (that.eventHandlers['dragEndHandler']) {
             that.nativeElement.removeEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
@@ -1060,10 +1267,25 @@ var KanbanComponent = /** @class */ (function (_super) {
         if (that.eventHandlers['sortHandler']) {
             that.nativeElement.removeEventListener('sort', that.eventHandlers['sortHandler']);
         }
+        if (that.eventHandlers['taskAddHandler']) {
+            that.nativeElement.removeEventListener('taskAdd', that.eventHandlers['taskAddHandler']);
+        }
+        if (that.eventHandlers['taskRemoveHandler']) {
+            that.nativeElement.removeEventListener('taskRemove', that.eventHandlers['taskRemoveHandler']);
+        }
     };
     KanbanComponent.ctorParameters = function () { return [
         { type: ElementRef }
     ]; };
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "allowColumnReorder", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "allowColumnEdit", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "allowColumnRemove", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "addNewButton", null);
@@ -1091,6 +1313,12 @@ var KanbanComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], KanbanComponent.prototype, "columns", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "columnActions", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "columnEditMode", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "currentUser", null);
@@ -1127,6 +1355,9 @@ var KanbanComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], KanbanComponent.prototype, "selectionMode", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "rightToLeft", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "swimlanes", null);
@@ -1168,6 +1399,9 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "textTemplate", null);
     __decorate([
         Input()
+    ], KanbanComponent.prototype, "theme", null);
+    __decorate([
+        Input()
     ], KanbanComponent.prototype, "userList", null);
     __decorate([
         Input()
@@ -1181,6 +1415,24 @@ var KanbanComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], KanbanComponent.prototype, "onClosing", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnAdd", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnRemove", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnReorder", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnUpdate", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnClick", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnDoubleClick", void 0);
     __decorate([
         Output()
     ], KanbanComponent.prototype, "onDragEnd", void 0);
@@ -1202,6 +1454,12 @@ var KanbanComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], KanbanComponent.prototype, "onSort", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onTaskAdd", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onTaskRemove", void 0);
     KanbanComponent = __decorate([
         Directive({
             selector: 'smart-kanban, [smart-kanban]'

@@ -374,11 +374,17 @@ import './../source/modules/smart.textbox';
             */
             _this._onTouched = function () { };
             /** @description This event is triggered when the value of the Text Box is changed.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	newValue)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
             *   oldValue - The previous value before it was changed.
-            *   newValue - The new value.
+            *   value - The new value.
             */
             _this.onChange = new core.EventEmitter();
+            /** @description This event is triggered on each key up event of the MaskedTextBox, if the value is changed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+            *   oldValue - The previous value before it was changed.
+            *   value - The new value.
+            */
+            _this.onChanging = new core.EventEmitter();
             /** @description This event is triggered if the validation property is set. Indicates whether valiation has passed successfully or not.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	success)
             *   success - A flag inidicating whether the validation was successfull or not.
@@ -812,6 +818,7 @@ import './../source/modules/smart.textbox';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -864,6 +871,8 @@ import './../source/modules/smart.textbox';
             var that = this;
             that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+            that.eventHandlers['changingHandler'] = function (event) { that.onChanging.emit(event); };
+            that.nativeElement.addEventListener('changing', that.eventHandlers['changingHandler']);
             that.eventHandlers['validationHandler'] = function (event) { that.onValidation.emit(event); };
             that.nativeElement.addEventListener('validation', that.eventHandlers['validationHandler']);
             that.eventHandlers['changeModelHandler'] = function (event) {
@@ -889,6 +898,9 @@ import './../source/modules/smart.textbox';
             var that = this;
             if (that.eventHandlers['changeHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+            }
+            if (that.eventHandlers['changingHandler']) {
+                that.nativeElement.removeEventListener('changing', that.eventHandlers['changingHandler']);
             }
             if (that.eventHandlers['validationHandler']) {
                 that.nativeElement.removeEventListener('validation', that.eventHandlers['validationHandler']);
@@ -1011,6 +1023,9 @@ import './../source/modules/smart.textbox';
         __decorate([
             core.Output()
         ], MaskedTextBoxComponent.prototype, "onChange", void 0);
+        __decorate([
+            core.Output()
+        ], MaskedTextBoxComponent.prototype, "onChanging", void 0);
         __decorate([
             core.Output()
         ], MaskedTextBoxComponent.prototype, "onValidation", void 0);

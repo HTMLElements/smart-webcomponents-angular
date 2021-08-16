@@ -119,6 +119,16 @@ let GridComponent = class GridComponent extends BaseElement {
         *   cell - The edited cell.
         */
         this.onBeginEdit = new EventEmitter();
+        /** @description This event is triggered, when the Grid's header toolbar is displayed and the 'OK' button of a header dropdown is clicked. For example, when you open the columns customize panel, reorder columns and click the 'OK' button.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
+        *   type - The type of dropdown. Possible values: 'filter', 'sort', 'search', 'group', 'format', 'customize'
+        */
+        this.onBatchChange = new EventEmitter();
+        /** @description This event is triggered, when the Grid's header toolbar is displayed and the 'Cancel' button of a header dropdown is clicked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	type)
+        *   type - The type of dropdown. Possible values: 'filter', 'sort', 'search', 'group', 'format', 'customize'
+        */
+        this.onBatchCancel = new EventEmitter();
         /** @description This event is triggered, when the selection is changed. When you select with a drag, the event is triggered when the drag starts and ends.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	started, 	finished, 	originalEvent)
         *   started - The flag is <em>true</em>, when the selection starts. The flag is <em>false</em>, when the selection ends and when the user changes the selection by dragging.
@@ -127,113 +137,163 @@ let GridComponent = class GridComponent extends BaseElement {
         */
         this.onChange = new EventEmitter();
         /** @description This event is triggered, when the user clicks on the header of a column.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	dataField, 	originalEvent)
         *   column - The clicked column.
+        *   dataField - The column's data field.
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
         */
         this.onColumnClick = new EventEmitter();
         /** @description This event is triggered, when the user double clicks on the header of a column.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	dataField, 	originalEvent)
         *   column - The double-clicked column.
+        *   dataField - The column's data field.
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
         */
         this.onColumnDoubleClick = new EventEmitter();
         /** @description This event is triggered, when the user resized a column.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	oldWidth, 	width)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	dataField, 	oldWidth, 	width)
         *   column - The resized column.
+        *   dataField - The column's data field.
         *   oldWidth - The old width of the column.
         *   width - The new width of the column.
         */
         this.onColumnResize = new EventEmitter();
         /** @description This event is triggered, when the user starts a column drag.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	index, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	dataField, 	index, 	originalEvent)
         *   column - The column.
+        *   dataField - The column's data field.
         *   index - The column's index
         *   originalEvent - The origianl Event object.
         */
         this.onColumnDragStart = new EventEmitter();
         /** @description This event is triggered, when the user drags a column.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	index, 	data, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	dataField, 	index, 	data, 	originalEvent)
         *   column - The column.
+        *   dataField - The column's data field.
         *   index - The column's index
         *   data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
         *   originalEvent - The origianl Event object.
         */
         this.onColumnDragging = new EventEmitter();
-        /** @description This event is triggered, when the user drags a column.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	index, 	newIndex, 	data, 	originalEvent)
+        /** @description This event is triggered, when the user drops a column.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	dataField, 	index, 	newIndex, 	data, 	originalEvent)
         *   column - The column.
+        *   dataField - The column's data field.
         *   index - The column's index
         *   newIndex - The column's new index
         *   data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
         *   originalEvent - The origianl Event object.
         */
         this.onColumnDragEnd = new EventEmitter();
+        /** @description This event is triggered, when the user reorders a column.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	column, 	dataField, 	index, 	newIndex, 	data, 	originalEvent)
+        *   column - The column.
+        *   dataField - The column's data field.
+        *   index - The column's index
+        *   newIndex - The column's new index
+        *   data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
+        *   originalEvent - The origianl Event object.
+        */
+        this.onColumnReorder = new EventEmitter();
         /** @description This event is triggered, when the user starts a row drag.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	index, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	index, 	originalEvent)
         *   row - The row.
+        *   id - The row's id
         *   index - The row's index
         *   originalEvent - The origianl Event object.
         */
         this.onRowDragStart = new EventEmitter();
         /** @description This event is triggered, when the user drags a row.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	index, 	data, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	index, 	data, 	originalEvent)
         *   row - The row.
+        *   id - The row's id
         *   index - The row's index
         *   data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
         *   originalEvent - The origianl Event object.
         */
         this.onRowDragging = new EventEmitter();
         /** @description This event is triggered, when the user drags a row.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	index, 	newIndex, 	data, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	index, 	newIndex, 	data, 	originalEvent)
         *   row - The row.
+        *   id - The row's id
         *   index - The row's index
         *   newIndex - The row's new index
         *   data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
         *   originalEvent - The origianl Event object.
         */
         this.onRowDragEnd = new EventEmitter();
+        /** @description This event is triggered, when the user reorders a row.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	index, 	newIndex, 	data, 	originalEvent)
+        *   row - The row.
+        *   id - The row's id
+        *   index - The row's index
+        *   newIndex - The row's new index
+        *   data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
+        *   originalEvent - The origianl Event object.
+        */
+        this.onRowReorder = new EventEmitter();
         /** @description This event is triggered, when the user expands a row of the grid. The Grid is in TreeGrid/Grouping mode.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	originalEvent)
         *   row - The expanded row.
+        *   id - The row's id
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
         */
         this.onRowExpand = new EventEmitter();
         /** @description This event is triggered, when the user collapsed a row of the grid. The Grid is in TreeGrid/Grouping mode.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	originalEvent)
         *   row - The collapsed row.
+        *   id - The row's id
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
         */
         this.onRowCollapse = new EventEmitter();
         /** @description This event is triggered, when the user clicks on a row of the grid.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent, 	id, 	isRightClick, 	pageX, 	pageY)
         *   row - The clicked row.
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+        *   id - Gets the row id.
+        *   isRightClick - Gets whether the pointing device's right button is clicked.
+        *   pageX - Gets the click's X position.
+        *   pageY - Gets the click's Y position.
         */
         this.onRowClick = new EventEmitter();
         /** @description This event is triggered, when the user double clicks on a row of the grid.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent, 	id, 	isRightClick, 	pageX, 	pageY)
         *   row - The double-clicked row.
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+        *   id - Gets the row id.
+        *   isRightClick - Gets whether the pointing device's right button is clicked.
+        *   pageX - Gets the click's X position.
+        *   pageY - Gets the click's Y position.
         */
         this.onRowDoubleClick = new EventEmitter();
         /** @description This event is triggered, when the user resized a row.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	oldHeight, 	height)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	oldHeight, 	height)
         *   row - The resized row.
+        *   id - Gets the row id.
         *   oldHeight - The old height of the row.
         *   height - The new height of the row.
         */
         this.onRowResize = new EventEmitter();
         /** @description This event is triggered, when the user clicks on a cell of the grid.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	cell, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	cell, 	originalEvent, 	id, 	dataField, 	isRightClick, 	pageX, 	pageY)
         *   cell - The clicked cell.
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+        *   id - Gets the row id.
+        *   dataField - Gets the column dataField.
+        *   isRightClick - Gets whether the pointing device's right button is clicked.
+        *   pageX - Gets the click's X position.
+        *   pageY - Gets the click's Y position.
         */
         this.onCellClick = new EventEmitter();
         /** @description This event is triggered, when the user double clicks on a cell of the grid.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	cell, 	originalEvent)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	cell, 	originalEvent, 	id, 	dataField, 	isRightClick, 	pageX, 	pageY)
         *   cell - The double-clicked cell.
         *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+        *   id - Gets the row id.
+        *   dataField - Gets the column dataField.
+        *   isRightClick - Gets whether the pointing device's right button is clicked.
+        *   pageX - Gets the click's X position.
+        *   pageY - Gets the click's Y position.
         */
         this.onCellDoubleClick = new EventEmitter();
         /** @description This event is triggered, when the edit ends.
@@ -746,6 +806,23 @@ let GridComponent = class GridComponent extends BaseElement {
             });
         }
     }
+    /** @description This method returns true, if all rows in the Grid are selected.
+    * @returns {boolean}
+  */
+    areAllRowsSelected() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.areAllRowsSelected();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
     */
     beginUpdate() {
@@ -761,21 +838,16 @@ let GridComponent = class GridComponent extends BaseElement {
     /** @description Begins row, cell or column. This method allows you to programmatically start a cell, row or column editing. After calling it, an editor HTMLElement will be created and displayed in the Grid.
     * @param {string | number} rowId. row bound id
     * @param {string} dataField?. column bound data field
-    * @returns {boolean}
-  */
+    */
     beginEdit(rowId, dataField) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const getResultOnRender = () => {
-                return new Promise(resolve => {
-                    this.nativeElement.whenRendered(() => {
-                        const result = this.nativeElement.beginEdit(rowId, dataField);
-                        resolve(result);
-                    });
-                });
-            };
-            const result = yield getResultOnRender();
-            return result;
-        });
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.beginEdit(rowId, dataField);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.beginEdit(rowId, dataField);
+            });
+        }
     }
     /** @description Clears all filters. Refreshes the view and updates all filter input components.
     */
@@ -997,7 +1069,170 @@ let GridComponent = class GridComponent extends BaseElement {
             });
         }
     }
-    /** @description Gets an array of columns with applied sorting.
+    /** @description Navigates to a page, when paging is enabled.
+    * @param {number} index. page index
+    */
+    goToPage(index) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.goToPage(index);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.goToPage(index);
+            });
+        }
+    }
+    /** @description Navigates to the next page, when grid paging is enabled.
+    */
+    nextPage() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.nextPage();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.nextPage();
+            });
+        }
+    }
+    /** @description Navigates to the prev page, when grid paging is enabled.
+    */
+    prevPage() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.prevPage();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.prevPage();
+            });
+        }
+    }
+    /** @description Navigates to the first page, when grid paging is enabled.
+    */
+    firstPage() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.firstPage();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.firstPage();
+            });
+        }
+    }
+    /** @description Navigates to the last page, when grid paging is enabled.
+    */
+    lastPage() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.lastPage();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.lastPage();
+            });
+        }
+    }
+    /** @description Gets the maximum position of the vertical scrollbar. You can use this method in combination with the setVerticalScrollValue to apply a new scroll position.
+    * @returns {number}
+  */
+    getVerticalScrollMax() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getVerticalScrollMax();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the position of the vertical scrollbar.
+    * @returns {number}
+  */
+    getVerticalScrollValue() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getVerticalScrollValue();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the maximum position of the horizontal scrollbar. You can use this method in combination with the setHorizontalScrollValue to apply a new scroll position.
+    * @returns {number}
+  */
+    getHorizontalScrollMax() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getHorizontalScrollMax();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the position of the horizontal scrollbar.
+    * @returns {number}
+  */
+    getHorizontalScrollValue() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getHorizontalScrollValue();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the columns array. Each item in the array contains the column properties which are dynamically set by the user interaction and the columns initialization data properties such as: 'label', 'dataField', 'dataType', 'visible'.
+    * @returns {any}
+  */
+    getColumns() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getColumns();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the groups array.
+    * @returns {any[]}
+  */
+    getGroups() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getGroups();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets an array of columns with applied sorting. Each member in the array is with column's data field used as a key and 'sortOrder' and 'sortIndex' as a value.
     * @returns {{[dataField: string]: { sortOrder: string, sortIndex: number }}}
   */
     getSortedColumns() {
@@ -1040,6 +1275,23 @@ let GridComponent = class GridComponent extends BaseElement {
                 return new Promise(resolve => {
                     this.nativeElement.whenRendered(() => {
                         const result = this.nativeElement.getSelectedRows();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the selected cells. The method returns an array of cell. Each cell is an array with row id, column data field and cell value.
+    * @returns {any[]}
+  */
+    getSelectedCells() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getSelectedCells();
                         resolve(result);
                     });
                 });
@@ -1099,6 +1351,23 @@ let GridComponent = class GridComponent extends BaseElement {
             return result;
         });
     }
+    /** @description Gets a JSON object with the following fields: 'sort', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'.
+    * @returns {any}
+  */
+    getState() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getState();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Gets the changes from the batch edit.
     * @returns {{ upDated: [{ id: string, dataField: string, oldValue: Object, newValue: Object }], deleted: [{id: string, data: Object}], added: [{id: string, data: Object}] }}
   */
@@ -1108,6 +1377,99 @@ let GridComponent = class GridComponent extends BaseElement {
                 return new Promise(resolve => {
                     this.nativeElement.whenRendered(() => {
                         const result = this.nativeElement.getBatchEditChanges();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets a value of a cell.
+    * @param {string | number} rowId. row bound id
+    * @param {string} dataField. column bound data field
+    * @returns {any}
+  */
+    getCellValue(rowId, dataField) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getCellValue(rowId, dataField);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets a value of a column.
+    * @param {string} dataField. column bound data field
+    * @param {string} propertyName. The property name.
+    * @returns {any}
+  */
+    getColumnProperty(dataField, propertyName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getColumnProperty(dataField, propertyName);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets a value of a row.
+    * @param {string | number} rowId. row bound id
+    * @param {string} propertyName. The property name.
+    * @returns {any}
+  */
+    getRowProperty(rowId, propertyName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getRowProperty(rowId, propertyName);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the Data source data associated to the row.
+    * @param {string | number} rowId. row bound id
+    * @returns {any}
+  */
+    getRowData(rowId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getRowData(rowId);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the Row's id.
+    * @param {number} rowIndex. row index
+    * @returns {any}
+  */
+    getRowId(rowIndex) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getRowId(rowIndex);
                         resolve(result);
                     });
                 });
@@ -1133,6 +1495,23 @@ let GridComponent = class GridComponent extends BaseElement {
             return result;
         });
     }
+    /** @description This method returns true, if any rows in the Grid are selected.
+    * @returns {boolean}
+  */
+    hasSelectedRows() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.hasSelectedRows();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Hides the Details of a Row, when row details are enabled.
     * @param {string | number} rowId. row bound id
     */
@@ -1143,6 +1522,48 @@ let GridComponent = class GridComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.hideDetail(rowId);
+            });
+        }
+    }
+    /** @description Highlights a column. Highlights a Grid column.
+    * @param {string} dataField. column bound data field
+    */
+    highlightColumn(dataField) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.highlightColumn(dataField);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.highlightColumn(dataField);
+            });
+        }
+    }
+    /** @description Highlights a cell. Calling the method a second time toggle the highlight state.
+    * @param {string | number} rowId. row bound id
+    * @param {string} dataField. column bound data field
+    * @param {string} className?. CSS Class Name
+    */
+    highlightCell(rowId, dataField, className) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.highlightCell(rowId, dataField, className);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.highlightCell(rowId, dataField, className);
+            });
+        }
+    }
+    /** @description Highlights a row. Calling the method a second time toggle the highlight state.
+    * @param {string | number} rowId. row bound id
+    * @param {string} className?. CSS Class Name
+    */
+    highlightRow(rowId, className) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.highlightRow(rowId, className);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.highlightRow(rowId, className);
             });
         }
     }
@@ -1222,6 +1643,35 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Reverts the batch edit changes. This method cancels all changes made by the end-user.
+    * @param {string | number} dataField. The data field or column index of the first grid column.
+    * @param {string | number} referenceDataField. The data field or column index of the second grid column.
+    * @param {boolean} insertAfter?. Determines whether to insert the first column after the reference column.
+    */
+    reorderColumns(dataField, referenceDataField, insertAfter) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.reorderColumns(dataField, referenceDataField, insertAfter);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.reorderColumns(dataField, referenceDataField, insertAfter);
+            });
+        }
+    }
+    /** @description Reorders two DataGrid columns.
+    * @param {string | number} dataField. The data field or column index of the first grid column.
+    * @param {string | number} referenceDataField. The data field or column index of the second grid column.
+    */
+    swapColumns(dataField, referenceDataField) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.swapColumns(dataField, referenceDataField);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.swapColumns(dataField, referenceDataField);
+            });
+        }
+    }
+    /** @description Swaps two DataGrid columns.
     */
     saveBatchEdit() {
         if (this.nativeElement.isRendered) {
@@ -1234,21 +1684,6 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Saves the batch edit changes. This method confirms the editing changes made by the end-user.
-    * @param {string | number} rowId. row bound id
-    * @param {any} data. row data matching the data source
-    * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
-    */
-    updateRow(rowId, data, callback) {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.updateRow(rowId, data, callback);
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.updateRow(rowId, data, callback);
-            });
-        }
-    }
-    /** @description Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string | number} rowId. row bound id
     * @param {string} dataField?. column bound data field
     */
@@ -1306,6 +1741,18 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Selects multiple rows by their ids.
+    */
+    selectAllRows() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectAllRows();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.selectAllRows();
+            });
+        }
+    }
+    /** @description Selects all rows.
     * @param {number[]} rowIndex. Array of row indexes
     */
     selectRowsByIndex(rowIndex) {
@@ -1320,6 +1767,77 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Selects multiple rows by their index.
     * @param {string | number} rowId. row bound id
+    * @param {string} dataField. column bound data field
+    * @param {string | number | Date | boolean} value. New Cell value.
+    */
+    setCellValue(rowId, dataField, value) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setCellValue(rowId, dataField, value);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setCellValue(rowId, dataField, value);
+            });
+        }
+    }
+    /** @description Sets a new value to a cell.
+    * @param {string} dataField. column bound data field
+    * @param {string} propertyName. The column property's name.
+    * @param {any} value. The new property value.
+    */
+    setColumnProperty(dataField, propertyName, value) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setColumnProperty(dataField, propertyName, value);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setColumnProperty(dataField, propertyName, value);
+            });
+        }
+    }
+    /** @description Sets a property to a column.
+    * @param {string | number} rowId. row bound id
+    * @param {string} propertyName. The row property's name.
+    * @param {any} value. The new property value.
+    */
+    setRowProperty(rowId, propertyName, value) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setRowProperty(rowId, propertyName, value);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setRowProperty(rowId, propertyName, value);
+            });
+        }
+    }
+    /** @description Sets a property to a row.
+    * @param {number} value. The new scroll position
+    */
+    setVerticalScrollValue(value) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setVerticalScrollValue(value);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setVerticalScrollValue(value);
+            });
+        }
+    }
+    /** @description Sets the position of the vertical scrollbar. You can use this method in combination with the getVerticalScrollValue and getVerticalScrollMax.
+    * @param {number} value. The new scroll position
+    */
+    setHorizontalScrollValue(value) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setHorizontalScrollValue(value);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setHorizontalScrollValue(value);
+            });
+        }
+    }
+    /** @description Sets the position of the horizontal scrollbar. You can use this method in combination with the getHorizontalScrollValue and getHorizontalScrollMax.
+    * @param {string | number} rowId. row bound id
     */
     showDetail(rowId) {
         if (this.nativeElement.isRendered) {
@@ -1332,6 +1850,21 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Shows the Details of a Row, when row details are enabled.
+    * @param {string | number} rowId. row bound id
+    * @param {any} data. row data matching the data source
+    * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
+    */
+    updateRow(rowId, data, callback) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateRow(rowId, data, callback);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.updateRow(rowId, data, callback);
+            });
+        }
+    }
+    /** @description Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string | number} rowId. row bound id
     * @param {string} dataField?. column bound data field
     */
@@ -1392,6 +1925,7 @@ let GridComponent = class GridComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -1412,6 +1946,10 @@ let GridComponent = class GridComponent extends BaseElement {
         const that = this;
         that.eventHandlers['beginEditHandler'] = (event) => { that.onBeginEdit.emit(event); };
         that.nativeElement.addEventListener('beginEdit', that.eventHandlers['beginEditHandler']);
+        that.eventHandlers['batchChangeHandler'] = (event) => { that.onBatchChange.emit(event); };
+        that.nativeElement.addEventListener('batchChange', that.eventHandlers['batchChangeHandler']);
+        that.eventHandlers['batchCancelHandler'] = (event) => { that.onBatchCancel.emit(event); };
+        that.nativeElement.addEventListener('batchCancel', that.eventHandlers['batchCancelHandler']);
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['columnClickHandler'] = (event) => { that.onColumnClick.emit(event); };
@@ -1426,12 +1964,16 @@ let GridComponent = class GridComponent extends BaseElement {
         that.nativeElement.addEventListener('columnDragging', that.eventHandlers['columnDraggingHandler']);
         that.eventHandlers['columnDragEndHandler'] = (event) => { that.onColumnDragEnd.emit(event); };
         that.nativeElement.addEventListener('columnDragEnd', that.eventHandlers['columnDragEndHandler']);
+        that.eventHandlers['columnReorderHandler'] = (event) => { that.onColumnReorder.emit(event); };
+        that.nativeElement.addEventListener('columnReorder', that.eventHandlers['columnReorderHandler']);
         that.eventHandlers['rowDragStartHandler'] = (event) => { that.onRowDragStart.emit(event); };
         that.nativeElement.addEventListener('rowDragStart', that.eventHandlers['rowDragStartHandler']);
         that.eventHandlers['rowDraggingHandler'] = (event) => { that.onRowDragging.emit(event); };
         that.nativeElement.addEventListener('rowDragging', that.eventHandlers['rowDraggingHandler']);
         that.eventHandlers['rowDragEndHandler'] = (event) => { that.onRowDragEnd.emit(event); };
         that.nativeElement.addEventListener('rowDragEnd', that.eventHandlers['rowDragEndHandler']);
+        that.eventHandlers['rowReorderHandler'] = (event) => { that.onRowReorder.emit(event); };
+        that.nativeElement.addEventListener('rowReorder', that.eventHandlers['rowReorderHandler']);
         that.eventHandlers['rowExpandHandler'] = (event) => { that.onRowExpand.emit(event); };
         that.nativeElement.addEventListener('rowExpand', that.eventHandlers['rowExpandHandler']);
         that.eventHandlers['rowCollapseHandler'] = (event) => { that.onRowCollapse.emit(event); };
@@ -1471,6 +2013,12 @@ let GridComponent = class GridComponent extends BaseElement {
         if (that.eventHandlers['beginEditHandler']) {
             that.nativeElement.removeEventListener('beginEdit', that.eventHandlers['beginEditHandler']);
         }
+        if (that.eventHandlers['batchChangeHandler']) {
+            that.nativeElement.removeEventListener('batchChange', that.eventHandlers['batchChangeHandler']);
+        }
+        if (that.eventHandlers['batchCancelHandler']) {
+            that.nativeElement.removeEventListener('batchCancel', that.eventHandlers['batchCancelHandler']);
+        }
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
         }
@@ -1492,6 +2040,9 @@ let GridComponent = class GridComponent extends BaseElement {
         if (that.eventHandlers['columnDragEndHandler']) {
             that.nativeElement.removeEventListener('columnDragEnd', that.eventHandlers['columnDragEndHandler']);
         }
+        if (that.eventHandlers['columnReorderHandler']) {
+            that.nativeElement.removeEventListener('columnReorder', that.eventHandlers['columnReorderHandler']);
+        }
         if (that.eventHandlers['rowDragStartHandler']) {
             that.nativeElement.removeEventListener('rowDragStart', that.eventHandlers['rowDragStartHandler']);
         }
@@ -1500,6 +2051,9 @@ let GridComponent = class GridComponent extends BaseElement {
         }
         if (that.eventHandlers['rowDragEndHandler']) {
             that.nativeElement.removeEventListener('rowDragEnd', that.eventHandlers['rowDragEndHandler']);
+        }
+        if (that.eventHandlers['rowReorderHandler']) {
+            that.nativeElement.removeEventListener('rowReorder', that.eventHandlers['rowReorderHandler']);
         }
         if (that.eventHandlers['rowExpandHandler']) {
             that.nativeElement.removeEventListener('rowExpand', that.eventHandlers['rowExpandHandler']);
@@ -1715,6 +2269,12 @@ __decorate([
 ], GridComponent.prototype, "onBeginEdit", void 0);
 __decorate([
     Output()
+], GridComponent.prototype, "onBatchChange", void 0);
+__decorate([
+    Output()
+], GridComponent.prototype, "onBatchCancel", void 0);
+__decorate([
+    Output()
 ], GridComponent.prototype, "onChange", void 0);
 __decorate([
     Output()
@@ -1736,6 +2296,9 @@ __decorate([
 ], GridComponent.prototype, "onColumnDragEnd", void 0);
 __decorate([
     Output()
+], GridComponent.prototype, "onColumnReorder", void 0);
+__decorate([
+    Output()
 ], GridComponent.prototype, "onRowDragStart", void 0);
 __decorate([
     Output()
@@ -1743,6 +2306,9 @@ __decorate([
 __decorate([
     Output()
 ], GridComponent.prototype, "onRowDragEnd", void 0);
+__decorate([
+    Output()
+], GridComponent.prototype, "onRowReorder", void 0);
 __decorate([
     Output()
 ], GridComponent.prototype, "onRowExpand", void 0);

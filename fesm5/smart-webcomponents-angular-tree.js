@@ -421,6 +421,17 @@ var TreeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TreeComponent.prototype, "filterMember", {
+        /** @description Determines the TreeItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the value property or 'textContent' if the user wants to filter by text inside the TreeItem's content or any other property. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.filterMember : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.filterMember = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TreeComponent.prototype, "filterMode", {
         /** @description Sets filter mode. */
         get: function () {
@@ -1057,6 +1068,7 @@ var TreeComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -1194,6 +1206,9 @@ var TreeComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], TreeComponent.prototype, "filterInputPlaceholder", null);
+    __decorate([
+        Input()
+    ], TreeComponent.prototype, "filterMember", null);
     __decorate([
         Input()
     ], TreeComponent.prototype, "filterMode", null);
@@ -1435,6 +1450,7 @@ var TreeItemComponent = /** @class */ (function (_super) {
     TreeItemComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     TreeItemComponent.prototype.ngOnDestroy = function () { };
@@ -1601,6 +1617,7 @@ var TreeItemsGroupComponent = /** @class */ (function (_super) {
     TreeItemsGroupComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
     };
     TreeItemsGroupComponent.prototype.ngOnDestroy = function () { };

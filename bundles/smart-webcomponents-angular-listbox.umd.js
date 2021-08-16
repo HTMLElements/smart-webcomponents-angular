@@ -1103,6 +1103,32 @@ import './../source/modules/smart.listbox';
                 });
             });
         };
+        /** @description Returns an array of ListBox items.
+        * @returns {{label: string, value: string}[]}
+      */
+        ListBoxComponent.prototype.getItems = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getItems();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Inserts a new item at a specified index.
         * @param {number} index. The index where the item must be inserted.
         * @param {any} items. A single item/definition or an array of List Items/definitions of list items to be inserted. The format of the item definitions is the same as the format of the <strong>dataSource</strong> property.
@@ -1243,6 +1269,7 @@ import './../source/modules/smart.listbox';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1745,6 +1772,7 @@ import './../source/modules/smart.listbox';
         ListItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         ListItemComponent.prototype.ngOnDestroy = function () { };
@@ -1843,6 +1871,7 @@ import './../source/modules/smart.listbox';
         ListItemsGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         ListItemsGroupComponent.prototype.ngOnDestroy = function () { };

@@ -221,6 +221,13 @@ let CardViewComponent = class CardViewComponent extends BaseElement {
     set dataSource(value) {
         this.nativeElement ? this.nativeElement.dataSource = value : undefined;
     }
+    /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+    get dataSourceSettings() {
+        return this.nativeElement ? this.nativeElement.dataSourceSettings : undefined;
+    }
+    set dataSourceSettings(value) {
+        this.nativeElement ? this.nativeElement.dataSourceSettings = value : undefined;
+    }
     /** @description Allows the edit option for the cards. */
     get editable() {
         return this.nativeElement ? this.nativeElement.editable : undefined;
@@ -248,6 +255,20 @@ let CardViewComponent = class CardViewComponent extends BaseElement {
     }
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
+    }
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    get rightToLeft() {
+        return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
+    }
+    set rightToLeft(value) {
+        this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
+    }
+    /** @description Determines the theme. Theme defines the look of the element */
+    get theme() {
+        return this.nativeElement ? this.nativeElement.theme : undefined;
+    }
+    set theme(value) {
+        this.nativeElement ? this.nativeElement.theme = value : undefined;
     }
     /** @description Describes the scrolling behavior of the element. */
     get scrolling() {
@@ -468,6 +489,7 @@ let CardViewComponent = class CardViewComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -572,6 +594,9 @@ __decorate([
 ], CardViewComponent.prototype, "dataSource", null);
 __decorate([
     Input()
+], CardViewComponent.prototype, "dataSourceSettings", null);
+__decorate([
+    Input()
 ], CardViewComponent.prototype, "editable", null);
 __decorate([
     Input()
@@ -582,6 +607,12 @@ __decorate([
 __decorate([
     Input()
 ], CardViewComponent.prototype, "messages", null);
+__decorate([
+    Input()
+], CardViewComponent.prototype, "rightToLeft", null);
+__decorate([
+    Input()
+], CardViewComponent.prototype, "theme", null);
 __decorate([
     Input()
 ], CardViewComponent.prototype, "scrolling", null);

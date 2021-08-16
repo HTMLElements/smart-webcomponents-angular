@@ -1,8 +1,17 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const schematics_1 = require("@angular-devkit/schematics");
 const schematics_2 = require("@angular/cdk/schematics");
-const config_1 = require("@schematics/angular/utility/config");
+const config_1 = require("@schematics/angular/utility/workspace");
 const material_fonts_1 = require("../../fonts/material-fonts");
 const theming_1 = require("../../theming/theming");
 /**
@@ -17,7 +26,6 @@ function default_1(options) {
         }),
         theming_1.addThemeToAppStyles(options),
         material_fonts_1.addFontsToIndex(options),
-        addMaterialAppStyles(options),
         theming_1.addTypographyClass(options),
         options.skipImport ? schematics_1.noop() : addTableModulesToModule(options)
     ]);
@@ -60,11 +68,11 @@ function addMaterialAppStyles(options) {
 /**
  * Adds the required modules to the relative module.
  */
+
 function addTableModulesToModule(options) {
-    return (host) => {
-        const modulePath = schematics_2.findModuleFromOptions(host, options);
+    return (host) => __awaiter(this, void 0, void 0, function* () {
+        const modulePath = (yield schematics_2.findModuleFromOptions(host, options));
         schematics_2.addModuleImportToModule(host, modulePath, 'GridModule', 'smart-webcomponents-angular/grid');
-        return host;
-    };
+    });
 }
 //# sourceMappingURL=index.js.map

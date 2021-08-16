@@ -299,6 +299,13 @@ let DateTimePickerComponent = class DateTimePickerComponent extends BaseElement 
     set footerTemplate(value) {
         this.nativeElement ? this.nativeElement.footerTemplate = value : undefined;
     }
+    /** @description Determines whether to display a footer. */
+    get footer() {
+        return this.nativeElement ? this.nativeElement.footer : undefined;
+    }
+    set footer(value) {
+        this.nativeElement ? this.nativeElement.footer = value : undefined;
+    }
     /** @description Determines the pattern that is used to display the value in. */
     get formatString() {
         return this.nativeElement ? this.nativeElement.formatString : undefined;
@@ -615,6 +622,7 @@ let DateTimePickerComponent = class DateTimePickerComponent extends BaseElement 
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -783,6 +791,9 @@ __decorate([
 __decorate([
     Input()
 ], DateTimePickerComponent.prototype, "footerTemplate", null);
+__decorate([
+    Input()
+], DateTimePickerComponent.prototype, "footer", null);
 __decorate([
     Input()
 ], DateTimePickerComponent.prototype, "formatString", null);

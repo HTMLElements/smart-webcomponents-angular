@@ -198,7 +198,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "formatFunction", {
-        /** @description A callback function defining the new format for the label of the Progress Bar. */
+        /** @description Sets or gets the language. Used in conjunction with the property messages.  */
         get: function () {
             return this.nativeElement ? this.nativeElement.formatFunction : undefined;
         },
@@ -209,7 +209,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "locale", {
-        /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+        /** @description Callback, related to localization module.  */
         get: function () {
             return this.nativeElement ? this.nativeElement.locale : undefined;
         },
@@ -220,7 +220,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "localizeFormatFunction", {
-        /** @description Callback, related to localization module.  */
+        /** @description Sets progress bars maximum possible value. */
         get: function () {
             return this.nativeElement ? this.nativeElement.localizeFormatFunction : undefined;
         },
@@ -231,7 +231,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "max", {
-        /** @description Sets progress bars maximum possible value. */
+        /** @description Sets an object with string values, related to the different states of passwords strength. */
         get: function () {
             return this.nativeElement ? this.nativeElement.max : undefined;
         },
@@ -242,7 +242,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "messages", {
-        /** @description Sets an object with string values, related to the different states of passwords strength. */
+        /** @description Sets progress bars minimum possible value. */
         get: function () {
             return this.nativeElement ? this.nativeElement.messages : undefined;
         },
@@ -253,7 +253,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "min", {
-        /** @description Sets progress bars minimum possible value. */
+        /** @description Sets the orientation of the progress bar */
         get: function () {
             return this.nativeElement ? this.nativeElement.min : undefined;
         },
@@ -264,7 +264,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "orientation", {
-        /** @description Sets the orientation of the progress bar */
+        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
         get: function () {
             return this.nativeElement ? this.nativeElement.orientation : undefined;
         },
@@ -275,7 +275,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "rightToLeft", {
-        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+        /** @description Enables/Disabled the label for the Progress Bar. */
         get: function () {
             return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
         },
@@ -286,7 +286,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "showProgressValue", {
-        /** @description Enables/Disabled the label for the Progress Bar. */
+        /** @description Determines the theme. Theme defines the look of the element */
         get: function () {
             return this.nativeElement ? this.nativeElement.showProgressValue : undefined;
         },
@@ -297,7 +297,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "theme", {
-        /** @description Determines the theme. Theme defines the look of the element */
+        /** @description If is set to true, the element cannot be focused. */
         get: function () {
             return this.nativeElement ? this.nativeElement.theme : undefined;
         },
@@ -308,7 +308,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "unfocusable", {
-        /** @description If is set to true, the element cannot be focused. */
+        /** @description Sets or gets the value of the progress bar */
         get: function () {
             return this.nativeElement ? this.nativeElement.unfocusable : undefined;
         },
@@ -319,7 +319,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(ProgressBarComponent.prototype, "value", {
-        /** @description Sets or gets the value of the progress bar */
+        /** @description undefined */
         get: function () {
             return this.nativeElement ? this.nativeElement.value : undefined;
         },
@@ -342,6 +342,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -477,7 +478,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "formatFunction", {
-        /** @description A callback function defining the new format for the label of the Progress Bar. */
+        /** @description Sets the value of the Circular Progress bar to indeterminate state(null) and starts the animation. */
         get: function () {
             return this.nativeElement ? this.nativeElement.formatFunction : undefined;
         },
@@ -488,7 +489,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "indeterminate", {
-        /** @description Sets the value of the Circular Progress bar to indeterminate state(null) and starts the animation. */
+        /** @description Sets the filling direction of the Circular Progress Bar. */
         get: function () {
             return this.nativeElement ? this.nativeElement.indeterminate : undefined;
         },
@@ -499,7 +500,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "inverted", {
-        /** @description Sets the filling direction of the Circular Progress Bar. */
+        /** @description Sets or gets the language. Used in conjunction with the property messages.  */
         get: function () {
             return this.nativeElement ? this.nativeElement.inverted : undefined;
         },
@@ -510,7 +511,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "locale", {
-        /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+        /** @description Callback, related to localization module.  */
         get: function () {
             return this.nativeElement ? this.nativeElement.locale : undefined;
         },
@@ -521,7 +522,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "localizeFormatFunction", {
-        /** @description Callback, related to localization module.  */
+        /** @description Sets progress bars maximum possible value. */
         get: function () {
             return this.nativeElement ? this.nativeElement.localizeFormatFunction : undefined;
         },
@@ -532,7 +533,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "max", {
-        /** @description Sets progress bars maximum possible value. */
+        /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
         get: function () {
             return this.nativeElement ? this.nativeElement.max : undefined;
         },
@@ -543,7 +544,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "messages", {
-        /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
+        /** @description Sets progress bars minimum possible value. */
         get: function () {
             return this.nativeElement ? this.nativeElement.messages : undefined;
         },
@@ -554,7 +555,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "min", {
-        /** @description Sets progress bars minimum possible value. */
+        /** @description Enables/Disabled the label for the Progress Bar. */
         get: function () {
             return this.nativeElement ? this.nativeElement.min : undefined;
         },
@@ -565,7 +566,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "showProgressValue", {
-        /** @description Enables/Disabled the label for the Progress Bar. */
+        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
         get: function () {
             return this.nativeElement ? this.nativeElement.showProgressValue : undefined;
         },
@@ -576,7 +577,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "rightToLeft", {
-        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+        /** @description Determines the theme. Theme defines the look of the element */
         get: function () {
             return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
         },
@@ -587,7 +588,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "theme", {
-        /** @description Determines the theme. Theme defines the look of the element */
+        /** @description If is set to true, the element cannot be focused. */
         get: function () {
             return this.nativeElement ? this.nativeElement.theme : undefined;
         },
@@ -598,7 +599,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "unfocusable", {
-        /** @description If is set to true, the element cannot be focused. */
+        /** @description Sets or gets the value of the progress bar */
         get: function () {
             return this.nativeElement ? this.nativeElement.unfocusable : undefined;
         },
@@ -609,7 +610,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(CircularProgressBarComponent.prototype, "value", {
-        /** @description Sets or gets the value of the progress bar */
+        /** @description undefined */
         get: function () {
             return this.nativeElement ? this.nativeElement.value : undefined;
         },
@@ -632,6 +633,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };

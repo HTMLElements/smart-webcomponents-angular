@@ -48,7 +48,12 @@ export declare class ScrollBarComponent extends BaseElement implements OnInit, A
     /** @description Sets or gets the widget's value. */
     value: number;
     /** @description This event is triggered when the value is changed.
-    *  @param event. The custom event. 	*/
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue, 	min, 	max)
+    *   value - A numeric value indicating the scroll position.
+    *   oldValue - A numeric value indicating the previous scroll position.
+    *   min - A numeric value indicating the min scroll position.
+    *   max - A numeric value indicating the max scroll position.
+    */
     onChange: EventEmitter<CustomEvent>;
     /** @description Redraws the element.
     */

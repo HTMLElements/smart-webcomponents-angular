@@ -5,7 +5,7 @@ if (!window['Smart']) {
 else {
 	window['Smart'].RenderMode = 'manual';
 }
-import './../../source/modules/smart.input';
+import './../../source/modules/smart.daterangeinput';
 
 /**
  * Generated bundle index. Do not edit.

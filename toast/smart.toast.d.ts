@@ -57,7 +57,7 @@ export declare class ToastComponent extends BaseElement implements OnInit, After
     value: any;
     /** @description This event is triggered when the toast item is clicked.
     *  @param event. The custom event. 	*/
-    onClick: EventEmitter<CustomEvent>;
+    onItemClick: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the toast item is closed.
     *  @param event. The custom event. 	*/
     onClose: EventEmitter<CustomEvent>;

@@ -138,7 +138,7 @@ var ToastComponent = /** @class */ (function (_super) {
         _this.eventHandlers = [];
         /** @description This event is triggered when the toast item is clicked.
         *  @param event. The custom event. 	*/
-        _this.onClick = new EventEmitter();
+        _this.onItemClick = new EventEmitter();
         /** @description This event is triggered when the toast item is closed.
         *  @param event. The custom event. 	*/
         _this.onClose = new EventEmitter();
@@ -483,6 +483,7 @@ var ToastComponent = /** @class */ (function (_super) {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
@@ -501,8 +502,8 @@ var ToastComponent = /** @class */ (function (_super) {
     /** @description Add event listeners. */
     ToastComponent.prototype.listen = function () {
         var that = this;
-        that.eventHandlers['clickHandler'] = function (event) { that.onClick.emit(event); };
-        that.nativeElement.addEventListener('click', that.eventHandlers['clickHandler']);
+        that.eventHandlers['itemClickHandler'] = function (event) { that.onItemClick.emit(event); };
+        that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         that.eventHandlers['closeHandler'] = function (event) { that.onClose.emit(event); };
         that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
         that.eventHandlers['openHandler'] = function (event) { that.onOpen.emit(event); };
@@ -519,8 +520,8 @@ var ToastComponent = /** @class */ (function (_super) {
     /** @description Remove event listeners. */
     ToastComponent.prototype.unlisten = function () {
         var that = this;
-        if (that.eventHandlers['clickHandler']) {
-            that.nativeElement.removeEventListener('click', that.eventHandlers['clickHandler']);
+        if (that.eventHandlers['itemClickHandler']) {
+            that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         }
         if (that.eventHandlers['closeHandler']) {
             that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
@@ -609,7 +610,7 @@ var ToastComponent = /** @class */ (function (_super) {
     ], ToastComponent.prototype, "value", null);
     __decorate([
         Output()
-    ], ToastComponent.prototype, "onClick", void 0);
+    ], ToastComponent.prototype, "onItemClick", void 0);
     __decorate([
         Output()
     ], ToastComponent.prototype, "onClose", void 0);

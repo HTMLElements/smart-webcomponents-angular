@@ -115,7 +115,10 @@ export declare class SliderComponent extends BaseElement implements OnInit, Afte
     /** @description Sets or gets the word length. Applicable only when scaleType is 'integer'.  */
     wordLength: WordLength;
     /** @description This event is triggered when the value of the slider is changed.
-    *  @param event. The custom event. 	*/
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
+    *   value - A numeric value indicating the scroll position.
+    *   oldValue - A numeric value indicating the previous scroll position.
+    */
     onChange: EventEmitter<CustomEvent>;
     /** @description Focuses the slider.
     */

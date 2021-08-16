@@ -143,6 +143,13 @@ let TooltipComponent = class TooltipComponent extends BaseElement {
     set animation(value) {
         this.nativeElement ? this.nativeElement.animation = value : undefined;
     }
+    /** @description Determines how to align the tooltip. */
+    get align() {
+        return this.nativeElement ? this.nativeElement.align : undefined;
+    }
+    set align(value) {
+        this.nativeElement ? this.nativeElement.align = value : undefined;
+    }
     /** @description Gets or sets whether a tooltip's arrow will be shown. */
     get arrow() {
         return this.nativeElement ? this.nativeElement.arrow : undefined;
@@ -312,6 +319,7 @@ let TooltipComponent = class TooltipComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -362,6 +370,9 @@ TooltipComponent.ctorParameters = () => [
 __decorate([
     Input()
 ], TooltipComponent.prototype, "animation", null);
+__decorate([
+    Input()
+], TooltipComponent.prototype, "align", null);
 __decorate([
     Input()
 ], TooltipComponent.prototype, "arrow", null);

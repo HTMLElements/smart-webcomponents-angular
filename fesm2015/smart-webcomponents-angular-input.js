@@ -136,6 +136,19 @@ let InputComponent = class InputComponent extends BaseElement {
         *   value - The value of the new selected item.
         */
         this.onChange = new EventEmitter();
+        /** @description This event is triggered on each key up event of the Input, if the value is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+        *   oldValue - The previous value before it was changed.
+        *   value - The new value.
+        */
+        this.onChanging = new EventEmitter();
+        /** @description This event is triggered when the user clicks on an item from the popup list.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	label, 	value)
+        *   item - The item that was clicked.
+        *   label - The label of the item that was clicked.
+        *   value - The value of the item that was clicked.
+        */
+        this.onItemClick = new EventEmitter();
         this._initialChange = true;
         this.nativeElement = ref.nativeElement;
     }
@@ -176,6 +189,13 @@ let InputComponent = class InputComponent extends BaseElement {
     }
     set disabled(value) {
         this.nativeElement ? this.nativeElement.disabled = value : undefined;
+    }
+    /** @description Sets additional class names to the Input drop down. */
+    get dropDownClassList() {
+        return this.nativeElement ? this.nativeElement.dropDownClassList : undefined;
+    }
+    set dropDownClassList(value) {
+        this.nativeElement ? this.nativeElement.dropDownClassList = value : undefined;
     }
     /** @description Determines the position of the drop down button. */
     get dropDownButtonPosition() {
@@ -388,6 +408,7 @@ let InputComponent = class InputComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -436,6 +457,10 @@ let InputComponent = class InputComponent extends BaseElement {
         const that = this;
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['changingHandler'] = (event) => { that.onChanging.emit(event); };
+        that.nativeElement.addEventListener('changing', that.eventHandlers['changingHandler']);
+        that.eventHandlers['itemClickHandler'] = (event) => { that.onItemClick.emit(event); };
+        that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         that.eventHandlers['changeModelHandler'] = (event) => {
             that._initialChange = false;
             that._onChange(that.nativeElement.value);
@@ -459,6 +484,12 @@ let InputComponent = class InputComponent extends BaseElement {
         const that = this;
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
+        if (that.eventHandlers['changingHandler']) {
+            that.nativeElement.removeEventListener('changing', that.eventHandlers['changingHandler']);
+        }
+        if (that.eventHandlers['itemClickHandler']) {
+            that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         }
         if (that.eventHandlers['changeModelHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
@@ -486,6 +517,9 @@ __decorate([
 __decorate([
     Input()
 ], InputComponent.prototype, "disabled", null);
+__decorate([
+    Input()
+], InputComponent.prototype, "dropDownClassList", null);
 __decorate([
     Input()
 ], InputComponent.prototype, "dropDownButtonPosition", null);
@@ -555,6 +589,12 @@ __decorate([
 __decorate([
     Output()
 ], InputComponent.prototype, "onChange", void 0);
+__decorate([
+    Output()
+], InputComponent.prototype, "onChanging", void 0);
+__decorate([
+    Output()
+], InputComponent.prototype, "onItemClick", void 0);
 InputComponent = __decorate([
     Directive({
         selector: 'smart-input, [smart-input]',

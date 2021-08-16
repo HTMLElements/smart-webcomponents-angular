@@ -64,6 +64,8 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     firstDayOfWeek: number;
     /** @description Sets or gets the footer template of the calendar pop-up. The value of this property can be the id of an HTMLTemplateElement or the HTMLTemplateElement itself. If set to null, a default template is applied. */
     footerTemplate: any;
+    /** @description Determines whether to display a footer. */
+    footer: boolean;
     /** @description Determines the pattern that is used to display the value in. */
     formatString: string;
     /** @description Sets custom header template for the calendar pop-up. Accepts the id of an HTMLTemplateElement or a reference ot it. */

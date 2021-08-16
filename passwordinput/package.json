@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-passwordinput.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-passwordinput.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-passwordinput.js",
+  "esm5": "../esm5/passwordinput/smart-webcomponents-angular-passwordinput.js",
+  "esm2015": "../esm2015/passwordinput/smart-webcomponents-angular-passwordinput.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-passwordinput.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-passwordinput.js",
+  "typings": "smart-webcomponents-angular-passwordinput.d.ts",
+  "metadata": "smart-webcomponents-angular-passwordinput.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/passwordinput"
+}

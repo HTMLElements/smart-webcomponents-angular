@@ -15,6 +15,8 @@ export declare class TooltipComponent extends BaseElement implements OnInit, Aft
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
+    /** @description Determines how to align the tooltip. */
+    align: string;
     /** @description Gets or sets whether a tooltip's arrow will be shown. */
     arrow: boolean;
     /** @description Sets the position of the arrow. */

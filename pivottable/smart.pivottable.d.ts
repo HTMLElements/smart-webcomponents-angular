@@ -1,8 +1,8 @@
 import { PivotTable } from './../index';
-import { Animation, PivotTableColumnTotalsPosition, PivotTableDesignerPosition, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting } from './../index';
+import { Animation, PivotTableColumnTotalsPosition, PivotTableDesignerPosition, PivotTableDrillDownDataExport, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, PivotTableColumnAlign, PivotTableColumnDataType, PivotTableColumnSummary, PivotTableColumnTotalsPosition, PivotTableConditionalFormattingCondition, PivotTableConditionalFormattingFontFamily, PivotTableConditionalFormattingFontSize, PivotTableDesignerPosition, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting, ElementRenderMode } from './../index';
+export { Animation, PivotTableColumnAlign, PivotTableColumnDataType, PivotTableColumnSummary, PivotTableColumnTotalsPosition, PivotTableConditionalFormattingCondition, PivotTableConditionalFormattingFontFamily, PivotTableConditionalFormattingFontSize, PivotTableDesignerPosition, PivotTableDrillDownDataExport, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { PivotTable } from './../index';
 export declare class PivotTableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -37,55 +37,80 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     disabled: boolean;
     /** @description If enabled, shows the original tabular data that has been aggregated in a PivotTable summary cell when the cell is double-clicked or F2 is pressed. */
     drillDown: boolean;
+    /** @description If set, shows an export button in the drill down dialog. */
+    drillDownDataExport: PivotTableDrillDownDataExport;
+    /** @description Sets or gets the drill down table export file name. */
+    drillDownDataExportName: string;
+    /** @description Sets or gets whether sorting based on columns in classic row groups layout mode is enabled. */
+    drillDownTableInit: {
+        (table: HTMLElement): void;
+    };
     /** @description Sets or gets whether the PivotTable's column header is sticky/frozen. */
+    drillDownCustomAction: {
+        (originalRecords: []): void;
+    };
+    /** @description Sets or gets whether to show a Grand total row aggregating the data of all rows. */
+    enableSortByRowGroups: boolean;
+    /** @description Sets or gets the way row nesting (based on rowGroup columns) is displayed. */
     freezeHeader: boolean;
-    /** @description A callback function that returns the default summary function of a summary column when it is dynamically assigned as such (e.g. by drag-drop in the designer). */
+    /** @description Sets or gets whether to hide the tooltip that displays details when multiple summary cells with non-null values are selected. */
     getDefaultSummaryFunction: {
         (column: PivotTableColumn): string;
     };
-    /** @description Sets or gets whether to show a Grand total row aggregating the data of all rows. */
-    grandTotal: boolean;
-    /** @description Sets or gets the way row nesting (based on rowGroup columns) is displayed. */
-    groupLayout: PivotTableGroupLayout;
-    /** @description Sets or gets whether to hide the tooltip that displays details when multiple summary cells with non-null values are selected. */
-    hideCellSelectionTooltip: boolean;
     /** @description Sets or gets whether to hide rows that contain only 0 or null values. Applicable only when there are rowGroup columns. */
-    hideEmptyRows: boolean;
+    grandTotal: boolean;
     /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
-    keyboardNavigation: boolean;
+    groupLayout: PivotTableGroupLayout;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
-    locale: string;
+    hideCellSelectionTooltip: boolean;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
-    messages: any;
+    hideEmptyRows: boolean;
     /** @description Sets or gets what value is shown in cells that do not have aggregated data to display. By default (null), such cells are empty. */
+    keyboardNavigation: boolean;
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    locale: string;
+    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
+    messages: any;
+    /** @description Sets or gets whether row summaries are displayed in the row headers. Example: Peterson(40) vs Peterson, when rowSummary is set to false. */
     nullDefaultValue: number;
-    /** @description A callback function executed each time a PivotTable cell is rendered. */
-    onCellRender: any;
-    /** @description A callback function executed each time a PivotTable column header cell is rendered. */
-    onColumnRender: any;
-    /** @description A callback function executed when the PivotTable is being initialized. */
+    /** @description Sets or gets whether to show row total columns for each summary column. */
+    onCellRender: {
+        (data: any, dynamicColumn: any, value: any, cell: HTMLTableCellElement): void;
+    };
+    /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
+    onColumnRender: {
+        (settings: {
+            text: string;
+            cell: HTMLTableCellElement;
+            column: PivotTableColumn;
+            fullDefinition: any;
+        }): void;
+    };
+    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
     onInit: {
         (): void;
     };
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
-    rightToLeft: boolean;
-    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
-    rowSort: boolean;
-    /** @description Sets or gets whether to show row total columns for each summary column. */
-    rowTotals: boolean;
-    /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
-    rowTotalsPosition: PivotTableRowTotalsPosition;
-    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
-    selection: boolean;
     /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
-    selectionMode: PivotTableSelectionMode;
+    rightToLeft: boolean;
     /** @description Determines the sorting mode of the PivotTable. */
-    sortMode: PivotTableSortMode;
+    rowSort: boolean;
     /** @description Determines the theme. Theme defines the look of the element */
-    theme: string;
+    rowSummary: boolean;
     /** @description Sets or gets whether the PivotTable's toolbar is shown. It contains two breadcrumb components that allow the modification of the row group and pivot columns, as well as the "Conditional Formatting" and "Fields" buttons that open a dialog with additional settings. */
-    toolbar: boolean;
+    rowTotals: boolean;
     /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+    rowTotalsPosition: PivotTableRowTotalsPosition;
+    /** @description undefined */
+    selection: boolean;
+    /** @description undefined */
+    selectionMode: PivotTableSelectionMode;
+    /** @description undefined */
+    sortMode: PivotTableSortMode;
+    /** @description undefined */
+    theme: string;
+    /** @description undefined */
+    toolbar: boolean;
+    /** @description undefined */
     tooltip: boolean;
     /** @description This event is triggered when a cell has been clicked.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	row)

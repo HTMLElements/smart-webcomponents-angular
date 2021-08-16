@@ -32,6 +32,8 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     dataSource: any;
     /** @description Enables or disables the element. */
     disabled: boolean;
+    /** @description Sets additional class names to the Input drop down. */
+    dropDownClassList: any;
     /** @description Determines the position of the drop down button. */
     dropDownButtonPosition: DropDownButtonPosition;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
@@ -84,6 +86,19 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     *   value - The value of the new selected item.
     */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered on each key up event of the Input, if the value is changed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+    *   oldValue - The previous value before it was changed.
+    *   value - The new value.
+    */
+    onChanging: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the user clicks on an item from the popup list.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	label, 	value)
+    *   item - The item that was clicked.
+    *   label - The label of the item that was clicked.
+    *   value - The value of the item that was clicked.
+    */
+    onItemClick: EventEmitter<CustomEvent>;
     /** @description Closes the drop down.
     */
     close(): void;

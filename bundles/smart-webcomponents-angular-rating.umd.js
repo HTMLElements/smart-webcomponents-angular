@@ -373,6 +373,12 @@ import './../source/modules/smart.rating';
             * The registered callback function called when a blur event occurs on the form elements.
             */
             _this._onTouched = function () { };
+            /** @description This event is triggered when the value of the slider is changed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue)
+            *   value - A numeric value indicating the scroll position.
+            *   oldValue - A numeric value indicating the previous scroll position.
+            */
+            _this.onChange = new core.EventEmitter();
             _this._initialChange = true;
             _this.nativeElement = ref.nativeElement;
             return _this;
@@ -509,6 +515,46 @@ import './../source/modules/smart.rating';
             enumerable: true,
             configurable: true
         });
+        /** @description Get the value of the rating.
+        * @returns {number}
+      */
+        RatingComponent.prototype.getValue = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getValue();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Sets the value of the rating.
+        * @param {number} value. Sets the value of the rating
+        */
+        RatingComponent.prototype.setValue = function (value) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.setValue(value);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.setValue(value);
+                });
+            }
+        };
         Object.defineProperty(RatingComponent.prototype, "isRendered", {
             get: function () {
                 return this.nativeElement ? this.nativeElement.isRendered : false;
@@ -522,6 +568,7 @@ import './../source/modules/smart.rating';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -572,6 +619,8 @@ import './../source/modules/smart.rating';
         /** @description Add event listeners. */
         RatingComponent.prototype.listen = function () {
             var that = this;
+            that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
+            that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
             that.eventHandlers['changeModelHandler'] = function (event) {
                 that._initialChange = false;
                 that._onChange(that.nativeElement.value);
@@ -593,6 +642,9 @@ import './../source/modules/smart.rating';
         /** @description Remove event listeners. */
         RatingComponent.prototype.unlisten = function () {
             var that = this;
+            if (that.eventHandlers['changeHandler']) {
+                that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+            }
             if (that.eventHandlers['changeModelHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
                 if (that.nativeElement.querySelector('input')) {
@@ -639,6 +691,9 @@ import './../source/modules/smart.rating';
         __decorate([
             core.Input()
         ], RatingComponent.prototype, "value", null);
+        __decorate([
+            core.Output()
+        ], RatingComponent.prototype, "onChange", void 0);
         RatingComponent = __decorate([
             core.Directive({
                 selector: 'smart-rating, [smart-rating]',

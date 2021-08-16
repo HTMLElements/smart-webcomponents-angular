@@ -15,7 +15,7 @@ import { TreeComponent, Smart } from 'smart-webcomponents-angular/tree';
   changeDetection: ChangeDetectionStrategy.<%= changeDetection %><% } %>
 })
 export class <%= classify(name) %>Component implements AfterViewInit, OnInit {
-  @ViewChild('tree', {read: TreeComponent, static: false}) tree: TreeComponent;
+  @ViewChild('tree', {read: TreeComponent, static: false}) tree!: TreeComponent;
 
   ngOnInit() {
   }

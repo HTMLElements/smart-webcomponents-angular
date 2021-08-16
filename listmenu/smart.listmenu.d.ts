@@ -43,6 +43,8 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
     filterable: boolean;
     /** @description Determines the placeholder for the filter input. */
     filterInputPlaceholder: string;
+    /** @description Determines the MenuItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the 'value' property or 'textContent' if the user wants to filter by text inside the MenuItem's content or any other property. */
+    filterMember: string;
     /** @description Determines the filtering mode. */
     filterMode: FilterMode;
     /** @description If enabled, the items will be grouped by their first letter and sorted. */

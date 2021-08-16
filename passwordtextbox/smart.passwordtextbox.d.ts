@@ -84,6 +84,12 @@ export declare class PasswordTextBoxComponent extends BaseElement implements OnI
     *   value - The new value of the element.
     */
     onChange: EventEmitter<CustomEvent>;
+    /** @description This event is triggered on each key up event of the TextBox, if the value is changed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+    *   oldValue - The previous value before it was changed.
+    *   value - The new value.
+    */
+    onChanging: EventEmitter<CustomEvent>;
     /** @description Focuses the element.
     */
     focus(): void;

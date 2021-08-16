@@ -21,29 +21,31 @@ export declare class ProgressBarComponent extends BaseElement implements OnInit,
     indeterminate: boolean;
     /** @description Sets the filling direction of the Progress Bar. */
     inverted: boolean;
-    /** @description A callback function defining the new format for the label of the Progress Bar. */
-    formatFunction: any;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
-    locale: string;
+    formatFunction: {
+        (value: number): string;
+    };
     /** @description Callback, related to localization module.  */
-    localizeFormatFunction: any;
+    locale: string;
     /** @description Sets progress bars maximum possible value. */
-    max: number;
+    localizeFormatFunction: any;
     /** @description Sets an object with string values, related to the different states of passwords strength. */
-    messages: any;
+    max: number;
     /** @description Sets progress bars minimum possible value. */
-    min: number;
+    messages: any;
     /** @description Sets the orientation of the progress bar */
-    orientation: Orientation;
+    min: number;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
-    rightToLeft: boolean;
+    orientation: Orientation;
     /** @description Enables/Disabled the label for the Progress Bar. */
-    showProgressValue: boolean;
+    rightToLeft: boolean;
     /** @description Determines the theme. Theme defines the look of the element */
-    theme: string;
+    showProgressValue: boolean;
     /** @description If is set to true, the element cannot be focused. */
-    unfocusable: boolean;
+    theme: string;
     /** @description Sets or gets the value of the progress bar */
+    unfocusable: boolean;
+    /** @description undefined */
     value: number;
     /** @description This event is triggered when the value is changed.
     *  @param event. The custom event. 	*/

@@ -5,7 +5,7 @@ if (!window['Smart']) {
 else {
 	window['Smart'].RenderMode = 'manual';
 }
-import './../../source/modules/smart.input';
+import './../../source/modules/smart.colorinput';
 
 /**
  * Generated bundle index. Do not edit.

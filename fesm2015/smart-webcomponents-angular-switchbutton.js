@@ -307,6 +307,7 @@ let SwitchButtonComponent = class SwitchButtonComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -317,7 +318,7 @@ let SwitchButtonComponent = class SwitchButtonComponent extends BaseElement {
         if (!this.nativeElement) {
             return null;
         }
-        const value = this.nativeElement.value;
+        const value = this.nativeElement.checked;
         return value;
     }
     set ngValue(value) {
@@ -329,7 +330,8 @@ let SwitchButtonComponent = class SwitchButtonComponent extends BaseElement {
         const that = this;
         const normalizedValue = value == null ? '' : value;
         that.nativeElement.whenRendered(() => {
-            that.value = normalizedValue;
+            that.checked = normalizedValue;
+            that.value = '' + normalizedValue;
             if (that._initialChange === false) {
                 that._onChange(that.value);
             }

@@ -155,84 +155,84 @@ let ProgressBarComponent = class ProgressBarComponent extends BaseElement {
     set inverted(value) {
         this.nativeElement ? this.nativeElement.inverted = value : undefined;
     }
-    /** @description A callback function defining the new format for the label of the Progress Bar. */
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     get formatFunction() {
         return this.nativeElement ? this.nativeElement.formatFunction : undefined;
     }
     set formatFunction(value) {
         this.nativeElement ? this.nativeElement.formatFunction = value : undefined;
     }
-    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    /** @description Callback, related to localization module.  */
     get locale() {
         return this.nativeElement ? this.nativeElement.locale : undefined;
     }
     set locale(value) {
         this.nativeElement ? this.nativeElement.locale = value : undefined;
     }
-    /** @description Callback, related to localization module.  */
+    /** @description Sets progress bars maximum possible value. */
     get localizeFormatFunction() {
         return this.nativeElement ? this.nativeElement.localizeFormatFunction : undefined;
     }
     set localizeFormatFunction(value) {
         this.nativeElement ? this.nativeElement.localizeFormatFunction = value : undefined;
     }
-    /** @description Sets progress bars maximum possible value. */
+    /** @description Sets an object with string values, related to the different states of passwords strength. */
     get max() {
         return this.nativeElement ? this.nativeElement.max : undefined;
     }
     set max(value) {
         this.nativeElement ? this.nativeElement.max = value : undefined;
     }
-    /** @description Sets an object with string values, related to the different states of passwords strength. */
+    /** @description Sets progress bars minimum possible value. */
     get messages() {
         return this.nativeElement ? this.nativeElement.messages : undefined;
     }
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
     }
-    /** @description Sets progress bars minimum possible value. */
+    /** @description Sets the orientation of the progress bar */
     get min() {
         return this.nativeElement ? this.nativeElement.min : undefined;
     }
     set min(value) {
         this.nativeElement ? this.nativeElement.min = value : undefined;
     }
-    /** @description Sets the orientation of the progress bar */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get orientation() {
         return this.nativeElement ? this.nativeElement.orientation : undefined;
     }
     set orientation(value) {
         this.nativeElement ? this.nativeElement.orientation = value : undefined;
     }
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Enables/Disabled the label for the Progress Bar. */
     get rightToLeft() {
         return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
     }
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
-    /** @description Enables/Disabled the label for the Progress Bar. */
+    /** @description Determines the theme. Theme defines the look of the element */
     get showProgressValue() {
         return this.nativeElement ? this.nativeElement.showProgressValue : undefined;
     }
     set showProgressValue(value) {
         this.nativeElement ? this.nativeElement.showProgressValue = value : undefined;
     }
-    /** @description Determines the theme. Theme defines the look of the element */
+    /** @description If is set to true, the element cannot be focused. */
     get theme() {
         return this.nativeElement ? this.nativeElement.theme : undefined;
     }
     set theme(value) {
         this.nativeElement ? this.nativeElement.theme = value : undefined;
     }
-    /** @description If is set to true, the element cannot be focused. */
+    /** @description Sets or gets the value of the progress bar */
     get unfocusable() {
         return this.nativeElement ? this.nativeElement.unfocusable : undefined;
     }
     set unfocusable(value) {
         this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
     }
-    /** @description Sets or gets the value of the progress bar */
+    /** @description undefined */
     get value() {
         return this.nativeElement ? this.nativeElement.value : undefined;
     }
@@ -248,6 +248,7 @@ let ProgressBarComponent = class ProgressBarComponent extends BaseElement {
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }
@@ -370,91 +371,91 @@ let CircularProgressBarComponent = class CircularProgressBarComponent extends Ba
     set disabled(value) {
         this.nativeElement ? this.nativeElement.disabled = value : undefined;
     }
-    /** @description A callback function defining the new format for the label of the Progress Bar. */
+    /** @description Sets the value of the Circular Progress bar to indeterminate state(null) and starts the animation. */
     get formatFunction() {
         return this.nativeElement ? this.nativeElement.formatFunction : undefined;
     }
     set formatFunction(value) {
         this.nativeElement ? this.nativeElement.formatFunction = value : undefined;
     }
-    /** @description Sets the value of the Circular Progress bar to indeterminate state(null) and starts the animation. */
+    /** @description Sets the filling direction of the Circular Progress Bar. */
     get indeterminate() {
         return this.nativeElement ? this.nativeElement.indeterminate : undefined;
     }
     set indeterminate(value) {
         this.nativeElement ? this.nativeElement.indeterminate = value : undefined;
     }
-    /** @description Sets the filling direction of the Circular Progress Bar. */
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     get inverted() {
         return this.nativeElement ? this.nativeElement.inverted : undefined;
     }
     set inverted(value) {
         this.nativeElement ? this.nativeElement.inverted = value : undefined;
     }
-    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    /** @description Callback, related to localization module.  */
     get locale() {
         return this.nativeElement ? this.nativeElement.locale : undefined;
     }
     set locale(value) {
         this.nativeElement ? this.nativeElement.locale = value : undefined;
     }
-    /** @description Callback, related to localization module.  */
+    /** @description Sets progress bars maximum possible value. */
     get localizeFormatFunction() {
         return this.nativeElement ? this.nativeElement.localizeFormatFunction : undefined;
     }
     set localizeFormatFunction(value) {
         this.nativeElement ? this.nativeElement.localizeFormatFunction = value : undefined;
     }
-    /** @description Sets progress bars maximum possible value. */
+    /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     get max() {
         return this.nativeElement ? this.nativeElement.max : undefined;
     }
     set max(value) {
         this.nativeElement ? this.nativeElement.max = value : undefined;
     }
-    /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
+    /** @description Sets progress bars minimum possible value. */
     get messages() {
         return this.nativeElement ? this.nativeElement.messages : undefined;
     }
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
     }
-    /** @description Sets progress bars minimum possible value. */
+    /** @description Enables/Disabled the label for the Progress Bar. */
     get min() {
         return this.nativeElement ? this.nativeElement.min : undefined;
     }
     set min(value) {
         this.nativeElement ? this.nativeElement.min = value : undefined;
     }
-    /** @description Enables/Disabled the label for the Progress Bar. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get showProgressValue() {
         return this.nativeElement ? this.nativeElement.showProgressValue : undefined;
     }
     set showProgressValue(value) {
         this.nativeElement ? this.nativeElement.showProgressValue = value : undefined;
     }
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Determines the theme. Theme defines the look of the element */
     get rightToLeft() {
         return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
     }
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
-    /** @description Determines the theme. Theme defines the look of the element */
+    /** @description If is set to true, the element cannot be focused. */
     get theme() {
         return this.nativeElement ? this.nativeElement.theme : undefined;
     }
     set theme(value) {
         this.nativeElement ? this.nativeElement.theme = value : undefined;
     }
-    /** @description If is set to true, the element cannot be focused. */
+    /** @description Sets or gets the value of the progress bar */
     get unfocusable() {
         return this.nativeElement ? this.nativeElement.unfocusable : undefined;
     }
     set unfocusable(value) {
         this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
     }
-    /** @description Sets or gets the value of the progress bar */
+    /** @description undefined */
     get value() {
         return this.nativeElement ? this.nativeElement.value : undefined;
     }
@@ -470,6 +471,7 @@ let CircularProgressBarComponent = class CircularProgressBarComponent extends Ba
         const that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
+        this.nativeElement.classList.add('smart-angular');
         this.nativeElement.whenRendered(() => { that.onReady.emit(that.nativeElement); });
         this.listen();
     }

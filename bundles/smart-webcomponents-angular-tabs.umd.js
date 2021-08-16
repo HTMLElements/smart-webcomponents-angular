@@ -850,6 +850,7 @@ import './../source/modules/smart.tabs';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -1113,6 +1114,7 @@ import './../source/modules/smart.tabs';
         TabItemComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         TabItemComponent.prototype.ngOnDestroy = function () { };
@@ -1207,6 +1209,7 @@ import './../source/modules/smart.tabs';
         TabItemsGroupComponent.prototype.ngAfterViewInit = function () {
             var that = this;
             that.onCreate.emit(that.nativeElement);
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         };
         TabItemsGroupComponent.prototype.ngOnDestroy = function () { };

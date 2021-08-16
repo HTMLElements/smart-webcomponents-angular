@@ -509,6 +509,17 @@ import './../source/modules/smart.cardview';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(CardViewComponent.prototype, "dataSourceSettings", {
+            /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.dataSourceSettings : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.dataSourceSettings = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(CardViewComponent.prototype, "editable", {
             /** @description Allows the edit option for the cards. */
             get: function () {
@@ -549,6 +560,28 @@ import './../source/modules/smart.cardview';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.messages = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(CardViewComponent.prototype, "rightToLeft", {
+            /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(CardViewComponent.prototype, "theme", {
+            /** @description Determines the theme. Theme defines the look of the element */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.theme : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.theme = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -807,6 +840,7 @@ import './../source/modules/smart.cardview';
             var that = this;
             that.onCreate.emit(that.nativeElement);
             Smart.Render();
+            this.nativeElement.classList.add('smart-angular');
             this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
             this.listen();
         };
@@ -910,6 +944,9 @@ import './../source/modules/smart.cardview';
         ], CardViewComponent.prototype, "dataSource", null);
         __decorate([
             core.Input()
+        ], CardViewComponent.prototype, "dataSourceSettings", null);
+        __decorate([
+            core.Input()
         ], CardViewComponent.prototype, "editable", null);
         __decorate([
             core.Input()
@@ -920,6 +957,12 @@ import './../source/modules/smart.cardview';
         __decorate([
             core.Input()
         ], CardViewComponent.prototype, "messages", null);
+        __decorate([
+            core.Input()
+        ], CardViewComponent.prototype, "rightToLeft", null);
+        __decorate([
+            core.Input()
+        ], CardViewComponent.prototype, "theme", null);
         __decorate([
             core.Input()
         ], CardViewComponent.prototype, "scrolling", null);
