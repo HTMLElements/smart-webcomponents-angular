@@ -1,0 +1,5 @@
+smart-gantt {
+	--smart-table-default-height: var(--smart-grid-default-height);
+    --smart-gantt-ticket-progress-thumb-icon: var(--smart-icon-star);
+    --smart-gantt-ticket-progress-thumb-icon-size: 8px;
+}
