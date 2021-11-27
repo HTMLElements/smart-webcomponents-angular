@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { GridModule } from '@smart-webcomponents-angular/grid';
+import { MultiComboInputModule } from 'smart-webcomponents-angular/multicomboinput';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [ AppComponent ],
-    imports: [ BrowserModule, GridModule ],
+    imports: [ BrowserModule,MultiComboInputModule, GridModule ],
     bootstrap: [ AppComponent ],
 	entryComponents: [ AppComponent ]
 })
