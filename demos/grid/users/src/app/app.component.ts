@@ -1,5 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { MultiComboInputComponent } from '@smart-webcomponents-angular/multicomboinput';
 import { GetData } from '../assets/data';
 
 
