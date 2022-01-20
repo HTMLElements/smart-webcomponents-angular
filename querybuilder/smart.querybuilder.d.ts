@@ -1,8 +1,8 @@
 import { QueryBuilder } from './../index';
-import { Animation, QueryBuilderApplyMode, QueryBuilderFieldsMode, QueryBuilderField } from './../index';
+import { Animation, QueryBuilderApplyMode, QueryBuilderFieldsMode, QueryBuilderCustomOperation, QueryBuilderField } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, QueryBuilderApplyMode, QueryBuilderFieldsMode, QueryBuilderField, ElementRenderMode } from './../index';
+export { Animation, QueryBuilderApplyMode, QueryBuilderFieldsMode, QueryBuilderCustomOperation, QueryBuilderField, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { QueryBuilder } from './../index';
 export declare class QueryBuilderComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -21,8 +21,8 @@ export declare class QueryBuilderComponent extends BaseElement implements OnInit
     applyMode: QueryBuilderApplyMode;
     /** @description Determines whether QueryBuilder will automatically prompt the user to enter a condition value when a new condition is created. When 'applyMode' is set to 'immediately', the operation field is automatically populated if empty when the selected condition operator is changed. The input field prompts the user when the operation or operator of the condition is changed. */
     autoPrompt: boolean;
-    /** @description Adds more operations that can be used to the query bilder's conditions structure. Each custom operation can have the following fields:label - label to be displayed in the operator box. Multiple operations with the same label can exist.name - unique name of the operationeditorTemplate - callback function that creates a custom value editorvalueTemplate - callback function that displays the value after the edior has been closedhandleValue - callback function that handles the value returned by the editor when it is closed. If the dataType is 'object' the expected result from the function should contain a 'label' and 'value' attributes. Where the label will be used for displaying purposes while 'value' will be used as the actual value. hideValue - a boolean condition that specifies whether the operation requires a value or notexpressionTemplate - a string representing a custom Linq expression template. If the value of the element is a string it will be considered as a Linq expression and it will be checked against all expressionTemplates to find a match.expressionReaderCallback - a callback that is used to specify which arguments from the expression are used for the fieldName and value. Used when converting a Linq expression to QueryBuilder value. Takes two arguments: expression - the LinQ expression defined in the expressionTemplate of the customOperator. Type stringbindings - an array of expression parameters based on the expression template of the customOperator. Type Array[string]expressionBuilderCallback - a callback function that is used to specify which arguments from the Linq expression are used for the fieldName and value when building the Linq expression from the current value of the element. Takes three arguments: name - the name of the dataField. Type string.operation - the name of the operation. Type stringvalue - the value of the operation. Type any( depends on the dataField).  */
-    customOperations: any;
+    /** @description Adds more operations that can be used to the query bilder's conditions structure. Each custom operation can have the following fields: */
+    customOperations: QueryBuilderCustomOperation[];
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Sets or gets the dropdown width of the property and operator editors. */

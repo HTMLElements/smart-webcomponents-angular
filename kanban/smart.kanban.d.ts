@@ -1,8 +1,8 @@
 import { Kanban } from './../index';
-import { Animation, KanbanColumnEditMode, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanUser } from './../index';
+import { KanbanAddNewButtonDisplayMode, KanbanColumnEditMode, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanTaskSubTasks, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanPriority, KanbanUser } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, KanbanColumnOrientation, KanbanColumnEditMode, KanbanDataSourcePriority, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanUser, ElementRenderMode } from './../index';
+export { KanbanAddNewButtonDisplayMode, KanbanColumnOrientation, KanbanColumnEditMode, KanbanDataSourcePriority, KanbanHeaderPosition, KanbanHierarchy, KanbanSelectionMode, KanbanTaskPosition, KanbanTaskSubTasks, KanbanColumn, KanbanDataSource, KanbanSwimlane, KanbanPriority, KanbanUser, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Kanban } from './../index';
 export { DataAdapter } from './../index';
@@ -20,26 +20,34 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     allowColumnEdit: boolean;
     /** @description Enables or disables column removing. When this property is set to true, users will be able to dynamically remove a column through the column actions menu. the 'columnActions' property should be true. */
     allowColumnRemove: boolean;
+    /** @description Enables or disables column hiding. When this property is set to true, users will be able to dynamically hide a column through the column actions menu. the 'columnActions' property should be true. */
+    allowColumnHide: boolean;
     /** @description Toggles the visibility of the column buttons for adding tasks. A particular button can be disabled by setting addNewButton in the column's definition to false. */
     addNewButton: boolean;
+    /** @description Determines whether the add button is visible in the column header and/or after the tasks in the column. */
+    addNewButtonDisplayMode: KanbanAddNewButtonDisplayMode;
     /** @description Sets or gets whether a column with a button for adding new status columns to the Kanban will be displayed. */
     addNewColumn: boolean;
     /** @description Allows the dragging of tasks. */
     allowDrag: boolean;
     /** @description Allows the dropping of tasks. */
     allowDrop: boolean;
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
     /** @description Enables or disables auto load state from the browser's localStorage. Information about tasks and their position and selected state, filtering, sorting, collapsed columns, as well as the values of the properties taskActions, taskComments, taskDue, taskPriority, taskProgress, taskTags, and taskUserIcon is loaded. */
     autoLoadState: boolean;
     /** @description Enables or disables auto save state to the browser's localStorage. Information about tasks and their position and selected state, filtering, sorting, collapsed columns, as well as the values of the properties taskActions, taskComments, taskDue, taskPriority, taskProgress, taskTags, and taskUserIcon is saved. */
     autoSaveState: boolean;
     /** @description Allows collapsing the card content. */
     collapsible: boolean;
+    /** @description Displays colors in the column header, when the column's color property is set. */
+    columnColors: boolean;
     /** @description Describes the columns properties. */
     columns: KanbanColumn[];
     /** @description Toggles the visibility of the column actions icon. */
     columnActions: boolean;
+    /** @description Determines whether task count information is displayed in column headers. */
+    columnSummary: boolean;
+    /** @description Determines whether a column header has a template. You can pass 'string', 'function' or HTMLTemplateElement as a value. */
+    columnHeaderTemplate: any;
     /** @description Determines the column edit behavior. With the 'header' option, edit starts on double click on the column's label. In 'menu' mode, edit is allowed from the 'columnActions' menu. In 'headerAndMenu' option, column editing includes both options. */
     columnEditMode: KanbanColumnEditMode;
     /** @description Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties. */
@@ -61,6 +69,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
         tags: string;
         text: string;
         userId: string;
+        createdUserId: string;
+        upDatedUserId: string;
+        createdDate: Date;
+        upDatedDate: Date;
     };
     /** @description Determines the offset of the drag feedback element from the mouse cursor when dragging tasks. The first member of the array is the horizontal offset and the second one - the vertical offset. If set to 'auto', the offset is based on the mouse position when the dragging started. */
     dragOffset: boolean;
@@ -80,6 +92,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     messages: any;
     /** @description Determines selection mode. */
     selectionMode: KanbanSelectionMode;
+    /** @description Sets or gets whether the tasks history will be stored and displayed in the task dialog. */
+    storeHistory: boolean;
+    /** @description Sets or gets the task history items that will be stored when storeHistory is enabled. */
+    storeHistoryItems: number;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Describes the swimlanes in the kanban board. Sub-columns are not applicable when swimlanes are present. */
@@ -102,6 +118,14 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     taskPriority: boolean;
     /** @description Toggles the visibility of task progress bar and the completed sub-tasks label. */
     taskProgress: boolean;
+    /** @description Sets the task custom fields displayed in the card. Each array item should have 'dataField', 'label' 'dataType' and optionally 'visible' properties. The 'dataField' determines the value, the label is displayed as title, 'dataType' is used for formatting and 'visible' determines whether the field will be displayed. */
+    taskCustomFields: any;
+    /** @description The task's background color depends on the task's color property. By default the color is rendered within the task's left border. */
+    taskColorEntireSurface: boolean;
+    /** @description Displays an input in the task's card for adding dynamically a sub task. The 'taskSubTasks' property should be set to a value different than 'none'. */
+    taskSubTasksInput: boolean;
+    /** @description Sets the rendering mode of sub tasks. 'none' - default value. Sub tasks are displayed only in the edit dialog. 'onePerRow' - all sub tasks are displayed in the task's card. 'onlyUnfinished' - only tasks which are not completed are displayed in the task's card. */
+    taskSubTasks: KanbanTaskSubTasks;
     /** @description Toggles the visibility of task tags. */
     taskTags: boolean;
     /** @description Toggles the visibility of the task user icon. */
@@ -110,6 +134,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     textTemplate: any;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
+    /** @description Determines whether the priority list (as defined by the priority property) will be shown when clicking the priority icon. Only applicable if editable privileges are enabled. */
+    priorityList: boolean;
+    /** @description Determines the priority Kanban tasks can be assigned to. Example: [{label: 'low', value: 'low'}, {label: 'high', value: 'high'}] */
+    priority: KanbanPriority[];
     /** @description Determines whether the user list (as defined by the users property) will be shown when clicking the user icon. Only applicable if editable privileges are enabled. */
     userList: boolean;
     /** @description Determines the users Kanban tasks can be assigned to and their characteristics and privileges. */
@@ -149,10 +177,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     */
     onColumnReorder: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a column is updated.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
-    *   label - The column label.
-    *   dataField - The column data field.
-    *   collapsed - The column's collapsed state.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value, 	column)
+    *   oldValue - The column's old label.
+    *   value - The column's new label.
+    *   column - The column's data object with 'label', 'dataField' and 'collapsed' fields.
     */
     onColumnUpdate: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a column header is clicked.
@@ -256,6 +284,10 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     * @param {number | string} column. The index or dataField of the column to collapse
     */
     collapse(column: number | string): void;
+    /** @description Hides a Kanban column.
+    * @param {number | string} column. The index or dataField of the column to hide
+    */
+    hide(column: number | string): void;
     /** @description Creates a copy of a task in the same column.
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     */
@@ -277,11 +309,16 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     expandAll(): void;
     /** @description Exports the Kanban's data.
     * @param {string} dataFormat. The file format to export to. Supported formats: 'csv', 'html', 'json', 'pdf', 'tsv', 'xlsx', 'xml'.
-    * @param {string} fileName?. The name of the file to export to
+    * @param {string} fileName. The name of the file to export to
     * @param {Function} callback?. A callback function to pass the exported data to (if fileName is not provided)
     * @returns {any}
   */
-    exportData(dataFormat: any, fileName?: any, callback?: any): Promise<any>;
+    exportData(dataFormat: any, fileName: any, callback?: any): Promise<any>;
+    /** @description Gets the data of a column. The returned value is a JSON object with the following fields: 'label', 'dataField', 'collapsed', 'collapsible', 'allowRemove', 'editable', 'reorder', 'orientation'.
+    * @param {string} dataField. The column's data field
+    * @returns {any}
+  */
+    getColumn(dataField: any): Promise<any>;
     /** @description Gets the Kanban's state.
     * @returns {{ collapsed: {}, dataSource: [], filtering: { filters: [], operator: string }, selection: { selected: [], selectionStart: number | string, selectionInColumn: string, swimlane: string }, sorting: { dataFields: [], dataTypes: [], orderBy: [] }, tabs: [], visibility: { taskActions: boolean, taskComments: boolean, taskDue: boolean, taskPriority: boolean, taskProgress: boolean, taskTags: boolean, taskUserIcon: boolean } }}
   */
@@ -350,6 +387,13 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     /** @description Saves the Kanban's state to the browser's localStorage.
     */
     saveState(): void;
+    /** @description Shows a Kanban column.
+    * @param {number | string} column. The index or dataField of the column to show
+    */
+    show(column: number | string): void;
+    /** @description Shows all Kanban columns.
+    */
+    showAllColumns(): void;
     /** @description Updates a task.
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     * @param {{}} newData. The new data to visualize in the task.

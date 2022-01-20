@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-phoneinput.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-phoneinput.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-phoneinput.js",
+  "esm5": "../esm5/phoneinput/smart-webcomponents-angular-phoneinput.js",
+  "esm2015": "../esm2015/phoneinput/smart-webcomponents-angular-phoneinput.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-phoneinput.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-phoneinput.js",
+  "typings": "smart-webcomponents-angular-phoneinput.d.ts",
+  "metadata": "smart-webcomponents-angular-phoneinput.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/phoneinput"
+}

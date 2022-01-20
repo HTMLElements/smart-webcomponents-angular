@@ -8,7 +8,8 @@ else {
 import './../source/modules/smart.numberinput';
 
 import { __decorate } from 'tslib';
-import { EventEmitter, Output, Input, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 class BaseElement {
     constructor(ref) {
@@ -108,10 +109,25 @@ __decorate([
 ], BaseElement.prototype, "theme", null);
 const Smart = window.Smart;
 
+const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NumberInputComponent),
+    multi: true
+};
 let NumberInputComponent = class NumberInputComponent extends BaseElement {
     constructor(ref) {
         super(ref);
         this.eventHandlers = [];
+        /**
+        * @description
+        * The registered callback function called when a change event occurs on the form elements.
+        */
+        this._onChange = () => { };
+        /**
+        * @description
+        * The registered callback function called when a blur event occurs on the form elements.
+        */
+        this._onTouched = () => { };
         /** @description This event is triggered when the selection is changed.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	oldLabel, 	oldValue, 	value)
         *   label - The label of the new selected item.
@@ -120,6 +136,7 @@ let NumberInputComponent = class NumberInputComponent extends BaseElement {
         *   value - The value of the new selected item.
         */
         this.onChange = new EventEmitter();
+        this._initialChange = true;
         this.nativeElement = ref.nativeElement;
     }
     /** @description Creates the component on demand.
@@ -318,6 +335,34 @@ let NumberInputComponent = class NumberInputComponent extends BaseElement {
     ngOnDestroy() {
         this.unlisten();
     }
+    get ngValue() {
+        if (!this.nativeElement) {
+            return null;
+        }
+        const value = this.nativeElement.value;
+        return value;
+    }
+    set ngValue(value) {
+        if (this.nativeElement) {
+            this.writeValue(value);
+        }
+    }
+    writeValue(value) {
+        const that = this;
+        const normalizedValue = value == null ? '' : value;
+        that.nativeElement.whenRendered(() => {
+            that.value = normalizedValue;
+            if (that._initialChange === false) {
+                that._onChange(that.value);
+            }
+        });
+    }
+    registerOnChange(fn) {
+        this._onChange = fn;
+    }
+    registerOnTouched(fn) {
+        this._onTouched = fn;
+    }
     ngOnChanges(changes) {
         if (this.nativeElement && this.nativeElement.isRendered) {
             for (const propName in changes) {
@@ -332,12 +377,38 @@ let NumberInputComponent = class NumberInputComponent extends BaseElement {
         const that = this;
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['changeModelHandler'] = (event) => {
+            that._initialChange = false;
+            that._onChange(that.nativeElement.value);
+        };
+        that.eventHandlers['blurModelHandler'] = (event) => {
+            that._onTouched();
+        };
+        that.nativeElement.whenRendered(() => {
+            if (that.nativeElement.querySelector('input')) {
+                that.eventHandlers['keyupModelHandler'] = (event) => {
+                    setTimeout(() => { that.eventHandlers['changeModelHandler'](event); }, 50);
+                };
+                that.nativeElement.querySelector('input').addEventListener('keyup', that.eventHandlers['keyupModelHandler']);
+            }
+        });
+        that.nativeElement.addEventListener('change', that.eventHandlers['changeModelHandler']);
+        that.nativeElement.addEventListener('blur', that.eventHandlers['blurModelHandler']);
     }
     /** @description Remove event listeners. */
     unlisten() {
         const that = this;
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
+        if (that.eventHandlers['changeModelHandler']) {
+            that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
+            if (that.nativeElement.querySelector('input')) {
+                that.nativeElement.querySelector('input').removeEventListener('keyup', that.eventHandlers['keyupModelHandler']);
+            }
+        }
+        if (that.eventHandlers['blurModelHandler']) {
+            that.nativeElement.removeEventListener('blur', that.eventHandlers['blurModelHandler']);
         }
     }
 };
@@ -400,7 +471,8 @@ __decorate([
 ], NumberInputComponent.prototype, "onChange", void 0);
 NumberInputComponent = __decorate([
     Directive({
-        selector: 'smart-number-input, [smart-number-input]'
+        selector: 'smart-number-input, [smart-number-input]',
+        providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], NumberInputComponent);
 

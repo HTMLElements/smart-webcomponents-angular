@@ -671,6 +671,17 @@ import './../source/modules/smart.fileupload';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(FileUploadComponent.prototype, "value", {
+            /** @description Gets the file upload value. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.value : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.value = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(FileUploadComponent.prototype, "validateFile", {
             /** @description Callback used to validate the files immediatelly after their selection. Retuns a boolean value. If the returned value is false, the file is removed from list and a 'validationError is fired. */
             get: function () {
@@ -917,6 +928,9 @@ import './../source/modules/smart.fileupload';
         __decorate([
             core.Input()
         ], FileUploadComponent.prototype, "unfocusable", null);
+        __decorate([
+            core.Input()
+        ], FileUploadComponent.prototype, "value", null);
         __decorate([
             core.Input()
         ], FileUploadComponent.prototype, "validateFile", null);

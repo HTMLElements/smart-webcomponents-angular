@@ -190,11 +190,11 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     expandRow(rowId: string | number): void;
     /** @description Exports the PivotTable's data.
     * @param {string} dataFormat. The file format to export to. Supported formats: 'csv', 'html', 'json', 'pdf', 'tsv', 'xlsx', 'xml'.
-    * @param {string} fileName?. The name of the file to export to
+    * @param {string} fileName. The name of the file to export to
     * @param {Function} callback?. A callback function to pass the exported data to (if fileName is not provided)
     * @returns {any}
   */
-    exportData(dataFormat: any, fileName?: any, callback?: any): Promise<any>;
+    exportData(dataFormat: any, fileName: any, callback?: any): Promise<any>;
     /** @description Returns the current dynamic pivot columns.
     * @returns {any}
   */

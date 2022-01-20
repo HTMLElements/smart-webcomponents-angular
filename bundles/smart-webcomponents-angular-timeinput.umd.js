@@ -8,10 +8,10 @@ else {
 import './../source/modules/smart.timeinput';
 
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('smart-webcomponents-angular/timeinput', ['exports', '@angular/core'], factory) :
-    (global = global || self, factory((global['smart-webcomponents-angular'] = global['smart-webcomponents-angular'] || {}, global['smart-webcomponents-angular'].timeinput = {}), global.ng.core));
-}(this, (function (exports, core) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('smart-webcomponents-angular/timeinput', ['exports', '@angular/core', '@angular/forms'], factory) :
+    (global = global || self, factory((global['smart-webcomponents-angular'] = global['smart-webcomponents-angular'] || {}, global['smart-webcomponents-angular'].timeinput = {}), global.ng.core, global.ng.forms));
+}(this, (function (exports, core, forms) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -353,11 +353,26 @@ import './../source/modules/smart.timeinput';
     }());
     var Smart = window.Smart;
 
+    var CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = {
+        provide: forms.NG_VALUE_ACCESSOR,
+        useExisting: core.forwardRef(function () { return TimeInputComponent; }),
+        multi: true
+    };
     var TimeInputComponent = /** @class */ (function (_super) {
         __extends(TimeInputComponent, _super);
         function TimeInputComponent(ref) {
             var _this = _super.call(this, ref) || this;
             _this.eventHandlers = [];
+            /**
+            * @description
+            * The registered callback function called when a change event occurs on the form elements.
+            */
+            _this._onChange = function () { };
+            /**
+            * @description
+            * The registered callback function called when a blur event occurs on the form elements.
+            */
+            _this._onTouched = function () { };
             /** @description This event is triggered when the selection is changed.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	oldLabel, 	oldValue, 	value)
             *   label - The label of the new selected item.
@@ -366,6 +381,7 @@ import './../source/modules/smart.timeinput';
             *   value - The value of the new selected item.
             */
             _this.onChange = new core.EventEmitter();
+            _this._initialChange = true;
             _this.nativeElement = ref.nativeElement;
             return _this;
         }
@@ -677,6 +693,38 @@ import './../source/modules/smart.timeinput';
         TimeInputComponent.prototype.ngOnDestroy = function () {
             this.unlisten();
         };
+        Object.defineProperty(TimeInputComponent.prototype, "ngValue", {
+            get: function () {
+                if (!this.nativeElement) {
+                    return null;
+                }
+                var value = this.nativeElement.value;
+                return value;
+            },
+            set: function (value) {
+                if (this.nativeElement) {
+                    this.writeValue(value);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        TimeInputComponent.prototype.writeValue = function (value) {
+            var that = this;
+            var normalizedValue = value == null ? '' : value;
+            that.nativeElement.whenRendered(function () {
+                that.value = normalizedValue;
+                if (that._initialChange === false) {
+                    that._onChange(that.value);
+                }
+            });
+        };
+        TimeInputComponent.prototype.registerOnChange = function (fn) {
+            this._onChange = fn;
+        };
+        TimeInputComponent.prototype.registerOnTouched = function (fn) {
+            this._onTouched = fn;
+        };
         TimeInputComponent.prototype.ngOnChanges = function (changes) {
             if (this.nativeElement && this.nativeElement.isRendered) {
                 for (var propName in changes) {
@@ -691,12 +739,38 @@ import './../source/modules/smart.timeinput';
             var that = this;
             that.eventHandlers['changeHandler'] = function (event) { that.onChange.emit(event); };
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+            that.eventHandlers['changeModelHandler'] = function (event) {
+                that._initialChange = false;
+                that._onChange(that.nativeElement.value);
+            };
+            that.eventHandlers['blurModelHandler'] = function (event) {
+                that._onTouched();
+            };
+            that.nativeElement.whenRendered(function () {
+                if (that.nativeElement.querySelector('input')) {
+                    that.eventHandlers['keyupModelHandler'] = function (event) {
+                        setTimeout(function () { that.eventHandlers['changeModelHandler'](event); }, 50);
+                    };
+                    that.nativeElement.querySelector('input').addEventListener('keyup', that.eventHandlers['keyupModelHandler']);
+                }
+            });
+            that.nativeElement.addEventListener('change', that.eventHandlers['changeModelHandler']);
+            that.nativeElement.addEventListener('blur', that.eventHandlers['blurModelHandler']);
         };
         /** @description Remove event listeners. */
         TimeInputComponent.prototype.unlisten = function () {
             var that = this;
             if (that.eventHandlers['changeHandler']) {
                 that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+            }
+            if (that.eventHandlers['changeModelHandler']) {
+                that.nativeElement.removeEventListener('change', that.eventHandlers['changeModelHandler']);
+                if (that.nativeElement.querySelector('input')) {
+                    that.nativeElement.querySelector('input').removeEventListener('keyup', that.eventHandlers['keyupModelHandler']);
+                }
+            }
+            if (that.eventHandlers['blurModelHandler']) {
+                that.nativeElement.removeEventListener('blur', that.eventHandlers['blurModelHandler']);
             }
         };
         TimeInputComponent.ctorParameters = function () { return [
@@ -761,7 +835,8 @@ import './../source/modules/smart.timeinput';
         ], TimeInputComponent.prototype, "onChange", void 0);
         TimeInputComponent = __decorate([
             core.Directive({
-                selector: 'smart-time-input, [smart-time-input]'
+                selector: 'smart-time-input, [smart-time-input]',
+                providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], TimeInputComponent);
         return TimeInputComponent;

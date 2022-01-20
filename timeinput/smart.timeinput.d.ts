@@ -5,7 +5,8 @@ import { BaseElement } from './smart.element';
 export { Animation, TimeFormatHour, TimeFormatMinute, DropDownButtonPosition, TimeFormat, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { TimeInput } from './../index';
-export declare class TimeInputComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+import { ControlValueAccessor } from '@angular/forms';
+export declare class TimeInputComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges, ControlValueAccessor {
     constructor(ref: ElementRef<TimeInput>);
     private eventHandlers;
     nativeElement: TimeInput;
@@ -13,6 +14,16 @@ export declare class TimeInputComponent extends BaseElement implements OnInit, A
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
     createComponent(properties?: {}): any;
+    /**
+    * @description
+    * The registered callback function called when a change event occurs on the form elements.
+    */
+    _onChange: (value: any) => void;
+    /**
+    * @description
+    * The registered callback function called when a blur event occurs on the form elements.
+    */
+    _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
     /** @description Determines the format of the time displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is 'numeric'. */
@@ -80,6 +91,11 @@ export declare class TimeInputComponent extends BaseElement implements OnInit, A
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
+    _initialChange: boolean;
+    ngValue: any;
+    writeValue(value: any): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
     ngOnChanges(changes: SimpleChanges): void;
     /** @description Add event listeners. */
     private listen;

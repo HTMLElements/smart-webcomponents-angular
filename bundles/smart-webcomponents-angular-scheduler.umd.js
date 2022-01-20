@@ -372,12 +372,18 @@ window.rrule = { RRule:  pkg.default };
             *   oldValue - The previously selected Date.
             */
             _this.onChange = new core.EventEmitter();
-            /** @description This event is triggered when an Event has been updated/inserted/removed/dragged/resized.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-            *   type - The type of change that is being done to the item.
+            /** @description This event is triggered when an Event has been updated/inserted/removed/dragged/resized or an exception of a repeating event has been added/updated/removed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type)
             *   item - An object that represents the actual item with it's attributes.
+            *   type - The type of change that is being done to the item.
             */
             _this.onItemChange = new core.EventEmitter();
+            /** @description This event is triggered when an Event is going to be updated/inserted/removed. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type)
+            *   item - An object that represents the actual item with it's attributes.
+            *   type - The type of change that is going to be made to the item (e.g. 'inserting', 'removing', 'updating', 'exceptionInserting', 'exceptionUpdating', 'exceptionRemoving').
+            */
+            _this.onItemChanging = new core.EventEmitter();
             /** @description This event is triggered when en event, event item or a context menu item is clicked.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	itemObj)
             *   item - The HTMLElement for the event.
@@ -459,31 +465,35 @@ window.rrule = { RRule:  pkg.default };
             */
             _this.onResizeEnd = new core.EventEmitter();
             /** @description This event is triggered when the user starts top open the event dialog window. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type, 	eventObj)
             *   target - The dialog window that is opening.
             *   item - The event object that is going to be edited.
             *   type - The type of window that is going to open. Two window types are available, the dafault which is an empty string ( does not have a type) and 'confirm' which is displayed when clicked on a repeating event.
+            *   eventObj - The event object that is the target of the menu.
             */
             _this.onEditDialogOpening = new core.EventEmitter();
             /** @description This event is triggered when the user opens the event dialog window.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item, 	eventObj)
             *   target - The dialog window that is opened.
             *   editors - An object containing all event editors that are present inside the window. This property is undefined when the window is of type 'confirm', because confirm windows do not contain editors.
             *   item - The event object that is being edited.
+            *   eventObj - The event object that is the target of the menu.
             */
             _this.onEditDialogOpen = new core.EventEmitter();
             /** @description This event is triggered when the user closes the event dialog window.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item, 	eventObj)
             *   target - The dialog window that is closed.
             *   editors - An object containing all event editors that are present inside the window. This property is undefined when the window is of type 'confirm', because confirm windows do not contain editors.
             *   item - The event object that is being edited.
+            *   eventObj - The event object that is the target of the menu.
             */
             _this.onEditDialogClose = new core.EventEmitter();
             /** @description This event is triggered when the user is about to close the event dialog window. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type, 	eventObj)
             *   target - The dialog window that is closing.
             *   item - The event object that is edited.
             *   type - The type of window that is going to be closed. Two window types are available, the dafault which is an empty string ( does not have a type) and 'confirm' which is displayed when clicked on a repeating event.
+            *   eventObj - The event object that is the target of the menu.
             */
             _this.onEditDialogClosing = new core.EventEmitter();
             /** @description This event is triggered when the user begins to open the context menu on a timeline cell or an event element. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
@@ -1184,6 +1194,17 @@ window.rrule = { RRule:  pkg.default };
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(SchedulerComponent.prototype, "mouseWheelStep", {
+            /** @description Determines the mouse wheel step. When this property is set to a positive number, the scroll step with mouse wheel or trackpad will depend on the property value. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.mouseWheelStep : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.mouseWheelStep = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(SchedulerComponent.prototype, "horizontalScrollBarVisibility", {
             /** @description Determines weather or not horizontal scrollbar is shown. */
             get: function () {
@@ -1400,6 +1421,39 @@ window.rrule = { RRule:  pkg.default };
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.showLegend = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SchedulerComponent.prototype, "sortBy", {
+            /** @description Determines the name of the resource data item property that will be used for sorting the resource data defined as the resource.dataSource. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.sortBy : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.sortBy = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SchedulerComponent.prototype, "sortFunction", {
+            /** @description Allows to define a custom sorting function that will be used to sort the resource data. The sortFunction is used when sortOrder is set to custom. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.sortFunction : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.sortFunction = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SchedulerComponent.prototype, "sortOrder", {
+            /** @description Determines the sorting order of the resource data items. When set to custom, a custom sorting function has to be defined for the sortFunction property. The asc stands for 'ascending' while desc means 'descending' sorting order. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.sortOrder : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.sortOrder = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1635,6 +1689,20 @@ window.rrule = { RRule:  pkg.default };
             enumerable: true,
             configurable: true
         });
+        /** @description Adds an event to the Scheduler. Accepts an event object of the following format (same as the dataSource format): { label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }
+        * @param {any} eventObj. An object describing a Scheduler event that is not already present in the element.
+        */
+        SchedulerComponent.prototype.addEvent = function (eventObj) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.addEvent(eventObj);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.addEvent(eventObj);
+                });
+            }
+        };
         /** @description Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
         */
         SchedulerComponent.prototype.beginUpdate = function () {
@@ -1645,6 +1713,24 @@ window.rrule = { RRule:  pkg.default };
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.beginUpdate();
+                });
+            }
+        };
+        /** @description Creates an event and adds it to the Scheduler.
+        * @param {string} label. Event label.
+        * @param {string} value. Event value.
+        * @param {string} dateStart. Event date start.
+        * @param {string} dateEnd. Event date end.
+        * @param {boolean} allDay. Event all day. Set it to true to create all day event.
+        */
+        SchedulerComponent.prototype.createEvent = function (label, value, dateStart, dateEnd, allDay) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.createEvent(label, value, dateStart, dateEnd, allDay);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.createEvent(label, value, dateStart, dateEnd, allDay);
                 });
             }
         };
@@ -1691,6 +1777,114 @@ window.rrule = { RRule:  pkg.default };
             }
         };
         /** @description Returns a JSON representation of the events inside the Scheduler.
+        * @returns {any}
+      */
+        SchedulerComponent.prototype.getDataSource = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getDataSource();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns a JSON representation of the resources inside the Scheduler.
+        * @returns {any}
+      */
+        SchedulerComponent.prototype.getResources = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getResources();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Gets a date from coordinates
+        * @param {number} x. X coordinate.
+        * @param {number} y. Y coordinate.
+        * @returns {string}
+      */
+        SchedulerComponent.prototype.getDateFromCoordinates = function (x, y) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getDateFromCoordinates(x, y);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Gets whether a cell is all day cell from coordinates
+        * @param {number} x. X coordinate.
+        * @param {number} y. Y coordinate.
+        * @returns {boolean}
+      */
+        SchedulerComponent.prototype.getIsAllDayCellFromCoordinates = function (x, y) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getIsAllDayCellFromCoordinates(x, y);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the current state of the Scheduler. Includes the current dateCurernt, dataSource and timeZone properties.
         * @returns {any}
       */
         SchedulerComponent.prototype.getState = function () {
@@ -1784,7 +1978,7 @@ window.rrule = { RRule:  pkg.default };
                 });
             });
         };
-        /** @description Inserts an event.
+        /** @description Inserts an event as object of the following format (same as the dataSource format): { label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }
         * @param {any} eventObj. An object describing a Scheduler event that is not already present in the element.
         * @param {number} index?. A number that represents the index to insert the event at. If not provided the event is inserted at the end of the list.
         */
@@ -1799,7 +1993,7 @@ window.rrule = { RRule:  pkg.default };
                 });
             }
         };
-        /** @description Updates an event.
+        /** @description Updates an event object of the following format (same as the dataSource format): { label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }
         * @param {any} index. A number that represents the index of an event or a Scheduler event object.
         * @param {any} eventObj. An object describing a Scheduler event. The properties of this object will be applied to the desired event.
         */
@@ -1814,7 +2008,7 @@ window.rrule = { RRule:  pkg.default };
                 });
             }
         };
-        /** @description Removes an event.
+        /** @description Removes an existing event.
         * @param {any} index. A number that represents the index of an event or the actual event object to be removed.
         */
         SchedulerComponent.prototype.removeEvent = function (index) {
@@ -1825,6 +2019,79 @@ window.rrule = { RRule:  pkg.default };
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.removeEvent(index);
+                });
+            }
+        };
+        /** @description Returns an array of all exceptions of the target repeating event.
+        * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+        * @returns {any}
+      */
+        SchedulerComponent.prototype.getEventExceptions = function (eventObj) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getEventExceptions(eventObj);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Adds an event exception to a repeating event. The exception occurences for a repeating event can be gathered via the following methods: occurencesoccurrencesBetweenoccurrenceAfteroccurrenceBefore.  Example usage: scheduler.addEventException(eventObj, { date: occuranceDate, dateStart: newDateStart, dateEnd: newDateEnd, label: 'Exception' });
+        * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+        * @param {any} exceptionObj. An event object that describes an exception. Exception event objects must have a <b>date</b> attribute of type Date which indicates the date of occurence.
+        */
+        SchedulerComponent.prototype.addEventException = function (eventObj, exceptionObj) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.addEventException(eventObj, exceptionObj);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.addEventException(eventObj, exceptionObj);
+                });
+            }
+        };
+        /** @description Updates an event exception of a repeating event. The exception occurences for a repeating event can be gathered via the following methods: occurencesoccurrencesBetweenoccurrenceAfteroccurrenceBefore.  Example usage: scheduler.updateEventException(eventObj, dateOfOccurance, { dateStart: newDateStart, dateEnd: newDateEnd, label: 'Updated Exception' });
+        * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+        * @param {any} exceptionRef. The index, id, an occurence date of the exception or an object reference of an existing Scheduler repeating event exception.
+        * @param {any} exceptionObj. An event object that describes an exception. All attributes of an exception can be updated except the occurance date (the <b>date</b> attribute).
+        */
+        SchedulerComponent.prototype.updateEventException = function (eventObj, exceptionRef, exceptionObj) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.updateEventException(eventObj, exceptionRef, exceptionObj);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.updateEventException(eventObj, exceptionRef, exceptionObj);
+                });
+            }
+        };
+        /** @description Removes an exception from a repeating event.
+        * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+        * @param {any} index. The index, id, occurance date or an object reference of an event exception that belongs to the target repeating event.
+        */
+        SchedulerComponent.prototype.removeEventException = function (eventObj, index) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.removeEventException(eventObj, index);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.removeEventException(eventObj, index);
                 });
             }
         };
@@ -1871,15 +2138,30 @@ window.rrule = { RRule:  pkg.default };
         /** @description Scrolls the Scheduler to a Date.
         * @param {Date} date. The date to scroll to.
         * @param {boolean} strictScroll?. Determines whether to scroll strictly to the date or not. This mean sthat the Scheduler wll scroll to the begining of the cell that corresponds to the target date.
+        * @param {boolean} autoScroll?. Calculates the scroll positions and element bounds, then adds an offset to scroll within the middle of the view.
         */
-        SchedulerComponent.prototype.scrollToDate = function (date, strictScroll) {
+        SchedulerComponent.prototype.scrollToDate = function (date, strictScroll, autoScroll) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.scrollToDate(date, strictScroll);
+                this.nativeElement.scrollToDate(date, strictScroll, autoScroll);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.scrollToDate(date, strictScroll);
+                    _this.nativeElement.scrollToDate(date, strictScroll, autoScroll);
+                });
+            }
+        };
+        /** @description Navigates the Scheduler to a Date.
+        * @param {Date} date. The date to navigate to.
+        */
+        SchedulerComponent.prototype.navigateToDate = function (date) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.navigateToDate(date);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.navigateToDate(date);
                 });
             }
         };
@@ -2293,6 +2575,8 @@ window.rrule = { RRule:  pkg.default };
             that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
             that.eventHandlers['itemChangeHandler'] = function (event) { that.onItemChange.emit(event); };
             that.nativeElement.addEventListener('itemChange', that.eventHandlers['itemChangeHandler']);
+            that.eventHandlers['itemChangingHandler'] = function (event) { that.onItemChanging.emit(event); };
+            that.nativeElement.addEventListener('itemChanging', that.eventHandlers['itemChangingHandler']);
             that.eventHandlers['itemClickHandler'] = function (event) { that.onItemClick.emit(event); };
             that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
             that.eventHandlers['itemInsertHandler'] = function (event) { that.onItemInsert.emit(event); };
@@ -2368,6 +2652,9 @@ window.rrule = { RRule:  pkg.default };
             }
             if (that.eventHandlers['itemChangeHandler']) {
                 that.nativeElement.removeEventListener('itemChange', that.eventHandlers['itemChangeHandler']);
+            }
+            if (that.eventHandlers['itemChangingHandler']) {
+                that.nativeElement.removeEventListener('itemChanging', that.eventHandlers['itemChangingHandler']);
             }
             if (that.eventHandlers['itemClickHandler']) {
                 that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
@@ -2627,6 +2914,9 @@ window.rrule = { RRule:  pkg.default };
         ], SchedulerComponent.prototype, "legendPosition", null);
         __decorate([
             core.Input()
+        ], SchedulerComponent.prototype, "mouseWheelStep", null);
+        __decorate([
+            core.Input()
         ], SchedulerComponent.prototype, "horizontalScrollBarVisibility", null);
         __decorate([
             core.Input()
@@ -2685,6 +2975,15 @@ window.rrule = { RRule:  pkg.default };
         __decorate([
             core.Input()
         ], SchedulerComponent.prototype, "showLegend", null);
+        __decorate([
+            core.Input()
+        ], SchedulerComponent.prototype, "sortBy", null);
+        __decorate([
+            core.Input()
+        ], SchedulerComponent.prototype, "sortFunction", null);
+        __decorate([
+            core.Input()
+        ], SchedulerComponent.prototype, "sortOrder", null);
         __decorate([
             core.Input()
         ], SchedulerComponent.prototype, "spinButtonsDelay", null);
@@ -2760,6 +3059,9 @@ window.rrule = { RRule:  pkg.default };
         __decorate([
             core.Output()
         ], SchedulerComponent.prototype, "onItemChange", void 0);
+        __decorate([
+            core.Output()
+        ], SchedulerComponent.prototype, "onItemChanging", void 0);
         __decorate([
             core.Output()
         ], SchedulerComponent.prototype, "onItemClick", void 0);

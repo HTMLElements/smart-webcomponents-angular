@@ -115,73 +115,168 @@ let EditorComponent = class EditorComponent extends BaseElement {
         super(ref);
         this.eventHandlers = [];
         /** @description This event is triggered on blur if the content is changed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+        *   oldValue - The old value before the change.
+        *   value - The new value after the change.
+        */
         this.onChange = new EventEmitter();
+        /** @description This event is triggered after user input to indicate that the content is changed via user interaction.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
+        *   oldValue - The old value before the input change.
+        *   value - The new value after the input change.
+        */
+        this.onChanging = new EventEmitter();
         /** @description This event is triggered before a Toolbar action is started. The event can be canceled via event.preventDefault().
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	name)
+        *   name - The name of the action.
+        */
         this.onActionStart = new EventEmitter();
         /** @description This event is triggered when a Toolbar action has ended.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	name)
+        *   name - The name of the action.
+        */
         this.onActionEnd = new EventEmitter();
         /** @description This event is triggered when a Context menu item has been clicked.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	originalEvent, 	value)
+        *   originalEvent - The original click event.
+        *   value - The value of the item.
+        */
         this.onContextMenuItemClick = new EventEmitter();
         /** @description This event is triggered when the Context Menu is opened.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	owner)
+        *   target - The toolbar that is the target of the operation.
+        *   owner - The tooltip target (the owner of the tooltip).
+        */
         this.onContextMenuOpen = new EventEmitter();
-        /** @description This event is triggered when the Context Menu is opening. The event can be canceled via event.preventDefault().
-        *  @param event. The custom event. 	*/
+        /** @description This event is triggered when the Context Menu is opening. The opening operation can be canceled via event.preventDefault().
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target)
+        *   target - The toolbar that is the target of the operation.
+        */
         this.onContextMenuOpening = new EventEmitter();
         /** @description This event is triggered when the Context Menu is closed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	owner)
+        *   target - The toolbar that is the target of the operation.
+        *   owner - The tooltip target (the owner of the tooltip).
+        */
         this.onContextMenuClose = new EventEmitter();
-        /** @description This event is triggered when the Context Menu is closing. The event can be canceled via event.preventDefault().
-        *  @param event. The custom event. 	*/
+        /** @description This event is triggered when the Context Menu is closing. The closing operation can be canceled via event.preventDefault().
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target)
+        *   target - The toolbar that is the target of the operation.
+        */
         this.onContextMenuClosing = new EventEmitter();
-        /** @description This event is triggered when an image/table resizing has started.
+        /** @description This event is triggered when an image/table/video resizing has started.
         *  @param event. The custom event. 	*/
         this.onResizeStart = new EventEmitter();
-        /** @description This event is triggered when an image/table resizing has ended.
-        *  @param event. The custom event. 	*/
+        /** @description This event is triggered when an image/table/video resizing has ended.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target)
+        *   target - The element that is resized (image/table or video).
+        */
         this.onResizeEnd = new EventEmitter();
         /** @description This event is triggered when the inline Toolbar is opened.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	owner)
+        *   target - The toolbar that is the target of the operation.
+        *   owner - The tooltip target (the owner of the tooltip).
+        */
         this.onInlineToolbarOpen = new EventEmitter();
+        /** @description This event is triggered when the inline Toolbar is opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target)
+        *   target - The toolbar that is the target of the operation.
+        */
+        this.onInlineToolbarOpening = new EventEmitter();
         /** @description This event is triggered when the inline Toolbar is closed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	owner)
+        *   target - The toolbar that is the target of the operation.
+        *   owner - The tooltip target (the owner of the tooltip).
+        */
         this.onInlineToolbarClose = new EventEmitter();
+        /** @description This event is triggered when the inline Toolbar is closing.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target)
+        *   target - The toolbar that is the target of the operation. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+        */
+        this.onInlineToolbarClosing = new EventEmitter();
         /** @description This event is triggered when the Drop Down Toolbar is opened.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	owner)
+        *   target - The toolbar that is the target of the operation.
+        *   owner - The tooltip target (the owner of the tooltip).
+        */
         this.onDropDownToolbarOpen = new EventEmitter();
+        /** @description This event is triggered when the Drop Down Toolbar is opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target)
+        *   target - The toolbar that is the target of the operation.
+        */
+        this.onDropDownToolbarOpening = new EventEmitter();
         /** @description This event is triggered when the Drop Down Toolbar is closed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	owner)
+        *   target - The toolbar that is the target of the operation.
+        *   owner - The tooltip target (the owner of the tooltip).
+        */
         this.onDropDownToolbarClose = new EventEmitter();
+        /** @description This event is triggered when the Drop Down Toolbar is closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target)
+        *   target - The toolbar that is the target of the operation.
+        */
+        this.onDropDownToolbarClosing = new EventEmitter();
         /** @description This event is triggered the Dialog Window is opened.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item)
+        *   target - The window that is the target of the operation.
+        *   item - The toolbar item is the target of the operation.
+        */
         this.onDialogOpen = new EventEmitter();
         /** @description This event is triggered before the Dialog Window is opened. The event can be prevented via event.preventDefault().
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item)
+        *   target - The window that is the target of the operation.
+        *   item - The toolbar item that is the target of the operation.
+        */
         this.onDialogOpening = new EventEmitter();
         /** @description This event is triggered when the Dialog Window is closed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item)
+        *   target - The window that is the target of the operation.
+        *   item - The toolbar item that is the target of the operation.
+        */
         this.onDialogClose = new EventEmitter();
-        /** @description This event is triggered before the Dialog Window is closed. The event can be prevented via event.preventDefault().
-        *  @param event. The custom event. 	*/
+        /** @description This event is triggered before the Dialog Window is closing. The event can be prevented via event.preventDefault().
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item)
+        *   target - The window that is the target of the operation.
+        *   item - The toolbar item that is the target of the operation.
+        */
         this.onDialogClosing = new EventEmitter();
-        /** @description This event is triggered when the uploading of an image is successful.
-        *  @param event. The custom event. 	*/
+        /** @description This event is triggered when the uploading of an image/video is successful.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status)
+        *   target - The file upload element that is the target of the operation.
+        *   item - The toolbar item that is the target of the operation.
+        *   filename - The name of the uploaded file.
+        *   type - The type of the uploaded file.
+        *   size - The size of the uploaded file.
+        *   index - The index of the uploaded file.
+        *   status - The status of the uploaded file. Whether there was an error or success.
+        */
         this.onImageUploadSuccess = new EventEmitter();
-        /** @description This event is triggered when the uploading of an image is unsuccessful.
-        *  @param event. The custom event. 	*/
+        /** @description This event is triggered when the uploading of an image/video is unsuccessful.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status)
+        *   target - The file upload element that is the target of the operation.
+        *   item - The toolbar item that is the target of the operation.
+        *   filename - The name of the canceled file.
+        *   type - The type of the canceled file.
+        *   size - The size of the canceled file.
+        *   index - The index of the canceled file.
+        *   status - The status of the uploaded file. Whether there was an error or success.
+        */
         this.onImageUploadFailed = new EventEmitter();
         /** @description This event is triggered when a Toolbar item is clicked.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	originalEvent, 	value)
+        *   originalEvent - The original click event.
+        *   value - The name of the toolbar item that was clicked.
+        */
         this.onToobarItemClick = new EventEmitter();
         /** @description This event is triggered when a message is closed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	instance)
+        *   instance - The toast item that is the target of the operation.
+        */
         this.onMessageClose = new EventEmitter();
         /** @description This event is triggered when a message is opened.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	instance)
+        *   instance - The toast item that is the target of the operation.
+        */
         this.onMessageOpen = new EventEmitter();
         this.nativeElement = ref.nativeElement;
     }
@@ -216,7 +311,7 @@ let EditorComponent = class EditorComponent extends BaseElement {
     set autoSave(value) {
         this.nativeElement ? this.nativeElement.autoSave = value : undefined;
     }
-    /** @description The interval that determines the interval to automatically save the state of the Editor when the autoSave property is set. */
+    /** @description The property that determines the interval to automatically save the state of the Editor when the autoSave property is set. */
     get autoSaveInterval() {
         return this.nativeElement ? this.nativeElement.autoSaveInterval : undefined;
     }
@@ -321,6 +416,13 @@ let EditorComponent = class EditorComponent extends BaseElement {
     set hideInlineToolbar(value) {
         this.nativeElement ? this.nativeElement.hideInlineToolbar = value : undefined;
     }
+    /** @description Determines the file format of the image/video that are uploaded from local storage. By default images/videos are stroed as base64. */
+    get imageFormat() {
+        return this.nativeElement ? this.nativeElement.imageFormat : undefined;
+    }
+    set imageFormat(value) {
+        this.nativeElement ? this.nativeElement.imageFormat = value : undefined;
+    }
     /** @description Sets the content of the Editor as HTML. Allows to insert text and HTML. */
     get innerHTML() {
         return this.nativeElement ? this.nativeElement.innerHTML : undefined;
@@ -363,6 +465,13 @@ let EditorComponent = class EditorComponent extends BaseElement {
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
     }
+    /** @description Sets a to the element which can be used to submit the value of the Editor via a form. */
+    get name() {
+        return this.nativeElement ? this.nativeElement.name : undefined;
+    }
+    set name(value) {
+        this.nativeElement ? this.nativeElement.name = value : undefined;
+    }
     /** @description Determines the format of the content that will be pasted inside the Editor. */
     get pasteFormat() {
         return this.nativeElement ? this.nativeElement.pasteFormat : undefined;
@@ -377,12 +486,26 @@ let EditorComponent = class EditorComponent extends BaseElement {
     set placeholder(value) {
         this.nativeElement ? this.nativeElement.placeholder = value : undefined;
     }
+    /** @description Determines whether the clearFormat toolbar action should also remove inline styles from the currently selected node. */
+    get removeStylesOnClearFormat() {
+        return this.nativeElement ? this.nativeElement.removeStylesOnClearFormat : undefined;
+    }
+    set removeStylesOnClearFormat(value) {
+        this.nativeElement ? this.nativeElement.removeStylesOnClearFormat = value : undefined;
+    }
     /** @description Determines whether Editor's content is required ot not. If set and the Editor's content is empty, a notification will appear to notify that the Editor cannot be empty. */
     get required() {
         return this.nativeElement ? this.nativeElement.required : undefined;
     }
     set required(value) {
         this.nativeElement ? this.nativeElement.required = value : undefined;
+    }
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    get rightToLeft() {
+        return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
+    }
+    set rightToLeft(value) {
+        this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
     /** @description Determines whether the value is sanitized from XSS content or not. When enabled scripts and other XSS vulnerabilities are not allowed to exist inside the Editor's as HTML content. */
     get sanitized() {
@@ -412,7 +535,7 @@ let EditorComponent = class EditorComponent extends BaseElement {
     set theme(value) {
         this.nativeElement ? this.nativeElement.theme = value : undefined;
     }
-    /** @description Determines the Toolbar items list. Each item can be string pointing to the name of the item or an object that defines a custom item or adds aditional settings to an item. The name of the items are case insensitive. An object definition should contain a name attribute that refers to the name of the item when modifing an existing toolbar item. The name attribute determines the action of the item. If set to 'custom' it is possible to create a custom toolbar item. If name attribute is not set or not valid it is treated as a separator, no a toolbar item. The following items are supported by default by the Editor: SourceCode - shows the HTML/Preview Panel by hiding the input panel. Item type - 'Toggle button'.SplitMode - shows both input and HTML/Preview Panel by splitting the Editor content in two sections. Item type - 'Toggle button'FullScreen - fits the viewport with the Editor by expanding it over the page content. Item type - 'Toggle button'.Alignment - aligns the selected content. Item type - 'Drop down'.FontName - changes the font family of the selected content. Item type - 'drop-down'.FontSize - changes the font size of the selected content. Item type - 'drop-down'.Formats - changes the format of the current selection. Itme type - 'drop-down'.TableRows - allows to insert/remove a row into a selected table element. Item type - 'drop-down'.TableColumns - allows to insert/remove a column into a selected table element. Itme type - 'drop-down'.TableVAlign - sets the vertical alignment of a selected table cell. Item type - 'drop-down'.TableStyle - sets additional styling to a selected table inside the Editor. Item type - 'drop-down'.BackgroundColor - changes the background color of the current selection. Item type - 'color-input'.FontColor - changes the font color of the current selection. Item type = 'color-input'.Bold - sets the currently selected text as bold or not. Item type - 'button'.Italic - sets the currently selected text as italic. Item type - 'button'. Underline - sets the currently selected text as underlined. Itme type - 'button'.Strikethrough - set the currently selected text as strikethrough. Item type - 'button'.Delete - deletes the current selection. Item type - 'button'.Undo - undoes the last operation. Item type - 'button'.Redo - redoes the previous operation. Item type - 'button'.Indent - indents the current selection once. Item type - 'button'.Outdent - outdents the current selection once. Item type - 'button'.OpenLink - triggers a hyperlink. Item type - 'button'.EditLink - creates/edits the selected hyperlink. Item type - 'button'.CreateLink - creates/edits the selected hyperlink. Item type - 'button'.RemoveLink - removes the currently selected hyperlink. Item type - 'button'.Hyperlink - same as createLink, triggers a Dialog Window for link creation. Item type - 'button'.Cut - Cuts the currently selected text. Item type - 'button'.Copy - copies the currently selected text. Item type - 'button'Paste - pastes the currenly copied/cut text from the Clipboard. Item type = 'button' or 'drop-down' when advanced attribute is set to 'true'.Image - triggers a Dialog Window to insert/edit an image. Item type - 'button'.LowerCase - changes the current selection to lower case. Item type - 'button'.UpperCase - changes the current selection to upper case. Item type - 'button'.Print - opens the browser print preview window. Item type - 'button'.Caption - insert/remove a caption when a table is selected. Item type - 'button'.ClearFormat - removes the formatting of the currntly selected text. Item type - 'button'.Table - triggers a Dialog Window to insert a table. Item type - 'button'.TableHeader - insert/remove a header row to the currently selected table. Item type - 'button'.OrderedList - insert/remove an order list. Item type = 'button'.UnorderedList - insert/remove an unordered list. Item type - 'button'.Subscript - changes the currently selected text to subscript. Item type - 'button'.Superscript - changes the currently selected text to superscript. Item type - 'button'.FindAndReplace - opens a dialog that allows to find and replace text inside the Editor's content section. Item type - 'button'.  The inlineToolbarItems attribute is applicable only to the following items: 'table', 'image', 'hyperlink'. It accepts the same type of value as toolbarItems property but the toolbar items will be placed insinde the Inline Toolbar instead. */
+    /** @description Determines the Toolbar items list. Each item can be string pointing to the name of the item or an object that defines a custom item or adds aditional settings to an item. The name of the items are case insensitive. An object definition should contain a name attribute that refers to the name of the item when modifing an existing toolbar item. The name attribute determines the action of the item. If set to 'custom' it is possible to create a custom toolbar item. If name attribute is not set or not valid it is treated as a separator, no a toolbar item. The following items are supported by default by the Editor: SourceCode - shows the HTML/Preview Panel by hiding the input panel. Item type - 'Toggle button'.SplitMode - shows both input and HTML/Preview Panel by splitting the Editor content in two sections. Item type - 'Toggle button'FullScreen - fits the viewport with the Editor by expanding it over the page content. Item type - 'Toggle button'.Alignment - aligns the selected content. Item type - 'Drop down'.FontName - changes the font family of the selected content. Item type - 'drop-down'.FontSize - changes the font size of the selected content. Item type - 'drop-down'.Formats - changes the format of the current selection. Itme type - 'drop-down'.TableRows - allows to insert/remove a row into a selected table element. Item type - 'drop-down'.TableColumns - allows to insert/remove a column into a selected table element. Itme type - 'drop-down'.TableVAlign - sets the vertical alignment of a selected table cell. Item type - 'drop-down'.TableStyle - sets additional styling to a selected table inside the Editor. Item type - 'drop-down'.BackgroundColor - changes the background color of the current selection. Item type - 'color-input'.FontColor - changes the font color of the current selection. Item type = 'color-input'.Bold - sets the currently selected text as bold or not. Item type - 'button'.Italic - sets the currently selected text as italic. Item type - 'button'. Underline - sets the currently selected text as underlined. Itme type - 'button'.Strikethrough - set the currently selected text as strikethrough. Item type - 'button'.Delete - deletes the current selection. Item type - 'button'.Undo - undoes the last operation. Item type - 'button'.Redo - redoes the previous operation. Item type - 'button'.Indent - indents the current selection once. Item type - 'button'.Outdent - outdents the current selection once. Item type - 'button'.OpenLink - triggers a hyperlink. Item type - 'button'.EditLink - creates/edits the selected hyperlink. Item type - 'button'.CreateLink - creates/edits the selected hyperlink. Item type - 'button'.RemoveLink - removes the currently selected hyperlink. Item type - 'button'.Hyperlink - same as createLink, triggers a Dialog Window for link creation. Item type - 'button'.Cut - Cuts the currently selected text. Item type - 'button'.Copy - copies the currently selected text. Item type - 'button'Paste - pastes the currenly copied/cut text from the Clipboard. Item type = 'button' or 'drop-down' when advanced attribute is set to 'true'.Image - triggers a Dialog Window to insert/edit an image. Item type - 'button'.Video - triggers a Dialog Window to insert/edit a video. Item type - 'button'.LowerCase - changes the current selection to lower case. Item type - 'button'.UpperCase - changes the current selection to upper case. Item type - 'button'.Print - opens the browser print preview window. Item type - 'button'.Caption - insert/remove a caption when a table is selected. Item type - 'button'.ClearFormat - removes the formatting of the currntly selected text. Item type - 'button'.Table - triggers a Dialog Window to insert a table. Item type - 'button'.TableHeader - insert/remove a header row to the currently selected table. Item type - 'button'.OrderedList - insert/remove an order list. Item type = 'button'.UnorderedList - insert/remove an unordered list. Item type - 'button'.Subscript - changes the currently selected text to subscript. Item type - 'button'.Superscript - changes the currently selected text to superscript. Item type - 'button'.FindAndReplace - opens a dialog that allows to find and replace text inside the Editor's content section. Item type - 'button'.  The inlineToolbarItems attribute is applicable only to the following items: 'table', 'image', 'hyperlink'. It accepts the same type of value as toolbarItems property but the toolbar items will be placed insinde the Inline Toolbar instead. */
     get toolbarItems() {
         return this.nativeElement ? this.nativeElement.toolbarItems : undefined;
     }
@@ -460,6 +583,13 @@ let EditorComponent = class EditorComponent extends BaseElement {
     }
     set value(value) {
         this.nativeElement ? this.nativeElement.value = value : undefined;
+    }
+    /** @description A function that can be used to completly customize the Editor dialog that is used to insert/edit tables/images/videos/hyperlinks. The function accepts two arguments: target - the target dialog that is about to be opened.item - the toolbar item object that trigger the dialog. */
+    get windowCustomizationFunction() {
+        return this.nativeElement ? this.nativeElement.windowCustomizationFunction : undefined;
+    }
+    set windowCustomizationFunction(value) {
+        this.nativeElement ? this.nativeElement.windowCustomizationFunction = value : undefined;
     }
     /** @description Blurs the content of the Editor.
     */
@@ -819,6 +949,25 @@ let EditorComponent = class EditorComponent extends BaseElement {
             });
         }
     }
+    /** @description Allows to update the settings of a single toolbar item. The method returns true if successful.
+    * @param {string | number} name. The name of the toolbar item or it's index inside the <b>toolbarItems</b> array.
+    * @param {any} settings. A settings object for the toolbar item. It should have the same definition as when defining a custom toolbar item. You can read more about it in the dedicated topic for the Editor Toolbar on the website.
+    * @returns {boolean | undefined}
+  */
+    updateToolbarItem(name, settings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.updateToolbarItem(name, settings);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     get isRendered() {
         return this.nativeElement ? this.nativeElement.isRendered : false;
     }
@@ -849,6 +998,8 @@ let EditorComponent = class EditorComponent extends BaseElement {
         const that = this;
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
+        that.eventHandlers['changingHandler'] = (event) => { that.onChanging.emit(event); };
+        that.nativeElement.addEventListener('changing', that.eventHandlers['changingHandler']);
         that.eventHandlers['actionStartHandler'] = (event) => { that.onActionStart.emit(event); };
         that.nativeElement.addEventListener('actionStart', that.eventHandlers['actionStartHandler']);
         that.eventHandlers['actionEndHandler'] = (event) => { that.onActionEnd.emit(event); };
@@ -869,12 +1020,20 @@ let EditorComponent = class EditorComponent extends BaseElement {
         that.nativeElement.addEventListener('resizeEnd', that.eventHandlers['resizeEndHandler']);
         that.eventHandlers['inlineToolbarOpenHandler'] = (event) => { that.onInlineToolbarOpen.emit(event); };
         that.nativeElement.addEventListener('inlineToolbarOpen', that.eventHandlers['inlineToolbarOpenHandler']);
+        that.eventHandlers['inlineToolbarOpeningHandler'] = (event) => { that.onInlineToolbarOpening.emit(event); };
+        that.nativeElement.addEventListener('inlineToolbarOpening', that.eventHandlers['inlineToolbarOpeningHandler']);
         that.eventHandlers['inlineToolbarCloseHandler'] = (event) => { that.onInlineToolbarClose.emit(event); };
         that.nativeElement.addEventListener('inlineToolbarClose', that.eventHandlers['inlineToolbarCloseHandler']);
+        that.eventHandlers['inlineToolbarClosingHandler'] = (event) => { that.onInlineToolbarClosing.emit(event); };
+        that.nativeElement.addEventListener('inlineToolbarClosing', that.eventHandlers['inlineToolbarClosingHandler']);
         that.eventHandlers['dropDownToolbarOpenHandler'] = (event) => { that.onDropDownToolbarOpen.emit(event); };
         that.nativeElement.addEventListener('dropDownToolbarOpen', that.eventHandlers['dropDownToolbarOpenHandler']);
+        that.eventHandlers['dropDownToolbarOpeningHandler'] = (event) => { that.onDropDownToolbarOpening.emit(event); };
+        that.nativeElement.addEventListener('dropDownToolbarOpening', that.eventHandlers['dropDownToolbarOpeningHandler']);
         that.eventHandlers['dropDownToolbarCloseHandler'] = (event) => { that.onDropDownToolbarClose.emit(event); };
         that.nativeElement.addEventListener('dropDownToolbarClose', that.eventHandlers['dropDownToolbarCloseHandler']);
+        that.eventHandlers['dropDownToolbarClosingHandler'] = (event) => { that.onDropDownToolbarClosing.emit(event); };
+        that.nativeElement.addEventListener('dropDownToolbarClosing', that.eventHandlers['dropDownToolbarClosingHandler']);
         that.eventHandlers['dialogOpenHandler'] = (event) => { that.onDialogOpen.emit(event); };
         that.nativeElement.addEventListener('dialogOpen', that.eventHandlers['dialogOpenHandler']);
         that.eventHandlers['dialogOpeningHandler'] = (event) => { that.onDialogOpening.emit(event); };
@@ -899,6 +1058,9 @@ let EditorComponent = class EditorComponent extends BaseElement {
         const that = this;
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
+        }
+        if (that.eventHandlers['changingHandler']) {
+            that.nativeElement.removeEventListener('changing', that.eventHandlers['changingHandler']);
         }
         if (that.eventHandlers['actionStartHandler']) {
             that.nativeElement.removeEventListener('actionStart', that.eventHandlers['actionStartHandler']);
@@ -930,14 +1092,26 @@ let EditorComponent = class EditorComponent extends BaseElement {
         if (that.eventHandlers['inlineToolbarOpenHandler']) {
             that.nativeElement.removeEventListener('inlineToolbarOpen', that.eventHandlers['inlineToolbarOpenHandler']);
         }
+        if (that.eventHandlers['inlineToolbarOpeningHandler']) {
+            that.nativeElement.removeEventListener('inlineToolbarOpening', that.eventHandlers['inlineToolbarOpeningHandler']);
+        }
         if (that.eventHandlers['inlineToolbarCloseHandler']) {
             that.nativeElement.removeEventListener('inlineToolbarClose', that.eventHandlers['inlineToolbarCloseHandler']);
+        }
+        if (that.eventHandlers['inlineToolbarClosingHandler']) {
+            that.nativeElement.removeEventListener('inlineToolbarClosing', that.eventHandlers['inlineToolbarClosingHandler']);
         }
         if (that.eventHandlers['dropDownToolbarOpenHandler']) {
             that.nativeElement.removeEventListener('dropDownToolbarOpen', that.eventHandlers['dropDownToolbarOpenHandler']);
         }
+        if (that.eventHandlers['dropDownToolbarOpeningHandler']) {
+            that.nativeElement.removeEventListener('dropDownToolbarOpening', that.eventHandlers['dropDownToolbarOpeningHandler']);
+        }
         if (that.eventHandlers['dropDownToolbarCloseHandler']) {
             that.nativeElement.removeEventListener('dropDownToolbarClose', that.eventHandlers['dropDownToolbarCloseHandler']);
+        }
+        if (that.eventHandlers['dropDownToolbarClosingHandler']) {
+            that.nativeElement.removeEventListener('dropDownToolbarClosing', that.eventHandlers['dropDownToolbarClosingHandler']);
         }
         if (that.eventHandlers['dialogOpenHandler']) {
             that.nativeElement.removeEventListener('dialogOpen', that.eventHandlers['dialogOpenHandler']);
@@ -1027,6 +1201,9 @@ __decorate([
 ], EditorComponent.prototype, "hideInlineToolbar", null);
 __decorate([
     Input()
+], EditorComponent.prototype, "imageFormat", null);
+__decorate([
+    Input()
 ], EditorComponent.prototype, "innerHTML", null);
 __decorate([
     Input()
@@ -1045,13 +1222,22 @@ __decorate([
 ], EditorComponent.prototype, "messages", null);
 __decorate([
     Input()
+], EditorComponent.prototype, "name", null);
+__decorate([
+    Input()
 ], EditorComponent.prototype, "pasteFormat", null);
 __decorate([
     Input()
 ], EditorComponent.prototype, "placeholder", null);
 __decorate([
     Input()
+], EditorComponent.prototype, "removeStylesOnClearFormat", null);
+__decorate([
+    Input()
 ], EditorComponent.prototype, "required", null);
+__decorate([
+    Input()
+], EditorComponent.prototype, "rightToLeft", null);
 __decorate([
     Input()
 ], EditorComponent.prototype, "sanitized", null);
@@ -1086,8 +1272,14 @@ __decorate([
     Input()
 ], EditorComponent.prototype, "value", null);
 __decorate([
+    Input()
+], EditorComponent.prototype, "windowCustomizationFunction", null);
+__decorate([
     Output()
 ], EditorComponent.prototype, "onChange", void 0);
+__decorate([
+    Output()
+], EditorComponent.prototype, "onChanging", void 0);
 __decorate([
     Output()
 ], EditorComponent.prototype, "onActionStart", void 0);
@@ -1120,13 +1312,25 @@ __decorate([
 ], EditorComponent.prototype, "onInlineToolbarOpen", void 0);
 __decorate([
     Output()
+], EditorComponent.prototype, "onInlineToolbarOpening", void 0);
+__decorate([
+    Output()
 ], EditorComponent.prototype, "onInlineToolbarClose", void 0);
+__decorate([
+    Output()
+], EditorComponent.prototype, "onInlineToolbarClosing", void 0);
 __decorate([
     Output()
 ], EditorComponent.prototype, "onDropDownToolbarOpen", void 0);
 __decorate([
     Output()
+], EditorComponent.prototype, "onDropDownToolbarOpening", void 0);
+__decorate([
+    Output()
 ], EditorComponent.prototype, "onDropDownToolbarClose", void 0);
+__decorate([
+    Output()
+], EditorComponent.prototype, "onDropDownToolbarClosing", void 0);
 __decorate([
     Output()
 ], EditorComponent.prototype, "onDialogOpen", void 0);

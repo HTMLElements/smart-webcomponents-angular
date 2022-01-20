@@ -587,6 +587,20 @@ var MenuComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Clicks on an item programatically.
+    * @param {HTMLElement | string} item. smart-menu-item/smart-menu-items-group or its id or numeric path.
+    */
+    MenuComponent.prototype.clickItem = function (item) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.clickItem(item);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.clickItem(item);
+            });
+        }
+    };
     /** @description Closes the Menu when mode is 'dropDown'.
     */
     MenuComponent.prototype.close = function () {

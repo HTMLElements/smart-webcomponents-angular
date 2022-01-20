@@ -5,7 +5,8 @@ import { BaseElement } from './smart.element';
 export { Animation, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { NumberInput } from './../index';
-export declare class NumberInputComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+import { ControlValueAccessor } from '@angular/forms';
+export declare class NumberInputComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges, ControlValueAccessor {
     constructor(ref: ElementRef<NumberInput>);
     private eventHandlers;
     nativeElement: NumberInput;
@@ -13,6 +14,16 @@ export declare class NumberInputComponent extends BaseElement implements OnInit,
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
     createComponent(properties?: {}): any;
+    /**
+    * @description
+    * The registered callback function called when a change event occurs on the form elements.
+    */
+    _onChange: (value: any) => void;
+    /**
+    * @description
+    * The registered callback function called when a blur event occurs on the form elements.
+    */
+    _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
     /** @description Enables or disables the element. */
@@ -74,6 +85,11 @@ export declare class NumberInputComponent extends BaseElement implements OnInit,
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
+    _initialChange: boolean;
+    ngValue: any;
+    writeValue(value: any): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
     ngOnChanges(changes: SimpleChanges): void;
     /** @description Add event listeners. */
     private listen;

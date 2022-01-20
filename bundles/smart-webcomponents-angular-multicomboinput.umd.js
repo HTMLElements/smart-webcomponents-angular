@@ -418,6 +418,28 @@ import './../source/modules/smart.multicomboinput';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(MultiComboInputComponent.prototype, "hideInputTagsCloseButton", {
+            /** @description Enables or disables the close buttons when multiple items are selected. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.hideInputTagsCloseButton : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.hideInputTagsCloseButton = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(MultiComboInputComponent.prototype, "colorItems", {
+            /** @description Enables or disables whether when an item has a 'color' property set, the tag of that item will set automatically the background to that color. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.colorItems : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.colorItems = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(MultiComboInputComponent.prototype, "dataSource", {
             /** @description Determines the data source that will be loaded to the MutliInput. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
             get: function () {
@@ -572,6 +594,17 @@ import './../source/modules/smart.multicomboinput';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(MultiComboInputComponent.prototype, "pills", {
+            /** @description Enables or disables whether drop-down items are rendered as pills. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.pills : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.pills = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(MultiComboInputComponent.prototype, "query", {
             /** @description Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied. */
             get: function () {
@@ -623,6 +656,17 @@ import './../source/modules/smart.multicomboinput';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.separator = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(MultiComboInputComponent.prototype, "singleSelect", {
+            /** @description Determines whether only a single item can be selected. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.singleSelect : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.singleSelect = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -878,6 +922,12 @@ import './../source/modules/smart.multicomboinput';
         ], MultiComboInputComponent.prototype, "autoCompleteDelay", null);
         __decorate([
             core.Input()
+        ], MultiComboInputComponent.prototype, "hideInputTagsCloseButton", null);
+        __decorate([
+            core.Input()
+        ], MultiComboInputComponent.prototype, "colorItems", null);
+        __decorate([
+            core.Input()
         ], MultiComboInputComponent.prototype, "dataSource", null);
         __decorate([
             core.Input()
@@ -920,6 +970,9 @@ import './../source/modules/smart.multicomboinput';
         ], MultiComboInputComponent.prototype, "placeholder", null);
         __decorate([
             core.Input()
+        ], MultiComboInputComponent.prototype, "pills", null);
+        __decorate([
+            core.Input()
         ], MultiComboInputComponent.prototype, "query", null);
         __decorate([
             core.Input()
@@ -933,6 +986,9 @@ import './../source/modules/smart.multicomboinput';
         __decorate([
             core.Input()
         ], MultiComboInputComponent.prototype, "separator", null);
+        __decorate([
+            core.Input()
+        ], MultiComboInputComponent.prototype, "singleSelect", null);
         __decorate([
             core.Input()
         ], MultiComboInputComponent.prototype, "selectAll", null);

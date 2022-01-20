@@ -159,6 +159,11 @@ let TableComponent = class TableComponent extends BaseElement {
         *   dataField - The data field of the cell's column.
         */
         this.onColumnClick = new EventEmitter();
+        /** @description This event is triggered when a column menu is closed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+        *   dataField - The data field of the column.
+        */
+        this.onCloseColumnMenu = new EventEmitter();
         /** @description This event is triggered when a column has been resized via dragging or double-click.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	headerCellElement, 	width)
         *   dataField - The data field of the column.
@@ -180,6 +185,11 @@ let TableComponent = class TableComponent extends BaseElement {
         *   path - The group's path (only when collapsing/expanding). The path includes the path to the expanded/collapsed group starting from the root group. The indexes are joined with '.'. This parameter is available when the 'action' is 'expand' or 'collapse'.
         */
         this.onGroup = new EventEmitter();
+        /** @description This event is triggered when a column menu is opened.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+        *   dataField - The data field of the column.
+        */
+        this.onOpenColumnMenu = new EventEmitter();
         /** @description This event is triggered when a paging-related action is made.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	action)
         *   action - The paging action. Possible actions: 'pageIndexChange', 'pageSizeChange'.
@@ -266,6 +276,13 @@ let TableComponent = class TableComponent extends BaseElement {
     }
     set columnResize(value) {
         this.nativeElement ? this.nativeElement.columnResize = value : undefined;
+    }
+    /** @description This property affects the table sizing, when the columnSizeMode is 'default'. When 'columnResizeNormalize' is false, the Table will add an additional TH element, if all table columns have the 'width' property set. This is done in order to maintain your width settings. Otherwise, when the property is set to true, the Table will auto-fill the remaining space similar to the layout of standard HTML Tables. */
+    get columnResizeNormalize() {
+        return this.nativeElement ? this.nativeElement.columnResizeNormalize : undefined;
+    }
+    set columnResizeNormalize(value) {
+        this.nativeElement ? this.nativeElement.columnResizeNormalize = value : undefined;
     }
     /** @description Sets or gets whether when resizing a column, a feedback showing the new column width in px will be displayed. */
     get columnResizeFeedback() {
@@ -414,7 +431,7 @@ let TableComponent = class TableComponent extends BaseElement {
     set freezeHeader(value) {
         this.nativeElement ? this.nativeElement.freezeHeader = value : undefined;
     }
-    /** @description Sets or gets the id of an HTML template element to be applied as additional column header(s). */
+    /** @description Allows to customize the header of the element. The property accepts the id of an HTMLElement, HTMLTemplateElement, function or a string that will be parsed as HTML. When set to a function it contains one argument - the header element of the Table. */
     get grouping() {
         return this.nativeElement ? this.nativeElement.grouping : undefined;
     }
@@ -1221,12 +1238,16 @@ let TableComponent = class TableComponent extends BaseElement {
         that.nativeElement.addEventListener('expand', that.eventHandlers['expandHandler']);
         that.eventHandlers['columnClickHandler'] = (event) => { that.onColumnClick.emit(event); };
         that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+        that.eventHandlers['closeColumnMenuHandler'] = (event) => { that.onCloseColumnMenu.emit(event); };
+        that.nativeElement.addEventListener('closeColumnMenu', that.eventHandlers['closeColumnMenuHandler']);
         that.eventHandlers['columnResizeHandler'] = (event) => { that.onColumnResize.emit(event); };
         that.nativeElement.addEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
         that.eventHandlers['filterHandler'] = (event) => { that.onFilter.emit(event); };
         that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
         that.eventHandlers['groupHandler'] = (event) => { that.onGroup.emit(event); };
         that.nativeElement.addEventListener('group', that.eventHandlers['groupHandler']);
+        that.eventHandlers['openColumnMenuHandler'] = (event) => { that.onOpenColumnMenu.emit(event); };
+        that.nativeElement.addEventListener('openColumnMenu', that.eventHandlers['openColumnMenuHandler']);
         that.eventHandlers['pageHandler'] = (event) => { that.onPage.emit(event); };
         that.nativeElement.addEventListener('page', that.eventHandlers['pageHandler']);
         that.eventHandlers['rowBeginEditHandler'] = (event) => { that.onRowBeginEdit.emit(event); };
@@ -1260,6 +1281,9 @@ let TableComponent = class TableComponent extends BaseElement {
         if (that.eventHandlers['columnClickHandler']) {
             that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
         }
+        if (that.eventHandlers['closeColumnMenuHandler']) {
+            that.nativeElement.removeEventListener('closeColumnMenu', that.eventHandlers['closeColumnMenuHandler']);
+        }
         if (that.eventHandlers['columnResizeHandler']) {
             that.nativeElement.removeEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
         }
@@ -1268,6 +1292,9 @@ let TableComponent = class TableComponent extends BaseElement {
         }
         if (that.eventHandlers['groupHandler']) {
             that.nativeElement.removeEventListener('group', that.eventHandlers['groupHandler']);
+        }
+        if (that.eventHandlers['openColumnMenuHandler']) {
+            that.nativeElement.removeEventListener('openColumnMenu', that.eventHandlers['openColumnMenuHandler']);
         }
         if (that.eventHandlers['pageHandler']) {
             that.nativeElement.removeEventListener('page', that.eventHandlers['pageHandler']);
@@ -1307,6 +1334,9 @@ __decorate([
 __decorate([
     Input()
 ], TableComponent.prototype, "columnResize", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "columnResizeNormalize", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "columnResizeFeedback", null);
@@ -1468,6 +1498,9 @@ __decorate([
 ], TableComponent.prototype, "onColumnClick", void 0);
 __decorate([
     Output()
+], TableComponent.prototype, "onCloseColumnMenu", void 0);
+__decorate([
+    Output()
 ], TableComponent.prototype, "onColumnResize", void 0);
 __decorate([
     Output()
@@ -1475,6 +1508,9 @@ __decorate([
 __decorate([
     Output()
 ], TableComponent.prototype, "onGroup", void 0);
+__decorate([
+    Output()
+], TableComponent.prototype, "onOpenColumnMenu", void 0);
 __decorate([
     Output()
 ], TableComponent.prototype, "onPage", void 0);

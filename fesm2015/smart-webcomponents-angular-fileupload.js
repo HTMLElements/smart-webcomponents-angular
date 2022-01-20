@@ -335,6 +335,13 @@ let FileUploadComponent = class FileUploadComponent extends BaseElement {
     set unfocusable(value) {
         this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
     }
+    /** @description Gets the file upload value. */
+    get value() {
+        return this.nativeElement ? this.nativeElement.value : undefined;
+    }
+    set value(value) {
+        this.nativeElement ? this.nativeElement.value = value : undefined;
+    }
     /** @description Callback used to validate the files immediatelly after their selection. Retuns a boolean value. If the returned value is false, the file is removed from list and a 'validationError is fired. */
     get validateFile() {
         return this.nativeElement ? this.nativeElement.validateFile : undefined;
@@ -567,6 +574,9 @@ __decorate([
 __decorate([
     Input()
 ], FileUploadComponent.prototype, "unfocusable", null);
+__decorate([
+    Input()
+], FileUploadComponent.prototype, "value", null);
 __decorate([
     Input()
 ], FileUploadComponent.prototype, "validateFile", null);

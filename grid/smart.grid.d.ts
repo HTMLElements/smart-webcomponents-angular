@@ -63,61 +63,61 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
             (commit: boolean): void;
         }): void;
     };
-    /** @description Describes the paging settings. */
+    /** @description Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties. */
     onCellRender: {
         (cell: GridCell): void;
     };
-    /** @description Describes the pager settings. */
+    /** @description Sets the grid users. Expects an array with 'id', 'name' and optionally 'color' and 'image' properties. */
     onBeforeInit: {
         (): void;
     };
-    /** @description Sets the row details. */
+    /** @description Describes the paging settings. */
     onInit: {
         (): void;
     };
-    /** @description Sets the scroll mode settings. */
+    /** @description Describes the pager settings. */
     onAfterInit: {
         (): void;
     };
-    /** @description Describes the column header settings. */
+    /** @description Sets the row details. */
     onChartInit: any;
-    /** @description Describes the summary row settings. */
+    /** @description Sets the scroll mode settings. */
     onRender: any;
-    /** @description Describes the settings for the group header. */
+    /** @description Describes the column header settings. */
     onKey: {
         (event: KeyboardEvent): void;
     };
-    /** @description Describes the header settings of the grid. */
+    /** @description Describes the summary row settings. */
     onRowInit: {
         (index: number, row: GridRow): void;
     };
-    /** @description Describes the footer settings of the grid. */
+    /** @description Describes the settings for the group header. */
     onRowDetailInit: {
         (index: number, row: GridRow, details: HTMLElement): void;
     };
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Describes the header settings of the grid. */
     onRowDetailUpdated: {
         (index: number, row: GridRow, details: HTMLElement): void;
     };
-    /** @description The rows property is used to describe all rows displayed in the grid. */
+    /** @description Describes the footer settings of the grid. */
     onRowInserted: {
         (index: number, row: GridRow): void;
     };
-    /** @description Describes the selection settings. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     onRowRemoved: {
         (index: number, row: GridRow): void;
     };
-    /** @description Describes sorting settings. */
+    /** @description The rows property is used to describe all rows displayed in the grid. */
     onRowUpdate: {
         (index: number, row: GridRow, oldValues: any[], values: any[], confirm: {
             (commit: boolean): void;
         }): void;
     };
-    /** @description undefined */
+    /** @description Describes the selection settings. */
     onRowUpdated: {
         (index: number, row: GridRow): void;
     };
-    /** @description undefined */
+    /** @description Describes sorting settings. */
     onColumnInit: {
         (index: number, column: GridColumn): void;
     };
@@ -137,6 +137,10 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     onCommand: {
         (name: string, command: any, details: GridCell, event: Event | KeyboardEvent | PointerEvent, handled: boolean): void;
     };
+    /** @description undefined */
+    currentUser: string | number;
+    /** @description undefined */
+    users: any[];
     /** @description undefined */
     paging: GridPaging;
     /** @description undefined */
@@ -164,7 +168,9 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     /** @description undefined */
     sorting: GridSorting;
     /** @description This event is triggered, when the edit begins.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	column, 	cell)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+    *   id - The edited row id.
+    *   dataField - The edited column data field.
     *   row - The edited row.
     *   column - The edited column.
     *   cell - The edited cell.
@@ -348,7 +354,9 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     onCellDoubleClick: EventEmitter<CustomEvent>;
     /** @description This event is triggered, when the edit ends.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	column, 	cell)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+    *   id - The edited row id.
+    *   dataField - The edited column data field.
     *   row - The edited row.
     *   column - The edited column.
     *   cell - The edited cell.
@@ -360,6 +368,16 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     *   data - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'
     */
     onFilter: EventEmitter<CustomEvent>;
+    /** @description This event is triggered, when the add new column dialog is opened.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+    *   dataField - The column data field.
+    */
+    onOpenColumnDialog: EventEmitter<CustomEvent>;
+    /** @description This event is triggered, when the add new column dialog is closed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+    *   dataField - The column data field.
+    */
+    onCloseColumnDialog: EventEmitter<CustomEvent>;
     /** @description This event is triggered, when the grid is resized.
     *  @param event. The custom event. 	*/
     onResize: EventEmitter<CustomEvent>;
@@ -413,6 +431,15 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     * @param {boolean} refreshFilters?.
     */
     addFilter(dataField: string, filter: string, refreshFilters?: boolean): void;
+    /** @description Groups the Grid by a data field. This method will add a group to the Grid when grouping is enabled.
+    * @param {string} dataField. column bound data field
+    */
+    addGroup(dataField: string): void;
+    /** @description Sorts the Grid by a data field. This method will add a sorting to the Grid when sorting is enabled.
+    * @param {string} dataField. column bound data field
+    * @param {string} sortOrder. column's sort order. Use 'asc' or 'desc'.
+    */
+    addSort(dataField: string, sortOrder: string): void;
     /** @description Auto-sizes grid rows. This method will update the height of all Grid rows.
     */
     autoSizeRows(): void;
@@ -434,6 +461,12 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     /** @description Clears all filters. Refreshes the view and updates all filter input components.
     */
     clearFilter(): void;
+    /** @description Clears all data groups. Refreshes the view and updates the DataGrid component.
+    */
+    clearGroups(): void;
+    /** @description Clears all sorting. Refreshes the view and updates the DataGrid component.
+    */
+    clearSort(): void;
     /** @description Clears the selection that user have made. All row, cell and column selection highlights will be removed.
     */
     clearSelection(): void;
@@ -644,6 +677,17 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     removeFilter(dataField: string, refreshFilters?: boolean): void;
     /** @description Removes a column filter.
+    * @param {string} dataField. column bound data field
+    */
+    removeGroup(dataField: string): void;
+    /** @description Removes a group by data field. This method will remove a group to the Grid when grouping is enabled.
+    * @param {string} dataField. column bound data field
+    */
+    removeSort(dataField: string): void;
+    /** @description Removes a sorting by data field. This method will remove a sorting from a Grid column.
+    */
+    refreshSort(): void;
+    /** @description Re-sorts the Grid by using the already applied column sortings and re-renders the Grid.
     */
     revertBatchEdit(): void;
     /** @description Reverts the batch edit changes. This method cancels all changes made by the end-user.
@@ -653,6 +697,11 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     reorderColumns(dataField: string | number, referenceDataField: string | number, insertAfter?: boolean): void;
     /** @description Reorders two DataGrid columns.
+    * @param {string} dataField. column bound data field
+    * @param {string | null} sortOrder. column's sort order. Use 'asc', 'desc' or null.
+    */
+    sortBy(dataField: string, sortOrder: string | null): void;
+    /** @description Sorts the Grid by a data field. This method will add or remove sorting, when sorting is enabled. To remove the sorting, use 'null' for the sortOrder parameter.
     * @param {string | number} dataField. The data field or column index of the first grid column.
     * @param {string | number} referenceDataField. The data field or column index of the second grid column.
     */

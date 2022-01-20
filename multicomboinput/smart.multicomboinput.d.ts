@@ -28,6 +28,10 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     animation: Animation;
     /** @description Determines the delay before the drop down opens to show the matches from the auto complete operation. The delay is measured in miliseconds. */
     autoCompleteDelay: number;
+    /** @description Enables or disables the close buttons when multiple items are selected. */
+    hideInputTagsCloseButton: boolean;
+    /** @description Enables or disables whether when an item has a 'color' property set, the tag of that item will set automatically the background to that color. */
+    colorItems: boolean;
     /** @description Determines the data source that will be loaded to the MutliInput. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
     dataSource: any;
     /** @description Enables or disables the element. */
@@ -56,6 +60,8 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     opened: boolean;
     /** @description Determines the placeholder of the input. */
     placeholder: string;
+    /** @description Enables or disables whether drop-down items are rendered as pills. */
+    pills: boolean;
     /** @description Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied. */
     query: string | number;
     /** @description Determines the auto complete query mode. This property also determines the matching algorithm for the autocomplete operation. */
@@ -66,6 +72,8 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     rightToLeft: boolean;
     /** @description Determines the delimiter between the tags in the input field. */
     separator: string;
+    /** @description Determines whether only a single item can be selected. */
+    singleSelect: boolean;
     /** @description Determines whether an additional item is displayed as the first item in the options list, which allows to select/unselect all items. */
     selectAll: boolean;
     /** @description Determines whether the items are sorted alphabetically or not */

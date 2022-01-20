@@ -112,23 +112,46 @@ let TabsComponent = class TabsComponent extends BaseElement {
     constructor(ref) {
         super(ref);
         this.eventHandlers = [];
-        /** @description This event is triggered when the tab selection is changed.
+        /** @description This event is triggered when the addNewTab is enabled and is clicked.
         *  @param event. The custom event. 	*/
+        this.onAddNewTabClick = new EventEmitter();
+        /** @description This event is triggered when the tab selection is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	oldIndex)
+        *   index - The tab's index.
+        *   oldIndex - The tab's old index.
+        */
         this.onChange = new EventEmitter();
         /** @description This event is triggered when a tab is closed.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	index)
+        *   index - The tab's index.
+        */
         this.onClose = new EventEmitter();
         /** @description This event is triggered when a tab is about to be closed. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	index)
+        *   index - The tab's index.
+        */
         this.onClosing = new EventEmitter();
         /** @description This event is triggered when a drag operation has ended.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	left, 	top, 	index, 	label)
+        *   left - The tab's left position.
+        *   top - The tab's top position.
+        *   index - The tab's index.
+        *   label - The tab's label.
+        */
         this.onDragEnd = new EventEmitter();
         /** @description This event is triggered when a drag operation has started.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	left, 	top, 	index, 	label)
+        *   left - The tab's left position.
+        *   top - The tab's top position.
+        *   index - The tab's index.
+        *   label - The tab's label.
+        */
         this.onDragStart = new EventEmitter();
         /** @description This event is triggered when tabs have been reordered.
-        *  @param event. The custom event. 	*/
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	oldIndex)
+        *   index - The tab's index.
+        *   oldIndex - The tab's old index.
+        */
         this.onReorder = new EventEmitter();
         this.nativeElement = ref.nativeElement;
     }
@@ -350,6 +373,42 @@ let TabsComponent = class TabsComponent extends BaseElement {
             });
         }
     }
+    /** @description Returns the label of a Tab at given index.
+    * @param {number} index. The index of the tab.
+    * @returns {string}
+  */
+    getTabLabel(index) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getTabLabel(index);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Returns the content of a Tab at given index.
+    * @param {number} index. The index of the tab.
+    * @returns {HTMLElement}
+  */
+    getTabContent(index) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getTabContent(index);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Makes sure a tab is visible by scrolling to it.
     * @param {number} index. The index of the tab to scroll to.
     */
@@ -374,6 +433,23 @@ let TabsComponent = class TabsComponent extends BaseElement {
                 this.nativeElement.expand();
             });
         }
+    }
+    /** @description Returns an array of the TabItems inside the element.
+    * @returns {TabItem[]}
+  */
+    getTabs() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getTabs();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
     }
     /** @description Returns the offset of the tab item container (smart-tab-item element) from the edge of the Tabs (smart-tabs element) where the tab strip is positioned.
     * @param {number} index. The index of the tab item.
@@ -488,6 +564,8 @@ let TabsComponent = class TabsComponent extends BaseElement {
     /** @description Add event listeners. */
     listen() {
         const that = this;
+        that.eventHandlers['addNewTabClickHandler'] = (event) => { that.onAddNewTabClick.emit(event); };
+        that.nativeElement.addEventListener('addNewTabClick', that.eventHandlers['addNewTabClickHandler']);
         that.eventHandlers['changeHandler'] = (event) => { that.onChange.emit(event); };
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['closeHandler'] = (event) => { that.onClose.emit(event); };
@@ -504,6 +582,9 @@ let TabsComponent = class TabsComponent extends BaseElement {
     /** @description Remove event listeners. */
     unlisten() {
         const that = this;
+        if (that.eventHandlers['addNewTabClickHandler']) {
+            that.nativeElement.removeEventListener('addNewTabClick', that.eventHandlers['addNewTabClickHandler']);
+        }
         if (that.eventHandlers['changeHandler']) {
             that.nativeElement.removeEventListener('change', that.eventHandlers['changeHandler']);
         }
@@ -613,6 +694,9 @@ __decorate([
 ], TabsComponent.prototype, "unfocusable", null);
 __decorate([
     Output()
+], TabsComponent.prototype, "onAddNewTabClick", void 0);
+__decorate([
+    Output()
 ], TabsComponent.prototype, "onChange", void 0);
 __decorate([
     Output()
@@ -657,6 +741,13 @@ let TabItemComponent = class TabItemComponent extends BaseElement {
     }
     set closeButtonHidden(value) {
         this.nativeElement ? this.nativeElement.closeButtonHidden = value : undefined;
+    }
+    /** @description Disables the Tab item */
+    get disabled() {
+        return this.nativeElement ? this.nativeElement.disabled : undefined;
+    }
+    set disabled(value) {
+        this.nativeElement ? this.nativeElement.disabled = value : undefined;
     }
     /** @description Tab item index */
     get index() {
@@ -721,6 +812,9 @@ TabItemComponent.ctorParameters = () => [
 __decorate([
     Input()
 ], TabItemComponent.prototype, "closeButtonHidden", null);
+__decorate([
+    Input()
+], TabItemComponent.prototype, "disabled", null);
 __decorate([
     Input()
 ], TabItemComponent.prototype, "index", null);

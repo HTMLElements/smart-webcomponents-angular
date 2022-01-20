@@ -359,7 +359,9 @@ import './../source/modules/smart.grid';
             var _this = _super.call(this, ref) || this;
             _this.eventHandlers = [];
             /** @description This event is triggered, when the edit begins.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	column, 	cell)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+            *   id - The edited row id.
+            *   dataField - The edited column data field.
             *   row - The edited row.
             *   column - The edited column.
             *   cell - The edited cell.
@@ -543,7 +545,9 @@ import './../source/modules/smart.grid';
             */
             _this.onCellDoubleClick = new core.EventEmitter();
             /** @description This event is triggered, when the edit ends.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	column, 	cell)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+            *   id - The edited row id.
+            *   dataField - The edited column data field.
             *   row - The edited row.
             *   column - The edited column.
             *   cell - The edited cell.
@@ -555,6 +559,16 @@ import './../source/modules/smart.grid';
             *   data - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'
             */
             _this.onFilter = new core.EventEmitter();
+            /** @description This event is triggered, when the add new column dialog is opened.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+            *   dataField - The column data field.
+            */
+            _this.onOpenColumnDialog = new core.EventEmitter();
+            /** @description This event is triggered, when the add new column dialog is closed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+            *   dataField - The column data field.
+            */
+            _this.onCloseColumnDialog = new core.EventEmitter();
             /** @description This event is triggered, when the grid is resized.
             *  @param event. The custom event. 	*/
             _this.onResize = new core.EventEmitter();
@@ -820,7 +834,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onCellRender", {
-            /** @description Describes the paging settings. */
+            /** @description Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onCellRender : undefined;
             },
@@ -831,7 +845,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onBeforeInit", {
-            /** @description Describes the pager settings. */
+            /** @description Sets the grid users. Expects an array with 'id', 'name' and optionally 'color' and 'image' properties. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onBeforeInit : undefined;
             },
@@ -842,7 +856,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onInit", {
-            /** @description Sets the row details. */
+            /** @description Describes the paging settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onInit : undefined;
             },
@@ -853,7 +867,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onAfterInit", {
-            /** @description Sets the scroll mode settings. */
+            /** @description Describes the pager settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onAfterInit : undefined;
             },
@@ -864,7 +878,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onChartInit", {
-            /** @description Describes the column header settings. */
+            /** @description Sets the row details. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onChartInit : undefined;
             },
@@ -875,7 +889,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRender", {
-            /** @description Describes the summary row settings. */
+            /** @description Sets the scroll mode settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRender : undefined;
             },
@@ -886,7 +900,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onKey", {
-            /** @description Describes the settings for the group header. */
+            /** @description Describes the column header settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onKey : undefined;
             },
@@ -897,7 +911,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowInit", {
-            /** @description Describes the header settings of the grid. */
+            /** @description Describes the summary row settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowInit : undefined;
             },
@@ -908,7 +922,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowDetailInit", {
-            /** @description Describes the footer settings of the grid. */
+            /** @description Describes the settings for the group header. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowDetailInit : undefined;
             },
@@ -919,7 +933,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowDetailUpdated", {
-            /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+            /** @description Describes the header settings of the grid. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowDetailUpdated : undefined;
             },
@@ -930,7 +944,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowInserted", {
-            /** @description The rows property is used to describe all rows displayed in the grid. */
+            /** @description Describes the footer settings of the grid. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowInserted : undefined;
             },
@@ -941,7 +955,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowRemoved", {
-            /** @description Describes the selection settings. */
+            /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowRemoved : undefined;
             },
@@ -952,7 +966,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowUpdate", {
-            /** @description Describes sorting settings. */
+            /** @description The rows property is used to describe all rows displayed in the grid. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowUpdate : undefined;
             },
@@ -963,7 +977,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowUpdated", {
-            /** @description undefined */
+            /** @description Describes the selection settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowUpdated : undefined;
             },
@@ -974,7 +988,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onColumnInit", {
-            /** @description undefined */
+            /** @description Describes sorting settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onColumnInit : undefined;
             },
@@ -1024,6 +1038,28 @@ import './../source/modules/smart.grid';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.onCommand = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "currentUser", {
+            /** @description undefined */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.currentUser : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.currentUser = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "users", {
+            /** @description undefined */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.users : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.users = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1258,6 +1294,35 @@ import './../source/modules/smart.grid';
                 });
             }
         };
+        /** @description Groups the Grid by a data field. This method will add a group to the Grid when grouping is enabled.
+        * @param {string} dataField. column bound data field
+        */
+        GridComponent.prototype.addGroup = function (dataField) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.addGroup(dataField);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.addGroup(dataField);
+                });
+            }
+        };
+        /** @description Sorts the Grid by a data field. This method will add a sorting to the Grid when sorting is enabled.
+        * @param {string} dataField. column bound data field
+        * @param {string} sortOrder. column's sort order. Use 'asc' or 'desc'.
+        */
+        GridComponent.prototype.addSort = function (dataField, sortOrder) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.addSort(dataField, sortOrder);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.addSort(dataField, sortOrder);
+                });
+            }
+        };
         /** @description Auto-sizes grid rows. This method will update the height of all Grid rows.
         */
         GridComponent.prototype.autoSizeRows = function () {
@@ -1348,6 +1413,32 @@ import './../source/modules/smart.grid';
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.clearFilter();
+                });
+            }
+        };
+        /** @description Clears all data groups. Refreshes the view and updates the DataGrid component.
+        */
+        GridComponent.prototype.clearGroups = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearGroups();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearGroups();
+                });
+            }
+        };
+        /** @description Clears all sorting. Refreshes the view and updates the DataGrid component.
+        */
+        GridComponent.prototype.clearSort = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.clearSort();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.clearSort();
                 });
             }
         };
@@ -2357,6 +2448,47 @@ import './../source/modules/smart.grid';
             }
         };
         /** @description Removes a column filter.
+        * @param {string} dataField. column bound data field
+        */
+        GridComponent.prototype.removeGroup = function (dataField) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.removeGroup(dataField);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.removeGroup(dataField);
+                });
+            }
+        };
+        /** @description Removes a group by data field. This method will remove a group to the Grid when grouping is enabled.
+        * @param {string} dataField. column bound data field
+        */
+        GridComponent.prototype.removeSort = function (dataField) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.removeSort(dataField);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.removeSort(dataField);
+                });
+            }
+        };
+        /** @description Removes a sorting by data field. This method will remove a sorting from a Grid column.
+        */
+        GridComponent.prototype.refreshSort = function () {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.refreshSort();
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.refreshSort();
+                });
+            }
+        };
+        /** @description Re-sorts the Grid by using the already applied column sortings and re-renders the Grid.
         */
         GridComponent.prototype.revertBatchEdit = function () {
             var _this = this;
@@ -2386,6 +2518,21 @@ import './../source/modules/smart.grid';
             }
         };
         /** @description Reorders two DataGrid columns.
+        * @param {string} dataField. column bound data field
+        * @param {string | null} sortOrder. column's sort order. Use 'asc', 'desc' or null.
+        */
+        GridComponent.prototype.sortBy = function (dataField, sortOrder) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.sortBy(dataField, sortOrder);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.sortBy(dataField, sortOrder);
+                });
+            }
+        };
+        /** @description Sorts the Grid by a data field. This method will add or remove sorting, when sorting is enabled. To remove the sorting, use 'null' for the sortOrder parameter.
         * @param {string | number} dataField. The data field or column index of the first grid column.
         * @param {string | number} referenceDataField. The data field or column index of the second grid column.
         */
@@ -2743,6 +2890,10 @@ import './../source/modules/smart.grid';
             that.nativeElement.addEventListener('endEdit', that.eventHandlers['endEditHandler']);
             that.eventHandlers['filterHandler'] = function (event) { that.onFilter.emit(event); };
             that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
+            that.eventHandlers['openColumnDialogHandler'] = function (event) { that.onOpenColumnDialog.emit(event); };
+            that.nativeElement.addEventListener('openColumnDialog', that.eventHandlers['openColumnDialogHandler']);
+            that.eventHandlers['closeColumnDialogHandler'] = function (event) { that.onCloseColumnDialog.emit(event); };
+            that.nativeElement.addEventListener('closeColumnDialog', that.eventHandlers['closeColumnDialogHandler']);
             that.eventHandlers['resizeHandler'] = function (event) { that.onResize.emit(event); };
             that.nativeElement.addEventListener('resize', that.eventHandlers['resizeHandler']);
             that.eventHandlers['rowTapHandler'] = function (event) { that.onRowTap.emit(event); };
@@ -2832,6 +2983,12 @@ import './../source/modules/smart.grid';
             }
             if (that.eventHandlers['filterHandler']) {
                 that.nativeElement.onfilterHandler = null;
+            }
+            if (that.eventHandlers['openColumnDialogHandler']) {
+                that.nativeElement.removeEventListener('openColumnDialog', that.eventHandlers['openColumnDialogHandler']);
+            }
+            if (that.eventHandlers['closeColumnDialogHandler']) {
+                that.nativeElement.removeEventListener('closeColumnDialog', that.eventHandlers['closeColumnDialogHandler']);
             }
             if (that.eventHandlers['resizeHandler']) {
                 that.nativeElement.removeEventListener('resize', that.eventHandlers['resizeHandler']);
@@ -2977,6 +3134,12 @@ import './../source/modules/smart.grid';
         ], GridComponent.prototype, "onCommand", null);
         __decorate([
             core.Input()
+        ], GridComponent.prototype, "currentUser", null);
+        __decorate([
+            core.Input()
+        ], GridComponent.prototype, "users", null);
+        __decorate([
+            core.Input()
         ], GridComponent.prototype, "paging", null);
         __decorate([
             core.Input()
@@ -3086,6 +3249,12 @@ import './../source/modules/smart.grid';
         __decorate([
             core.Output()
         ], GridComponent.prototype, "onFilter", void 0);
+        __decorate([
+            core.Output()
+        ], GridComponent.prototype, "onOpenColumnDialog", void 0);
+        __decorate([
+            core.Output()
+        ], GridComponent.prototype, "onCloseColumnDialog", void 0);
         __decorate([
             core.Output()
         ], GridComponent.prototype, "onResize", void 0);

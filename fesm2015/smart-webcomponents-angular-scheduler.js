@@ -126,12 +126,18 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         *   oldValue - The previously selected Date.
         */
         this.onChange = new EventEmitter();
-        /** @description This event is triggered when an Event has been updated/inserted/removed/dragged/resized.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-        *   type - The type of change that is being done to the item.
+        /** @description This event is triggered when an Event has been updated/inserted/removed/dragged/resized or an exception of a repeating event has been added/updated/removed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type)
         *   item - An object that represents the actual item with it's attributes.
+        *   type - The type of change that is being done to the item.
         */
         this.onItemChange = new EventEmitter();
+        /** @description This event is triggered when an Event is going to be updated/inserted/removed. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type)
+        *   item - An object that represents the actual item with it's attributes.
+        *   type - The type of change that is going to be made to the item (e.g. 'inserting', 'removing', 'updating', 'exceptionInserting', 'exceptionUpdating', 'exceptionRemoving').
+        */
+        this.onItemChanging = new EventEmitter();
         /** @description This event is triggered when en event, event item or a context menu item is clicked.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	itemObj)
         *   item - The HTMLElement for the event.
@@ -213,31 +219,35 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         */
         this.onResizeEnd = new EventEmitter();
         /** @description This event is triggered when the user starts top open the event dialog window. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type, 	eventObj)
         *   target - The dialog window that is opening.
         *   item - The event object that is going to be edited.
         *   type - The type of window that is going to open. Two window types are available, the dafault which is an empty string ( does not have a type) and 'confirm' which is displayed when clicked on a repeating event.
+        *   eventObj - The event object that is the target of the menu.
         */
         this.onEditDialogOpening = new EventEmitter();
         /** @description This event is triggered when the user opens the event dialog window.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item, 	eventObj)
         *   target - The dialog window that is opened.
         *   editors - An object containing all event editors that are present inside the window. This property is undefined when the window is of type 'confirm', because confirm windows do not contain editors.
         *   item - The event object that is being edited.
+        *   eventObj - The event object that is the target of the menu.
         */
         this.onEditDialogOpen = new EventEmitter();
         /** @description This event is triggered when the user closes the event dialog window.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	editors, 	item, 	eventObj)
         *   target - The dialog window that is closed.
         *   editors - An object containing all event editors that are present inside the window. This property is undefined when the window is of type 'confirm', because confirm windows do not contain editors.
         *   item - The event object that is being edited.
+        *   eventObj - The event object that is the target of the menu.
         */
         this.onEditDialogClose = new EventEmitter();
         /** @description This event is triggered when the user is about to close the event dialog window. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	type, 	eventObj)
         *   target - The dialog window that is closing.
         *   item - The event object that is edited.
         *   type - The type of window that is going to be closed. Two window types are available, the dafault which is an empty string ( does not have a type) and 'confirm' which is displayed when clicked on a repeating event.
+        *   eventObj - The event object that is the target of the menu.
         */
         this.onEditDialogClosing = new EventEmitter();
         /** @description This event is triggered when the user begins to open the context menu on a timeline cell or an event element. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
@@ -720,6 +730,13 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     set legendPosition(value) {
         this.nativeElement ? this.nativeElement.legendPosition = value : undefined;
     }
+    /** @description Determines the mouse wheel step. When this property is set to a positive number, the scroll step with mouse wheel or trackpad will depend on the property value. */
+    get mouseWheelStep() {
+        return this.nativeElement ? this.nativeElement.mouseWheelStep : undefined;
+    }
+    set mouseWheelStep(value) {
+        this.nativeElement ? this.nativeElement.mouseWheelStep = value : undefined;
+    }
     /** @description Determines weather or not horizontal scrollbar is shown. */
     get horizontalScrollBarVisibility() {
         return this.nativeElement ? this.nativeElement.horizontalScrollBarVisibility : undefined;
@@ -859,6 +876,27 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     }
     set showLegend(value) {
         this.nativeElement ? this.nativeElement.showLegend = value : undefined;
+    }
+    /** @description Determines the name of the resource data item property that will be used for sorting the resource data defined as the resource.dataSource. */
+    get sortBy() {
+        return this.nativeElement ? this.nativeElement.sortBy : undefined;
+    }
+    set sortBy(value) {
+        this.nativeElement ? this.nativeElement.sortBy = value : undefined;
+    }
+    /** @description Allows to define a custom sorting function that will be used to sort the resource data. The sortFunction is used when sortOrder is set to custom. */
+    get sortFunction() {
+        return this.nativeElement ? this.nativeElement.sortFunction : undefined;
+    }
+    set sortFunction(value) {
+        this.nativeElement ? this.nativeElement.sortFunction = value : undefined;
+    }
+    /** @description Determines the sorting order of the resource data items. When set to custom, a custom sorting function has to be defined for the sortFunction property. The asc stands for 'ascending' while desc means 'descending' sorting order. */
+    get sortOrder() {
+        return this.nativeElement ? this.nativeElement.sortOrder : undefined;
+    }
+    set sortOrder(value) {
+        this.nativeElement ? this.nativeElement.sortOrder = value : undefined;
     }
     /** @description Determines the repeating delay of the repeat buttons inside the header of the element. Such buttons are the Date navigation buttons and the view scroll buttons. */
     get spinButtonsDelay() {
@@ -1007,6 +1045,19 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     set windowCustomizationFunction(value) {
         this.nativeElement ? this.nativeElement.windowCustomizationFunction = value : undefined;
     }
+    /** @description Adds an event to the Scheduler. Accepts an event object of the following format (same as the dataSource format): { label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }
+    * @param {any} eventObj. An object describing a Scheduler event that is not already present in the element.
+    */
+    addEvent(eventObj) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addEvent(eventObj);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.addEvent(eventObj);
+            });
+        }
+    }
     /** @description Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
     */
     beginUpdate() {
@@ -1016,6 +1067,23 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.beginUpdate();
+            });
+        }
+    }
+    /** @description Creates an event and adds it to the Scheduler.
+    * @param {string} label. Event label.
+    * @param {string} value. Event value.
+    * @param {string} dateStart. Event date start.
+    * @param {string} dateEnd. Event date end.
+    * @param {boolean} allDay. Event all day. Set it to true to create all day event.
+    */
+    createEvent(label, value, dateStart, dateEnd, allDay) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.createEvent(label, value, dateStart, dateEnd, allDay);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.createEvent(label, value, dateStart, dateEnd, allDay);
             });
         }
     }
@@ -1059,6 +1127,78 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         }
     }
     /** @description Returns a JSON representation of the events inside the Scheduler.
+    * @returns {any}
+  */
+    getDataSource() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getDataSource();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Returns a JSON representation of the resources inside the Scheduler.
+    * @returns {any}
+  */
+    getResources() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getResources();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets a date from coordinates
+    * @param {number} x. X coordinate.
+    * @param {number} y. Y coordinate.
+    * @returns {string}
+  */
+    getDateFromCoordinates(x, y) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getDateFromCoordinates(x, y);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets whether a cell is all day cell from coordinates
+    * @param {number} x. X coordinate.
+    * @param {number} y. Y coordinate.
+    * @returns {boolean}
+  */
+    getIsAllDayCellFromCoordinates(x, y) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getIsAllDayCellFromCoordinates(x, y);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Returns the current state of the Scheduler. Includes the current dateCurernt, dataSource and timeZone properties.
     * @returns {any}
   */
     getState() {
@@ -1131,7 +1271,7 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
             return result;
         });
     }
-    /** @description Inserts an event.
+    /** @description Inserts an event as object of the following format (same as the dataSource format): { label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }
     * @param {any} eventObj. An object describing a Scheduler event that is not already present in the element.
     * @param {number} index?. A number that represents the index to insert the event at. If not provided the event is inserted at the end of the list.
     */
@@ -1145,7 +1285,7 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
             });
         }
     }
-    /** @description Updates an event.
+    /** @description Updates an event object of the following format (same as the dataSource format): { label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }
     * @param {any} index. A number that represents the index of an event or a Scheduler event object.
     * @param {any} eventObj. An object describing a Scheduler event. The properties of this object will be applied to the desired event.
     */
@@ -1159,7 +1299,7 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
             });
         }
     }
-    /** @description Removes an event.
+    /** @description Removes an existing event.
     * @param {any} index. A number that represents the index of an event or the actual event object to be removed.
     */
     removeEvent(index) {
@@ -1169,6 +1309,67 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.removeEvent(index);
+            });
+        }
+    }
+    /** @description Returns an array of all exceptions of the target repeating event.
+    * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+    * @returns {any}
+  */
+    getEventExceptions(eventObj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getEventExceptions(eventObj);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Adds an event exception to a repeating event. The exception occurences for a repeating event can be gathered via the following methods: occurencesoccurrencesBetweenoccurrenceAfteroccurrenceBefore.  Example usage: scheduler.addEventException(eventObj, { date: occuranceDate, dateStart: newDateStart, dateEnd: newDateEnd, label: 'Exception' });
+    * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+    * @param {any} exceptionObj. An event object that describes an exception. Exception event objects must have a <b>date</b> attribute of type Date which indicates the date of occurence.
+    */
+    addEventException(eventObj, exceptionObj) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addEventException(eventObj, exceptionObj);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.addEventException(eventObj, exceptionObj);
+            });
+        }
+    }
+    /** @description Updates an event exception of a repeating event. The exception occurences for a repeating event can be gathered via the following methods: occurencesoccurrencesBetweenoccurrenceAfteroccurrenceBefore.  Example usage: scheduler.updateEventException(eventObj, dateOfOccurance, { dateStart: newDateStart, dateEnd: newDateEnd, label: 'Updated Exception' });
+    * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+    * @param {any} exceptionRef. The index, id, an occurence date of the exception or an object reference of an existing Scheduler repeating event exception.
+    * @param {any} exceptionObj. An event object that describes an exception. All attributes of an exception can be updated except the occurance date (the <b>date</b> attribute).
+    */
+    updateEventException(eventObj, exceptionRef, exceptionObj) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateEventException(eventObj, exceptionRef, exceptionObj);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.updateEventException(eventObj, exceptionRef, exceptionObj);
+            });
+        }
+    }
+    /** @description Removes an exception from a repeating event.
+    * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+    * @param {any} index. The index, id, occurance date or an object reference of an event exception that belongs to the target repeating event.
+    */
+    removeEventException(eventObj, index) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.removeEventException(eventObj, index);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.removeEventException(eventObj, index);
             });
         }
     }
@@ -1212,14 +1413,28 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     /** @description Scrolls the Scheduler to a Date.
     * @param {Date} date. The date to scroll to.
     * @param {boolean} strictScroll?. Determines whether to scroll strictly to the date or not. This mean sthat the Scheduler wll scroll to the begining of the cell that corresponds to the target date.
+    * @param {boolean} autoScroll?. Calculates the scroll positions and element bounds, then adds an offset to scroll within the middle of the view.
     */
-    scrollToDate(date, strictScroll) {
+    scrollToDate(date, strictScroll, autoScroll) {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.scrollToDate(date, strictScroll);
+            this.nativeElement.scrollToDate(date, strictScroll, autoScroll);
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.scrollToDate(date, strictScroll);
+                this.nativeElement.scrollToDate(date, strictScroll, autoScroll);
+            });
+        }
+    }
+    /** @description Navigates the Scheduler to a Date.
+    * @param {Date} date. The date to navigate to.
+    */
+    navigateToDate(date) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.navigateToDate(date);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.navigateToDate(date);
             });
         }
     }
@@ -1539,6 +1754,8 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['itemChangeHandler'] = (event) => { that.onItemChange.emit(event); };
         that.nativeElement.addEventListener('itemChange', that.eventHandlers['itemChangeHandler']);
+        that.eventHandlers['itemChangingHandler'] = (event) => { that.onItemChanging.emit(event); };
+        that.nativeElement.addEventListener('itemChanging', that.eventHandlers['itemChangingHandler']);
         that.eventHandlers['itemClickHandler'] = (event) => { that.onItemClick.emit(event); };
         that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         that.eventHandlers['itemInsertHandler'] = (event) => { that.onItemInsert.emit(event); };
@@ -1614,6 +1831,9 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         }
         if (that.eventHandlers['itemChangeHandler']) {
             that.nativeElement.removeEventListener('itemChange', that.eventHandlers['itemChangeHandler']);
+        }
+        if (that.eventHandlers['itemChangingHandler']) {
+            that.nativeElement.removeEventListener('itemChanging', that.eventHandlers['itemChangingHandler']);
         }
         if (that.eventHandlers['itemClickHandler']) {
             that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
@@ -1874,6 +2094,9 @@ __decorate([
 ], SchedulerComponent.prototype, "legendPosition", null);
 __decorate([
     Input()
+], SchedulerComponent.prototype, "mouseWheelStep", null);
+__decorate([
+    Input()
 ], SchedulerComponent.prototype, "horizontalScrollBarVisibility", null);
 __decorate([
     Input()
@@ -1932,6 +2155,15 @@ __decorate([
 __decorate([
     Input()
 ], SchedulerComponent.prototype, "showLegend", null);
+__decorate([
+    Input()
+], SchedulerComponent.prototype, "sortBy", null);
+__decorate([
+    Input()
+], SchedulerComponent.prototype, "sortFunction", null);
+__decorate([
+    Input()
+], SchedulerComponent.prototype, "sortOrder", null);
 __decorate([
     Input()
 ], SchedulerComponent.prototype, "spinButtonsDelay", null);
@@ -2007,6 +2239,9 @@ __decorate([
 __decorate([
     Output()
 ], SchedulerComponent.prototype, "onItemChange", void 0);
+__decorate([
+    Output()
+], SchedulerComponent.prototype, "onItemChanging", void 0);
 __decorate([
     Output()
 ], SchedulerComponent.prototype, "onItemClick", void 0);

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsMaterialDashboard",
+  "$id": "SchematicsMaterialDashboard",
   "title": "Material Dashboard Options Schema",
   "type": "object",
   "properties": {

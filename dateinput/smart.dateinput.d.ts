@@ -5,7 +5,8 @@ import { BaseElement } from './smart.element';
 export { Animation, DateTimeFormatDay, DateTimeFormatMonth, DateTimeFormatYear, DropDownButtonPosition, DateTimeFormat, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { DateInput } from './../index';
-export declare class DateInputComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+import { ControlValueAccessor } from '@angular/forms';
+export declare class DateInputComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges, ControlValueAccessor {
     constructor(ref: ElementRef<DateInput>);
     private eventHandlers;
     nativeElement: DateInput;
@@ -13,6 +14,16 @@ export declare class DateInputComponent extends BaseElement implements OnInit, A
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
     createComponent(properties?: {}): any;
+    /**
+    * @description
+    * The registered callback function called when a change event occurs on the form elements.
+    */
+    _onChange: (value: any) => void;
+    /**
+    * @description
+    * The registered callback function called when a blur event occurs on the form elements.
+    */
+    _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
     animation: Animation;
     /** @description Determines whether the calendar button pop-up will be closed automatically when date or time is selected through it. */
@@ -90,6 +101,11 @@ export declare class DateInputComponent extends BaseElement implements OnInit, A
     ngOnInit(): void;
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
+    _initialChange: boolean;
+    ngValue: any;
+    writeValue(value: any): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
     ngOnChanges(changes: SimpleChanges): void;
     /** @description Add event listeners. */
     private listen;

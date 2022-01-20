@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-countryinput.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-countryinput.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-countryinput.js",
+  "esm5": "../esm5/countryinput/smart-webcomponents-angular-countryinput.js",
+  "esm2015": "../esm2015/countryinput/smart-webcomponents-angular-countryinput.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-countryinput.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-countryinput.js",
+  "typings": "smart-webcomponents-angular-countryinput.d.ts",
+  "metadata": "smart-webcomponents-angular-countryinput.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/countryinput"
+}

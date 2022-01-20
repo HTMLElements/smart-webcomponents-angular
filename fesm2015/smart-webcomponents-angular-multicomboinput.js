@@ -163,6 +163,20 @@ let MultiComboInputComponent = class MultiComboInputComponent extends BaseElemen
     set autoCompleteDelay(value) {
         this.nativeElement ? this.nativeElement.autoCompleteDelay = value : undefined;
     }
+    /** @description Enables or disables the close buttons when multiple items are selected. */
+    get hideInputTagsCloseButton() {
+        return this.nativeElement ? this.nativeElement.hideInputTagsCloseButton : undefined;
+    }
+    set hideInputTagsCloseButton(value) {
+        this.nativeElement ? this.nativeElement.hideInputTagsCloseButton = value : undefined;
+    }
+    /** @description Enables or disables whether when an item has a 'color' property set, the tag of that item will set automatically the background to that color. */
+    get colorItems() {
+        return this.nativeElement ? this.nativeElement.colorItems : undefined;
+    }
+    set colorItems(value) {
+        this.nativeElement ? this.nativeElement.colorItems = value : undefined;
+    }
     /** @description Determines the data source that will be loaded to the MutliInput. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
     get dataSource() {
         return this.nativeElement ? this.nativeElement.dataSource : undefined;
@@ -261,6 +275,13 @@ let MultiComboInputComponent = class MultiComboInputComponent extends BaseElemen
     set placeholder(value) {
         this.nativeElement ? this.nativeElement.placeholder = value : undefined;
     }
+    /** @description Enables or disables whether drop-down items are rendered as pills. */
+    get pills() {
+        return this.nativeElement ? this.nativeElement.pills : undefined;
+    }
+    set pills(value) {
+        this.nativeElement ? this.nativeElement.pills = value : undefined;
+    }
     /** @description Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied. */
     get query() {
         return this.nativeElement ? this.nativeElement.query : undefined;
@@ -295,6 +316,13 @@ let MultiComboInputComponent = class MultiComboInputComponent extends BaseElemen
     }
     set separator(value) {
         this.nativeElement ? this.nativeElement.separator = value : undefined;
+    }
+    /** @description Determines whether only a single item can be selected. */
+    get singleSelect() {
+        return this.nativeElement ? this.nativeElement.singleSelect : undefined;
+    }
+    set singleSelect(value) {
+        this.nativeElement ? this.nativeElement.singleSelect = value : undefined;
     }
     /** @description Determines whether an additional item is displayed as the first item in the options list, which allows to select/unselect all items. */
     get selectAll() {
@@ -504,6 +532,12 @@ __decorate([
 ], MultiComboInputComponent.prototype, "autoCompleteDelay", null);
 __decorate([
     Input()
+], MultiComboInputComponent.prototype, "hideInputTagsCloseButton", null);
+__decorate([
+    Input()
+], MultiComboInputComponent.prototype, "colorItems", null);
+__decorate([
+    Input()
 ], MultiComboInputComponent.prototype, "dataSource", null);
 __decorate([
     Input()
@@ -546,6 +580,9 @@ __decorate([
 ], MultiComboInputComponent.prototype, "placeholder", null);
 __decorate([
     Input()
+], MultiComboInputComponent.prototype, "pills", null);
+__decorate([
+    Input()
 ], MultiComboInputComponent.prototype, "query", null);
 __decorate([
     Input()
@@ -559,6 +596,9 @@ __decorate([
 __decorate([
     Input()
 ], MultiComboInputComponent.prototype, "separator", null);
+__decorate([
+    Input()
+], MultiComboInputComponent.prototype, "singleSelect", null);
 __decorate([
     Input()
 ], MultiComboInputComponent.prototype, "selectAll", null);

@@ -1467,6 +1467,11 @@ export interface CardViewProperties {
    */
   dataSource?: any;
   /**
+   * Sets the grid's data source settings when the dataSource property is set to an Array or URL.
+   * Default value: [object Object]
+   */
+  dataSourceSettings?: DataSourceSettings;
+  /**
    * Allows the edit option for the cards.
    * Default value: false
    */
@@ -1557,6 +1562,16 @@ export interface CardViewProperties {
    * }
    */
   messages?: any;
+  /**
+   * Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts.
+   * Default value: false
+   */
+  rightToLeft?: boolean;
+  /**
+   * Determines the theme. Theme defines the look of the element
+   * Default value: ""
+   */
+  theme?: string;
   /**
    * Describes the scrolling behavior of the element.
    * Default value: physical
@@ -1692,6 +1707,11 @@ export interface CardViewColumn {
    */
   dataField?: string;
   /**
+   * Sets or gets the column's data type.
+   * Default value: string
+   */
+  dataType?: CardViewColumnDataType;
+  /**
    * Sets or gets the column's icon. Expects CSS class name.
    * Default value: 
    */
@@ -1713,14 +1733,106 @@ export interface CardViewColumn {
   visible?: boolean;
   /**
    * Sets or gets the column's format function.
-   * Default value: 
+   * Default value: null
    */
-  formatFunction?: any;
+  formatFunction?: { (settings: { template?: string, column?: any, record?: any, value?: any }): any };
   /**
    * Sets or gets the column's format settings. You can use any of the build in formatting options or to NumberFormat object like that: 'Intl: {  NumberFormat: {  style: \'currency\', currency: \'EUR\' }}' or DateTimeFormat object like that: 'Intl: {  DateTimeFormat: {  dateStyle: \'full\' }}''
    * Default value: [object Object]
    */
   formatSettings?: any;
+}
+
+/**Sets the grid's data source settings when the <em>dataSource</em> property is set to an Array or URL. */
+export interface DataSourceSettings {
+  /**
+   * Sets or gets whether a column will be auto-generated.
+   * Default value: false
+   */
+  autoGenerateColumns?: boolean;
+  /**
+   * Sets or gets a children data field like 'children', 'items' in the data source. When this property is set, the dataAdapter will look for this data field when looping through the items. If it is found a hierarchical data source would be created.
+   * Default value: ""
+   */
+  childrenDataField?: string;
+  /**
+   * Sets or gets the XML binding root.
+   * Default value: ""
+   */
+  root?: string;
+  /**
+   * Sets or gets the XML binding root.
+   * Default value: blackList
+   */
+  sanitizeHTML?: DataSourceSettingsSanitizeHTML;
+  /**
+   * Sets or gets the XML binding record.
+   * Default value: ""
+   */
+  record?: string;
+  /**
+   * Sets or gets the data fields to group by.
+   * Default value: []
+   */
+  groupBy?: string[];
+  /**
+   * Sets or gets the data fields which decribe the loaded data and data type. Ex: ['id: number', 'firstName: string', 'lastName: string']
+   * Default value: null
+   */
+  dataFields?: DataSourceSettingsDataField[];
+  /**
+   * Sets or gets whether the data source type.
+   * Default value: array
+   */
+  dataSourceType?: DataSourceSettingsDataSourceType;
+  /**
+   * Sets or gets the dataAdapter's id
+   * Default value: ""
+   */
+  id?: string;
+  /**
+   * Sets or gets the key data field to be used for building the hierarchy. It is used in combination with the parentDataField property. Usually the 'id' field is used as key data field and 'parentId' as parent data field'
+   * Default value: ""
+   */
+  keyDataField?: string;
+  /**
+   * Sets or gets the parent data field to be used for building the hierarchy. It is used in combination with the keyDataField property. Usually the 'id' field is used as key data field and 'parentId' as parent data field'
+   * Default value: ""
+   */
+  parentDataField?: string;
+  /**
+   * Sets the 'mapChar' data field of the record
+   * Default value: "."
+   */
+  mapChar?: string;
+  /**
+   * Sets the virtual data source function which is called each time the Grid requests data. Demos using 'virtualDataSource' are available on the Grid demos page.
+   * Default value: null
+   */
+  virtualDataSource?: any;
+  /**
+   * Sets the virtual data source on expand function. This function is called when we load data on demand in Tree or TreeGrid and virtualDataSource in these components is set, too
+   * Default value: null
+   */
+  virtualDataSourceOnExpand?: any;
+}
+
+export interface DataSourceSettingsDataField {
+  /**
+   * Sets the dataField name.
+   * Default value: ""
+   */
+  name?: string;
+  /**
+   * Sets the dataField mapping path. For nested mapping, use '.'. Example: 'name.firstName'.
+   * Default value: ""
+   */
+  map?: string;
+  /**
+   * Sets the dataField type.
+   * Default value: string
+   */
+  dataType?: DataSourceSettingsDataFieldDataType;
 }
 
 declare global {
@@ -1735,8 +1847,16 @@ declare global {
 
 /**Describes the orientation of the card cells. */
 export declare type Orientation = 'horizontal' | 'vertical';
+/**Sets or gets the column's data type. */
+export declare type CardViewColumnDataType = 'string' | 'date' | 'boolean' | 'number' | 'array' | 'any';
 /**Describes the cover image fit property. */
 export declare type CardViewCoverMode = 'fit' | 'crop';
+/**Sets or gets the XML binding root. */
+export declare type DataSourceSettingsSanitizeHTML = 'all' | 'blackList' | 'none';
+/**Sets the dataField type. */
+export declare type DataSourceSettingsDataFieldDataType = 'string' | 'date' | 'boolean' | 'number' | 'array' | 'any';
+/**Sets or gets whether the data source type. */
+export declare type DataSourceSettingsDataSourceType = 'array' | 'json' | 'xml' | 'csv' | 'tsv';
 /**Sets or gets the header position. The header contains the Customize, Filter, Sort, and Search buttons. */
 export declare type CardViewHeaderPosition = 'none' | 'top' | 'bottom';
 /**Describes the scrolling behavior of the element. */
@@ -4279,7 +4399,7 @@ export interface CircularProgressBarProperties {
    * A callback function defining the new format for the label of the Progress Bar.
    * Default value: null
    */
-  formatFunction?: any;
+  formatFunction?: {(value: number): string};
   /**
    * Sets the value of the Circular Progress bar to indeterminate state(null) and starts the animation.
    * Default value: false
@@ -5558,7 +5678,7 @@ export interface ComboBoxProperties {
   selectedValues?: string[];
   /**
    * Determines how many items can be selected.
-   * Default value: one
+   * Default value: zeroAndOne
    */
   selectionMode?: ListSelectionMode;
   /**
@@ -5776,9 +5896,140 @@ export declare type ListItemMeasureMode = 'auto' | 'precise';
 /**Determines what will be displayed in the input. */
 export declare type SelectionDisplayMode = 'plain' | 'placeholder' | 'tokens';
 /**Determines how many items can be selected. */
-export declare type ListSelectionMode = 'none' | 'oneOrManyExtended' | 'zeroOrMany' | 'oneOrMany' | 'zeroOrOne' | 'one' | 'checkBox' | 'radioButton';
+export declare type ListSelectionMode = 'none' | 'oneOrManyExtended' | 'zeroOrMany' | 'oneOrMany' | 'zeroAndOne' | 'zeroOrOne' | 'one' | 'checkBox' | 'radioButton';
 /**Determines the visibility of the vertical scroll bar. */
 export declare type VerticalScrollBarVisibility = 'auto' | 'disabled' | 'hidden' | 'visible';
+export interface CountryInputProperties {
+  /**
+   * Enables or disables the element.
+   * Default value: false
+   */
+  disabled?: boolean;
+  /**
+   * Sets additional class names to the Input drop down.
+   * Default value: 
+   */
+  dropDownClassList?: any;
+  /**
+   * Determines the position of the drop down button.
+   * Default value: none
+   */
+  dropDownButtonPosition?: DropDownButtonPosition;
+  /**
+   * Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable.
+   * Default value: 
+   */
+  dropDownHeight?: string | number;
+  /**
+   * Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable.
+   * Default value: 
+   */
+  dropDownWidth?: string | number;
+  /**
+   * Sets or gets the name attribute for the element. Name is used when submiting data inside an HTML form.
+   * Default value: ""
+   */
+  name?: string;
+  /**
+   * Determines whether the drop down is opened or not.
+   * Default value: false
+   */
+  opened?: boolean;
+  /**
+   * Sets or gets an array of country codes which will be used instead of the default one with all countries. The country code should be ISO 3166-1 alpha-2 codes(https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   * Default value: []
+   */
+  onlyCountries?: any;
+  /**
+   * Determines the placeholder of the input.
+   * Default value: ""
+   */
+  placeholder?: string;
+  /**
+   * Sets or gets the selected country of the element. The country code should be ISO 3166-1 alpha-2 codes(https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   * Default value: ""
+   */
+  selectedCountry?: string;
+  /**
+   * Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts.
+   * Default value: false
+   */
+  rightToLeft?: boolean;
+  /**
+   * Determines the theme for the element. Themes define the look of the elements.
+   * Default value: ""
+   */
+  theme?: string;
+  /**
+   * If is set to true, the element cannot be focused.
+   * Default value: false
+   */
+  unfocusable?: boolean;
+  /**
+   * Sets or gets the value of the element.
+   * Default value: ""
+   */
+  value?: string;
+}
+/**
+ The Country Input specifies an input field where the user can select a country.
+*/
+export interface CountryInput extends BaseElement, CountryInputProperties {
+
+  /* Get a member by its name */
+  [name: string]: any;
+  /**
+   * This event is triggered when the selection is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(label, oldLabel, oldValue, value)
+   *  label - The label of the new selected item.
+   *  oldLabel - The label of the item that was previously selected before the event was triggered.
+   *  oldValue - The value of the item that was previously selected before the event was triggered.
+   *  value - The value of the new selected item.
+   */
+  onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered on each key up event of the Input, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the user clicks on an item from the popup list.
+	* @param event. The custom event. Custom data event was created with: ev.detail(item, label, value)
+   *  item - The item that was clicked.
+   *  label - The label of the item that was clicked.
+   *  value - The value of the item that was clicked.
+   */
+  onItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * Closes the drop down.
+   */
+  close(): void;
+  /**
+   * Ensures that the active ( selected ) item is always visible.
+   */
+  ensureVisible(): void;
+  /**
+   * Opens the drop down.
+   */
+  open(): void;
+  /**
+   * Selects the text inside the input or if it is <b>readonly</b> then the element is focused.
+   */
+  select(): void;
+}
+
+declare global {
+    interface Document {
+        createElement(tagName: "smart-country-input"): CountryInput;
+        querySelector(selectors: "smart-country-input"): CountryInput | null;
+        querySelectorAll(selectors: "smart-country-input"): NodeListOf<CountryInput>;
+        getElementsByTagName(qualifiedName: "smart-country-input"): HTMLCollectionOf<CountryInput>;
+        getElementsByName(elementName: "smart-country-input"): NodeListOf<CountryInput>;
+    }
+}
+
 export interface CustomizationDialogProperties {
   /**
    * Sets or gets the animation mode. Animation is disabled when the property is set to 'none'
@@ -6307,6 +6558,16 @@ export interface DateInputProperties {
    */
   animation?: Animation;
   /**
+   * Determines whether the calendar button pop-up will be closed automatically when date or time is selected through it.
+   * Default value: false
+   */
+  autoClose?: boolean;
+  /**
+   * Determines the delay before the calendar pop-up is automatically closed. Applicable only when autoClose is set to true.
+   * Default value: 500
+   */
+  autoCloseDelay?: number;
+  /**
    * Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. Intl.DateTimeFormat is used to format date strings in JavaScript. By default the date format is 'numeric'. The default value is: { day: 'numeric', month: 'numeric', year: 'numeric' }
    * Default value: { day: 'numeric', month: 'numeric', year: 'numeric' }
    */
@@ -6409,7 +6670,7 @@ export interface DateInputProperties {
    */
   unfocusable?: boolean;
   /**
-   * Sets or gets the value of the element.
+   * Sets or gets the value of the element. Expected value is: Date string, Date object or null.
    * Default value: 
    */
   value?: any;
@@ -6824,6 +7085,11 @@ export interface DateTimePickerProperties {
    * Default value: null
    */
   footerTemplate?: any;
+  /**
+   * Determines whether to display a footer.
+   * Default value: false
+   */
+  footer?: boolean;
   /**
    * Determines the pattern that is used to display the value in.
    * Default value: "dd-MMM-yy HH:mm:ss.fff"
@@ -7569,6 +7835,11 @@ export interface DropDownButtonProperties {
    */
   placeholder?: string;
   /**
+   * Determines the element's placeholder template, displayed in the element's action button container. You can pass 'string', 'function' or HTMLTemplateElement as a value.
+   * Default value: null
+   */
+  placeholderTemplate?: any;
+  /**
    * Disables user interaction with the element.
    * Default value: false
    */
@@ -7945,7 +8216,7 @@ export interface DropDownListProperties {
   selectedValues?: string[];
   /**
    * Determines how many items can be selected.
-   * Default value: one
+   * Default value: zeroAndOne
    */
   selectionMode?: ListSelectionMode;
   /**
@@ -8152,6 +8423,996 @@ declare global {
     }
 }
 
+export interface EditorProperties {
+  /**
+   * Sets or gets the animation mode. Animation is disabled when the property is set to 'none'
+   * Default value: advanced
+   */
+  animation?: Animation;
+  /**
+   * Automatically loads the last saved state of the editor (from local storage) on element initialization. An id must be provided in order to load a previously saved state.
+   * Default value: false
+   */
+  autoLoad?: boolean;
+  /**
+   * Automatically saves the current content of the editor. Saving happens at time intervas determined by the autoSaveInterval property while the element on focus. An id must be provided to the element in order to store the state.
+   * Default value: false
+   */
+  autoSave?: boolean;
+  /**
+   * The property that determines the interval to automatically save the state of the Editor when the autoSave property is set.
+   * Default value: 1000
+   */
+  autoSaveInterval?: number;
+  /**
+   * A formatting function for the char counter. Takes two arguments: chars - the current number of characters inside the Editor.maxCharCount - the maximum number of characters inside the Editor.
+   * Default value: null
+   */
+  charCountFormatFunction?: any;
+  /**
+   * Determines the content filtering settings.
+   * Default value: [object Object]
+   */
+  contentFiltering?: EditorContentFiltering;
+  /**
+   * Determines the context menu for the Editor. The context menu is triggered when the user right clicks on the content area of the Editor.
+   * Default value: default
+   */
+  contextMenu?: EditorContextMenu;
+  /**
+   * Allows to customize default the context menu of the Editor. The property accepts an array of items which can be strings that represent the value of the item, or objects of the following format: { label: string, value: string }, where the label will be displayed and the value will be action value for the item. The property also accepts a function that must return an array of items with the following format function (target: HTMLElement, type: string, defaultItems: string[]) { return defaultItems } and the following arguments: target - the element that is the target of the context menu.type - the type of context menu ( whether it's a table, image, link or other)defaultItems - an array of strings which represent the default items for the context menu.
+   * Default value: null
+   */
+  contextMenuDataSource?: string[] | { label: string, value: 'string' }[] | Function | null;
+  /**
+   * Sets the Editor's Data Export options.
+   * Default value: [object Object]
+   */
+  dataExport?: EditorDataExport;
+  /**
+   * Enables or disables the Editor.
+   * Default value: false
+   */
+  disabled?: boolean;
+  /**
+   * Disables content editing inside Editor.
+   * Default value: false
+   */
+  disableEditing?: boolean;
+  /**
+   * Disables the Quick Search Bar.
+   * Default value: false
+   */
+  disableSearchBar?: boolean;
+  /**
+   * Determines the edit mode for the Editor. By default the editor's content accepts and parses HTML. However if set to 'markdown' the Editor can be used as a full time Markdown Editor by parsing the makrdown to HTML in preview mode.
+   * Default value: html
+   */
+  editMode?: EditMode;
+  /**
+   * Determines whether the value returned from getHTML method and Source Code view are encoded or not.
+   * Default value: false
+   */
+  enableHtmlEncode?: boolean;
+  /**
+   * Determines whether the Tab key can insert tab chars inside the Editor or change focus (default)
+   * Default value: false
+   */
+  enableTabKey?: boolean;
+  /**
+   * Determines the time interval between results for the find and replace and search bar features.
+   * Default value: 50
+   */
+  findAndReplaceTimeout?: number;
+  /**
+   * Determines whether the Toolbar is hidden or not.
+   * Default value: false
+   */
+  hideToolbar?: boolean;
+  /**
+   * Determines whether the Inline Toolbar is hidden or not.
+   * Default value: false
+   */
+  hideInlineToolbar?: boolean;
+  /**
+   * Determines the file format of the image/video that are uploaded from local storage. By default images/videos are stroed as base64.
+   * Default value: base64
+   */
+  imageFormat?: EditorImageFormat;
+  /**
+   * Sets the content of the Editor as HTML. Allows to insert text and HTML.
+   * Default value: "en"
+   */
+  innerHTML: string;
+  /**
+   * Defines an offset(x,y) for the Inline Toolbar positioning on the page.
+   * Default value: [0, -5]
+   */
+  inlineToolbarOffset?: number[];
+  /**
+   * Determines the iframe settings of the Editor. When enabled the contents of the Editor are placed inside an iframe, isolated in a separate dom. The element allows to insert external resources into the iframe if needed.
+   * Default value: [object Object]
+   */
+  iframeSettings?: EditorIframeSettings;
+  /**
+   * Sets or gets the language. Used in conjunction with the property messages. 
+   * Default value: "en"
+   */
+  locale?: string;
+  /**
+   * Sets a limit on the number of chars inside the Editor. 
+   * Default value: null
+   */
+  maxCharCount?: number;
+  /**
+   * Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property language. 
+   * Default value:    * {
+   *   "en": {
+   *     "propertyUnknownName": "Invalid property name: ''!",
+   *     "propertyUnknownType": "'' property is with undefined 'type' member!",
+   *     "propertyInvalidValue": "Invalid ''!",
+   *     "propertyInvalidValueType": "Invalid ''!",
+   *     "methodInvalidValueType": "Invalid ''!",
+   *     "methodInvalidArgumentsCount": "Invalid '' argument(s)!",
+   *     "methodInvalidReturnType": "Invalid ''!",
+   *     "elementNotInDOM": "Element does not exist in DOM! Please, add the element to the DOM, before invoking a method.",
+   *     "moduleUndefined": "Module is undefined.",
+   *     "missingReference": "'.",
+   *     "htmlTemplateNotSuported": ": Web Browser doesn't support HTMLTemplate elements.",
+   *     "invalidTemplate": "' property accepts a string that must match the id of an HTMLTemplate element from the DOM.",
+   *     "invalidValue": ".",
+   *     "incorrectArgument": ".",
+   *     "permissionsRequired": ".",
+   *     "timeout": ": The import request has timed out.",
+   *     "importError": ".",
+   *     "exportError": ".",
+   *     "ok": "Ok",
+   *     "cancel": "Cancel",
+   *     "alignLeft": "Align Left",
+   *     "alignCenter": "Align Center",
+   *     "alignRight": "Align Right",
+   *     "alignJustify": "Align Justify",
+   *     "segoeUi": "Segoe UI",
+   *     "arial": "Arial",
+   *     "georgia": "Georgia",
+   *     "impact": "Impact",
+   *     "tahoma": "Tahoma",
+   *     "timesNewRoman": "Times New Roman",
+   *     "verdana": "Verdana",
+   *     "p": "Paragraph",
+   *     "pre": "Code",
+   *     "code": "Code",
+   *     "blockquote": "Quotation",
+   *     "h1": "Heading 1",
+   *     "h2": "Heading 2",
+   *     "h3": "Heading 3",
+   *     "h4": "Heading 4",
+   *     "h5": "Heading 5",
+   *     "h6": "Heading 6",
+   *     "bold": "Bold",
+   *     "italic": "Italic",
+   *     "underline": "Underline",
+   *     "strikethrough": "Strikethrough",
+   *     "orderedlist": "Ordered List",
+   *     "unorderedlist": "Unordered List",
+   *     "subscript": "Subscript",
+   *     "superscript": "Superscript",
+   *     "alignment": "Alignments",
+   *     "fontname": "Font Name",
+   *     "fontsize": "Font Size",
+   *     "formats": "Formats",
+   *     "backgroundcolor": "Background Color",
+   *     "fontcolor": "Font Color",
+   *     "redo": "Redo",
+   *     "undo": "Undo",
+   *     "indent": "Indent",
+   *     "outdent": "Outdent",
+   *     "createlink": "Hyperlink",
+   *     "hyperlink": "Hyperlink",
+   *     "editlink": "Hyperlink",
+   *     "removelink": "Remove link",
+   *     "openlink": "Open link",
+   *     "image": "Image",
+   *     "video": "Video",
+   *     "table": "Table",
+   *     "lowercase": "Lower Case",
+   *     "uppercase": "Upper Case",
+   *     "print": " Print",
+   *     "cut": " Cut",
+   *     "copy": " Copy",
+   *     "paste": " Paste",
+   *     "clearformat": "Clear Format",
+   *     "fullscreen": "Full Screen",
+   *     "restore": "Restore Screen",
+   *     "sourcecode": "Source Code",
+   *     "preview": "Preview",
+   *     "splitmode": "Split Editor",
+   *     "address": "Web Address",
+   *     "text": "Display Text",
+   *     "addressPlaceholder": "http://example.com",
+   *     "textPlaceholder": "Enter Text",
+   *     "targetPlaceholder": "Select Target",
+   *     "titlePlaceholder": "Enter a Title",
+   *     "urlPlaceholder": "http://example.com/image.png",
+   *     "srcPlaceholder": "https://www.youtube.com/embed/video_link",
+   *     "thumbnail": "Or provide a URL as a video thumbnail",
+   *     "thumbnailPlaceholder": "https://www.link-to-thumbnail.jpg",
+   *     "videoUrl": "Video URL",
+   *     "videoUrlPlaceholder": "https://www.youtube.com/video_link",
+   *     "captionPlaceholder": "Caption",
+   *     "altPlaceholder": "Alternative Text",
+   *     "widthPlaceholder": "auto",
+   *     "heightPlaceholder": "auto",
+   *     "target": "Open Link in",
+   *     "linkBlankDescr": "New Window",
+   *     "linkSelfDescr": "Same Window",
+   *     "linkParentDescr": "Parent Frame",
+   *     "linkTopDescr": "Full Body of the Window",
+   *     "linkCustomDescr": "Custom Frame Name",
+   *     "title": "Title",
+   *     "url": "Or provide the URL to an image",
+   *     "src": "Or provide the URL to an embed video",
+   *     "width": "Width",
+   *     "height": "Height",
+   *     "alt": "Alternative Text",
+   *     "caption": "Caption",
+   *     "display": "Display",
+   *     "displayPlaceholder": "Display",
+   *     "displayBlock": "Block",
+   *     "displayInline": "Inline",
+   *     "draggable": "Enable Dragging",
+   *     "resizable": "Enable Resizing",
+   *     "browse": "Browse",
+   *     "connectionError": ": File Upload requires connection to the server.",
+   *     "wrongItemIndex": ": There is no file with such an index in the list of uploaded files.",
+   *     "tooLongFileName": ": File name is too long.",
+   *     "totalFiles": "Total files: ",
+   *     "cancelFile": "Cancel File",
+   *     "dashedborders": "Dashed Borders",
+   *     "altrows": "Alternate Rows",
+   *     "insertRowBefore": "Insert Row Before",
+   *     "insertRowAfter": "Insert Row After",
+   *     "deleteRow": "Delete Row",
+   *     "insertColumnLeft": "Insert Column Left",
+   *     "insertColumnRight": "Insert Column Right",
+   *     "deleteColumn": "Delete Column",
+   *     "alignTop": "Align Top",
+   *     "alignMiddle": "Align Middle",
+   *     "alignBottom": "Align Bottom",
+   *     "delete": "Delete",
+   *     "tablerows": "Table Rows",
+   *     "tablecolumns": "Table Columns",
+   *     "tablevalign": "Table Cell Vertical Align",
+   *     "tablestyle": "Table Style",
+   *     "tableheader": "Table Header",
+   *     "buttonLabel": "Custom Table",
+   *     "pasteLabel": "Choose the paste format action:",
+   *     "cols": "Columns",
+   *     "rows": "Rows",
+   *     "alphabet": "abcdefghijklmnopqrstuvwxyz",
+   *     "header": "Header",
+   *     "column": "Column",
+   *     "plainText": "Plain Text",
+   *     "keepFormat": "Keep Format",
+   *     "cleanFormat": "Clean Format",
+   *     "roleDescription": "Text Editor",
+   *     "iframeTitle": "Editor Content is Encloused in it's own DOM inside an iFrame",
+   *     "toolbarButtonAriaLabel": "Toolbar Toggle Button",
+   *     "primaryToolbarAriaLabel": "Primary Toolbar",
+   *     "secondaryToolbarAriaLabel": "Secondary Toolbar",
+   *     "inputAriaLabel": "Enter Text",
+   *     "homeTab": "Home",
+   *     "viewTab": "View",
+   *     "insertTab": "Insert",
+   *     "layoutTab": "Layout",
+   *     "undoGroup": "Undo",
+   *     "clipboardGroup": "Clipboard",
+   *     "fontGroup": "Font",
+   *     "paragraphGroup": "Paragraph",
+   *     "editingGroup": "Editing",
+   *     "tableGroup": "Tables",
+   *     "imageGroup": "Images",
+   *     "videoGroup": "Videos",
+   *     "linkGroup": "Links",
+   *     "viewsGroup": "Views",
+   *     "deleteGroup": "Delete",
+   *     "findandreplace": "Find and Replace",
+   *     "requiredMessage": "The content of the Editor cannot be empty",
+   *     "tableProperties": "Table Properties",
+   *     "imageProperties": "Image Properties",
+   *     "videoProperties": "Video Properties",
+   *     "linkProperties": "Link Properties",
+   *     "selectAll": "Select All",
+   *     "deleteTable": "Delete Table",
+   *     "deleteImage": "Delete Image",
+   *     "deleteVideo": "Delete Video",
+   *     "createLink": "Create Link",
+   *     "deleteLink": "Delete Link",
+   *     "copyImage": "Copy",
+   *     "cutImage": "Cut",
+   *     "copyVideo": "Copy",
+   *     "cutVideo": "Cut",
+   *     "find": "Find",
+   *     "findPlaceholder": "",
+   *     "replace": "Replace",
+   *     "replaceWith": "Replace With",
+   *     "replaceAll": "Replace All",
+   *     "replacePlaceholder": "",
+   *     "results": "Results",
+   *     "resultsPlaceholder": "No match",
+   *     "matchCase": "Match Case",
+   *     "searchPlaceholder": "Search..."
+   *   }
+   * }
+   */
+  messages?: any;
+  /**
+   * Sets a to the element which can be used to submit the value of the Editor via a form.
+   * Default value: null
+   */
+  name?: string | null;
+  /**
+   * Determines the format of the content that will be pasted inside the Editor.
+   * Default value: keepFormat
+   */
+  pasteFormat?: PasteFormat;
+  /**
+   * Determines the placeholder that will be shown when there's no content inside the Editor.
+   * Default value: ""
+   */
+  placeholder?: string;
+  /**
+   * Determines whether the clearFormat toolbar action should also remove inline styles from the currently selected node.
+   * Default value: false
+   */
+  removeStylesOnClearFormat?: boolean;
+  /**
+   * Determines whether Editor's content is required ot not. If set and the Editor's content is empty, a notification will appear to notify that the Editor cannot be empty.
+   * Default value: false
+   */
+  required?: boolean;
+  /**
+   * Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts.
+   * Default value: false
+   */
+  rightToLeft?: boolean;
+  /**
+   * Determines whether the value is sanitized from XSS content or not. When enabled scripts and other XSS vulnerabilities are not allowed to exist inside the Editor's as HTML content.
+   * Default value: false
+   */
+  sanitized?: boolean;
+  /**
+   * Determines whether the char counter is visible or not. When enabled it is displayed in the bottom right corner. If maxCharCount is set and the content characters are equal or more than 70% of the maximum char count the counter is colored in order to warn the user. If the char count is equal or more than 90% the counter is again colored with a different warning color to indicate that the counter is near maximum. When maximum is reached, text input is not allowed.
+   * Default value: false
+   */
+  showCharCount?: boolean;
+  /**
+   * Determines the refresh interval for the Source Code/Preview Panel when Split Mode is enabled. 
+   * Default value: 100
+   */
+  splitModeRefreshTimeout?: number;
+  /**
+   * Determines the theme. Theme defines the look of the element
+   * Default value: ""
+   */
+  theme?: string;
+  /**
+   * Determines the Toolbar items list. Each item can be string pointing to the name of the item or an object that defines a custom item or adds aditional settings to an item. The name of the items are case insensitive. An object definition should contain a name attribute that refers to the name of the item when modifing an existing toolbar item. The name attribute determines the action of the item. If set to 'custom' it is possible to create a custom toolbar item. If name attribute is not set or not valid it is treated as a separator, no a toolbar item. The following items are supported by default by the Editor: SourceCode - shows the HTML/Preview Panel by hiding the input panel. Item type - 'Toggle button'.SplitMode - shows both input and HTML/Preview Panel by splitting the Editor content in two sections. Item type - 'Toggle button'FullScreen - fits the viewport with the Editor by expanding it over the page content. Item type - 'Toggle button'.Alignment - aligns the selected content. Item type - 'Drop down'.FontName - changes the font family of the selected content. Item type - 'drop-down'.FontSize - changes the font size of the selected content. Item type - 'drop-down'.Formats - changes the format of the current selection. Itme type - 'drop-down'.TableRows - allows to insert/remove a row into a selected table element. Item type - 'drop-down'.TableColumns - allows to insert/remove a column into a selected table element. Itme type - 'drop-down'.TableVAlign - sets the vertical alignment of a selected table cell. Item type - 'drop-down'.TableStyle - sets additional styling to a selected table inside the Editor. Item type - 'drop-down'.BackgroundColor - changes the background color of the current selection. Item type - 'color-input'.FontColor - changes the font color of the current selection. Item type = 'color-input'.Bold - sets the currently selected text as bold or not. Item type - 'button'.Italic - sets the currently selected text as italic. Item type - 'button'. Underline - sets the currently selected text as underlined. Itme type - 'button'.Strikethrough - set the currently selected text as strikethrough. Item type - 'button'.Delete - deletes the current selection. Item type - 'button'.Undo - undoes the last operation. Item type - 'button'.Redo - redoes the previous operation. Item type - 'button'.Indent - indents the current selection once. Item type - 'button'.Outdent - outdents the current selection once. Item type - 'button'.OpenLink - triggers a hyperlink. Item type - 'button'.EditLink - creates/edits the selected hyperlink. Item type - 'button'.CreateLink - creates/edits the selected hyperlink. Item type - 'button'.RemoveLink - removes the currently selected hyperlink. Item type - 'button'.Hyperlink - same as createLink, triggers a Dialog Window for link creation. Item type - 'button'.Cut - Cuts the currently selected text. Item type - 'button'.Copy - copies the currently selected text. Item type - 'button'Paste - pastes the currenly copied/cut text from the Clipboard. Item type = 'button' or 'drop-down' when advanced attribute is set to 'true'.Image - triggers a Dialog Window to insert/edit an image. Item type - 'button'.Video - triggers a Dialog Window to insert/edit a video. Item type - 'button'.LowerCase - changes the current selection to lower case. Item type - 'button'.UpperCase - changes the current selection to upper case. Item type - 'button'.Print - opens the browser print preview window. Item type - 'button'.Caption - insert/remove a caption when a table is selected. Item type - 'button'.ClearFormat - removes the formatting of the currntly selected text. Item type - 'button'.Table - triggers a Dialog Window to insert a table. Item type - 'button'.TableHeader - insert/remove a header row to the currently selected table. Item type - 'button'.OrderedList - insert/remove an order list. Item type = 'button'.UnorderedList - insert/remove an unordered list. Item type - 'button'.Subscript - changes the currently selected text to subscript. Item type - 'button'.Superscript - changes the currently selected text to superscript. Item type - 'button'.FindAndReplace - opens a dialog that allows to find and replace text inside the Editor's content section. Item type - 'button'.  The inlineToolbarItems attribute is applicable only to the following items: 'table', 'image', 'hyperlink'. It accepts the same type of value as toolbarItems property but the toolbar items will be placed insinde the Inline Toolbar instead.
+   * Default value: bold,italic,underline,|,formats,alignment,orderedList,unorderedList,|,hyperlink,image,video,|,sourceCode,redo,undo
+   */
+  toolbarItems?: ToolbarItem[];
+  /**
+   * Determines the toolbar mode of the Editor. The main toolbar of the Editor can appear as a Ribbon or as a Menu.
+   * Default value: menu
+   */
+  toolbarMode?: ToolbarMode;
+  /**
+   * Allows to configure the SingleLineRibbon appearance by changing the order and items of the groups.
+   * Default value: [{"name":"homeTab","groups":[{"name":"undoGroup","items":["undo","redo"]},{"name":"clipboardGroup","items":["cut","copy","paste"]},{"name":"fontGroup","items":["fontName","fontSize","backgroundColor","fontColor","clearFormat","formats","bold","italic","underline","strikethrough","superscript","subscript"]},{"name":"paragraphGroup","items":["orderedList","unorderedList","indent","outdent","alignment"]},{"name":"editingGroup","items":["findAndReplace"]}]},{"name":"insertTab","groups":[{"name":"tableGroup","items":["table"]},{"name":"imageGroup","items":["image"]}{"name":"videoGroup","items":["video"]},{"name":"linkGroup","items":["createLink","removeLink"]}]},{"name":"viewTab","groups":[{"name":"viewsGroup","items":["fullScreen","sourceCode","splitMode"]}]},{"name":"layoutTab","hidden":true,"groups":[{"name":"deleteGroup","items":["delete"]},{"name":"tableGroup","items":["table","tableHeader","tableRows","tableColumns","tableVAlign","tableStyle",""]},{"name":"imageGroup","items":["image","caption"]},{"name":"videoGroup","items":["video","caption"]}]}]
+   */
+  toolbarRibbonConfig?: { name: string, groups: { name: string, items: string[] }[] }[];
+  /**
+   * Determines the format of the content that will be pasted inside the Editor.
+   * Default value: toggle
+   */
+  toolbarViewMode?: ToolbarViewMode;
+  /**
+   * Sticks the Toolbar to the top of the window and stays there while scrolling.
+   * Default value: false
+   */
+  toolbarSticky?: boolean;
+  /**
+   * If is set to true, the element cannot be focused.
+   * Default value: false
+   */
+  unfocusable?: boolean;
+  /**
+   * Sets or gets the value of the Editor.
+   * Default value: """"
+   */
+  value?: string;
+  /**
+   * A function that can be used to completly customize the Editor dialog that is used to insert/edit tables/images/videos/hyperlinks. The function accepts two arguments: target - the target dialog that is about to be opened.item - the toolbar item object that trigger the dialog.
+   * Default value: null
+   */
+  windowCustomizationFunction?: any;
+}
+/**
+ jqxEditor represents an advanced HTML text editor which can simplify web content creation or be a replacement of your HTML/Markdown Text Areas.
+*/
+export interface Editor extends BaseElement, EditorProperties {
+
+  /* Get a member by its name */
+  [name: string]: any;
+  /**
+   * This event is triggered on blur if the content is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The old value before the change.
+   *  value - The new value after the change.
+   */
+  onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered after user input to indicate that the content is changed via user interaction.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The old value before the input change.
+   *  value - The new value after the input change.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered before a Toolbar action is started. The event can be canceled via event.preventDefault().
+	* @param event. The custom event. Custom data event was created with: ev.detail(name)
+   *  name - The name of the action.
+   */
+  onActionStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a Toolbar action has ended.
+	* @param event. The custom event. Custom data event was created with: ev.detail(name)
+   *  name - The name of the action.
+   */
+  onActionEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a Context menu item has been clicked.
+	* @param event. The custom event. Custom data event was created with: ev.detail(originalEvent, value)
+   *  originalEvent - The original click event.
+   *  value - The value of the item.
+   */
+  onContextMenuItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Context Menu is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, owner)
+   *  target - The toolbar that is the target of the operation.
+   *  owner - The tooltip target (the owner of the tooltip).
+   */
+  onContextMenuOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Context Menu is opening. The opening operation can be canceled via event.preventDefault().
+	* @param event. The custom event. Custom data event was created with: ev.detail(target)
+   *  target - The toolbar that is the target of the operation.
+   */
+  onContextMenuOpening?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Context Menu is closed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, owner)
+   *  target - The toolbar that is the target of the operation.
+   *  owner - The tooltip target (the owner of the tooltip).
+   */
+  onContextMenuClose?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Context Menu is closing. The closing operation can be canceled via event.preventDefault().
+	* @param event. The custom event. Custom data event was created with: ev.detail(target)
+   *  target - The toolbar that is the target of the operation.
+   */
+  onContextMenuClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when an image/table/video resizing has started.
+	* @param event. The custom event.    */
+  onResizeStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when an image/table/video resizing has ended.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target)
+   *  target - The element that is resized (image/table or video).
+   */
+  onResizeEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the inline Toolbar is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, owner)
+   *  target - The toolbar that is the target of the operation.
+   *  owner - The tooltip target (the owner of the tooltip).
+   */
+  onInlineToolbarOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the inline Toolbar is opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target)
+   *  target - The toolbar that is the target of the operation.
+   */
+  onInlineToolbarOpening?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the inline Toolbar is closed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, owner)
+   *  target - The toolbar that is the target of the operation.
+   *  owner - The tooltip target (the owner of the tooltip).
+   */
+  onInlineToolbarClose?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the inline Toolbar is closing.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target)
+   *  target - The toolbar that is the target of the operation. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+   */
+  onInlineToolbarClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Drop Down Toolbar is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, owner)
+   *  target - The toolbar that is the target of the operation.
+   *  owner - The tooltip target (the owner of the tooltip).
+   */
+  onDropDownToolbarOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Drop Down Toolbar is opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target)
+   *  target - The toolbar that is the target of the operation.
+   */
+  onDropDownToolbarOpening?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Drop Down Toolbar is closed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, owner)
+   *  target - The toolbar that is the target of the operation.
+   *  owner - The tooltip target (the owner of the tooltip).
+   */
+  onDropDownToolbarClose?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Drop Down Toolbar is closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target)
+   *  target - The toolbar that is the target of the operation.
+   */
+  onDropDownToolbarClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered the Dialog Window is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item)
+   *  target - The window that is the target of the operation.
+   *  item - The toolbar item is the target of the operation.
+   */
+  onDialogOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered before the Dialog Window is opened. The event can be prevented via event.preventDefault().
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item)
+   *  target - The window that is the target of the operation.
+   *  item - The toolbar item that is the target of the operation.
+   */
+  onDialogOpening?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the Dialog Window is closed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item)
+   *  target - The window that is the target of the operation.
+   *  item - The toolbar item that is the target of the operation.
+   */
+  onDialogClose?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered before the Dialog Window is closing. The event can be prevented via event.preventDefault().
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item)
+   *  target - The window that is the target of the operation.
+   *  item - The toolbar item that is the target of the operation.
+   */
+  onDialogClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the uploading of an image/video is successful.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item, filename, type, size, index, status)
+   *  target - The file upload element that is the target of the operation.
+   *  item - The toolbar item that is the target of the operation.
+   *  filename - The name of the uploaded file.
+   *  type - The type of the uploaded file.
+   *  size - The size of the uploaded file.
+   *  index - The index of the uploaded file.
+   *  status - The status of the uploaded file. Whether there was an error or success.
+   */
+  onImageUploadSuccess?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the uploading of an image/video is unsuccessful.
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item, filename, type, size, index, status)
+   *  target - The file upload element that is the target of the operation.
+   *  item - The toolbar item that is the target of the operation.
+   *  filename - The name of the canceled file.
+   *  type - The type of the canceled file.
+   *  size - The size of the canceled file.
+   *  index - The index of the canceled file.
+   *  status - The status of the uploaded file. Whether there was an error or success.
+   */
+  onImageUploadFailed?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a Toolbar item is clicked.
+	* @param event. The custom event. Custom data event was created with: ev.detail(originalEvent, value)
+   *  originalEvent - The original click event.
+   *  value - The name of the toolbar item that was clicked.
+   */
+  onToobarItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a message is closed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(instance)
+   *  instance - The toast item that is the target of the operation.
+   */
+  onMessageClose?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a message is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(instance)
+   *  instance - The toast item that is the target of the operation.
+   */
+  onMessageOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * Blurs the content of the Editor.
+   */
+  blur(): void;
+  /**
+   * Clears the content of the Editor.
+   */
+  clearContent(): void;
+  /**
+   * Collapse the Toolbar if the <b>toolbarViewMode</b> is set to 'toggle'.
+   */
+  collapseToolbar(): void;
+  /**
+   * Disables a Toolbar item.
+   * @param {string} itemName. The name of the toolbar item to disable.
+   */
+  disableToolbarItem(itemName: string): void;
+  /**
+   * Expand the Toolbar if the <b>toolbarViewMode</b> is set to 'toggle'.
+   */
+  expandToolbar(): void;
+  /**
+   * Enables a previously disabled Toolbar item.
+   * @param {string} itemName. The name of the toolbar item to enable.
+   */
+  enableToolbarItem(itemName: string): void;
+  /**
+   * Executes a command via the native <b>execCommand</b> method. The method returns true or false depending on whether the execution was successful or not. The following list of commands can be eexecuted: <ul><li>bold - makes the currently selected content bold. Example: <b>editor.executeCommand('bold');</b></li><li>italic - makes the currently selected content italic. Example: <b>editor.executeCommand('italic');</b></li><li>undelined - makes the currently selected content underlined. Example: <b>editor.executeCommand('underline');</b></li><li>strikeThrough - applies a single line strike through formatting to the currently selected content. Example: <b>editor.executeCommand('strikeThrough');</b></li><li>superscript - sets the selected content as superscript. Example: <b>editor.executeCommand('superscript');</b></li><li>subscript - sets the selected content as superscript. Example: <b>editor.executeCommand('subscript');</b></li><li>uppercase - changes the case of the current selection to upper. Example: <b>editor.executeCommand('uppercase');</b></li><li>lowercase - changes the case of the current selection to lower. Example: <b>editor.executeCommand('lowercase');</b></li><li>foreColor - changes the font color of the current content selection. Example: <b>editor.executeCommand('foreColor', '#000000');</b></li><li>fontName - changes the font name for the selected content. Example: <b>editor.executeCommand('fontName', 'Arial');</b></li><li>fontSize - changes the font size of the currently selected content. Example: <b>editor.executeCommand('fontSize', '15px');</b></li><li>hiliteColor - changes the background color of current selection. Example: <b>editor.executeCommand('hiliteColor', '#000000');</b></li><li>justifyCenter - aligns the content to the center. Example: <b>editor.executeCommand('justifyCenter');</b></li><li>justifyFull - aligns the content to be fully justified. Example: <b>editor.executeCommand('justifyFull');</b></li><li>justifyLeft - aligns the content to the left. Example: <b>editor.executeCommand('justifyLeft');</b></li><li>justifyRight - aligns the content to the right. Example: <b>editor.executeCommand('justifyRight');</b></li><li>undo - allows to undo the previous action. Example: <b>editor.executeCommand('undo');</b></li><li>redo - allows to redo the previous actions. Example: <b>editor.executeCommand('redo');</b></li><li>createLink - creates a hyperlink in the content section of the Editor. Example: <b>editor.executeCommand('createLink', { text: 'Links', url: 'http://', title : 'Link' });</b></li><li>indent - indents the content with one level. Example: <b>editor.executeCommand('indent');</b></li><li>outdent - outdents the content with one level. Example: <b>editor.executeCommand('outdent');</b></li><li>insertHTML - insert an HTML content as string at the current cursor location. Example: <b>editor.executeCommand('insertHTML', '<p>Text</p>');</b></li><li>insertOrderedList - inserts a new numbered list item. Example: <b>editor.executeCommand('insertOrderedList');</b></li><li>insertUnorderedList - inserts a new bulleted list item. Example: <b>editor.executeCommand('insertUnorderedList');</b></li><li>removeFormat - removes the formatting styles from currently selected text. Example: <b>editor.executeCommand('removeFormat');</b></li><li>insertText - inserts a text at the current cursor location. Example: <b>editor.executeCommand('insertText', 'Some text to insert');</b></li><li>insertImage - inserts an image at the current cursor location. Example: <b>editor.executeCommand('insertImage', { url: 'https://www.htmlelements.com/demos/images/carousel-medium-2.jpg'});</b></li></ul>
+   * @param {string} commandName. The name of the command to execute.
+   * @param {string | number} value?. The value for the command. Some commands require a value to be passed, others do not.
+   * @returns {boolean}
+   */
+  executeCommand(commandName: string, value?: string | number): boolean;
+  /**
+   * Focuses the content of the Editor.
+   */
+  focus(): void;
+  /**
+   * Returns the number of characters inside the Editor's content.
+   * @returns {number}
+   */
+  getCharCount(): number;
+  /**
+   * Returns the current selection range. By default the result is an object of type Range, but if the <b>editMode</b> property is set to 'markdown' the returned value is an object indicating the start/end indexes of the current selection. 
+   * @returns {any}
+   */
+  getSelectionRange(): any;
+  /**
+   * Returns the content of the Editor as HTML. When <b>editMode</b> is set to 'markdown' the markdown is parsed and returned as HTML.
+   * @returns {string}
+   */
+  getHTML(): string;
+  /**
+   * Returns the content of the Editor as text.
+   * @returns {string}
+   */
+  getText(): string;
+  /**
+   * Hides a specific message or all messages if no argument is provided.
+   * @param {HTMLElement | string | number} item?. Hides a specific message. The argument can be a DOM reference to a specific item, it's index or it's id. If the argument is not provided then all messages will be closed.
+   */
+  hideMessage(item?: HTMLElement | string | number): void;
+  /**
+   * Hides the last shown message.
+   */
+  hideLastMessage(): void;
+  /**
+   * Shows a custom message inside the Editor.
+   * @param {string} message. The text message to be displayed.
+   * @param {any} settings?. Additional settings that can be applied to the Toast element that handles the messages. This parameter should contain only valid Toast properties and values.
+   * @returns {HTMLElement | undefined}
+   */
+  showMessage(message: string, settings?: any): HTMLElement | undefined;
+  /**
+   * Selects the text inside Editor's content.
+   */
+  selectAll(): void;
+  /**
+   * Selects a range of text inside the Editor. The method will find the nodes containing the text from the start to the end indexes and will select them as ranges. However, currently only FireFox supports multiple range selection. The rest of the browsers will only select the first node. If the editor is in 'html' <b>editMode</b> then the expected text will be selected regardless of the browser because there's only one node inside the editor.
+   * @param {number} startIndex. The start index to select from.
+   * @param {number} endIndex. The end index to select to.
+   */
+  selectRange(startIndex: number, endIndex: number): void;
+  /**
+   * Clears the local storage from previously stored states of the Editor with the current id.
+   */
+  clearState(): void;
+  /**
+   * Saves the current state of the Editor to local storage. Requires an id to be set to the Editor.
+   */
+  saveState(): void;
+  /**
+   * Loads the last stored state of the Editor from local storage. Requires an id to be set to the Editor.
+   */
+  loadState(): void;
+  /**
+   * Sets Editor into Split Mode. In split mode the HTML/Markdown editor and SourceCode/Preview panels are visible.
+   * @param {boolean} value?. Determines whether to enter or leave split mode. By default the argument is not passed and the mode is toggled.
+   */
+  splitMode(value?: boolean): void;
+  /**
+   * Sets Editor into SourceCode/Preview Mode. In this mode the HTML view panel is displayed.
+   * @param {boolean} value?. Determines whether to enter or leave split mode. By default the argument is not passed and the mode is toggled.
+   */
+  previewMode(value?: boolean): void;
+  /**
+   * Sets Editor into Full Screen Mode. If enabled the Editor is positioned above the page content and fills the screen.
+   * @param {boolean} value?. Determines whether to enter or leave split mode. By default the argument is not passed and the mode is toggled.
+   */
+  fullScreenMode(value?: boolean): void;
+  /**
+   * Exports the content of the Editor in the desired format. The currently supported formats are: HTML, Markdown and PDF.
+   * @param {string} dataFormat. The expected file format.
+   * @param {any} callback?. A callback that is executed before the data is exported. Allows to modify the output.
+   */
+  exportData(dataFormat: string, callback?: any): void;
+  /**
+   * Imports the content of a file to the Editor. The currently supported formats are: TXT or HTML.
+   * @param {any} source. The url to the file or an object that defines settings for the Ajax request like url, timeput, etc. Object format: { url: string, type: string, data: object, timeout: number }
+   * @param {any} settings?. Additional settings for the ajax request. Such as loadError function, contentType, etc. Format: { contentType: string, beforeSend: Function, loadError: Function, beforeLoadComplete: Function  }
+   */
+  importData(source: any, settings?: any): void;
+  /**
+   * Opens the Print Preview Panel of the Browser to print Editor's content.
+   */
+  print(): void;
+  /**
+   * Allows to update the settings of a single toolbar item. The method returns <b>true</b> if successful.
+   * @param {string | number} name. The name of the toolbar item or it's index inside the <b>toolbarItems</b> array.
+   * @param {any} settings. A settings object for the toolbar item. It should have the same definition as when defining a custom toolbar item. You can read more about it in the dedicated topic for the Editor Toolbar on the website.
+   * @returns {boolean | undefined}
+   */
+  updateToolbarItem(name: string | number, settings: any): boolean | undefined;
+}
+
+/**Determines the content filtering settings. */
+export interface EditorContentFiltering {
+  /**
+   * Determines which element attributes to filter.
+   * Default value: null
+   */
+  attributes?: string[];
+  /**
+   * Determines whether to allow (whiteList) or remove (blackList) the specified attributes.
+   * Default value: blackList
+   */
+  attributeFilterMode?: EditorContentFilteringAttributeFilterMode;
+  /**
+   * Determines which element tags to filter.
+   * Default value: null
+   */
+  tags?: string[];
+  /**
+   * Determines whether to allow (whiteList) or remove (blackList) the specified tags.
+   * Default value: blackList
+   */
+  tagFilterMode?: EditorContentFilteringTagFilterMode;
+  /**
+   * Determines which style attributes to filter.
+   * Default value: null
+   */
+  styleAttributes?: string[];
+  /**
+   * Determines whether to allow (whiteList) or remove (blackList) the specified style attributes.
+   * Default value: blackList
+   */
+  styleAttributeFilterMode?: EditorContentFilteringStyleAttributeFilterMode;
+}
+
+/**Sets the Editor's Data Export options. */
+export interface EditorDataExport {
+  /**
+   * Sets a custom style object of the dataExport. 
+   * Default value: null
+   */
+  style?: any;
+  /**
+   * Sets the exported file's name.
+   * Default value: "jqxScheduler"
+   */
+  fileName?: string;
+  /**
+   * Sets the page orientation, when exporting to PDF.
+   * Default value: "portrait"
+   */
+  pageOrientation?: string;
+}
+
+/**Determines the iframe settings of the Editor. When enabled the contents of the Editor are placed inside an iframe, isolated in a separate dom. The element allows to insert external resources into the iframe if needed. */
+export interface EditorIframeSettings {
+  /**
+   * Determines the attributes and their values that will be set to the iframe. Here's how to define attributes: attributes: { height: 500 }
+   * Default value: null
+   */
+  attributes?: any;
+  /**
+   * Enables/Disables the usage of an iframe for the content of the Editor.
+   * Default value: false
+   */
+  enabled?: boolean;
+  /**
+   * Determines the resources like scripts/styles that will be imported into the iframe. Here's how to define resources: resources: { 'style': { href: 'styles.css' }, 'script': { src: 'index.js', type: 'module' }} 
+   * Default value: "portrait"
+   */
+  resources?: string;
+}
+
+export interface ToolbarItem {
+  /**
+   * The unique name of the toolbar item. The list of all possible names is available in the description above.
+   * Default value: 
+   */
+  name?: string | null;
+  /**
+   * Determines whethet the item is disabled or not.
+   * Default value: false
+   */
+  disabled?: boolean | null;
+  /**
+   * Applicable only to item 'paste'. Transforms the type of the Paste toolbar item to drop down list with paste format options.
+   * Default value: false
+   */
+  advanced?: boolean | null;
+  /**
+   * Allows to set a different dataSource for the toolbar items of type 'drop-down' or 'color-input.
+   * Default value: 
+   */
+  dataSource?: any;
+  /**
+   * Defines the list of toolbar items for the Inline Toolbar. Accept the same values as toolbarItems property.
+   * Default value: 
+   */
+  inlineToolbarItems?: any;
+  /**
+   * Allows to set predefined values for the Dialog Window of the following toolbar items: 'table', 'image', 'video', 'hyperlink'.
+   * Default value: [object Object]
+   */
+  editor?: ToolbarItemEditor;
+  /**
+   * Allows to set a template for a custom Toolbar item when the name attribute is set to 'custom'.
+   * Default value: null
+   */
+  template?: any;
+  /**
+   * Determines the width of the toolbar item.
+   * Default value: 
+   */
+  width?: number | string | null;
+}
+
+/**Allows to set predefined values for the Dialog Window of the following toolbar items: 'table', 'image', 'video', 'hyperlink'. */
+export interface ToolbarItemEditor {
+  /**
+   * Allows to preset the value for the hyperlink address field in the Dialog Window.
+   * Default value: 
+   */
+  address?: string | null;
+  /**
+   * Allows to preset the value for the hyperlink target field in the Dialog Window.
+   * Default value: 
+   */
+  target?: string | null;
+  /**
+   * Allows to preset the value for the hyperlink text field in the Dialog Window.
+   * Default value: 
+   */
+  text?: string | null;
+  /**
+   * Allows to preset the value for the hyperlink/image title field in the Dialog Window.
+   * Default value: 
+   */
+  title?: string | null;
+  /**
+   * Allows to preset the value for the image/video file uploader in the Dialog Window.
+   * Default value: null
+   */
+  file?: any;
+  /**
+   * Allows to preset the value for the image/video alt field in the Dialog Window.
+   * Default value: 
+   */
+  alt?: string | null;
+  /**
+   * Allows to preset the value for the image/video url field in the Dialog Window.
+   * Default value: 
+   */
+  url?: string | null;
+  /**
+   * Allows to preset the value for the image/table/video width field in the Dialog Window.
+   * Default value: 
+   */
+  width?: string | number;
+  /**
+   * Allows to preset the value for the image/table/video height field in the Dialog Window.
+   * Default value: 
+   */
+  height?: string | number;
+  /**
+   * Allows to preset the value for the image/video caption field in the Dialog Window.
+   * Default value: 
+   */
+  caption?: string | null;
+  /**
+   * Allows to preset the value for the image/video alignment field in the Dialog Window.
+   * Default value: 
+   */
+  alignment?: string | null;
+  /**
+   * Allows to preset the value for the image/video display field in the Dialog Window.
+   * Default value: 
+   */
+  display?: string | null;
+  /**
+   * Allows to preset the value for the image draggable field in the Dialog Window.
+   * Default value: false
+   */
+  draggable?: boolean | null;
+  /**
+   * Allows to preset the value for the image/table/video resizable field in the Dialog Window.
+   * Default value: false
+   */
+  resizable?: boolean | null;
+  /**
+   * Allows to preset the value for the table cols field in the Dialog Window.
+   * Default value: 
+   */
+  cols?: number | string | null;
+  /**
+   * Allows to preset the value for the table rows field in the Dialog Window.
+   * Default value: 
+   */
+  rows?: number | string | null;
+  /**
+   * Allows to preset the value for the table header field in the Dialog Window.
+   * Default value: false
+   */
+  tableheader?: boolean | null;
+  /**
+   * Allows to preset the value for the table altrows field in the Dialog Window.
+   * Default value: false
+   */
+  altrows?: boolean | null;
+  /**
+   * Allows to preset the value for the table dashedborders field in the Dialog Window.
+   * Default value: false
+   */
+  dashedborders?: boolean | null;
+}
+
+declare global {
+    interface Document {
+        createElement(tagName: "smart-editor"): Editor;
+        querySelector(selectors: "smart-editor"): Editor | null;
+        querySelectorAll(selectors: "smart-editor"): NodeListOf<Editor>;
+        getElementsByTagName(qualifiedName: "smart-editor"): HTMLCollectionOf<Editor>;
+        getElementsByName(elementName: "smart-editor"): NodeListOf<Editor>;
+    }
+}
+
+/**Determines whether to allow (whiteList) or remove (blackList) the specified attributes. */
+export declare type EditorContentFilteringAttributeFilterMode = 'blackList' | 'whiteList';
+/**Determines whether to allow (whiteList) or remove (blackList) the specified tags. */
+export declare type EditorContentFilteringTagFilterMode = 'blackList' | 'whiteList';
+/**Determines whether to allow (whiteList) or remove (blackList) the specified style attributes. */
+export declare type EditorContentFilteringStyleAttributeFilterMode = 'blackList' | 'whiteList';
+/**Determines the context menu for the Editor. The context menu is triggered when the user right clicks on the content area of the Editor. */
+export declare type EditorContextMenu = 'default' | 'browser' | 'none';
+/**Determines the edit mode for the Editor. By default the editor's content accepts and parses HTML. However if set to 'markdown' the Editor can be used as a full time Markdown Editor by parsing the makrdown to HTML in preview mode. */
+export declare type EditMode = 'html' | 'markdown';
+/**Determines the file format of the image/video that are uploaded from local storage. By default images/videos are stroed as base64. */
+export declare type EditorImageFormat = 'base64' | 'blob';
+/**Determines the format of the content that will be pasted inside the Editor. */
+export declare type PasteFormat = 'prompt' | 'plainText' | 'keepFormat' | 'cleanFormat';
+/**Determines the toolbar mode of the Editor. The main toolbar of the Editor can appear as a Ribbon or as a Menu. */
+export declare type ToolbarMode = 'menu' | 'singleLineRibbon';
+/**Determines the format of the content that will be pasted inside the Editor. */
+export declare type ToolbarViewMode = 'toggle' | 'multiRow' | 'scroll';
 export interface ElementProperties {
   /**
    * Sets or gets the animation mode. Animation is disabled when the property is set to 'none'
@@ -8438,6 +9699,11 @@ export interface FileUploadProperties {
    * Default value: false
    */
   unfocusable?: boolean;
+  /**
+   * Gets the file upload value.
+   * Default value: null
+   */
+  value?: any;
   /**
    * Callback used to validate the files immediatelly after their selection. Retuns a boolean value. If the returned value is false, the file is removed from list and a 'validationError is fired.
    * Default value: null
@@ -10570,6 +11836,11 @@ declare global {
 export declare type FormGroupLabelPosition = 'left' | 'top';
 export interface GanttChartProperties {
   /**
+   * Determines whether nonworkingDays/nonworkingHours are taken into considuration when determining the dateEnd of the tasks. When this property is enabled the dateEnd of the tasks is calculated to include only the actual working time. By default it's disabled and only calendar time is used.
+   * Default value: false
+   */
+  adjustToNonworkingTime?: boolean;
+  /**
    * Recalculates the tasks that are connected and re-schedules them according to their connections. If no connections are present, autoScheduling has no effect until a connection is created. Connection types determines the start/end date limits of the tasks.
    * Default value: false
    */
@@ -10585,15 +11856,40 @@ export interface GanttChartProperties {
    */
   autoScrollStep?: number;
   /**
+   * Enabled/Disables the colummn header menu. When enabled and the user hovers a column header, a drop down button will appear that triggers a column menu for quick actions like sorting, filtering, etc. The actions depend on the enabled Gantt features, for example the filtering action will be available only if filtering is enabled for the element.
+   * Default value: false
+   */
+  columnMenu?: boolean;
+  /**
+   * Determines whether the Table columns are resizable or not. When enabled it is possible to resize the columns from the header cells of the Table in both Task and Resource timelines.
+   * Default value: false
+   */
+  columnResize?: boolean;
+  /**
+   * Determines resize feedback is used during column resizing. This property is applicable only when columnResize is enabled.
+   * Default value: false
+   */
+  columnResizeFeedback?: boolean;
+  /**
+   * Enables/Disables the current time indicator. Current time indicator shows the current time in the appropriate view cells.
+   * Default value: false
+   */
+  currentTimeIndicator?: boolean;
+  /**
+   * Determines the refresh interval in seconds for the currentTimeIndicator. 
+   * Default value: 1
+   */
+  currentTimeIndicatorInterval?: number;
+  /**
    * Sets the GanttChart's Data Export options.
    * Default value: [object Object]
    */
   dataExport?: GanttChartDataExport;
   /**
-   * Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..
+   * Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown. The duration always shows the calendar time whether it is in days/hours or other.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).overdue - a boolean that indicates whether the task's dateEnd has surpassed it's deadline date.disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.segments - an array of objects that allows to devide a task into multiple segements. Each segment (except the first) can have a different starting date, duration and label.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..GanttChart also accepts a DataAdapter instance as dataSource. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/.
    * Default value: 
    */
-  dataSource?: GanttChartDataSource[];
+  dataSource?: any;
   /**
    * Determines the format of the dates in the timeline header when they represent days.
    * Default value: short
@@ -10609,6 +11905,11 @@ export interface GanttChartProperties {
    * Default value: 
    */
   dateStart?: string | Date;
+  /**
+   * Determines the date markers that will be displayed inside the timeline. Date markers allow to mark and even label specific dates (including time) inside the GanttChart timeline.
+   * Default value: null
+   */
+  dateMarkers?: GanttChartDateMarker[];
   /**
    * Enables or disables the element.
    * Default value: false
@@ -10640,6 +11941,16 @@ export interface GanttChartProperties {
    */
   disableSelection?: boolean;
   /**
+   * Disables the task segment dragging.
+   * Default value: false
+   */
+  disableSegmentDrag?: boolean;
+  /**
+   * Disables the task segment resizing.
+   * Default value: false
+   */
+  disableSegmentResize?: boolean;
+  /**
    * Disables the window editor for the GanttChart.
    * Default value: false
    */
@@ -10650,15 +11961,35 @@ export interface GanttChartProperties {
    */
   durationUnit?: Duration;
   /**
+   * Determines whether a dedicated filter row is used for Table filtering instead of the default filter input. This property has no effect if filtering is not enabled.
+   * Default value: false
+   */
+  filterRow?: boolean;
+  /**
+   * Groups the tasks inside the Task timeline according to the resources they are assigned to. Unassigned tasks are placed in a default group labeled 'Unassigned'.
+   * Default value: false
+   */
+  groupByResources?: boolean;
+  /**
    * Allows to create a custom header content for the Task Panel. The attribute accepts an HTMLTemplate element, it's id or a function.
    * Default value: null
    */
   headerTemplate?: any;
   /**
+   * Determines whether the dateMarkers are visible or not.
+   * Default value: false
+   */
+  hideDateMarkers?: boolean;
+  /**
    * By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ).
    * Default value: false
    */
   hideTimelineHeaderDetails?: boolean;
+  /**
+   * Shows the selection column of the Task/Resource Table. When applied a checkbox column is displayed that allows to select tasks/resources.
+   * Default value: false
+   */
+  showSelectionColumn?: boolean;
   /**
    * Hides the Resource panel regardless of the resources availability By default the Resource panel is visible if resources are added to the GanttChart. This property allows to hide the Resource panel permanently.
    * Default value: false
@@ -10675,10 +12006,25 @@ export interface GanttChartProperties {
    */
   hourFormat?: HourFormat;
   /**
+   * When enabled, scrolling to the end of the horizotal timeline, triggers the creation of additional to extend the time range. The number of cells to be added when the scrollbar reaches the end position is determined by the infiniteTimelineStep.
+   * Default value: false
+   */
+  infiniteTimeline?: boolean;
+  /**
+   * Determines the number of cells to be added when the horizontal scroll bar of the Timeline reaches it's end position when infiniteTimeline is enabled.
+   * Default value: 5
+   */
+  infiniteTimelineStep?: number;
+  /**
    * When set the Timeline is positioned on the left side while the Task Tree is positioned on the right. By default it's vice versa.
    * Default value: false
    */
   inverted?: boolean;
+  /**
+   * Determines whether keyboard navigation inside the Table is enabled or not. Keyboard navigation affects both Task and Resource Tables. It allows to navigate between items. the following keyboard shortcut keys are available for focused tasks inside the Task Table: Enter - opens the Window editor to edit the currently focused task.Delete - opens a confirmation window regarding the deletion of the currently focused task.
+   * Default value: false
+   */
+  keyboardNavigation?: boolean;
   /**
    *  Determines the language of the GanttChart. 
    * Default value: "en"
@@ -10705,20 +12051,25 @@ export interface GanttChartProperties {
    */
   monthFormat?: MonthFormat;
   /**
-   * Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be displayed with colored cells inside the timeline and will be ignored during task range calculations.
+   * Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be displayed with colored cells inside the timeline and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled.
    * Default value: 
    */
   nonworkingDays?: number[];
   /**
-   * Determines the nonworking hours of a day. Hours are represented as numbers inside an array. In the timline the cells that represent nonworking days are colored differently from the rest.
+   * Determines the nonworking hours of a day. Hours are represented as numbers inside an array (e.g. [1,2,3] - means 1,2 and 3 AM) or number ranges represented as nested arrays(e.g. [[0,6]] - means from 0 to 6 AM). In the timline the cells that represent nonworking days are colored differently from the rest and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled.
    * Default value: 
    */
-  nonworkingHours?: number[];
+  nonworkingHours?: number[] | number[][];
   /**
-   * A function that can be used to completly customize the popup Window that is used to interact width tasks by changing their properties. The function as three arguments: target - the target popup Window that is about to be opened.type - the type of the window. The type determines the purpose of the window. Three possible values: 'task' (task editing), 'confirm' ( confirmation window), 'connection' (used when deleting a connection between tasks). taskIndex - the index of the task that is being edited. It will be undefined if the type of the window is not 'task'.
+   * A function that can be used to completly customize the popup Window that is used to interact width tasks by changing their properties. The function as three arguments: target - the target popup Window that is about to be opened.type - the type of the window. The type determines the purpose of the window. Three possible values: 'task' (task editing), 'confirm' ( confirmation window), 'connection' (used when deleting a connection between tasks). item - the connection/task object that is the target of the window.
    * Default value: null
    */
   popupWindowCustomizationFunction?: any;
+  /**
+   * Determines which Tab items are visible inside the popup window. Three possible values are allowed: general - the general tab with task properties determines by the taskColumns property.dependency - the dependency tab which shows the connections to the task and allows to create/delete connections.segments - the segments tab which shows the segments of the task and allows to created/delete segments..
+   * Default value: ['general', 'dependency', 'segments']
+   */
+  popupWindowTabs?: string[];
   /**
    * A format function for the Timeline task progress label. The expected result from the function is a string. The label is hidden by default can be shown with the showProgressLabel property.
    * Default value: null
@@ -10734,6 +12085,16 @@ export interface GanttChartProperties {
    * Default value: { "label": "resourceColumnLabel", "value": "label" }
    */
   resourceColumns?: GanttChartResourceColumn[];
+  /**
+   * Determines whether the Resource Table is filterable or not.
+   * Default value: false
+   */
+  resourceFiltering?: boolean;
+  /**
+   * A format function that allows to re-format the group row labels when groupByResources is enabled.
+   * Default value: null
+   */
+  resourceGroupFormatFunction?: any;
   /**
    * Allows to create a custom header content for the Resource Panel. The attribute accepts an HTMLTemplate element, it's id or a function.
    * Default value: null
@@ -10775,10 +12136,25 @@ export interface GanttChartProperties {
    */
   rightToLeft?: boolean;
   /**
-   * Determines the selected task(s). If empty no tasks are selected.
+   * Sets which tasks to select by their id or gets the currently selected task ids. If no id is provided for the task, an internal id is generated for each task according to it's index(tree path).
    * Default value: 
    */
-  selectedIndexes?: number[];
+  selectedTaskIds?: number[] | string[];
+  /**
+   * Sets which resources to select by their id or gets the currently selected resource ids. If no id is provided for the resource, an internal id is generated for each resource according to it's index(tree path).
+   * Default value: 
+   */
+  selectedResourceIds?: number[] | string[];
+  /**
+   * Enables/Disables the current time shader. If enabled all cells that represent past time will be shaded.
+   * Default value: false
+   */
+  shadeUntilCurrentTime?: boolean;
+  /**
+   * Determines whether the baselnes of the tasks are visible or not. Baselines are defined via the 'planned' attribute on the task objects of the dataSource property.
+   * Default value: false
+   */
+  showBaseline?: boolean;
   /**
    * Shows the progress label inside the progress bars of the Timeline tasks.
    * Default value: false
@@ -10790,13 +12166,13 @@ export interface GanttChartProperties {
    */
   snapToNearest?: boolean;
   /**
-   * Determines whether the GanttChart can be sorted or not.
-   * Default value: false
+   * Allows to set a custom sorting function to be executed when a column is sorted. Can be used to override the default sorting behavior. The function contains the following parameters: dataSource - the Table's data sourcesortColumns - an array of the data fields of columns to be sorted bydirections - an array of sort directions to be sorted by (corresponding to sortColumns)defaultCompareFunctions - an array of default compare functions to be sorted by (corresponding to sortColumns), useful if the sorting of some columns does not have to be overridden.
+   * Default value: null
    */
-  sortable?: boolean;
+  sortFunction?: { (dataSource: any, sortColumns: string[], directions: string[], defaultCompareFunctions: { (firstRecord: any, secondRecord: any): number }[]): void };
   /**
-   * Determines whether the GanttChart can be sorted by one or more columns.
-   * Default value: one
+   * Determines whether the GanttChart can be sorted by one, more then one or no columns.
+   * Default value: none
    */
   sortMode?: GanttChartSortMode;
   /**
@@ -10809,6 +12185,11 @@ export interface GanttChartProperties {
    * Default value: { "label": "Task Name", "value": "label" }
    */
   taskColumns?: GanttChartTaskColumn[];
+  /**
+   * Determines whether the Task Table is filterable or not.
+   * Default value: false
+   */
+  taskFiltering?: boolean;
   /**
    * Determines the min size of the Task Panel. Used when Resource Panel is visible.
    * Default value: 200
@@ -10825,12 +12206,12 @@ export interface GanttChartProperties {
    */
   timelineMin?: string | number;
   /**
-   * Determines the min width of the task tree.
+   * Determines the min width of the task table.
    * Default value: 100
    */
   treeMin?: string | number;
   /**
-   * Determines the size(width) of the task tree.
+   * Determines the size(width) of the task table.
    * Default value: 100
    */
   treeSize?: string | number;
@@ -10839,6 +12220,11 @@ export interface GanttChartProperties {
    * Default value: null
    */
   timelineHeaderFormatFunction?: any;
+  /**
+   * Determines whether the tooltips are enabled or not. Tooltips are available for timeline tasks, resources, connections, indicators and segments.
+   * Default value: [object Object]
+   */
+  tooltip?: GanttChartTooltip;
   /**
    * Determines weather or not vertical scrollbar is shown.
    * Default value: auto
@@ -10886,88 +12272,6 @@ export interface GanttChart extends BaseElement, GanttChartProperties {
 	* @param event. The custom event.    */
   onEndUpdate?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered when a Task is selected/unselected.
-	* @param event. The custom event. Custom data event was created with: ev.detail(value, oldValue)
-   *  value - The index of the new selected task.
-   *  oldValue - The index of the previously selected task.
-   */
-  onChange: ((this: any, ev: Event) => any) | null;
-  /**
-   * This event is triggered when a task, resource or connection is clicked inside the Timeline or the Tree columns.
-	* @param event. The custom event. Custom data event was created with: ev.detail(item, type, originalEvent)
-   *  item - The item that was clicked. It cam be a task, resource or connection.
-   *  type - The type of item. Possible values are: 'task', 'resource', 'connection'.
-   *  originalEvent - The original DOM event.
-   */
-  onItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when a Task/Resource/Connection is inserted.
-	* @param event. The custom event. Custom data event was created with: ev.detail(type, item)
-   *  type - The type of item that has been modified.
-   *  item - An object that represents the actual item with it's attributes.
-   */
-  onItemInsert?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when a Task/Resource/Connection is removed.
-	* @param event. The custom event. Custom data event was created with: ev.detail(type, item)
-   *  type - The type of item that has been modified.
-   *  item - An object that represents the actual item with it's attributes.
-   */
-  onItemRemove?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when a Task/Resource/Connection is updated.
-	* @param event. The custom event. Custom data event was created with: ev.detail(type, item)
-   *  type - The type of item that has been modified.
-   *  item - An object that represents the actual item with it's attributes.
-   */
-  onItemUpdate?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when the progress of a task bar starts to change as a result of user interaction. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event. Custom data event was created with: ev.detail(index, progress)
-   *  index - The index of the task which progress is going to be changed.
-   *  progress - The progress of the task before it is changed.
-   */
-  onProgressChangeStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when the progress of a task is changed.
-	* @param event. The custom event. Custom data event was created with: ev.detail(index, progress)
-   *  index - The index of the task which progress is has been changed.
-   *  progress - The progress of the task after it was changed.
-   */
-  onProgressChangeEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when dragging of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event. Custom data event was created with: ev.detail(index, dateStart, dateEnd)
-   *  index - The index of the task that is going to be dragged.
-   *  dateStart - The start date of the task that is going to be dragged.
-   *  dateEnd - The end date of the task that is going to be dragged.
-   */
-  onDragStart: ((this: any, ev: Event) => any) | null;
-  /**
-   * This event is triggered when dragging of a task finishes.
-	* @param event. The custom event. Custom data event was created with: ev.detail(index, dateStart, dateEnd)
-   *  index - The index of the task that is was dragged.
-   *  dateStart - The start date of the task that is was dragged.
-   *  dateEnd - The end date of the task that is was dragged.
-   */
-  onDragEnd: ((this: any, ev: Event) => any) | null;
-  /**
-   * This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event. Custom data event was created with: ev.detail(index, dateStart, dateEnd)
-   *  index - The index of the task that is going to be resized.
-   *  dateStart - The start date of the task that is going to be resized.
-   *  dateEnd - The end date of the task that is going to be resized.
-   */
-  onResizeStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when the resizing of a task finishes.
-	* @param event. The custom event. Custom data event was created with: ev.detail(index, dateStart, dateEnd)
-   *  index - The index of the task that was resized.
-   *  dateStart - The start date of the task that was resized.
-   *  dateEnd - The end date of the task that was resized.
-   */
-  onResizeEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
    * This event is triggered when the user starts connecting one task to another. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
 	* @param event. The custom event. Custom data event was created with: ev.detail(startIndex)
    *  startIndex - The index of the task that a connection is started from.
@@ -10975,12 +12279,193 @@ export interface GanttChart extends BaseElement, GanttChartProperties {
   onConnectionStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when the user completes a connection between two tasks.
-	* @param event. The custom event. Custom data event was created with: ev.detail(startIndex, endIndex, type)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, startTaskId, startIndex, endIndex, endTaskId, type)
+   *  id - The id of the connection that was created.
+   *  startTaskId - The id of the task that a connection is started from.
    *  startIndex - The index of the task that a connection is started from.
-   *  endIndex - The index of the task that a connection is started from.
+   *  endIndex - The index of the task that a connection ended to.
+   *  endTaskId - The id of the task that a connection ended to.
    *  type - The type of connection. Fours types are available: <ul><li><b>0</b> - start-to-start</li><li><b>1</b> - end-to-start</li><li><b>2</b> - end-to-end</li><li><b>3</b> - start-to-end</li></ul>
    */
   onConnectionEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a Task is selected/unselected.
+	* @param event. The custom event. Custom data event was created with: ev.detail(value, oldValue)
+   *  value - The index of the new selected task.
+   *  oldValue - The index of the previously selected task.
+   */
+  onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered when a Tree column is resized. Column resizing is controled by the <b>columnResize</b> property.
+	* @param event. The custom event. Custom data event was created with: ev.detail(dataField, headerCellElement, widthInPercentages, width)
+   *  dataField - The name of the column. Corresponds to the <b>value</b> attribute of a <b>taskColumns/resourceColumns</b> object.
+   *  headerCellElement - The HTMLElement column cell element that was resized.
+   *  widthInPercentages - The new width of the column in percentages.
+   *  width - The new width of the column in pixels.
+   */
+  onColumnResize?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered just before the window for task editing or tooltip is closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(owner, item, target, type)
+   *  owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip.
+   *  item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+   *  target - The instance of the window/tooltip that is going to close.
+   *  type - The type of window/tooltip that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+   */
+  onClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the window for task editing is closed( hidden )
+	* @param event. The custom event. Custom data event was created with: ev.detail(owner, item, target, type)
+   *  owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+   *  item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+   *  target - The instance of the window/tooltip that is closed.
+   *  type - The type of window/tooltip that is closed. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+   */
+  onClose: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered when an item is collapsed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(isGroup, item, index, label, value)
+   *  isGroup - A boolean flag indicating whether the collapsed item is a resource group. This is the case when <b>groupByResoruces</b> is enabled.
+   *  item - The object details of the collapsed item.
+   *  index - The index of the collapsed item.
+   *  label - The label of the collapsed item.
+   *  value - The value of the collapsed item.
+   */
+  onCollapse?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when dragging of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, item, dateStart, dateEnd, segment)
+   *  id - The id of the task that is going to be dragged.
+   *  item - The object of the task that is going to be dragged.
+   *  dateStart - The start date of the task that is going to be dragged.
+   *  dateEnd - The end date of the task that is going to be dragged.
+   *  segment - The segment object that is going to be dragged. This attribute is undefined if a segment is not going to be dragged.
+   */
+  onDragStart: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered when dragging of a task finishes.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, item, dateStart, dateEnd, segment)
+   *  id - The id of the task that is was dragged.
+   *  item - The object of the task that is was dragged.
+   *  dateStart - The start date of the task that is was dragged.
+   *  dateEnd - The end date of the task that is was dragged.
+   *  segment - The segment object that was dragged. This attribute is undefined if a segment has not been dragged.
+   */
+  onDragEnd: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered when an item is expanded.
+	* @param event. The custom event. Custom data event was created with: ev.detail(isGroup, item, index, label, value)
+   *  isGroup - A boolean flag indicating whether the collapsed item is a resource group. This is the case when <b>groupByResoruces</b> is enabled.
+   *  item - The index of the expanded item.
+   *  index - The index of the expanded item.
+   *  label - The label of the expanded item.
+   *  value - The value of the expanded item.
+   */
+  onExpand?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the GanttChart is filtered.
+	* @param event. The custom event. Custom data event was created with: ev.detail(type, action, filters)
+   *  type - The type of items that have been filtered ( task or resource ).
+   *  action - The name of the filtering action (whether filtering is added or removed).
+   *  filters - The filters that have been applied. Filters represent JQX.Utilities.FilterGroup objects.
+   */
+  onFilter?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a task, resource or connection is clicked inside the Timeline or the Tree columns.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, item, type, originalEvent)
+   *  id - The id of the task.
+   *  item - The item that was clicked. It can be a task, resource or connection.
+   *  type - The type of item. Possible values are: 'task', 'project', 'resource', 'connection'.
+   *  originalEvent - The original DOM event.
+   */
+  onItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a Task/Resource/Connection is inserted.
+	* @param event. The custom event. Custom data event was created with: ev.detail(type, item)
+   *  type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
+   *  item - An object that represents the actual item with it's attributes.
+   */
+  onItemInsert?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a Task/Resource/Connection is removed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, type, item)
+   *  id - The id of the task.
+   *  type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
+   *  item - An object that represents the actual item with it's attributes.
+   */
+  onItemRemove?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a Task/Resource/Connection is updated.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, type, item)
+   *  id - The id of the task.
+   *  type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
+   *  item - An object that represents the actual item with it's attributes.
+   */
+  onItemUpdate?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered just before the window for task editing or tooltip is opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(owner, item, target, type)
+   *  owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+   *  item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+   *  target - The instance of the window/tooltip that is going to open.
+   *  type - The type of window/tooltip that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+   */
+  onOpening?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the window for task editing is opened( visible ) or when the tooltip is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(owner, item, target, type)
+   *  owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+   *  item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+   *  target - The instance of the window/tooltip that is opened.
+   *  type - The type of window/tooltip that is opened. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+   */
+  onOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the progress of a task bar starts to change as a result of user interaction. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, index, progress)
+   *  id - The id of the task.
+   *  index - The index of the task which progress is going to be changed.
+   *  progress - The progress of the task before it is changed.
+   */
+  onProgressChangeStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the progress of a task is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, index, progress)
+   *  id - The id of the task.
+   *  index - The index of the task which progress is has been changed.
+   *  progress - The progress of the task after it was changed.
+   */
+  onProgressChangeEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, item, dateStart, dateEnd, segment)
+   *  id - The id of the task that is going to be resized.
+   *  item - The object of the task that is going to be resized.
+   *  dateStart - The start date of the task that is going to be resized.
+   *  dateEnd - The end date of the task that is going to be resized.
+   *  segment - The segment object that is going to be resized. This attribute is undefined if a segment is not going to be resized.
+   */
+  onResizeStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the resizing of a task finishes.
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, item, dateStart, dateEnd, segment)
+   *  id - The id of the task that was resized.
+   *  item - The object of the task that was resized.
+   *  dateStart - The start date of the task that was resized.
+   *  dateEnd - The end date of the task that was resized.
+   *  segment - The segment object that was resized. This attribute is undefined if a segment has not been resized.
+   */
+  onResizeEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the GanttChart is sorted by some column.
+	* @param event. The custom event. Custom data event was created with: ev.detail(type, columns, sortDataFields, sortOrders, sortDataTypes)
+   *  type - The type of columns that have been sorted ( task or resource column ).
+   *  columns - An array of objects that contains the currently sorted column objects.
+   *  sortDataFields - The dataFields of the columns that have been sorted. The dataField corresponds to the <b>value</b> property of a <b>taskColumns/resourceColumns</b> object.
+   *  sortOrders - The orders of the columns that have been sorted.
+   *  sortDataTypes - The data types of the columns that have been sorted.
+   */
+  onSort?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when the Timeline has been scrolled to the bottom.
 	* @param event. The custom event.    */
@@ -10990,49 +12475,56 @@ export interface GanttChart extends BaseElement, GanttChartProperties {
 	* @param event. The custom event.    */
   onScrollTopReached?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered just before the window for task editing starts opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event. Custom data event was created with: ev.detail(target, type)
-   *  target - The instance of the window that is going to open.
-   *  type - The type of window that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
-   */
-  onOpening?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when the window for task editing is opened( visible ).
+   * This event is triggered when the Timeline has been scrolled to the beginning (horizontally).
 	* @param event. The custom event.    */
-  onOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  onScrollLeftReached?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered just before the window for task editing starts closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event. Custom data event was created with: ev.detail(target, type)
-   *  target - The instance of the window that is going to close.
-   *  type - The type of window that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
-   */
-  onClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
-  /**
-   * This event is triggered when the window for task editing is closed( hidden )
+   * This event is triggered when the Timeline has been scrolled to the end (horizontally).
 	* @param event. The custom event.    */
-  onClose: ((this: any, ev: Event) => any) | null;
+  onScrollRightReached?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered when a Project is collapsed.
-	* @param event. The custom event. Custom data event was created with: ev.detail(index, label, value)
-   *  index - The index of the collapsed project.
-   *  label - The label of the collapsed project.
-   *  value - The value of the collapsed project.
+   * Adds a custom filter to a specific column (task or resource column).
+   * @param {any} columns. An object or an array of objects with the following syntax: <ul><li><b>type</b> - indicates the type of column to filter. Possible values are 'task' or 'resource'.</li><li><b>value</b> - the value of the column that must match the value attribute of a taskColumns/resourceColumns object(e.g. 'label', 'dateStart', etc).</li></ul>.
+   * @param {any} filterGroup. A Smart.Utilities.FilterGroup object. Here's an example for creating a FilterGroup object: <pre>const filterGroup = new window.Smart.Utilities.FilterGroup(), filterObject = filterGroup.createFilter('string', 'Task B', 'STARTS_WITH_CASE_SENSITIVE'); filterGroup.addFilter('or', filterObject); gantt.addFilter({ type: 'task', value: 'label' }, filterGroup);</pre>
    */
-  onCollapse?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  addFilter(columns: any, filterGroup: any): void;
   /**
-   * This event is triggered when a Project is expanded.
-	* @param event. The custom event. Custom data event was created with: ev.detail(item, label, value)
-   *  item - The index of the expanded project.
-   *  label - The label of the expanded project.
-   *  value - The value of the expanded project.
+   * Clears the currently applied filters.
    */
-  onExpand?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  clearFilters(): void;
   /**
-   * Adds a task as the last item of a Project.
-   * @param {any} taskIndex. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following SmartTree syntax).
-   * @param {string | number} projectIndex. A number that represents the index of a project or a string that matches the hierarchical position of the item, e.g. '0' ( following SmartTree syntax).
+   * Clears the currently applied column sorting.
    */
-  addTaskTo(taskIndex: any, projectIndex: string | number): void;
+  clearSort(): void;
+  /**
+   * Unselects all currently selected items inside the GanttChart including Tasks and Resources. It also clears the assignment highlgihters.
+   */
+  clearSelection(): void;
+  /**
+   * Removes a previously saved state of the element form LocalStorage according to it's id. <strong>Requires an id to be set to the element.</strong>
+   */
+  clearState(): void;
+  /**
+   * Removes all tasks. 
+   */
+  clearTasks(): void;
+  /**
+   * Removes all resources. 
+   */
+  clearResources(): void;
+  /**
+   * Creates a connection between two tasks. 
+   * @param {number | string} startTaskIndex. The id of the start task or the connection string like '2-3-0'. <b>If the complete connections string is provided as the first argument, the rest of the method arguments are not necessary</b>
+   * @param {number | string} taskEndIndex?. The id of the end task.
+   * @param {number} connectionType?. The type of the connection. A numeric value from 0 to 3. The connection type can be: <ul><li><b>0</b> - Start-to-Start connection.</li><li><b>1</b> - End-to-Start connection.</li><li><b>2</b> - End-to-End connection.</li><li><b>3</b> - Start-to-End connection.</li></ul>
+   * @param {number} lag?. The connection lag in miliseconds. Used by the Auto scheduling algorithm in order allow some slack time slack time before or after the next task begins/ends. Lag is measured in miliseconds. It can be a negative (lead) or a positive (lag) number.
+   */
+  createConnection(startTaskIndex: number | string, taskEndIndex?: number | string, connectionType?: number, lag?: number): void;
+  /**
+   * Collapses an expanded project.
+   * @param {string | number} id. The id of a project item that should be collapsed.
+   */
+  collapse(id: string | number): void;
   /**
    * Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
    */
@@ -11047,6 +12539,131 @@ export interface GanttChart extends BaseElement, GanttChartProperties {
    */
   refresh(fullRefresh?: boolean): void;
   /**
+   * Makes sure a Task is visible by scrolling to it.
+   * @param {string | number} taskId. The id of the target Task.
+   */
+  ensureVisible(taskId: string | number): void;
+  /**
+   * Expands a collapsed project with tasks.
+   * @param {string | number} id. The id of a project task that should be expanded.
+   */
+  expand(id: string | number): void;
+  /**
+   * Exports the data of Tree of the GanttChart.
+   * @param {string} dataFormat. Determines the format of the exported file. Three possible values are available: <ul><li><b>pdf</b></li><li><b>xlsx</b></li><li><b>html</b></li><li><b>tsv</b></li><li><b>csv</b></li><li><b>xml</b></li></ul>
+   * @param {any} callback?. A callback that allows to format the exported data based on a condition. For additional details, refer ro the Smart Export Documentation.
+   */
+  exportData(dataFormat: string, callback?: any): void;
+  /**
+   * Returns all existing connections. The connections are returned as objects that contain detailed information. Each object in the array has the following keys: 'id' - connection id, 'type' - connection type, 'startTaskId' - connection's start task id, 'endTaskId' - connection's end task id, 'startIndex' - connection's start task index, 'endIndex' - connection's end task index, 'lag' - lag time. 
+   * @returns {any}
+   */
+  getConnections(): any;
+  /**
+   * Returns the connection details for the target connection which includes: startTask, endTask, startTaskId, endTaskId and type of the corresponding connection. Connection types are described in detail under the `connectionEnd` event description in this document and in a dedicated topic available on the website.
+   * @param {string} connectionId. A connection id. Each connection has a unique id that is assigned when a connection is created.
+   * @returns {any}
+   */
+  getConnectionDetails(connectionId: string): any;
+  /**
+   * Returns a JSON representation of all tasks inside the element along with their connections and settings.
+   * @returns {any[]}
+   */
+  getState(): any[];
+  /**
+   * Returns the Tree path of a task/resource. The tree path is used as task/resource id if no id is provided by the user.
+   * @param {any} item. A GattChartTask/GanttChartResource item object.
+   * @returns {string}
+   */
+  getItemPath(item: any): string;
+  /**
+   * Returns the task object that corresponds to the id/path.
+   * @param {string | number} itemId. The id/path of a task.
+   * @returns {any}
+   */
+  getTask(itemId: string | number): any;
+  /**
+   * Returns an array of all GanttChart tasks.
+   * @returns {any[]}
+   */
+  getTasks(): any[];
+  /**
+   * Returns the index of a task.
+   * @param {any} task. A GattChartTask object.
+   * @returns {number}
+   */
+  getTaskIndex(task: any): number;
+  /**
+   * Returns the connections definitions of a task.
+   * @param {any} taskId. A GanttChartTask object or it's id.
+   * @returns {any}
+   */
+  getTaskConnections(taskId: any): any;
+  /**
+   * Returns the Project of a task or undefined if it does not have one.
+   * @param {any} task. A GantChartTask object.
+   * @returns {any}
+   */
+  getTaskProject(task: any): any;
+  /**
+   * Returns the resource object that corresponds to the id/path.
+   * @param {string | number} itemId. The id/path of a resource.
+   * @returns {any}
+   */
+  getResource(itemId: string | number): any;
+  /**
+   * Returns an array of all GanttChart resources.
+   * @returns {any[]}
+   */
+  getResources(): any[];
+  /**
+   * Returns the index of a resource.
+   * @param {any} resource. A GanttChartResource object.
+   * @returns {number}
+   */
+  getResourceIndex(resource: any): number;
+  /**
+   * Returns the tasks that are assigned to the resource.
+   * @param {any} resource. A GanttChartResource object or it's id.
+   * @returns {any}
+   */
+  getResourceTasks(resource: any): any;
+  /**
+   * Returns the currently selected tasks/resource ids. If selection is disabled or no items are selected returns null.
+   * @returns {any}
+   */
+  getSelectedIds(): any;
+  /**
+   * Returns the currently selected tasks.
+   * @returns {any}
+   */
+  getSelectedTasks(): any;
+  /**
+   * Returns the currently selected resources.
+   * @returns {any}
+   */
+  getSelectedResources(): any;
+  /**
+   * Returns the working hours of the day as numbers.
+   * @returns {any}
+   */
+  getWorkingHours(): any;
+  /**
+   * Hides the tooltip if it's visible.
+   * @returns {any}
+   */
+  hideTooltip(): any;
+  /**
+   * Depending on the nonworkingDays property, returns true or false whether the target date is on a working day or not.
+   * @param {Date} date. A javascript Date object or a string/number which represents a valid JS Date.
+   */
+  isWorkingDay(date: Date): void;
+  /**
+   * Loads a previously saved state of the element or checks LocalStorage for any saved states if no argument is passed to the method.
+   * @param {any[]} state?. An Array containing a valid structure of Gantt Chart tasks.
+   */
+  loadState(state?: any[]): void;
+  /**
    * Removes all connections between tasks. 
    */
   removeAllConnections(): void;
@@ -11060,123 +12677,40 @@ export interface GanttChart extends BaseElement, GanttChartProperties {
   removeConnection(startTaskIndex: number | string, taskEndIndex?: number, connectionType?: number): any;
   /**
    * Removes all connections of a task or between two tasks if the second argument is provided and valid.
-   * @param {number} taskStartIndex. The index of the start task. 
-   * @param {number} taskEndIndex?. The index of the end task.
-   * @returns {string}
+   * @param {any} taskStart. The start task object or it's id.
+   * @param {any} taskEnd?. The end task object or it's id.
    */
-  removeTaskConnection(taskStartIndex: number, taskEndIndex?: number): string;
+  removeTaskConnection(taskStart: any, taskEnd?: any): void;
   /**
-   * Removes all tasks. 
+   * Shows the tooltip for a specific element.
+   * @param {HTMLElement} target. The HTMLElement that will be the target of the tooltip.
+   * @param {string} content?. Allows to set a custom content for the Tooltip.
    */
-  clearTasks(): void;
-  /**
-   * Removes all resources. 
-   */
-  clearResources(): void;
-  /**
-   * Creates a connection between two tasks. 
-   * @param {number | string} startTaskIndex. The index of the start task or the connection string like '2-3-0.
-   * @param {number} taskEndIndex?. The index of the end task.
-   * @param {number} connectionType?. The type of the connection. A numeric value from 0 to 3.
-   */
-  createConnection(startTaskIndex: number | string, taskEndIndex?: number, connectionType?: number): void;
-  /**
-   * Collapses an expanded project with tasks.
-   * @param {string | number} index. The index of a project task that should be collapsed.
-   */
-  collapse(index: string | number): void;
-  /**
-   * Makes sure a Task is visible by scrolling to it.
-   * @param {string | number} item. The index of the target Task. Can be a string representing a Tree index ( similar to SmartTree )
-   */
-  ensureVisible(item: string | number): void;
-  /**
-   * Expands a collapsed project with tasks.
-   * @param {string | number} index. The index of a project task that should be expanded.
-   */
-  expand(index: string | number): void;
-  /**
-   * Exports the data of Tree of the GanttChart.
-   * @param {string} dataFormat. Determines the format of the exported file. Three possible values are available: <ul><li><b>pdf</b></li><li><b>xlsx</b></li><li><b>html</b></li></ul>
-   * @param {any} callback?. A callback that allows to format the exported data based on a condition. For additional details, refer ro the Smart Export Documentation.
-   */
-  exportData(dataFormat: string, callback?: any): void;
-  /**
-   * Returns a JSON representation of all tasks inside the element along with their connections and settings.
-   * @returns {any[]}
-   */
-  getState(): any[];
-  /**
-   * Returns the Tree path of a task/resource.
-   * @param {any} item. A GattChartTask/GanttChartResource item object or index.
-   * @returns {string}
-   */
-  getItemPath(item: any): string;
-  /**
-   * Returns the index of a task.
-   * @param {any} task. A GattChartTask object.
-   * @returns {number}
-   */
-  getTaskIndex(task: any): number;
-  /**
-   * Returns the tree path of a task.
-   * @param {any} task. A GanttChartTask object.
-   * @returns {string}
-   */
-  getTaskPath(task: any): string;
-  /**
-   * Returns teh Project of a task if any.
-   * @param {any} task. A GantChartTask object.
-   * @returns {any}
-   */
-  getTaskProject(task: any): any;
-  /**
-   * Returns the index of a resource.
-   * @param {any} resource. A GanttChartResource object.
-   * @returns {number}
-   */
-  getResourceIndex(resource: any): number;
-  /**
-   * Returns the tasks that are assigned to the resource.
-   * @param {any} resource. A GanttChartResource object.
-   * @returns {any}
-   */
-  getResourceTasks(resource: any): any;
-  /**
-   * Unselects all currently selected items inside the GanttChart including Tasks and Resources. It also clears the assignment highlgihters.
-   */
-  clearSelection(): void;
-  /**
-   * Removes a previously saved state of the element form LocalStorage according to it's id. <strong>Requires an id to be set to the element.</strong>
-   */
-  clearState(): void;
-  /**
-   * Loads a previously saved state of the element or checks LocalStorage for any saved states if no argument is passed to the method.
-   * @param {any[]} state?. An Array containing a valid structure of Gantt Chart tasks.
-   */
-  loadState(state?: any[]): void;
+  showTooltip(target: HTMLElement, content?: string): void;
   /**
    * Saves the current settings of the element to LocalStorage. <strong>Requires an id to be set to the element.</strong>
    * @param {any[]} state?. An Array containing a valid structure of Gantt Chart tasks.
    */
   saveState(state?: any[]): void;
   /**
-   * Inserts a new task in the timeline.
-   * @param {string | number} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following SmartTree syntax).
+   * Inserts a new task in the timeline. The new task can be inserted as a sub task of a project by passing the appropriate argument for the project id or as a root level item.
    * @param {any} taskObject. An object describing a Gantt Chart task.
+   * @param {any} project?. A number or string that represents the id of a project (e.g. '0') or a project object definition present in the GanttChart. This parameter determines the parent project of the task that will be inserted. If <b>null</b> is passed as an arguemnt the new task will be inserted at root level without a parent project.
+   * @param {number} index?. The index where the new item should be inserted(e.g. 2). This index will determine the position of the newly inserted task.
+   * @returns {string | number | undefined}
    */
-  insertTask(index: string | number, taskObject: any): void;
+  insertTask(taskObject: any, project?: any, index?: number): string | number | undefined;
   /**
-   * Updates a task inside the timeline.
-   * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following SmartTree syntax).
+   * Updates a task/project/milestone.
+   * @param {any} taskId. A number or string that represents the id of a task/project(e.g. '0') or the object definition of the task/project.
    * @param {any} taskObject. An object describing a Gantt Chart task. The properties of this object will be applied to the desired task.
    */
-  updateTask(index: any, taskObject: any): void;
+  updateTask(taskId: any, taskObject: any): void;
   /**
    * Removes a task from the timeline.
-   * @param {any} index. A number that represents the index of a task or a string that matches the hierarchical position of the item, e.g. '0' ( following SmartTree syntax).
+   * @param {any} taskId. A number or string that represents the id of a task or the actual item object.
    */
-  removeTask(index: any): void;
+  removeTask(taskId: any): void;
   /**
    * Inserts a new resource.
    * @param {string | number} resourceId. A string that represents the id of a resource or it's hierarchical position, e.g. '0' ( following SmartTree syntax), or a number that represents the index of a resource.
@@ -11195,10 +12729,10 @@ export interface GanttChart extends BaseElement, GanttChartProperties {
    */
   removeResource(resourceId: any): void;
   /**
-   * Opens the popup Window for specific task Editing.
-   * @param {string | number} index. A string or number that represents the index of a task that is going to be edited.
+   * Opens the popup Window for specific task to edit or to delete a connection if a connection string is passed.
+   * @param {any} taskId. A string or number that represents the id of a task or the task object that is going to be edited or a connection string(e.g. '2-0-0').
    */
-  openWindow(index: string | number): void;
+  openWindow(taskId: any): void;
   /**
    * Closes an opened popup Window. The method will close any opened popup window inside the element.
    */
@@ -11208,24 +12742,49 @@ export interface GanttChart extends BaseElement, GanttChartProperties {
    */
   print(): void;
   /**
-   * Sorts the GanttChart tasks/resources if <b>sortable</b> is enabled.
-   * @param {any} columns?. An Array of objects which determine which columns to be sorted, the sort order and the type of item to sort: task or resource. If no arguments are provided sorting will be removed. <br /> An object should have the following properties: <ul><li><b>value</b> - a string that represents the value of a <b>taskColumn</b> to sort.</li><li><b>sortOrder</b> - a string that represents the sorting order for the column: 'asc' (asscending sorting) or 'desc' (descending) are possible values. </li><li><b>type</b> - a string that represents the type of item to sort. This property determines which panel will be sorted. Two possible values: 'task', 'resource'.</li></ul>
+   * Allows to sets the working days and hours at once.
+   * @param  settings. An object definition that contains the days and hours that should be working. The days and hours can be defined as an array of numbers where each number is a day/hour, strings where each string represents a range of days/hours (e.g. '1-5' or '2:00-8:00') or nested array of numbers (e.g. [[1,5]] or [[2, 8]]) which means from 1 to 5 or 2 to 8.
    */
-  sort(columns?: any): void;
+  setWorkTime(settings: { days: (number | string | number[])[], hours: (number | string | number[])[] }): void;
+  /**
+   * Allows to select a task based on it's id.
+   * @param {string | number} id. The id of the task to select.
+   */
+  selectTask(id: string | number): void;
+  /**
+   * Allows to select a resource based on it's id.
+   * @param {string | number} id. The id of the resource to select.
+   */
+  selectResource(id: string | number): void;
+  /**
+   * Allows to unselect a task based on it's id.
+   * @param {string | number} id. The id of the task to unselect.
+   */
+  unselectTask(id: string | number): void;
+  /**
+   * Allows to unselect a resource based on it's id.
+   * @param {string | number} id. The id of the resource to unselect.
+   */
+  unselectResource(id: string | number): void;
+  /**
+   * Allows to unset previously set working time. The opposte method for <b>setWorkingTime</b>.
+   * @param  settings. An object definition that contains the days and hours that should not be working. The days and hours can be defined as an array of numbers where each number is a day/hour, strings where each string represents a range of days/hours (e.g. '1-5' or '2:00-8:00') or nested array of numbers (e.g. [[1,5]] or [[2, 8]]) which means from 1 to 5 or 2 to 8.
+   */
+  unsetWorkTime(settings: { days: (number | string | number[])[], hours: (number | string | number[])[] }): void;
+  /**
+   * Sorts the GanttChart tasks/resources if <b>sortable</b> is enabled.
+   * @param {any} columns. An Array of objects which determine which columns to be sorted, the sort order and the type of item to sort: task or resource. If no arguments are provided sorting will be removed. <br /> An object should have the following properties: <ul><li><b>value</b> - a string that represents the value of a <b>taskColumn</b> to sort.</li><li><b>sortOrder</b> - a string that represents the sorting order for the column: 'asc' (asscending sorting) or 'desc' (descending) are possible values. </li><li><b>type</b> - a string that represents the type of item to sort. This property determines which panel will be sorted. Two possible values: 'task', 'resource'.</li></ul>
+   */
+  sort(columns: any): void;
 }
 
 /**Sets the GanttChart's Data Export options. */
 export interface GanttChartDataExport {
   /**
-   * Sets whether the columns header will be exported.
-   * Default value: true
+   * Determines whether to export filtered items or not. By default filtered data is not exported.
+   * Default value: false
    */
-  header?: boolean;
-  /**
-   * Sets a custom style object of the dataExport. 
-   * Default value: null
-   */
-  style?: any;
+  exportFiltered?: boolean;
   /**
    * Sets the exported file's name.
    * Default value: "jqxGanttChart"
@@ -11236,212 +12795,24 @@ export interface GanttChartDataExport {
    * Default value: task
    */
   itemType?: GanttChartDataExportItemType;
-  /**
-   * Determines whether hidden items will be exported as well. By default only the visible are exported.
-   * Default value: false
-   */
-  includeHidden?: boolean;
-  /**
-   * Sets the page orientation, when exporting to PDF.
-   * Default value: "portrait"
-   */
-  pageOrientation?: string;
-  /**
-   * Sets the expand char displayed for the Project tasks when GanttChart exported.
-   * Default value: "+"
-   */
-  expandChar?: string;
-  /**
-   * Sets the collapse char displayed for the Project tasks when GanttChart is exported.
-   * Default value: "-"
-   */
-  collapseChar?: string;
 }
 
-export interface GanttChartDataSource {
+export interface GanttChartDateMarker {
   /**
-   * Tasks connection.
-   * Default value: undefined
-   */
-  connections?: any;
-  /**
-   * Project, Task or Milestone CSS class.
-   * Default value: ""
-   */
-  class?: string;
-  /**
-   * Project, Task or Milestone start date.
-   * Default value: 
-   */
-  dateStart?: string | Date;
-  /**
-   * Project, Task or Milestone end date.
-   * Default value: 
-   */
-  dateEnd?: string | Date;
-  /**
-   * Disable the resources for Project, Task or Milestone.
-   * Default value: false
-   */
-  disableResources?: boolean;
-  /**
-   * Project, Task or Milestone dragging is disabled.
-   * Default value: false
-   */
-  disableDrag?: boolean;
-  /**
-   * Project, Task or Milestone resizing is disabled.
-   * Default value: false
-   */
-  disableResize?: boolean;
-  /**
-   * Project, Task or Milestone drag enabled in the view.
-   * Default value: true
-   */
-  dragProject?: boolean;
-  /**
-   * The duration of the Project, Task or Milestone in miliseconds. The duration unit can be changed via the durationUnit property.
-   * Default value: 0
-   */
-  duration?: number | undefined;
-  /**
-   * Project, Task or Milestone expanded state in the view.
-   * Default value: false
-   */
-  expanded?: boolean;
-  /**
-   * Project, Task or Milestone id.
-   * Default value: 
-   */
-  id?: string | null;
-  /**
-   * Project, Task or Milestone label.
+   * Determines the marker label.
    * Default value: 
    */
   label?: string | null;
   /**
-   * Project, Task or Milestone format function.
+   * Determines the date for the marker. The date can include time as well.
    * Default value: null
    */
-  formatFunction?: any;
+  date?: string | Date | number;
   /**
-   * Project, Task or Milestone max start date.
-   * Default value: 
+   * Allows to add a custom class name to the marker.
+   * Default value: "null"
    */
-  maxDateStart?: string | Date;
-  /**
-   * Project, Task or Milestone min start date.
-   * Default value: 
-   */
-  minDateStart?: string | Date;
-  /**
-   * Project, Task or Milestone max end date.
-   * Default value: 
-   */
-  maxDateEnd?: string | Date;
-  /**
-   * Project, Task or Milestone min end date.
-   * Default value: 
-   */
-  minDateEnd?: string | Date;
-  /**
-   * The minimum duration of the Project, Task or Milestone in miliseconds. The units can be changed via the durationUnit property.
-   * Default value: 0
-   */
-  minDuration?: number | undefined;
-  /**
-   * The maximum duration of the Project, Task or Milestone in miliseconds. The unit can be changed via the durationUnit property.
-   * Default value: 0
-   */
-  maxDuration?: number | undefined;
-  /**
-   * Project, Task or Milestone progress.
-   * Default value: 0
-   */
-  progress?: number;
-  /**
-   * Project, Task or Milestone resources
-   * Default value: null
-   */
-  resources?: GanttChartDataSourceResource[];
-  /**
-   * Project, Task or Milestone synchronized in the view.
-   * Default value: false
-   */
-  synchronized?: boolean;
-  /**
-   * Project's tasks.
-   * Default value: 
-   */
-  tasks?: any;
-  /**
-   * Project, Task or Milestone type. Possible values are 'project' and 'task'
-   * Default value: task
-   */
-  type?: GanttChartTaskType;
-  /**
-   * Project, Task or Milestone value.
-   * Default value: 
-   */
-  value?: any;
-  /**
-   * Project, Task or Milestone value.
-   * Default value: false
-   */
-  hidden?: boolean | undefined;
-}
-
-export interface GanttChartDataSourceResource {
-  /**
-   * The capacity of a resource. By default it is used to determines the working capacity ( in hours ) of the resource.
-   * Default value: 8
-   */
-  capacity?: number;
-  /**
-   * Resource id. The unique id of the resource.
-   * Default value: ""
-   */
-  id?: string;
-  /**
-   * Resource label.
-   * Default value: 0
-   */
-  label?: string | null;
-  /**
-   * Resource min capacity
-   * Default value: 0
-   */
-  minCapacity?: number;
-  /**
-   * Resource max capacity. By default this property is used for the resource timeline histogram where maxCapacity is the maximum working capacity in hours of the resource.
-   * Default value: 0
-   */
-  maxCapacity?: number;
-  /**
-   * Resource progress. Progress is the total progress of the resource based on the tasks it is assigned to. This property is automatically calculated.
-   * Default value: 0
-   */
-  progress?: number;
-  /**
-   * Resource type.
-   * Default value: 
-   */
-  type?: any;
-  /**
-   * Resource value.
-   * Default value: 
-   */
-  value?: any;
-  /**
-   * Resource visibility.
-   * Default value: false
-   */
-  hidden?: boolean | undefined;
-  /**
-   * Resource workload. Workload is the total working time in hours of a resource based on the tasks it is assigned to. This property is automatically calculated.
-   * Default value: 0
-   */
-  workload?: string | number;
+  className?: string;
 }
 
 export interface GanttChartResource {
@@ -11552,6 +12923,11 @@ export interface GanttChartTask {
    */
   dateEnd?: string | Date;
   /**
+   * Determines the deadline for the Project, Task or Milestone.
+   * Default value: 
+   */
+  deadline?: string | Date;
+  /**
    * Project, Task or Milestone with disabled resources.
    * Default value: false
    */
@@ -11591,6 +12967,11 @@ export interface GanttChartTask {
    * Default value: 
    */
   id?: string | null;
+  /**
+   * Determines the indicators for the task. Task indicators represent special dates that are displayed inside the task's row.
+   * Default value: null
+   */
+  indicators?: GanttChartTaskIndicator[];
   /**
    * Project, Task or Milestone label.
    * Default value: 
@@ -11632,6 +13013,16 @@ export interface GanttChartTask {
    */
   maxDuration?: number | undefined;
   /**
+   * Determines whether the task is overdue it's deadline date or not. The property acts only as a getter. By default it's false, unless there's a deadline defined for the task and the dateEnd has surpassed the deadline date.
+   * Default value: false
+   */
+  overdue?: boolean;
+  /**
+   * Determines the planned dateStart/dateEnd for as the baseline for the task.
+   * Default value: undefined
+   */
+  planned?: GanttChartTaskPlanned;
+  /**
    * Project, Task or Milestone progress.
    * Default value: 0
    */
@@ -11641,6 +13032,11 @@ export interface GanttChartTask {
    * Default value: 
    */
   resources?: any;
+  /**
+   * Determines the segments of a task. GanttChart items of type 'task' can be segmented into smaller pieces. This property stores the segment definitions. At least two segments need to be defined in order to segment a task. The first segment should start on the same date as the task. The Last segment should end on the same date as the task.
+   * Default value: null
+   */
+  segments?: GanttChartTaskSegment[];
   /**
    * Project, Task or Milestone synchronized in the view.
    * Default value: false
@@ -11663,6 +13059,91 @@ export interface GanttChartTask {
   value?: any;
 }
 
+export interface GanttChartTaskIndicator {
+  /**
+   * Indicator label.
+   * Default value: ""
+   */
+  label?: string;
+  /**
+   * Indicator date(can include time).
+   * Default value: 
+   */
+  date?: string | Date;
+  /**
+   * A custom class name that can be applied to the indicator's element in order to apply some styling via CSS.
+   * Default value: "null"
+   */
+  className?: string;
+  /**
+   * Represents the code for an icon that will be displayed infront of the indicator label inside the timeline.
+   * Default value: "null"
+   */
+  icon?: string;
+  /**
+   * Determines the tooltip content for the indicator. By default indicators do not show tooltips when hovered.
+   * Default value: "null"
+   */
+  tooltip?: string;
+}
+
+/**Determines the planned dateStart/dateEnd for as the baseline for the task. */
+export interface GanttChartTaskPlanned {
+  /**
+   * Determines the planned dateStart of the task.
+   * Default value: 
+   */
+  dateStart?: string | Date;
+  /**
+   * Determines the planned dateEnd of the task.
+   * Default value: 
+   */
+  dateEnd?: string | Date;
+  /**
+   * Determines the planned duration of the task.
+   * Default value: 0
+   */
+  duration?: number | undefined;
+}
+
+export interface GanttChartTaskSegment {
+  /**
+   * Segment label.
+   * Default value: 
+   */
+  label?: string | null;
+  /**
+   * Segment start date.
+   * Default value: 
+   */
+  dateStart?: string | Date;
+  /**
+   * Segment end date.
+   * Default value: 
+   */
+  dateEnd?: string | Date;
+  /**
+   * Determines whether segment dragging is disabled.
+   * Default value: false
+   */
+  disableDrag?: boolean;
+  /**
+   * Determines whether segment resizing is disabled.
+   * Default value: false
+   */
+  disableResize?: boolean;
+  /**
+   * The duration of a segment in miliseconds(unit). The duration unit can be changed via the durationUnit property.
+   * Default value: 0
+   */
+  duration?: number | undefined;
+  /**
+   * Segment label format function.
+   * Default value: null
+   */
+  formatFunction?: any;
+}
+
 export interface GanttChartTaskColumn {
   /**
    * Determines whether the task propery determined by column can be edited from the Window editor or not. By default editing is enabled.
@@ -11670,40 +13151,35 @@ export interface GanttChartTaskColumn {
    */
   disableEdit?: boolean;
   /**
-   * Determines whether the Splitter Bar after the column is hidden or not. Splitter bars allow to resize the columns.
-   * Default value: false
+   * Applies only to column's that display dates (e.g. dateStart/dateEnd, etc). This property allows to define a JS Intl.DateTimeFormat object in order to format the dates of the column. Here is an example value of the property: dateFormat: { year: '2-digit', month: 'long', day: 'numeric' }. Another option is to use a date format string. Built-in Date formats:// short date pattern'd' - 'M/d/yyyy',// long date pattern'D' - 'dddd, MMMM dd, yyyy',// short time pattern't' - 'h:mm tt',// long time pattern'T' - 'h:mm:ss tt',// long date, short time pattern'f' - 'dddd, MMMM dd, yyyy h:mm tt',// long date, long time pattern'F' - 'dddd, MMMM dd, yyyy h:mm:ss tt',// month/day pattern'M' - 'MMMM dd',// month/year pattern'Y' - 'yyyy MMMM',// S is a sortable format that does not vary by culture'S' - 'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Date format strings:'d'-the day of the month;'dd'-the day of the month'ddd'-the abbreviated name of the day of the week'dddd'- the full name of the day of the week'h'-the hour, using a 12-hour clock from 1 to 12'hh'-the hour, using a 12-hour clock from 01 to 12'H'-the hour, using a 24-hour clock from 0 to 23'HH'- the hour, using a 24-hour clock from 00 to 23'm'-the minute, from 0 through 59'mm'-the minutes,from 00 though59'M'- the month, from 1 through 12'MM'- the month, from 01 through 12'MMM'-the abbreviated name of the month'MMMM'-the full name of the month's'-the second, from 0 through 59'ss'-the second, from 00 through 59't'- the first character of the AM/PM designator'tt'-the AM/PM designator'y'- the year, from 0 to 99'yy'- the year, from 00 to 99'yyy'-the year, with a minimum of three digits'yyyy'-the year as a four-digit number;'yyyyy'-the year as a four-digit number.
+   * Default value: null
    */
-  hideResizeBar?: boolean;
+  dateFormat?: any;
+  /**
+   * Applies only to column's that display numbers. This property allows to define a JS Intl.NumberFormat object in order to format the numbers of the column. Another option is to use a number format string. Number format strings: 'd' - decimal numbers.'f' - floating-point numbers.'n' - integer numbers.'c' - currency numbers.'p' - percentage numbers.For adding decimal places to the numbers, add a number after the formatting striFor example: 'c3' displays a number in this format $25.256
+   * Default value: null
+   */
+  numberFormat?: any;
   /**
    * Column's label.
    * Default value: 
    */
   label?: string | null;
   /**
-   * Determines whether the column can be resized or not. Locked columns cannot be resized and their size remains fixed.
-   * Default value: false
-   */
-  locked?: boolean;
-  /**
    * Column's value.
    * Default value: 
    */
   value?: string | null;
   /**
-   * Column's min size.
-   * Default value: 0
-   */
-  min?: string | number | null;
-  /**
-   * Determines whether the column will be the root column of the Task Tree. Root column contains the Tree structure. By default the first column is the root.
-   * Default value: false
-   */
-  root?: boolean;
-  /**
    * Column's size.
    * Default value: 0
    */
   size?: string | number | null;
+  /**
+   * Column's min width.
+   * Default value: 0
+   */
+  minWidth?: string | number | null;
   /**
    * Column's format function. You can use it to customize the column label's rendering.
    * Default value: null
@@ -11726,6 +13202,30 @@ export interface GanttChartTaskColumn {
   setCustomEditorValue?: any;
 }
 
+/**Determines whether the tooltips are enabled or not. Tooltips are available for timeline tasks, resources, connections, indicators and segments. */
+export interface GanttChartTooltip {
+  /**
+   * Determines whether the tooltip will have an arrow or not.
+   * Default value: false
+   */
+  arrow?: boolean;
+  /**
+   * Determines the delay (in miliseconds) before the tooltip is opened.
+   * Default value: 50
+   */
+  delay?: number;
+  /**
+   * Enabled or disables the tooltips.
+   * Default value: false
+   */
+  enabled?: boolean;
+  /**
+   * Determines the [horizontal, vertical] offset (in pixels) for the tooltip position when opened.
+   * Default value: 
+   */
+  offset?: number[];
+}
+
 declare global {
     interface Document {
         createElement(tagName: "smart-gantt-chart"): GanttChart;
@@ -11738,8 +13238,6 @@ declare global {
 
 /**Determines the type of items that is going to be exported.  */
 export declare type GanttChartDataExportItemType = 'task' | 'resource';
-/**Project, Task or Milestone type. Possible values are 'project', 'milestone' and 'task' */
-export declare type GanttChartTaskType = 'project' | 'milestone' | 'task';
 /**Determines the format of the dates in the timeline header when they represent days. */
 export declare type GanttDayFormat = '2-digit' | 'numeric' | 'long' | 'short' | 'narrow';
 /**Determines in what unit is task duration property measured. */
@@ -11750,15 +13248,17 @@ export declare type HourFormat = 'default' | '2-digit' | 'numeric';
 export declare type GanttChartResourceTimelineMode = 'diagram' | 'histogram' | 'custom';
 /**Determines how the resources will be displayed inside the resource Timeline. */
 export declare type GanttChartResourceTimelineView = 'hours' | 'tasks' | 'custom';
-/**Determines whether the GanttChart can be sorted by one or more columns. */
-export declare type GanttChartSortMode = 'one' | 'many';
+/**Determines whether the GanttChart can be sorted by one, more then one or no columns. */
+export declare type GanttChartSortMode = 'none' | 'one' | 'many';
+/**Project, Task or Milestone type. Possible values are 'project', 'milestone' and 'task' */
+export declare type GanttChartTaskType = 'project' | 'milestone' | 'task';
 /**Determines the viewing date range of the timeline. Possible values: day - The timeline show the hours of the day.
 week - the timeline shows the days of the week.
 month - the timeline shows the days of the month.
 year - the timeline shows the months of the year.
 resource - displays the current tasks by grouping them according to the resources they have assigned. The unassigned tasks will be placed in a separate group called 'Unassigned'.
  <br /> The timeline has a header section that contains the labels of each cell according to the date inside them. The header is splitted in two sections in order to give a more detailed information of the dates. */
-export declare type GanttChartView = 'day' | 'week' | 'month' | 'year' | 'resource';
+export declare type GanttChartView = 'day' | 'week' | 'month' | 'year';
 /**Determines the format of the dates inside the timeline header when they represent weeks.  */
 export declare type WeekFormat = 'long' | 'numeric';
 export interface GaugeProperties {
@@ -12274,6 +13774,16 @@ export interface GridProperties {
    */
   onCommand?: {(name: string, command: any, details: GridCell, event: Event | KeyboardEvent | PointerEvent, handled: boolean): void};
   /**
+   * Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties.
+   * Default value: 
+   */
+  currentUser?: string | number;
+  /**
+   * Sets the grid users. Expects an array with 'id', 'name' and optionally 'color' and 'image' properties.
+   * Default value: []
+   */
+  users?: any[];
+  /**
    * Describes the paging settings.
    * Default value: [object Object]
    */
@@ -12348,12 +13858,26 @@ export interface Grid extends BaseElement, GridProperties {
   [name: string]: any;
   /**
    * This event is triggered, when the edit begins.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, column, cell)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, dataField, row, column, cell)
+   *  id - The edited row id.
+   *  dataField - The edited column data field.
    *  row - The edited row.
    *  column - The edited column.
    *  cell - The edited cell.
    */
   onBeginEdit?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered, when the Grid's header toolbar is displayed and the 'OK' button of a header dropdown is clicked. For example, when you open the columns customize panel, reorder columns and click the 'OK' button.
+	* @param event. The custom event. Custom data event was created with: ev.detail(type)
+   *  type - The type of dropdown. Possible values: 'filter', 'sort', 'search', 'group', 'format', 'customize'
+   */
+  onBatchChange?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered, when the Grid's header toolbar is displayed and the 'Cancel' button of a header dropdown is clicked.
+	* @param event. The custom event. Custom data event was created with: ev.detail(type)
+   *  type - The type of dropdown. Possible values: 'filter', 'sort', 'search', 'group', 'format', 'customize'
+   */
+  onBatchCancel?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the selection is changed. When you select with a drag, the event is triggered when the drag starts and ends. 
 	* @param event. The custom event. Custom data event was created with: ev.detail(started, finished, originalEvent)
@@ -12364,47 +13888,53 @@ export interface Grid extends BaseElement, GridProperties {
   onChange: ((this: any, ev: Event) => any) | null;
   /**
    * This event is triggered, when the user clicks on the header of a column.
-	* @param event. The custom event. Custom data event was created with: ev.detail(column, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(column, dataField, originalEvent)
    *  column - The clicked column.
+   *  dataField - The column's data field.
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
    */
   onColumnClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user double clicks on the header of a column.
-	* @param event. The custom event. Custom data event was created with: ev.detail(column, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(column, dataField, originalEvent)
    *  column - The double-clicked column.
+   *  dataField - The column's data field.
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
    */
   onColumnDoubleClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user resized a column.
-	* @param event. The custom event. Custom data event was created with: ev.detail(column, oldWidth, width)
+	* @param event. The custom event. Custom data event was created with: ev.detail(column, dataField, oldWidth, width)
    *  column - The resized column.
+   *  dataField - The column's data field.
    *  oldWidth - The old width of the column.
    *  width - The new width of the column.
    */
   onColumnResize?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user starts a column drag.
-	* @param event. The custom event. Custom data event was created with: ev.detail(column, index, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(column, dataField, index, originalEvent)
    *  column - The column.
+   *  dataField - The column's data field.
    *  index - The column's index
    *  originalEvent - The origianl Event object.
    */
   onColumnDragStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user drags a column.
-	* @param event. The custom event. Custom data event was created with: ev.detail(column, index, data, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(column, dataField, index, data, originalEvent)
    *  column - The column.
+   *  dataField - The column's data field.
    *  index - The column's index
    *  data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
    *  originalEvent - The origianl Event object.
    */
   onColumnDragging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered, when the user drags a column.
-	* @param event. The custom event. Custom data event was created with: ev.detail(column, index, newIndex, data, originalEvent)
+   * This event is triggered, when the user drops a column.
+	* @param event. The custom event. Custom data event was created with: ev.detail(column, dataField, index, newIndex, data, originalEvent)
    *  column - The column.
+   *  dataField - The column's data field.
    *  index - The column's index
    *  newIndex - The column's new index
    *  data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
@@ -12412,17 +13942,30 @@ export interface Grid extends BaseElement, GridProperties {
    */
   onColumnDragEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
+   * This event is triggered, when the user reorders a column.
+	* @param event. The custom event. Custom data event was created with: ev.detail(column, dataField, index, newIndex, data, originalEvent)
+   *  column - The column.
+   *  dataField - The column's data field.
+   *  index - The column's index
+   *  newIndex - The column's new index
+   *  data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
+   *  originalEvent - The origianl Event object.
+   */
+  onColumnReorder?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
    * This event is triggered, when the user starts a row drag.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, index, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, id, index, originalEvent)
    *  row - The row.
+   *  id - The row's id
    *  index - The row's index
    *  originalEvent - The origianl Event object.
    */
   onRowDragStart?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user drags a row.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, index, data, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, id, index, data, originalEvent)
    *  row - The row.
+   *  id - The row's id
    *  index - The row's index
    *  data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
    *  originalEvent - The origianl Event object.
@@ -12430,8 +13973,9 @@ export interface Grid extends BaseElement, GridProperties {
   onRowDragging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user drags a row.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, index, newIndex, data, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, id, index, newIndex, data, originalEvent)
    *  row - The row.
+   *  id - The row's id
    *  index - The row's index
    *  newIndex - The row's new index
    *  data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
@@ -12439,58 +13983,92 @@ export interface Grid extends BaseElement, GridProperties {
    */
   onRowDragEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
+   * This event is triggered, when the user reorders a row.
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, id, index, newIndex, data, originalEvent)
+   *  row - The row.
+   *  id - The row's id
+   *  index - The row's index
+   *  newIndex - The row's new index
+   *  data - The dragging object. data.feedback and data.feedbackLine are HTML Elements which are displayed while the user drags. The object has error(), success() and data() methods which you can call to set the feedback state.
+   *  originalEvent - The origianl Event object.
+   */
+  onRowReorder?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
    * This event is triggered, when the user expands a row of the grid. The Grid is in TreeGrid/Grouping mode.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, id, originalEvent)
    *  row - The expanded row.
+   *  id - The row's id
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
    */
   onRowExpand?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user collapsed a row of the grid. The Grid is in TreeGrid/Grouping mode.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, id, originalEvent)
    *  row - The collapsed row. 
+   *  id - The row's id
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
    */
   onRowCollapse?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user clicks on a row of the grid.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, originalEvent, id, isRightClick, pageX, pageY)
    *  row - The clicked row.
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+   *  id - Gets the row id.
+   *  isRightClick - Gets whether the pointing device's right button is clicked.
+   *  pageX - Gets the click's X position.
+   *  pageY - Gets the click's Y position.
    */
   onRowClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user double clicks on a row of the grid.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, originalEvent, id, isRightClick, pageX, pageY)
    *  row - The double-clicked row.
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+   *  id - Gets the row id.
+   *  isRightClick - Gets whether the pointing device's right button is clicked.
+   *  pageX - Gets the click's X position.
+   *  pageY - Gets the click's Y position.
    */
   onRowDoubleClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user resized a row.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, oldHeight, height)
+	* @param event. The custom event. Custom data event was created with: ev.detail(row, id, oldHeight, height)
    *  row - The resized row.
+   *  id - Gets the row id.
    *  oldHeight - The old height of the row.
    *  height - The new height of the row.
    */
   onRowResize?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user clicks on a cell of the grid.
-	* @param event. The custom event. Custom data event was created with: ev.detail(cell, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(cell, originalEvent, id, dataField, isRightClick, pageX, pageY)
    *  cell - The clicked cell.
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+   *  id - Gets the row id.
+   *  dataField - Gets the column dataField.
+   *  isRightClick - Gets whether the pointing device's right button is clicked.
+   *  pageX - Gets the click's X position.
+   *  pageY - Gets the click's Y position.
    */
   onCellClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the user double clicks on a cell of the grid.
-	* @param event. The custom event. Custom data event was created with: ev.detail(cell, originalEvent)
+	* @param event. The custom event. Custom data event was created with: ev.detail(cell, originalEvent, id, dataField, isRightClick, pageX, pageY)
    *  cell - The double-clicked cell. 
    *  originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+   *  id - Gets the row id.
+   *  dataField - Gets the column dataField.
+   *  isRightClick - Gets whether the pointing device's right button is clicked.
+   *  pageX - Gets the click's X position.
+   *  pageY - Gets the click's Y position.
    */
   onCellDoubleClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the edit ends.
-	* @param event. The custom event. Custom data event was created with: ev.detail(row, column, cell)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, dataField, row, column, cell)
+   *  id - The edited row id.
+   *  dataField - The edited column data field.
    *  row - The edited row.
    *  column - The edited column.
    *  cell - The edited cell.
@@ -12503,6 +14081,18 @@ export interface Grid extends BaseElement, GridProperties {
    *  data - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'
    */
   onFilter?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered, when the add new column dialog is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(dataField)
+   *  dataField - The column data field.
+   */
+  onOpenColumnDialog?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered, when the add new column dialog is closed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(dataField)
+   *  dataField - The column data field.
+   */
+  onCloseColumnDialog?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered, when the grid is resized.
 	* @param event. The custom event.    */
@@ -12568,6 +14158,17 @@ export interface Grid extends BaseElement, GridProperties {
    */
   addFilter(dataField: string, filter: string, refreshFilters?: boolean): void;
   /**
+   * Groups the Grid by a data field. This method will add a group to the Grid when grouping is enabled.
+   * @param {string} dataField. column bound data field
+   */
+  addGroup(dataField: string): void;
+  /**
+   * Sorts the Grid by a data field. This method will add a sorting to the Grid when sorting is enabled.
+   * @param {string} dataField. column bound data field
+   * @param {string} sortOrder. column's sort order. Use 'asc' or 'desc'.
+   */
+  addSort(dataField: string, sortOrder: string): void;
+  /**
    * Auto-sizes grid rows. This method will update the <em>height</em> of all Grid rows.
    */
   autoSizeRows(): void;
@@ -12576,6 +14177,11 @@ export interface Grid extends BaseElement, GridProperties {
    */
   autoSizeColumns(): void;
   /**
+   * This method returns true, if all rows in the Grid are selected.
+   * @returns {boolean}
+   */
+  areAllRowsSelected(): boolean;
+  /**
    * Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
    */
   beginUpdate(): void;
@@ -12583,13 +14189,20 @@ export interface Grid extends BaseElement, GridProperties {
    * Begins row, cell or column. This method allows you to programmatically start a cell, row or column editing. After calling it, an editor HTMLElement will be created and displayed in the Grid.
    * @param {string | number} rowId. row bound id
    * @param {string} dataField?. column bound data field
-   * @returns {boolean}
    */
-  beginEdit(rowId: string | number, dataField?: string): boolean;
+  beginEdit(rowId: string | number, dataField?: string): void;
   /**
    * Clears all filters. Refreshes the view and updates all filter input components.
    */
   clearFilter(): void;
+  /**
+   * Clears all data groups. Refreshes the view and updates the DataGrid component.
+   */
+  clearGroups(): void;
+  /**
+   * Clears all sorting. Refreshes the view and updates the DataGrid component.
+   */
+  clearSort(): void;
   /**
    * Clears the selection that user have made. All row, cell and column selection highlights will be removed.
    */
@@ -12667,7 +14280,58 @@ export interface Grid extends BaseElement, GridProperties {
    */
   exportData(Dataformat: string): void;
   /**
-   * Gets an array of columns with applied sorting.
+   * Navigates to a page, when paging is enabled.
+   * @param {number} index. page index
+   */
+  goToPage(index: number): void;
+  /**
+   * Navigates to the next page, when grid paging is enabled.
+   */
+  nextPage(): void;
+  /**
+   * Navigates to the prev page, when grid paging is enabled.
+   */
+  prevPage(): void;
+  /**
+   * Navigates to the first page, when grid paging is enabled.
+   */
+  firstPage(): void;
+  /**
+   * Navigates to the last page, when grid paging is enabled.
+   */
+  lastPage(): void;
+  /**
+   * Gets the maximum position of the vertical scrollbar. You can use this method in combination with the setVerticalScrollValue to apply a new scroll position.
+   * @returns {number}
+   */
+  getVerticalScrollMax(): number;
+  /**
+   * Gets the position of the vertical scrollbar.
+   * @returns {number}
+   */
+  getVerticalScrollValue(): number;
+  /**
+   * Gets the maximum position of the horizontal scrollbar. You can use this method in combination with the setHorizontalScrollValue to apply a new scroll position.
+   * @returns {number}
+   */
+  getHorizontalScrollMax(): number;
+  /**
+   * Gets the position of the horizontal scrollbar.
+   * @returns {number}
+   */
+  getHorizontalScrollValue(): number;
+  /**
+   * Gets the columns array. Each item in the array contains the column properties which are dynamically set by the user interaction and the columns initialization data properties such as: 'label', 'dataField', 'dataType', 'visible'.
+   * @returns {any}
+   */
+  getColumns(): any;
+  /**
+   * Gets the groups array.
+   * @returns {any[]}
+   */
+  getGroups(): any[];
+  /**
+   * Gets an array of columns with applied sorting. Each member in the array is with column's data field used as a key and 'sortOrder' and 'sortIndex' as a value.
    * @returns 
    */
   getSortedColumns(): {[dataField: string]: { sortOrder: string, sortIndex: number }};
@@ -12681,6 +14345,11 @@ export interface Grid extends BaseElement, GridProperties {
    * @returns {any[]}
    */
   getSelectedRows(): any[];
+  /**
+   * Gets the selected cells. The method returns an array of cell. Each cell is an array with row id, column data field and cell value.
+   * @returns {any[]}
+   */
+  getSelectedCells(): any[];
   /**
    * Gets an array of columns with applied filters.
    * @returns {any}
@@ -12697,20 +14366,81 @@ export interface Grid extends BaseElement, GridProperties {
    */
   getViewRows(): any;
   /**
+   * Gets a JSON object with the following fields: 'sort', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'.
+   * @returns {any}
+   */
+  getState(): any;
+  /**
    * Gets the changes from the batch edit.
    * @returns 
    */
   getBatchEditChanges(): { upDated: [{ id: string, dataField: string, oldValue: Object, newValue: Object }], deleted: [{id: string, data: Object}], added: [{id: string, data: Object}] };
+  /**
+   * Gets a value of a cell.
+   * @param {string | number} rowId. row bound id
+   * @param {string} dataField. column bound data field
+   * @returns {any}
+   */
+  getCellValue(rowId: string | number, dataField: string): any;
+  /**
+   * Gets a value of a column.
+   * @param {string} dataField. column bound data field
+   * @param {string} propertyName. The property name.
+   * @returns {any}
+   */
+  getColumnProperty(dataField: string, propertyName: string): any;
+  /**
+   * Gets a value of a row.
+   * @param {string | number} rowId. row bound id
+   * @param {string} propertyName. The property name.
+   * @returns {any}
+   */
+  getRowProperty(rowId: string | number, propertyName: string): any;
+  /**
+   * Gets the Data source data associated to the row.
+   * @param {string | number} rowId. row bound id
+   * @returns {any}
+   */
+  getRowData(rowId: string | number): any;
+  /**
+   * Gets the Row's id.
+   * @param {number} rowIndex. row index
+   * @returns {any}
+   */
+  getRowId(rowIndex: number): any;
   /**
    * Gets whether a column's drop-down menu is opened.
    * @returns {boolean}
    */
   hasMenu(): boolean;
   /**
+   * This method returns true, if any rows in the Grid are selected.
+   * @returns {boolean}
+   */
+  hasSelectedRows(): boolean;
+  /**
    * Hides the Details of a Row, when row details are enabled.
    * @param {string | number} rowId. row bound id
    */
   hideDetail(rowId: string | number): void;
+  /**
+   * Highlights a column. Highlights a Grid column.
+   * @param {string} dataField. column bound data field
+   */
+  highlightColumn(dataField: string): void;
+  /**
+   * Highlights a cell. Calling the method a second time toggle the highlight state.
+   * @param {string | number} rowId. row bound id
+   * @param {string} dataField. column bound data field
+   * @param {string} className?. CSS Class Name
+   */
+  highlightCell(rowId: string | number, dataField: string, className?: string): void;
+  /**
+   * Highlights a row. Calling the method a second time toggle the highlight state.
+   * @param {string | number} rowId. row bound id
+   * @param {string} className?. CSS Class Name
+   */
+  highlightRow(rowId: string | number, className?: string): void;
   /**
    * Opens a column drop-down menu.
    * @param {string} dataField. column bound data field
@@ -12739,20 +14469,46 @@ export interface Grid extends BaseElement, GridProperties {
    */
   removeFilter(dataField: string, refreshFilters?: boolean): void;
   /**
+   * Removes a group by data field. This method will remove a group to the Grid when grouping is enabled.
+   * @param {string} dataField. column bound data field
+   */
+  removeGroup(dataField: string): void;
+  /**
+   * Removes a sorting by data field. This method will remove a sorting from a Grid column.
+   * @param {string} dataField. column bound data field
+   */
+  removeSort(dataField: string): void;
+  /**
+   * Re-sorts the Grid by using the already applied column sortings and re-renders the Grid.
+   */
+  refreshSort(): void;
+  /**
    * Reverts the batch edit changes. This method cancels all changes made by the end-user.
    */
   revertBatchEdit(): void;
   /**
+   * Reorders two DataGrid columns.
+   * @param {string | number} dataField. The data field or column index of the first grid column.
+   * @param {string | number} referenceDataField. The data field or column index of the second grid column.
+   * @param {boolean} insertAfter?. Determines whether to insert the first column after the reference column.
+   */
+  reorderColumns(dataField: string | number, referenceDataField: string | number, insertAfter?: boolean): void;
+  /**
+   * Sorts the Grid by a data field. This method will add or remove sorting, when sorting is enabled. To remove the sorting, use 'null' for the sortOrder parameter.
+   * @param {string} dataField. column bound data field
+   * @param {string | null} sortOrder. column's sort order. Use 'asc', 'desc' or null.
+   */
+  sortBy(dataField: string, sortOrder: string | null): void;
+  /**
+   * Swaps two DataGrid columns.
+   * @param {string | number} dataField. The data field or column index of the first grid column.
+   * @param {string | number} referenceDataField. The data field or column index of the second grid column.
+   */
+  swapColumns(dataField: string | number, referenceDataField: string | number): void;
+  /**
    * Saves the batch edit changes. This method confirms the editing changes made by the end-user.
    */
   saveBatchEdit(): void;
-  /**
-   * Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
-   * @param {string | number} rowId. row bound id
-   * @param {any} data. row data matching the data source
-   * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
-   */
-  updateRow(rowId: string | number, data: any, callback?: any): void;
   /**
    * Selects a row, cell or column.
    * @param {string | number} rowId. row bound id
@@ -12779,15 +14535,57 @@ export interface Grid extends BaseElement, GridProperties {
    */
   selectRows(rowId: (string | number)[]): void;
   /**
+   * Selects all rows.
+   */
+  selectAllRows(): void;
+  /**
    * Selects multiple rows by their index.
    * @param {number[]} rowIndex. Array of row indexes
    */
   selectRowsByIndex(rowIndex: number[]): void;
   /**
+   * Sets a new value to a cell.
+   * @param {string | number} rowId. row bound id
+   * @param {string} dataField. column bound data field
+   * @param {string | number | Date | boolean} value. New Cell value.
+   */
+  setCellValue(rowId: string | number, dataField: string, value: string | number | Date | boolean): void;
+  /**
+   * Sets a property to a column.
+   * @param {string} dataField. column bound data field
+   * @param {string} propertyName. The column property's name.
+   * @param {any} value. The new property value.
+   */
+  setColumnProperty(dataField: string, propertyName: string, value: any): void;
+  /**
+   * Sets a property to a row.
+   * @param {string | number} rowId. row bound id
+   * @param {string} propertyName. The row property's name.
+   * @param {any} value. The new property value.
+   */
+  setRowProperty(rowId: string | number, propertyName: string, value: any): void;
+  /**
+   * Sets the position of the vertical scrollbar. You can use this method in combination with the getVerticalScrollValue and getVerticalScrollMax.
+   * @param {number} value. The new scroll position
+   */
+  setVerticalScrollValue(value: number): void;
+  /**
+   * Sets the position of the horizontal scrollbar. You can use this method in combination with the getHorizontalScrollValue and getHorizontalScrollMax.
+   * @param {number} value. The new scroll position
+   */
+  setHorizontalScrollValue(value: number): void;
+  /**
    * Shows the Details of a Row, when row details are enabled.
    * @param {string | number} rowId. row bound id
    */
   showDetail(rowId: string | number): void;
+  /**
+   * Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+   * @param {string | number} rowId. row bound id
+   * @param {any} data. row data matching the data source
+   * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
+   */
+  updateRow(rowId: string | number, data: any, callback?: any): void;
   /**
    * Unselects a row, cell or column.
    * @param {string | number} rowId. row bound id
@@ -12972,6 +14770,11 @@ export interface GridAppearance {
    * Default value: true
    */
   showRowLines?: boolean;
+  /**
+   * Shows column groups in the Hide columns panel. Column groups and columns are shown in a tree-like structure. When the property is set to false, the column groups are not displayed and the column labels contain the column group name.
+   * Default value: false
+   */
+  showColumnGroupsInColumnPanel?: boolean;
   /**
    * Shows filtered column background, when filter is applied.
    * Default value: true
@@ -13188,7 +14991,12 @@ export interface GridColumn {
    */
   allowResize?: boolean;
   /**
-   * Sets or gets the column's cells format.
+   * Sets or gets whether the column can have 'null' values.
+   * Default value: true
+   */
+  allowNull?: boolean;
+  /**
+   * Sets or gets the column's cells format. This property is used for applying a formatting to the cell values. Number format strings: 'd' - decimal numbers.'f' - floating-point numbers.'n' - integer numbers.'c' - currency numbers.'p' - percentage numbers.For adding decimal places to the numbers, add a number after the formatting striFor example: 'c3' displays a number in this format $25.256Built-in Date formats:// short date pattern'd' - 'M/d/yyyy',// long date pattern'D' - 'dddd, MMMM dd, yyyy',// short time pattern't' - 'h:mm tt',// long time pattern'T' - 'h:mm:ss tt',// long date, short time pattern'f' - 'dddd, MMMM dd, yyyy h:mm tt',// long date, long time pattern'F' - 'dddd, MMMM dd, yyyy h:mm:ss tt',// month/day pattern'M' - 'MMMM dd',// month/year pattern'Y' - 'yyyy MMMM',// S is a sortable format that does not vary by culture'S' - 'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Date format strings:'d'-the day of the month;'dd'-the day of the month'ddd'-the abbreviated name of the day of the week'dddd'- the full name of the day of the week'h'-the hour, using a 12-hour clock from 1 to 12'hh'-the hour, using a 12-hour clock from 01 to 12'H'-the hour, using a 24-hour clock from 0 to 23'HH'- the hour, using a 24-hour clock from 00 to 23'm'-the minute, from 0 through 59'mm'-the minutes,from 00 though59'M'- the month, from 1 through 12'MM'- the month, from 01 through 12'MMM'-the abbreviated name of the month'MMMM'-the full name of the month's'-the second, from 0 through 59'ss'-the second, from 00 through 59't'- the first character of the AM/PM designator'tt'-the AM/PM designator'y'- the year, from 0 to 99'yy'- the year, from 00 to 99'yyy'-the year, with a minimum of three digits'yyyy'-the year as a four-digit number;'yyyyy'-the year as a four-digit number.
    * Default value: ""
    */
   cellsFormat?: string;
@@ -13208,6 +15016,16 @@ export interface GridColumn {
    */
   cellsVerticalAlign?: VerticalAlignment;
   /**
+   * Sets or gets the column's header CSS class name.
+   * Default value: ""
+   */
+  className?: string;
+  /**
+   * Sets or gets the column's cells CSS class name.
+   * Default value: ""
+   */
+  cellsClassName?: string;
+  /**
    * Sets the name of the column group.
    * Default value: ""
    */
@@ -13218,7 +15036,7 @@ export interface GridColumn {
    */
   dataField?: string;
   /**
-   * Sets or gets the column's data type.
+   * Sets or gets the column's data type. Any of the following value is valid: 'string', 'number', 'int', 'date', 'bool', 'object', 'any'
    * Default value: "string"
    */
   dataType?: string;
@@ -13228,12 +15046,17 @@ export interface GridColumn {
    */
   displayField?: string;
   /**
+   * Sets or gets the column's description. The description of the column is displayed in the column's header, when the end-user moves the pointer over the description button. 'showDescriptionButton' property determines whether the description button is visible.
+   * Default value: ""
+   */
+  description?: string;
+  /**
    * Gets the HTML Element. The property returns null when the Column is not in the View.
    * Default value: null
    */
   element?: HTMLElement;
   /**
-   * Sets or gets the column's editor. The property expects 'input', 'autoComplete', 'numberInput', 'checkBox', 'deteTimePicker', 'timeInput', 'dateInput', 'maskedTextBox', 'textArea' or a custom object with 'template' property which defines the editor type, 'onInit' and 'onRender' callback functions.
+   * Sets or gets the column's editor. The property expects 'input', 'autoComplete', 'comboBox', 'dropDownList', 'image', 'numberInput', 'checkBox', 'multiInput', 'multiComboInput', 'checkInput', 'slider', 'dateTimePicker', 'timeInput', 'dateInput', 'dateRangeInput', 'maskedTextBox', 'textArea' or a custom object with 'template' property which defines the editor type, 'settings' property which defines the custom editor's properties, 'onInit(int row, string column, object editor, object rowData): object', 'onRender(int row, string column, object editor, object rowData): object', 'setValue(object value): void' and 'getValue(object value): object' callback functions.
    * Default value: null
    */
   editor?: any;
@@ -13247,6 +15070,11 @@ export interface GridColumn {
    * Default value: ""
    */
   filter?: string;
+  /**
+   * Sets or gets the filter menu mode of the column. In 'basic' mode, a single input is displayed in the filter menu. In 'default' mode, two input options are available for more precise filtering. In 'excel' mode, checked list with unique values is displayed.
+   * Default value: default
+   */
+  filterMenuMode?: GridColumnFilterMenuMode;
   /**
    * Sets or gets the column's format function.
    * Default value: null
@@ -13283,8 +15111,13 @@ export interface GridColumn {
    */
   sortOrder?: GridColumnSortOrder | null;
   /**
+   * Sets or gets the sort index of the column. Accepts an integer value. This property can be used to get or set the column's sort index when sorting mode is 'many'.
+   * Default value: null
+   */
+  sortIndex?: number;
+  /**
    * Sets or gets whether the column's header action drop-down button is displayed. This button opens the column's menu.
-   * Default value: false
+   * Default value: true
    */
   showActionButton?: boolean;
   /**
@@ -13303,7 +15136,7 @@ export interface GridColumn {
    */
   width?: string | number;
   /**
-   * Sets or gets the column's template. The property expects the 'id' of HTMLTemplateElement or HTML string which is displayed in the cells. Built-in values are: 'checkBox', 'url', 'email', 
+   * Sets or gets the column's template. The property expects the 'id' of HTMLTemplateElement or HTML string which is displayed in the cells. Built-in string values are: 'checkBox', 'switchButton', 'radioButton', 'url', 'email', 'dropdownlist', 'list', 'tags', 'autoNumber', 'modifiedBy', 'createdBy', 'createdTime', 'modifiedTime', 'images. For example, when you set the template to 'url', the cells will be render anchor tags. When you set the template property to HTMLTemplateElement you should consider that once a template is rendered, the formatObject.template property stores the rendered template component for further use.
    * Default value: 
    */
   template?: any;
@@ -13318,10 +15151,10 @@ export interface GridColumn {
    */
   verticalAlign?: VerticalAlignment;
   /**
-   * Sets or gets the column summary.
-   * Default value: sum
+   * Sets or gets the column summary. The property should be set to an array with the following possible values: 'sum', 'min', 'max', 'avg', 'count', 'median', 'stdev', 'stdevp', 'var', 'varp'.
+   * Default value: 
    */
-  summary?: GridColumnSummary;
+  summary?: string[];
   /**
    * Sets or gets whether the column is visible. Set the property to 'false' to hide the column.
    * Default value: true
@@ -13697,6 +15530,11 @@ export interface GridDataSourceSettings {
   childrenDataField?: string;
   /**
    * Sets or gets the XML binding root.
+   * Default value: blackList
+   */
+  sanitizeHTML?: GridDataSourceSettingsSanitizeHTML;
+  /**
+   * Sets or gets the XML binding root.
    * Default value: ""
    */
   root?: string;
@@ -14005,6 +15843,11 @@ export interface GridEditingAddNewRow {
    * Default value: false
    */
   autoCreate?: boolean;
+  /**
+   * Determines whether the newly added row enters automatically in edit mode, when added.
+   * Default value: true
+   */
+  autoEdit?: boolean;
   /**
    * Sets the position of the 'Add New Row' UI element.
    * Default value: both
@@ -14473,6 +16316,11 @@ export interface GridSummaryRow {
    * Default value: false
    */
   visible?: boolean;
+  /**
+   * Sets the summary row editor. When you point over a summary row cell, an editor is displayed and you will be able to dynamically change the summary type.
+   * Default value: false
+   */
+  editing?: boolean;
 }
 
 /**Describes the settings for the group header. */
@@ -14501,6 +16349,11 @@ export interface GridHeader {
    * Default value: 
    */
   template?: string | HTMLTemplateElement;
+  /**
+   * This callback function can be used for customization of the Header toolbar. The Toolbar HTML Element is passed as an argument.
+   * Default value: null
+   */
+  onInit?: any;
   /**
    * Determines the buttons displayed in the Grid header. 'columns' displays a button opening the columns chooser panel. 'filter'  displays a button opening the filtering panel.  'group' displays a button opening the grouping panel. 'sort'  displays a button opening the sorting panel. 'format'  displays a button opening the conditional formatting panel. 'search' displays a button opening the search panel.
    * Default value: [ "columns", "filter", "group", "sort", "format", "search" ]
@@ -14634,6 +16487,11 @@ export interface GridRow {
    */
   showDetail?: boolean;
   /**
+   * "Method which applies a style object to all cells. Expects a JSON object with the following allowed values: 'background', 'color', 'fontSize', 'fontFamily', 'fontWeight', 'fontStyle', 'textDecoration'
+   * Default value: undefined
+   */
+  setStyle?: {(value: any): void};
+  /**
    * Sets or gets whether the row is visible. Set the property to 'false' to hide the row.
    * Default value: true
    */
@@ -14766,6 +16624,11 @@ export interface GridCell {
    * Default value: "'center'"
    */
   verticalAlign?: string;
+  /**
+   * "Method which applies a cell style object. Expects a JSON object with the following possible values: 'background', 'color', 'fontSize', 'fontFamily', 'fontWeight', 'fontStyle', 'textDecoration'
+   * Default value: undefined
+   */
+  setStyle?: {(value: any): void};
 }
 
 /**Describes the selection settings. */
@@ -14820,6 +16683,11 @@ export interface GridSelection {
    * Default value: true
    */
   allowCellDragSelectionAutoFill?: boolean;
+  /**
+   * Sets or gets whether the default browser's text selection is enabled.
+   * Default value: false
+   */
+  defaultSelection?: boolean;
   /**
    * Sets or gets whether the selection allows you to select 'one', 'many' or a variation of 'many' called 'extended'. 'one' allows you to have only single cell or row selected. 'many' 
    * Default value: many
@@ -14883,7 +16751,7 @@ export interface GridSorting {
    */
   sort?: string[];
   /**
-   * Sets the count of allowed sorting columns.
+   * Sets the count of allowed sorting columns. When the property value is set to 'many', users can sort data by multiple columns.
    * Default value: one
    */
   mode?: GridSortingMode;
@@ -14914,20 +16782,22 @@ export declare type GridResizeMode = 'none' | 'split' | 'growAndShrink';
 export declare type GridClipboardAutoFillMode = 'none' | 'copy' | 'fillSeries';
 /**Sets or gets whether the position of the checkbox selection column. */
 export declare type Position = 'near' | 'far';
+/**Sets or gets the filter menu mode of the column. In 'basic' mode, a single input is displayed in the filter menu. In 'default' mode, two input options are available for more precise filtering. In 'excel' mode, checked list with unique values is displayed. */
+export declare type GridColumnFilterMenuMode = 'basic' | 'default' | 'excel';
 /**Sets or gets the sort order of the column. Accepts: 'asc', 'desc' and null. */
 export declare type GridColumnSortOrder = 'asc' | 'desc' | null;
-/**Sets or gets the column summary. */
-export declare type GridColumnSummary = 'sum' | 'min' | 'max' | 'avg' | 'count' | 'median' | 'stdev' | 'stdevp' | 'var' | 'varp';
 /**The formatting condition. */
 export declare type GridConditionalFormattingCondition = 'between' | 'equal' | 'greaterThan' | 'lessThan' | 'notEqual';
 /**Sets the page orientation, when exporting to PDF. */
 export declare type GridDataExportPageOrientation = 'landscape' | 'portrait';
+/**Sets or gets the XML binding root. */
+export declare type GridDataSourceSettingsSanitizeHTML = 'all' | 'blackList' | 'none';
 /**Sets the dataField type. */
 export declare type GridDataSourceSettingsDataFieldDataType = 'string' | 'date' | 'boolean' | 'number' | 'array' | 'any';
 /**Sets or gets whether the data source type. */
 export declare type GridDataSourceSettingsDataSourceType = 'array' | 'json' | 'xml' | 'csv' | 'tsv';
 /**Determines the way editing is initiated. */
-export declare type GridEditingAction = 'none' | 'click' | 'dblClick';
+export declare type GridEditingAction = 'none' | 'click' | 'doubleClick';
 /**Sets what is to be displayed in command column buttons. */
 export declare type GridCommandDisplayMode = 'label' | 'icon' | 'labelAndIcon';
 /**Sets the grid's edit mode. */
@@ -14950,7 +16820,7 @@ export declare type GridSelectionMode = 'one' | 'many' | 'extended';
 export declare type GridSelectionAction = 'none' | 'click' | 'doubleClick';
 /**Sets or gets whether the checkbox selection selects all rows in the current page or all rows. The 'none' setting disables the header checkbox. */
 export declare type GridSelectionCheckBoxesSelectAllMode = 'none' | 'page' | 'all';
-/**Sets the count of allowed sorting columns. */
+/**Sets the count of allowed sorting columns. When the property value is set to 'many', users can sort data by multiple columns. */
 export declare type GridSortingMode = 'one' | 'many';
 export interface GroupPanelProperties {
   /**
@@ -15098,6 +16968,11 @@ export interface InputProperties {
    */
   disabled?: boolean;
   /**
+   * Sets additional class names to the Input drop down.
+   * Default value: 
+   */
+  dropDownClassList?: any;
+  /**
    * Determines the position of the drop down button.
    * Default value: none
    */
@@ -15237,6 +17112,21 @@ export interface Input extends BaseElement, InputProperties {
    */
   onChange: ((this: any, ev: Event) => any) | null;
   /**
+   * This event is triggered on each key up event of the Input, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the user clicks on an item from the popup list.
+	* @param event. The custom event. Custom data event was created with: ev.detail(item, label, value)
+   *  item - The item that was clicked.
+   *  label - The label of the item that was clicked.
+   *  value - The value of the item that was clicked.
+   */
+  onItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
    * Closes the drop down.
    */
   close(): void;
@@ -15268,10 +17158,35 @@ declare global {
 export declare type InputQueryMode = 'contains' | 'containsIgnoreCase' | 'doesNotContain' | 'doesNotContainIgnoreCase' | 'equals' | 'equalsIgnoreCase' | 'startsWith' | 'startsWithIgnoreCase' | 'endsWith' | 'endsWithIgnoreCase';
 export interface KanbanProperties {
   /**
+   * Enables or disables column reordering. When this property is set to true and allowDrag is enabled, users will be able to reoder columns through drag & drop. For example: Click and drag the first column's header and drop it over another column.
+   * Default value: false
+   */
+  allowColumnReorder?: boolean;
+  /**
+   * Enables or disables column editing. When this property is set to true, users will be able to dynamically change the column's header label by double clicking on it.
+   * Default value: false
+   */
+  allowColumnEdit?: boolean;
+  /**
+   * Enables or disables column removing. When this property is set to true, users will be able to dynamically remove a column through the column actions menu. the 'columnActions' property should be true.
+   * Default value: false
+   */
+  allowColumnRemove?: boolean;
+  /**
+   * Enables or disables column hiding. When this property is set to true, users will be able to dynamically hide a column through the column actions menu. the 'columnActions' property should be true.
+   * Default value: false
+   */
+  allowColumnHide?: boolean;
+  /**
    * Toggles the visibility of the column buttons for adding tasks. A particular button can be disabled by setting addNewButton in the column's definition to false.
    * Default value: false
    */
   addNewButton?: boolean;
+  /**
+   * Determines whether the add button is visible in the column header and/or after the tasks in the column.
+   * Default value: both
+   */
+  addNewButtonDisplayMode?: KanbanAddNewButtonDisplayMode;
   /**
    * Sets or gets whether a column with a button for adding new status columns to the Kanban will be displayed.
    * Default value: false
@@ -15288,11 +17203,6 @@ export interface KanbanProperties {
    */
   allowDrop?: boolean;
   /**
-   * Sets or gets the animation mode. Animation is disabled when the property is set to 'none'
-   * Default value: advanced
-   */
-  animation?: Animation;
-  /**
    * Enables or disables auto load state from the browser's localStorage. Information about tasks and their position and selected state, filtering, sorting, collapsed columns, as well as the values of the properties taskActions, taskComments, taskDue, taskPriority, taskProgress, taskTags, and taskUserIcon is loaded.
    * Default value: true
    */
@@ -15308,10 +17218,35 @@ export interface KanbanProperties {
    */
   collapsible?: boolean;
   /**
+   * Displays colors in the column header, when the column's color property is set.
+   * Default value: false
+   */
+  columnColors?: boolean;
+  /**
    * Describes the columns properties.
    * Default value: 
    */
   columns?: KanbanColumn[];
+  /**
+   * Toggles the visibility of the column actions icon.
+   * Default value: false
+   */
+  columnActions?: boolean;
+  /**
+   * Determines whether task count information is displayed in column headers.
+   * Default value: false
+   */
+  columnSummary?: boolean;
+  /**
+   * Determines whether a column header has a template. You can pass 'string', 'function' or HTMLTemplateElement as a value.
+   * Default value: null
+   */
+  columnHeaderTemplate?: any;
+  /**
+   * Determines the column edit behavior. With the 'header' option, edit starts on double click on the column's label. In 'menu' mode, edit is allowed from the 'columnActions' menu. In 'headerAndMenu' option, column editing includes both options.
+   * Default value: headerAndMenu
+   */
+  columnEditMode?: KanbanColumnEditMode;
   /**
    * Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties.
    * Default value: 
@@ -15324,9 +17259,9 @@ export interface KanbanProperties {
   dataSource?: KanbanDataSource[];
   /**
    * Determines the the relation (mapping) between the Kanban's default fields (keywords) and the data fields from the data source. Not necessary if both match. Only some of the default mapping can be overwritten.
-   * Default value: { checklist: 'checklist', color: 'color', comments: 'comments', dueDate: 'dueDate', id: 'id', priority: 'priority', progress: 'progress', startDate: 'startDate', status: 'status', swimlane: 'swimlane', tags: 'tags', text: 'text', userId: 'userId' }
+   * Default value: { checklist: 'checklist', color: 'color', comments: 'comments', dueDate: 'dueDate', id: 'id', priority: 'priority', progress: 'progress', startDate: 'startDate', status: 'status', swimlane: 'swimlane', tags: 'tags', text: 'text', userId: 'userId'. createdUserId: 'createdUserId', createdDate: 'createdDate', updatedUserId: 'updatedUserId', updatedDate: 'updatedDate' }
    */
-  dataSourceMap?: { checklist: string; color: string; comments: string; dueDate: string; id: string; priority: string; progress: string; startDate: string; status: string; swimlane: string; tags: string; text: string; userId: string; };
+  dataSourceMap?: { checklist: string; color: string; comments: string; dueDate: string; id: string; priority: string; progress: string; startDate: string; status: string; swimlane: string; tags: string; text: string; userId: string; createdUserId: string; upDatedUserId: string; createdDate: Date; upDatedDate: Date;};
   /**
    * Determines the offset of the drag feedback element from the mouse cursor when dragging tasks. The first member of the array is the horizontal offset and the second one - the vertical offset. If set to 'auto', the offset is based on the mouse position when the dragging started.
    * Default value: auto
@@ -15364,7 +17299,7 @@ export interface KanbanProperties {
   locale?: string;
   /**
    * Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale. 
-   * Default value:    * { 'en': { 'addFilter': '+ Add filter', 'and': 'And', 'apply': 'Apply', 'booleanFirst': '☐', 'booleanLast': '☑', 'cancel': 'Cancel', 'CONTAINS': 'contains', 'CONTAINS_CASE_SENSITIVE': 'contains (case sensitive)', 'dateFirst': '1', 'dateLast': '9', 'DOES_NOT_CONTAIN': 'does not contain', 'DOES_NOT_CONTAIN_CASE_SENSITIVE': 'does not contain (case sensitive)', 'EMPTY': 'empty', 'ENDS_WITH': 'ends with', 'ENDS_WITH_CASE_SENSITIVE': 'ends with (case sensitive)', 'EQUAL': 'equal', 'EQUAL_CASE_SENSITIVE': 'equal (case sensitive)', 'filter': 'Filter', 'filteredByMultiple': '"?', 'remove': 'Remove', 'removeSubtask': 'Remove subtask', 'send': 'Send', 'startDate': 'Start date', 'status': 'Status', 'swimlane': 'Swimlane', 'tags': 'Tags', 'text': 'Text', 'userId': 'User ID', 'userIcon': 'User icon' } }
+   * Default value:    * { 'en': { 'addFilter': '+ Add filter', 'and': 'And', 'apply': 'Apply', 'booleanFirst': '☐', 'booleanLast': '☑', 'cancel': 'Cancel', 'CONTAINS': 'contains', 'CONTAINS_CASE_SENSITIVE': 'contains (case sensitive)', 'dateFirst': '1', 'dateLast': '9', 'DOES_NOT_CONTAIN': 'does not contain', 'DOES_NOT_CONTAIN_CASE_SENSITIVE': 'does not contain (case sensitive)', 'EMPTY': 'empty', 'ENDS_WITH': 'ends with', 'ENDS_WITH_CASE_SENSITIVE': 'ends with (case sensitive)', 'EQUAL': 'equal', 'EQUAL_CASE_SENSITIVE': 'equal (case sensitive)', 'filter': 'Filter', 'filteredByMultiple': '%', 'removeComment': 'Remove comment', 'promptColumn': 'Are you sure you want to remove this column?'} }
    */
   messages?: any;
   /**
@@ -15372,6 +17307,21 @@ export interface KanbanProperties {
    * Default value: zeroOrOne
    */
   selectionMode?: KanbanSelectionMode;
+  /**
+   * Sets or gets whether the tasks history will be stored and displayed in the task dialog.
+   * Default value: false
+   */
+  storeHistory?: boolean;
+  /**
+   * Sets or gets the task history items that will be stored when storeHistory is enabled.
+   * Default value: 20
+   */
+  storeHistoryItems?: number;
+  /**
+   * Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts.
+   * Default value: false
+   */
+  rightToLeft?: boolean;
   /**
    * Describes the swimlanes in the kanban board. Sub-columns are not applicable when swimlanes are present.
    * Default value: 
@@ -15423,6 +17373,26 @@ export interface KanbanProperties {
    */
   taskProgress?: boolean;
   /**
+   * Sets the task custom fields displayed in the card. Each array item should have 'dataField', 'label' 'dataType' and optionally 'visible' properties. The 'dataField' determines the value, the label is displayed as title, 'dataType' is used for formatting and 'visible' determines whether the field will be displayed.
+   * Default value: 
+   */
+  taskCustomFields?: any;
+  /**
+   * The task's background color depends on the task's color property. By default the color is rendered within the task's left border.
+   * Default value: false
+   */
+  taskColorEntireSurface?: boolean;
+  /**
+   * Displays an input in the task's card for adding dynamically a sub task. The 'taskSubTasks' property should be set to a value different than 'none'.
+   * Default value: true
+   */
+  taskSubTasksInput?: boolean;
+  /**
+   * Sets the rendering mode of sub tasks. 'none' - default value. Sub tasks are displayed only in the edit dialog. 'onePerRow' - all sub tasks are displayed in the task's card. 'onlyUnfinished' - only tasks which are not completed are displayed in the task's card.
+   * Default value: none
+   */
+  taskSubTasks?: KanbanTaskSubTasks;
+  /**
    * Toggles the visibility of task tags.
    * Default value: true
    */
@@ -15437,6 +17407,21 @@ export interface KanbanProperties {
    * Default value: null
    */
   textTemplate?: any;
+  /**
+   * Determines the theme. Theme defines the look of the element
+   * Default value: ""
+   */
+  theme?: string;
+  /**
+   * Determines whether the priority list (as defined by the priority property) will be shown when clicking the priority icon. Only applicable if editable privileges are enabled.
+   * Default value: false
+   */
+  priorityList?: boolean;
+  /**
+   * Determines the priority Kanban tasks can be assigned to. Example: [{label: 'low', value: 'low'}, {label: 'high', value: 'high'}]
+   * Default value: 
+   */
+  priority?: KanbanPriority[];
   /**
    * Determines whether the user list (as defined by the users property) will be shown when clicking the user icon. Only applicable if editable privileges are enabled.
    * Default value: false
@@ -15471,6 +17456,54 @@ export interface Kanban extends BaseElement, KanbanProperties {
    * This event is triggered when the edit/prompt dialog is about to be closed. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
 	* @param event. The custom event.    */
   onClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column is added.
+	* @param event. The custom event. Custom data event was created with: ev.detail(label, dataField, collapsed)
+   *  label - The column label.
+   *  dataField - The column data field.
+   *  collapsed - The column's collapsed state.
+   */
+  onColumnAdd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column is removed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(label, dataField, collapsed)
+   *  label - The column label.
+   *  dataField - The column data field.
+   *  collapsed - The column's collapsed state.
+   */
+  onColumnRemove?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column is reordered.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldIndex, index, column)
+   *  oldIndex - The column's old index.
+   *  index - The column's new index.
+   *  column - The column's data object with 'label', 'dataField' and 'collapsed' fields.
+   */
+  onColumnReorder?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column is updated.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value, column)
+   *  oldValue - The column's old label.
+   *  value - The column's new label.
+   *  column - The column's data object with 'label', 'dataField' and 'collapsed' fields.
+   */
+  onColumnUpdate?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column header is clicked.
+	* @param event. The custom event. Custom data event was created with: ev.detail(label, dataField, collapsed)
+   *  label - The column label.
+   *  dataField - The column data field.
+   *  collapsed - The column's collapsed state.
+   */
+  onColumnClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column header is double clicked.
+	* @param event. The custom event. Custom data event was created with: ev.detail(label, dataField, collapsed)
+   *  label - The column label.
+   *  dataField - The column data field.
+   *  collapsed - The column's collapsed state.
+   */
+  onColumnDoubleClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a task is dropped somewhere in the DOM. The dragging operation can be canceled by calling event.preventDefault() in the event handler function.
 	* @param event. The custom event. Custom data event was created with: ev.detail(container, data, item, items, originalEvent, previousContainer, target)
@@ -15524,6 +17557,18 @@ export interface Kanban extends BaseElement, KanbanProperties {
 	* @param event. The custom event.    */
   onSort?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
+   * This event is triggered when a new task is added.
+	* @param event. The custom event. Custom data event was created with: ev.detail(value)
+   *  value - The task data that is added to the Kanban.
+   */
+  onTaskAdd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a task is removed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(value)
+   *  value - The task data that is removed from the Kanban.
+   */
+  onTaskRemove?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
    * Adds filtering
    * @param {string[]} filters. Filter information
    * @param {string} operator?. Logical operator between the filters of different fields
@@ -15540,6 +17585,11 @@ export interface Kanban extends BaseElement, KanbanProperties {
    * @param {any} data?. An object containing the new task's data
    */
   addTask(data?: any): void;
+  /**
+   * Adds a column to a Kanban. If no data is specified, an empty column is added.
+   * @param {any} data?. An object containing the new column's data
+   */
+  addColumn(data?: any): void;
   /**
    * Begins an edit operation
    * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
@@ -15558,6 +17608,11 @@ export interface Kanban extends BaseElement, KanbanProperties {
    * @param {number | string} column. The index or dataField of the column to collapse
    */
   collapse(column: number | string): void;
+  /**
+   * Hides a Kanban column.
+   * @param {number | string} column. The index or dataField of the column to hide
+   */
+  hide(column: number | string): void;
   /**
    * Creates a copy of a task in the same column.
    * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
@@ -15585,11 +17640,17 @@ export interface Kanban extends BaseElement, KanbanProperties {
   /**
    * Exports the Kanban's data.
    * @param {string} dataFormat. The file format to export to. Supported formats: 'csv', 'html', 'json', 'pdf', 'tsv', 'xlsx', 'xml'.
-   * @param {string} fileName?. The name of the file to export to
+   * @param {string} fileName. The name of the file to export to
    * @param {Function} callback?. A callback function to pass the exported data to (if fileName is not provided)
    * @returns {any}
    */
-  exportData(dataFormat: string, fileName?: string, callback?: Function): any;
+  exportData(dataFormat: string, fileName: string, callback?: Function): any;
+  /**
+   * Gets the data of a column. The returned value is a JSON object with the following fields: 'label', 'dataField', 'collapsed', 'collapsible', 'allowRemove', 'editable', 'reorder', 'orientation'.
+   * @param {string} dataField. The column's data field
+   * @returns {any}
+   */
+  getColumn(dataField: string): any;
   /**
    * Gets the Kanban's state.
    * @returns 
@@ -15633,15 +17694,35 @@ export interface Kanban extends BaseElement, KanbanProperties {
    */
   removeTask(task: number | string | HTMLElement, prompt?: boolean): void;
   /**
+   * Removes a column.
+   * @param {string} dataField. The column's data field
+   */
+  removeColumn(dataField: string): void;
+  /**
    * Saves the Kanban's state to the browser's localStorage.
    */
   saveState(): void;
+  /**
+   * Shows a Kanban column.
+   * @param {number | string} column. The index or dataField of the column to show
+   */
+  show(column: number | string): void;
+  /**
+   * Shows all Kanban columns.
+   */
+  showAllColumns(): void;
   /**
    * Updates a task.
    * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
    * @param {{}} newData. The new data to visualize in the task.
    */
   updateTask(task: number | string | HTMLElement, newData: {}): void;
+  /**
+   * Updates a column.
+   * @param {string} dataField. The new column's data field
+   * @param {{}} newData. The new data to visualize in the column.
+   */
+  updateColumn(dataField: string, newData: {}): void;
 }
 
 export interface KanbanColumn {
@@ -15650,6 +17731,11 @@ export interface KanbanColumn {
    * Default value: true
    */
   addNewButton?: boolean;
+  /**
+   * Sets or gets whether the column can be removed from the column menu.
+   * Default value: true
+   */
+  allowRemove?: boolean;
   /**
    * Sets or gets whether the column is collapsed.
    * Default value: false
@@ -15676,6 +17762,21 @@ export interface KanbanColumn {
    */
   label?: string;
   /**
+   * Sets or gets whether a column is editable.
+   * Default value: true
+   */
+  editable?: boolean;
+  /**
+   * Sets or gets whether a column is visible.
+   * Default value: true
+   */
+  visible?: boolean;
+  /**
+   * Sets or gets whether a column can be reordered.
+   * Default value: true
+   */
+  reorder?: boolean;
+  /**
    * Sets or gets whether the tasks in the column flow vertically or horizontally.
    * Default value: vertical
    */
@@ -15685,6 +17786,11 @@ export interface KanbanColumn {
    * Default value: false
    */
   selected?: boolean;
+  /**
+   * Determines whether a column header has a template. You can pass 'string', 'function' or HTMLTemplateElement as a value.
+   * Default value: null
+   */
+  headerTemplate?: any;
 }
 
 export interface KanbanDataSource {
@@ -15713,6 +17819,16 @@ export interface KanbanDataSource {
    * Default value: null
    */
   dueDate?: Date;
+  /**
+   * Callback function which can be used for customizing the tasks rendering. The Kanban calls it with 2 arguments - task html element and task data.
+   * Default value: null
+   */
+  onTaskRender?: any;
+  /**
+   * Callback function which can be used for customizing the column header rendering. The Kanban calls it with 2 arguments - column header html element and column data.
+   * Default value: null
+   */
+  onColumnHeaderRender?: any;
   /**
    * The task's priority.
    * Default value: normal
@@ -15773,6 +17889,19 @@ export interface KanbanSwimlane {
   label?: string;
 }
 
+export interface KanbanPriority {
+  /**
+   * The priority label displayed.
+   * Default value: ""
+   */
+  label?: string;
+  /**
+   * The priority value.
+   * Default value: ""
+   */
+  value?: string;
+}
+
 export interface KanbanUser {
   /**
    * Sets whether the user has a privilege to add or copy tasks.
@@ -15826,8 +17955,12 @@ declare global {
     }
 }
 
+/**Determines whether the add button is visible in the column header and/or after the tasks in the column. */
+export declare type KanbanAddNewButtonDisplayMode = 'top' | 'bottom' | 'both';
 /**Sets or gets whether the tasks in the column flow vertically or horizontally. */
 export declare type KanbanColumnOrientation = 'vertical' | 'horizontal';
+/**Determines the column edit behavior. With the 'header' option, edit starts on double click on the column's label. In 'menu' mode, edit is allowed from the 'columnActions' menu. In 'headerAndMenu' option, column editing includes both options. */
+export declare type KanbanColumnEditMode = 'header' | 'menu' | 'headerAndMenu';
 /**The task's priority. */
 export declare type KanbanDataSourcePriority = 'low' | 'normal' | 'high';
 /**Sets or gets the header position. The header contains the Customize, Filter, Sort, and Search buttons. */
@@ -15838,6 +17971,8 @@ export declare type KanbanHierarchy = 'columns' | 'tabs';
 export declare type KanbanSelectionMode = 'zeroOrOne' | 'zeroOrManyExtended';
 /**Sets or gets whether tasks can be shown in all levels of column hierarchy or only on leaf columns. */
 export declare type KanbanTaskPosition = 'all' | 'leaf';
+/**Sets the rendering mode of sub tasks. 'none' - default value. Sub tasks are displayed only in the edit dialog. 'onePerRow' - all sub tasks are displayed in the task's card. 'onlyUnfinished' - only tasks which are not completed are displayed in the task's card. */
+export declare type KanbanTaskSubTasks = 'none' | 'onePerRow' | 'onlyUnfinished';
 export interface LayoutProperties {
   /**
    * Sets or gets the animation mode. Animation is disabled when the property is set to 'none'
@@ -16392,7 +18527,7 @@ export interface ListBoxProperties {
    * A getter that returns an array of all ListBox items.
    * Default value: 
    */
-  items?: {label: string, value: string}[];
+  items?: ListBoxItem[];
   /**
    * A string that represents the id of an HTMLTemplateElement inside the DOM or a reference to the template itself. It's used to set a custom template for the list items.
    * Default value: null
@@ -16640,6 +18775,11 @@ export interface ListBox extends BaseElement, ListBoxProperties {
    */
   getItem(value: string): HTMLElement;
   /**
+   * Returns an array of ListBox items.
+   * @returns {{label: string, value: string}[]}
+   */
+  getItems(): {label: string, value: string}[];
+  /**
    * Inserts a new item at a specified index.
    * @param {number} index. The index where the item must be inserted.
    * @param {any} items. A single item/definition or an array of List Items/definitions of list items to be inserted. The format of the item definitions is the same as the format of the <strong>dataSource</strong> property.
@@ -16679,6 +18819,19 @@ export interface ListBox extends BaseElement, ListBoxProperties {
    * @param {any} details. An object that contains the properties and their new values for the List item that should be updated. For example, label, value or selected attributes.
    */
   update(index: number, details: any): void;
+}
+
+export interface ListBoxItem {
+  /**
+   * The label of the list item.
+   * Default value: 
+   */
+  label?: string | null;
+  /**
+   * The value of the list item.
+   * Default value: 
+   */
+  value?: string | null;
 }
 
 declare global {
@@ -16875,6 +19028,11 @@ export interface ListMenuProperties {
    * Default value: ""
    */
   filterInputPlaceholder?: string;
+  /**
+   * Determines the MenuItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the 'value' property or 'textContent' if the user wants to filter by text inside the MenuItem's content or any other property.
+   * Default value: "label"
+   */
+  filterMember?: string;
   /**
    * Determines the filtering mode.
    * Default value: containsIgnoreCase
@@ -17332,11 +19490,18 @@ export interface MaskedTextBox extends BaseElement, MaskedTextBoxProperties {
   [name: string]: any;
   /**
    * This event is triggered when the value of the Text Box is changed.
-	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, newValue)
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
    *  oldValue - The previous value before it was changed.
-   *  newValue - The new value.
+   *  value - The new value.
    */
   onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered on each key up event of the MaskedTextBox, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered if the <b>validation</b> property is set. Indicates whether valiation has passed successfully or not.
 	* @param event. The custom event. Custom data event was created with: ev.detail(success)
@@ -17629,6 +19794,11 @@ export interface Menu extends BaseElement, MenuProperties {
    * Clears all Menu items.
    */
   clear(): void;
+  /**
+   * Clicks on an item programatically.
+   * @param {HTMLElement | string} item. smart-menu-item/smart-menu-items-group or its id or numeric path.
+   */
+  clickItem(item: HTMLElement | string): void;
   /**
    * Closes the Menu when <strong>mode</strong> is <em>'dropDown'</em>.
    */
@@ -17978,6 +20148,16 @@ export interface MultiComboInputProperties {
    */
   autoCompleteDelay?: number;
   /**
+   * Enables or disables the close buttons when multiple items are selected.
+   * Default value: false
+   */
+  hideInputTagsCloseButton?: boolean;
+  /**
+   * Enables or disables whether when an item has a 'color' property set, the tag of that item will set automatically the background to that color.
+   * Default value: true
+   */
+  colorItems?: boolean;
+  /**
    * Determines the data source that will be loaded to the MutliInput. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described.
    * Default value: null
    */
@@ -18060,6 +20240,11 @@ export interface MultiComboInputProperties {
    */
   placeholder?: string;
   /**
+   * Enables or disables whether drop-down items are rendered as pills.
+   * Default value: false
+   */
+  pills?: boolean;
+  /**
    * Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied.
    * Default value: 
    */
@@ -18084,6 +20269,11 @@ export interface MultiComboInputProperties {
    * Default value: ""
    */
   separator?: string;
+  /**
+   * Determines whether only a single item can be selected.
+   * Default value: false
+   */
+  singleSelect?: boolean;
   /**
    * Determines whether an additional item is displayed as the first item in the options list, which allows to select/unselect all items.
    * Default value: false
@@ -18816,8 +21006,20 @@ export interface MultiSplitButton extends BaseElement, MultiSplitButtonPropertie
   /* Get a member by its name */
   [name: string]: any;
   /**
-   * This event is triggered when button's dropDown selection is changed.
+   * This event is triggered when action button is clicked.
 	* @param event. The custom event.    */
+  onButtonClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the selection is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(addedItems, disabled, index, label, removedItems, selected, value)
+   *  addedItems - An array of List items that have been selected.
+   *  disabled - A flag indicating whether or not the item that caused the change event is disabled.
+   *  index - The index of the List item that triggered the event.
+   *  label - The label of the List item that triggered the event.
+   *  removedItems - An array of List items that have been unselected before the event was fired.
+   *  selected - The selected state of the List item that triggered the event. If an item was selected the value will be true and vice versa.
+   *  value - The value of the List item that triggered the event.
+   */
   onChange: ((this: any, ev: Event) => any) | null;
   /**
    * This event is triggered when button's dropDown list is closed.
@@ -18828,8 +21030,14 @@ export interface MultiSplitButton extends BaseElement, MultiSplitButtonPropertie
 	* @param event. The custom event.    */
   onClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered when user clicks any of the element's buttons or button's dropDown items.
-	* @param event. The custom event.    */
+   * This event is triggered when an item is clicked.
+	* @param event. The custom event. Custom data event was created with: ev.detail(disabled, index, label, selected, value)
+   *  disabled - Indicates whether the List item that was clicked is disabled or not.
+   *  index - Indicates the index of the List item that was clicked.
+   *  label - The label of the List item that was clicked.
+   *  selected - Indicates whether the List item that was clicked is selected or not.
+   *  value - The value of the List item that was clicked.
+   */
   onItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when button's dropDown list is opened.
@@ -19526,6 +21734,112 @@ declare global {
 
 /**Handles pager's elipsis. Ellipsis buttons are displayed as indicators and additional help to navigate between pages. */
 export declare type PagerAutoEllipsis = 'none' | 'before' | 'after' | 'both';
+export interface PasswordInputProperties {
+  /**
+   * Enables or disables the element.
+   * Default value: false
+   */
+  disabled?: boolean;
+  /**
+   * Sets or gets the language. Used in conjunction with the property messages. 
+   * Default value: "en"
+   */
+  locale?: string;
+  /**
+   * Callback used to customize the format of the messages that are returned from the Localization Module.
+   * Default value: null
+   */
+  localizeFormatFunction?: any;
+  /**
+   * Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale. 
+   * Default value:    * {
+   *   "en": {
+   *     "propertyUnknownType": "'' property is with undefined 'type' member!",
+   *     "propertyInvalidValue": "Invalid '!",
+   *     "propertyInvalidValueType": "Invalid '!",
+   *     "elementNotInDOM": "Element does not exist in DOM! Please, add the element to the DOM, before invoking a method.",
+   *     "moduleUndefined": "Module is undefined.",
+   *     "missingReference": ".",
+   *     "htmlTemplateNotSuported": ": Browser doesn't support HTMLTemplate elements.",
+   *     "invalidTemplate": "' property accepts a string that must match the id of an HTMLTemplate element from the DOM.",
+   *     "invalidNode": "."
+   *   }
+   * }
+   */
+  messages?: any;
+  /**
+   * Determines the minimum number of characters inside the input in order to trigger the autocomplete functionality that will open the drop down and show the matched items.
+   * Default value: 1
+   */
+  minLength?: number;
+  /**
+   * Sets or gets the name attribute for the element. Name is used when submiting data inside an HTML form.
+   * Default value: ""
+   */
+  name?: string;
+  /**
+   * Determines the placeholder of the input.
+   * Default value: ""
+   */
+  placeholder?: string;
+  /**
+   * Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts.
+   * Default value: false
+   */
+  rightToLeft?: boolean;
+  /**
+   * Determines the theme for the element. Themes define the look of the elements.
+   * Default value: ""
+   */
+  theme?: string;
+  /**
+   * If is set to true, the element cannot be focused.
+   * Default value: false
+   */
+  unfocusable?: boolean;
+  /**
+   * Sets or gets the value of the element.
+   * Default value: ""
+   */
+  value?: string;
+}
+/**
+ PasswordInput specifies a password field where the user can enter data. It is similar to the password text box, but this component does not have additional functionality for tooltips and popups.
+*/
+export interface PasswordInput extends BaseElement, PasswordInputProperties {
+
+  /* Get a member by its name */
+  [name: string]: any;
+  /**
+   * This event is triggered when the value is changed and the focus moved out of the element.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value.
+   *  value - The new value.
+   */
+  onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered on each key up event of the PasswordInput, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * Selects the text inside the input or if it is <b>readonly</b> then the element is focused.
+   */
+  select(): void;
+}
+
+declare global {
+    interface Document {
+        createElement(tagName: "smart-password-input"): PasswordInput;
+        querySelector(selectors: "smart-password-input"): PasswordInput | null;
+        querySelectorAll(selectors: "smart-password-input"): NodeListOf<PasswordInput>;
+        getElementsByTagName(qualifiedName: "smart-password-input"): HTMLCollectionOf<PasswordInput>;
+        getElementsByName(elementName: "smart-password-input"): NodeListOf<PasswordInput>;
+    }
+}
+
 export interface PasswordTextBoxProperties {
   /**
    * Sets or gets the animation mode. Animation is disabled when the property is set to 'none'
@@ -19696,6 +22010,13 @@ export interface PasswordTextBox extends BaseElement, PasswordTextBoxProperties 
    *  value - The new value of the element.
    */
   onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered on each key up event of the TextBox, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * Focuses the element.
    */
@@ -19949,6 +22270,173 @@ declare global {
 
 /**Determines the format of the path. Follows specific operation system criteria by changing the drive,folder separators.  */
 export declare type PathFormat = 'windows' | 'unix';
+export interface PhoneInputProperties {
+  /**
+   * Enables or disables the element.
+   * Default value: false
+   */
+  disabled?: boolean;
+  /**
+   * Sets additional class names to the Input drop down.
+   * Default value: 
+   */
+  dropDownClassList?: any;
+  /**
+   * Determines the position of the drop down button.
+   * Default value: none
+   */
+  dropDownButtonPosition?: DropDownButtonPosition;
+  /**
+   * Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable.
+   * Default value: 
+   */
+  dropDownHeight?: string | number;
+  /**
+   * Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable.
+   * Default value: 
+   */
+  dropDownWidth?: string | number;
+  /**
+   * Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale. 
+   * Default value:    * [object Object]
+   */
+  messages?: any;
+  /**
+   * Sets or gets the name attribute for the element. Name is used when submiting data inside an HTML form.
+   * Default value: ""
+   */
+  name?: string;
+  /**
+   * Determines whether the input will be in international or national mode i.e whether the input will start with '+'.
+   * Default value: false
+   */
+  nationalMode?: boolean;
+  /**
+   * Determines whether the drop down is opened or not.
+   * Default value: false
+   */
+  opened?: boolean;
+  /**
+   * Sets or gets an array of country codes which will be used instead of the default one with all countries. The country code should be ISO 3166-1 alpha-2 codes(https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   * Default value: []
+   */
+  onlyCountries?: any;
+  /**
+   * Determines the placeholder of the input.
+   * Default value: ""
+   */
+  placeholder?: string;
+  /**
+   * Sets or gets the selected country of the element. The country code should be ISO 3166-1 alpha-2 codes(https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   * Default value: ""
+   */
+  selectedCountry?: string;
+  /**
+   * Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts.
+   * Default value: false
+   */
+  rightToLeft?: boolean;
+  /**
+   * Determines the theme for the element. Themes define the look of the elements.
+   * Default value: ""
+   */
+  theme?: string;
+  /**
+   * If is set to true, the element cannot be focused.
+   * Default value: false
+   */
+  unfocusable?: boolean;
+  /**
+   * Sets or gets the value of the element.
+   * Default value: ""
+   */
+  value?: string;
+}
+/**
+ The Phone Input specifies an input field where the user can enter and validate a phone number.
+*/
+export interface PhoneInput extends BaseElement, PhoneInputProperties {
+
+  /* Get a member by its name */
+  [name: string]: any;
+  /**
+   * This event is triggered when the selection is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(label, oldLabel, oldValue, value)
+   *  label - The label of the new selected item.
+   *  oldLabel - The label of the item that was previously selected before the event was triggered.
+   *  oldValue - The value of the item that was previously selected before the event was triggered.
+   *  value - The value of the new selected item.
+   */
+  onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered on each key up event of the Input, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the user clicks on an item from the popup list.
+	* @param event. The custom event. Custom data event was created with: ev.detail(item, label, value)
+   *  item - The item that was clicked.
+   *  label - The label of the item that was clicked.
+   *  value - The value of the item that was clicked.
+   */
+  onItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * Closes the drop down.
+   */
+  close(): void;
+  /**
+   * Ensures that the active ( selected ) item is always visible.
+   */
+  ensureVisible(): void;
+  /**
+   * Returns the entered phone number with formatting.
+   * @param {boolean} isInternational?. When you use 'false', the national phone number will be returned and the international phone number, when you use 'true' as parameter.
+   * @returns {string}
+   */
+  getNumber(isInternational?: boolean): string;
+  /**
+   * Returns an item by its country dial code. The item is an object with 'label', 'value', 'iso2' and 'dialCode' properties.
+   * @param {string} dialCode?. Returns the national or international phone number
+   * @returns {any}
+   */
+  getItemByDialCode(dialCode?: string): any;
+  /**
+   * Returns the selected item. The item is an object with 'label', 'value', 'iso2' and 'dialCode' properties.
+   * @returns {any}
+   */
+  getSelectedItem(): any;
+  /**
+   * Returns true or false depending on whether the entered phone number is valid.
+   * @returns {boolean}
+   */
+  isValidNumber(): boolean;
+  /**
+   * Validates the entered phone number.
+   */
+  validate(): void;
+  /**
+   * Opens the drop down.
+   */
+  open(): void;
+  /**
+   * Selects the text inside the input or if it is <b>readonly</b> then the element is focused.
+   */
+  select(): void;
+}
+
+declare global {
+    interface Document {
+        createElement(tagName: "smart-phone-input"): PhoneInput;
+        querySelector(selectors: "smart-phone-input"): PhoneInput | null;
+        querySelectorAll(selectors: "smart-phone-input"): NodeListOf<PhoneInput>;
+        getElementsByTagName(qualifiedName: "smart-phone-input"): HTMLCollectionOf<PhoneInput>;
+        getElementsByName(elementName: "smart-phone-input"): NodeListOf<PhoneInput>;
+    }
+}
+
 export interface PivotTableProperties {
   /**
    * Sets or gets the animation mode. Animation is disabled when the property is set to 'none'
@@ -20011,6 +22499,31 @@ export interface PivotTableProperties {
    */
   drillDown?: boolean;
   /**
+   * If set, shows an export button in the drill down dialog.
+   * Default value: 
+   */
+  drillDownDataExport?: PivotTableDrillDownDataExport;
+  /**
+   * Sets or gets the drill down table export file name.
+   * Default value: ""
+   */
+  drillDownDataExportName?: string;
+  /**
+   * Sets or gets the drill down dialog callback function. The argument of the callback passed by the PivotTable is the drill-down Table component. You can use it to customize the table.
+   * Default value: null
+   */
+  drillDownTableInit?: { (table: HTMLElement ): void };
+  /**
+   * Sets or gets the drill down custom action callback function. The argument of the callback passed by the PivotTable is the drill-down data source. You can use it to override the default drill-down UI i.e to replace our Dialog with Table.
+   * Default value: null
+   */
+  drillDownCustomAction?: { (originalRecords: [] ): void };
+  /**
+   * Sets or gets whether sorting based on columns in classic row groups layout mode is enabled.
+   * Default value: false
+   */
+  enableSortByRowGroups?: boolean;
+  /**
    * Sets or gets whether the PivotTable's column header is sticky/frozen.
    * Default value: false
    */
@@ -20064,12 +22577,12 @@ export interface PivotTableProperties {
    * A callback function executed each time a PivotTable cell is rendered.
    * Default value: null
    */
-  onCellRender?: any;
+  onCellRender?: { (data: any, dynamicColumn: any, value: any, cell: HTMLTableCellElement): void };
   /**
    * A callback function executed each time a PivotTable column header cell is rendered.
    * Default value: null
    */
-  onColumnRender?: any;
+  onColumnRender?: { (settings: { text: string, cell: HTMLTableCellElement, column: PivotTableColumn, fullDefinition: any }): void };
   /**
    * A callback function executed when the PivotTable is being initialized.
    * Default value: null
@@ -20085,6 +22598,11 @@ export interface PivotTableProperties {
    * Default value: false
    */
   rowSort?: boolean;
+  /**
+   * Sets or gets whether row summaries are displayed in the row headers. Example: Peterson(40) vs Peterson, when rowSummary is set to false.
+   * Default value: true
+   */
+  rowSummary?: boolean;
   /**
    * Sets or gets whether to show row total columns for each summary column.
    * Default value: false
@@ -20229,11 +22747,11 @@ export interface PivotTable extends BaseElement, PivotTableProperties {
   /**
    * Exports the PivotTable's data.
    * @param {string} dataFormat. The file format to export to. Supported formats: 'csv', 'html', 'json', 'pdf', 'tsv', 'xlsx', 'xml'.
-   * @param {string} fileName?. The name of the file to export to
+   * @param {string} fileName. The name of the file to export to
    * @param {Function} callback?. A callback function to pass the exported data to (if fileName is not provided)
    * @returns {any}
    */
-  exportData(dataFormat: string, fileName?: string, callback?: Function): any;
+  exportData(dataFormat: string, fileName: string, callback?: Function): any;
   /**
    * Returns the current dynamic pivot columns.
    * @returns {any}
@@ -20313,7 +22831,7 @@ export interface PivotTableColumn {
    * A callback function that can be used to modify the contents of a cell and the cell itself.
    * Default value: null
    */
-  formatFunction?: any;
+  formatFunction?: { (settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template?: any }): void };
   /**
    * Sets or gets the column's displayed text (for example in summary column headers).
    * Default value: ""
@@ -20410,6 +22928,8 @@ export declare type PivotTableConditionalFormattingFontFamily = 'The default fon
 export declare type PivotTableConditionalFormattingFontSize = '8px' | '9px' | '10px' | '11px' | '12px' | '13px' | '14px' | '15px' | '16px';
 /**Sets or gets the position of the PivotTable's designer (shown when designer is enabled). */
 export declare type PivotTableDesignerPosition = 'near' | 'far';
+/**If set, shows an export button in the drill down dialog. */
+export declare type PivotTableDrillDownDataExport = null | 'xlsx' | 'pdf' | 'html' | 'json' | 'csv' | 'tsv' | 'xml';
 /**Sets or gets the way row nesting (based on rowGroup columns) is displayed. */
 export declare type PivotTableGroupLayout = 'classic' | 'default';
 /**Sets or gets the position of row total columns (shown when rowTotals is enabled). */
@@ -20539,7 +23059,7 @@ export interface ProgressBarProperties {
    * A callback function defining the new format for the label of the Progress Bar.
    * Default value: null
    */
-  formatFunction?: any;
+  formatFunction?: {(value: number): string};
   /**
    * Sets or gets the language. Used in conjunction with the property messages. 
    * Default value: "en"
@@ -20647,10 +23167,15 @@ export interface QueryBuilderProperties {
    */
   applyMode?: QueryBuilderApplyMode;
   /**
-   * Adds more operations that can be used to the query bilder's conditions structure. Each custom operation can have the following fields:label - label to be displayed in the operator box. Multiple operations with the same label can exist.name - unique name of the operationeditorTemplate - callback function that creates a custom value editorvalueTemplate - callback function that displays the value after the edior has been closedhandleValue - callback function that handles the value returned by the editor when it is closed. If the dataType is 'object' the expected result from the function should contain a 'label' and 'value' attributes. Where the label will be used for displaying purposes while 'value' will be used as the actual value. hideValue - a boolean condition that specifies whether the operation requires a value or notexpressionTemplate - a string representing a custom Linq expression template. If the value of the element is a string it will be considered as a Linq expression and it will be checked against all expressionTemplates to find a match.expressionReaderCallback - a callback that is used to specify which arguments from the expression are used for the fieldName and value. Used when converting a Linq expression to QueryBuilder value. Takes two arguments: expression - the LinQ expression defined in the expressionTemplate of the customOperator. Type stringbindings - an array of expression parameters based on the expression template of the customOperator. Type Array[string]expressionBuilderCallback - a callback function that is used to specify which arguments from the Linq expression are used for the fieldName and value when building the Linq expression from the current value of the element. Takes three arguments: name - the name of the dataField. Type string.operation - the name of the operation. Type stringvalue - the value of the operation. Type any( depends on the dataField). 
+   * Determines whether QueryBuilder will automatically prompt the user to enter a condition value when a new condition is created. When 'applyMode' is set to 'immediately', the operation field is automatically populated if empty when the selected condition operator is changed. The input field prompts the user when the operation or operator of the condition is changed.
+   * Default value: false
+   */
+  autoPrompt?: boolean;
+  /**
+   * Adds more operations that can be used to the query bilder's conditions structure. Each custom operation can have the following fields:
    * Default value: 
    */
-  customOperations?: any;
+  customOperations?: QueryBuilderCustomOperation[];
   /**
    * Enables or disables the element.
    * Default value: false
@@ -20764,6 +23289,11 @@ export interface QueryBuilderProperties {
    */
   showIcons?: boolean;
   /**
+   * Shows/Hides the drop down icon for the operator field name of the conditions.
+   * Default value: false
+   */
+  showFieldNameArrow?: boolean;
+  /**
    * Determines the theme. Theme defines the look of the element
    * Default value: ""
    */
@@ -20774,12 +23304,22 @@ export interface QueryBuilderProperties {
    */
   unfocusable?: boolean;
   /**
+   * Determines whether the value of the condition is validated on key up or not. By default the value is validated when the user blur's the value input. The validationTimeout determines the time interval after the user has ended typing that triggers the value validation.
+   * Default value: false
+   */
+  validateOnInput?: boolean;
+  /**
+   * Determines the timeout (starting after the user has finished typing in the value field) before the validation is applied to the condition value. This property works along validationOnInput.
+   * Default value: 100
+   */
+  validationTimeout?: number;
+  /**
    * The value is represented by multidimensional array. The array contains group operators with conditions. Each group can contain multiple conditions.
    * Default value: 
    */
   value?: any;
   /**
-   * Callback used to format the content of the value fields.
+   * Callback used to format the content of the condition value fields.
    * Default value: null
    */
   valueFormatFunction?: any;
@@ -20852,6 +23392,64 @@ export interface QueryBuilder extends BaseElement, QueryBuilderProperties {
   getLinq(): string;
 }
 
+export interface QueryBuilderCustomOperation {
+  /**
+   * label to be displayed in the operator box. Multiple operations with the same label can exist
+   * Default value: ""
+   */
+  label?: string;
+  /**
+   * A unique name for the operation.
+   * Default value: ""
+   */
+  name?: string;
+  /**
+   * A callback function that creates a custom value editor. Takes three arguemnts: fieldType - the type of the field for the operation.value - the value of the condition.fieldData - the field object.
+   * Default value: null
+   */
+  editorTemplate?: any;
+  /**
+   * A callback function that displays the value after the edior has been closed. Takes two argument: editor - the custom editor elementvalue - the condition value.
+   * Default value: null
+   */
+  valueTemplate?: any;
+  /**
+   * A callback function that handles the value returned by the editor when it is closed. The callback takes one arguemnt - the custom editor element. If the dataType is 'object' the expected result from the function should contain a 'label' and 'value' attributes. Where the label will be used for displaying purposes while 'value' will be used as the actual value.
+   * Default value: null
+   */
+  handleValue?: any;
+  /**
+   * A boolean condition that specifies whether the operation requires a value or not.
+   * Default value: false
+   */
+  hideValue?: boolean;
+  /**
+   * A callback that is executed when QueryBuilder validation is triggered. The callback takes one argument, the value of the condition. The function should return true or false to determine whether the conditon is valid or not.
+   * Default value: null
+   */
+  validateValue?: any;
+  /**
+   * A callback that is called when the custom editor is rendered, visible inside the DOM and ready to be opened. The callback has one parameter - the custom editor element.
+   * Default value: null
+   */
+  onEditorOpen?: any;
+  /**
+   * A string representing a custom Linq expression template. If the value of the element is a string it will be considered as a Linq expression and it will be checked against all expressionTemplates to find a match.
+   * Default value: "null"
+   */
+  expressionTemplate?: string;
+  /**
+   * A callback that is used to specify which arguments from the expression are used for the fieldName and value. Used when converting a Linq expression to QueryBuilder value. Takes two arguments: expression - the LinQ expression defined in the expressionTemplate of the customOperator. Type stringbindings - an array of expression parameters based on the expression template of the customOperator. Type string[]
+   * Default value: null
+   */
+  expressionReaderCallback?: any;
+  /**
+   * A callback function that is used to specify which arguments from the Linq expression are used for the fieldName and value when building the Linq expression from the current value of the element. Takes three arguments: name - the name of the dataField. Type string.operation - the name of the operation. Type stringvalue - the value of the operation. Type any( depends on the dataField).
+   * Default value: null
+   */
+  expressionBuilderCallback?: any;
+}
+
 export interface QueryBuilderField {
   /**
    * Sets or gets the label.
@@ -20865,9 +23463,9 @@ export interface QueryBuilderField {
   dataField?: string;
   /**
    * Sets or gets the data type.
-   * Default value: string
+   * Default value: "string"
    */
-  dataType?: QueryBuilderFieldDataType;
+  dataType?: string;
   /**
    * Sets or gets the filter format.
    * Default value: ""
@@ -20892,8 +23490,6 @@ declare global {
 
 /**Determines when the value of the element is updated with the new changes. */
 export declare type QueryBuilderApplyMode = 'change' | 'immediately';
-/**Sets or gets the data type. */
-export declare type QueryBuilderFieldDataType = 'number' | 'string' | 'boolean' | 'date';
 /**Determines whether new fields can be dynamically added by typing in the field (property) box. */
 export declare type QueryBuilderFieldsMode = 'dynamic' | 'static';
 export interface RadioButtonProperties {
@@ -21103,6 +23699,23 @@ export interface Rating extends BaseElement, RatingProperties {
 
   /* Get a member by its name */
   [name: string]: any;
+  /**
+   * This event is triggered when the value of the slider is changed. 
+	* @param event. The custom event. Custom data event was created with: ev.detail(value, oldValue)
+   *  value - A numeric value indicating the scroll position.
+   *  oldValue - A numeric value indicating the previous scroll position.
+   */
+  onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * Get the value of the rating.
+   * @returns {number}
+   */
+  getValue(): number;
+  /**
+   * Sets the value of the rating.
+   * @param {number} value. Sets the value of the rating
+   */
+  setValue(value: number): void;
 }
 
 declare global {
@@ -21246,7 +23859,7 @@ export interface SchedulerProperties {
    * Determines the context menu items that are visible when the Context Menu is opened.
    * Default value: null
    */
-  contextMenuDataSource?: any;
+  contextMenuDataSource?: any[];
   /**
    * Determines whether the clipboard shortcuts for copy/paste/cut action of events are visible in the Scheduler context menu or not.
    * Default value: false
@@ -21281,7 +23894,7 @@ export interface SchedulerProperties {
    * Determines the currently visible date for the Scheduler.
    * Default value: new Date()
    */
-  dateCurrent?: any;
+  dateCurrent?: string | Date;
   /**
    * Sets the Schedulers's Data Export options.
    * Default value: [object Object]
@@ -21291,7 +23904,7 @@ export interface SchedulerProperties {
    * Determines the events that will be loaded inside the Timeline. Each event represents an object that should contain the following properties:
    * Default value: 
    */
-  dataSource?: SchedulerDataSource[];
+  dataSource?: SchedulerEvent[];
   /**
    * A callback that can be used to customize the text inside the date selector located in the header. The callback has one parameter - the current date.
    * Default value: null
@@ -21463,6 +24076,11 @@ export interface SchedulerProperties {
    */
   hideNonworkingWeekdays?: boolean;
   /**
+   * Determines whether other month days are visible when view is set to month. When enabled, events that start on other month days are not displayed and the cells that represent such days do not allow the creation of new events on them. Also dragging and droping an event on other month days is not allowed. Reszing is also affected. Events can end on other month days, but cannot start on one.
+   * Default value: false
+   */
+  hideOtherMonthDays?: boolean;
+  /**
    * Determines whether the 'Today' button is hidden or not.
    * Default value: false
    */
@@ -21488,6 +24106,11 @@ export interface SchedulerProperties {
    */
   legendPosition?: SchedulerLegendPosition;
   /**
+   * Determines the mouse wheel step. When this property is set to a positive number, the scroll step with mouse wheel or trackpad will depend on the property value.
+   * Default value: -1
+   */
+  mouseWheelStep?: number;
+  /**
    * Determines weather or not horizontal scrollbar is shown.
    * Default value: auto
    */
@@ -21502,6 +24125,11 @@ export interface SchedulerProperties {
    * Default value: 2100-1-1
    */
   max?: string | Date;
+  /**
+   * Detetmines the maximum number of events per Scheduler cell. By default this property is null which means that the number of events per cell is automatically determined by the size of the events.
+   * Default value: null
+   */
+  maxEventsPerCell?: number | null;
   /**
    * Detetmines the minimum view date for the Scheduler.
    * Default value: 1900-1-1
@@ -21583,6 +24211,21 @@ export interface SchedulerProperties {
    */
   showLegend?: boolean;
   /**
+   * Determines the name of the resource data item property that will be used for sorting the resource data defined as the resource.dataSource.
+   * Default value: "null"
+   */
+  sortBy?: string;
+  /**
+   * Allows to define a custom sorting function that will be used to sort the resource data. The sortFunction is used when sortOrder is set to custom.
+   * Default value: null
+   */
+  sortFunction?: any;
+  /**
+   * Determines the sorting order of the resource data items. When set to custom, a custom sorting function has to be defined for the sortFunction property. The asc stands for 'ascending' while desc means 'descending' sorting order.
+   * Default value: asc
+   */
+  sortOrder?: SchedulerSortOrder;
+  /**
    * Determines the repeating delay of the repeat buttons inside the header of the element. Such buttons are the Date navigation buttons and the view scroll buttons.
    * Default value: 80
    */
@@ -21653,7 +24296,7 @@ export interface SchedulerProperties {
    */
   viewType?: SchedulerViewType;
   /**
-   * Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view.
+   * Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view.hideHours - an Optional property applicable only to timelineWeek view that allows to hide the hour cells and only show the day cells.
    * Default value: day,week,month
    */
   views?: SchedulerViews;
@@ -21710,6 +24353,20 @@ export interface Scheduler extends BaseElement, SchedulerProperties {
    *  oldValue - The previously selected Date.
    */
   onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered when an Event has been updated/inserted/removed/dragged/resized or an exception of a repeating event has been added/updated/removed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(item, type)
+   *  item - An object that represents the actual item with it's attributes.
+   *  type - The type of change that is being done to the item.
+   */
+  onItemChange?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when an Event is going to be updated/inserted/removed. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
+	* @param event. The custom event. Custom data event was created with: ev.detail(item, type)
+   *  item - An object that represents the actual item with it's attributes.
+   *  type - The type of change that is going to be made to the item (e.g. 'inserting', 'removing', 'updating', 'exceptionInserting', 'exceptionUpdating', 'exceptionRemoving').
+   */
+  onItemChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when en event, event item or a context menu item is clicked.
 	* @param event. The custom event. Custom data event was created with: ev.detail(item, type, itemObj)
@@ -21804,34 +24461,38 @@ export interface Scheduler extends BaseElement, SchedulerProperties {
   onResizeEnd?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when the user starts top open the event dialog window. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event. Custom data event was created with: ev.detail(target, item, type)
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item, type, eventObj)
    *  target - The dialog window that is opening.
    *  item - The event object that is going to be edited.
    *  type - The type of window that is going to open. Two window types are available, the dafault which is an empty string ( does not have a type) and 'confirm' which is displayed when clicked on a repeating event.
+   *  eventObj - The event object that is the target of the menu.
    */
   onEditDialogOpening?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when the user opens the event dialog window.
-	* @param event. The custom event. Custom data event was created with: ev.detail(target, editors, item)
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, editors, item, eventObj)
    *  target - The dialog window that is opened.
    *  editors - An object containing all event editors that are present inside the window. This property is undefined when the window is of type 'confirm', because confirm windows do not contain editors.
    *  item - The event object that is being edited.
+   *  eventObj - The event object that is the target of the menu.
    */
   onEditDialogOpen?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when the user closes the event dialog window.
-	* @param event. The custom event. Custom data event was created with: ev.detail(target, editors, item)
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, editors, item, eventObj)
    *  target - The dialog window that is closed.
    *  editors - An object containing all event editors that are present inside the window. This property is undefined when the window is of type 'confirm', because confirm windows do not contain editors.
    *  item - The event object that is being edited.
+   *  eventObj - The event object that is the target of the menu.
    */
   onEditDialogClose?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when the user is about to close the event dialog window. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event. Custom data event was created with: ev.detail(target, item, type)
+	* @param event. The custom event. Custom data event was created with: ev.detail(target, item, type, eventObj)
    *  target - The dialog window that is closing.
    *  item - The event object that is edited.
    *  type - The type of window that is going to be closed. Two window types are available, the dafault which is an empty string ( does not have a type) and 'confirm' which is displayed when clicked on a repeating event.
+   *  eventObj - The event object that is the target of the menu.
    */
   onEditDialogClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
@@ -21939,9 +24600,23 @@ export interface Scheduler extends BaseElement, SchedulerProperties {
    */
   onNotificationClose?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
+   * Adds an event to the Scheduler. Accepts an event object of the following format (same as the dataSource format): <pre>{ label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }</pre>
+   * @param {any} eventObj. An object describing a Scheduler event that is not already present in the element.
+   */
+  addEvent(eventObj: any): void;
+  /**
    * Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
    */
   beginUpdate(): void;
+  /**
+   * Creates an event and adds it to the Scheduler.
+   * @param {string} label. Event label.
+   * @param {string} value. Event value.
+   * @param {string} dateStart. Event date start.
+   * @param {string} dateEnd. Event date end.
+   * @param {boolean} allDay. Event all day. Set it to true to create all day event.
+   */
+  createEvent(label: string, value: string, dateStart: string, dateEnd: string, allDay: boolean): void;
   /**
    * Ends the update operation. This method will resume the rendering and will refresh the element.
    */
@@ -21959,6 +24634,30 @@ export interface Scheduler extends BaseElement, SchedulerProperties {
   exportData(dataFormat: string, callback?: any): void;
   /**
    * Returns a JSON representation of the events inside the Scheduler.
+   * @returns {any}
+   */
+  getDataSource(): any;
+  /**
+   * Returns a JSON representation of the resources inside the Scheduler.
+   * @returns {any}
+   */
+  getResources(): any;
+  /**
+   * Gets a date from coordinates
+   * @param {number} x. X coordinate.
+   * @param {number} y. Y coordinate.
+   * @returns {string}
+   */
+  getDateFromCoordinates(x: number, y: number): string;
+  /**
+   * Gets whether a cell is all day cell from coordinates
+   * @param {number} x. X coordinate.
+   * @param {number} y. Y coordinate.
+   * @returns {boolean}
+   */
+  getIsAllDayCellFromCoordinates(x: number, y: number): boolean;
+  /**
+   * Returns the current state of the Scheduler. Includes the current <b>dateCurernt</b>, <b>dataSource</b> and <b>timeZone</b> properties.
    * @returns {any}
    */
   getState(): any;
@@ -21983,22 +24682,47 @@ export interface Scheduler extends BaseElement, SchedulerProperties {
    */
   containsEvent(eventObj: any): boolean;
   /**
-   * Inserts an event.
+   * Inserts an event as object of the following format (same as the dataSource format): <pre>{ label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }</pre>
    * @param {any} eventObj. An object describing a Scheduler event that is not already present in the element.
    * @param {number} index?. A number that represents the index to insert the event at. If not provided the event is inserted at the end of the list.
    */
   insertEvent(eventObj: any, index?: number): void;
   /**
-   * Updates an event.
+   * Updates an event object of the following format (same as the dataSource format): <pre>{ label?: string, dateStart: date, dateEnd: date, description?: string, id?: string | number, class?: string, backgroundColor?: string, color?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], allDay?: boolean, disableDrag?: boolean, disableResize?: boolean, repeat?: { repeatFreq: string, repeatInterval: number, repeatOn?: number | number[] | date, repeatEnd?: number | date, exceptions?: { date: date, dateStart?: date, dateEnd?: date, hidden?: boolean, backgroundColor?: string, status?: string, label?: string, description?: string, notifications?: { interval: numeric, type?: string, time: number[] }[], disableDrag?: boolean, disableResize?: boolean }[] }, status?: string }</pre>
    * @param {any} index. A number that represents the index of an event or a Scheduler event object.
    * @param {any} eventObj. An object describing a Scheduler event. The properties of this object will be applied to the desired event.
    */
   updateEvent(index: any, eventObj: any): void;
   /**
-   * Removes an event.
+   * Removes an existing event.
    * @param {any} index. A number that represents the index of an event or the actual event object to be removed.
    */
   removeEvent(index: any): void;
+  /**
+   * Returns an array of all exceptions of the target repeating event.
+   * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+   * @returns {any}
+   */
+  getEventExceptions(eventObj: any): any;
+  /**
+   * Adds an event exception to a repeating event. The exception occurences for a repeating event can be gathered via the following methods: <ul><li><b>occurences</b></li><li><b>occurrencesBetween</b></li><li><b>occurrenceAfter</b></li><li><b>occurrenceBefore</b></li></ul>.  <p>Example usage:</p> <pre>scheduler.addEventException(eventObj, { date: occuranceDate, dateStart: newDateStart, dateEnd: newDateEnd, label: 'Exception' });</pre>
+   * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+   * @param {any} exceptionObj. An event object that describes an exception. Exception event objects must have a <b>date</b> attribute of type Date which indicates the date of occurence.
+   */
+  addEventException(eventObj: any, exceptionObj: any): void;
+  /**
+   * Updates an event exception of a repeating event. The exception occurences for a repeating event can be gathered via the following methods: <ul><li><b>occurences</b></li><li><b>occurrencesBetween</b></li><li><b>occurrenceAfter</b></li><li><b>occurrenceBefore</b></li></ul>.  <p>Example usage:</p> <pre>scheduler.updateEventException(eventObj, dateOfOccurance, { dateStart: newDateStart, dateEnd: newDateEnd, label: 'Updated Exception' });</pre>
+   * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+   * @param {any} exceptionRef. The index, id, an occurence date of the exception or an object reference of an existing Scheduler repeating event exception.
+   * @param {any} exceptionObj. An event object that describes an exception. All attributes of an exception can be updated except the occurance date (the <b>date</b> attribute).
+   */
+  updateEventException(eventObj: any, exceptionRef: any, exceptionObj: any): void;
+  /**
+   * Removes an exception from a repeating event.
+   * @param {any} eventObj. The index, id or an object reference of an existing repeating Scheduler event.
+   * @param {any} index. The index, id, occurance date or an object reference of an event exception that belongs to the target repeating event.
+   */
+  removeEventException(eventObj: any, index: any): void;
   /**
    * Opens the popup Window for specific event Editing.
    * @param {any} index. A number that represents the index of a event or the actual event object to be edited.
@@ -22016,8 +24740,14 @@ export interface Scheduler extends BaseElement, SchedulerProperties {
    * Scrolls the Scheduler to a Date.
    * @param {Date} date. The date to scroll to.
    * @param {boolean} strictScroll?. Determines whether to scroll strictly to the date or not. This mean sthat the Scheduler wll scroll to the begining of the cell that corresponds to the target date.
+   * @param {boolean} autoScroll?. Calculates the scroll positions and element bounds, then adds an offset to scroll within the middle of the view.
    */
-  scrollToDate(date: Date, strictScroll?: boolean): void;
+  scrollToDate(date: Date, strictScroll?: boolean, autoScroll?: boolean): void;
+  /**
+   * Navigates the Scheduler to a Date.
+   * @param {Date} date. The date to navigate to.
+   */
+  navigateToDate(date: Date): void;
   /**
    * Scrolls the Scheduler to an event.
    * @param {any} index. The index of a Scheduler event or the actual event object to scroll to.
@@ -22149,12 +24879,12 @@ export interface SchedulerDataExport {
   pageOrientation?: string;
 }
 
-export interface SchedulerDataSource {
+export interface SchedulerEvent {
   /**
    * Event Repeat Object.
    * Default value: undefined
    */
-  repeat?: SchedulerDataSourceRepeat;
+  repeat?: SchedulerEventRepeat;
   /**
    * Event CSS class.
    * Default value: ""
@@ -22211,130 +24941,15 @@ export interface SchedulerDataSource {
    */
   color?: string;
   /**
-   * Event notifications.
-   * Default value: null
+   * Sets the appointment status.
+   * Default value: "false"
    */
-  notifications?: SchedulerNotification[];
-}
-
-/**Event Repeat Object. */
-export interface SchedulerDataSourceRepeat {
+  status?: string;
   /**
-   * Determines the repeating frequency. The event can repeat hourly, daily, weekly, monthly or yearly.
-   * Default value: hourly
-   */
-  repeatFreq?: SchedulerRepeatFreq;
-  /**
-   * Determines the repeating interval.
-   * Default value: 1
-   */
-  repeatInterval?: number;
-  /**
-   * Determines on wah day/date the event will repeat on. This is applicable only when repeatFreq is of type 'weekly' ( allows to pick the days of week from 0 to 6, where 0 is Sunday and 6 is Saturday), 'monthly' ( allows to pick a date of the month from 0 to 31) or 'yearly' (allows to pick a particular Date to repeat on. The date can be set as a Date or an object of type{ month: string, date: number }).
-   * Default value: 
-   */
-  repeatOn?: any;
-  /**
-   * Determines when the repeating event will end. By default it does not have an end condition. If the value is set to a number than it is considered as the number of time the event will repeat before it ends. If it's a Date then it is considered as the end date for the repeating series. If not set it will never end.
-   * Default value: 0
-   */
-  repeatEnd?: number | Date | undefined;
-  /**
-   * Event exceptions represent a repeating series event that has been re-scheduler for another date/time or it has been hidden from the Scheduler. Exceptions cannot repeat.
-   * Default value: undefined
-   */
-  exceptions?: { Date: string | Date, DateStart: Date | string, DateEnd: Date | string, backgroundColor: 'string', color: string, hidden: boolean }[] | undefined;
-}
-
-export interface SchedulerNotification {
-  /**
-   * The number of days/weeks when the notification should appear before the event starts.
-   * Default value: 0
-   */
-  interval?: number;
-  /**
-   * The type of the interval for the notification.
-   * Default value: days
-   */
-  type?: SchedulerNotificationType;
-  /**
-   * An array that represents the time when the notification should appear before the event starts. The array should have the following format: [hours: number, minutes:number]
-   * Default value: 
-   */
-  time?: any;
-  /**
-   * The message that will appear inside the notificaiton. If no message is set, then the label of the event is displayed.
+   * Event resource unique id.
    * Default value: ""
    */
-  message?: string;
-  /**
-   * Determines the type of icon that will be displayed inside the notification. By default the iconType is 'info'.
-   * Default value: ""
-   */
-  iconType?: string;
-}
-
-export interface SchedulerEvent {
-  /**
-   * Event Repeat Object.
-   * Default value: undefined
-   */
-  repeat?: SchedulerEventRepeat;
-  /**
-   * Event CSS class.
-   * Default value: ""
-   */
-  class?: string;
-  /**
-   * Event start date.
-   * Default value: 
-   */
-  dateStart?: string | Date;
-  /**
-   * Event end date.
-   * Default value: 
-   */
-  dateEnd?: string | Date;
-  /**
-   * Determines whether dragging is disabled for the event.
-   * Default value: false
-   */
-  disableDrag?: boolean;
-  /**
-   * Determines whether resizing is disabled for the event.
-   * Default value: false
-   */
-  disableResize?: boolean;
-  /**
-   * Event unique id.
-   * Default value: 
-   */
-  id?: string | undefined;
-  /**
-   * Event Label.
-   * Default value: 
-   */
-  label?: string | undefined;
-  /**
-   * Event Description.
-   * Default value: 
-   */
-  description?: string | undefined;
-  /**
-   * Determines whether an event is an all day event ot nor. All day events ignore time.
-   * Default value: false
-   */
-  allDay?: boolean | undefined;
-  /**
-   * Sets a background color for the event. The background color should be in HEX format.
-   * Default value: false
-   */
-  backgroundColor?: string | undefined;
-  /**
-   * Sets a color for the event. The color should be in HEX format.
-   * Default value: false
-   */
-  color?: string | undefined;
+  resourceId?: string;
   /**
    * Event notifications.
    * Default value: null
@@ -22368,7 +24983,35 @@ export interface SchedulerEventRepeat {
    * Event exceptions represent a repeating series event that has been re-scheduler for another date/time or it has been hidden from the Scheduler. Exceptions cannot repeat.
    * Default value: undefined
    */
-  exceptions?: { Date: string | Date, DateStart: Date | string, DateEnd: Date | string, backgroundColor: 'string', color: string, hidden: boolean }[] | undefined;
+  exceptions?: { Date: string | Date, DateStart: Date | string, DateEnd: Date | string, backgroundColor: string, color: string, hidden: boolean }[] | undefined;
+}
+
+export interface SchedulerNotification {
+  /**
+   * The number of days/weeks when the notification should appear before the event starts.
+   * Default value: 0
+   */
+  interval?: number;
+  /**
+   * The type of the interval for the notification.
+   * Default value: days
+   */
+  type?: SchedulerNotificationType;
+  /**
+   * An array that represents the time when the notification should appear before the event starts. The array should have the following format: [hours: number, minutes:number]
+   * Default value: 
+   */
+  time?: number[];
+  /**
+   * The message that will appear inside the notificaiton. If no message is set, then the label of the event is displayed.
+   * Default value: ""
+   */
+  message?: string;
+  /**
+   * Determines the type of icon that will be displayed inside the notification. By default the iconType is 'info'.
+   * Default value: ""
+   */
+  iconType?: string;
 }
 
 export interface SchedulerResource {
@@ -22387,6 +25030,21 @@ export interface SchedulerResource {
    * Default value: 
    */
   dataSource?: any;
+  /**
+   * Determines the property name to sort the dataSource by.
+   * Default value: "null"
+   */
+  sortBy?: string;
+  /**
+   * Determines the custom sorting function that will be used to sort the resource dataSource. The sortFunction is used when sortOrder is set to custom.
+   * Default value: null
+   */
+  sortFunction?: any;
+  /**
+   * Determines the sorting order. When set to custom, a custom sorting function has to be defined for the sortFunction property. The asc stands for 'ascending' while desc means 'descending' sorting order.
+   * Default value: asc
+   */
+  sortOrder?: SchedulerResourceSortOrder;
 }
 
 export interface SchedulerStatuse {
@@ -22440,8 +25098,12 @@ export declare type SchedulerLegendPosition = 'near' | 'far';
 export declare type MinuteFormat = '2-digit' | 'numeric';
 /**Determines the visibility of the resize handles. */
 export declare type ResizeHandlesVisibility = 'auto' | 'hidden' | 'visible';
+/**Determines the sorting order. When set to <b>custom</b>, a custom sorting function has to be defined for the <b>sortFunction</b> property. The <b>asc</b> stands for 'ascending' while <b>desc</b> means 'descending' sorting order. */
+export declare type SchedulerResourceSortOrder = 'asc' | 'desc' | 'custom';
 /** Determines the position of the date navigation navigation buttons inside the header of the element. */
 export declare type SchedulerScrollButtonsPosition = 'both' | 'far' | 'near';
+/**Determines the sorting order of the resource data items. When set to <b>custom</b>, a custom sorting function has to be defined for the <b>sortFunction</b> property. The <b>asc</b> stands for 'ascending' while <b>desc</b> means 'descending' sorting order. */
+export declare type SchedulerSortOrder = 'asc' | 'desc' | 'custom';
 /**Determines the date scale for the timeline cells. */
 export declare type SchedulerTimelineDayScale = 'hour' | 'halfHour' | 'quarterHour' | 'tenMinutes' | 'fiveMinutes';
 /**Determines the timeZone for the element. By default if the local time zone is used if the property is not set. */
@@ -22454,6 +25116,7 @@ export declare type SchedulerViewType = 'day' | 'week' | 'month' | 'agenda' | 't
 <b>hideWeekend</b> - an Optional property that allows to hide the weekend only for this specific view.
 <b>hideNonworkingWeekdays</b> - an Optional property that allows to hide the nonwrking weekdays for this specific view.
 <b>shortcutKey</b> - an Optional property that allows to set a custom shortcut key for the view.
+<b>hideHours</b> - an Optional property applicable only to <b>timelineWeek</b> view that allows to hide the hour cells and only show the day cells.
  */
 export declare type SchedulerViews = 'day' | 'week' | 'month' | 'agenda' | 'timelineDay' | 'timelineWeek' | 'timelineMonth';
 /**Determines type of the view selector located in the header of the element. */
@@ -22567,7 +25230,12 @@ export interface ScrollBar extends BaseElement, ScrollBarProperties {
   [name: string]: any;
   /**
    * This event is triggered when the value is changed.
-	* @param event. The custom event.    */
+	* @param event. The custom event. Custom data event was created with: ev.detail(value, oldValue, min, max)
+   *  value - A numeric value indicating the scroll position.
+   *  oldValue - A numeric value indicating the previous scroll position.
+   *  min - A numeric value indicating the min scroll position.
+   *  max - A numeric value indicating the max scroll position.
+   */
   onChange: ((this: any, ev: Event) => any) | null;
   /**
    * Redraws the element.
@@ -22835,7 +25503,10 @@ export interface Slider extends BaseElement, SliderProperties {
   [name: string]: any;
   /**
    * This event is triggered when the value of the slider is changed. 
-	* @param event. The custom event.    */
+	* @param event. The custom event. Custom data event was created with: ev.detail(value, oldValue)
+   *  value - A numeric value indicating the scroll position.
+   *  oldValue - A numeric value indicating the previous scroll position.
+   */
   onChange: ((this: any, ev: Event) => any) | null;
   /**
    * Focuses the slider. 
@@ -23590,6 +26261,11 @@ export interface TabItemProperties {
    */
   closeButtonHidden?: boolean;
   /**
+   * Disables the Tab item
+   * Default value: false
+   */
+  disabled?: boolean;
+  /**
    * Tab item index
    * Default value: null
    */
@@ -23825,6 +26501,11 @@ export interface TableProperties {
    */
   columnResize?: boolean;
   /**
+   * This property affects the table sizing, when the columnSizeMode is 'default'. When 'columnResizeNormalize' is false, the Table will add an additional TH element, if all table columns have the 'width' property set. This is done in order to maintain your width settings. Otherwise, when the property is set to true, the Table will auto-fill the remaining space similar to the layout of standard HTML Tables.
+   * Default value: false
+   */
+  columnResizeNormalize?: boolean;
+  /**
    * Sets or gets whether when resizing a column, a feedback showing the new column width in px will be displayed.
    * Default value: false
    */
@@ -23840,7 +26521,7 @@ export interface TableProperties {
    */
   conditionalFormatting?: TableConditionalFormatting[];
   /**
-   * Sets or gets the column sizing behavior.
+   * Sets or gets the column sizing behavior. In 'auto' mode Columns are automatically sized based on their content and the value of the columnMinWidth property, unless there is not enough space in the Table, in which case ellipses are shown. User-set static column width is still respected. In 'default' mode Columns are sized according to the rules of the standard HTML table element's table-layout: fixed. Custom width can also be applied to columns in this case by setting the column width property.
    * Default value: default
    */
   columnSizeMode?: TableColumnSizeMode;
@@ -23849,6 +26530,11 @@ export interface TableProperties {
    * Default value: false
    */
   conditionalFormattingButton?: boolean;
+  /**
+   * This property determines the time in milliseconds after which the Table data is updated, when you vertically scroll.
+   * Default value: 1
+   */
+  deferredScrollDelay?: number;
   /**
    * When binding the dataSource property directly to an array (as opposed to an instance of JQX.DataAdapter), sets or gets the name of the data field in the source array to bind row ids to.
    * Default value: "null"
@@ -23868,7 +26554,7 @@ export interface TableProperties {
    * A callback function that can be used to transform the initial dataSource records. If implemented, it is called once for each record (which is passed as an argument).
    * Default value: null
    */
-  dataTransform?: any;
+  dataTransform?: { (record: any): void };
   /**
    * Disables the interaction with the element.
    * Default value: false
@@ -23884,6 +26570,11 @@ export interface TableProperties {
    * Default value: cell
    */
   editMode?: TableEditMode;
+  /**
+   * Sets or gets whether Row hierarchies are expanded by default, when created. Use this property when you want your groups to be expanded by default, when the Table is grouped or when you use the Table in tree mode.
+   * Default value: false
+   */
+  expandHierarchy?: boolean;
   /**
    * Sets or gets whether the Table can be filtered. By default, the Table can be filtered by all string and numeric columns through a filter input in the header.
    * Default value: false
@@ -23928,12 +26619,12 @@ export interface TableProperties {
    * A callback function that can be used to modify the contents of a grouping header row. By changing the 'label' you modify the rendered grouping value. By changing the 'template' you can modify the entire content including the column and count information.
    * Default value: null
    */
-  groupFormatFunction?: any;
+  groupFormatFunction?: { (settings: { value: any, row: string | number, column: string, template?: any }): void };
   /**
-   * Sets or gets the id of an HTML template element to be applied as additional column header(s).
-   * Default value: "null"
+   * Allows to customize the header of the element. The property accepts the id of an HTMLElement, HTMLTemplateElement, function or a string that will be parsed as HTML. When set to a function it contains one argument - the header element of the Table.
+   * Default value: null
    */
-  headerRow?: string;
+  headerRow?: string | HTMLElement | Function;
   /**
    * Sets or gets whether navigation with the keyboard is enabled in the Table.
    * Default value: false
@@ -24013,7 +26704,7 @@ export interface TableProperties {
    * A callback function executed each time a Table cell is rendered.
    * Default value: null
    */
-  onCellRender?: any;
+  onCellRender?: { (data: any, dataField: string, value: any, cell: HTMLTableCellElement): void };
   /**
    * A callback function executed each time a Table column header cell is rendered.
    * Default value: null
@@ -24065,10 +26756,15 @@ export interface TableProperties {
    */
   selectionMode?: TableSelectionMode;
   /**
+   * Sets or gets whether row selection (via checkboxes) is hierarchical. When a parent row is selected, all sub rows are selected, too.
+   * Default value: true
+   */
+  selectionByHierarchy?: boolean;
+  /**
    * A callback function executed when a column is sorted that can be used to override the default sorting behavior. The function is passed four parameters: dataSource - the Table's data sourcesortColumns - an array of the data fields of columns to be sorted bydirections - an array of sort directions to be sorted by (corresponding to sortColumns)defaultCompareFunctions - an array of default compare functions to be sorted by (corresponding to sortColumns), useful if the sorting of some columns does not have to be overridden
    * Default value: null
    */
-  sort?: any;
+  sort?: { (dataSource: any, sortColumns: string[], directions: string[], defaultCompareFunctions: { (firstRecord: any, secondRecord: any): number }[]): void };
   /**
    * Determines the sorting mode of the Table.
    * Default value: none
@@ -24104,7 +26800,8 @@ export interface Table extends BaseElement, TableProperties {
   [name: string]: any;
   /**
    * This event is triggered when a cell edit operation has been initiated.
-	* @param event. The custom event. Custom data event was created with: ev.detail(dataField, row, value)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, dataField, row, value)
+   *  id - The id of the row.
    *  dataField - The data field of the cell's column.
    *  row - The data of the cell's row.
    *  value - The data value of the cell.
@@ -24122,27 +26819,30 @@ export interface Table extends BaseElement, TableProperties {
   onCellClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a cell has been edited.
-	* @param event. The custom event. Custom data event was created with: ev.detail(dataField, row, value)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, dataField, row, value)
+   *  id - The id of the row.
    *  dataField - The data field of the cell's column.
    *  row - The new data of the cell's row.
    *  value - The data value of the cell.
    */
   onCellEndEdit?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered when the selection is changed.
+   * This event is triggered when the selection is changed. Within the event handler you can get the selection by using the 'getSelection' method.
 	* @param event. The custom event. Custom data event was created with: ev.detail(type)
    *  type - The type of action that initiated the selection change. Possible types: 'programmatic', 'interaction', 'remove'.
    */
   onChange: ((this: any, ev: Event) => any) | null;
   /**
    * This event is triggered when a row has been collapsed.
-	* @param event. The custom event. Custom data event was created with: ev.detail(record)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, record)
+   *  id - The id of the collapsed row.
    *  record - The data of the collapsed row.
    */
   onCollapse?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a row has been expanded.
-	* @param event. The custom event. Custom data event was created with: ev.detail(record)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, record)
+   *  id - The id of the expanded row.
    *  record - The (aggregated) data of the expanded row.
    */
   onExpand?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
@@ -24152,6 +26852,12 @@ export interface Table extends BaseElement, TableProperties {
    *  dataField - The data field of the cell's column.
    */
   onColumnClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column menu is closed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(dataField)
+   *  dataField - The data field of the column.
+   */
+  onCloseColumnMenu?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a column has been resized via dragging or double-click.
 	* @param event. The custom event. Custom data event was created with: ev.detail(dataField, headerCellElement, width)
@@ -24169,12 +26875,19 @@ export interface Table extends BaseElement, TableProperties {
   onFilter?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a grouping-related action is made.
-	* @param event. The custom event. Custom data event was created with: ev.detail(action, dataField, label)
+	* @param event. The custom event. Custom data event was created with: ev.detail(action, dataField, label, path)
    *  action - The grouping action. Possible actions: 'add', 'collapse', 'expand', 'remove'.
    *  dataField - The data field of the column whose grouping is modified.
    *  label - The label of the group (only when collapsing/expanding).
+   *  path - The group's path (only when collapsing/expanding). The path includes the path to the expanded/collapsed group starting from the root group. The indexes are joined with '.'. This parameter is available when the 'action' is 'expand' or 'collapse'.
    */
   onGroup?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when a column menu is opened.
+	* @param event. The custom event. Custom data event was created with: ev.detail(dataField)
+   *  dataField - The data field of the column.
+   */
+  onOpenColumnMenu?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a paging-related action is made.
 	* @param event. The custom event. Custom data event was created with: ev.detail(action)
@@ -24183,22 +26896,33 @@ export interface Table extends BaseElement, TableProperties {
   onPage?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a row edit operation has been initiated (only when <strong>editMode</strong> is <em>'row'</em>).
-	* @param event. The custom event. Custom data event was created with: ev.detail(row)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, row)
+   *  id - The id of the row.
    *  row - The data of the row.
    */
   onRowBeginEdit?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a row has been edited (only when <strong>editMode</strong> is <em>'row'</em>).
-	* @param event. The custom event. Custom data event was created with: ev.detail(row)
+	* @param event. The custom event. Custom data event was created with: ev.detail(id, row)
+   *  id - The id of the row.
    *  row - The new data of the row.
    */
   onRowEndEdit?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
-   * This event is triggered when a column header cell has been clicked.
-	* @param event. The custom event. Custom data event was created with: ev.detail(columns)
+   * This event is triggered when a column header cell has been clicked or sorting is applied programmatically using the Table API.
+	* @param event. The custom event. Custom data event was created with: ev.detail(columns, sortDataFields, sortOrders, sortDataTypes, type)
    *  columns - An array with information about the columns the Table has been sorted by.
+   *  sortDataFields - An array with information about the data fields the Table has been sorted by.
+   *  sortOrders - An array with information about the columns sort orders the Table has been sorted by.
+   *  sortDataTypes - An array with information about the columns data types the Table has been sorted by.
+   *  type - The type of action that initiated the data sort. Possible types: 'programmatic', 'interaction'
    */
   onSort?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * Adds a new row. When you invoke the method, pass a JSON object with the row's data.
+   * @param {any} data. JSON object with the new row's data. Sample JSON: {firstName: 'Peter', lastName: 'Fuller'}.
+   */
+  addRow(data: any): void;
   /**
    * Adds a filter to a specific column.
    * @param {string} dataField. The column's data field.
@@ -24216,6 +26940,10 @@ export interface Table extends BaseElement, TableProperties {
    * @param {string} dataField?. The dataField of the cell's column. May be omitted when <strong>editMode</strong> is <em>'row'</em>.
    */
   beginEdit(row: string | number, dataField?: string): void;
+  /**
+   * Begins an update operation. Suspends all table refreshes and renders.
+   */
+  beginUpdate(): void;
   /**
    * Ends the current edit operation and discards changes.
    */
@@ -24241,6 +26969,14 @@ export interface Table extends BaseElement, TableProperties {
    */
   collapseAllRows(): void;
   /**
+   * Collapses all groups (in tree mode).
+   */
+  collapseAllGroups(): void;
+  /**
+   * Collapses all row details. Rows that have details defined via the <b>rowDetailTemplate</b> will be collapsed.
+   */
+  collapseAllRowDetails(): void;
+  /**
    * Collapses a group.
    * @param {string} index. The group's hierarchical index.
    */
@@ -24251,13 +26987,36 @@ export interface Table extends BaseElement, TableProperties {
    */
   collapseRow(rowId: string | number): void;
   /**
+   * Disables a selection of a row. When the 'selection' property is set to 'true', selection is enabled for all rows by default.
+   * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select.
+   */
+  disableSelect(rowId: string | number | (string | number)[]): void;
+  /**
+   * Enables a selection of a row, if it was previously disabled through a 'disableSelect' method call. When the 'selection' property is set to 'true', selection is enabled for all rows by default.
+   * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to select.
+   */
+  enableSelect(rowId: string | number | (string | number)[]): void;
+  /**
    * Ends the current edit operation and saves changes.
    */
   endEdit(): void;
   /**
+   * Ends an update operation. Resumes all table refreshes and renders. Re-renders the Table.
+   * @param {boolean} refresh?. Optionally you can pass 'false' in case you need to manually call the 'refresh' method. By default, the table is re-rendered.
+   */
+  endUpdate(refresh?: boolean): void;
+  /**
    * Expands all rows (in tree mode).
    */
   expandAllRows(): void;
+  /**
+   * Expands all groups (in tree mode).
+   */
+  expandAllGroups(): void;
+  /**
+   * Expands all row details. Rows that have details defined via <b>rowDetailTemplate</b> will be expanded.
+   */
+  expandAllRowDetails(): void;
   /**
    * Expands a group.
    * @param {string} index. The group's hierarchical index.
@@ -24295,6 +27054,19 @@ export interface Table extends BaseElement, TableProperties {
    */
   getValue(row: string | number, dataField: string): any;
   /**
+   * Gets a column property.
+   * @param {string} columnDataField. Column field name.
+   * @param {string} propertyName. Column property name.
+   * @returns {any}
+   */
+  getColumnProperty(columnDataField: string, propertyName: string): any;
+  /**
+   * Checks whether a group is expanded and returns <em>true</em> or <em>false</em>. <em>false</em> is returned when the group index is undefined, too.
+   * @param {string} index. The group's hierarchical index.
+   * @returns {boolean}
+   */
+  isGroupExpanded(index: string): boolean;
+  /**
    * Loads the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the <strong>stateSettings</strong> property.
    * @param {any} state?. An object returned by one of the methods <strong>getState</strong> or <strong>saveState</strong>. If a state is not passed, the method tries to load the state from the browser's localStorage.
    */
@@ -24319,6 +27091,11 @@ export interface Table extends BaseElement, TableProperties {
    */
   removeGroup(dataField: string): void;
   /**
+   * Removes a row by its id.
+   * @param {string | number} row. The id of the cell's row.
+   */
+  removeRow(row: string | number): void;
+  /**
    * Saves the Table's state. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is saved, based on the value of the <strong>stateSettings</strong> property.
    * @returns {any}
    */
@@ -24341,6 +27118,19 @@ export interface Table extends BaseElement, TableProperties {
    * @param {string} sortOrder?. Sort order. Possible values: 'asc' (ascending), 'desc' (descending), and null (removes sorting by column). If not provided, toggles the sorting.
    */
   sortBy(columnDataField: string, sortOrder?: string): void;
+  /**
+   * Sets a column property.
+   * @param {string} columnDataField. Column field name.
+   * @param {string} propertyName. Column property name.
+   * @param {any} propertyValue. Property value.
+   */
+  setColumnProperty(columnDataField: string, propertyName: string, propertyValue: any): void;
+  /**
+   * Updates a table row. The method expects two parameters - row id and JSON object with the new row data.
+   * @param {string | number} rowId. The id of the row.
+   * @param {any} data. JSON object with the new row's data. Example: {firstName: 'Peter', lastName: 'Fuller'}.
+   */
+  updateRow(rowId: string | number, data: any): void;
   /**
    * Unselects one or more rows.
    * @param {string | number | (string | number)[]} rowId. The id of the row (or an array of row ids) to unselect.
@@ -24383,10 +27173,25 @@ export interface TableColumn {
    */
   allowGroup?: boolean;
   /**
+   * Sets or gets whether the column can be resized.
+   * Default value: true
+   */
+  allowResize?: boolean;
+  /**
    * Sets or gets whether the table can be sorted by the column.
    * Default value: true
    */
   allowSort?: boolean;
+  /**
+   * Sets or gets whether the column may have a column menu when the 'columnMenu' property of the Table is enabled.
+   * Default value: true
+   */
+  allowMenu?: boolean;
+  /**
+   * Sets or gets whether the column may be hidden with the Table's column menu when the 'columnMenu' property of the Table is enabled.
+   * Default value: true
+   */
+  allowHide?: boolean;
   /**
    * Sets or gets the column's column group. Has to correspond to the name field of a column group (TableColumnGroup).
    * Default value: "null"
@@ -24416,22 +27221,27 @@ export interface TableColumn {
    * A callback function that can be used to modify the contents of a cell and the cell itself.
    * Default value: null
    */
-  formatFunction?: any;
-  /**
-   * Sets or gets whether the column is hidden or not. Hidden columns allow data to be grouped by their corresponding dataField.
-   * Default value: true
-   */
-  hidden: boolean;
+  formatFunction?: { (settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template?: any }): void };
   /**
    * Sets or gets the text displayed in the column's header.
    * Default value: ""
    */
   label?: string;
   /**
-   * Sets or gets the column's priority when resizing the browser window. The larger the priority value, the column will be hidden at a larger screen resolution. Columns with priority 1 are never hidden.
-   * Default value: 1
+   * Sets or gets the data field map, when the Table is bound to an Array and dataSourceSettings property is not set.
+   * Default value: ""
    */
-  responsivePriority?: TableColumnResponsivePriority;
+  map?: string;
+  /**
+   * Sets or gets the column's priority when resizing the browser window. The larger the priority value, the column will be hidden at a larger screen resolution. Columns with priority 1 are never hidden. The property should be set to a number in the range of 1 to 5. The property by default is not set.
+   * Default value: null
+   */
+  responsivePriority?: number | null;
+  /**
+   * Use this for custom sort implementation only. All non-undefined array elements are sorted according to the return value of the compare function (all undefined elements are sorted to the end of the array, with no call to compareFunction).
+   * Default value: null
+   */
+  sort?: { (firstRecord: any, secondRecord: any): number };
   /**
    * A string to be parsed into HTML and be used as custom cell content. Applicable only when virtualization is enabled.
    * Default value: "null"
@@ -24441,22 +27251,32 @@ export interface TableColumn {
    * A callback function that can be used to apply settings to a template element (specified by the column templateElement property). Applicable only when virtualization is enabled.
    * Default value: null
    */
-  templateElementSettings?: any;
+  templateElementSettings?: { (value: any, row: string | number, templateElement: HTMLElement): void };
   /**
    * A callback function that can be used to transform all the data of the column's original data field into a new data field to be used in column cells and all column operations. Can be useful for localizing data.
    * Default value: null
    */
-  transform?: any;
+  transform?: { (value: any): any };
   /**
    * A callback function that can be used to validate cell values after editing. If it returns true, the cell is valid. If it returns false or an object with a message field, the cell is not valid and the message (or a default one) is displayed in a tooltip.
    * Default value: null
    */
-  validation?: any;
+  validation?: { (value: any): boolean | { message: string } };
+  /**
+   * Sets or gets whether the column is hidden or not. Hidden columns allow data to be grouped by their corresponding dataField.
+   * Default value: true
+   */
+  visible?: boolean;
   /**
    * Sets the width of the column. The width can be entered as a number or string with px.
    * Default value: null
    */
   width?: string | number;
+  /**
+   * Sets the minimum width of the column. The width can be entered as a number.
+   * Default value: null
+   */
+  minWidth?: number;
 }
 
 export interface TableConditionalFormatting {
@@ -24519,6 +27339,16 @@ export interface TableDataSourceSettings {
    * Default value: ""
    */
   root?: string;
+  /**
+   * Sets or gets the Table values espace mode. This property specifies how html tags will be espaced by the table. The default 'blackList' value includes the most commonly used tags for espace such as 'script'. The 'all' value espaces all tags, whereas 'none' does not escape any tags.
+   * Default value: blackList
+   */
+  sanitizeHTML?: TableDataSourceSettingsSanitizeHTML;
+  /**
+   * Determines whether cell values will display the espaced values as text or html.
+   * Default value: text
+   */
+  sanitizeHTMLRender?: TableDataSourceSettingsSanitizeHTMLRender;
   /**
    * Sets or gets the XML binding record.
    * Default value: ""
@@ -24600,19 +27430,21 @@ declare global {
 }
 
 /**Sets or gets the data type of the column's cells. */
-export declare type TableColumnDataType = 'boolean' | 'date' | 'number' | 'string';
+export declare type TableColumnDataType = 'boolean' | 'date' | 'number' | 'string' | 'any';
 /**Sets or gets whether the column is sticky/frozen. true and 'near' designate freezing on the left side, 'far' - on the right side. */
 export declare type TableColumnFreeze = 'true' | 'near' | 'far';
-/**Sets or gets the column's priority when resizing the browser window. The larger the priority value, the column will be hidden at a larger screen resolution. Columns with priority 1 are never hidden. */
-export declare type TableColumnResponsivePriority = '1' | '2' | '3' | '4' | '5';
 /**The formatting condition. */
 export declare type TableConditionalFormattingCondition = 'between' | 'equal' | 'greaterThan' | 'lessThan' | 'notEqual';
 /**The fontFamily to apply to formatted cells. */
 export declare type TableConditionalFormattingFontFamily = 'The default fontFamily as set in CSS' | 'Arial' | 'Courier New' | 'Georgia' | 'Times New Roman' | 'Verdana';
 /**The fontSize to apply to formatted cells. The fontSize as set in CSS is used by default. */
 export declare type TableConditionalFormattingFontSize = '8px' | '9px' | '10px' | '11px' | '12px' | '13px' | '14px' | '15px' | '16px';
-/**Sets or gets the column sizing behavior. */
+/**Sets or gets the column sizing behavior. In 'auto' mode Columns are automatically sized based on their content and the value of the columnMinWidth property, unless there is not enough space in the Table, in which case ellipses are shown. User-set static column width is still respected. In 'default' mode Columns are sized according to the rules of the standard HTML table element's table-layout: fixed. Custom width can also be applied to columns in this case by setting the column width property. */
 export declare type TableColumnSizeMode = 'auto' | 'default';
+/**Sets or gets the Table values espace mode. This property specifies how html tags will be espaced by the table. The default 'blackList' value includes the most commonly used tags for espace such as 'script'. The 'all' value espaces all tags, whereas 'none' does not escape any tags. */
+export declare type TableDataSourceSettingsSanitizeHTML = 'all' | 'blackList' | 'none';
+/**Determines whether cell values will display the espaced values as text or html. */
+export declare type TableDataSourceSettingsSanitizeHTMLRender = 'text' | 'html';
 /**Sets the dataField type. */
 export declare type TableDataSourceSettingsDataFieldDataType = 'string' | 'date' | 'boolean' | 'number' | 'array' | 'any';
 /**Sets or gets whether the data source type. */
@@ -24624,7 +27456,7 @@ export declare type TableLoadColumnStateBehavior = 'implementationOnly' | 'inter
 /**Sets or gets the page size (when paging is enabled). */
 export declare type TablePageSize = '10' | '25' | '50';
 /**Sets or gets the selection mode. Only applicable when selection is enabled. */
-export declare type TableSelectionMode = 'many' | 'extended';
+export declare type TableSelectionMode = 'one' | 'many' | 'extended';
 /**Determines the sorting mode of the Table. */
 export declare type TableSortMode = 'none' | 'one' | 'many';
 export interface TabsProperties {
@@ -24793,33 +27625,69 @@ export interface Tabs extends BaseElement, TabsProperties {
   /* Get a member by its name */
   [name: string]: any;
   /**
-   * This event is triggered when the tab selection is changed.
+   * This event is triggered when the addNewTab is enabled and is clicked.
 	* @param event. The custom event.    */
+  onAddNewTabClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
+   * This event is triggered when the tab selection is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(index, oldIndex)
+   *  index - The tab's index.
+   *  oldIndex - The tab's old index.
+   */
   onChange: ((this: any, ev: Event) => any) | null;
   /**
    * This event is triggered when a tab is closed.
-	* @param event. The custom event.    */
+	* @param event. The custom event. Custom data event was created with: ev.detail(index)
+   *  index - The tab's index.
+   */
   onClose: ((this: any, ev: Event) => any) | null;
   /**
    * This event is triggered when a tab is about to be closed. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
-	* @param event. The custom event.    */
+	* @param event. The custom event. Custom data event was created with: ev.detail(index)
+   *  index - The tab's index.
+   */
   onClosing?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when a drag operation has ended.
-	* @param event. The custom event.    */
+	* @param event. The custom event. Custom data event was created with: ev.detail(left, top, index, label)
+   *  left - The tab's left position.
+   *  top - The tab's top position.
+   *  index - The tab's index.
+   *  label - The tab's label.
+   */
   onDragEnd: ((this: any, ev: Event) => any) | null;
   /**
    * This event is triggered when a drag operation has started.
-	* @param event. The custom event.    */
+	* @param event. The custom event. Custom data event was created with: ev.detail(left, top, index, label)
+   *  left - The tab's left position.
+   *  top - The tab's top position.
+   *  index - The tab's index.
+   *  label - The tab's label.
+   */
   onDragStart: ((this: any, ev: Event) => any) | null;
   /**
    * This event is triggered when tabs have been reordered.
-	* @param event. The custom event.    */
+	* @param event. The custom event. Custom data event was created with: ev.detail(index, oldIndex)
+   *  index - The tab's index.
+   *  oldIndex - The tab's old index.
+   */
   onReorder?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * Collapses the content section.
    */
   collapse(): void;
+  /**
+   * Returns the label of a Tab at given index.
+   * @param {number} index. The index of the tab.
+   * @returns {string}
+   */
+  getTabLabel(index: number): string;
+  /**
+   * Returns the content of a Tab at given index.
+   * @param {number} index. The index of the tab.
+   * @returns {HTMLElement}
+   */
+  getTabContent(index: number): HTMLElement;
   /**
    * Makes sure a tab is visible by scrolling to it.
    * @param {number} index. The index of the tab to scroll to.
@@ -24829,6 +27697,11 @@ export interface Tabs extends BaseElement, TabsProperties {
    * Expands the content section.
    */
   expand(): void;
+  /**
+   * Returns an array of the TabItems inside the element.
+   * @returns {TabItem[]}
+   */
+  getTabs(): TabItem[];
   /**
    * Returns the offset of the tab item container (smart-tab-item element) from the edge of the Tabs (smart-tabs element) where the tab strip is positioned.
    * @param {number} index. The index of the tab item.
@@ -25304,6 +28177,13 @@ export interface TextArea extends BaseElement, TextAreaProperties {
    */
   onChange: ((this: any, ev: Event) => any) | null;
   /**
+   * This event is triggered on each key up event of the TextArea, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
+  /**
    * Closes the drop down.
    */
   close(): void;
@@ -25615,13 +28495,20 @@ export interface TextBox extends BaseElement, TextBoxProperties {
   /* Get a member by its name */
   [name: string]: any;
   /**
-   * This event is triggered when the value of the Text Box is changed.
+   * This event is triggered when the value of the Text Box is changed. This happens on blur and if 'Enter' is pressed.
 	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value, type)
    *  oldValue - The previous value before it was changed.
    *  value - The new value.
    *  type - The type of the event.
    */
   onChange: ((this: any, ev: Event) => any) | null;
+  /**
+   * This event is triggered on each key up event of the TextBox, if the value is changed.
+	* @param event. The custom event. Custom data event was created with: ev.detail(oldValue, value)
+   *  oldValue - The previous value before it was changed.
+   *  value - The new value.
+   */
+  onChanging?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * Closes the drop down. <strong>The drop down is used only when auto complete is enabled.</strong>
    */
@@ -26094,7 +28981,7 @@ export interface Toast extends BaseElement, ToastProperties {
   /**
    * This event is triggered when the toast item is clicked.
 	* @param event. The custom event.    */
-  onClick: ((this: any, ev: Event) => any) | null;
+  onItemClick?: ((this: any, ev: Event) => any) | ((this: any, ev: CustomEvent<any>) => any) | null;
   /**
    * This event is triggered when the toast item is closed.
 	* @param event. The custom event.    */
@@ -26278,6 +29165,11 @@ export interface TooltipProperties {
    * Default value: advanced
    */
   animation?: Animation;
+  /**
+   * Determines how to align the tooltip.
+   * Default value: "center"
+   */
+  align?: string;
   /**
    * Gets or sets whether a tooltip's arrow will be shown.
    * Default value: false
@@ -26513,6 +29405,11 @@ export interface TreeProperties {
    * Default value: ""
    */
   filterInputPlaceholder?: string;
+  /**
+   * Determines the TreeItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the value property or 'textContent' if the user wants to filter by text inside the TreeItem's content or any other property.
+   * Default value: "label"
+   */
+  filterMember?: string;
   /**
    * Sets filter mode.
    * Default value: containsIgnoreCase
@@ -26890,7 +29787,7 @@ export declare type TreeScrollMode = 'scrollbar' | 'scrollButtons';
 /**Determines the way selected items are highlighted. */
 export declare type TreeSelectionDisplayMode = 'row' | 'label';
 /**Determines selection mode. */
-export declare type TreeSelectionMode = 'none' | 'oneOrManyExtended' | 'zeroOrMany' | 'oneOrMany' | 'zeroOrOne' | 'one' | 'checkBox' | 'radioButton';
+export declare type TreeSelectionMode = 'none' | 'oneOrManyExtended' | 'zeroOrMany' | 'oneOrMany' | 'zeroAndOne' | 'zeroOrOne' | 'one' | 'checkBox' | 'radioButton';
 /**Determines whether jqx-tree-items-groups can be selected. */
 export declare type TreeSelectionTarget = 'all' | 'leaf';
 /**Determines sort direction - ascending or descending. */
@@ -27059,7 +29956,7 @@ export interface ValidatorRule {
    * A callback function whose result to compare to the input value by the comparisonType in order to show the validation message. Applicable when type is 'compare'.
    * Default value: 
    */
-  comparisonTarget?: any;
+  comparisonTarget?: { (inputElement: any, rule: ValidatorRule): any };
   /**
    * An operator to compare the input value by with the result of comparisonTarget in order to show the validation message. Applicable when type is 'compare'.
    * Default value: "=="
@@ -27099,7 +29996,7 @@ export interface ValidatorRule {
    * A callback function to validate the input's value by when the rule's type is 'custom'.
    * Default value: 
    */
-  validationCallback?: any;
+  validationCallback?: { (inputElement: any): boolean };
 }
 
 declare global {

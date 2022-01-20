@@ -14,6 +14,8 @@ export declare class TabItemComponent extends BaseElement implements OnInit, Aft
     createComponent(properties?: {}): any;
     /** @description Tab item close button state */
     closeButtonHidden: boolean;
+    /** @description Disables the Tab item */
+    disabled: boolean;
     /** @description Tab item index */
     index: number;
     /** @description Tab item selected state */

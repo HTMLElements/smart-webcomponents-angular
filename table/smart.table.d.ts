@@ -2,7 +2,7 @@ import { Table } from './../index';
 import { Animation, TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, TableColumnDataType, TableColumnFreeze, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableDataSourceSettingsSanitizeHTML, TableDataSourceSettingsDataFieldDataType, TableDataSourceSettingsDataSourceType, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings, TableDataSourceSettingsDataField, ElementRenderMode } from './../index';
+export { Animation, TableColumnDataType, TableColumnFreeze, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableDataSourceSettingsSanitizeHTML, TableDataSourceSettingsSanitizeHTMLRender, TableDataSourceSettingsDataFieldDataType, TableDataSourceSettingsDataSourceType, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings, TableDataSourceSettingsDataField, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Table } from './../index';
 export declare class TableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -27,6 +27,8 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     columnReorder: boolean;
     /** @description Sets or gets whether the resizing of columns is enabled. Note: column sizes continue to adhere to the behavior of the standard HTML table element's table-layout: fixed, upon which smart-table is based. */
     columnResize: boolean;
+    /** @description This property affects the table sizing, when the columnSizeMode is 'default'. When 'columnResizeNormalize' is false, the Table will add an additional TH element, if all table columns have the 'width' property set. This is done in order to maintain your width settings. Otherwise, when the property is set to true, the Table will auto-fill the remaining space similar to the layout of standard HTML Tables. */
+    columnResizeNormalize: boolean;
     /** @description Sets or gets whether when resizing a column, a feedback showing the new column width in px will be displayed. */
     columnResizeFeedback: boolean;
     /** @description Describes the columns properties. */
@@ -71,7 +73,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     freezeFooter: boolean;
     /** @description Sets or gets whether grouping the Table is enabled. */
     freezeHeader: boolean;
-    /** @description Sets or gets the id of an HTML template element to be applied as additional column header(s). */
+    /** @description Allows to customize the header of the element. The property accepts the id of an HTMLElement, HTMLTemplateElement, function or a string that will be parsed as HTML. When set to a function it contains one argument - the header element of the Table. */
     grouping: boolean;
     /** @description Sets or gets whether navigation with the keyboard is enabled in the Table. */
     groupFormatFunction: {
@@ -83,7 +85,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
         }): void;
     };
     /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
-    headerRow: string;
+    headerRow: string | HTMLElement | Function;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     keyboardNavigation: boolean;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
@@ -185,6 +187,11 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     *   dataField - The data field of the cell's column.
     */
     onColumnClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column menu is closed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+    *   dataField - The data field of the column.
+    */
+    onCloseColumnMenu: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a column has been resized via dragging or double-click.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	headerCellElement, 	width)
     *   dataField - The data field of the column.
@@ -206,6 +213,11 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     *   path - The group's path (only when collapsing/expanding). The path includes the path to the expanded/collapsed group starting from the root group. The indexes are joined with '.'. This parameter is available when the 'action' is 'expand' or 'collapse'.
     */
     onGroup: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column menu is opened.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+    *   dataField - The data field of the column.
+    */
+    onOpenColumnMenu: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a paging-related action is made.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	action)
     *   action - The paging action. Possible actions: 'pageIndexChange', 'pageSizeChange'.

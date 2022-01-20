@@ -57,6 +57,8 @@ export declare class FileUploadComponent extends BaseElement implements OnInit, 
     uploadUrl: string;
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
+    /** @description Gets the file upload value. */
+    value: any;
     /** @description Callback used to validate the files immediatelly after their selection. Retuns a boolean value. If the returned value is false, the file is removed from list and a 'validationError is fired. */
     validateFile: any;
     /** @description This event is triggered when a file has been selected.

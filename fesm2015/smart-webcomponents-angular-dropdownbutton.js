@@ -313,6 +313,13 @@ let DropDownButtonComponent = class DropDownButtonComponent extends BaseElement 
     set placeholder(value) {
         this.nativeElement ? this.nativeElement.placeholder = value : undefined;
     }
+    /** @description Determines the element's placeholder template, displayed in the element's action button container. You can pass 'string', 'function' or HTMLTemplateElement as a value. */
+    get placeholderTemplate() {
+        return this.nativeElement ? this.nativeElement.placeholderTemplate : undefined;
+    }
+    set placeholderTemplate(value) {
+        this.nativeElement ? this.nativeElement.placeholderTemplate = value : undefined;
+    }
     /** @description Disables user interaction with the element. */
     get readonly() {
         return this.nativeElement ? this.nativeElement.readonly : undefined;
@@ -594,6 +601,9 @@ __decorate([
 __decorate([
     Input()
 ], DropDownButtonComponent.prototype, "placeholder", null);
+__decorate([
+    Input()
+], DropDownButtonComponent.prototype, "placeholderTemplate", null);
 __decorate([
     Input()
 ], DropDownButtonComponent.prototype, "readonly", null);

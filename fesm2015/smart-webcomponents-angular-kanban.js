@@ -147,10 +147,10 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
         */
         this.onColumnReorder = new EventEmitter();
         /** @description This event is triggered when a column is updated.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
-        *   label - The column label.
-        *   dataField - The column data field.
-        *   collapsed - The column's collapsed state.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value, 	column)
+        *   oldValue - The column's old label.
+        *   value - The column's new label.
+        *   column - The column's data object with 'label', 'dataField' and 'collapsed' fields.
         */
         this.onColumnUpdate = new EventEmitter();
         /** @description This event is triggered when a column header is clicked.
@@ -255,12 +255,26 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set allowColumnRemove(value) {
         this.nativeElement ? this.nativeElement.allowColumnRemove = value : undefined;
     }
+    /** @description Enables or disables column hiding. When this property is set to true, users will be able to dynamically hide a column through the column actions menu. the 'columnActions' property should be true. */
+    get allowColumnHide() {
+        return this.nativeElement ? this.nativeElement.allowColumnHide : undefined;
+    }
+    set allowColumnHide(value) {
+        this.nativeElement ? this.nativeElement.allowColumnHide = value : undefined;
+    }
     /** @description Toggles the visibility of the column buttons for adding tasks. A particular button can be disabled by setting addNewButton in the column's definition to false. */
     get addNewButton() {
         return this.nativeElement ? this.nativeElement.addNewButton : undefined;
     }
     set addNewButton(value) {
         this.nativeElement ? this.nativeElement.addNewButton = value : undefined;
+    }
+    /** @description Determines whether the add button is visible in the column header and/or after the tasks in the column. */
+    get addNewButtonDisplayMode() {
+        return this.nativeElement ? this.nativeElement.addNewButtonDisplayMode : undefined;
+    }
+    set addNewButtonDisplayMode(value) {
+        this.nativeElement ? this.nativeElement.addNewButtonDisplayMode = value : undefined;
     }
     /** @description Sets or gets whether a column with a button for adding new status columns to the Kanban will be displayed. */
     get addNewColumn() {
@@ -283,13 +297,6 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set allowDrop(value) {
         this.nativeElement ? this.nativeElement.allowDrop = value : undefined;
     }
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    get animation() {
-        return this.nativeElement ? this.nativeElement.animation : undefined;
-    }
-    set animation(value) {
-        this.nativeElement ? this.nativeElement.animation = value : undefined;
-    }
     /** @description Enables or disables auto load state from the browser's localStorage. Information about tasks and their position and selected state, filtering, sorting, collapsed columns, as well as the values of the properties taskActions, taskComments, taskDue, taskPriority, taskProgress, taskTags, and taskUserIcon is loaded. */
     get autoLoadState() {
         return this.nativeElement ? this.nativeElement.autoLoadState : undefined;
@@ -311,6 +318,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set collapsible(value) {
         this.nativeElement ? this.nativeElement.collapsible = value : undefined;
     }
+    /** @description Displays colors in the column header, when the column's color property is set. */
+    get columnColors() {
+        return this.nativeElement ? this.nativeElement.columnColors : undefined;
+    }
+    set columnColors(value) {
+        this.nativeElement ? this.nativeElement.columnColors = value : undefined;
+    }
     /** @description Describes the columns properties. */
     get columns() {
         return this.nativeElement ? this.nativeElement.columns : undefined;
@@ -324,6 +338,20 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     set columnActions(value) {
         this.nativeElement ? this.nativeElement.columnActions = value : undefined;
+    }
+    /** @description Determines whether task count information is displayed in column headers. */
+    get columnSummary() {
+        return this.nativeElement ? this.nativeElement.columnSummary : undefined;
+    }
+    set columnSummary(value) {
+        this.nativeElement ? this.nativeElement.columnSummary = value : undefined;
+    }
+    /** @description Determines whether a column header has a template. You can pass 'string', 'function' or HTMLTemplateElement as a value. */
+    get columnHeaderTemplate() {
+        return this.nativeElement ? this.nativeElement.columnHeaderTemplate : undefined;
+    }
+    set columnHeaderTemplate(value) {
+        this.nativeElement ? this.nativeElement.columnHeaderTemplate = value : undefined;
     }
     /** @description Determines the column edit behavior. With the 'header' option, edit starts on double click on the column's label. In 'menu' mode, edit is allowed from the 'columnActions' menu. In 'headerAndMenu' option, column editing includes both options. */
     get columnEditMode() {
@@ -416,6 +444,20 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set selectionMode(value) {
         this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
     }
+    /** @description Sets or gets whether the tasks history will be stored and displayed in the task dialog. */
+    get storeHistory() {
+        return this.nativeElement ? this.nativeElement.storeHistory : undefined;
+    }
+    set storeHistory(value) {
+        this.nativeElement ? this.nativeElement.storeHistory = value : undefined;
+    }
+    /** @description Sets or gets the task history items that will be stored when storeHistory is enabled. */
+    get storeHistoryItems() {
+        return this.nativeElement ? this.nativeElement.storeHistoryItems : undefined;
+    }
+    set storeHistoryItems(value) {
+        this.nativeElement ? this.nativeElement.storeHistoryItems = value : undefined;
+    }
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get rightToLeft() {
         return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
@@ -493,6 +535,34 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set taskProgress(value) {
         this.nativeElement ? this.nativeElement.taskProgress = value : undefined;
     }
+    /** @description Sets the task custom fields displayed in the card. Each array item should have 'dataField', 'label' 'dataType' and optionally 'visible' properties. The 'dataField' determines the value, the label is displayed as title, 'dataType' is used for formatting and 'visible' determines whether the field will be displayed. */
+    get taskCustomFields() {
+        return this.nativeElement ? this.nativeElement.taskCustomFields : undefined;
+    }
+    set taskCustomFields(value) {
+        this.nativeElement ? this.nativeElement.taskCustomFields = value : undefined;
+    }
+    /** @description The task's background color depends on the task's color property. By default the color is rendered within the task's left border. */
+    get taskColorEntireSurface() {
+        return this.nativeElement ? this.nativeElement.taskColorEntireSurface : undefined;
+    }
+    set taskColorEntireSurface(value) {
+        this.nativeElement ? this.nativeElement.taskColorEntireSurface = value : undefined;
+    }
+    /** @description Displays an input in the task's card for adding dynamically a sub task. The 'taskSubTasks' property should be set to a value different than 'none'. */
+    get taskSubTasksInput() {
+        return this.nativeElement ? this.nativeElement.taskSubTasksInput : undefined;
+    }
+    set taskSubTasksInput(value) {
+        this.nativeElement ? this.nativeElement.taskSubTasksInput = value : undefined;
+    }
+    /** @description Sets the rendering mode of sub tasks. 'none' - default value. Sub tasks are displayed only in the edit dialog. 'onePerRow' - all sub tasks are displayed in the task's card. 'onlyUnfinished' - only tasks which are not completed are displayed in the task's card. */
+    get taskSubTasks() {
+        return this.nativeElement ? this.nativeElement.taskSubTasks : undefined;
+    }
+    set taskSubTasks(value) {
+        this.nativeElement ? this.nativeElement.taskSubTasks = value : undefined;
+    }
     /** @description Toggles the visibility of task tags. */
     get taskTags() {
         return this.nativeElement ? this.nativeElement.taskTags : undefined;
@@ -520,6 +590,20 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     set theme(value) {
         this.nativeElement ? this.nativeElement.theme = value : undefined;
+    }
+    /** @description Determines whether the priority list (as defined by the priority property) will be shown when clicking the priority icon. Only applicable if editable privileges are enabled. */
+    get priorityList() {
+        return this.nativeElement ? this.nativeElement.priorityList : undefined;
+    }
+    set priorityList(value) {
+        this.nativeElement ? this.nativeElement.priorityList = value : undefined;
+    }
+    /** @description Determines the priority Kanban tasks can be assigned to. Example: [{label: 'low', value: 'low'}, {label: 'high', value: 'high'}] */
+    get priority() {
+        return this.nativeElement ? this.nativeElement.priority : undefined;
+    }
+    set priority(value) {
+        this.nativeElement ? this.nativeElement.priority = value : undefined;
     }
     /** @description Determines whether the user list (as defined by the users property) will be shown when clicking the user icon. Only applicable if editable privileges are enabled. */
     get userList() {
@@ -639,6 +723,19 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
             });
         }
     }
+    /** @description Hides a Kanban column.
+    * @param {number | string} column. The index or dataField of the column to hide
+    */
+    hide(column) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.hide(column);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.hide(column);
+            });
+        }
+    }
     /** @description Creates a copy of a task in the same column.
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     */
@@ -709,7 +806,7 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     /** @description Exports the Kanban's data.
     * @param {string} dataFormat. The file format to export to. Supported formats: 'csv', 'html', 'json', 'pdf', 'tsv', 'xlsx', 'xml'.
-    * @param {string} fileName?. The name of the file to export to
+    * @param {string} fileName. The name of the file to export to
     * @param {Function} callback?. A callback function to pass the exported data to (if fileName is not provided)
     * @returns {any}
   */
@@ -719,6 +816,24 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
                 return new Promise(resolve => {
                     this.nativeElement.whenRendered(() => {
                         const result = this.nativeElement.exportData(dataFormat, fileName, callback);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Gets the data of a column. The returned value is a JSON object with the following fields: 'label', 'dataField', 'collapsed', 'collapsible', 'allowRemove', 'editable', 'reorder', 'orientation'.
+    * @param {string} dataField. The column's data field
+    * @returns {any}
+  */
+    getColumn(dataField) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getColumn(dataField);
                         resolve(result);
                     });
                 });
@@ -867,6 +982,31 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.saveState();
+            });
+        }
+    }
+    /** @description Shows a Kanban column.
+    * @param {number | string} column. The index or dataField of the column to show
+    */
+    show(column) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.show(column);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.show(column);
+            });
+        }
+    }
+    /** @description Shows all Kanban columns.
+    */
+    showAllColumns() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.showAllColumns();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.showAllColumns();
             });
         }
     }
@@ -1036,7 +1176,13 @@ __decorate([
 ], KanbanComponent.prototype, "allowColumnRemove", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "allowColumnHide", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "addNewButton", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "addNewButtonDisplayMode", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "addNewColumn", null);
@@ -1048,9 +1194,6 @@ __decorate([
 ], KanbanComponent.prototype, "allowDrop", null);
 __decorate([
     Input()
-], KanbanComponent.prototype, "animation", null);
-__decorate([
-    Input()
 ], KanbanComponent.prototype, "autoLoadState", null);
 __decorate([
     Input()
@@ -1060,10 +1203,19 @@ __decorate([
 ], KanbanComponent.prototype, "collapsible", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "columnColors", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "columns", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "columnActions", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "columnSummary", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "columnHeaderTemplate", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "columnEditMode", null);
@@ -1105,6 +1257,12 @@ __decorate([
 ], KanbanComponent.prototype, "selectionMode", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "storeHistory", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "storeHistoryItems", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "rightToLeft", null);
 __decorate([
     Input()
@@ -1138,6 +1296,18 @@ __decorate([
 ], KanbanComponent.prototype, "taskProgress", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "taskCustomFields", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "taskColorEntireSurface", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "taskSubTasksInput", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "taskSubTasks", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "taskTags", null);
 __decorate([
     Input()
@@ -1148,6 +1318,12 @@ __decorate([
 __decorate([
     Input()
 ], KanbanComponent.prototype, "theme", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "priorityList", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "priority", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "userList", null);

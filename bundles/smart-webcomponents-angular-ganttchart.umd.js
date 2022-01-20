@@ -370,10 +370,12 @@ import './../source/modules/smart.ganttchart';
             */
             _this.onConnectionStart = new core.EventEmitter();
             /** @description This event is triggered when the user completes a connection between two tasks.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	startIndex, 	endIndex, 	type)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	startTaskId, 	startIndex, 	endIndex, 	endTaskId, 	type)
             *   id - The id of the connection that was created.
+            *   startTaskId - The id of the task that a connection is started from.
             *   startIndex - The index of the task that a connection is started from.
-            *   endIndex - The index of the task that a connection is started from.
+            *   endIndex - The index of the task that a connection ended to.
+            *   endTaskId - The id of the task that a connection ended to.
             *   type - The type of connection. Fours types are available: <ul><li><b>0</b> - start-to-start</li><li><b>1</b> - end-to-start</li><li><b>2</b> - end-to-end</li><li><b>3</b> - start-to-end</li></ul>
             */
             _this.onConnectionEnd = new core.EventEmitter();
@@ -391,14 +393,21 @@ import './../source/modules/smart.ganttchart';
             *   width - The new width of the column in pixels.
             */
             _this.onColumnResize = new core.EventEmitter();
-            /** @description This event is triggered just before the window for task editing starts closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
-            *   target - The instance of the window that is going to close.
-            *   type - The type of window that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
+            /** @description This event is triggered just before the window for task editing or tooltip is closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+            *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip.
+            *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+            *   target - The instance of the window/tooltip that is going to close.
+            *   type - The type of window/tooltip that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
             */
             _this.onClosing = new core.EventEmitter();
             /** @description This event is triggered when the window for task editing is closed( hidden )
-            *  @param event. The custom event. 	*/
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+            *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+            *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+            *   target - The instance of the window/tooltip that is closed.
+            *   type - The type of window/tooltip that is closed. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+            */
             _this.onClose = new core.EventEmitter();
             /** @description This event is triggered when an item is collapsed.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	isGroup, 	item, 	index, 	label, 	value)
@@ -410,19 +419,21 @@ import './../source/modules/smart.ganttchart';
             */
             _this.onCollapse = new core.EventEmitter();
             /** @description This event is triggered when dragging of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
             *   id - The id of the task that is going to be dragged.
             *   item - The object of the task that is going to be dragged.
             *   dateStart - The start date of the task that is going to be dragged.
             *   dateEnd - The end date of the task that is going to be dragged.
+            *   segment - The segment object that is going to be dragged. This attribute is undefined if a segment is not going to be dragged.
             */
             _this.onDragStart = new core.EventEmitter();
             /** @description This event is triggered when dragging of a task finishes.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
             *   id - The id of the task that is was dragged.
             *   item - The object of the task that is was dragged.
             *   dateStart - The start date of the task that is was dragged.
             *   dateEnd - The end date of the task that is was dragged.
+            *   segment - The segment object that was dragged. This attribute is undefined if a segment has not been dragged.
             */
             _this.onDragEnd = new core.EventEmitter();
             /** @description This event is triggered when an item is expanded.
@@ -442,65 +453,79 @@ import './../source/modules/smart.ganttchart';
             */
             _this.onFilter = new core.EventEmitter();
             /** @description This event is triggered when a task, resource or connection is clicked inside the Timeline or the Tree columns.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	originalEvent)
-            *   item - The item that was clicked. It cam be a task, resource or connection.
-            *   type - The type of item. Possible values are: 'task', 'resource', 'connection'.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	type, 	originalEvent)
+            *   id - The id of the task.
+            *   item - The item that was clicked. It can be a task, resource or connection.
+            *   type - The type of item. Possible values are: 'task', 'project', 'resource', 'connection'.
             *   originalEvent - The original DOM event.
             */
             _this.onItemClick = new core.EventEmitter();
             /** @description This event is triggered when a Task/Resource/Connection is inserted.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-            *   type - The type of item that has been modified.
+            *   type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
             *   item - An object that represents the actual item with it's attributes.
             */
             _this.onItemInsert = new core.EventEmitter();
             /** @description This event is triggered when a Task/Resource/Connection is removed.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-            *   type - The type of item that has been modified.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	type, 	item)
+            *   id - The id of the task.
+            *   type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
             *   item - An object that represents the actual item with it's attributes.
             */
             _this.onItemRemove = new core.EventEmitter();
             /** @description This event is triggered when a Task/Resource/Connection is updated.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-            *   type - The type of item that has been modified.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	type, 	item)
+            *   id - The id of the task.
+            *   type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
             *   item - An object that represents the actual item with it's attributes.
             */
             _this.onItemUpdate = new core.EventEmitter();
-            /** @description This event is triggered just before the window for task editing starts opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
-            *   target - The instance of the window that is going to open.
-            *   type - The type of window that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
+            /** @description This event is triggered just before the window for task editing or tooltip is opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+            *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+            *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+            *   target - The instance of the window/tooltip that is going to open.
+            *   type - The type of window/tooltip that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
             */
             _this.onOpening = new core.EventEmitter();
-            /** @description This event is triggered when the window for task editing is opened( visible ).
-            *  @param event. The custom event. 	*/
+            /** @description This event is triggered when the window for task editing is opened( visible ) or when the tooltip is opened.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+            *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+            *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+            *   target - The instance of the window/tooltip that is opened.
+            *   type - The type of window/tooltip that is opened. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+            */
             _this.onOpen = new core.EventEmitter();
             /** @description This event is triggered when the progress of a task bar starts to change as a result of user interaction. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	progress)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	index, 	progress)
+            *   id - The id of the task.
             *   index - The index of the task which progress is going to be changed.
             *   progress - The progress of the task before it is changed.
             */
             _this.onProgressChangeStart = new core.EventEmitter();
             /** @description This event is triggered when the progress of a task is changed.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	progress)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	index, 	progress)
+            *   id - The id of the task.
             *   index - The index of the task which progress is has been changed.
             *   progress - The progress of the task after it was changed.
             */
             _this.onProgressChangeEnd = new core.EventEmitter();
             /** @description This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
             *   id - The id of the task that is going to be resized.
             *   item - The object of the task that is going to be resized.
             *   dateStart - The start date of the task that is going to be resized.
             *   dateEnd - The end date of the task that is going to be resized.
+            *   segment - The segment object that is going to be resized. This attribute is undefined if a segment is not going to be resized.
             */
             _this.onResizeStart = new core.EventEmitter();
             /** @description This event is triggered when the resizing of a task finishes.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
             *   id - The id of the task that was resized.
             *   item - The object of the task that was resized.
             *   dateStart - The start date of the task that was resized.
             *   dateEnd - The end date of the task that was resized.
+            *   segment - The segment object that was resized. This attribute is undefined if a segment has not been resized.
             */
             _this.onResizeEnd = new core.EventEmitter();
             /** @description This event is triggered when the GanttChart is sorted by some column.
@@ -582,6 +607,17 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "columnMenu", {
+            /** @description Enabled/Disables the colummn header menu. When enabled and the user hovers a column header, a drop down button will appear that triggers a column menu for quick actions like sorting, filtering, etc. The actions depend on the enabled Gantt features, for example the filtering action will be available only if filtering is enabled for the element. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.columnMenu : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.columnMenu = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "columnResize", {
             /** @description Determines whether the Table columns are resizable or not. When enabled it is possible to resize the columns from the header cells of the Table in both Task and Resource timelines. */
             get: function () {
@@ -604,6 +640,28 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "currentTimeIndicator", {
+            /** @description Enables/Disables the current time indicator. Current time indicator shows the current time in the appropriate view cells. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.currentTimeIndicator : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.currentTimeIndicator = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "currentTimeIndicatorInterval", {
+            /** @description Determines the refresh interval in seconds for the currentTimeIndicator.  */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.currentTimeIndicatorInterval : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.currentTimeIndicatorInterval = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "dataExport", {
             /** @description Sets the GanttChart's Data Export options. */
             get: function () {
@@ -616,7 +674,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "dataSource", {
-            /** @description Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown. The duration always shows the calendar time whether it is in days/hours or other.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..  GanttChart also accepts a DataAdapter instance as dataSource. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
+            /** @description Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown. The duration always shows the calendar time whether it is in days/hours or other.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).overdue - a boolean that indicates whether the task's dateEnd has surpassed it's deadline date.disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.segments - an array of objects that allows to devide a task into multiple segements. Each segment (except the first) can have a different starting date, duration and label.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..GanttChart also accepts a DataAdapter instance as dataSource. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.dataSource : undefined;
             },
@@ -655,6 +713,17 @@ import './../source/modules/smart.ganttchart';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.dateStart = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "dateMarkers", {
+            /** @description Determines the date markers that will be displayed inside the timeline. Date markers allow to mark and even label specific dates (including time) inside the GanttChart timeline. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.dateMarkers : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.dateMarkers = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -725,6 +794,28 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "disableSegmentDrag", {
+            /** @description Disables the task segment dragging. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.disableSegmentDrag : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.disableSegmentDrag = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "disableSegmentResize", {
+            /** @description Disables the task segment resizing. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.disableSegmentResize : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.disableSegmentResize = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "disableWindowEditor", {
             /** @description Disables the window editor for the GanttChart. */
             get: function () {
@@ -780,6 +871,17 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "hideDateMarkers", {
+            /** @description Determines whether the dateMarkers are visible or not. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.hideDateMarkers : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.hideDateMarkers = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "hideTimelineHeaderDetails", {
             /** @description By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ). */
             get: function () {
@@ -787,6 +889,17 @@ import './../source/modules/smart.ganttchart';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.hideTimelineHeaderDetails = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "showSelectionColumn", {
+            /** @description Shows the selection column of the Task/Resource Table. When applied a checkbox column is displayed that allows to select tasks/resources. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.showSelectionColumn : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.showSelectionColumn = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -946,12 +1059,23 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "popupWindowCustomizationFunction", {
-            /** @description A function that can be used to completly customize the popup Window that is used to interact width tasks by changing their properties. The function as three arguments: target - the target popup Window that is about to be opened.type - the type of the window. The type determines the purpose of the window. Three possible values: 'task' (task editing), 'confirm' ( confirmation window), 'connection' (used when deleting a connection between tasks). taskIndex - the index of the task that is being edited. It will be undefined if the type of the window is not 'task'. */
+            /** @description A function that can be used to completly customize the popup Window that is used to interact width tasks by changing their properties. The function as three arguments: target - the target popup Window that is about to be opened.type - the type of the window. The type determines the purpose of the window. Three possible values: 'task' (task editing), 'confirm' ( confirmation window), 'connection' (used when deleting a connection between tasks). item - the connection/task object that is the target of the window. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.popupWindowCustomizationFunction : undefined;
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.popupWindowCustomizationFunction = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "popupWindowTabs", {
+            /** @description Determines which Tab items are visible inside the popup window. Three possible values are allowed: general - the general tab with task properties determines by the taskColumns property.dependency - the dependency tab which shows the connections to the task and allows to create/delete connections.segments - the segments tab which shows the segments of the task and allows to created/delete segments.. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.popupWindowTabs : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.popupWindowTabs = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1121,6 +1245,28 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GanttChartComponent.prototype, "shadeUntilCurrentTime", {
+            /** @description Enables/Disables the current time shader. If enabled all cells that represent past time will be shaded. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.shadeUntilCurrentTime : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.shadeUntilCurrentTime = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "showBaseline", {
+            /** @description Determines whether the baselnes of the tasks are visible or not. Baselines are defined via the 'planned' attribute on the task objects of the dataSource property. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.showBaseline : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.showBaseline = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GanttChartComponent.prototype, "showProgressLabel", {
             /** @description Shows the progress label inside the progress bars of the Timeline tasks. */
             get: function () {
@@ -1143,8 +1289,19 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(GanttChartComponent.prototype, "sortMode", {
+        Object.defineProperty(GanttChartComponent.prototype, "sortFunction", {
             /** @description Determines whether the GanttChart can be sorted by one, more then one or no columns. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.sortFunction : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.sortFunction = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "sortMode", {
+            /** @description A getter that returns a flat structure as an array of all tasks inside the element. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.sortMode : undefined;
             },
@@ -1155,7 +1312,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "tasks", {
-            /** @description A getter that returns a flat structure as an array of all tasks inside the element. */
+            /** @description Deteremines the columns that will be visible in the Task Tree. Each entry in the value of this property must be of type Object.  It should contain the label and value keys. The value of label determines the column header label inside the Task Tree. The value of value determines the content of the cells in the column. It should reference a task attribute from the dataSource. By default, one column with all task labels is visible.  Additional properties: formatFunction - a function that allows to customize the content of each record in the column. The function accepts one argument - the actual label as string that is going to be inserted and must return some content. min - controls the min size of the column max - controls the max size of the column size - controls the actual size of the columncustomEditor - a callback that can be used to set a custom editor for the column when editing via the window. It accepts two arguments label - the label of the columnvalue - the value of the column. The callback must return the editor.setCustomEditorValue - a callback that is used to set the value of the custom editor.getCustomEditorValue - a callback that is used to get the value of the custom editor. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.tasks : undefined;
             },
@@ -1166,7 +1323,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "taskColumns", {
-            /** @description Deteremines the columns that will be visible in the Task Tree. Each entry in the value of this property must be of type Object.  It should contain the label and value keys. The value of label determines the column header label inside the Task Tree. The value of value determines the content of the cells in the column. It should reference a task attribute from the dataSource. By default, one column with all task labels is visible.  Additional properties: formatFunction - a function that allows to customize the content of each record in the column. The function accepts one argument - the actual label as string that is going to be inserted and must return some content. min - controls the min size of the column max - controls the max size of the column size - controls the actual size of the columncustomEditor - a callback that can be used to set a custom editor for the column when editing via the window. It accepts two arguments label - the label of the columnvalue - the value of the column. The callback must return the editor.setCustomEditorValue - a callback that is used to set the value of the custom editor.getCustomEditorValue - a callback that is used to get the value of the custom editor. */
+            /** @description Determines whether the Task Table is filterable or not. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.taskColumns : undefined;
             },
@@ -1177,7 +1334,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "taskFiltering", {
-            /** @description Determines whether the Task Table is filterable or not. */
+            /** @description Determines the min size of the Task Panel. Used when Resource Panel is visible. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.taskFiltering : undefined;
             },
@@ -1188,7 +1345,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "taskPanelMin", {
-            /** @description Determines the min size of the Task Panel. Used when Resource Panel is visible. */
+            /** @description Determines the size of the Task Panel. Used when Resource Panel is visible. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.taskPanelMin : undefined;
             },
@@ -1199,7 +1356,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "taskPanelSize", {
-            /** @description Determines the size of the Task Panel. Used when Resource Panel is visible. */
+            /** @description Determines the min width of the timeline. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.taskPanelSize : undefined;
             },
@@ -1210,7 +1367,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "timelineMin", {
-            /** @description Determines the min width of the timeline. */
+            /** @description Determines the min width of the task table. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.timelineMin : undefined;
             },
@@ -1221,7 +1378,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "treeMin", {
-            /** @description Determines the min width of the task table. */
+            /** @description Determines the size(width) of the task table. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.treeMin : undefined;
             },
@@ -1232,7 +1389,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "treeSize", {
-            /** @description Determines the size(width) of the task table. */
+            /** @description A format function for the Header of the Timeline. The function provides the following arguments: date - a Date object that represets the date for the current cell.type - a string that represents the type of date that the cell is showing, e.g. 'month', 'week', 'day', etc.isHeaderDetails - a boolean that indicates whether the current cell is part of the Header Details Container or not.value - a string that represents the default value for the cell provided by the element. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.treeSize : undefined;
             },
@@ -1243,7 +1400,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "timelineHeaderFormatFunction", {
-            /** @description A format function for the Header of the Timeline. The function provides the following arguments: date - a Date object that represets the date for the current cell.type - a string that represents the type of date that the cell is showing, e.g. 'month', 'week', 'day', etc.isHeaderDetails - a boolean that indicates whether the current cell is part of the Header Details Container or not.value - a string that represents the default value for the cell provided by the element. */
+            /** @description Determines whether the tooltips are enabled or not. Tooltips are available for timeline tasks, resources, connections, indicators and segments. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.timelineHeaderFormatFunction : undefined;
             },
@@ -1253,8 +1410,19 @@ import './../source/modules/smart.ganttchart';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(GanttChartComponent.prototype, "verticalScrollBarVisibility", {
+        Object.defineProperty(GanttChartComponent.prototype, "tooltip", {
             /** @description Determines weather or not vertical scrollbar is shown. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.tooltip : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.tooltip = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GanttChartComponent.prototype, "verticalScrollBarVisibility", {
+            /** @description Determines the viewing date range of the timeline. Possible values: day - The timeline show the hours of the day.week - the timeline shows the days of the week.month - the timeline shows the days of the month.year - the timeline shows the months of the year.resource - displays the current tasks by grouping them according to the resources they have assigned. The unassigned tasks will be placed in a separate group called 'Unassigned'.  The timeline has a header section that contains the labels of each cell according to the date inside them. The header is splitted in two sections in order to give a more detailed information of the dates. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.verticalScrollBarVisibility : undefined;
             },
@@ -1265,7 +1433,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "view", {
-            /** @description Determines the viewing date range of the timeline. Possible values: day - The timeline show the hours of the day.week - the timeline shows the days of the week.month - the timeline shows the days of the month.year - the timeline shows the months of the year.resource - displays the current tasks by grouping them according to the resources they have assigned. The unassigned tasks will be placed in a separate group called 'Unassigned'.  The timeline has a header section that contains the labels of each cell according to the date inside them. The header is splitted in two sections in order to give a more detailed information of the dates. */
+            /** @description Determines the format of the dates inside the timeline header when they represent years. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.view : undefined;
             },
@@ -1276,7 +1444,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "yearFormat", {
-            /** @description Determines the format of the dates inside the timeline header when they represent years. */
+            /** @description Determines the format of the dates inside the timeline header when they represent weeks.  */
             get: function () {
                 return this.nativeElement ? this.nativeElement.yearFormat : undefined;
             },
@@ -1287,7 +1455,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "weekFormat", {
-            /** @description Determines the format of the dates inside the timeline header when they represent weeks.  */
+            /** @description Sets or gets the element's visual theme.  */
             get: function () {
                 return this.nativeElement ? this.nativeElement.weekFormat : undefined;
             },
@@ -1298,7 +1466,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "theme", {
-            /** @description Sets or gets the element's visual theme.  */
+            /** @description Sets or gets if the element can be focused. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.theme : undefined;
             },
@@ -1309,7 +1477,7 @@ import './../source/modules/smart.ganttchart';
             configurable: true
         });
         Object.defineProperty(GanttChartComponent.prototype, "unfocusable", {
-            /** @description Sets or gets if the element can be focused. */
+            /** @description undefined */
             get: function () {
                 return this.nativeElement ? this.nativeElement.unfocusable : undefined;
             },
@@ -1525,6 +1693,59 @@ import './../source/modules/smart.ganttchart';
                     _this.nativeElement.exportData(dataFormat, callback);
                 });
             }
+        };
+        /** @description Returns all existing connections. The connections are returned as objects that contain detailed information. Each object in the array has the following keys: 'id' - connection id, 'type' - connection type, 'startTaskId' - connection's start task id, 'endTaskId' - connection's end task id, 'startIndex' - connection's start task index, 'endIndex' - connection's end task index, 'lag' - lag time.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getConnections = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getConnections();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Returns the connection details for the target connection which includes: startTask, endTask, startTaskId, endTaskId and type of the corresponding connection. Connection types are described in detail under the `connectionEnd` event description in this document and in a dedicated topic available on the website.
+        * @param {string} connectionId. A connection id. Each connection has a unique id that is assigned when a connection is created.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.getConnectionDetails = function (connectionId) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getConnectionDetails(connectionId);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
         };
         /** @description Returns a JSON representation of all tasks inside the element along with their connections and settings.
         * @returns {any[]}
@@ -1924,6 +2145,32 @@ import './../source/modules/smart.ganttchart';
                 });
             });
         };
+        /** @description Hides the tooltip if it's visible.
+        * @returns {any}
+      */
+        GanttChartComponent.prototype.hideTooltip = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.hideTooltip();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Depending on the nonworkingDays property, returns true or false whether the target date is on a working day or not.
         * @param {Date} date. A javascript Date object or a string/number which represents a valid JS Date.
         */
@@ -2006,6 +2253,21 @@ import './../source/modules/smart.ganttchart';
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.removeTaskConnection(taskStart, taskEnd);
+                });
+            }
+        };
+        /** @description Shows the tooltip for a specific element.
+        * @param {HTMLElement} target. The HTMLElement that will be the target of the tooltip.
+        * @param {string} content?. Allows to set a custom content for the Tooltip.
+        */
+        GanttChartComponent.prototype.showTooltip = function (target, content) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.showTooltip(target, content);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.showTooltip(target, content);
                 });
             }
         };
@@ -2457,10 +2719,19 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "autoScrollStep", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "columnMenu", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "columnResize", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "columnResizeFeedback", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "currentTimeIndicator", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "currentTimeIndicatorInterval", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "dataExport", null);
@@ -2476,6 +2747,9 @@ import './../source/modules/smart.ganttchart';
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "dateStart", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "dateMarkers", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "disabled", null);
@@ -2496,6 +2770,12 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "disableSelection", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "disableSegmentDrag", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "disableSegmentResize", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "disableWindowEditor", null);
         __decorate([
             core.Input()
@@ -2511,7 +2791,13 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "headerTemplate", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "hideDateMarkers", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "hideTimelineHeaderDetails", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "showSelectionColumn", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "hideResourcePanel", null);
@@ -2559,6 +2845,9 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "popupWindowCustomizationFunction", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "popupWindowTabs", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "progressLabelFormatFunction", null);
         __decorate([
             core.Input()
@@ -2604,10 +2893,19 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "selectedResourceIds", null);
         __decorate([
             core.Input()
+        ], GanttChartComponent.prototype, "shadeUntilCurrentTime", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "showBaseline", null);
+        __decorate([
+            core.Input()
         ], GanttChartComponent.prototype, "showProgressLabel", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "snapToNearest", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "sortFunction", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "sortMode", null);
@@ -2638,6 +2936,9 @@ import './../source/modules/smart.ganttchart';
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "timelineHeaderFormatFunction", null);
+        __decorate([
+            core.Input()
+        ], GanttChartComponent.prototype, "tooltip", null);
         __decorate([
             core.Input()
         ], GanttChartComponent.prototype, "verticalScrollBarVisibility", null);

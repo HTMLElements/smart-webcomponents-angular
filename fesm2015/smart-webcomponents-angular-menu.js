@@ -438,6 +438,19 @@ let MenuComponent = class MenuComponent extends BaseElement {
             });
         }
     }
+    /** @description Clicks on an item programatically.
+    * @param {HTMLElement | string} item. smart-menu-item/smart-menu-items-group or its id or numeric path.
+    */
+    clickItem(item) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.clickItem(item);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.clickItem(item);
+            });
+        }
+    }
     /** @description Closes the Menu when mode is 'dropDown'.
     */
     close() {

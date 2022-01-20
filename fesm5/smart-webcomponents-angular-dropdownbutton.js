@@ -431,6 +431,17 @@ var DropDownButtonComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DropDownButtonComponent.prototype, "placeholderTemplate", {
+        /** @description Determines the element's placeholder template, displayed in the element's action button container. You can pass 'string', 'function' or HTMLTemplateElement as a value. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.placeholderTemplate : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.placeholderTemplate = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(DropDownButtonComponent.prototype, "readonly", {
         /** @description Disables user interaction with the element. */
         get: function () {
@@ -765,6 +776,9 @@ var DropDownButtonComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], DropDownButtonComponent.prototype, "placeholder", null);
+    __decorate([
+        Input()
+    ], DropDownButtonComponent.prototype, "placeholderTemplate", null);
     __decorate([
         Input()
     ], DropDownButtonComponent.prototype, "readonly", null);

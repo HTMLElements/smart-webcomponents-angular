@@ -171,10 +171,10 @@ var KanbanComponent = /** @class */ (function (_super) {
         */
         _this.onColumnReorder = new EventEmitter();
         /** @description This event is triggered when a column is updated.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField, 	collapsed)
-        *   label - The column label.
-        *   dataField - The column data field.
-        *   collapsed - The column's collapsed state.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value, 	column)
+        *   oldValue - The column's old label.
+        *   value - The column's new label.
+        *   column - The column's data object with 'label', 'dataField' and 'collapsed' fields.
         */
         _this.onColumnUpdate = new EventEmitter();
         /** @description This event is triggered when a column header is clicked.
@@ -293,6 +293,17 @@ var KanbanComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(KanbanComponent.prototype, "allowColumnHide", {
+        /** @description Enables or disables column hiding. When this property is set to true, users will be able to dynamically hide a column through the column actions menu. the 'columnActions' property should be true. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.allowColumnHide : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.allowColumnHide = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(KanbanComponent.prototype, "addNewButton", {
         /** @description Toggles the visibility of the column buttons for adding tasks. A particular button can be disabled by setting addNewButton in the column's definition to false. */
         get: function () {
@@ -300,6 +311,17 @@ var KanbanComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.addNewButton = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "addNewButtonDisplayMode", {
+        /** @description Determines whether the add button is visible in the column header and/or after the tasks in the column. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.addNewButtonDisplayMode : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.addNewButtonDisplayMode = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -337,17 +359,6 @@ var KanbanComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(KanbanComponent.prototype, "animation", {
-        /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.animation : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.animation = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(KanbanComponent.prototype, "autoLoadState", {
         /** @description Enables or disables auto load state from the browser's localStorage. Information about tasks and their position and selected state, filtering, sorting, collapsed columns, as well as the values of the properties taskActions, taskComments, taskDue, taskPriority, taskProgress, taskTags, and taskUserIcon is loaded. */
         get: function () {
@@ -381,6 +392,17 @@ var KanbanComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(KanbanComponent.prototype, "columnColors", {
+        /** @description Displays colors in the column header, when the column's color property is set. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnColors : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnColors = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(KanbanComponent.prototype, "columns", {
         /** @description Describes the columns properties. */
         get: function () {
@@ -399,6 +421,28 @@ var KanbanComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.columnActions = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "columnSummary", {
+        /** @description Determines whether task count information is displayed in column headers. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnSummary : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnSummary = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "columnHeaderTemplate", {
+        /** @description Determines whether a column header has a template. You can pass 'string', 'function' or HTMLTemplateElement as a value. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnHeaderTemplate : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnHeaderTemplate = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -546,6 +590,28 @@ var KanbanComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(KanbanComponent.prototype, "storeHistory", {
+        /** @description Sets or gets whether the tasks history will be stored and displayed in the task dialog. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.storeHistory : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.storeHistory = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "storeHistoryItems", {
+        /** @description Sets or gets the task history items that will be stored when storeHistory is enabled. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.storeHistoryItems : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.storeHistoryItems = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(KanbanComponent.prototype, "rightToLeft", {
         /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
         get: function () {
@@ -667,6 +733,50 @@ var KanbanComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(KanbanComponent.prototype, "taskCustomFields", {
+        /** @description Sets the task custom fields displayed in the card. Each array item should have 'dataField', 'label' 'dataType' and optionally 'visible' properties. The 'dataField' determines the value, the label is displayed as title, 'dataType' is used for formatting and 'visible' determines whether the field will be displayed. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.taskCustomFields : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.taskCustomFields = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "taskColorEntireSurface", {
+        /** @description The task's background color depends on the task's color property. By default the color is rendered within the task's left border. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.taskColorEntireSurface : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.taskColorEntireSurface = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "taskSubTasksInput", {
+        /** @description Displays an input in the task's card for adding dynamically a sub task. The 'taskSubTasks' property should be set to a value different than 'none'. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.taskSubTasksInput : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.taskSubTasksInput = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "taskSubTasks", {
+        /** @description Sets the rendering mode of sub tasks. 'none' - default value. Sub tasks are displayed only in the edit dialog. 'onePerRow' - all sub tasks are displayed in the task's card. 'onlyUnfinished' - only tasks which are not completed are displayed in the task's card. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.taskSubTasks : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.taskSubTasks = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(KanbanComponent.prototype, "taskTags", {
         /** @description Toggles the visibility of task tags. */
         get: function () {
@@ -707,6 +817,28 @@ var KanbanComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.theme = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "priorityList", {
+        /** @description Determines whether the priority list (as defined by the priority property) will be shown when clicking the priority icon. Only applicable if editable privileges are enabled. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.priorityList : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.priorityList = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(KanbanComponent.prototype, "priority", {
+        /** @description Determines the priority Kanban tasks can be assigned to. Example: [{label: 'low', value: 'low'}, {label: 'high', value: 'high'}] */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.priority : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.priority = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -845,6 +977,20 @@ var KanbanComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Hides a Kanban column.
+    * @param {number | string} column. The index or dataField of the column to hide
+    */
+    KanbanComponent.prototype.hide = function (column) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.hide(column);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.hide(column);
+            });
+        }
+    };
     /** @description Creates a copy of a task in the same column.
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     */
@@ -928,7 +1074,7 @@ var KanbanComponent = /** @class */ (function (_super) {
     };
     /** @description Exports the Kanban's data.
     * @param {string} dataFormat. The file format to export to. Supported formats: 'csv', 'html', 'json', 'pdf', 'tsv', 'xlsx', 'xml'.
-    * @param {string} fileName?. The name of the file to export to
+    * @param {string} fileName. The name of the file to export to
     * @param {Function} callback?. A callback function to pass the exported data to (if fileName is not provided)
     * @returns {any}
   */
@@ -943,6 +1089,33 @@ var KanbanComponent = /** @class */ (function (_super) {
                             return new Promise(function (resolve) {
                                 _this.nativeElement.whenRendered(function () {
                                     var result = _this.nativeElement.exportData(dataFormat, fileName, callback);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Gets the data of a column. The returned value is a JSON object with the following fields: 'label', 'dataField', 'collapsed', 'collapsible', 'allowRemove', 'editable', 'reorder', 'orientation'.
+    * @param {string} dataField. The column's data field
+    * @returns {any}
+  */
+    KanbanComponent.prototype.getColumn = function (dataField) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getColumn(dataField);
                                     resolve(result);
                                 });
                             });
@@ -1117,6 +1290,33 @@ var KanbanComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Shows a Kanban column.
+    * @param {number | string} column. The index or dataField of the column to show
+    */
+    KanbanComponent.prototype.show = function (column) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.show(column);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.show(column);
+            });
+        }
+    };
+    /** @description Shows all Kanban columns.
+    */
+    KanbanComponent.prototype.showAllColumns = function () {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.showAllColumns();
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.showAllColumns();
+            });
+        }
+    };
     /** @description Updates a task.
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     * @param {{}} newData. The new data to visualize in the task.
@@ -1288,7 +1488,13 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "allowColumnRemove", null);
     __decorate([
         Input()
+    ], KanbanComponent.prototype, "allowColumnHide", null);
+    __decorate([
+        Input()
     ], KanbanComponent.prototype, "addNewButton", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "addNewButtonDisplayMode", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "addNewColumn", null);
@@ -1300,9 +1506,6 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "allowDrop", null);
     __decorate([
         Input()
-    ], KanbanComponent.prototype, "animation", null);
-    __decorate([
-        Input()
     ], KanbanComponent.prototype, "autoLoadState", null);
     __decorate([
         Input()
@@ -1312,10 +1515,19 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "collapsible", null);
     __decorate([
         Input()
+    ], KanbanComponent.prototype, "columnColors", null);
+    __decorate([
+        Input()
     ], KanbanComponent.prototype, "columns", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "columnActions", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "columnSummary", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "columnHeaderTemplate", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "columnEditMode", null);
@@ -1357,6 +1569,12 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "selectionMode", null);
     __decorate([
         Input()
+    ], KanbanComponent.prototype, "storeHistory", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "storeHistoryItems", null);
+    __decorate([
+        Input()
     ], KanbanComponent.prototype, "rightToLeft", null);
     __decorate([
         Input()
@@ -1390,6 +1608,18 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "taskProgress", null);
     __decorate([
         Input()
+    ], KanbanComponent.prototype, "taskCustomFields", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "taskColorEntireSurface", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "taskSubTasksInput", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "taskSubTasks", null);
+    __decorate([
+        Input()
     ], KanbanComponent.prototype, "taskTags", null);
     __decorate([
         Input()
@@ -1400,6 +1630,12 @@ var KanbanComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], KanbanComponent.prototype, "theme", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "priorityList", null);
+    __decorate([
+        Input()
+    ], KanbanComponent.prototype, "priority", null);
     __decorate([
         Input()
     ], KanbanComponent.prototype, "userList", null);

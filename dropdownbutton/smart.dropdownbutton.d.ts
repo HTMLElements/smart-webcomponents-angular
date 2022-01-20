@@ -59,6 +59,8 @@ export declare class DropDownButtonComponent extends BaseElement implements OnIn
     opened: boolean;
     /** @description Determines the element's placeholder, displayed in the element's action button container. */
     placeholder: string;
+    /** @description Determines the element's placeholder template, displayed in the element's action button container. You can pass 'string', 'function' or HTMLTemplateElement as a value. */
+    placeholderTemplate: any;
     /** @description Disables user interaction with the element. */
     readonly: boolean;
     /** @description Determines whether the resize indicator in the bottom right corner is visible or not. */

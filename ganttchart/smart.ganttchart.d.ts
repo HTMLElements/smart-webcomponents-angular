@@ -1,8 +1,8 @@
 import { GanttChart } from './../index';
-import { GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskColumn } from './../index';
+import { GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDateMarker, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskColumn, GanttChartTooltip } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { GanttChartDataExportItemType, GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, GanttChartTaskType, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskColumn, ElementRenderMode } from './../index';
+export { GanttChartDataExportItemType, GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, GanttChartTaskType, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDateMarker, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskIndicator, GanttChartTaskPlanned, GanttChartTaskSegment, GanttChartTaskColumn, GanttChartTooltip, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { GanttChart } from './../index';
 export declare class GanttChartComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -21,13 +21,19 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     autoScheduleStrictMode: boolean;
     /** @description Determines the scroll speed when dragging when autoScroll property is set.  */
     autoScrollStep: number;
+    /** @description Enabled/Disables the colummn header menu. When enabled and the user hovers a column header, a drop down button will appear that triggers a column menu for quick actions like sorting, filtering, etc. The actions depend on the enabled Gantt features, for example the filtering action will be available only if filtering is enabled for the element. */
+    columnMenu: boolean;
     /** @description Determines whether the Table columns are resizable or not. When enabled it is possible to resize the columns from the header cells of the Table in both Task and Resource timelines. */
     columnResize: boolean;
     /** @description Determines resize feedback is used during column resizing. This property is applicable only when columnResize is enabled. */
     columnResizeFeedback: boolean;
+    /** @description Enables/Disables the current time indicator. Current time indicator shows the current time in the appropriate view cells. */
+    currentTimeIndicator: boolean;
+    /** @description Determines the refresh interval in seconds for the currentTimeIndicator.  */
+    currentTimeIndicatorInterval: number;
     /** @description Sets the GanttChart's Data Export options. */
     dataExport: GanttChartDataExport;
-    /** @description Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown. The duration always shows the calendar time whether it is in days/hours or other.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..  GanttChart also accepts a DataAdapter instance as dataSource. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
+    /** @description Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown. The duration always shows the calendar time whether it is in days/hours or other.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).overdue - a boolean that indicates whether the task's dateEnd has surpassed it's deadline date.disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.segments - an array of objects that allows to devide a task into multiple segements. Each segment (except the first) can have a different starting date, duration and label.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..GanttChart also accepts a DataAdapter instance as dataSource. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
     dataSource: any;
     /** @description Determines the format of the dates in the timeline header when they represent days. */
     dayFormat: GanttDayFormat;
@@ -35,6 +41,8 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     dateEnd: string | Date;
     /** @description Determines a specific starting date for the Timeline. Usefull when the user wants custom starting date for the Timeline. If no date is set the start date of the timeline is automatically determined from the tasks. */
     dateStart: string | Date;
+    /** @description Determines the date markers that will be displayed inside the timeline. Date markers allow to mark and even label specific dates (including time) inside the GanttChart timeline. */
+    dateMarkers: GanttChartDateMarker[];
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Disables auto scrolling while dragging/resizing a task bar inside the Timeline. */
@@ -47,6 +55,10 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     disableTaskResize: boolean;
     /** @description Disables the selection inside the GanttChart. */
     disableSelection: boolean;
+    /** @description Disables the task segment dragging. */
+    disableSegmentDrag: boolean;
+    /** @description Disables the task segment resizing. */
+    disableSegmentResize: boolean;
     /** @description Disables the window editor for the GanttChart. */
     disableWindowEditor: boolean;
     /** @description Determines in what unit is task duration property measured. */
@@ -57,8 +69,12 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     groupByResources: boolean;
     /** @description Allows to create a custom header content for the Task Panel. The attribute accepts an HTMLTemplate element, it's id or a function. */
     headerTemplate: any;
+    /** @description Determines whether the dateMarkers are visible or not. */
+    hideDateMarkers: boolean;
     /** @description By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ). */
     hideTimelineHeaderDetails: boolean;
+    /** @description Shows the selection column of the Task/Resource Table. When applied a checkbox column is displayed that allows to select tasks/resources. */
+    showSelectionColumn: boolean;
     /** @description Hides the Resource panel regardless of the resources availability By default the Resource panel is visible if resources are added to the GanttChart. This property allows to hide the Resource panel permanently. */
     hideResourcePanel: boolean;
     /** @description Determines weather or not horizontal scrollbar is shown. */
@@ -87,8 +103,10 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     nonworkingDays: number[];
     /** @description Determines the nonworking hours of a day. Hours are represented as numbers inside an array (e.g. [1,2,3] - means 1,2 and 3 AM) or number ranges represented as nested arrays(e.g. [[0,6]] - means from 0 to 6 AM). In the timline the cells that represent nonworking days are colored differently from the rest and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */
     nonworkingHours: number[] | number[][];
-    /** @description A function that can be used to completly customize the popup Window that is used to interact width tasks by changing their properties. The function as three arguments: target - the target popup Window that is about to be opened.type - the type of the window. The type determines the purpose of the window. Three possible values: 'task' (task editing), 'confirm' ( confirmation window), 'connection' (used when deleting a connection between tasks). taskIndex - the index of the task that is being edited. It will be undefined if the type of the window is not 'task'. */
+    /** @description A function that can be used to completly customize the popup Window that is used to interact width tasks by changing their properties. The function as three arguments: target - the target popup Window that is about to be opened.type - the type of the window. The type determines the purpose of the window. Three possible values: 'task' (task editing), 'confirm' ( confirmation window), 'connection' (used when deleting a connection between tasks). item - the connection/task object that is the target of the window. */
     popupWindowCustomizationFunction: any;
+    /** @description Determines which Tab items are visible inside the popup window. Three possible values are allowed: general - the general tab with task properties determines by the taskColumns property.dependency - the dependency tab which shows the connections to the task and allows to create/delete connections.segments - the segments tab which shows the segments of the task and allows to created/delete segments.. */
+    popupWindowTabs: string[];
     /** @description A format function for the Timeline task progress label. The expected result from the function is a string. The label is hidden by default can be shown with the showProgressLabel property. */
     progressLabelFormatFunction: any;
     /** @description A getter that returns a flat structure as an array of all resources inside the element. */
@@ -119,41 +137,53 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     selectedTaskIds: number[] | string[];
     /** @description Sets which resources to select by their id or gets the currently selected resource ids. If no id is provided for the resource, an internal id is generated for each resource according to it's index(tree path). */
     selectedResourceIds: number[] | string[];
+    /** @description Enables/Disables the current time shader. If enabled all cells that represent past time will be shaded. */
+    shadeUntilCurrentTime: boolean;
+    /** @description Determines whether the baselnes of the tasks are visible or not. Baselines are defined via the 'planned' attribute on the task objects of the dataSource property. */
+    showBaseline: boolean;
     /** @description Shows the progress label inside the progress bars of the Timeline tasks. */
     showProgressLabel: boolean;
     /** @description If set the dateStart/dateEnd of the tasks will be coerced to the nearest timeline cell date ( according to the view ). Affects the dragging operation as well. */
     snapToNearest: boolean;
     /** @description Determines whether the GanttChart can be sorted by one, more then one or no columns. */
-    sortMode: GanttChartSortMode;
+    sortFunction: {
+        (dataSource: any, sortColumns: string[], directions: string[], defaultCompareFunctions: {
+            (firstRecord: any, secondRecord: any): number;
+        }[]): void;
+    };
     /** @description A getter that returns a flat structure as an array of all tasks inside the element. */
-    tasks: GanttChartTask[];
+    sortMode: GanttChartSortMode;
     /** @description Deteremines the columns that will be visible in the Task Tree. Each entry in the value of this property must be of type Object.  It should contain the label and value keys. The value of label determines the column header label inside the Task Tree. The value of value determines the content of the cells in the column. It should reference a task attribute from the dataSource. By default, one column with all task labels is visible.  Additional properties: formatFunction - a function that allows to customize the content of each record in the column. The function accepts one argument - the actual label as string that is going to be inserted and must return some content. min - controls the min size of the column max - controls the max size of the column size - controls the actual size of the columncustomEditor - a callback that can be used to set a custom editor for the column when editing via the window. It accepts two arguments label - the label of the columnvalue - the value of the column. The callback must return the editor.setCustomEditorValue - a callback that is used to set the value of the custom editor.getCustomEditorValue - a callback that is used to get the value of the custom editor. */
-    taskColumns: GanttChartTaskColumn[];
+    tasks: GanttChartTask[];
     /** @description Determines whether the Task Table is filterable or not. */
-    taskFiltering: boolean;
+    taskColumns: GanttChartTaskColumn[];
     /** @description Determines the min size of the Task Panel. Used when Resource Panel is visible. */
-    taskPanelMin: string | number;
+    taskFiltering: boolean;
     /** @description Determines the size of the Task Panel. Used when Resource Panel is visible. */
-    taskPanelSize: string | number;
+    taskPanelMin: string | number;
     /** @description Determines the min width of the timeline. */
-    timelineMin: string | number;
+    taskPanelSize: string | number;
     /** @description Determines the min width of the task table. */
-    treeMin: string | number;
+    timelineMin: string | number;
     /** @description Determines the size(width) of the task table. */
-    treeSize: string | number;
+    treeMin: string | number;
     /** @description A format function for the Header of the Timeline. The function provides the following arguments: date - a Date object that represets the date for the current cell.type - a string that represents the type of date that the cell is showing, e.g. 'month', 'week', 'day', etc.isHeaderDetails - a boolean that indicates whether the current cell is part of the Header Details Container or not.value - a string that represents the default value for the cell provided by the element. */
+    treeSize: string | number;
+    /** @description Determines whether the tooltips are enabled or not. Tooltips are available for timeline tasks, resources, connections, indicators and segments. */
     timelineHeaderFormatFunction: any;
     /** @description Determines weather or not vertical scrollbar is shown. */
-    verticalScrollBarVisibility: VerticalScrollBarVisibility;
+    tooltip: GanttChartTooltip;
     /** @description Determines the viewing date range of the timeline. Possible values: day - The timeline show the hours of the day.week - the timeline shows the days of the week.month - the timeline shows the days of the month.year - the timeline shows the months of the year.resource - displays the current tasks by grouping them according to the resources they have assigned. The unassigned tasks will be placed in a separate group called 'Unassigned'.  The timeline has a header section that contains the labels of each cell according to the date inside them. The header is splitted in two sections in order to give a more detailed information of the dates. */
-    view: GanttChartView;
+    verticalScrollBarVisibility: VerticalScrollBarVisibility;
     /** @description Determines the format of the dates inside the timeline header when they represent years. */
-    yearFormat: YearFormat;
+    view: GanttChartView;
     /** @description Determines the format of the dates inside the timeline header when they represent weeks.  */
-    weekFormat: WeekFormat;
+    yearFormat: YearFormat;
     /** @description Sets or gets the element's visual theme.  */
-    theme: string;
+    weekFormat: WeekFormat;
     /** @description Sets or gets if the element can be focused. */
+    theme: string;
+    /** @description undefined */
     unfocusable: boolean;
     /** @description This event is triggered when a batch update was started after executing the beginUpdate method.
     *  @param event. The custom event. 	*/
@@ -167,10 +197,12 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     */
     onConnectionStart: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the user completes a connection between two tasks.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	startIndex, 	endIndex, 	type)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	startTaskId, 	startIndex, 	endIndex, 	endTaskId, 	type)
     *   id - The id of the connection that was created.
+    *   startTaskId - The id of the task that a connection is started from.
     *   startIndex - The index of the task that a connection is started from.
-    *   endIndex - The index of the task that a connection is started from.
+    *   endIndex - The index of the task that a connection ended to.
+    *   endTaskId - The id of the task that a connection ended to.
     *   type - The type of connection. Fours types are available: <ul><li><b>0</b> - start-to-start</li><li><b>1</b> - end-to-start</li><li><b>2</b> - end-to-end</li><li><b>3</b> - start-to-end</li></ul>
     */
     onConnectionEnd: EventEmitter<CustomEvent>;
@@ -188,14 +220,21 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     *   width - The new width of the column in pixels.
     */
     onColumnResize: EventEmitter<CustomEvent>;
-    /** @description This event is triggered just before the window for task editing starts closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
-    *   target - The instance of the window that is going to close.
-    *   type - The type of window that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
+    /** @description This event is triggered just before the window for task editing or tooltip is closing. The closing operation can be canceled by calling event.preventDefault() in the event handler function.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+    *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip.
+    *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+    *   target - The instance of the window/tooltip that is going to close.
+    *   type - The type of window/tooltip that is going to close. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
     */
     onClosing: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the window for task editing is closed( hidden )
-    *  @param event. The custom event. 	*/
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+    *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+    *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+    *   target - The instance of the window/tooltip that is closed.
+    *   type - The type of window/tooltip that is closed. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+    */
     onClose: EventEmitter<CustomEvent>;
     /** @description This event is triggered when an item is collapsed.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	isGroup, 	item, 	index, 	label, 	value)
@@ -207,19 +246,21 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     */
     onCollapse: EventEmitter<CustomEvent>;
     /** @description This event is triggered when dragging of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
     *   id - The id of the task that is going to be dragged.
     *   item - The object of the task that is going to be dragged.
     *   dateStart - The start date of the task that is going to be dragged.
     *   dateEnd - The end date of the task that is going to be dragged.
+    *   segment - The segment object that is going to be dragged. This attribute is undefined if a segment is not going to be dragged.
     */
     onDragStart: EventEmitter<CustomEvent>;
     /** @description This event is triggered when dragging of a task finishes.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
     *   id - The id of the task that is was dragged.
     *   item - The object of the task that is was dragged.
     *   dateStart - The start date of the task that is was dragged.
     *   dateEnd - The end date of the task that is was dragged.
+    *   segment - The segment object that was dragged. This attribute is undefined if a segment has not been dragged.
     */
     onDragEnd: EventEmitter<CustomEvent>;
     /** @description This event is triggered when an item is expanded.
@@ -239,65 +280,79 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     */
     onFilter: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a task, resource or connection is clicked inside the Timeline or the Tree columns.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	type, 	originalEvent)
-    *   item - The item that was clicked. It cam be a task, resource or connection.
-    *   type - The type of item. Possible values are: 'task', 'resource', 'connection'.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	type, 	originalEvent)
+    *   id - The id of the task.
+    *   item - The item that was clicked. It can be a task, resource or connection.
+    *   type - The type of item. Possible values are: 'task', 'project', 'resource', 'connection'.
     *   originalEvent - The original DOM event.
     */
     onItemClick: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a Task/Resource/Connection is inserted.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-    *   type - The type of item that has been modified.
+    *   type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
     *   item - An object that represents the actual item with it's attributes.
     */
     onItemInsert: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a Task/Resource/Connection is removed.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-    *   type - The type of item that has been modified.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	type, 	item)
+    *   id - The id of the task.
+    *   type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
     *   item - An object that represents the actual item with it's attributes.
     */
     onItemRemove: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a Task/Resource/Connection is updated.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	type, 	item)
-    *   type - The type of item that has been modified.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	type, 	item)
+    *   id - The id of the task.
+    *   type - The type of item that has been modified. The type could be: 'connection', 'task', 'project', 'resource'.
     *   item - An object that represents the actual item with it's attributes.
     */
     onItemUpdate: EventEmitter<CustomEvent>;
-    /** @description This event is triggered just before the window for task editing starts opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	type)
-    *   target - The instance of the window that is going to open.
-    *   type - The type of window that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>
+    /** @description This event is triggered just before the window for task editing or tooltip is opening. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+    *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+    *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+    *   target - The instance of the window/tooltip that is going to open.
+    *   type - The type of window/tooltip that is going to open. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
     */
     onOpening: EventEmitter<CustomEvent>;
-    /** @description This event is triggered when the window for task editing is opened( visible ).
-    *  @param event. The custom event. 	*/
+    /** @description This event is triggered when the window for task editing is opened( visible ) or when the tooltip is opened.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	owner, 	item, 	target, 	type)
+    *   owner - The HTMLElement that is the owner of the tooltip. This attribute is defined only when the event is related to the tooltip
+    *   item - The item object that is related to the tooltip owner. It can be a task/segment/resource/indicator object. This attribute is defined only when the event is related to the tooltip.
+    *   target - The instance of the window/tooltip that is opened.
+    *   type - The type of window/tooltip that is opened. There are three types of windows inside GanttChart: <ul><li><b>confirm</b> - a confirm window. This type of window is usually used to confirm the deletion of a task.</li><li><b>task</b> - a window used for task editing.</li><li><b>connection</b> - a window used to delete a connection.</li></ul>. If the event is a tooltip event, there are several tooltip types: <ul><li>indicator - when the tooltip owner is an indicator.</li><li>segment - when the tooltip owner is a task segment.</li><li>task - when the tooltip owner is a task.</li><li>resource - when the tooltip target is a resource.</li></ul>
+    */
     onOpen: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the progress of a task bar starts to change as a result of user interaction. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	progress)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	index, 	progress)
+    *   id - The id of the task.
     *   index - The index of the task which progress is going to be changed.
     *   progress - The progress of the task before it is changed.
     */
     onProgressChangeStart: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the progress of a task is changed.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	index, 	progress)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	index, 	progress)
+    *   id - The id of the task.
     *   index - The index of the task which progress is has been changed.
     *   progress - The progress of the task after it was changed.
     */
     onProgressChangeEnd: EventEmitter<CustomEvent>;
     /** @description This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
     *   id - The id of the task that is going to be resized.
     *   item - The object of the task that is going to be resized.
     *   dateStart - The start date of the task that is going to be resized.
     *   dateEnd - The end date of the task that is going to be resized.
+    *   segment - The segment object that is going to be resized. This attribute is undefined if a segment is not going to be resized.
     */
     onResizeStart: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the resizing of a task finishes.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	item, 	dateStart, 	dateEnd, 	segment)
     *   id - The id of the task that was resized.
     *   item - The object of the task that was resized.
     *   dateStart - The start date of the task that was resized.
     *   dateEnd - The end date of the task that was resized.
+    *   segment - The segment object that was resized. This attribute is undefined if a segment has not been resized.
     */
     onResizeEnd: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the GanttChart is sorted by some column.
@@ -378,6 +433,15 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     * @param {any} callback?. A callback that allows to format the exported data based on a condition. For additional details, refer ro the JQX Export Documentation.
     */
     exportData(dataFormat: string, callback?: any): void;
+    /** @description Returns all existing connections. The connections are returned as objects that contain detailed information. Each object in the array has the following keys: 'id' - connection id, 'type' - connection type, 'startTaskId' - connection's start task id, 'endTaskId' - connection's end task id, 'startIndex' - connection's start task index, 'endIndex' - connection's end task index, 'lag' - lag time.
+    * @returns {any}
+  */
+    getConnections(): Promise<any>;
+    /** @description Returns the connection details for the target connection which includes: startTask, endTask, startTaskId, endTaskId and type of the corresponding connection. Connection types are described in detail under the `connectionEnd` event description in this document and in a dedicated topic available on the website.
+    * @param {string} connectionId. A connection id. Each connection has a unique id that is assigned when a connection is created.
+    * @returns {any}
+  */
+    getConnectionDetails(connectionId: any): Promise<any>;
     /** @description Returns a JSON representation of all tasks inside the element along with their connections and settings.
     * @returns {any[]}
   */
@@ -446,6 +510,10 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     * @returns {any}
   */
     getWorkingHours(): Promise<any>;
+    /** @description Hides the tooltip if it's visible.
+    * @returns {any}
+  */
+    hideTooltip(): Promise<any>;
     /** @description Depending on the nonworkingDays property, returns true or false whether the target date is on a working day or not.
     * @param {Date} date. A javascript Date object or a string/number which represents a valid JS Date.
     */
@@ -469,6 +537,11 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     * @param {any} taskEnd?. The end task object or it's id.
     */
     removeTaskConnection(taskStart: any, taskEnd?: any): void;
+    /** @description Shows the tooltip for a specific element.
+    * @param {HTMLElement} target. The HTMLElement that will be the target of the tooltip.
+    * @param {string} content?. Allows to set a custom content for the Tooltip.
+    */
+    showTooltip(target: HTMLElement, content?: string): void;
     /** @description Saves the current settings of the element to LocalStorage. Requires an id to be set to the element.
     * @param {any[]} state?. An Array containing a valid structure of Gantt Chart tasks.
     */

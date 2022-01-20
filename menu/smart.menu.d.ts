@@ -150,6 +150,10 @@ export declare class MenuComponent extends BaseElement implements OnInit, AfterV
     /** @description Clears all Menu items.
     */
     clear(): void;
+    /** @description Clicks on an item programatically.
+    * @param {HTMLElement | string} item. smart-menu-item/smart-menu-items-group or its id or numeric path.
+    */
+    clickItem(item: HTMLElement | string): void;
     /** @description Closes the Menu when mode is 'dropDown'.
     */
     close(): void;

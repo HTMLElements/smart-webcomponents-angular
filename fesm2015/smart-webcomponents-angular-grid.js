@@ -113,7 +113,9 @@ let GridComponent = class GridComponent extends BaseElement {
         super(ref);
         this.eventHandlers = [];
         /** @description This event is triggered, when the edit begins.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	column, 	cell)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+        *   id - The edited row id.
+        *   dataField - The edited column data field.
         *   row - The edited row.
         *   column - The edited column.
         *   cell - The edited cell.
@@ -297,7 +299,9 @@ let GridComponent = class GridComponent extends BaseElement {
         */
         this.onCellDoubleClick = new EventEmitter();
         /** @description This event is triggered, when the edit ends.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	column, 	cell)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+        *   id - The edited row id.
+        *   dataField - The edited column data field.
         *   row - The edited row.
         *   column - The edited column.
         *   cell - The edited cell.
@@ -309,6 +313,16 @@ let GridComponent = class GridComponent extends BaseElement {
         *   data - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'
         */
         this.onFilter = new EventEmitter();
+        /** @description This event is triggered, when the add new column dialog is opened.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+        *   dataField - The column data field.
+        */
+        this.onOpenColumnDialog = new EventEmitter();
+        /** @description This event is triggered, when the add new column dialog is closed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+        *   dataField - The column data field.
+        */
+        this.onCloseColumnDialog = new EventEmitter();
         /** @description This event is triggered, when the grid is resized.
         *  @param event. The custom event. 	*/
         this.onResize = new EventEmitter();
@@ -491,105 +505,105 @@ let GridComponent = class GridComponent extends BaseElement {
     set onCellUpdate(value) {
         this.nativeElement ? this.nativeElement.onCellUpdate = value : undefined;
     }
-    /** @description Describes the paging settings. */
+    /** @description Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties. */
     get onCellRender() {
         return this.nativeElement ? this.nativeElement.onCellRender : undefined;
     }
     set onCellRender(value) {
         this.nativeElement ? this.nativeElement.onCellRender = value : undefined;
     }
-    /** @description Describes the pager settings. */
+    /** @description Sets the grid users. Expects an array with 'id', 'name' and optionally 'color' and 'image' properties. */
     get onBeforeInit() {
         return this.nativeElement ? this.nativeElement.onBeforeInit : undefined;
     }
     set onBeforeInit(value) {
         this.nativeElement ? this.nativeElement.onBeforeInit = value : undefined;
     }
-    /** @description Sets the row details. */
+    /** @description Describes the paging settings. */
     get onInit() {
         return this.nativeElement ? this.nativeElement.onInit : undefined;
     }
     set onInit(value) {
         this.nativeElement ? this.nativeElement.onInit = value : undefined;
     }
-    /** @description Sets the scroll mode settings. */
+    /** @description Describes the pager settings. */
     get onAfterInit() {
         return this.nativeElement ? this.nativeElement.onAfterInit : undefined;
     }
     set onAfterInit(value) {
         this.nativeElement ? this.nativeElement.onAfterInit = value : undefined;
     }
-    /** @description Describes the column header settings. */
+    /** @description Sets the row details. */
     get onChartInit() {
         return this.nativeElement ? this.nativeElement.onChartInit : undefined;
     }
     set onChartInit(value) {
         this.nativeElement ? this.nativeElement.onChartInit = value : undefined;
     }
-    /** @description Describes the summary row settings. */
+    /** @description Sets the scroll mode settings. */
     get onRender() {
         return this.nativeElement ? this.nativeElement.onRender : undefined;
     }
     set onRender(value) {
         this.nativeElement ? this.nativeElement.onRender = value : undefined;
     }
-    /** @description Describes the settings for the group header. */
+    /** @description Describes the column header settings. */
     get onKey() {
         return this.nativeElement ? this.nativeElement.onKey : undefined;
     }
     set onKey(value) {
         this.nativeElement ? this.nativeElement.onKey = value : undefined;
     }
-    /** @description Describes the header settings of the grid. */
+    /** @description Describes the summary row settings. */
     get onRowInit() {
         return this.nativeElement ? this.nativeElement.onRowInit : undefined;
     }
     set onRowInit(value) {
         this.nativeElement ? this.nativeElement.onRowInit = value : undefined;
     }
-    /** @description Describes the footer settings of the grid. */
+    /** @description Describes the settings for the group header. */
     get onRowDetailInit() {
         return this.nativeElement ? this.nativeElement.onRowDetailInit : undefined;
     }
     set onRowDetailInit(value) {
         this.nativeElement ? this.nativeElement.onRowDetailInit = value : undefined;
     }
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Describes the header settings of the grid. */
     get onRowDetailUpdated() {
         return this.nativeElement ? this.nativeElement.onRowDetailUpdated : undefined;
     }
     set onRowDetailUpdated(value) {
         this.nativeElement ? this.nativeElement.onRowDetailUpdated = value : undefined;
     }
-    /** @description The rows property is used to describe all rows displayed in the grid. */
+    /** @description Describes the footer settings of the grid. */
     get onRowInserted() {
         return this.nativeElement ? this.nativeElement.onRowInserted : undefined;
     }
     set onRowInserted(value) {
         this.nativeElement ? this.nativeElement.onRowInserted = value : undefined;
     }
-    /** @description Describes the selection settings. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get onRowRemoved() {
         return this.nativeElement ? this.nativeElement.onRowRemoved : undefined;
     }
     set onRowRemoved(value) {
         this.nativeElement ? this.nativeElement.onRowRemoved = value : undefined;
     }
-    /** @description Describes sorting settings. */
+    /** @description The rows property is used to describe all rows displayed in the grid. */
     get onRowUpdate() {
         return this.nativeElement ? this.nativeElement.onRowUpdate : undefined;
     }
     set onRowUpdate(value) {
         this.nativeElement ? this.nativeElement.onRowUpdate = value : undefined;
     }
-    /** @description undefined */
+    /** @description Describes the selection settings. */
     get onRowUpdated() {
         return this.nativeElement ? this.nativeElement.onRowUpdated : undefined;
     }
     set onRowUpdated(value) {
         this.nativeElement ? this.nativeElement.onRowUpdated = value : undefined;
     }
-    /** @description undefined */
+    /** @description Describes sorting settings. */
     get onColumnInit() {
         return this.nativeElement ? this.nativeElement.onColumnInit : undefined;
     }
@@ -623,6 +637,20 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     set onCommand(value) {
         this.nativeElement ? this.nativeElement.onCommand = value : undefined;
+    }
+    /** @description undefined */
+    get currentUser() {
+        return this.nativeElement ? this.nativeElement.currentUser : undefined;
+    }
+    set currentUser(value) {
+        this.nativeElement ? this.nativeElement.currentUser = value : undefined;
+    }
+    /** @description undefined */
+    get users() {
+        return this.nativeElement ? this.nativeElement.users : undefined;
+    }
+    set users(value) {
+        this.nativeElement ? this.nativeElement.users = value : undefined;
     }
     /** @description undefined */
     get paging() {
@@ -782,6 +810,33 @@ let GridComponent = class GridComponent extends BaseElement {
             });
         }
     }
+    /** @description Groups the Grid by a data field. This method will add a group to the Grid when grouping is enabled.
+    * @param {string} dataField. column bound data field
+    */
+    addGroup(dataField) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addGroup(dataField);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.addGroup(dataField);
+            });
+        }
+    }
+    /** @description Sorts the Grid by a data field. This method will add a sorting to the Grid when sorting is enabled.
+    * @param {string} dataField. column bound data field
+    * @param {string} sortOrder. column's sort order. Use 'asc' or 'desc'.
+    */
+    addSort(dataField, sortOrder) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addSort(dataField, sortOrder);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.addSort(dataField, sortOrder);
+            });
+        }
+    }
     /** @description Auto-sizes grid rows. This method will update the height of all Grid rows.
     */
     autoSizeRows() {
@@ -858,6 +913,30 @@ let GridComponent = class GridComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.clearFilter();
+            });
+        }
+    }
+    /** @description Clears all data groups. Refreshes the view and updates the DataGrid component.
+    */
+    clearGroups() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.clearGroups();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.clearGroups();
+            });
+        }
+    }
+    /** @description Clears all sorting. Refreshes the view and updates the DataGrid component.
+    */
+    clearSort() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.clearSort();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.clearSort();
             });
         }
     }
@@ -1631,6 +1710,44 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Removes a column filter.
+    * @param {string} dataField. column bound data field
+    */
+    removeGroup(dataField) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.removeGroup(dataField);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.removeGroup(dataField);
+            });
+        }
+    }
+    /** @description Removes a group by data field. This method will remove a group to the Grid when grouping is enabled.
+    * @param {string} dataField. column bound data field
+    */
+    removeSort(dataField) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.removeSort(dataField);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.removeSort(dataField);
+            });
+        }
+    }
+    /** @description Removes a sorting by data field. This method will remove a sorting from a Grid column.
+    */
+    refreshSort() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.refreshSort();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.refreshSort();
+            });
+        }
+    }
+    /** @description Re-sorts the Grid by using the already applied column sortings and re-renders the Grid.
     */
     revertBatchEdit() {
         if (this.nativeElement.isRendered) {
@@ -1658,6 +1775,20 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Reorders two DataGrid columns.
+    * @param {string} dataField. column bound data field
+    * @param {string | null} sortOrder. column's sort order. Use 'asc', 'desc' or null.
+    */
+    sortBy(dataField, sortOrder) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.sortBy(dataField, sortOrder);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.sortBy(dataField, sortOrder);
+            });
+        }
+    }
+    /** @description Sorts the Grid by a data field. This method will add or remove sorting, when sorting is enabled. To remove the sorting, use 'null' for the sortOrder parameter.
     * @param {string | number} dataField. The data field or column index of the first grid column.
     * @param {string | number} referenceDataField. The data field or column index of the second grid column.
     */
@@ -1992,6 +2123,10 @@ let GridComponent = class GridComponent extends BaseElement {
         that.nativeElement.addEventListener('endEdit', that.eventHandlers['endEditHandler']);
         that.eventHandlers['filterHandler'] = (event) => { that.onFilter.emit(event); };
         that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
+        that.eventHandlers['openColumnDialogHandler'] = (event) => { that.onOpenColumnDialog.emit(event); };
+        that.nativeElement.addEventListener('openColumnDialog', that.eventHandlers['openColumnDialogHandler']);
+        that.eventHandlers['closeColumnDialogHandler'] = (event) => { that.onCloseColumnDialog.emit(event); };
+        that.nativeElement.addEventListener('closeColumnDialog', that.eventHandlers['closeColumnDialogHandler']);
         that.eventHandlers['resizeHandler'] = (event) => { that.onResize.emit(event); };
         that.nativeElement.addEventListener('resize', that.eventHandlers['resizeHandler']);
         that.eventHandlers['rowTapHandler'] = (event) => { that.onRowTap.emit(event); };
@@ -2081,6 +2216,12 @@ let GridComponent = class GridComponent extends BaseElement {
         }
         if (that.eventHandlers['filterHandler']) {
             that.nativeElement.onfilterHandler = null;
+        }
+        if (that.eventHandlers['openColumnDialogHandler']) {
+            that.nativeElement.removeEventListener('openColumnDialog', that.eventHandlers['openColumnDialogHandler']);
+        }
+        if (that.eventHandlers['closeColumnDialogHandler']) {
+            that.nativeElement.removeEventListener('closeColumnDialog', that.eventHandlers['closeColumnDialogHandler']);
         }
         if (that.eventHandlers['resizeHandler']) {
             that.nativeElement.removeEventListener('resize', that.eventHandlers['resizeHandler']);
@@ -2227,6 +2368,12 @@ __decorate([
 ], GridComponent.prototype, "onCommand", null);
 __decorate([
     Input()
+], GridComponent.prototype, "currentUser", null);
+__decorate([
+    Input()
+], GridComponent.prototype, "users", null);
+__decorate([
+    Input()
 ], GridComponent.prototype, "paging", null);
 __decorate([
     Input()
@@ -2336,6 +2483,12 @@ __decorate([
 __decorate([
     Output()
 ], GridComponent.prototype, "onFilter", void 0);
+__decorate([
+    Output()
+], GridComponent.prototype, "onOpenColumnDialog", void 0);
+__decorate([
+    Output()
+], GridComponent.prototype, "onCloseColumnDialog", void 0);
 __decorate([
     Output()
 ], GridComponent.prototype, "onResize", void 0);

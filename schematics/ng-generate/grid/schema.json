@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SchematicsMaterialGrid",
+  "$id": "SchematicsMaterialGrid",
   "title": "Material Grid Options Schema",
   "type": "object",
   "properties": {

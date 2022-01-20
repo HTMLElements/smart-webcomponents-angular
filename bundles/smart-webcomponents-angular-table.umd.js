@@ -405,6 +405,11 @@ import './../source/modules/smart.table';
             *   dataField - The data field of the cell's column.
             */
             _this.onColumnClick = new core.EventEmitter();
+            /** @description This event is triggered when a column menu is closed.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+            *   dataField - The data field of the column.
+            */
+            _this.onCloseColumnMenu = new core.EventEmitter();
             /** @description This event is triggered when a column has been resized via dragging or double-click.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField, 	headerCellElement, 	width)
             *   dataField - The data field of the column.
@@ -426,6 +431,11 @@ import './../source/modules/smart.table';
             *   path - The group's path (only when collapsing/expanding). The path includes the path to the expanded/collapsed group starting from the root group. The indexes are joined with '.'. This parameter is available when the 'action' is 'expand' or 'collapse'.
             */
             _this.onGroup = new core.EventEmitter();
+            /** @description This event is triggered when a column menu is opened.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
+            *   dataField - The data field of the column.
+            */
+            _this.onOpenColumnMenu = new core.EventEmitter();
             /** @description This event is triggered when a paging-related action is made.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	action)
             *   action - The paging action. Possible actions: 'pageIndexChange', 'pageSizeChange'.
@@ -539,6 +549,17 @@ import './../source/modules/smart.table';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.columnResize = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "columnResizeNormalize", {
+            /** @description This property affects the table sizing, when the columnSizeMode is 'default'. When 'columnResizeNormalize' is false, the Table will add an additional TH element, if all table columns have the 'width' property set. This is done in order to maintain your width settings. Otherwise, when the property is set to true, the Table will auto-fill the remaining space similar to the layout of standard HTML Tables. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.columnResizeNormalize : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.columnResizeNormalize = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -775,7 +796,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "grouping", {
-            /** @description Sets or gets the id of an HTML template element to be applied as additional column header(s). */
+            /** @description Allows to customize the header of the element. The property accepts the id of an HTMLElement, HTMLTemplateElement, function or a string that will be parsed as HTML. When set to a function it contains one argument - the header element of the Table. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.grouping : undefined;
             },
@@ -1784,12 +1805,16 @@ import './../source/modules/smart.table';
             that.nativeElement.addEventListener('expand', that.eventHandlers['expandHandler']);
             that.eventHandlers['columnClickHandler'] = function (event) { that.onColumnClick.emit(event); };
             that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
+            that.eventHandlers['closeColumnMenuHandler'] = function (event) { that.onCloseColumnMenu.emit(event); };
+            that.nativeElement.addEventListener('closeColumnMenu', that.eventHandlers['closeColumnMenuHandler']);
             that.eventHandlers['columnResizeHandler'] = function (event) { that.onColumnResize.emit(event); };
             that.nativeElement.addEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
             that.eventHandlers['filterHandler'] = function (event) { that.onFilter.emit(event); };
             that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
             that.eventHandlers['groupHandler'] = function (event) { that.onGroup.emit(event); };
             that.nativeElement.addEventListener('group', that.eventHandlers['groupHandler']);
+            that.eventHandlers['openColumnMenuHandler'] = function (event) { that.onOpenColumnMenu.emit(event); };
+            that.nativeElement.addEventListener('openColumnMenu', that.eventHandlers['openColumnMenuHandler']);
             that.eventHandlers['pageHandler'] = function (event) { that.onPage.emit(event); };
             that.nativeElement.addEventListener('page', that.eventHandlers['pageHandler']);
             that.eventHandlers['rowBeginEditHandler'] = function (event) { that.onRowBeginEdit.emit(event); };
@@ -1823,6 +1848,9 @@ import './../source/modules/smart.table';
             if (that.eventHandlers['columnClickHandler']) {
                 that.nativeElement.removeEventListener('columnClick', that.eventHandlers['columnClickHandler']);
             }
+            if (that.eventHandlers['closeColumnMenuHandler']) {
+                that.nativeElement.removeEventListener('closeColumnMenu', that.eventHandlers['closeColumnMenuHandler']);
+            }
             if (that.eventHandlers['columnResizeHandler']) {
                 that.nativeElement.removeEventListener('columnResize', that.eventHandlers['columnResizeHandler']);
             }
@@ -1831,6 +1859,9 @@ import './../source/modules/smart.table';
             }
             if (that.eventHandlers['groupHandler']) {
                 that.nativeElement.removeEventListener('group', that.eventHandlers['groupHandler']);
+            }
+            if (that.eventHandlers['openColumnMenuHandler']) {
+                that.nativeElement.removeEventListener('openColumnMenu', that.eventHandlers['openColumnMenuHandler']);
             }
             if (that.eventHandlers['pageHandler']) {
                 that.nativeElement.removeEventListener('page', that.eventHandlers['pageHandler']);
@@ -1869,6 +1900,9 @@ import './../source/modules/smart.table';
         __decorate([
             core.Input()
         ], TableComponent.prototype, "columnResize", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "columnResizeNormalize", null);
         __decorate([
             core.Input()
         ], TableComponent.prototype, "columnResizeFeedback", null);
@@ -2030,6 +2064,9 @@ import './../source/modules/smart.table';
         ], TableComponent.prototype, "onColumnClick", void 0);
         __decorate([
             core.Output()
+        ], TableComponent.prototype, "onCloseColumnMenu", void 0);
+        __decorate([
+            core.Output()
         ], TableComponent.prototype, "onColumnResize", void 0);
         __decorate([
             core.Output()
@@ -2037,6 +2074,9 @@ import './../source/modules/smart.table';
         __decorate([
             core.Output()
         ], TableComponent.prototype, "onGroup", void 0);
+        __decorate([
+            core.Output()
+        ], TableComponent.prototype, "onOpenColumnMenu", void 0);
         __decorate([
             core.Output()
         ], TableComponent.prototype, "onPage", void 0);
