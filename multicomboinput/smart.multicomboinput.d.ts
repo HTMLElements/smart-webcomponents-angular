@@ -76,6 +76,8 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     singleSelect: boolean;
     /** @description Determines whether an additional item is displayed as the first item in the options list, which allows to select/unselect all items. */
     selectAll: boolean;
+    /** @description Gets or sets an array of selected values. */
+    selectedValues: any;
     /** @description Determines whether the items are sorted alphabetically or not */
     sorted: boolean;
     /** @description Determines the sorting algorithm - ascending(asc) or descending(desc) if sort is enabled. */

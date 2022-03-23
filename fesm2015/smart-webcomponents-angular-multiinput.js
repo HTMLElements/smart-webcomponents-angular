@@ -296,6 +296,13 @@ let MultiInputComponent = class MultiInputComponent extends BaseElement {
     set separator(value) {
         this.nativeElement ? this.nativeElement.separator = value : undefined;
     }
+    /** @description Gets or sets an array of selected values. */
+    get selectedValues() {
+        return this.nativeElement ? this.nativeElement.selectedValues : undefined;
+    }
+    set selectedValues(value) {
+        this.nativeElement ? this.nativeElement.selectedValues = value : undefined;
+    }
     /** @description Determines whether an additional item is displayed as the first item in the options list, which allows to select/unselect all items. */
     get selectAll() {
         return this.nativeElement ? this.nativeElement.selectAll : undefined;
@@ -552,6 +559,9 @@ __decorate([
 __decorate([
     Input()
 ], MultiInputComponent.prototype, "separator", null);
+__decorate([
+    Input()
+], MultiInputComponent.prototype, "selectedValues", null);
 __decorate([
     Input()
 ], MultiInputComponent.prototype, "selectAll", null);

@@ -638,6 +638,17 @@ import './../source/modules/smart.checkinput';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(CheckInputComponent.prototype, "selectedValues", {
+            /** @description Gets or sets an array of selected values. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.selectedValues : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.selectedValues = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(CheckInputComponent.prototype, "sorted", {
             /** @description Determines whether the items are sorted alphabetically or not */
             get: function () {
@@ -925,6 +936,9 @@ import './../source/modules/smart.checkinput';
         __decorate([
             core.Input()
         ], CheckInputComponent.prototype, "selectAll", null);
+        __decorate([
+            core.Input()
+        ], CheckInputComponent.prototype, "selectedValues", null);
         __decorate([
             core.Input()
         ], CheckInputComponent.prototype, "sorted", null);

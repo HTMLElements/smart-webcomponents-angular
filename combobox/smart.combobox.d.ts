@@ -1,8 +1,8 @@
 import { ComboBox } from './../index';
-import { Animation, AutoComplete, DropDownButtonPosition, DropDownOpenMode, DropDownPosition, ComboBoxEscKeyMode, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ResizeMode, SelectionDisplayMode, ListSelectionMode, VerticalScrollBarVisibility } from './../index';
+import { AutoComplete, DropDownButtonPosition, DropDownOpenMode, DropDownPosition, ComboBoxEscKeyMode, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ResizeMode, SelectionDisplayMode, ListSelectionMode, VerticalScrollBarVisibility } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, AutoComplete, DropDownButtonPosition, DropDownOpenMode, DropDownPosition, ComboBoxEscKeyMode, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ResizeMode, SelectionDisplayMode, ListSelectionMode, VerticalScrollBarVisibility, ElementRenderMode } from './../index';
+export { AutoComplete, DropDownButtonPosition, DropDownOpenMode, DropDownPosition, ComboBoxEscKeyMode, FilterMode, HorizontalScrollBarVisibility, SearchMode, ListItemMeasureMode, VerticalAlignment, ResizeMode, SelectionDisplayMode, ListSelectionMode, VerticalScrollBarVisibility, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { ComboBox } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -24,8 +24,6 @@ export declare class ComboBoxComponent extends BaseElement implements OnInit, Af
     * The registered callback function called when a blur event occurs on the form elements.
     */
     _onTouched: () => any;
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
     /** @description Used only when dropDownOpenMode is set to 'auto'. Determines the delay before the opened drop down closes if the pointer is not over the element. */
     autoCloseDelay: number;
     /** @description Determines the autocomplete mode. Auto complete modes filter the items from the dataSource and show only those that match the input. */

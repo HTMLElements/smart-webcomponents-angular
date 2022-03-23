@@ -300,6 +300,13 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     *   originalEvent - The original event object.
     */
     onDragEnd: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the user drops an item over a cell.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	date, 	allDay)
+    *   target - The HTMLElement that corresponds to the event that is dragged.
+    *   date - The cell's date under the pointer.
+    *   allDay - Boolean value, which is true when the cell under the pointer is all day cell.
+    */
+    onDropoverCell: EventEmitter<CustomEvent>;
     /** @description This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	itemDateRange, 	originalEvent)
     *   target - The HTMLElement that corresponds to the event that is going to be resized.

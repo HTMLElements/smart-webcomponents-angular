@@ -461,6 +461,17 @@ var MultiComboInputComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(MultiComboInputComponent.prototype, "selectedValues", {
+        /** @description Gets or sets an array of selected values. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.selectedValues : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.selectedValues = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(MultiComboInputComponent.prototype, "sorted", {
         /** @description Determines whether the items are sorted alphabetically or not */
         get: function () {
@@ -771,6 +782,9 @@ var MultiComboInputComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], MultiComboInputComponent.prototype, "selectAll", null);
+    __decorate([
+        Input()
+    ], MultiComboInputComponent.prototype, "selectedValues", null);
     __decorate([
         Input()
     ], MultiComboInputComponent.prototype, "sorted", null);

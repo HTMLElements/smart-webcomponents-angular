@@ -7,7 +7,7 @@ else {
 }
 import './../source/modules/smart.input';
 
-import { __decorate, __extends } from 'tslib';
+import { __decorate, __extends, __awaiter, __generator } from 'tslib';
 import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -166,6 +166,12 @@ var InputComponent = /** @class */ (function (_super) {
         *   value - The new value.
         */
         _this.onChanging = new EventEmitter();
+        /** @description This event is triggered when the popup is opened.
+        *  @param event. The custom event. 	*/
+        _this.onOpen = new EventEmitter();
+        /** @description This event is triggered when the popup is closed.
+        *  @param event. The custom event. 	*/
+        _this.onClose = new EventEmitter();
         /** @description This event is triggered when the user clicks on an item from the popup list.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	label, 	value)
         *   item - The item that was clicked.
@@ -188,17 +194,6 @@ var InputComponent = /** @class */ (function (_super) {
         }
         return this.nativeElement;
     };
-    Object.defineProperty(InputComponent.prototype, "animation", {
-        /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.animation : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.animation = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(InputComponent.prototype, "autoCompleteDelay", {
         /** @description Determines the delay before the drop down opens to show the matches from the auto complete operation. The delay is measured in miliseconds. */
         get: function () {
@@ -211,7 +206,7 @@ var InputComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(InputComponent.prototype, "dataSource", {
-        /** @description Determines the data source that will be loaded to the Input. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
+        /** @description Determines the data source that will be loaded to the Input. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. The data source item object may have the following fields: 'label' - string, 'value' - string or number, 'selected' - boolean, 'prefix' - string, 'suffix' - string, 'title' - string. The 'prefix' and 'suffix' add html before and after the label. */
         get: function () {
             return this.nativeElement ? this.nativeElement.dataSource : undefined;
         },
@@ -441,6 +436,28 @@ var InputComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(InputComponent.prototype, "selectedIndex", {
+        /** @description Determines the selected index. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.selectedIndex : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.selectedIndex = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(InputComponent.prototype, "selectedValue", {
+        /** @description Determines the selected value. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.selectedValue : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.selectedValue = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(InputComponent.prototype, "theme", {
         /** @description Determines the theme for the element. Themes define the look of the elements. */
         get: function () {
@@ -524,7 +541,7 @@ var InputComponent = /** @class */ (function (_super) {
             });
         }
     };
-    /** @description Selects the text inside the input or if it is readonly then the element is focused.
+    /** @description Focuses and selects the text inside the input or if it is readonly then the element is focused.
     */
     InputComponent.prototype.select = function () {
         var _this = this;
@@ -536,6 +553,74 @@ var InputComponent = /** @class */ (function (_super) {
                 _this.nativeElement.select();
             });
         }
+    };
+    /** @description Selects an item by value. For example, if your data source is ['Item 1', 'Item 2', 'Item 3'], you can use 'Item 1' as an argument. If your data source is an object with label and value, pass the value when you call selectItem.
+    * @param {string | number} value. The item's value when the item is an object or string when the item is a string item.
+    */
+    InputComponent.prototype.selectItem = function (value) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectItem(value);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.selectItem(value);
+            });
+        }
+    };
+    /** @description Gets an item by value. For example, if your data source is ['Item 1', 'Item 2', 'Item 3'], you can use 'Item 1' as an argument. If your data source is an object with label and value, pass the value when you call selectItem.
+    * @param {string | number} value. The item's value when the item is an object or string when the item is a string item.
+    * @returns {any}
+  */
+    InputComponent.prototype.getItem = function (value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getItem(value);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Gets the selected item. For example, if your data source is ['Item 1', 'Item 2', 'Item 3'] and the user selected the second item, the method returns 'Item 2'. If your data source is an object with label and value, the returned value would be the 'value'.
+    * @param {string | number} value. The item's value when the item is an object or string when the item is a string item.
+    * @returns {any}
+  */
+    InputComponent.prototype.getSelectedItem = function (value) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getSelectedItem(value);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
     };
     Object.defineProperty(InputComponent.prototype, "isRendered", {
         get: function () {
@@ -605,6 +690,10 @@ var InputComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('change', that.eventHandlers['changeHandler']);
         that.eventHandlers['changingHandler'] = function (event) { that.onChanging.emit(event); };
         that.nativeElement.addEventListener('changing', that.eventHandlers['changingHandler']);
+        that.eventHandlers['openHandler'] = function (event) { that.onOpen.emit(event); };
+        that.nativeElement.addEventListener('open', that.eventHandlers['openHandler']);
+        that.eventHandlers['closeHandler'] = function (event) { that.onClose.emit(event); };
+        that.nativeElement.addEventListener('close', that.eventHandlers['closeHandler']);
         that.eventHandlers['itemClickHandler'] = function (event) { that.onItemClick.emit(event); };
         that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         that.eventHandlers['changeModelHandler'] = function (event) {
@@ -634,6 +723,12 @@ var InputComponent = /** @class */ (function (_super) {
         if (that.eventHandlers['changingHandler']) {
             that.nativeElement.removeEventListener('changing', that.eventHandlers['changingHandler']);
         }
+        if (that.eventHandlers['openHandler']) {
+            that.nativeElement.removeEventListener('open', that.eventHandlers['openHandler']);
+        }
+        if (that.eventHandlers['closeHandler']) {
+            that.nativeElement.removeEventListener('close', that.eventHandlers['closeHandler']);
+        }
         if (that.eventHandlers['itemClickHandler']) {
             that.nativeElement.removeEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         }
@@ -650,9 +745,6 @@ var InputComponent = /** @class */ (function (_super) {
     InputComponent.ctorParameters = function () { return [
         { type: ElementRef }
     ]; };
-    __decorate([
-        Input()
-    ], InputComponent.prototype, "animation", null);
     __decorate([
         Input()
     ], InputComponent.prototype, "autoCompleteDelay", null);
@@ -721,6 +813,12 @@ var InputComponent = /** @class */ (function (_super) {
     ], InputComponent.prototype, "sortDirection", null);
     __decorate([
         Input()
+    ], InputComponent.prototype, "selectedIndex", null);
+    __decorate([
+        Input()
+    ], InputComponent.prototype, "selectedValue", null);
+    __decorate([
+        Input()
     ], InputComponent.prototype, "theme", null);
     __decorate([
         Input()
@@ -737,6 +835,12 @@ var InputComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], InputComponent.prototype, "onChanging", void 0);
+    __decorate([
+        Output()
+    ], InputComponent.prototype, "onOpen", void 0);
+    __decorate([
+        Output()
+    ], InputComponent.prototype, "onClose", void 0);
     __decorate([
         Output()
     ], InputComponent.prototype, "onItemClick", void 0);

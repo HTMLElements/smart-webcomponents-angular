@@ -192,13 +192,6 @@ let ComboBoxComponent = class ComboBoxComponent extends BaseElement {
         }
         return this.nativeElement;
     }
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    get animation() {
-        return this.nativeElement ? this.nativeElement.animation : undefined;
-    }
-    set animation(value) {
-        this.nativeElement ? this.nativeElement.animation = value : undefined;
-    }
     /** @description Used only when dropDownOpenMode is set to 'auto'. Determines the delay before the opened drop down closes if the pointer is not over the element. */
     get autoCloseDelay() {
         return this.nativeElement ? this.nativeElement.autoCloseDelay : undefined;
@@ -1006,9 +999,6 @@ let ComboBoxComponent = class ComboBoxComponent extends BaseElement {
 ComboBoxComponent.ctorParameters = () => [
     { type: ElementRef }
 ];
-__decorate([
-    Input()
-], ComboBoxComponent.prototype, "animation", null);
 __decorate([
     Input()
 ], ComboBoxComponent.prototype, "autoCloseDelay", null);

@@ -627,6 +627,17 @@ import './../source/modules/smart.multiinput';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(MultiInputComponent.prototype, "selectedValues", {
+            /** @description Gets or sets an array of selected values. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.selectedValues : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.selectedValues = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(MultiInputComponent.prototype, "selectAll", {
             /** @description Determines whether an additional item is displayed as the first item in the options list, which allows to select/unselect all items. */
             get: function () {
@@ -922,6 +933,9 @@ import './../source/modules/smart.multiinput';
         __decorate([
             core.Input()
         ], MultiInputComponent.prototype, "separator", null);
+        __decorate([
+            core.Input()
+        ], MultiInputComponent.prototype, "selectedValues", null);
         __decorate([
             core.Input()
         ], MultiInputComponent.prototype, "selectAll", null);

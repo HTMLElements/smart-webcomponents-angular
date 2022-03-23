@@ -191,6 +191,48 @@ var KanbanComponent = /** @class */ (function (_super) {
         *   collapsed - The column's collapsed state.
         */
         _this.onColumnDoubleClick = new EventEmitter();
+        /** @description This event is triggered when a column is shown by using the column's action menu or the Kanban's 'show' method.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+        *   label - The column label.
+        *   dataField - The column data field.
+        */
+        _this.onColumnShow = new EventEmitter();
+        /** @description This event is triggered when a column is hidden by using the column's action menu or the Kanban's 'hide' method.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+        *   label - The column label.
+        *   dataField - The column data field.
+        */
+        _this.onColumnHide = new EventEmitter();
+        /** @description This event is triggered when a column is collapsed  by using the column's action menu or the Kanban's 'collapse' method.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+        *   label - The column label.
+        *   dataField - The column data field.
+        */
+        _this.onColumnCollapse = new EventEmitter();
+        /** @description This event is triggered when a column is expanded by using the column's action menu or the Kanban's 'expand' method.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+        *   label - The column label.
+        *   dataField - The column data field.
+        */
+        _this.onColumnExpand = new EventEmitter();
+        /** @description This event is triggered when a comment is added to the Kanban Task.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	value)
+        *   id - The task's id.
+        *   value - The comment object. It has 'text: string, time: Date and userId:number' properties.
+        */
+        _this.onCommentAdd = new EventEmitter();
+        /** @description This event is triggered when a comment is removed from the Kanban Task.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	value)
+        *   id - The task's id.
+        *   value - The comment object. It has 'text: string, time: Date and userId:number' properties.
+        */
+        _this.onCommentRemove = new EventEmitter();
+        /** @description This event is triggered when a comment is updated in the Kanban Task.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	value)
+        *   id - The task's id.
+        *   value - The comment object. It has 'text: string, time: Date and userId:number' properties.
+        */
+        _this.onCommentUpdate = new EventEmitter();
         /** @description This event is triggered when a task is dropped somewhere in the DOM. The dragging operation can be canceled by calling event.preventDefault() in the event handler function.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	container, 	data, 	item, 	items, 	originalEvent, 	previousContainer, 	target)
         *   container - the Kanban the dragged task(s) is dropped to
@@ -237,15 +279,36 @@ var KanbanComponent = /** @class */ (function (_super) {
         *  @param event. The custom event. 	*/
         _this.onSort = new EventEmitter();
         /** @description This event is triggered when a new task is added.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
         *   value - The task data that is added to the Kanban.
+        *   id - The task data id.
         */
         _this.onTaskAdd = new EventEmitter();
         /** @description This event is triggered when a task is removed.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
         *   value - The task data that is removed from the Kanban.
+        *   id - The task data id.
         */
         _this.onTaskRemove = new EventEmitter();
+        /** @description This event is triggered when a task is updated.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue, 	id)
+        *   value - The task data that is updated.
+        *   oldValue - The update task's old data.
+        *   id - The task data id.
+        */
+        _this.onTaskUpdate = new EventEmitter();
+        /** @description This event is triggered when a task is clicked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
+        *   value - The task data.
+        *   id - The task data id.
+        */
+        _this.onTaskClick = new EventEmitter();
+        /** @description This event is triggered when a task is double clicked.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
+        *   value - The task data.
+        *   id - The task data id.
+        */
+        _this.onTaskDoubleClick = new EventEmitter();
         _this.nativeElement = ref.nativeElement;
         return _this;
     }
@@ -977,6 +1040,19 @@ var KanbanComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Clears the Kanban's selection.
+    */
+    KanbanComponent.prototype.clearSelection = function () {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.clearSelection();
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.clearSelection();
+            });
+        }
+    };
     /** @description Hides a Kanban column.
     * @param {number | string} column. The index or dataField of the column to hide
     */
@@ -1116,6 +1192,60 @@ var KanbanComponent = /** @class */ (function (_super) {
                             return new Promise(function (resolve) {
                                 _this.nativeElement.whenRendered(function () {
                                     var result = _this.nativeElement.getColumn(dataField);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Gets the data of a task. The returned value is a JSON object with the following fields: 'checklist', 'id', 'color', 'comments', 'history', 'dueDate', 'startDate', 'priority', 'progress', 'status', 'swimlane', 'tags', 'text', 'description', 'userId', 'createdUserId', 'createdDate', 'updatedUserId', 'updatedDate'
+    * @param {number} id. The task's id
+    * @returns {any}
+  */
+    KanbanComponent.prototype.getTask = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getTask(id);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Gets the selected ids. The returned value is an array. Each item in the array is the 'id' of a selected task.
+    * @param {number} id. The task's id
+    * @returns {any}
+  */
+    KanbanComponent.prototype.getSelectedTasks = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getSelectedTasks(id);
                                     resolve(result);
                                 });
                             });
@@ -1317,6 +1447,34 @@ var KanbanComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Selects a task.
+    * @param {number | string} task. The task's id.
+    */
+    KanbanComponent.prototype.selectTask = function (task) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.selectTask(task);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.selectTask(task);
+            });
+        }
+    };
+    /** @description Unselects a task.
+    * @param {number | string} task. The task's id.
+    */
+    KanbanComponent.prototype.unselectTask = function (task) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.unselectTask(task);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.unselectTask(task);
+            });
+        }
+    };
     /** @description Updates a task.
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     * @param {{}} newData. The new data to visualize in the task.
@@ -1397,6 +1555,20 @@ var KanbanComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('columnClick', that.eventHandlers['columnClickHandler']);
         that.eventHandlers['columnDoubleClickHandler'] = function (event) { that.onColumnDoubleClick.emit(event); };
         that.nativeElement.addEventListener('columnDoubleClick', that.eventHandlers['columnDoubleClickHandler']);
+        that.eventHandlers['columnShowHandler'] = function (event) { that.onColumnShow.emit(event); };
+        that.nativeElement.addEventListener('columnShow', that.eventHandlers['columnShowHandler']);
+        that.eventHandlers['columnHideHandler'] = function (event) { that.onColumnHide.emit(event); };
+        that.nativeElement.addEventListener('columnHide', that.eventHandlers['columnHideHandler']);
+        that.eventHandlers['columnCollapseHandler'] = function (event) { that.onColumnCollapse.emit(event); };
+        that.nativeElement.addEventListener('columnCollapse', that.eventHandlers['columnCollapseHandler']);
+        that.eventHandlers['columnExpandHandler'] = function (event) { that.onColumnExpand.emit(event); };
+        that.nativeElement.addEventListener('columnExpand', that.eventHandlers['columnExpandHandler']);
+        that.eventHandlers['commentAddHandler'] = function (event) { that.onCommentAdd.emit(event); };
+        that.nativeElement.addEventListener('commentAdd', that.eventHandlers['commentAddHandler']);
+        that.eventHandlers['commentRemoveHandler'] = function (event) { that.onCommentRemove.emit(event); };
+        that.nativeElement.addEventListener('commentRemove', that.eventHandlers['commentRemoveHandler']);
+        that.eventHandlers['commentUpdateHandler'] = function (event) { that.onCommentUpdate.emit(event); };
+        that.nativeElement.addEventListener('commentUpdate', that.eventHandlers['commentUpdateHandler']);
         that.eventHandlers['dragEndHandler'] = function (event) { that.onDragEnd.emit(event); };
         that.nativeElement.addEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
         that.eventHandlers['draggingHandler'] = function (event) { that.onDragging.emit(event); };
@@ -1415,6 +1587,12 @@ var KanbanComponent = /** @class */ (function (_super) {
         that.nativeElement.addEventListener('taskAdd', that.eventHandlers['taskAddHandler']);
         that.eventHandlers['taskRemoveHandler'] = function (event) { that.onTaskRemove.emit(event); };
         that.nativeElement.addEventListener('taskRemove', that.eventHandlers['taskRemoveHandler']);
+        that.eventHandlers['taskUpdateHandler'] = function (event) { that.onTaskUpdate.emit(event); };
+        that.nativeElement.addEventListener('taskUpdate', that.eventHandlers['taskUpdateHandler']);
+        that.eventHandlers['taskClickHandler'] = function (event) { that.onTaskClick.emit(event); };
+        that.nativeElement.addEventListener('taskClick', that.eventHandlers['taskClickHandler']);
+        that.eventHandlers['taskDoubleClickHandler'] = function (event) { that.onTaskDoubleClick.emit(event); };
+        that.nativeElement.addEventListener('taskDoubleClick', that.eventHandlers['taskDoubleClickHandler']);
     };
     /** @description Remove event listeners. */
     KanbanComponent.prototype.unlisten = function () {
@@ -1446,6 +1624,27 @@ var KanbanComponent = /** @class */ (function (_super) {
         if (that.eventHandlers['columnDoubleClickHandler']) {
             that.nativeElement.removeEventListener('columnDoubleClick', that.eventHandlers['columnDoubleClickHandler']);
         }
+        if (that.eventHandlers['columnShowHandler']) {
+            that.nativeElement.removeEventListener('columnShow', that.eventHandlers['columnShowHandler']);
+        }
+        if (that.eventHandlers['columnHideHandler']) {
+            that.nativeElement.removeEventListener('columnHide', that.eventHandlers['columnHideHandler']);
+        }
+        if (that.eventHandlers['columnCollapseHandler']) {
+            that.nativeElement.removeEventListener('columnCollapse', that.eventHandlers['columnCollapseHandler']);
+        }
+        if (that.eventHandlers['columnExpandHandler']) {
+            that.nativeElement.removeEventListener('columnExpand', that.eventHandlers['columnExpandHandler']);
+        }
+        if (that.eventHandlers['commentAddHandler']) {
+            that.nativeElement.removeEventListener('commentAdd', that.eventHandlers['commentAddHandler']);
+        }
+        if (that.eventHandlers['commentRemoveHandler']) {
+            that.nativeElement.removeEventListener('commentRemove', that.eventHandlers['commentRemoveHandler']);
+        }
+        if (that.eventHandlers['commentUpdateHandler']) {
+            that.nativeElement.removeEventListener('commentUpdate', that.eventHandlers['commentUpdateHandler']);
+        }
         if (that.eventHandlers['dragEndHandler']) {
             that.nativeElement.removeEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
         }
@@ -1472,6 +1671,15 @@ var KanbanComponent = /** @class */ (function (_super) {
         }
         if (that.eventHandlers['taskRemoveHandler']) {
             that.nativeElement.removeEventListener('taskRemove', that.eventHandlers['taskRemoveHandler']);
+        }
+        if (that.eventHandlers['taskUpdateHandler']) {
+            that.nativeElement.removeEventListener('taskUpdate', that.eventHandlers['taskUpdateHandler']);
+        }
+        if (that.eventHandlers['taskClickHandler']) {
+            that.nativeElement.removeEventListener('taskClick', that.eventHandlers['taskClickHandler']);
+        }
+        if (that.eventHandlers['taskDoubleClickHandler']) {
+            that.nativeElement.removeEventListener('taskDoubleClick', that.eventHandlers['taskDoubleClickHandler']);
         }
     };
     KanbanComponent.ctorParameters = function () { return [
@@ -1671,6 +1879,27 @@ var KanbanComponent = /** @class */ (function (_super) {
     ], KanbanComponent.prototype, "onColumnDoubleClick", void 0);
     __decorate([
         Output()
+    ], KanbanComponent.prototype, "onColumnShow", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnHide", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnCollapse", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onColumnExpand", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onCommentAdd", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onCommentRemove", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onCommentUpdate", void 0);
+    __decorate([
+        Output()
     ], KanbanComponent.prototype, "onDragEnd", void 0);
     __decorate([
         Output()
@@ -1696,6 +1925,15 @@ var KanbanComponent = /** @class */ (function (_super) {
     __decorate([
         Output()
     ], KanbanComponent.prototype, "onTaskRemove", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onTaskUpdate", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onTaskClick", void 0);
+    __decorate([
+        Output()
+    ], KanbanComponent.prototype, "onTaskDoubleClick", void 0);
     KanbanComponent = __decorate([
         Directive({
             selector: 'smart-kanban, [smart-kanban]'

@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-barcode.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-barcode.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-barcode.js",
+  "esm5": "../esm5/barcode/smart-webcomponents-angular-barcode.js",
+  "esm2015": "../esm2015/barcode/smart-webcomponents-angular-barcode.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-barcode.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-barcode.js",
+  "typings": "smart-webcomponents-angular-barcode.d.ts",
+  "metadata": "smart-webcomponents-angular-barcode.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/barcode"
+}

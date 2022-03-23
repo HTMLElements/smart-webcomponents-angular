@@ -1,8 +1,8 @@
 import { Input as InputEditor } from './../index';
-import { Animation, DropDownButtonPosition, InputQueryMode } from './../index';
+import { DropDownButtonPosition, InputQueryMode } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, DropDownButtonPosition, InputQueryMode, ElementRenderMode } from './../index';
+export { DropDownButtonPosition, InputQueryMode, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Input as InputEditor } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -24,11 +24,9 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     * The registered callback function called when a blur event occurs on the form elements.
     */
     _onTouched: () => any;
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
     /** @description Determines the delay before the drop down opens to show the matches from the auto complete operation. The delay is measured in miliseconds. */
     autoCompleteDelay: number;
-    /** @description Determines the data source that will be loaded to the Input. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
+    /** @description Determines the data source that will be loaded to the Input. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. The data source item object may have the following fields: 'label' - string, 'value' - string or number, 'selected' - boolean, 'prefix' - string, 'suffix' - string, 'title' - string. The 'prefix' and 'suffix' add html before and after the label. */
     dataSource: any;
     /** @description Enables or disables the element. */
     disabled: boolean;
@@ -70,6 +68,10 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     sorted: boolean;
     /** @description Determines the sorting algorithm - ascending(asc) or descending(desc) if sort is enabled. */
     sortDirection: string;
+    /** @description Determines the selected index. */
+    selectedIndex: number;
+    /** @description Determines the selected value. */
+    selectedValue: string | number;
     /** @description Determines the theme for the element. Themes define the look of the elements. */
     theme: string;
     /** @description Determines the input type. Input type determines what input can be entered. */
@@ -92,6 +94,12 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     *   value - The new value.
     */
     onChanging: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the popup is opened.
+    *  @param event. The custom event. 	*/
+    onOpen: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when the popup is closed.
+    *  @param event. The custom event. 	*/
+    onClose: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the user clicks on an item from the popup list.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	item, 	label, 	value)
     *   item - The item that was clicked.
@@ -108,9 +116,23 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     /** @description Opens the drop down.
     */
     open(): void;
-    /** @description Selects the text inside the input or if it is readonly then the element is focused.
+    /** @description Focuses and selects the text inside the input or if it is readonly then the element is focused.
     */
     select(): void;
+    /** @description Selects an item by value. For example, if your data source is ['Item 1', 'Item 2', 'Item 3'], you can use 'Item 1' as an argument. If your data source is an object with label and value, pass the value when you call selectItem.
+    * @param {string | number} value. The item's value when the item is an object or string when the item is a string item.
+    */
+    selectItem(value: string | number): void;
+    /** @description Gets an item by value. For example, if your data source is ['Item 1', 'Item 2', 'Item 3'], you can use 'Item 1' as an argument. If your data source is an object with label and value, pass the value when you call selectItem.
+    * @param {string | number} value. The item's value when the item is an object or string when the item is a string item.
+    * @returns {any}
+  */
+    getItem(value: any): Promise<any>;
+    /** @description Gets the selected item. For example, if your data source is ['Item 1', 'Item 2', 'Item 3'] and the user selected the second item, the method returns 'Item 2'. If your data source is an object with label and value, the returned value would be the 'value'.
+    * @param {string | number} value. The item's value when the item is an object or string when the item is a string item.
+    * @returns {any}
+  */
+    getSelectedItem(value: any): Promise<any>;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

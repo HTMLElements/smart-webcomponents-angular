@@ -59,7 +59,7 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     };
     /** @description Callback function() called when the grid has been rendered. */
     onCellUpdate: {
-        (cell: GridCell, oldValue: any, value: any, confirm: {
+        (cells: GridCell[], oldValues: any[], values: any[], confirm: {
             (commit: boolean): void;
         }): void;
     };
@@ -101,21 +101,21 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     };
     /** @description Describes the footer settings of the grid. */
     onRowInserted: {
-        (index: number, row: GridRow): void;
+        (index: number[], row: GridRow[]): void;
     };
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     onRowRemoved: {
-        (index: number, row: GridRow): void;
+        (indexes: number[], rows: GridRow[]): void;
     };
     /** @description The rows property is used to describe all rows displayed in the grid. */
     onRowUpdate: {
-        (index: number, row: GridRow, oldValues: any[], values: any[], confirm: {
+        (index: number[], row: GridRow[], oldValues: any[], values: any[], confirm: {
             (commit: boolean): void;
         }): void;
     };
     /** @description Describes the selection settings. */
     onRowUpdated: {
-        (index: number, row: GridRow): void;
+        (index: number[], row: GridRow[]): void;
     };
     /** @description Describes sorting settings. */
     onColumnInit: {
@@ -252,6 +252,18 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     *   originalEvent - The origianl Event object.
     */
     onColumnReorder: EventEmitter<CustomEvent>;
+    /** @description This event is triggered, when the user enters a comment in the row edit dialog.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	comment)
+    *   id - The row's id.
+    *   comment - The comment object. The comment object has 'text: string', 'id: string', 'userId: string | number', and 'time: date' fields. The 'text' is the comment's text. 'id' is the comment's unique id, 'userId' is the user's id who entered the comment and 'time' is a javascript date object.
+    */
+    onCommentAdd: EventEmitter<CustomEvent>;
+    /** @description This event is triggered, when the user removes a comment in the row edit dialog.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	comment)
+    *   id - The row's id.
+    *   comment - The comment object. The comment object has 'text: string', 'id: string', 'userId: string | number', and 'time: date' fields. The 'text' is the comment's text. 'id' is the comment's unique id, 'userId' is the user's id who entered the comment and 'time' is a javascript date object.
+    */
+    onCommentRemove: EventEmitter<CustomEvent>;
     /** @description This event is triggered, when the user starts a row drag.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	index, 	originalEvent)
     *   row - The row.
@@ -331,6 +343,14 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     *   height - The new height of the row.
     */
     onRowResize: EventEmitter<CustomEvent>;
+    /** @description This event is triggered, when the user clicks on the row header's star.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent, 	id, 	value)
+    *   row - The clicked row.
+    *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+    *   id - Gets the row id.
+    *   value - Gets whether the row is starred or not.
+    */
+    onRowStarred: EventEmitter<CustomEvent>;
     /** @description This event is triggered, when the user clicks on a cell of the grid.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	cell, 	originalEvent, 	id, 	dataField, 	isRightClick, 	pageX, 	pageY)
     *   cell - The clicked cell.
@@ -363,11 +383,17 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     onEndEdit: EventEmitter<CustomEvent>;
     /** @description This event is triggered, when a filter is added or removed.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	columns, 	data)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	columns, 	data, 	expressions)
     *   columns - Array of columns.
-    *   data - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'
+    *   data - Array of {dataField: string, filter: object}. <em>dataField</em> is the column's data field. <em>filter</em> is a FilterGroup object.
+    *   expressions - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'. In each array item, you will have an object with column's name and filter string. Example: [['firstName', 'contains Andrew or contains Nancy'], ['quantity', '&lt;= 3 and &gt;= 8']], [['firstName', 'EQUAL' 'Andrew' or 'EQUAL' 'Antoni' or 'EQUAL' 'Beate']], [['lastName','CONTAINS' 'burke' or 'CONTAINS' 'peterson']]. Filter conditions used in the filter expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
     */
     onFilter: EventEmitter<CustomEvent>;
+    /** @description This event is triggered, when the rows grouping is changed.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	groups)
+    *   groups - Array of column data fields.
+    */
+    onGroup: EventEmitter<CustomEvent>;
     /** @description This event is triggered, when the add new column dialog is opened.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
     *   dataField - The column data field.
@@ -419,6 +445,11 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     * @returns {boolean}
   */
     addNewRow(position?: any): Promise<any>;
+    /** @description Adds a new column.
+    * @param {any} column. A Grid column object. See 'columns' property.
+    * @returns {boolean}
+  */
+    addNewColumn(column: any): Promise<any>;
     /** @description Adds a new unbound row to the top or bottom. Unbound rows are not part of the Grid's dataSource. They become part of the dataSource, after an unbound row is edited.
     * @param {number} count. The count of unbound rows.
     * @param {string} position?. 'near' or 'far'
@@ -426,17 +457,17 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
   */
     addUnboundRow(count: any, position?: any): Promise<any>;
     /** @description Adds a filter to a column. This method will apply a filter to the Grid data.
-    * @param {string} dataField. column bound data field
-    * @param {string} filter. Filter expression like: 'startsWith B'
-    * @param {boolean} refreshFilters?.
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
+    * @param {string} filter. Filter expression like: 'startsWith B'. Example 2: ['contains Andrew or contains Nancy'], Example 3:  ['quantity', '&lt;= 3 and &gt;= 8'].  Filter conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
+    * @param {boolean} refreshFilters?. Set this to false, if you will use multiple 'addFilter' calls. By doing this, you will avoid unnecessary renders.
     */
     addFilter(dataField: string, filter: string, refreshFilters?: boolean): void;
     /** @description Groups the Grid by a data field. This method will add a group to the Grid when grouping is enabled.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     addGroup(dataField: string): void;
     /** @description Sorts the Grid by a data field. This method will add a sorting to the Grid when sorting is enabled.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} sortOrder. column's sort order. Use 'asc' or 'desc'.
     */
     addSort(dataField: string, sortOrder: string): void;
@@ -455,7 +486,7 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     beginUpdate(): void;
     /** @description Begins row, cell or column. This method allows you to programmatically start a cell, row or column editing. After calling it, an editor HTMLElement will be created and displayed in the Grid.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField?. column bound data field
+    * @param {string} dataField?. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     beginEdit(rowId: string | number, dataField?: string): void;
     /** @description Clears all filters. Refreshes the view and updates all filter input components.
@@ -505,7 +536,7 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     deleteRow(rowId: string | number, callback?: any): void;
     /** @description Scrolls to a row or cell. This method scrolls to a row or cell, when scrolling is necessary. If pagination is enabled, it will automatically change the page.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField?. column bound data field
+    * @param {string} dataField?. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @returns {boolean}
   */
     ensureVisible(rowId: any, dataField?: any): Promise<any>;
@@ -605,12 +636,12 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     getBatchEditChanges(): Promise<any>;
     /** @description Gets a value of a cell.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @returns {any}
   */
     getCellValue(rowId: any, dataField: any): Promise<any>;
     /** @description Gets a value of a column.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} propertyName. The property name.
     * @returns {any}
   */
@@ -644,12 +675,12 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     hideDetail(rowId: string | number): void;
     /** @description Highlights a column. Highlights a Grid column.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     highlightColumn(dataField: string): void;
     /** @description Highlights a cell. Calling the method a second time toggle the highlight state.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} className?. CSS Class Name
     */
     highlightCell(rowId: string | number, dataField: string, className?: string): void;
@@ -658,8 +689,14 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     * @param {string} className?. CSS Class Name
     */
     highlightRow(rowId: string | number, className?: string): void;
+    /** @description Inserts a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {any} data. row data matching the data source
+    * @param {number} index?. Determines the insert index. The default value is the last index.
+    * @param {any} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
+    */
+    insertRow(data: any, index?: number, callback?: any): void;
     /** @description Opens a column drop-down menu.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     openMenu(dataField: string): void;
     /** @description Prints the Grid data. The method uses the options of the dataExport property. When printed, the Grid will not display any scrollbars so all rows and columns will be displayed. The grid will auto resize width and height to fit all contents. To customize the printing options, you can use  the dataExport property.
@@ -672,16 +709,16 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     refreshView(): void;
     /** @description Refreshes the grid cells in view. The method is useful for live-updates of cell values.
-    * @param {string} dataField. column bound data field
-    * @param {boolean} refreshFilters?.
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
+    * @param {boolean} refreshFilters?. Set this to false, if you need to make multiple removeFilter calls.
     */
     removeFilter(dataField: string, refreshFilters?: boolean): void;
     /** @description Removes a column filter.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     removeGroup(dataField: string): void;
     /** @description Removes a group by data field. This method will remove a group to the Grid when grouping is enabled.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     removeSort(dataField: string): void;
     /** @description Removes a sorting by data field. This method will remove a sorting from a Grid column.
@@ -697,7 +734,7 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     */
     reorderColumns(dataField: string | number, referenceDataField: string | number, insertAfter?: boolean): void;
     /** @description Reorders two DataGrid columns.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string | null} sortOrder. column's sort order. Use 'asc', 'desc' or null.
     */
     sortBy(dataField: string, sortOrder: string | null): void;
@@ -739,12 +776,12 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     selectRowsByIndex(rowIndex: number[]): void;
     /** @description Selects multiple rows by their index.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string | number | Date | boolean} value. New Cell value.
     */
     setCellValue(rowId: string | number, dataField: string, value: string | number | Date | boolean): void;
     /** @description Sets a new value to a cell.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} propertyName. The column property's name.
     * @param {any} value. The new property value.
     */
@@ -775,7 +812,7 @@ export declare class GridComponent extends BaseElement implements OnInit, AfterV
     updateRow(rowId: string | number, data: any, callback?: any): void;
     /** @description Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField?. column bound data field
+    * @param {string} dataField?. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     unselect(rowId: string | number, dataField?: string): void;
     /** @description Unselects a row, cell or column.

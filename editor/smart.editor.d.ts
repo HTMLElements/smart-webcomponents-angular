@@ -82,6 +82,8 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     sanitized: boolean;
     /** @description Determines whether the char counter is visible or not. When enabled it is displayed in the bottom right corner. If maxCharCount is set and the content characters are equal or more than 70% of the maximum char count the counter is colored in order to warn the user. If the char count is equal or more than 90% the counter is again colored with a different warning color to indicate that the counter is near maximum. When maximum is reached, text input is not allowed. */
     showCharCount: boolean;
+    /** @description Determines whether the editor may be checked for spelling errors. */
+    spellCheck: boolean;
     /** @description Determines the refresh interval for the Source Code/Preview Panel when Split Mode is enabled.  */
     splitModeRefreshTimeout: number;
     /** @description Determines the theme. Theme defines the look of the element */

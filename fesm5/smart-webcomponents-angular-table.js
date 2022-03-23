@@ -254,17 +254,6 @@ var TableComponent = /** @class */ (function (_super) {
         }
         return this.nativeElement;
     };
-    Object.defineProperty(TableComponent.prototype, "animation", {
-        /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-        get: function () {
-            return this.nativeElement ? this.nativeElement.animation : undefined;
-        },
-        set: function (value) {
-            this.nativeElement ? this.nativeElement.animation = value : undefined;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(TableComponent.prototype, "autoLoadState", {
         /** @description Enables or disables auto load state from the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property. */
         get: function () {
@@ -371,6 +360,17 @@ var TableComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "columnMenu", {
+        /** @description Sets or gets the column menu. When you set this property to true, each column will have a column menu. From the column menu, you will be able to sort, filter, show or hide columns. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.columnMenu : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.columnMenu = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -508,12 +508,23 @@ var TableComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(TableComponent.prototype, "filterRow", {
-        /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
+        /** @description Sets or gets the Table's filter operator. It determines whether 'and' or 'or' is used when applying column filters - cellvalue1 && cellvalue2 vs cellvalue1 || cellvalue2 */
         get: function () {
             return this.nativeElement ? this.nativeElement.filterRow : undefined;
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.filterRow = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "filterOperator", {
+        /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.filterOperator : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.filterOperator = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -596,7 +607,7 @@ var TableComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(TableComponent.prototype, "headerRow", {
-        /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
+        /** @description Sets or gets whether the checkboxes are displayed in the selection column. */
         get: function () {
             return this.nativeElement ? this.nativeElement.headerRow : undefined;
         },
@@ -607,12 +618,23 @@ var TableComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(TableComponent.prototype, "keyboardNavigation", {
-        /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+        /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
         get: function () {
             return this.nativeElement ? this.nativeElement.keyboardNavigation : undefined;
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.keyboardNavigation = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(TableComponent.prototype, "hideSelectionColumn", {
+        /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.hideSelectionColumn : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.hideSelectionColumn = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1659,9 +1681,6 @@ var TableComponent = /** @class */ (function (_super) {
     ]; };
     __decorate([
         Input()
-    ], TableComponent.prototype, "animation", null);
-    __decorate([
-        Input()
     ], TableComponent.prototype, "autoLoadState", null);
     __decorate([
         Input()
@@ -1690,6 +1709,9 @@ var TableComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], TableComponent.prototype, "conditionalFormatting", null);
+    __decorate([
+        Input()
+    ], TableComponent.prototype, "columnMenu", null);
     __decorate([
         Input()
     ], TableComponent.prototype, "columnSizeMode", null);
@@ -1731,6 +1753,9 @@ var TableComponent = /** @class */ (function (_super) {
     ], TableComponent.prototype, "filterRow", null);
     __decorate([
         Input()
+    ], TableComponent.prototype, "filterOperator", null);
+    __decorate([
+        Input()
     ], TableComponent.prototype, "filterTemplate", null);
     __decorate([
         Input()
@@ -1756,6 +1781,9 @@ var TableComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], TableComponent.prototype, "keyboardNavigation", null);
+    __decorate([
+        Input()
+    ], TableComponent.prototype, "hideSelectionColumn", null);
     __decorate([
         Input()
     ], TableComponent.prototype, "loadColumnStateBehavior", null);

@@ -521,6 +521,13 @@ let EditorComponent = class EditorComponent extends BaseElement {
     set showCharCount(value) {
         this.nativeElement ? this.nativeElement.showCharCount = value : undefined;
     }
+    /** @description Determines whether the editor may be checked for spelling errors. */
+    get spellCheck() {
+        return this.nativeElement ? this.nativeElement.spellCheck : undefined;
+    }
+    set spellCheck(value) {
+        this.nativeElement ? this.nativeElement.spellCheck = value : undefined;
+    }
     /** @description Determines the refresh interval for the Source Code/Preview Panel when Split Mode is enabled.  */
     get splitModeRefreshTimeout() {
         return this.nativeElement ? this.nativeElement.splitModeRefreshTimeout : undefined;
@@ -1244,6 +1251,9 @@ __decorate([
 __decorate([
     Input()
 ], EditorComponent.prototype, "showCharCount", null);
+__decorate([
+    Input()
+], EditorComponent.prototype, "spellCheck", null);
 __decorate([
     Input()
 ], EditorComponent.prototype, "splitModeRefreshTimeout", null);

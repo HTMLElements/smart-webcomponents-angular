@@ -228,13 +228,6 @@ let TableComponent = class TableComponent extends BaseElement {
         }
         return this.nativeElement;
     }
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    get animation() {
-        return this.nativeElement ? this.nativeElement.animation : undefined;
-    }
-    set animation(value) {
-        this.nativeElement ? this.nativeElement.animation = value : undefined;
-    }
     /** @description Enables or disables auto load state from the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property. */
     get autoLoadState() {
         return this.nativeElement ? this.nativeElement.autoLoadState : undefined;
@@ -304,6 +297,13 @@ let TableComponent = class TableComponent extends BaseElement {
     }
     set conditionalFormatting(value) {
         this.nativeElement ? this.nativeElement.conditionalFormatting = value : undefined;
+    }
+    /** @description Sets or gets the column menu. When you set this property to true, each column will have a column menu. From the column menu, you will be able to sort, filter, show or hide columns. */
+    get columnMenu() {
+        return this.nativeElement ? this.nativeElement.columnMenu : undefined;
+    }
+    set columnMenu(value) {
+        this.nativeElement ? this.nativeElement.columnMenu = value : undefined;
     }
     /** @description Sets or gets the column sizing behavior. In 'auto' mode Columns are automatically sized based on their content and the value of the columnMinWidth property, unless there is not enough space in the Table, in which case ellipses are shown. User-set static column width is still respected. In 'default' mode Columns are sized according to the rules of the standard HTML table element's table-layout: fixed. Custom width can also be applied to columns in this case by setting the column width property. */
     get columnSizeMode() {
@@ -389,12 +389,19 @@ let TableComponent = class TableComponent extends BaseElement {
     set filtering(value) {
         this.nativeElement ? this.nativeElement.filtering = value : undefined;
     }
-    /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
+    /** @description Sets or gets the Table's filter operator. It determines whether 'and' or 'or' is used when applying column filters - cellvalue1 && cellvalue2 vs cellvalue1 || cellvalue2 */
     get filterRow() {
         return this.nativeElement ? this.nativeElement.filterRow : undefined;
     }
     set filterRow(value) {
         this.nativeElement ? this.nativeElement.filterRow = value : undefined;
+    }
+    /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
+    get filterOperator() {
+        return this.nativeElement ? this.nativeElement.filterOperator : undefined;
+    }
+    set filterOperator(value) {
+        this.nativeElement ? this.nativeElement.filterOperator = value : undefined;
     }
     /** @description Sets or gets the id of an HTML template element to be applied as footer row(s). */
     get filterTemplate() {
@@ -445,19 +452,26 @@ let TableComponent = class TableComponent extends BaseElement {
     set groupFormatFunction(value) {
         this.nativeElement ? this.nativeElement.groupFormatFunction = value : undefined;
     }
-    /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
+    /** @description Sets or gets whether the checkboxes are displayed in the selection column. */
     get headerRow() {
         return this.nativeElement ? this.nativeElement.headerRow : undefined;
     }
     set headerRow(value) {
         this.nativeElement ? this.nativeElement.headerRow = value : undefined;
     }
-    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
     get keyboardNavigation() {
         return this.nativeElement ? this.nativeElement.keyboardNavigation : undefined;
     }
     set keyboardNavigation(value) {
         this.nativeElement ? this.nativeElement.keyboardNavigation = value : undefined;
+    }
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    get hideSelectionColumn() {
+        return this.nativeElement ? this.nativeElement.hideSelectionColumn : undefined;
+    }
+    set hideSelectionColumn(value) {
+        this.nativeElement ? this.nativeElement.hideSelectionColumn = value : undefined;
     }
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
     get loadColumnStateBehavior() {
@@ -1315,9 +1329,6 @@ TableComponent.ctorParameters = () => [
 ];
 __decorate([
     Input()
-], TableComponent.prototype, "animation", null);
-__decorate([
-    Input()
 ], TableComponent.prototype, "autoLoadState", null);
 __decorate([
     Input()
@@ -1346,6 +1357,9 @@ __decorate([
 __decorate([
     Input()
 ], TableComponent.prototype, "conditionalFormatting", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "columnMenu", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "columnSizeMode", null);
@@ -1387,6 +1401,9 @@ __decorate([
 ], TableComponent.prototype, "filterRow", null);
 __decorate([
     Input()
+], TableComponent.prototype, "filterOperator", null);
+__decorate([
+    Input()
 ], TableComponent.prototype, "filterTemplate", null);
 __decorate([
     Input()
@@ -1412,6 +1429,9 @@ __decorate([
 __decorate([
     Input()
 ], TableComponent.prototype, "keyboardNavigation", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "hideSelectionColumn", null);
 __decorate([
     Input()
 ], TableComponent.prototype, "loadColumnStateBehavior", null);

@@ -439,17 +439,6 @@ import './../source/modules/smart.combobox';
             }
             return this.nativeElement;
         };
-        Object.defineProperty(ComboBoxComponent.prototype, "animation", {
-            /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-            get: function () {
-                return this.nativeElement ? this.nativeElement.animation : undefined;
-            },
-            set: function (value) {
-                this.nativeElement ? this.nativeElement.animation = value : undefined;
-            },
-            enumerable: true,
-            configurable: true
-        });
         Object.defineProperty(ComboBoxComponent.prototype, "autoCloseDelay", {
             /** @description Used only when dropDownOpenMode is set to 'auto'. Determines the delay before the opened drop down closes if the pointer is not over the element. */
             get: function () {
@@ -1563,9 +1552,6 @@ import './../source/modules/smart.combobox';
         ComboBoxComponent.ctorParameters = function () { return [
             { type: core.ElementRef }
         ]; };
-        __decorate([
-            core.Input()
-        ], ComboBoxComponent.prototype, "animation", null);
         __decorate([
             core.Input()
         ], ComboBoxComponent.prototype, "autoCloseDelay", null);

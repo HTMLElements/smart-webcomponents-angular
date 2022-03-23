@@ -682,6 +682,17 @@ import './../source/modules/smart.multicomboinput';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(MultiComboInputComponent.prototype, "selectedValues", {
+            /** @description Gets or sets an array of selected values. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.selectedValues : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.selectedValues = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(MultiComboInputComponent.prototype, "sorted", {
             /** @description Determines whether the items are sorted alphabetically or not */
             get: function () {
@@ -992,6 +1003,9 @@ import './../source/modules/smart.multicomboinput';
         __decorate([
             core.Input()
         ], MultiComboInputComponent.prototype, "selectAll", null);
+        __decorate([
+            core.Input()
+        ], MultiComboInputComponent.prototype, "selectedValues", null);
         __decorate([
             core.Input()
         ], MultiComboInputComponent.prototype, "sorted", null);

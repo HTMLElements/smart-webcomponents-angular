@@ -197,6 +197,18 @@ let GridComponent = class GridComponent extends BaseElement {
         *   originalEvent - The origianl Event object.
         */
         this.onColumnReorder = new EventEmitter();
+        /** @description This event is triggered, when the user enters a comment in the row edit dialog.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	comment)
+        *   id - The row's id.
+        *   comment - The comment object. The comment object has 'text: string', 'id: string', 'userId: string | number', and 'time: date' fields. The 'text' is the comment's text. 'id' is the comment's unique id, 'userId' is the user's id who entered the comment and 'time' is a javascript date object.
+        */
+        this.onCommentAdd = new EventEmitter();
+        /** @description This event is triggered, when the user removes a comment in the row edit dialog.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	comment)
+        *   id - The row's id.
+        *   comment - The comment object. The comment object has 'text: string', 'id: string', 'userId: string | number', and 'time: date' fields. The 'text' is the comment's text. 'id' is the comment's unique id, 'userId' is the user's id who entered the comment and 'time' is a javascript date object.
+        */
+        this.onCommentRemove = new EventEmitter();
         /** @description This event is triggered, when the user starts a row drag.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	index, 	originalEvent)
         *   row - The row.
@@ -276,6 +288,14 @@ let GridComponent = class GridComponent extends BaseElement {
         *   height - The new height of the row.
         */
         this.onRowResize = new EventEmitter();
+        /** @description This event is triggered, when the user clicks on the row header's star.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	originalEvent, 	id, 	value)
+        *   row - The clicked row.
+        *   originalEvent - The original event object, which is 'pointer', 'touch' or 'mouse' Event object, depending on the device type and web browser
+        *   id - Gets the row id.
+        *   value - Gets whether the row is starred or not.
+        */
+        this.onRowStarred = new EventEmitter();
         /** @description This event is triggered, when the user clicks on a cell of the grid.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	cell, 	originalEvent, 	id, 	dataField, 	isRightClick, 	pageX, 	pageY)
         *   cell - The clicked cell.
@@ -308,11 +328,17 @@ let GridComponent = class GridComponent extends BaseElement {
         */
         this.onEndEdit = new EventEmitter();
         /** @description This event is triggered, when a filter is added or removed.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	columns, 	data)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	columns, 	data, 	expressions)
         *   columns - Array of columns.
-        *   data - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'
+        *   data - Array of {dataField: string, filter: object}. <em>dataField</em> is the column's data field. <em>filter</em> is a FilterGroup object.
+        *   expressions - Array of {dataField: string, filter: string}. <em>dataField</em> is the column's data field. <em>filter</em> is a filter expression like 'startsWith B'. In each array item, you will have an object with column's name and filter string. Example: [['firstName', 'contains Andrew or contains Nancy'], ['quantity', '&lt;= 3 and &gt;= 8']], [['firstName', 'EQUAL' 'Andrew' or 'EQUAL' 'Antoni' or 'EQUAL' 'Beate']], [['lastName','CONTAINS' 'burke' or 'CONTAINS' 'peterson']]. Filter conditions used in the filter expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
         */
         this.onFilter = new EventEmitter();
+        /** @description This event is triggered, when the rows grouping is changed.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	groups)
+        *   groups - Array of column data fields.
+        */
+        this.onGroup = new EventEmitter();
         /** @description This event is triggered, when the add new column dialog is opened.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	dataField)
         *   dataField - The column data field.
@@ -776,6 +802,24 @@ let GridComponent = class GridComponent extends BaseElement {
             return result;
         });
     }
+    /** @description Adds a new column.
+    * @param {any} column. A Grid column object. See 'columns' property.
+    * @returns {boolean}
+  */
+    addNewColumn(column) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.addNewColumn(column);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Adds a new unbound row to the top or bottom. Unbound rows are not part of the Grid's dataSource. They become part of the dataSource, after an unbound row is edited.
     * @param {number} count. The count of unbound rows.
     * @param {string} position?. 'near' or 'far'
@@ -796,9 +840,9 @@ let GridComponent = class GridComponent extends BaseElement {
         });
     }
     /** @description Adds a filter to a column. This method will apply a filter to the Grid data.
-    * @param {string} dataField. column bound data field
-    * @param {string} filter. Filter expression like: 'startsWith B'
-    * @param {boolean} refreshFilters?.
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
+    * @param {string} filter. Filter expression like: 'startsWith B'. Example 2: ['contains Andrew or contains Nancy'], Example 3:  ['quantity', '&lt;= 3 and &gt;= 8'].  Filter conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
+    * @param {boolean} refreshFilters?. Set this to false, if you will use multiple 'addFilter' calls. By doing this, you will avoid unnecessary renders.
     */
     addFilter(dataField, filter, refreshFilters) {
         if (this.nativeElement.isRendered) {
@@ -811,7 +855,7 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Groups the Grid by a data field. This method will add a group to the Grid when grouping is enabled.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     addGroup(dataField) {
         if (this.nativeElement.isRendered) {
@@ -824,7 +868,7 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Sorts the Grid by a data field. This method will add a sorting to the Grid when sorting is enabled.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} sortOrder. column's sort order. Use 'asc' or 'desc'.
     */
     addSort(dataField, sortOrder) {
@@ -892,7 +936,7 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Begins row, cell or column. This method allows you to programmatically start a cell, row or column editing. After calling it, an editor HTMLElement will be created and displayed in the Grid.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField?. column bound data field
+    * @param {string} dataField?. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     beginEdit(rowId, dataField) {
         if (this.nativeElement.isRendered) {
@@ -1068,7 +1112,7 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Scrolls to a row or cell. This method scrolls to a row or cell, when scrolling is necessary. If pagination is enabled, it will automatically change the page.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField?. column bound data field
+    * @param {string} dataField?. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @returns {boolean}
   */
     ensureVisible(rowId, dataField) {
@@ -1466,7 +1510,7 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Gets a value of a cell.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @returns {any}
   */
     getCellValue(rowId, dataField) {
@@ -1484,7 +1528,7 @@ let GridComponent = class GridComponent extends BaseElement {
         });
     }
     /** @description Gets a value of a column.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} propertyName. The property name.
     * @returns {any}
   */
@@ -1605,7 +1649,7 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Highlights a column. Highlights a Grid column.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     highlightColumn(dataField) {
         if (this.nativeElement.isRendered) {
@@ -1619,7 +1663,7 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Highlights a cell. Calling the method a second time toggle the highlight state.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} className?. CSS Class Name
     */
     highlightCell(rowId, dataField, className) {
@@ -1646,8 +1690,23 @@ let GridComponent = class GridComponent extends BaseElement {
             });
         }
     }
+    /** @description Inserts a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
+    * @param {any} data. row data matching the data source
+    * @param {number} index?. Determines the insert index. The default value is the last index.
+    * @param {any} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
+    */
+    insertRow(data, index, callback) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.insertRow(data, index, callback);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.insertRow(data, index, callback);
+            });
+        }
+    }
     /** @description Opens a column drop-down menu.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     openMenu(dataField) {
         if (this.nativeElement.isRendered) {
@@ -1696,8 +1755,8 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Refreshes the grid cells in view. The method is useful for live-updates of cell values.
-    * @param {string} dataField. column bound data field
-    * @param {boolean} refreshFilters?.
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
+    * @param {boolean} refreshFilters?. Set this to false, if you need to make multiple removeFilter calls.
     */
     removeFilter(dataField, refreshFilters) {
         if (this.nativeElement.isRendered) {
@@ -1710,7 +1769,7 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Removes a column filter.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     removeGroup(dataField) {
         if (this.nativeElement.isRendered) {
@@ -1723,7 +1782,7 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Removes a group by data field. This method will remove a group to the Grid when grouping is enabled.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     removeSort(dataField) {
         if (this.nativeElement.isRendered) {
@@ -1775,7 +1834,7 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Reorders two DataGrid columns.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string | null} sortOrder. column's sort order. Use 'asc', 'desc' or null.
     */
     sortBy(dataField, sortOrder) {
@@ -1898,7 +1957,7 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Selects multiple rows by their index.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string | number | Date | boolean} value. New Cell value.
     */
     setCellValue(rowId, dataField, value) {
@@ -1912,7 +1971,7 @@ let GridComponent = class GridComponent extends BaseElement {
         }
     }
     /** @description Sets a new value to a cell.
-    * @param {string} dataField. column bound data field
+    * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     * @param {string} propertyName. The column property's name.
     * @param {any} value. The new property value.
     */
@@ -1997,7 +2056,7 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     /** @description Updates a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
     * @param {string | number} rowId. row bound id
-    * @param {string} dataField?. column bound data field
+    * @param {string} dataField?. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
     */
     unselect(rowId, dataField) {
         if (this.nativeElement.isRendered) {
@@ -2097,6 +2156,10 @@ let GridComponent = class GridComponent extends BaseElement {
         that.nativeElement.addEventListener('columnDragEnd', that.eventHandlers['columnDragEndHandler']);
         that.eventHandlers['columnReorderHandler'] = (event) => { that.onColumnReorder.emit(event); };
         that.nativeElement.addEventListener('columnReorder', that.eventHandlers['columnReorderHandler']);
+        that.eventHandlers['commentAddHandler'] = (event) => { that.onCommentAdd.emit(event); };
+        that.nativeElement.addEventListener('commentAdd', that.eventHandlers['commentAddHandler']);
+        that.eventHandlers['commentRemoveHandler'] = (event) => { that.onCommentRemove.emit(event); };
+        that.nativeElement.addEventListener('commentRemove', that.eventHandlers['commentRemoveHandler']);
         that.eventHandlers['rowDragStartHandler'] = (event) => { that.onRowDragStart.emit(event); };
         that.nativeElement.addEventListener('rowDragStart', that.eventHandlers['rowDragStartHandler']);
         that.eventHandlers['rowDraggingHandler'] = (event) => { that.onRowDragging.emit(event); };
@@ -2115,6 +2178,8 @@ let GridComponent = class GridComponent extends BaseElement {
         that.nativeElement.addEventListener('rowDoubleClick', that.eventHandlers['rowDoubleClickHandler']);
         that.eventHandlers['rowResizeHandler'] = (event) => { that.onRowResize.emit(event); };
         that.nativeElement.addEventListener('rowResize', that.eventHandlers['rowResizeHandler']);
+        that.eventHandlers['rowStarredHandler'] = (event) => { that.onRowStarred.emit(event); };
+        that.nativeElement.addEventListener('rowStarred', that.eventHandlers['rowStarredHandler']);
         that.eventHandlers['cellClickHandler'] = (event) => { that.onCellClick.emit(event); };
         that.nativeElement.addEventListener('cellClick', that.eventHandlers['cellClickHandler']);
         that.eventHandlers['cellDoubleClickHandler'] = (event) => { that.onCellDoubleClick.emit(event); };
@@ -2123,6 +2188,8 @@ let GridComponent = class GridComponent extends BaseElement {
         that.nativeElement.addEventListener('endEdit', that.eventHandlers['endEditHandler']);
         that.eventHandlers['filterHandler'] = (event) => { that.onFilter.emit(event); };
         that.nativeElement.addEventListener('filter', that.eventHandlers['filterHandler']);
+        that.eventHandlers['groupHandler'] = (event) => { that.onGroup.emit(event); };
+        that.nativeElement.addEventListener('group', that.eventHandlers['groupHandler']);
         that.eventHandlers['openColumnDialogHandler'] = (event) => { that.onOpenColumnDialog.emit(event); };
         that.nativeElement.addEventListener('openColumnDialog', that.eventHandlers['openColumnDialogHandler']);
         that.eventHandlers['closeColumnDialogHandler'] = (event) => { that.onCloseColumnDialog.emit(event); };
@@ -2178,6 +2245,12 @@ let GridComponent = class GridComponent extends BaseElement {
         if (that.eventHandlers['columnReorderHandler']) {
             that.nativeElement.removeEventListener('columnReorder', that.eventHandlers['columnReorderHandler']);
         }
+        if (that.eventHandlers['commentAddHandler']) {
+            that.nativeElement.removeEventListener('commentAdd', that.eventHandlers['commentAddHandler']);
+        }
+        if (that.eventHandlers['commentRemoveHandler']) {
+            that.nativeElement.removeEventListener('commentRemove', that.eventHandlers['commentRemoveHandler']);
+        }
         if (that.eventHandlers['rowDragStartHandler']) {
             that.nativeElement.removeEventListener('rowDragStart', that.eventHandlers['rowDragStartHandler']);
         }
@@ -2205,6 +2278,9 @@ let GridComponent = class GridComponent extends BaseElement {
         if (that.eventHandlers['rowResizeHandler']) {
             that.nativeElement.removeEventListener('rowResize', that.eventHandlers['rowResizeHandler']);
         }
+        if (that.eventHandlers['rowStarredHandler']) {
+            that.nativeElement.removeEventListener('rowStarred', that.eventHandlers['rowStarredHandler']);
+        }
         if (that.eventHandlers['cellClickHandler']) {
             that.nativeElement.removeEventListener('cellClick', that.eventHandlers['cellClickHandler']);
         }
@@ -2216,6 +2292,9 @@ let GridComponent = class GridComponent extends BaseElement {
         }
         if (that.eventHandlers['filterHandler']) {
             that.nativeElement.onfilterHandler = null;
+        }
+        if (that.eventHandlers['groupHandler']) {
+            that.nativeElement.removeEventListener('group', that.eventHandlers['groupHandler']);
         }
         if (that.eventHandlers['openColumnDialogHandler']) {
             that.nativeElement.removeEventListener('openColumnDialog', that.eventHandlers['openColumnDialogHandler']);
@@ -2446,6 +2525,12 @@ __decorate([
 ], GridComponent.prototype, "onColumnReorder", void 0);
 __decorate([
     Output()
+], GridComponent.prototype, "onCommentAdd", void 0);
+__decorate([
+    Output()
+], GridComponent.prototype, "onCommentRemove", void 0);
+__decorate([
+    Output()
 ], GridComponent.prototype, "onRowDragStart", void 0);
 __decorate([
     Output()
@@ -2473,6 +2558,9 @@ __decorate([
 ], GridComponent.prototype, "onRowResize", void 0);
 __decorate([
     Output()
+], GridComponent.prototype, "onRowStarred", void 0);
+__decorate([
+    Output()
 ], GridComponent.prototype, "onCellClick", void 0);
 __decorate([
     Output()
@@ -2483,6 +2571,9 @@ __decorate([
 __decorate([
     Output()
 ], GridComponent.prototype, "onFilter", void 0);
+__decorate([
+    Output()
+], GridComponent.prototype, "onGroup", void 0);
 __decorate([
     Output()
 ], GridComponent.prototype, "onOpenColumnDialog", void 0);

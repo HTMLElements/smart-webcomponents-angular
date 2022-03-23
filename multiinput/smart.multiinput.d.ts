@@ -66,6 +66,8 @@ export declare class MultiInputComponent extends BaseElement implements OnInit, 
     rightToLeft: boolean;
     /** @description Determines the delimiter between the selected items in the input. */
     separator: string;
+    /** @description Gets or sets an array of selected values. */
+    selectedValues: any;
     /** @description Determines whether an additional item is displayed as the first item in the options list, which allows to select/unselect all items. */
     selectAll: boolean;
     /** @description Determines whether the items are sorted alphabetically or not */

@@ -448,6 +448,13 @@ window.rrule = { RRule:  pkg.default };
             *   originalEvent - The original event object.
             */
             _this.onDragEnd = new core.EventEmitter();
+            /** @description This event is triggered when the user drops an item over a cell.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	date, 	allDay)
+            *   target - The HTMLElement that corresponds to the event that is dragged.
+            *   date - The cell's date under the pointer.
+            *   allDay - Boolean value, which is true when the cell under the pointer is all day cell.
+            */
+            _this.onDropoverCell = new core.EventEmitter();
             /** @description This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	itemDateRange, 	originalEvent)
             *   target - The HTMLElement that corresponds to the event that is going to be resized.
@@ -2597,6 +2604,8 @@ window.rrule = { RRule:  pkg.default };
             that.nativeElement.addEventListener('dragStart', that.eventHandlers['dragStartHandler']);
             that.eventHandlers['dragEndHandler'] = function (event) { that.onDragEnd.emit(event); };
             that.nativeElement.addEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
+            that.eventHandlers['dropoverCellHandler'] = function (event) { that.onDropoverCell.emit(event); };
+            that.nativeElement.addEventListener('dropoverCell', that.eventHandlers['dropoverCellHandler']);
             that.eventHandlers['resizeStartHandler'] = function (event) { that.onResizeStart.emit(event); };
             that.nativeElement.addEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
             that.eventHandlers['resizeEndHandler'] = function (event) { that.onResizeEnd.emit(event); };
@@ -2685,6 +2694,9 @@ window.rrule = { RRule:  pkg.default };
             }
             if (that.eventHandlers['dragEndHandler']) {
                 that.nativeElement.removeEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
+            }
+            if (that.eventHandlers['dropoverCellHandler']) {
+                that.nativeElement.removeEventListener('dropoverCell', that.eventHandlers['dropoverCellHandler']);
             }
             if (that.eventHandlers['resizeStartHandler']) {
                 that.nativeElement.removeEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
@@ -3092,6 +3104,9 @@ window.rrule = { RRule:  pkg.default };
         __decorate([
             core.Output()
         ], SchedulerComponent.prototype, "onDragEnd", void 0);
+        __decorate([
+            core.Output()
+        ], SchedulerComponent.prototype, "onDropoverCell", void 0);
         __decorate([
             core.Output()
         ], SchedulerComponent.prototype, "onResizeStart", void 0);

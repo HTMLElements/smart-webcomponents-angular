@@ -202,6 +202,13 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         *   originalEvent - The original event object.
         */
         this.onDragEnd = new EventEmitter();
+        /** @description This event is triggered when the user drops an item over a cell.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	date, 	allDay)
+        *   target - The HTMLElement that corresponds to the event that is dragged.
+        *   date - The cell's date under the pointer.
+        *   allDay - Boolean value, which is true when the cell under the pointer is all day cell.
+        */
+        this.onDropoverCell = new EventEmitter();
         /** @description This event is triggered when resizing of a task starts. This event allows to cancel the operation by calling event.preventDefault() in the event handler function.
         *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	itemDateRange, 	originalEvent)
         *   target - The HTMLElement that corresponds to the event that is going to be resized.
@@ -1776,6 +1783,8 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         that.nativeElement.addEventListener('dragStart', that.eventHandlers['dragStartHandler']);
         that.eventHandlers['dragEndHandler'] = (event) => { that.onDragEnd.emit(event); };
         that.nativeElement.addEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
+        that.eventHandlers['dropoverCellHandler'] = (event) => { that.onDropoverCell.emit(event); };
+        that.nativeElement.addEventListener('dropoverCell', that.eventHandlers['dropoverCellHandler']);
         that.eventHandlers['resizeStartHandler'] = (event) => { that.onResizeStart.emit(event); };
         that.nativeElement.addEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
         that.eventHandlers['resizeEndHandler'] = (event) => { that.onResizeEnd.emit(event); };
@@ -1864,6 +1873,9 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         }
         if (that.eventHandlers['dragEndHandler']) {
             that.nativeElement.removeEventListener('dragEnd', that.eventHandlers['dragEndHandler']);
+        }
+        if (that.eventHandlers['dropoverCellHandler']) {
+            that.nativeElement.removeEventListener('dropoverCell', that.eventHandlers['dropoverCellHandler']);
         }
         if (that.eventHandlers['resizeStartHandler']) {
             that.nativeElement.removeEventListener('resizeStart', that.eventHandlers['resizeStartHandler']);
@@ -2272,6 +2284,9 @@ __decorate([
 __decorate([
     Output()
 ], SchedulerComponent.prototype, "onDragEnd", void 0);
+__decorate([
+    Output()
+], SchedulerComponent.prototype, "onDropoverCell", void 0);
 __decorate([
     Output()
 ], SchedulerComponent.prototype, "onResizeStart", void 0);

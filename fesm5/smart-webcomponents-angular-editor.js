@@ -679,6 +679,17 @@ var EditorComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(EditorComponent.prototype, "spellCheck", {
+        /** @description Determines whether the editor may be checked for spelling errors. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.spellCheck : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.spellCheck = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(EditorComponent.prototype, "splitModeRefreshTimeout", {
         /** @description Determines the refresh interval for the Source Code/Preview Panel when Split Mode is enabled.  */
         get: function () {
@@ -1528,6 +1539,9 @@ var EditorComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], EditorComponent.prototype, "showCharCount", null);
+    __decorate([
+        Input()
+    ], EditorComponent.prototype, "spellCheck", null);
     __decorate([
         Input()
     ], EditorComponent.prototype, "splitModeRefreshTimeout", null);

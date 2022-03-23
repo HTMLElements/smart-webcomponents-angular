@@ -1,8 +1,8 @@
 import { Table } from './../index';
-import { Animation, TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings } from './../index';
+import { TableColumnSizeMode, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, TableColumnDataType, TableColumnFreeze, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableDataSourceSettingsSanitizeHTML, TableDataSourceSettingsSanitizeHTMLRender, TableDataSourceSettingsDataFieldDataType, TableDataSourceSettingsDataSourceType, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings, TableDataSourceSettingsDataField, ElementRenderMode } from './../index';
+export { TableColumnDataType, TableColumnFreeze, TableConditionalFormattingCondition, TableConditionalFormattingFontFamily, TableConditionalFormattingFontSize, TableColumnSizeMode, TableDataSourceSettingsSanitizeHTML, TableDataSourceSettingsSanitizeHTMLRender, TableDataSourceSettingsDataFieldDataType, TableDataSourceSettingsDataSourceType, TableEditMode, TableLoadColumnStateBehavior, TablePageSize, TableSelectionMode, TableSortMode, TableColumnGroup, TableColumn, TableConditionalFormatting, TableDataSourceSettings, TableDataSourceSettingsDataField, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Table } from './../index';
 export declare class TableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -13,8 +13,6 @@ export declare class TableComponent extends BaseElement implements OnInit, After
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
     createComponent(properties?: {}): any;
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
     /** @description Enables or disables auto load state from the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and sorted columns is loaded, based on the value of the stateSettings property. */
     autoLoadState: boolean;
     /** @description Enables or disables auto save state to the browser's localStorage. Information about columns, expanded rows, selected rows, applied fitering, grouping, and   sorted columns is saved, based on the value of the stateSettings property. */
@@ -35,6 +33,8 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     columns: TableColumn[];
     /** @description Sets or gets details about conditional formatting to be applied to the Table's cells. */
     conditionalFormatting: TableConditionalFormatting[];
+    /** @description Sets or gets the column menu. When you set this property to true, each column will have a column menu. From the column menu, you will be able to sort, filter, show or hide columns. */
+    columnMenu: boolean;
     /** @description Sets or gets the column sizing behavior. In 'auto' mode Columns are automatically sized based on their content and the value of the columnMinWidth property, unless there is not enough space in the Table, in which case ellipses are shown. User-set static column width is still respected. In 'default' mode Columns are sized according to the rules of the standard HTML table element's table-layout: fixed. Custom width can also be applied to columns in this case by setting the column width property. */
     columnSizeMode: TableColumnSizeMode;
     /** @description Sets or gets whether the "Conditional Formatting" button appears in the Table's header (toolbar). Clicking this button opens a dialog with formatting options. */
@@ -61,8 +61,10 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     expandHierarchy: boolean;
     /** @description Sets or gets whether the Table can be filtered via a filter row. */
     filtering: boolean;
-    /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
+    /** @description Sets or gets the Table's filter operator. It determines whether 'and' or 'or' is used when applying column filters - cellvalue1 && cellvalue2 vs cellvalue1 || cellvalue2 */
     filterRow: boolean;
+    /** @description Sets or gets the id of an HTML template element to be applied as a custom filter template. */
+    filterOperator: boolean;
     /** @description Sets or gets the id of an HTML template element to be applied as footer row(s). */
     filterTemplate: string;
     /** @description Sets or gets whether Excel-like formulas can be passed as cell values. Formulas are always preceded by the = sign and are re-evaluated when cell values are changed. This feature depends on the third-party free plug-in formula-parser (the file formula-parser.min.js has to be referenced). */
@@ -84,10 +86,12 @@ export declare class TableComponent extends BaseElement implements OnInit, After
             template?: any;
         }): void;
     };
-    /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
+    /** @description Sets or gets whether the checkboxes are displayed in the selection column. */
     headerRow: string | HTMLElement | Function;
-    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    /** @description Sets or gets the behavior when loading column settings either via autoLoadState or loadState. Applicable only when stateSettings contains 'columns'. */
     keyboardNavigation: boolean;
+    /** @description Sets or gets the language. Used in conjunction with the property messages.  */
+    hideSelectionColumn: boolean;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
     loadColumnStateBehavior: TableLoadColumnStateBehavior;
     /** @description Sets or gets the page size (when paging is enabled). */

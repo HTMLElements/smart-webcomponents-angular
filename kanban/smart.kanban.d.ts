@@ -197,6 +197,48 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     *   collapsed - The column's collapsed state.
     */
     onColumnDoubleClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is shown by using the column's action menu or the Kanban's 'show' method.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+    *   label - The column label.
+    *   dataField - The column data field.
+    */
+    onColumnShow: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is hidden by using the column's action menu or the Kanban's 'hide' method.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+    *   label - The column label.
+    *   dataField - The column data field.
+    */
+    onColumnHide: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is collapsed  by using the column's action menu or the Kanban's 'collapse' method.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+    *   label - The column label.
+    *   dataField - The column data field.
+    */
+    onColumnCollapse: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a column is expanded by using the column's action menu or the Kanban's 'expand' method.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	dataField)
+    *   label - The column label.
+    *   dataField - The column data field.
+    */
+    onColumnExpand: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a comment is added to the Kanban Task.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	value)
+    *   id - The task's id.
+    *   value - The comment object. It has 'text: string, time: Date and userId:number' properties.
+    */
+    onCommentAdd: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a comment is removed from the Kanban Task.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	value)
+    *   id - The task's id.
+    *   value - The comment object. It has 'text: string, time: Date and userId:number' properties.
+    */
+    onCommentRemove: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a comment is updated in the Kanban Task.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	value)
+    *   id - The task's id.
+    *   value - The comment object. It has 'text: string, time: Date and userId:number' properties.
+    */
+    onCommentUpdate: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a task is dropped somewhere in the DOM. The dragging operation can be canceled by calling event.preventDefault() in the event handler function.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	container, 	data, 	item, 	items, 	originalEvent, 	previousContainer, 	target)
     *   container - the Kanban the dragged task(s) is dropped to
@@ -243,15 +285,36 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     *  @param event. The custom event. 	*/
     onSort: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a new task is added.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
     *   value - The task data that is added to the Kanban.
+    *   id - The task data id.
     */
     onTaskAdd: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a task is removed.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
     *   value - The task data that is removed from the Kanban.
+    *   id - The task data id.
     */
     onTaskRemove: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a task is updated.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	oldValue, 	id)
+    *   value - The task data that is updated.
+    *   oldValue - The update task's old data.
+    *   id - The task data id.
+    */
+    onTaskUpdate: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a task is clicked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
+    *   value - The task data.
+    *   id - The task data id.
+    */
+    onTaskClick: EventEmitter<CustomEvent>;
+    /** @description This event is triggered when a task is double clicked.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
+    *   value - The task data.
+    *   id - The task data id.
+    */
+    onTaskDoubleClick: EventEmitter<CustomEvent>;
     /** @description Adds filtering
     * @param {string[]} filters. Filter information
     * @param {string} operator?. Logical operator between the filters of different fields
@@ -284,6 +347,9 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     * @param {number | string} column. The index or dataField of the column to collapse
     */
     collapse(column: number | string): void;
+    /** @description Clears the Kanban's selection.
+    */
+    clearSelection(): void;
     /** @description Hides a Kanban column.
     * @param {number | string} column. The index or dataField of the column to hide
     */
@@ -319,6 +385,16 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     * @returns {any}
   */
     getColumn(dataField: any): Promise<any>;
+    /** @description Gets the data of a task. The returned value is a JSON object with the following fields: 'checklist', 'id', 'color', 'comments', 'history', 'dueDate', 'startDate', 'priority', 'progress', 'status', 'swimlane', 'tags', 'text', 'description', 'userId', 'createdUserId', 'createdDate', 'updatedUserId', 'updatedDate'
+    * @param {number} id. The task's id
+    * @returns {any}
+  */
+    getTask(id: any): Promise<any>;
+    /** @description Gets the selected ids. The returned value is an array. Each item in the array is the 'id' of a selected task.
+    * @param {number} id. The task's id
+    * @returns {any}
+  */
+    getSelectedTasks(id: any): Promise<any>;
     /** @description Gets the Kanban's state.
     * @returns {{ collapsed: {}, dataSource: [], filtering: { filters: [], operator: string }, selection: { selected: [], selectionStart: number | string, selectionInColumn: string, swimlane: string }, sorting: { dataFields: [], dataTypes: [], orderBy: [] }, tabs: [], visibility: { taskActions: boolean, taskComments: boolean, taskDue: boolean, taskPriority: boolean, taskProgress: boolean, taskTags: boolean, taskUserIcon: boolean } }}
   */
@@ -394,6 +470,14 @@ export declare class KanbanComponent extends BaseElement implements OnInit, Afte
     /** @description Shows all Kanban columns.
     */
     showAllColumns(): void;
+    /** @description Selects a task.
+    * @param {number | string} task. The task's id.
+    */
+    selectTask(task: number | string): void;
+    /** @description Unselects a task.
+    * @param {number | string} task. The task's id.
+    */
+    unselectTask(task: number | string): void;
     /** @description Updates a task.
     * @param {number | string | HTMLElement} task. The task's id or corresponding HTMLElement
     * @param {{}} newData. The new data to visualize in the task.

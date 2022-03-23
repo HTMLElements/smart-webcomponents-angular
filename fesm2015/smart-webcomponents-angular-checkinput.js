@@ -303,6 +303,13 @@ let CheckInputComponent = class CheckInputComponent extends BaseElement {
     set selectAll(value) {
         this.nativeElement ? this.nativeElement.selectAll = value : undefined;
     }
+    /** @description Gets or sets an array of selected values. */
+    get selectedValues() {
+        return this.nativeElement ? this.nativeElement.selectedValues : undefined;
+    }
+    set selectedValues(value) {
+        this.nativeElement ? this.nativeElement.selectedValues = value : undefined;
+    }
     /** @description Determines whether the items are sorted alphabetically or not */
     get sorted() {
         return this.nativeElement ? this.nativeElement.sorted : undefined;
@@ -555,6 +562,9 @@ __decorate([
 __decorate([
     Input()
 ], CheckInputComponent.prototype, "selectAll", null);
+__decorate([
+    Input()
+], CheckInputComponent.prototype, "selectedValues", null);
 __decorate([
     Input()
 ], CheckInputComponent.prototype, "sorted", null);
