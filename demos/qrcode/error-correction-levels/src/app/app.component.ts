@@ -27,12 +27,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 	init(): void {
 		// init code.
 	    
-    this.lowOption.addEventListener('click', function() {
-			this.qrcodeToExport.errorLevel = 'L';
+		this.lowOption.addEventListener('click', function() {
+			this.qrcode.errorLevel = 'L';
 		});
 
 		this.highOption.addEventListener('click', function() {
-			this.qrcodeToExport.errorLevel = 'H';
+			this.qrcode.errorLevel = 'H';
 		});
 
 	}	
