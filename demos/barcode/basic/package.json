@@ -13,7 +13,7 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
-    "@smart-webcomponents-angular/barcode": "13.1.44",
+    "@smart-webcomponents-angular/barcode": "13.1.70",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
