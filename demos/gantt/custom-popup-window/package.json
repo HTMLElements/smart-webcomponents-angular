@@ -18,6 +18,7 @@
 	"@smart-webcomponents-angular/ganttchart": "14.2.0",
 	"@smart-webcomponents-angular/multilinetextbox": "14.2.0",
 	"@smart-webcomponents-angular/textbox": "14.2.0",
+	"@smart-webcomponents-angular/window": "14.2.0",
     "rxjs": "~7.5.6",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.8"

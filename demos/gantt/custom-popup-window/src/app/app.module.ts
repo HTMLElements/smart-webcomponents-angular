@@ -5,12 +5,13 @@ import { ButtonModule } from '@smart-webcomponents-angular/button';
 import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
 import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
 import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
+import { WindowModule } from '@smart-webcomponents-angular/window';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [ AppComponent ],
-    imports: [ BrowserModule, ButtonModule, GanttChartModule, MultilineTextBoxModule, TextBoxModule ],
+    imports: [ BrowserModule, ButtonModule, WindowModule, GanttChartModule, MultilineTextBoxModule, TextBoxModule ],
     bootstrap: [ AppComponent ],
 	entryComponents: [ AppComponent ]
 })
