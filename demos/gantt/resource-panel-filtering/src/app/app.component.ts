@@ -222,7 +222,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Assigned',
             value: 'resources',
             formatFunction: function (data: Array<object>, taskIndex: number): string {
-                return `<span>${data.length > 0 ? '&#10003' : '&#10007'}</span>`;
+                return `<span>${data.length > 0 ? '✓' : '✗'}</span>`;
             }
         }
     ];
