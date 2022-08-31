@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { DropDownList } from '@smart-webcomponents-angular';
+import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GanttChartComponent, GanttChartTaskColumn, GanttChartView } from '@smart-webcomponents-angular/ganttchart';
 

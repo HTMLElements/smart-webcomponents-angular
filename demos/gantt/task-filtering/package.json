@@ -15,6 +15,7 @@
     "@angular/router": "~14.2.0",
     "@smart-webcomponents-angular/button": "14.2.0",
 	"@smart-webcomponents-angular/chart": "14.2.0",
+	"@smart-webcomponents-angular/dropdownlist": "14.2.0",
 	"@smart-webcomponents-angular/ganttchart": "14.2.0",
     "rxjs": "~7.5.6",
     "tslib": "^2.3.0",
