@@ -12,7 +12,7 @@ import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn } f
 
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
     @ViewChild('log', { read: ElementRef , static: false }) log!: ElementRef;
 
     view: GanttChartView = 'month';
@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     ];
 
     timelineHeaderFormatFunction: Function = function (date: Date, type: String, isHeaderDetails: Boolean, defaultValue: String) {
-        const ganttChart = this.ganttChart;
+        const ganttChart = this.ganttchart;
 
         if (isHeaderDetails) {
             return date.toLocaleDateString(ganttChart.locale, {
