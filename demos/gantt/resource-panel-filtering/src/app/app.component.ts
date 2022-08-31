@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/radiobutton';
-import { GanttChartComponent, GanttChartResourceTimelineView, GanttChartTaskResource, GanttChart, GanttChartResource, Smart } from '@smart-webcomponents-angular/ganttchart';
+import { GanttChartComponent, GanttChartResourceTimelineView, GanttChart, GanttChartResource, Smart } from '@smart-webcomponents-angular/ganttchart';
 
 
 @Component({
