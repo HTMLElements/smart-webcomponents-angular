@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
-import { GetGanttChartFlatData } from '../assets/data';
+import { GetGanttChartFlatData } from './data';
 
 @Component({
     selector: 'app-root',
