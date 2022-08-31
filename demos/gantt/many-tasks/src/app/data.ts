@@ -28,8 +28,8 @@ interface IRowGenerateOrdersData {
 
 interface ITaskGenerateData {
 	id: number | string;
-	status: string;
-	text: string;
+	status?: string;
+	text?: string;
 	tags?: string;
 	priority?: string;
 	progress?: number;
@@ -839,7 +839,7 @@ export function GetEmployees() {
 		"Anne has a BA degree in English from St. Lawrence College.  She is fluent in French and German."];
 	var k = 0;
 	for (var i = 0; i < firstNames.length; i++) {
-		var row = {};
+		var row: any = {};
 		row["firstName"] = firstNames[k];
 		row["lastName"] = lastNames[k];
 		row["title"] = titles[k];
@@ -1020,7 +1020,7 @@ export function GetOrdersData(rowscount?: number): IRowGenerateOrdersData[] {
 }
 
 export function GetKanbanData(locale = 'en') {
-	const text = {
+	const text: any = {
 		en: [
 			'Research', 'Displaying data from data source', 'Showing cover and title', 'Property validation',
 			'formatFunction and formatSettings', 'Expand/collapse arrow', 'Virtual scrolling', 'Deferred scrolling',
@@ -1036,7 +1036,7 @@ export function GetKanbanData(locale = 'en') {
 			'שימוש חוזר באלמנטים HTML קיימים', 'וירטואליזציה של כרטיסים שהתמוטטו'
 		]
 	},
-		tags = {
+		tags: any = {
 			en: ['initial', 'data', 'visual', 'property', 'scrolling', 'method'],
 			he: ['התחלתי', 'נתונים', 'חזותי', 'תכונה', 'גלילה', 'שיטה']
 		},
@@ -1297,7 +1297,7 @@ export function GetKanbanHierarchicalData() {
 
 export function GeneratePivotData(numberOfRecords: number, numberOfYears: number = 4): any {
 	const continents: string[] = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'],
-		cities = {
+		cities: any = {
 			Africa: ['Cairo', 'Lagos', 'Kinshasa', 'Luanda', 'Khartoum'],
 			Asia: ['Tokyo', 'Delhi', 'Shanghai', 'Mumbai', 'Beijing'],
 			Australia: ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide'],
@@ -1306,7 +1306,7 @@ export function GeneratePivotData(numberOfRecords: number, numberOfYears: number
 			'South America': ['São Paulo', 'Buenos Aires', 'Rio de Janeiro', 'Bogotá', 'Lima']
 		},
 		allMonths: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-		months = {
+		months: any = {
 			Q1: ['January', 'February', 'March'],
 			Q2: ['April', 'May', 'June'],
 			Q3: ['July', 'August', 'September'],
@@ -1317,13 +1317,15 @@ export function GeneratePivotData(numberOfRecords: number, numberOfYears: number
 	let result: any = [];
 
 	for (let i = 0; i < numberOfRecords; i++) {
-		const dataPoint = {} as IPivotRowGenerateData;
+		const dataPoint: any = {} as IPivotRowGenerateData;
 
 		dataPoint.continent = continents[Math.floor(Math.random() * continents.length)];
 		dataPoint.city = cities[dataPoint.continent][Math.floor(Math.random() * cities[dataPoint.continent].length)];
 		dataPoint.year = Math.floor(Math.random() * (maxYear - minYear + 1)) + minYear;
 		dataPoint.quarter = ['Q1', 'Q2', 'Q3', 'Q4'][Math.floor(Math.random() * 4)];
-		dataPoint.month = months[dataPoint.quarter][[Math.floor(Math.random() * 3)]];
+		
+		const randomQuarter: number = Math.floor(Math.random() * 3);
+		dataPoint.month = months[dataPoint.quarter][randomQuarter];
 		dataPoint.revenue = Math.floor(Math.random() * (10000 - 1001)) + 1000;
 		dataPoint.expense = -1 * Math.floor(Math.random() * (10000 - 1001)) + 1000;
 
@@ -1368,6 +1370,8 @@ export function GeneratePivotData(numberOfRecords: number, numberOfYears: number
 
 						return result * (directions[i] === 'asc' ? 1 : -1);
 					}
+					
+					return 0;
 				});
 
 				for (let i = 0; i < dataSource.length; i++) {
@@ -1377,4 +1381,141 @@ export function GeneratePivotData(numberOfRecords: number, numberOfYears: number
 	}
 
 	return result;
+}
+
+
+export function GetGanttChartTreeData(count: number = 50, minDate?: Date, maxDate?: Date) {
+	const data = [];
+
+	if (!minDate || isNaN(new Date(minDate).getTime())) {
+		minDate = new Date();
+	}
+
+	if (!maxDate || isNaN(new Date(maxDate).getTime())) {
+		maxDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate() + 1);
+	}
+
+	const dateMin = new Date(minDate),
+		dateMax = new Date(maxDate);
+	let [taskCounter, projectCounter] = [0, 0];
+
+	function getTasks(n: number = 1, includeSubProjects?: boolean): any[] {
+		let tasks = [];
+
+		for (let i = 0; i < n; i += 1) {
+			const rand = getRandom();
+			let task;
+
+			if (includeSubProjects && rand % 5 === 0) {
+				task = getProject(rand);
+			}
+			else {
+				task = {
+					label: 'Task ' + taskCounter,
+					dateStart: `${dateMin.getFullYear()}-${dateMin.getMonth()}-${dateMin.getDate()}`,
+					dateEnd: `${dateMax.getFullYear()}-${dateMax.getMonth()}-${dateMax.getDate()}`,
+					type: 'task'
+				};
+			}
+
+			// if (i % 5 === 0) {
+			//     task.connections = [{
+			//         target: rand % count,
+			//         type: rand % 3
+			//     }];
+			// }
+
+			tasks.push(task);
+
+			dateMin.setDate(dateMin.getDate() + rand);
+			dateMax.setDate(dateMax.getDate() + rand + getRandom());
+			taskCounter++;
+		}
+
+		return tasks
+	}
+
+	function getProject(rand: number): any {
+		const isEven = rand % 2 === 0,
+			projObj = {
+				label: 'Project ' + projectCounter,
+				dateStart: `${dateMin.getFullYear()}-${dateMin.getMonth()}-${dateMin.getDate()}`,
+				dateEnd: `${dateMax.getFullYear()}-${dateMax.getMonth()}-${dateMax.getDate()}`,
+				type: 'project',
+				expanded: isEven,
+				tasks: getTasks(rand, isEven)
+			}
+
+		projectCounter++;
+		dateMin.setDate(dateMin.getDate() + rand);
+		dateMax.setDate(dateMax.getDate() + rand + getRandom());
+
+		return projObj
+	}
+
+	for (let i = 0; i < count; i += 1) {
+		const rand = getRandom();
+
+		if (rand % 5 === 0) {
+			data.push(getProject(rand));
+		}
+		else {
+			data.push(getTasks()[0]);
+		}
+	}
+
+	return data
+}
+
+function getRandom(coeff = 10) {
+	return Math.round(Math.random() * coeff)
+}
+
+export function GetGanttChartFlatData(count: number = 50, minDate?: Date, maxDate?: Date) {
+	const data = [];
+
+	if (!minDate || isNaN(new Date(minDate).getTime())) {
+		minDate = new Date();
+	}
+
+	if (!maxDate || isNaN(new Date(maxDate).getTime())) {
+		maxDate = new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate() + getRandom(50));
+	}
+
+	const dateMin = new Date(minDate),
+		dateMax = new Date(maxDate);
+	let dateMinYear = dateMin.getFullYear(),
+		dateMinMonth = dateMin.getMonth(),
+		dateMinDate = dateMin.getDate(),
+		dateMaxYear = dateMax.getFullYear(),
+		dateMaxMonth = dateMax.getMonth(),
+		dateMaxDate = dateMax.getDate(),
+		[taskCounter, projectCounter] = [0, 0];
+
+	for (let i = 0; i < count; i += 1) {
+		const rand = getRandom(),
+			task: any = {
+				label: 'Task ' + (taskCounter + 1),
+				dateStart: `${dateMinYear}-${dateMinMonth}-${dateMinDate}`,
+				dateEnd: `${dateMaxYear}-${dateMaxMonth}-${dateMaxDate}`,
+				type: 'task'
+			};
+
+		if (i % 4 === 0) {
+			task.connections = [{
+				target: i + rand % count,
+				type: rand % 3
+			}];
+		}
+
+		dateMinMonth = rand;
+		dateMaxMonth = rand + getRandom(20);
+		dateMinDate = getRandom();
+		dateMaxDate = getRandom(20);
+		taskCounter++;
+
+		data.push(task);
+	}
+
+	return data
 }
