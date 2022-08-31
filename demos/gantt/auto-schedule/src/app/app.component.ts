@@ -9,7 +9,7 @@ import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
     @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
 
     dataSource: Array<object> = [
