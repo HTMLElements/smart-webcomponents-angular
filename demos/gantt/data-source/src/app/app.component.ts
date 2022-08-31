@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     ];
 
     timelineHeaderFormatFunction: Function = function (date: Date, type: String, isHeaderDetails: Boolean, defaultValue: String) {
-        const ganttChart = document.querySelector('smart-gantt-chart');
+        const ganttChart = this.ganttChart;
 
         if (isHeaderDetails) {
             return date.toLocaleDateString(ganttChart.locale, {

@@ -100,7 +100,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const ganttChart = this.ganttchart;
 
-        this.checkBox.addEventListener('change', function (event: CustomEvent): void {
+        this.checkbox.addEventListener('change', function (event: CustomEvent): void {
             ganttChart.autoScheduleStrictMode = event.detail.value;
         });
     }
