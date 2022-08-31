@@ -16,7 +16,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
     @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
     @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
 
     treeSize: string = '30%';
 
