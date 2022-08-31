@@ -10,7 +10,7 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
     @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
     @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
 

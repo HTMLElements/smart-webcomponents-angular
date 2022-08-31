@@ -9,7 +9,7 @@ import { MenuComponent } from '@smart-webcomponents-angular/menu';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
     @ViewChild('menu', { read: MenuComponent, static: false }) menu2!: MenuComponent;
 
     view: GanttChartView = 'week';

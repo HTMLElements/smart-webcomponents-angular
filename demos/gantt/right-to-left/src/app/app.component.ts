@@ -11,7 +11,7 @@ import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {

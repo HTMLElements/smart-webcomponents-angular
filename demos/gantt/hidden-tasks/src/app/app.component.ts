@@ -12,7 +12,7 @@ import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
 
     headerTemplate = 'headerTemplate';
 
@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     hideTimelineHeaderDetails = true;
 
     timelineHeaderFormatFunction = function (date, type, isHeaderDetailsContainer) {
-        const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart;
+        const ganttChart = this.ganttchart;
 
         if (isHeaderDetailsContainer) {
             return '';
