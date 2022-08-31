@@ -148,7 +148,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Date Start',
             value: 'dateStart',
             //Custom format function
-            formatFunction: (date: Date) => new Date(date).toLocaleDateString(this.ganttChart.locale, { year: 'numeric', month: 'short', day: 'numeric' })
+            formatFunction: (date: Date) => new Date(date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' })
         },
         {
             label: 'Date End',
