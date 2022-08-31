@@ -11,7 +11,7 @@ import { GanttChartComponent, GanttChartTask, GanttChart, GanttChartResource } f
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkBox', { read: CheckBoxComponent, static: false }) checkBox!: CheckBoxComponent;
     @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [

@@ -356,8 +356,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                 endDateOfWeek = new Date(date);
 
             endDateOfWeek.setDate(date.getDate() + 6);
-            return startDayOfWeek.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: monthFormat, year: ganttChart.yearFormat }) + ' - ' +
-                endDateOfWeek.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: monthFormat, year: ganttChart.yearFormat });
+            return startDayOfWeek.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: monthFormat, year:  'numeric' }) + ' - ' +
+                endDateOfWeek.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: monthFormat, year:  'numeric' });
         }
 
         if (type === 'day') {

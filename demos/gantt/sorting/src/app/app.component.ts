@@ -12,7 +12,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkBox', { read: CheckBoxComponent, static: false }) checkBox!: CheckBoxComponent;
     @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
     @ViewChild('buttonSort', { read: ButtonComponent, static: false }) buttonSort!: ButtonComponent;
     @ViewChild('buttonClearSort', { read: ButtonComponent, static: false }) buttonClearSort!: ButtonComponent;
