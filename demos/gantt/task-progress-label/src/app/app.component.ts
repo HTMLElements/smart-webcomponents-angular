@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn, GanttChartDataSource } from '@smart-webcomponents-angular/ganttchart';
+import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn } from '@smart-webcomponents-angular/ganttchart';
 
 @Component({
     selector: 'app-root',
@@ -8,7 +8,7 @@ import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn, Ga
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     view: GanttChartView = 'week';
 
@@ -59,7 +59,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
     ];
 
-    dataSource: GanttChartDataSource[] = [{
+    dataSource = [{
         label: 'Mission A',
         dateStart: '2020-08-01',
         duration: 10,

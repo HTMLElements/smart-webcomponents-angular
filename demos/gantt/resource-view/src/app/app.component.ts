@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
-import { GanttChartComponent, GanttChartTask, GanttChartTaskResource, GanttChart, GanttChartResource } from '@smart-webcomponents-angular/ganttchart';
+import { GanttChartComponent, GanttChartTask, GanttChart, GanttChartResource } from '@smart-webcomponents-angular/ganttchart';
 
 
 @Component({
@@ -11,8 +11,8 @@ import { GanttChartComponent, GanttChartTask, GanttChartTaskResource, GanttChart
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkBox', { read: CheckBoxComponent, static: false }) checkBox: CheckBoxComponent;
-    @ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart: GanttChartComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
@@ -213,28 +213,31 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Assignee',
             value: 'resources',
             size: '20%',
-            formatFunction: function (data: Array<string>, taskIndex: number): string {
-                const gantt = document.querySelector('smart-gantt-chart') as GanttChart,
-                    resources = gantt.resources as Array<GanttChartResource>,
-                    tasks = gantt.tasks as Array<GanttChartTask>,
-                    getResource = (d: string): any => resources.find((res) => res.id.toString() === d.toString());
+            formatFunction: function (value: string, item: GanttChartTask): string {
+                const gantt = document.querySelector('smart-gantt-chart')!,
+                    resources = gantt.resources!,
+                    getResource = (d: any) => resources.find((res: any) => res.id.toString() === d.toString());
 
-                if (tasks[taskIndex].disableResources) {
-                    return '';
+                if (!item || item.disableResources) {
+                    return ''
                 }
-                if (!data.length) {
+
+                const itemResources = item.resources;
+
+                if (!itemResources.length) {
                     return '<span class="gantt-chart-task-assignee unassigned">?</span>';
                 }
-                else if (data.length === 1) {
-                    return `<span>${getResource(data[0]).label}</span>`;
+                else if (itemResources.length === 1) {
+                    return `<span>${getResource(itemResources[0])!.label!}</span>`;
                 }
                 else {
                     let result = '';
-                    for (let i = 0; i < data.length; i++) {
-                        const resource = getResource(data[i]);
+
+                    for (let i = 0; i < itemResources.length; i++) {
+                        const resource = getResource(itemResources[i]);
 
                         if (resource) {
-                            result += `<span class="gantt-chart-task-assignee ${resource.id.toLowerCase()}">${resource.label.charAt(0)}</span>`;
+                            result += `<span class="gantt-chart-task-assignee ${resource.id!.toLowerCase()}">${resource.label!.charAt(0)}</span>`;
                         }
                     }
 
@@ -254,10 +257,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     hideResourcePanel: boolean = true;
 
+    groupByResources: boolean = true;
+
     view: string = 'week';
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string): string {
-        const gantt = document.querySelector('smart-gantt-chart') as GanttChart;
+    timelineHeaderFormatFunction = function (date: Date, type: string): any {
+        const gantt = document.querySelector('smart-gantt-chart')!,
+            monthFormat = (gantt.monthFormat as "numeric" | "2-digit" | "narrow" | "long" | "short" | undefined);
 
         if (type === 'week') {
             const startDayOfWeek = new Date(date),
@@ -265,11 +271,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             endDateOfWeek.setDate(date.getDate() + 6);
 
-            return startDayOfWeek.toLocaleDateString(gantt.locale, { day: 'numeric', month: gantt.monthFormat, year: gantt.yearFormat }) + ' - ' +
-                endDateOfWeek.toLocaleDateString(gantt.locale, { day: 'numeric', month: gantt.monthFormat, year: gantt.yearFormat });
+            return startDayOfWeek.toLocaleDateString(gantt.locale, { day: 'numeric', month: monthFormat, year: gantt.yearFormat }) + ' - ' +
+                endDateOfWeek.toLocaleDateString(gantt.locale, { day: 'numeric', month: monthFormat, year: gantt.yearFormat });
         }
+
         if (type === 'day') {
-            return date.toLocaleDateString(gantt.locale, { day: 'numeric', month: gantt.monthFormat });
+            return date.toLocaleDateString(gantt.locale, { day: 'numeric', month: monthFormat });
         }
     }
 
@@ -289,7 +296,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             ganttChart = that.ganttChart;
 
         that.checkBox.addEventListener('change', function (event: CustomEvent): void {
-            ganttChart.view = event.detail.value ? "resource" : "week";
+            ganttChart.groupByResources = event.detail.value;
         });
     }
 }

@@ -9,7 +9,7 @@ import { GanttChartComponent, GanttChartTaskColumn } from '@smart-webcomponents-
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     infiniteTimeline: boolean = true;
 

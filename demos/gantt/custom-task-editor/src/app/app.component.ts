@@ -11,7 +11,7 @@ import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     treeSize: string = '35%';
 

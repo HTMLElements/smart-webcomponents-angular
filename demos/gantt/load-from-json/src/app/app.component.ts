@@ -9,7 +9,7 @@ import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn } f
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     view: GanttChartView = 'week';
 
@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
         const gantt = this.ganttchart;
 
-        fetch('./data.json', {
+        fetch('./../../../src/gantt/load-from-json/data.json', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'

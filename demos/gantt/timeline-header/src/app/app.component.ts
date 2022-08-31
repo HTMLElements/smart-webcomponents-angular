@@ -11,7 +11,7 @@ import { GanttChartComponent, GanttChart, GanttChartView } from '@smart-webcompo
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
@@ -162,7 +162,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Labels',
             value: 'label',
             //Column min size
-            size: '40%',
+            size: '30%',
             //Custom format function
             formatFunction: function (label) {
                 if (label === 'Learn') {
@@ -194,6 +194,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             //Custom format function
             formatFunction: (date) => {
                 const ganttChart = document.querySelector('smart-gantt-chart');
+
                 return new Date(date).toLocaleDateString(ganttChart.locale, {});
             },
             size: '25%'
@@ -233,39 +234,34 @@ export class AppComponent implements AfterViewInit, OnInit {
         ganttChart.addEventListener('connectionEnd', storeState);
 
         document.querySelector('.header-controls').addEventListener('click', function (event: CustomEvent): void {
-            const button = (<HTMLElement>event.target).closest('smart-button');
+            const button = (<HTMLElement>event.target)!.closest('smart-button') as Button;
 
             if (!button) {
                 return;
             }
 
-            let targetView;
-
             switch (button.id) {
                 case 'view':
-                    if (ganttChart.view === "resource" /* Resource */) {
-                        ganttChart.view = view;
+                    if (ganttChart.groupByResources) {
+                        ganttChart.groupByResources = false;
+                        button.innerHTML = 'show resource view';
                     }
                     else {
-                        view = ganttChart.view;
-                        ganttChart.view = "resource" /* Resource */;
+                        ganttChart.groupByResources = true;
+                        button.innerHTML = 'hide resource view';
                     }
                     break;
                 case 'zoomIn':
                 case 'zoomOut': {
-                    const isResourceView = ganttChart.view === "resource" /* Resource */,
-                        isZoomIn = button.id === 'zoomIn',
-                        maxValue = isZoomIn ? views[views.length - 1] : view[0];
+                    const isZoomIn = button.id === 'zoomIn',
+                        maxValue = isZoomIn ? views[views.length - 1] : views[0];
 
                     ganttChart.view = view = (views[views.indexOf(view) + (isZoomIn ? -1 : 1) * 1] || maxValue) as GanttChartView;
 
-                    if (isResourceView) {
-                        ganttChart.view = "resource" /* Resource */;
-                    }
-                    (<Button>document.getElementById(isZoomIn ? 'zoomOut' : 'zoomIn')).disabled = false;
+                    (<Button>document.getElementById(isZoomIn ? 'zoomOut' : 'zoomIn'))!.disabled = false;
 
-                    if ((isZoomIn && view === "day" /* Day */) || (!isZoomIn && view === "year" /* Year */)) {
-                        (<Button>button).disabled = true;
+                    if ((isZoomIn && view === 'day') || (!isZoomIn && view === 'year')) {
+                        button.disabled = true;
                     }
 
                     break;
@@ -277,7 +273,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                         if (states[stateId]) {
                             ganttChart.loadState(states[stateId]);
-                            (<Button>document.getElementById('redo')).disabled = false;
+                            (<Button>document.getElementById('redo'))!.disabled = false;
+                        }
+
+                        if (!states[stateId] || !states[stateId - 1]) {
+                            button.disabled = true;
                         }
                     }
                     else {
@@ -285,13 +285,18 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                         if (states[stateId]) {
                             ganttChart.loadState(states[stateId]);
-                            (<Button>document.getElementById('undo')).disabled = false;
+                            (<Button>document.getElementById('undo'))!.disabled = false;
+                        }
+
+                        if (!states[stateId] || !states[stateId + 1]) {
+                            button.disabled = true;
                         }
                     }
 
                     stateId = Math.max(0, Math.min(Object.keys(states).length - 1, stateId));
                     return;
             }
+            
             ganttChart.ensureVisible(0);
         });
     }

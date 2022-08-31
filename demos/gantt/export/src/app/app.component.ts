@@ -2,7 +2,6 @@
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -11,10 +10,13 @@ import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
+    @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     treeSize: string = '30%';
 
@@ -127,6 +129,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
     ];
 
+    handleExport(format: string) {
+        this.ganttchart.exportData(format);
+    }
+
     ngOnInit(): void {
         // onInit code.
     }
@@ -138,22 +144,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
-        const that = this,
-            ganttChart = that.ganttchart;
-
-        document.getElementById('exportToXLSX').addEventListener('click', function (event: CustomEvent): void {
-            ganttChart.exportData('xlsx');
-        });
-
-        document.getElementById('exportToPDF').addEventListener('click', function (event: CustomEvent): void {
-            ganttChart.exportData('pdf');
-        });
-
-        document.getElementById('exportToHTML').addEventListener('click', function (event: CustomEvent): void {
-            ganttChart.exportData('html');
-        });
-
-
     }
 }

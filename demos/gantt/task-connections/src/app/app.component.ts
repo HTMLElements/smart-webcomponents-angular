@@ -11,11 +11,11 @@ import { GanttChartComponent, GanttChartTask } from '@smart-webcomponents-angula
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart: GanttChartComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
@@ -89,12 +89,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.button.addEventListener('click', function (): void {
             const task = gantt.tasks[2] as GanttChartTask;
 
-            if (task && task.connections.length) {
-                return;
-            }
-            
-            gantt.createConnection(2, 3, 0);
-            connectionSelector.insert(4, { value: '2-3-0', label: 'Task 1.2 - Milestone 1' });
+            gantt.getTaskConnections(task).then(taskConnections => {
+                if (task && taskConnections.length) {
+                    return;
+                }
+    
+                gantt.createConnection(2, 3, 0);
+                connectionSelector.insert(4, { value: '2-3-0', label: 'Task 1.2 - Milestone 1' });
+            });
         });
 
         that.button2.addEventListener('click', function (): void {

@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
@@ -7,15 +7,16 @@ import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
     dataSource: Array<object> = [
         {
@@ -171,27 +172,19 @@ export class AppComponent implements AfterViewInit, OnInit {
             indexSelector = that.dropdownlist;
 
         that.button.addEventListener('click', function (): void {
-            const index: number = parseInt(indexSelector.selectedValues[0]);
-
-            if (!isNaN(index)) {
-                ganttChart.collapse(index);
-            }
+            ganttChart.collapse(indexSelector.selectedValues[0]);
         });
 
         that.button2.addEventListener('click', function (): void {
-            const index: number = parseInt(indexSelector.selectedValues[0]);
-
-            if (!isNaN(index)) {
-                ganttChart.expand(index);
-            }
+            ganttChart.expand(indexSelector.selectedValues[0]);
         });
 
         ganttChart.addEventListener('collapse', function (event: CustomEvent): void {
-            log.innerHTML += '<br />' + event.type + 'Task # ' + ganttChart.getTaskIndex(event.detail.item);
+            ganttChart.getTaskIndex(event.detail.item).then(index => log.innerHTML += '<br />' + event.type + 'Task # ' + index);
         });
 
         ganttChart.addEventListener('expand', function (event: CustomEvent): void {
-            log.innerHTML += '<br />' + event.type + 'Task # ' + ganttChart.getTaskIndex(event.detail.item);
+            ganttChart.getTaskIndex(event.detail.item).then(index => log.innerHTML += '<br />' + event.type + 'Task # ' + index);
         });
     }
 }

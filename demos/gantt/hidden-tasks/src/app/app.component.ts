@@ -12,7 +12,7 @@ import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     headerTemplate = 'headerTemplate';
 
@@ -37,14 +37,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Tasks',
             value: 'label',
-            size: '40%',
-            hideResizeBar: true
+            size: '40%'
         },
         {
             label: 'Start Time',
             value: 'dateStart',
-            size: '30%',
-            hideResizeBar: true
+            size: '30%'
         },
         {
             label: 'Priority',

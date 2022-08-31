@@ -9,7 +9,7 @@ import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart: GanttChartComponent;
+	@ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
  
     dataSource: Array<object> = [
         {

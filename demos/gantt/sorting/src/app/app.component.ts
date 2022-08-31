@@ -12,12 +12,12 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkBox', { read: CheckBoxComponent, static: false }) checkBox: CheckBoxComponent;
-    @ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart: GanttChartComponent;
-    @ViewChild('buttonSort', { read: ButtonComponent, static: false }) buttonSort: ButtonComponent;
-    @ViewChild('buttonClearSort', { read: ButtonComponent, static: false }) buttonClearSort: ButtonComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('buttonSort', { read: ButtonComponent, static: false }) buttonSort!: ButtonComponent;
+    @ViewChild('buttonClearSort', { read: ButtonComponent, static: false }) buttonClearSort!: ButtonComponent;
 
-    sortable: Boolean = true;
+    sortMode: String = 'one';
 
     treeSize: String = '30%';
 
@@ -158,7 +158,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         });
 
         that.buttonClearSort.addEventListener('click', function (): void {
-            ganttChart.sort();
+            ganttChart.clearSort();
         });
     }
 }

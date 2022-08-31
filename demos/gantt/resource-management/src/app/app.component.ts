@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { GanttChartComponent, GanttChartTask, GanttChartTaskResource, GanttChart } from '@smart-webcomponents-angular/ganttchart';
+import { GanttChartComponent, GanttChartTask, GanttChart } from '@smart-webcomponents-angular/ganttchart';
 
 
 @Component({
@@ -11,17 +11,17 @@ import { GanttChartComponent, GanttChartTask, GanttChartTaskResource, GanttChart
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
             label: 'Research',
             synchronized: true,
             expanded: true,
-            type: "task" /* Task */,
+            type: "project",
             disableResources: true,
             tasks: [
                 {
@@ -224,25 +224,28 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     taskColumns: Array<object> = [
         {
+            label: 'Task Name',
+            value: 'label'
+        },
+        {
             label: 'Assignee',
             value: 'resources',
             size: '35%',
-            formatFunction: function (data: Array<string>, taskIndex: number): string {
-                const ganttChart = this as GanttChart;
-                const resources = ganttChart.resources as Array<GanttChartTaskResource>,
-                    tasks = ganttChart.tasks as Array<GanttChartTask>;
+            formatFunction: function (data: any, task: GanttChartTask): String {
+                const ganttChart = document.querySelector('smart-gantt-chart')!,
+                    resources = ganttChart.resources!;
 
-                if (tasks[taskIndex].disableResources) {
-                    return '';
+                if (!task || task.disableResources) {
+                    return ''
                 }
 
                 let result = '';
 
                 for (let i = 0; i < data.length; i++) {
-                    const resource = resources.find((res: GanttChartTaskResource) => res.id.toString() === data[i].toString());
+                    const resource = resources.find((res: any): Boolean => res.id.toString() === data[i].toString());
 
                     if (resource) {
-                        result += `<span class="gantt-chart-task-assignee ${resource.label.toString().toLowerCase()}">${resource.label}</span>`;
+                        result += `<span class="gantt-chart-task-assignee ${resource.label!.toLowerCase()}">${resource.label}</span>`
                     }
                 }
 
@@ -250,15 +253,9 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         },
         {
-            label: 'Task Name',
-            value: 'label',
-            root: true
-        },
-        {
             label: 'Add',
             value: 'addTask',
-            min: 30,
-            size: 30,
+            min: 35,
             formatFunction: function (): string {
                 return '<span class="add-task-button">+</span>';
             }
@@ -303,7 +300,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 assignedTo: 'release'
             };
 
-            ganttChart.insertResource(-1, resource);
+            ganttChart.insertResource(0, resource);
             this.disabled = true;
         });
         that.button2.addEventListener('click', function (): void {
@@ -315,9 +312,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             const resources = ganttChart.resources;
 
             ganttChart.removeResource(resources[resources.length - 1].id);
-            this.disabled = true;
+            that.button.disabled = true;
         });
-
-
     }
 }

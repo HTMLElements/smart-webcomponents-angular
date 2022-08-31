@@ -2,7 +2,7 @@
 import { ButtonComponent, RepeatButton, Button } from '@smart-webcomponents-angular/button';
 import { GanttChartComponent, GanttChartTask } from '@smart-webcomponents-angular/ganttchart';
 import { MultilineTextBoxComponent, MultilineTextBox } from '@smart-webcomponents-angular/multilinetextbox';
-import { RepeatButtonComponent } from '@smart-webcomponents-angular/repeatbutton';
+import { RepeatButtonComponent } from '@smart-webcomponents-angular/button';
 import { TextBoxComponent, TextBox } from '@smart-webcomponents-angular/textbox';
 import { Window, TabPosition, WindowFooterPosition } from '@smart-webcomponents-angular/window';
 
@@ -15,20 +15,20 @@ import { Window, TabPosition, WindowFooterPosition } from '@smart-webcomponents-
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
-    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox: MultilineTextBoxComponent;
-    @ViewChild('repeatbutton', { read: RepeatButtonComponent, static: false }) repeatbutton: RepeatButtonComponent;
-    @ViewChild('repeatbutton2', { read: RepeatButtonComponent, static: false }) repeatbutton2: RepeatButtonComponent;
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox!: MultilineTextBoxComponent;
+    @ViewChild('repeatbutton', { read: RepeatButtonComponent, static: false }) repeatbutton!: RepeatButtonComponent;
+    @ViewChild('repeatbutton2', { read: RepeatButtonComponent, static: false }) repeatbutton2!: RepeatButtonComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
 
     durationUnit: string = 'day';
 
     view: string = 'week';
 
-    treeSize: string = '40%';
+    treeSize: string = '30%';
 
     dateStart: string = '2021-04-01';
 
@@ -340,8 +340,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 
         const gantt = document.querySelector('smart-gantt-chart');
-
-        let editedTaskIndex: number,
+        let task: GanttChartTask | undefined,
             taskLabel: HTMLLabelElement,
             description: MultilineTextBox,
             dayPicker: HTMLSelectElement,
@@ -355,11 +354,11 @@ export class AppComponent implements AfterViewInit, OnInit {
             cancelBtn: Button,
             saveBtn: Button;
 
-        gantt.popupWindowCustomizationFunction = function (target: Window, type: string, taskIndex: number) {
+        gantt.popupWindowCustomizationFunction = function (target: any, type: string, targetTask: GanttChartTask) {
             function deleteTask() {
-                gantt.removeTask(editedTaskIndex);
+                gantt.removeTask(task);
                 gantt.closeWindow();
-                editedTaskIndex = undefined;
+                task = undefined;
             }
     
             function cancelTask() {
@@ -372,9 +371,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                     parseInt(dayPicker.value)),
                     duration = parseInt(dayInput.value);
                     
-                gantt.updateTask(editedTaskIndex, { label: description.value, dateStart: dateStart, duration: duration });
+                gantt.updateTask(task, { label: description.value, dateStart: dateStart, duration: duration });
                 gantt.closeWindow();
-                editedTaskIndex = undefined;
+                task = targetTask;
             }
 
             function updateTotalDate() {
@@ -387,12 +386,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                 totalDate.innerHTML = newDateEnd.toDateString();
             }
 
-            const targetTask: GanttChartTask = gantt.tasks[taskIndex];
-
             if (type === 'task' && targetTask) {
                 let addListeners: boolean;
-
-                editedTaskIndex = taskIndex;
 
                 //Hide the header
                 target.headerPosition = 'none' as TabPosition;
@@ -441,6 +436,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                 dayInput.value = targetTask.duration.toString();
                 totalDate.innerHTML = (<Date>targetTask.dateEnd).toDateString();
 
+                task = targetTask;
+
                 if (addListeners) {
                     dayIncrementBtn.addEventListener('click', function () {
                         dayInput.value = (Math.min(31, (parseInt(dayInput.value) || 0) + 1)).toString();
@@ -455,6 +452,17 @@ export class AppComponent implements AfterViewInit, OnInit {
                     deleteBtn.addEventListener('click', deleteTask);
                     cancelBtn.addEventListener('click', cancelTask);
                     saveBtn.addEventListener('click', saveTask);
+                }
+
+                const dateControls = target.querySelector('.custom-window-content-section.date-controls');
+
+                if (dateControls) {
+                    if (targetTask.type === 'project' && targetTask.synchronized) {
+                        dateControls.setAttribute('disabled', true);
+                    }
+                    else {
+                        dateControls.removeAttribute('disabled');
+                    }
                 }
             }
         };

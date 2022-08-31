@@ -1,8 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { CheckBoxComponent, CheckBox } from '@smart-webcomponents-angular/checkbox';
-import { GanttChartComponent, GanttChartTask, GanttChart } from '@smart-webcomponents-angular/ganttchart';
-import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
-
+import { DropDownList } from '@smart-webcomponents-angular';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
+import { GanttChartComponent, GanttChartTaskColumn, GanttChartView } from '@smart-webcomponents-angular/ganttchart';
 
 @Component({
     selector: 'app-root',
@@ -12,48 +11,37 @@ import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
-    headerTemplate = 'headerTemplate';
+    view: GanttChartView = 'week';
 
-    view = 'week';
+    durationUnit: string = 'day';
 
-    durationUnit = 'day';
+    treeMin: number = 300;
 
-    treeMin = 300;
+    taskFiltering: boolean = true;
 
-    hideTimelineHeaderDetails = true;
+    hideTimelineHeaderDetails: boolean = true;
 
-    timelineHeaderFormatFunction = function (date, type, isHeaderDetailsContainer) {
-        const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart;
-
-        if (isHeaderDetailsContainer) {
-            return '';
-        }
-        return date.toLocaleDateString(ganttChart.locale, { day: '2-digit', month: 'short' });
-    };
-
-    taskColumns = [
+    taskColumns: GanttChartTaskColumn[] = [
         {
             label: 'Tasks',
             value: 'label',
-            size: '40%',
-            hideResizeBar: true
+            size: '40%'
         },
         {
             label: 'Start Time',
             value: 'dateStart',
-            size: '30%',
-            hideResizeBar: true
+            size: '30%'
         },
         {
             label: 'Priority',
             value: 'value',
-            hideResizeBar: true,
-            customEditor: function (label: string, value: number): DocumentFragment {
-                const container = document.createDocumentFragment();
-                const labelElement = document.createElement('label');
-                const dropDownList = document.createElement('smart-drop-down-list') as DropDownList;
+            customEditor: function (label: string, value: number) {
+                const container = document.createDocumentFragment(),
+                    labelElement = document.createElement('label'),
+                    dropDownList = document.createElement('smart-drop-down-list') as DropDownList;
 
                 labelElement.textContent = 'Priority';
                 dropDownList.dropDownAppendTo = 'body';
@@ -63,16 +51,19 @@ export class AppComponent implements AfterViewInit, OnInit {
                     { label: 'Medium', value: 1 },
                     { label: 'High', value: 2 }
                 ];
+
                 container.appendChild(labelElement);
                 container.appendChild(dropDownList);
+
                 return container;
             },
             getCustomEditorValue: function (editor: HTMLElement) {
-                return (editor.querySelector('smart-drop-down-list') as DropDownList).selectedIndexes[0];
+                return (<DropDownList>editor.querySelector('smart-drop-down-list')).selectedIndexes[0];
             },
             formatFunction: (value: string) => ['Low', 'Medium', 'High'][value]
         }
     ];
+
     dataSource = [
         {
             label: 'Project A',
@@ -108,16 +99,14 @@ export class AppComponent implements AfterViewInit, OnInit {
                             value: 1,
                             class: 'priority-medium',
                             dateStart: '2021-05-05',
-                            duration: 3,
-                            hidden: true
+                            duration: 3
                         },
                         {
                             label: 'Task B-1',
                             value: 0,
                             class: 'priority-low',
                             dateStart: '2021-05-06',
-                            duration: 2,
-                            hidden: true
+                            duration: 2
                         },
                         {
                             label: 'Task B-2',
@@ -138,8 +127,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                             value: 1,
                             class: 'priority-medium',
                             dateStart: '2021-05-10',
-                            duration: 4,
-                            hidden: true
+                            duration: 4
                         }
                     ]
                 },
@@ -150,7 +138,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                     dateStart: '2021-05-05',
                     duration: 8,
                     expanded: true,
-                    hidden: true,
                     type: 'project',
                     tasks: [
                         {
@@ -211,44 +198,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const ganttChart = this.ganttchart;
+        const ganttChart = document.querySelector('smart-gantt-chart'),
+            button = document.getElementById('filterRow');
 
-        ganttChart.addEventListener('change', function (event) {
-            const target = event.target as HTMLElement;
-
-            if (target.classList.contains('priority')) {
-                function getPriority(label: String) {
-                    switch (label) {
-                        case 'high':
-                            return 2;
-                        case 'medium':
-                            return 1;
-                        default:
-                            return 0;
-                    }
-                }
-                const checkBoxes = document.getElementsByClassName('priority');
-                let priority = [];
-                for (let i = 0; i < checkBoxes.length; i++) {
-                    const checkBox = checkBoxes[i] as CheckBox;
-
-                    if (checkBox.checked) {
-                        priority.push(getPriority(checkBox.id));
-                    }
-                }
-                //Important Note: Begins a batch update
-                ganttChart.beginUpdate();
-                const tasks = ganttChart.tasks;
-                for (let i = 0; i < tasks.length; i++) {
-                    const task = tasks[i] as GanttChartTask;
-
-                    ganttChart.updateTask(task, { hidden: !priority.includes(task.value) });
-                }
-                //Important Note: Ends the batch update
-                ganttChart.endUpdate();
-            }
+        button.addEventListener('click', function (event: CustomEvent) {
+            ganttChart.filterRow = !ganttChart.filterRow;
+            button.innerHTML = ganttChart.filterRow ? 'Disable' : 'Enable';
         });
-
-
-    }
+    };
 }

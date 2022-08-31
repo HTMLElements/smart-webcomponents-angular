@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [ AppComponent ],
-    imports: [ BrowserModule, CheckBoxModule, GanttChartModule ],
+    imports: [ BrowserModule, ButtonModule, GanttChartModule ],
     bootstrap: [ AppComponent ],
 	entryComponents: [ AppComponent ]
 })

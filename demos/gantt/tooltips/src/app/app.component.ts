@@ -10,7 +10,7 @@ import { GanttChartComponent, GanttChartTaskColumn, GanttChartResourceColumn, Ga
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     view: GanttChartView = 'week';
 

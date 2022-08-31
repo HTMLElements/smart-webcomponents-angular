@@ -10,10 +10,13 @@ import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart: GanttChartComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
+    @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
@@ -165,18 +168,49 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
         const that = this,
-            ganttChart = that.ganttChart;
+            ganttChart = that.ganttChart,
+            getNewTask = function (label: string) {
+                return {
+                    label: `${label} 1`,
+                    dateStart: '2020-08-10',
+                    dateEnd: '2020-12-23',
+                    expanded: true,
+                    tasks: [
+                        {
+                            label: `${label} 1.1`,
+                            dateStart: '2020-09-01',
+                            dateEnd: '2020-10-30',
+                        },
+                        {
+                            label: `${label} 1.2`,
+                            dateStart: '2020-11-01',
+                            dateEnd: '2020-12-23',
+                        }
+                    ]
+                };
+            },
+            updateButtons = function () {
+                const currentTasks = ganttChart.tasks!;
 
-        that.button.addEventListener('click', function ():void {
+                if (currentTasks.length) {
+                    that.button6.disabled = false;
+                    that.button.disabled = false;
+                }
+                else {
+                    that.button6.disabled = true;
+                    that.button.disabled = true;
+                }
+            };
+
+        that.button.addEventListener('click', function (): void {
             const taskDetails = {
                 label: 'Task Updated Successfully',
                 dateEnd: '2020-1-1'
             };
 
             const targetTask = ganttChart.tasks[0];
-            
+
             if (!targetTask) {
                 return;
             }
@@ -186,33 +220,33 @@ export class AppComponent implements AfterViewInit, OnInit {
             this.disabled = true;
         });
 
-        that.button2.addEventListener('click', function ():void {
-            const tasks = {
-                label: 'Inserted Task 1',
-                dateStart: '2021-08-10',
-                dateEnd: '2021-12-23',
-                tasks: [
-                    {
-                        label: 'Inserted Sub-Task 1.1',
-                        dateStart: '2021-09-01',
-                        dateEnd: '2021-10-30',
-                    },
-                    {
-                        label: 'Inserted Sub-Task 1.2',
-                        dateStart: '2021-11-01',
-                        dateEnd: '2021-12-23',
-                    }
-                ]
-            };
-
-            ganttChart.insertTask(0, tasks);
-
+        that.button2.addEventListener('click', function (): void {
+            ganttChart.insertTask(getNewTask('Inserted Task'));
             this.disabled = true;
+            updateButtons();
         });
 
-        that.button3.addEventListener('click', function ():void {
-            ganttChart.removeTask(0);
+        that.button3.addEventListener('click', function (): void {
+            ganttChart.insertTask(getNewTask('Inserted Task At Position'), null, 2);
             this.disabled = true;
+            updateButtons();
+        });
+
+        that.button4.addEventListener('click', function (): void {
+            ganttChart.insertTask(getNewTask('Inserted Task Into Project'), '0.2');
+            this.disabled = true;
+            updateButtons();
+        });
+
+        that.button5.addEventListener('click', function (): void {
+            ganttChart.insertTask(getNewTask('Inserted Task Into Project At position'), 0, 3);
+            this.disabled = true;
+            updateButtons();
+        });
+
+        that.button6.addEventListener('click', function (): void {
+            ganttChart.removeTask(0);
+            updateButtons();
         });
     }
 }

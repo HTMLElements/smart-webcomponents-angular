@@ -10,13 +10,14 @@ import { GanttChartComponent, GanttChart } from '@smart-webcomponents-angular/ga
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
             label: 'Preparing',
             synchronized: true,
             expanded: true,
+            type: 'project',
             disableResources: true,
             tasks: [
                 {
@@ -74,6 +75,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             synchronized: true,
             expanded: true,
             disableResources: true,
+            type: 'project',
             tasks: [
                 {
                     label: 'Product Vision',
@@ -109,6 +111,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             synchronized: true,
             expanded: true,
             disableResources: true,
+            type: 'project',
             tasks: [
                 {
                     label: 'Release Management',
@@ -137,6 +140,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             synchronized: true,
             expanded: true,
             disableResources: true,
+            type: 'project',
             tasks: [
                 {
                     label: 'QA',

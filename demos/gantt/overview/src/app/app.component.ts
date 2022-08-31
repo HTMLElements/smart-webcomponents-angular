@@ -1,29 +1,29 @@
 ﻿import { Component, ViewEncapsulation } from '@angular/core';
-import { GanttChartComponent, GanttChartDataSource, GanttChartTaskColumn} from '@smart-webcomponents-angular/ganttchart';
+import { GanttChartComponent, GanttChartTaskColumn } from '@smart-webcomponents-angular/ganttchart';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['app.component.css'],
-    encapsulation: ViewEncapsulation.None
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['app.component.css'],
+	encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent {
-    durationUnit = 'hour';
-	taskColumns: GanttChartTaskColumn[] = 
-	[
-		{
-			label: 'Tasks',
-			value: 'label',
-			size: '60%'
-		},
-		{
-			label: 'Duration (hours)',
-			value: 'duration',
-			formatFunction: (date) => parseInt(date)
-		}
-	]
-	dataSource: GanttChartDataSource[] = [
+	durationUnit = 'hour';
+	taskColumns: GanttChartTaskColumn[] =
+		[
+			{
+				label: 'Tasks',
+				value: 'label',
+				size: '60%'
+			},
+			{
+				label: 'Duration (hours)',
+				value: 'duration',
+				formatFunction: (date) => parseInt(date)
+			}
+		]
+	dataSource = [
 		{
 			label: 'PRD & User-Stories',
 			dateStart: '2019-01-10',
@@ -95,8 +95,8 @@ export class AppComponent {
 			type: 'task'
 		}
 	]
-	
+
 	ngOnInit(): void {
-  
-    }
+
+	}
 }

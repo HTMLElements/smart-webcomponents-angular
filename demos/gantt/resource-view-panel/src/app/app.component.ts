@@ -10,14 +10,14 @@ import { GanttChartComponent, GanttChartTask, GanttChart, GanttChartResource } f
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
             label: 'Office Configuration',
             synchronized: true,
             expanded: true,
-            type: "task" /* Task */,
+            type: "project",
             disableResources: true,
             tasks: [
                 {
@@ -211,15 +211,15 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Assignee',
             value: 'resources',
             size: '20%',
-            formatFunction: function (data: Array<string>, taskIndex: number): string {
+            formatFunction: function (data: Array<string>, task: GanttChartTask): string {
                 const gantt = document.querySelector('smart-gantt-chart') as GanttChart,
                     resources = gantt.resources as Array<GanttChartResource>,
-                    tasks = gantt.tasks as Array<GanttChartTask>,
                     getResource = (d: string) => resources.find((res) => res.id.toString() === d.toString());
 
-                if (tasks[taskIndex].disableResources) {
-                    return '';
+                if (task && task.disableResources) {
+                    return ''
                 }
+
                 if (!data.length) {
                     return '<span class="gantt-chart-task-assignee unassigned">?</span>';
                 }
@@ -263,20 +263,21 @@ export class AppComponent implements AfterViewInit, OnInit {
     view: string = 'week';
 
     timelineHeaderFormatFunction: Function = function (date: Date, type: string): string {
-        const that = document.querySelector('smart-gantt-chart') as GanttChart;
+        const that = document.querySelector('smart-gantt-chart') as GanttChart,
+            monthFormat = that.monthFormat as "numeric" | "2-digit" | "narrow" | "long" | "short";
 
         if (type === 'week') {
-            const startDayOfWeek = new Date(date), 
-            endDateOfWeek = new Date(date);
+            const startDayOfWeek = new Date(date),
+                endDateOfWeek = new Date(date);
 
             endDateOfWeek.setDate(date.getDate() + 6);
 
-            return startDayOfWeek.toLocaleDateString(that.locale, { day: 'numeric', month: that.monthFormat, year: that.yearFormat }) + ' - ' +
-                endDateOfWeek.toLocaleDateString(that.locale, { day: 'numeric', month: that.monthFormat, year: that.yearFormat });
+            return startDayOfWeek.toLocaleDateString(that.locale, { day: 'numeric', month: monthFormat, year: that.yearFormat }) + ' - ' +
+                endDateOfWeek.toLocaleDateString(that.locale, { day: 'numeric', month: monthFormat, year: that.yearFormat });
         }
 
         if (type === 'day') {
-            return date.toLocaleDateString(that.locale, { day: 'numeric', month: that.monthFormat });
+            return date.toLocaleDateString(that.locale, { day: 'numeric', month: monthFormat });
         }
     }
 
