@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
         const gantt = this.ganttchart;
 
-        fetch('assets/data.json', {
+        fetch('./data.json', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'
