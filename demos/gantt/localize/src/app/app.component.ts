@@ -11,7 +11,7 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
     @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 
     durationUnit: string = 'hour';
@@ -195,7 +195,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const that = this,
             gantt: GanttChartComponent = that.ganttchart,
-            dropDown: DropDownListComponent = that.dropDownList;
+            dropDown: DropDownListComponent = that.dropdownlist;
 
         dropDown.addEventListener('change', function (event: CustomEvent): void {
             gantt.locale = event.detail.label;
