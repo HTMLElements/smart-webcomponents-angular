@@ -14,7 +14,7 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets whether the reordering of columns is enabled. */
     columnReorder: boolean;
     /** @description Describes the columns of the PivotTable's original tabular data. Based on these settings and the data source, the actual columns of the PivotTable are dynamically generated. */
@@ -22,7 +22,7 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets whether to show total columns for each pivot data point. When enabled, all summary columns must have the same summary function set by which total columns are calculated. */
     columnTotals: boolean;
     /** @description Sets or gets the position of total columns (shown when columnTotals is enabled). */
-    columnTotalsPosition: PivotTableColumnTotalsPosition;
+    columnTotalsPosition: PivotTableColumnTotalsPosition | string;
     /** @description Sets or gets details about conditional formatting to be applied to the PivotTable's cells. */
     conditionalFormatting: PivotTableConditionalFormatting[];
     /** @description Determines the original tabular data source of the PivotTable. */
@@ -32,13 +32,13 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets whether to display the PivotTable's designer alongside the table itself. The designer allows for configuring column settings and applying filtering. */
     designer: boolean;
     /** @description Sets or gets the position of the PivotTable's designer (shown when designer is enabled). */
-    designerPosition: PivotTableDesignerPosition;
+    designerPosition: PivotTableDesignerPosition | string;
     /** @description Disables the interaction with the element. */
     disabled: boolean;
     /** @description If enabled, shows the original tabular data that has been aggregated in a PivotTable summary cell when the cell is double-clicked or F2 is pressed. */
     drillDown: boolean;
     /** @description If set, shows an export button in the drill down dialog. */
-    drillDownDataExport: PivotTableDrillDownDataExport;
+    drillDownDataExport: PivotTableDrillDownDataExport | string;
     /** @description Sets or gets the drill down table export file name. */
     drillDownDataExportName: string;
     /** @description Sets or gets whether sorting based on columns in classic row groups layout mode is enabled. */
@@ -60,7 +60,7 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets whether to hide rows that contain only 0 or null values. Applicable only when there are rowGroup columns. */
     grandTotal: boolean;
     /** @description Sets or gets whether navigation with the keyboard is enabled in the PivotTable. */
-    groupLayout: PivotTableGroupLayout;
+    groupLayout: PivotTableGroupLayout | string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     hideCellSelectionTooltip: boolean;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
@@ -99,13 +99,13 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets whether the PivotTable's toolbar is shown. It contains two breadcrumb components that allow the modification of the row group and pivot columns, as well as the "Conditional Formatting" and "Fields" buttons that open a dialog with additional settings. */
     rowTotals: boolean;
     /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
-    rowTotalsPosition: PivotTableRowTotalsPosition;
+    rowTotalsPosition: PivotTableRowTotalsPosition | string;
     /** @description undefined */
     selection: boolean;
     /** @description undefined */
-    selectionMode: PivotTableSelectionMode;
+    selectionMode: PivotTableSelectionMode | string;
     /** @description undefined */
-    sortMode: PivotTableSortMode;
+    sortMode: PivotTableSortMode | string;
     /** @description undefined */
     theme: string;
     /** @description undefined */

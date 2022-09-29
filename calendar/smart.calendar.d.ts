@@ -25,13 +25,13 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Applies new animation settings when it is enabled. Properties:startSpeed - Determines the initial speed of the animation.easeThreshold - Determines the point at which the animation starts to slow down - the "ease effect".step - Determines the step ( scrolling interval ) at which the animation will run. stepEaseSize - Coefficient that is used to calculated the new step once the threshold has been passed. resetThreshold - Determines the threshold for animation reset. When it's reached the animation will start over. */
     animationSettings: any;
     /** @description Determines the date controls inside the header of the Calendar. */
-    calendarMode: CalendarMode;
+    calendarMode: CalendarMode | string;
     /** @description Determines the format of the day names located above the days inside the calendar. */
-    dayNameFormat: DayFormat;
+    dayNameFormat: DayFormat | string;
     /** @description  A callback that can be used to customize the format of the month name when calendarMode is set to 'default'. */
     dateFormatFunction: any;
     /** @description Enables or disables the Calendar. */
@@ -39,9 +39,9 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Disables auto navigation when the user clicks on a date that's not from the current month in view. */
     disableAutoNavigation: boolean;
     /** @description Determines the date view of the calendar when calendarMode is set to 'default' */
-    displayMode: CalendarDisplayMode;
+    displayMode: CalendarDisplayMode | string;
     /** @description Determines the type of the month/year view when calendarMode is set to Default. */
-    displayModeView: CalendarDisplayModeView;
+    displayModeView: CalendarDisplayModeView | string;
     /** @description Determines the height of the month's drop down inside the Calendar. */
     dropDownHeight: string | number;
     /** @description Determines the width of the month's drop down inside the Calendar. */
@@ -75,7 +75,7 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Determines the number of months to be displayed inside the calendar. The maximum amount of months that can be shown is 12. By default only 1 month is shown. */
     months: number;
     /** @description Determines the format of the month names in the header when DisplayMode is set to Default or when Months property is greater than 1.  */
-    monthNameFormat: MonthFormat;
+    monthNameFormat: MonthFormat | string;
     /** @description Sets or gets the name attribute for the element. Name is used when submiting HTML forms. */
     name: string;
     /** @description If the element is readonly, users cannot interact with it. */
@@ -85,13 +85,13 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description  Determines the direction of the navigation buttons located in the header and the animation. */
-    scrollButtonsNavigationMode: ViewLayout;
+    scrollButtonsNavigationMode: ViewLayout | string;
     /** @description  Determines the position of the navigation buttons located inside the header.  */
-    scrollButtonsPosition: LayoutPosition;
+    scrollButtonsPosition: LayoutPosition | string;
     /** @description Sets the dates that will be selected. Selected dates are styled differently than the rest. The dates can be Date objects or strings in a valid date format. */
     selectedDates: string[] | Date[];
     /** @description Determines the date selection mode. */
-    selectionMode: CalendarSelectionMode;
+    selectionMode: CalendarSelectionMode | string;
     /** @description Sets the delay between clicks of the date navigation buttons located in the header of the Calendar.  */
     spinButtonsDelay: number;
     /** @description Determines the initial delay before the action of the date navigation buttons located in the header of the Calendar.  */
@@ -109,13 +109,13 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Set's a custom offset to the tooltip's position. Accepts an array of two numbers: the left coordinate and the top coordinate. */
     tooltipOffset: number[][];
     /** @description Sets the position of the tooltip. */
-    tooltipPosition: TooltipPosition;
+    tooltipPosition: TooltipPosition | string;
     /** @description Sets a template for the tooltip's content. Accepts the id of an HTMLTEmplate element inside the DOM or it's reference. */
     tooltipTemplate: any;
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
     /** @description Determines the orientation of the Calendar. */
-    view: ViewLayout;
+    view: ViewLayout | string;
     /** @description Determines the visible sections of the Calendar. The view sections are : title, header, footer. Multiple sections can be applied at the same time. By default only the 'header' section is visible. */
     viewSections: string[];
     /** @description Enables/Disabled week numbering. If enabled week numbers are displayed infront of each week inside the Calendar. */
@@ -123,7 +123,7 @@ export declare class CalendarComponent extends BaseElement implements OnInit, Af
     /** @description Determines the number of visible weeks. The value of the property ranges from 1 to 6. Where 1 is one week and 6 is a full month ( 6 weeks ). */
     weeks: number;
     /** @description Determines the year format in the header when DisplayMode is set to Default or when Months property is greater than 1. */
-    yearFormat: YearFormat;
+    yearFormat: YearFormat | string;
     /** @description This event is triggered when a new date has been selected/unselected.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	value)
     *   value - An array of all currently selected dates.

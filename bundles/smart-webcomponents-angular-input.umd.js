@@ -1067,7 +1067,7 @@ import './../source/modules/smart.input';
         ], InputComponent.prototype, "onItemClick", void 0);
         InputComponent = __decorate([
             core.Directive({
-                selector: 'smart-input, [smart-input]',
+                exportAs: 'smart-input', selector: 'smart-input, [smart-input]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], InputComponent);

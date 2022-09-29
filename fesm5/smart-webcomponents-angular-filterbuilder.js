@@ -739,7 +739,7 @@ var FilterBuilderComponent = /** @class */ (function (_super) {
     ], FilterBuilderComponent.prototype, "onClosing", void 0);
     FilterBuilderComponent = __decorate([
         Directive({
-            selector: 'smart-filter-builder, [smart-filter-builder]'
+            exportAs: 'smart-filter-builder', selector: 'smart-filter-builder, [smart-filter-builder]'
         })
     ], FilterBuilderComponent);
     return FilterBuilderComponent;

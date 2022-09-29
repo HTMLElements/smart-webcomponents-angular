@@ -14,7 +14,7 @@ export declare class CircularProgressBarComponent extends BaseElement implements
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Enables or disables the element.  */
     disabled: boolean;
     /** @description Sets the value of the Circular Progress bar to indeterminate state(null) and starts the animation. */

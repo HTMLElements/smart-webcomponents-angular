@@ -2821,7 +2821,7 @@ var GanttChartComponent = /** @class */ (function (_super) {
     ], GanttChartComponent.prototype, "onScrollRightReached", void 0);
     GanttChartComponent = __decorate([
         Directive({
-            selector: 'smart-gantt-chart, [smart-gantt-chart]'
+            exportAs: 'smart-gantt-chart', selector: 'smart-gantt-chart, [smart-gantt-chart]'
         })
     ], GanttChartComponent);
     return GanttChartComponent;

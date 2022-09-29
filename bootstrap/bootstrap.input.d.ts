@@ -26,7 +26,7 @@ export declare class BootstrapInputComponent extends BaseElement implements OnIn
     /** @description Gets or sets whether the element is required.  */
     required: boolean;
     /** @description Sets or gets the style mode of the element. */
-    styleMode: BootstrapInputStyleMode;
+    styleMode: BootstrapInputStyleMode | string;
     /** @description Gets or sets the value of the element.  */
     value: string;
     /** @description Change event is triggered when the value of the element is changed.

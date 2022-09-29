@@ -668,7 +668,7 @@ import './../source/modules/smart.gridpanel';
         ], MultiColumnFilterPanelComponent.prototype, "onExpandAll", void 0);
         MultiColumnFilterPanelComponent = __decorate([
             core.Directive({
-                selector: 'smart-multi-column-filter-panel, [smart-multi-column-filter-panel]'
+                exportAs: 'smart-multi-column-filter-panel', selector: 'smart-multi-column-filter-panel, [smart-multi-column-filter-panel]'
             })
         ], MultiColumnFilterPanelComponent);
         return MultiColumnFilterPanelComponent;

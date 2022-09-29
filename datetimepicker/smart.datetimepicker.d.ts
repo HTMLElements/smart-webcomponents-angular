@@ -25,7 +25,7 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Applies new animation settings to the calendar pop-up when it is enabled. Properties:startSpeed - Determines the initial speed of the animation.easeThreshold - Determines the point at which the animation starts to slow down - the "ease effect".step - Determines the step ( scrolling interval ) at which the animation will run. stepEaseSize - Coefficient that is used to calculated the new step once the threshold has been passed. resetThreshold - Determines the threshold for animation reset. When it's reached the animation will start over. */
     animationSettings: any;
     /** @description Determines whether the calendar button pop-up will be closed automatically when date or time is selected through it. */
@@ -35,29 +35,29 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     /** @description Determines whether the calendar button is visible or not. The calendar button is used to open the Calendar popup to select a date. */
     calendarButton: boolean;
     /** @description Determines the position of the calendar button. */
-    calendarButtonPosition: DropDownButtonPosition;
+    calendarButtonPosition: DropDownButtonPosition | string;
     /** @description Determines the header mode of the calendar pop-up. */
-    calendarMode: CalendarMode;
+    calendarMode: CalendarMode | string;
     /** @description Sets or gets the format of calendar pop-up's day names. */
-    dayNameFormat: DayFormat;
+    dayNameFormat: DayFormat | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Disables auto navigation of the calendar pop-up when the user clicks on a date that's not from month in view. */
     disableAutoNavigation: boolean;
     /** @description Determines the time zone to display the value in. */
-    displayKind: DateTimePickerDisplayKind;
+    displayKind: DateTimePickerDisplayKind | string;
     /** @description Determines the type of the month/year view in the calendar pop-up when calendarMode is set to Default. */
-    displayModeView: CalendarDisplayModeView;
+    displayModeView: CalendarDisplayModeView | string;
     /** @description Sets custom container to append the pop-up to. By default, it is in the DateTimePicker. The value of the property can be an HTML element or the id of an HTML element. */
     dropDownAppendTo: string;
     /** @description Sets or gets the pop-up display mode (what components appear in it, and its behaviour). */
-    dropDownDisplayMode: DateTimePickerDropDownDisplayMode;
+    dropDownDisplayMode: DateTimePickerDropDownDisplayMode | string;
     /** @description If this property is enabled, when the element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */
     dropDownOverlay: boolean;
     /** @description Determines the pop-up position when opened. */
-    dropDownPosition: DropDownPosition;
+    dropDownPosition: DropDownPosition | string;
     /** @description Determines how the the value can be edited inside the input. */
-    editMode: DateTimePickerEditMode;
+    editMode: DateTimePickerEditMode | string;
     /** @description Determines whether the value can be incremented/decremented with the mouse wheel when the mouse is over the input. */
     enableMouseWheelAction: boolean;
     /** @description Determines the first day of the week of the calendar pop-up. From 0(Sunday) to 6(Saturday) */
@@ -66,7 +66,7 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     footerTemplate: any;
     /** @description Determines whether to display a footer. */
     footer: boolean;
-    /** @description Determines the pattern that is used to display the value in. */
+    /** @description Determines the pattern that is used to display the value in. Built-in Date formats:// short date pattern'd' - 'M/d/yyyy',// long date pattern'D' - 'dddd, MMMM dd, yyyy',// short time pattern't' - 'h:mm tt',// long time pattern'T' - 'h:mm:ss tt',// long date, short time pattern'f' - 'dddd, MMMM dd, yyyy h:mm tt',// long date, long time pattern'F' - 'dddd, MMMM dd, yyyy h:mm:ss tt',// month/day pattern'M' - 'MMMM dd',// month/year pattern'Y' - 'yyyy MMMM',// S is a sortable format that does not vary by culture'S' - 'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Date format strings:'d'-the day of the month;'dd'-the day of the month'ddd'-the abbreviated name of the day of the week'dddd'- the full name of the day of the week'h'-the hour, using a 12-hour clock from 1 to 12'hh'-the hour, using a 12-hour clock from 01 to 12'H'-the hour, using a 24-hour clock from 0 to 23'HH'- the hour, using a 24-hour clock from 00 to 23'm'-the minute, from 0 through 59'mm'-the minutes,from 00 though59'M'- the month, from 1 through 12'MM'- the month, from 01 through 12'MMM'-the abbreviated name of the month'MMMM'-the full name of the month's'-the second, from 0 through 59'ss'-the second, from 00 through 59't'- the first character of the AM/PM designator'tt'-the AM/PM designator'y'- the year, from 0 to 99'yy'- the year, from 00 to 99'yyy'-the year, with a minimum of three digits'yyyy'-the year as a four-digit number;'yyyyy'-the year as a four-digit number. */
     formatString: string;
     /** @description Sets custom header template for the calendar pop-up. Accepts the id of an HTMLTemplateElement or a reference ot it. */
     headerTemplate: any;
@@ -117,7 +117,7 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     /** @description Sets a delay before the first repeat iteration of spin buttons in miliseconds. */
     spinButtonsInitialDelay: number;
     /** @description Sets or gets the position of the spin buttons. */
-    spinButtonsPosition: DateTimePickerSpinButtonsPosition;
+    spinButtonsPosition: DateTimePickerSpinButtonsPosition | string;
     /** @description Sets or gets the element's visual theme.  */
     theme: string;
     /** @description Enables/Disabled the tooltip for the important dates in the calendar pop-up. */
@@ -125,13 +125,13 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     /** @description Sets the delay of the calendar pop-up's tooltip before it appears. */
     tooltipDelay: number;
     /** @description Sets the position of the tooltip in the calendar pop-up. */
-    tooltipPosition: TooltipPosition;
+    tooltipPosition: TooltipPosition | string;
     /** @description Sets a template for the content of the calendar pop-up's tooltip. Accepts the id of or a reference to an HTMLTemplateElement. */
     tooltipTemplate: string | HTMLTemplateElement;
     /** @description Sets or gets if the element can be focused. */
     unfocusable: boolean;
     /** @description Determines the validation mechanism for the value by min/max. */
-    validation: Validation;
+    validation: Validation | string;
     /** @description Sets or gets the value. The value represents the current date/time that is set to the element as a DateTime object. */
     value: any;
     /** @description Enables/Disabled week numbering in the calendar pop-up.  */
@@ -170,6 +170,14 @@ export declare class DateTimePickerComponent extends BaseElement implements OnIn
     /** @description Selects the text inside the input.
     */
     select(): void;
+    /** @description Gets a Date object.
+    * @returns {Date}
+  */
+    getDate(): Promise<any>;
+    /** @description Sets the date of the DateTimePicker.
+    * @param {Date} date. The date object to be set.
+    */
+    setDate(date: Date): void;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

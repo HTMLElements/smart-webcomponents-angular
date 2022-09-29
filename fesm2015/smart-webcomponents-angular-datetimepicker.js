@@ -7,7 +7,7 @@ else {
 }
 import './../source/modules/smart.datetimepicker';
 
-import { __decorate } from 'tslib';
+import { __decorate, __awaiter } from 'tslib';
 import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -306,7 +306,7 @@ let DateTimePickerComponent = class DateTimePickerComponent extends BaseElement 
     set footer(value) {
         this.nativeElement ? this.nativeElement.footer = value : undefined;
     }
-    /** @description Determines the pattern that is used to display the value in. */
+    /** @description Determines the pattern that is used to display the value in. Built-in Date formats:// short date pattern'd' - 'M/d/yyyy',// long date pattern'D' - 'dddd, MMMM dd, yyyy',// short time pattern't' - 'h:mm tt',// long time pattern'T' - 'h:mm:ss tt',// long date, short time pattern'f' - 'dddd, MMMM dd, yyyy h:mm tt',// long date, long time pattern'F' - 'dddd, MMMM dd, yyyy h:mm:ss tt',// month/day pattern'M' - 'MMMM dd',// month/year pattern'Y' - 'yyyy MMMM',// S is a sortable format that does not vary by culture'S' - 'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Date format strings:'d'-the day of the month;'dd'-the day of the month'ddd'-the abbreviated name of the day of the week'dddd'- the full name of the day of the week'h'-the hour, using a 12-hour clock from 1 to 12'hh'-the hour, using a 12-hour clock from 01 to 12'H'-the hour, using a 24-hour clock from 0 to 23'HH'- the hour, using a 24-hour clock from 00 to 23'm'-the minute, from 0 through 59'mm'-the minutes,from 00 though59'M'- the month, from 1 through 12'MM'- the month, from 01 through 12'MMM'-the abbreviated name of the month'MMMM'-the full name of the month's'-the second, from 0 through 59'ss'-the second, from 00 through 59't'- the first character of the AM/PM designator'tt'-the AM/PM designator'y'- the year, from 0 to 99'yy'- the year, from 00 to 99'yyy'-the year, with a minimum of three digits'yyyy'-the year as a four-digit number;'yyyyy'-the year as a four-digit number. */
     get formatString() {
         return this.nativeElement ? this.nativeElement.formatString : undefined;
     }
@@ -610,6 +610,36 @@ let DateTimePickerComponent = class DateTimePickerComponent extends BaseElement 
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.select();
+            });
+        }
+    }
+    /** @description Gets a Date object.
+    * @returns {Date}
+  */
+    getDate() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getDate();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Sets the date of the DateTimePicker.
+    * @param {Date} date. The date object to be set.
+    */
+    setDate(date) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setDate(date);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setDate(date);
             });
         }
     }
@@ -922,7 +952,7 @@ __decorate([
 ], DateTimePickerComponent.prototype, "onOpening", void 0);
 DateTimePickerComponent = __decorate([
     Directive({
-        selector: 'smart-date-time-picker, [smart-date-time-picker]',
+        exportAs: 'smart-date-time-picker', selector: 'smart-date-time-picker, [smart-date-time-picker]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], DateTimePickerComponent);

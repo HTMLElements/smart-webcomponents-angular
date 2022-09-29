@@ -456,7 +456,7 @@ __decorate([
 ], AccordionComponent.prototype, "onExpanding", void 0);
 AccordionComponent = __decorate([
     Directive({
-        selector: 'smart-accordion, [smart-accordion]'
+        exportAs: 'smart-accordion', selector: 'smart-accordion, [smart-accordion]'
     })
 ], AccordionComponent);
 
@@ -586,7 +586,7 @@ __decorate([
 ], AccordionItemComponent.prototype, "onExpand", void 0);
 AccordionItemComponent = __decorate([
     Directive({
-        selector: 'smart-accordion-item, [smart-accordion-item]'
+        exportAs: 'smart-accordion-item', selector: 'smart-accordion-item, [smart-accordion-item]'
     })
 ], AccordionItemComponent);
 

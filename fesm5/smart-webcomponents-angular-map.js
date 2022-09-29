@@ -279,7 +279,7 @@ var MapComponent = /** @class */ (function (_super) {
     ], MapComponent.prototype, "zoom", null);
     MapComponent = __decorate([
         Directive({
-            selector: 'smart-map, [smart-map]'
+            exportAs: 'smart-map', selector: 'smart-map, [smart-map]'
         })
     ], MapComponent);
     return MapComponent;

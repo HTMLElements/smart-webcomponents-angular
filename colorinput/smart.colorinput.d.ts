@@ -25,7 +25,7 @@ export declare class ColorInputComponent extends BaseElement implements OnInit, 
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the delay before the drop down opens to show the matches from the auto complete operation. The delay is measured in miliseconds. */
     autoCompleteDelay: number;
     /** @description Determines the data source ( that represent valid colors ) that will be loaded to the Input. The dataSource can be an array of strings or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
@@ -33,9 +33,9 @@ export declare class ColorInputComponent extends BaseElement implements OnInit, 
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Determines the colors that will be displayed and their layout. */
-    displayMode: ColorInputDisplayMode;
+    displayMode: ColorInputDisplayMode | string;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
     dropDownHeight: string | number;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */
@@ -61,7 +61,7 @@ export declare class ColorInputComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied. */
     query: string | number;
     /** @description Determines the auto complete query mode. This property also determines the matching algorithm for the autocomplete operation. */
-    queryMode: ColorQueryMode;
+    queryMode: ColorQueryMode | string;
     /** @description Determines whether the user can enter text inside the input or not. Determines whether the element acts as a ComboBox or a DropDownList if a dataSource is provided. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
@@ -73,9 +73,9 @@ export declare class ColorInputComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the value of the element. */
     value: string;
     /** @description Determines what will be displayed inside the color picker's action section. */
-    valueDisplayMode: ColorValueDisplayMode;
+    valueDisplayMode: ColorValueDisplayMode | string;
     /** @description Determines the format of the color. Whether it's in HEX, RGB or RGBA. By default it shows the color depending on the displayMode. */
-    valueFormat: ColorValueFormat;
+    valueFormat: ColorValueFormat | string;
     /** @description This event is triggered when the selection is changed.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	oldLabel, 	oldValue, 	value)
     *   label - The label of the new selected color.

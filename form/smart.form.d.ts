@@ -22,7 +22,7 @@ export declare class FormComponent extends BaseElement implements OnInit, AfterV
     /** @description Callback function for handling value changes */
     onValueChanges: any;
     /** @description Sets or Gets the labels position. */
-    labelPosition: FormLabelPosition;
+    labelPosition: FormLabelPosition | string;
     /** @description Makes the form readonly. */
     readonly: boolean;
     /** @description Shows / hides the colon after the labels. */
@@ -33,6 +33,8 @@ export declare class FormComponent extends BaseElement implements OnInit, AfterV
     state: any;
     /** @description Gets or Sets the Form value. */
     value: any;
+    /** @description Automatically validates the form when it is created. */
+    validateOnLoad: boolean;
     /** @description Adds a control to the Form.
     * @param {any} controlOptions. Control options. The control options description is available in the <em>controls</em> property.
     */

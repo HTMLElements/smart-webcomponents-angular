@@ -655,7 +655,7 @@ __decorate([
 ], MultilineTextBoxComponent.prototype, "onChange", void 0);
 MultilineTextBoxComponent = __decorate([
     Directive({
-        selector: 'smart-multiline-text-box, [smart-multiline-text-box]',
+        exportAs: 'smart-multiline-text-box', selector: 'smart-multiline-text-box, [smart-multiline-text-box]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], MultilineTextBoxComponent);
@@ -813,7 +813,7 @@ __decorate([
 ], ListItemComponent.prototype, "readonly", null);
 ListItemComponent = __decorate([
     Directive({
-        selector: 'smart-list-item, [smart-list-item]'
+        exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
     })
 ], ListItemComponent);
 
@@ -870,7 +870,7 @@ __decorate([
 ], ListItemsGroupComponent.prototype, "label", null);
 ListItemsGroupComponent = __decorate([
     Directive({
-        selector: 'smart-list-items-group, [smart-list-items-group]'
+        exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
     })
 ], ListItemsGroupComponent);
 

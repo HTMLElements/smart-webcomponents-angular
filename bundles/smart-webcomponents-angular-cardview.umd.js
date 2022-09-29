@@ -998,7 +998,7 @@ import './../source/modules/smart.cardview';
         ], CardViewComponent.prototype, "onDragEnd", void 0);
         CardViewComponent = __decorate([
             core.Directive({
-                selector: 'smart-card-view, [smart-card-view]'
+                exportAs: 'smart-card-view', selector: 'smart-card-view, [smart-card-view]'
             })
         ], CardViewComponent);
         return CardViewComponent;

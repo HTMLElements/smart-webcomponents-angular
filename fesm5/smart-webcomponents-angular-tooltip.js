@@ -540,7 +540,7 @@ var TooltipComponent = /** @class */ (function (_super) {
     ], TooltipComponent.prototype, "onClosing", void 0);
     TooltipComponent = __decorate([
         Directive({
-            selector: 'smart-tooltip, [smart-tooltip]'
+            exportAs: 'smart-tooltip', selector: 'smart-tooltip, [smart-tooltip]'
         })
     ], TooltipComponent);
     return TooltipComponent;

@@ -410,6 +410,17 @@ var TreeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TreeComponent.prototype, "filterOnEnter", {
+        /** @description Applies a filter only after the 'Enter' key is pressed. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.filterOnEnter : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.filterOnEnter = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(TreeComponent.prototype, "filterInputPlaceholder", {
         /** @description Sets custom text for placeholder in the filter input. */
         get: function () {
@@ -889,6 +900,32 @@ var TreeComponent = /** @class */ (function (_super) {
             });
         });
     };
+    /** @description Gets the selected values. If value is not defined, returns the selected labels.
+    * @returns {string[]}
+  */
+    TreeComponent.prototype.getSelectedValues = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getSelectedValues();
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
     /** @description Returns SmartTree's state
     * @returns {any}
   */
@@ -1012,7 +1049,7 @@ var TreeComponent = /** @class */ (function (_super) {
             });
         });
     };
-    /** @description Selects an item.
+    /** @description Selects an item by its index or by HTMLElement id.
     * @param {HTMLElement | string} item. The smart-tree-item/smart-tree-items-group (or its id or numeric path) to remove.
     */
     TreeComponent.prototype.select = function (item) {
@@ -1026,7 +1063,21 @@ var TreeComponent = /** @class */ (function (_super) {
             });
         }
     };
-    /** @description Unselects an item.
+    /** @description Selects an item or items by values.
+    * @param {string | string[]} items. The smart-tree-item/smart-tree-items-group values or labels, if values are not defined.
+    */
+    TreeComponent.prototype.setSelectedValues = function (items) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setSelectedValues(items);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.setSelectedValues(items);
+            });
+        }
+    };
+    /** @description Unselects an item by its index or by HTMLElement id.
     * @param {HTMLElement | string} item. The smart-tree-item/smart-tree-items-group (or its id or numeric path) to remove.
     */
     TreeComponent.prototype.unselect = function (item) {
@@ -1037,6 +1088,20 @@ var TreeComponent = /** @class */ (function (_super) {
         else {
             this.nativeElement.whenRendered(function () {
                 _this.nativeElement.unselect(item);
+            });
+        }
+    };
+    /** @description Unselects an item or items by values.
+    * @param {string | string[]} items. The smart-tree-item/smart-tree-items-group values or labels, if values are not defined.
+    */
+    TreeComponent.prototype.unselectValues = function (items) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.unselectValues(items);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.unselectValues(items);
             });
         }
     };
@@ -1205,6 +1270,9 @@ var TreeComponent = /** @class */ (function (_super) {
     ], TreeComponent.prototype, "filterable", null);
     __decorate([
         Input()
+    ], TreeComponent.prototype, "filterOnEnter", null);
+    __decorate([
+        Input()
     ], TreeComponent.prototype, "filterInputPlaceholder", null);
     __decorate([
         Input()
@@ -1325,7 +1393,7 @@ var TreeComponent = /** @class */ (function (_super) {
     ], TreeComponent.prototype, "onSwiperight", void 0);
     TreeComponent = __decorate([
         Directive({
-            selector: 'smart-tree, [smart-tree]'
+            exportAs: 'smart-tree', selector: 'smart-tree, [smart-tree]'
         })
     ], TreeComponent);
     return TreeComponent;
@@ -1492,7 +1560,7 @@ var TreeItemComponent = /** @class */ (function (_super) {
     ], TreeItemComponent.prototype, "readonly", null);
     TreeItemComponent = __decorate([
         Directive({
-            selector: 'smart-tree-item, [smart-tree-item]'
+            exportAs: 'smart-tree-item', selector: 'smart-tree-item, [smart-tree-item]'
         })
     ], TreeItemComponent);
     return TreeItemComponent;
@@ -1659,7 +1727,7 @@ var TreeItemsGroupComponent = /** @class */ (function (_super) {
     ], TreeItemsGroupComponent.prototype, "readonly", null);
     TreeItemsGroupComponent = __decorate([
         Directive({
-            selector: 'smart-tree-items-group, [smart-tree-items-group]'
+            exportAs: 'smart-tree-items-group', selector: 'smart-tree-items-group, [smart-tree-items-group]'
         })
     ], TreeItemsGroupComponent);
     return TreeItemsGroupComponent;

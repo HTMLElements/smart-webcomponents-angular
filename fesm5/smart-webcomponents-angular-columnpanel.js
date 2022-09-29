@@ -343,7 +343,7 @@ var ColumnPanelComponent = /** @class */ (function (_super) {
     ], ColumnPanelComponent.prototype, "onCancel", void 0);
     ColumnPanelComponent = __decorate([
         Directive({
-            selector: 'smart-column-panel, [smart-column-panel]'
+            exportAs: 'smart-column-panel', selector: 'smart-column-panel, [smart-column-panel]'
         })
     ], ColumnPanelComponent);
     return ColumnPanelComponent;

@@ -14,9 +14,9 @@ export declare class PagerComponent extends BaseElement implements OnInit, After
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Handles pager's elipsis. Ellipsis buttons are displayed as indicators and additional help to navigate between pages. */
-    autoEllipsis: PagerAutoEllipsis;
+    autoEllipsis: PagerAutoEllipsis | string;
     /** @description Enables or disables the pager. */
     disabled: boolean;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
@@ -26,7 +26,7 @@ export declare class PagerComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Handles the position of the navigation buttons. */
-    navigationButtonsPosition: LayoutPosition;
+    navigationButtonsPosition: LayoutPosition | string;
     /** @description Gets/sets current page index. */
     pageIndex: number;
     /** @description Defines the number of page index selectors. */

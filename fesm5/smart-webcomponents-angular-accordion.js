@@ -542,7 +542,7 @@ var AccordionComponent = /** @class */ (function (_super) {
     ], AccordionComponent.prototype, "onExpanding", void 0);
     AccordionComponent = __decorate([
         Directive({
-            selector: 'smart-accordion, [smart-accordion]'
+            exportAs: 'smart-accordion', selector: 'smart-accordion, [smart-accordion]'
         })
     ], AccordionComponent);
     return AccordionComponent;
@@ -700,7 +700,7 @@ var AccordionItemComponent = /** @class */ (function (_super) {
     ], AccordionItemComponent.prototype, "onExpand", void 0);
     AccordionItemComponent = __decorate([
         Directive({
-            selector: 'smart-accordion-item, [smart-accordion-item]'
+            exportAs: 'smart-accordion-item', selector: 'smart-accordion-item, [smart-accordion-item]'
         })
     ], AccordionItemComponent);
     return AccordionItemComponent;

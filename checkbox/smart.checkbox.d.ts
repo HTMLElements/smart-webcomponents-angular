@@ -25,13 +25,13 @@ export declare class CheckBoxComponent extends BaseElement implements OnInit, Af
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the checked state.  */
     checked: boolean;
     /** @description Determines which part of the element can be used to toggle it. */
-    checkMode: CheckMode;
+    checkMode: CheckMode | string;
     /** @description Sets the click mode of the checkbox. */
-    clickMode: ClickMode;
+    clickMode: ClickMode | string;
     /** @description Enables or disables the checkbox.  */
     disabled: boolean;
     /** @description Sets or gets the elements's innerHTML. */

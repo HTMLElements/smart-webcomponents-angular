@@ -36,7 +36,7 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description Determines the tasks that will be loaded inside the Timeline. Each item represents an object that should contain the following properties: label - the label of the TaskdateStart - the starting date of the Task. Should be a string representing a valid date.dateEnd - the ending date of the Task. Should be a string representing a valid date.type - determines the type of the task. Whether it's a simple task, a project or a milestone. Each type of task has specific behavior and additional attributes..  Additional properties: connections - an array of objects representing the connection between two tasks. Each connection (object) should have the following properties : target - a number representing the index of the target tasktype - a number representing the type of the connection. Four types of connections are available: 0 - is a connection of type Start-to-Start 1 - is a connection of type End-to-Start 2 - is a connection of type End-to-End3 - is a connection of type Start-to-End lag - a number that determines the delay between two connected auto scheduled tasks. Lag property can be a positive or a negative number. When negative it determines the overlap between two connected tasks. This property is used in conjuction with autoSchedule.duration - determines the duration of a Task in days, hours, minutes, seconds or miliseconds. Very usefull when the the dateEnd of a Task is unknown. The duration always shows the calendar time whether it is in days/hours or other.minDuration - sets the minimum duration of a task. maxDuration - sets the maximum duration of a task.minDateStart - determines the mininum date that a task can start from. Must be if type string and should represent a valid date.maxDateStart - determines the maximum date that a task can start from. Must be if type string and should represent a valid date.minDateEnd - determines the mininum date that a task can end. Must be if type string and should represent a valid date.maxDateEnd - determines the maximum date that a task can end. Must be if type string and should represent a valid date.progress - a number that determines the progress of a task ( from 0 to 100 ).overdue - a boolean that indicates whether the task's dateEnd has surpassed it's deadline date.disableDrag - a boolean property that disables the dragging of a task when set to true.disableResize - a boolean property that disables the resizing of a task when set to true.dragProject - a boolean that determines whether or not the whole project (along with the tasks) can be dragged while dragging the project task. Applicalbe only to Projects.segments - an array of objects that allows to devide a task into multiple segements. Each segment (except the first) can have a different starting date, duration and label.synchronized - a boolean that if set the project task's start/end dates are automatically calculated based on the tasks. By default a synchronized project task can't be dragged alone. Applicable only to Project tasks.expanded - a boolean that determines if a project is expanded or not. If not all of it's sub-tasks are not visible. Only the project task itself is visible. By default no projects are expanded. Applicable only to project tasks..GanttChart also accepts a DataAdapter instance as dataSource. You can read more about the dataAdapter here - https://www.htmlelements.com/docs/data-adapter/. */
     dataSource: any;
     /** @description Determines the format of the dates in the timeline header when they represent days. */
-    dayFormat: GanttDayFormat;
+    dayFormat: GanttDayFormat | string;
     /** @description Determines a specific end date for the Timeline. Usefull when the user wants custom ending date for the Timeline. If no date is set the end date of the timeline is automatically determined from the tasks. */
     dateEnd: string | Date;
     /** @description Determines a specific starting date for the Timeline. Usefull when the user wants custom starting date for the Timeline. If no date is set the start date of the timeline is automatically determined from the tasks. */
@@ -62,7 +62,7 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description Disables the window editor for the GanttChart. */
     disableWindowEditor: boolean;
     /** @description Determines in what unit is task duration property measured. */
-    durationUnit: Duration;
+    durationUnit: Duration | string;
     /** @description Determines whether a dedicated filter row is used for Table filtering instead of the default filter input. This property has no effect if filtering is not enabled. */
     filterRow: boolean;
     /** @description Groups the tasks inside the Task timeline according to the resources they are assigned to. Unassigned tasks are placed in a default group labeled 'Unassigned'. */
@@ -78,9 +78,9 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description Hides the Resource panel regardless of the resources availability By default the Resource panel is visible if resources are added to the GanttChart. This property allows to hide the Resource panel permanently. */
     hideResourcePanel: boolean;
     /** @description Determines weather or not horizontal scrollbar is shown. */
-    horizontalScrollBarVisibility: HorizontalScrollBarVisibility;
+    horizontalScrollBarVisibility: HorizontalScrollBarVisibility | string;
     /** @description Determines the format of the dates inside the timeline header when they represent hours. */
-    hourFormat: HourFormat;
+    hourFormat: HourFormat | string;
     /** @description When enabled, scrolling to the end of the horizotal timeline, triggers the creation of additional to extend the time range. The number of cells to be added when the scrollbar reaches the end position is determined by the infiniteTimelineStep. */
     infiniteTimeline: boolean;
     /** @description Determines the number of cells to be added when the horizontal scroll bar of the Timeline reaches it's end position when infiniteTimeline is enabled. */
@@ -98,7 +98,7 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Determines the format of the dates the timeline header when they represent months. */
-    monthFormat: MonthFormat;
+    monthFormat: MonthFormat | string;
     /** @description Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be displayed with colored cells inside the timeline and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */
     nonworkingDays: number[];
     /** @description Determines the nonworking hours of a day. Hours are represented as numbers inside an array (e.g. [1,2,3] - means 1,2 and 3 AM) or number ranges represented as nested arrays(e.g. [[0,6]] - means from 0 to 6 AM). In the timline the cells that represent nonworking days are colored differently from the rest and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */
@@ -128,9 +128,9 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description A callback that can be used to customize the content of the resource Timeline cells. The callback accepts three arguments: taskIndexes - an array of task indexes that are assigned to the resource for the current cell.resourceIndex - the index of the resource.cellDate - the date of the current cell. This property is used when resourceTimelineView is set to custom. Depending on the resourceTimelineMode, it should return: string - when the resourceTimelineMode is set to 'diagram'.object - when the resourceTimelineMode is set to 'histogram'. The object should have two attributes: capacity and maxCapacity, in order to be visualized as a histogram.. Another usage of this callback is to customize the timeline resource representation completely if resourceTimelineMode is set to custom. */
     resourceTimelineFormatFunction: any;
     /** @description Determines how the capacity of the resources will be visualized inside the resource timeline. By default, the capacity is measured in hours depending on the view property of the element. */
-    resourceTimelineMode: GanttChartResourceTimelineMode;
+    resourceTimelineMode: GanttChartResourceTimelineMode | string;
     /** @description Determines how the resources will be displayed inside the resource Timeline. */
-    resourceTimelineView: GanttChartResourceTimelineView;
+    resourceTimelineView: GanttChartResourceTimelineView | string;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Sets which tasks to select by their id or gets the currently selected task ids. If no id is provided for the task, an internal id is generated for each task according to it's index(tree path). */
@@ -152,7 +152,7 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
         }[]): void;
     };
     /** @description A getter that returns a flat structure as an array of all tasks inside the element. */
-    sortMode: GanttChartSortMode;
+    sortMode: GanttChartSortMode | string;
     /** @description Deteremines the columns that will be visible in the Task Tree. Each entry in the value of this property must be of type Object.  It should contain the label and value keys. The value of label determines the column header label inside the Task Tree. The value of value determines the content of the cells in the column. It should reference a task attribute from the dataSource. By default, one column with all task labels is visible.  Additional properties: formatFunction - a function that allows to customize the content of each record in the column. The function accepts one argument - the actual label as string that is going to be inserted and must return some content. min - controls the min size of the column max - controls the max size of the column size - controls the actual size of the columncustomEditor - a callback that can be used to set a custom editor for the column when editing via the window. It accepts two arguments label - the label of the columnvalue - the value of the column. The callback must return the editor.setCustomEditorValue - a callback that is used to set the value of the custom editor.getCustomEditorValue - a callback that is used to get the value of the custom editor. */
     tasks: GanttChartTask[];
     /** @description Determines whether the Task Table is filterable or not. */
@@ -174,13 +174,13 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     /** @description Determines weather or not vertical scrollbar is shown. */
     tooltip: GanttChartTooltip;
     /** @description Determines the viewing date range of the timeline. Possible values: day - The timeline show the hours of the day.week - the timeline shows the days of the week.month - the timeline shows the days of the month.year - the timeline shows the months of the year.resource - displays the current tasks by grouping them according to the resources they have assigned. The unassigned tasks will be placed in a separate group called 'Unassigned'.  The timeline has a header section that contains the labels of each cell according to the date inside them. The header is splitted in two sections in order to give a more detailed information of the dates. */
-    verticalScrollBarVisibility: VerticalScrollBarVisibility;
+    verticalScrollBarVisibility: VerticalScrollBarVisibility | string;
     /** @description Determines the format of the dates inside the timeline header when they represent years. */
-    view: GanttChartView;
+    view: GanttChartView | string;
     /** @description Determines the format of the dates inside the timeline header when they represent weeks.  */
-    yearFormat: YearFormat;
+    yearFormat: YearFormat | string;
     /** @description Sets or gets the element's visual theme.  */
-    weekFormat: WeekFormat;
+    weekFormat: WeekFormat | string;
     /** @description Sets or gets if the element can be focused. */
     theme: string;
     /** @description undefined */

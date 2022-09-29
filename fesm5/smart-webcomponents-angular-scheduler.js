@@ -396,6 +396,17 @@ var SchedulerComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SchedulerComponent.prototype, "autoHeightAllDayCells", {
+        /** @description Determines whether the all day cells in Day and Week views automatically change their height depending on the events count in these cells.  */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.autoHeightAllDayCells : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.autoHeightAllDayCells = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SchedulerComponent.prototype, "colorScheme", {
         /** @description Determines the color scheme for the event background selector in the event window editor.  */
         get: function () {
@@ -1419,6 +1430,17 @@ var SchedulerComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(SchedulerComponent.prototype, "viewStartDay", {
+        /** @description Determines the Start Date rule. The Week and TimelineWeek views start by default from the current date taking into account the firstDayOfWeek property. When this property is set to 'dateCurrent', these views will start from the value of the 'dateCurrent'. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.viewStartDay : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.viewStartDay = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(SchedulerComponent.prototype, "weekdayFormat", {
         /** @description Determines the format of the week days inside the element.  */
         get: function () {
@@ -1488,6 +1510,25 @@ var SchedulerComponent = /** @class */ (function (_super) {
             });
         }
     };
+    /** @description Adds a new view. Example: scheduler.addView('week', 'My View', 'myView', false, false, 10); scheduler.setView('myView');
+    * @param {string} type. The view type.
+    * @param {string} label. The view's label displayed in the header.
+    * @param {string} value. The view's value used to identify the view.
+    * @param {boolean} hideWeekend. Determines whether to hide the weekend.
+    * @param {boolean} hideNonworkingWeekdays. Determines whether to hide the non working days.
+    * @param {number} additionalDays. Determines whether to add additional days to the view.
+    */
+    SchedulerComponent.prototype.addView = function (type, label, value, hideWeekend, hideNonworkingWeekdays, additionalDays) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addView(type, label, value, hideWeekend, hideNonworkingWeekdays, additionalDays);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.addView(type, label, value, hideWeekend, hideNonworkingWeekdays, additionalDays);
+            });
+        }
+    };
     /** @description Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
     */
     SchedulerComponent.prototype.beginUpdate = function () {
@@ -1531,6 +1572,32 @@ var SchedulerComponent = /** @class */ (function (_super) {
                 _this.nativeElement.endUpdate();
             });
         }
+    };
+    /** @description Returns an array of the start and end view dates.
+    * @returns {Date[]}
+  */
+    SchedulerComponent.prototype.getViewDates = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getViewDates();
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
     };
     /** @description Refereshes the Scheduler by recalculating the Scrollbars.
     * @param {boolean} fullRefresh?. If set the Scheduler will be re-rendered completely.
@@ -1733,6 +1800,20 @@ var SchedulerComponent = /** @class */ (function (_super) {
         else {
             this.nativeElement.whenRendered(function () {
                 _this.nativeElement.saveState(state);
+            });
+        }
+    };
+    /** @description Sets the Scheduler's view. Example: scheduler.addView('week', 'My View', 'myView', false, false, 10); scheduler.setView('myView');
+    * @param {string} view?. The view's value. For example: 'day'.
+    */
+    SchedulerComponent.prototype.setView = function (view) {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setView(view);
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.setView(view);
             });
         }
     };
@@ -2545,6 +2626,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "autoScrollStep", null);
     __decorate([
         Input()
+    ], SchedulerComponent.prototype, "autoHeightAllDayCells", null);
+    __decorate([
+        Input()
     ], SchedulerComponent.prototype, "colorScheme", null);
     __decorate([
         Input()
@@ -2824,6 +2908,9 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "viewSelectorType", null);
     __decorate([
         Input()
+    ], SchedulerComponent.prototype, "viewStartDay", null);
+    __decorate([
+        Input()
     ], SchedulerComponent.prototype, "weekdayFormat", null);
     __decorate([
         Input()
@@ -2947,7 +3034,7 @@ var SchedulerComponent = /** @class */ (function (_super) {
     ], SchedulerComponent.prototype, "onNotificationClose", void 0);
     SchedulerComponent = __decorate([
         Directive({
-            selector: 'smart-scheduler, [smart-scheduler]'
+            exportAs: 'smart-scheduler', selector: 'smart-scheduler, [smart-scheduler]'
         })
     ], SchedulerComponent);
     return SchedulerComponent;

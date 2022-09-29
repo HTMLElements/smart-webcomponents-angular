@@ -427,7 +427,7 @@ var ProgressBarComponent = /** @class */ (function (_super) {
     ], ProgressBarComponent.prototype, "onChange", void 0);
     ProgressBarComponent = __decorate([
         Directive({
-            selector: 'smart-progress-bar, [smart-progress-bar]'
+            exportAs: 'smart-progress-bar', selector: 'smart-progress-bar, [smart-progress-bar]'
         })
     ], ProgressBarComponent);
     return ProgressBarComponent;
@@ -715,7 +715,7 @@ var CircularProgressBarComponent = /** @class */ (function (_super) {
     ], CircularProgressBarComponent.prototype, "onChange", void 0);
     CircularProgressBarComponent = __decorate([
         Directive({
-            selector: 'smart-circular-progress-bar, [smart-circular-progress-bar]'
+            exportAs: 'smart-circular-progress-bar', selector: 'smart-circular-progress-bar, [smart-circular-progress-bar]'
         })
     ], CircularProgressBarComponent);
     return CircularProgressBarComponent;

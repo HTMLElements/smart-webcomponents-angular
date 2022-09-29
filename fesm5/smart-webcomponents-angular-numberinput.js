@@ -7,7 +7,7 @@ else {
 }
 import './../source/modules/smart.numberinput';
 
-import { __decorate, __extends } from 'tslib';
+import { __decorate, __extends, __awaiter, __generator } from 'tslib';
 import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -365,30 +365,56 @@ var NumberInputComponent = /** @class */ (function (_super) {
     /** @description Returns the value in the desired format.
     * @param {string | number} value. The value to be formatted by the method.
     * @param {any} format?. The object that contains the formatting properties. The argument should contain Intl.NumberFormat valid properties. For example, { style: 'currency', currency: 'EUR' }
-    */
+    * @returns {string}
+  */
     NumberInputComponent.prototype.getFormattedValue = function (value, format) {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.getFormattedValue(value, format);
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.getFormattedValue(value, format);
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getFormattedValue(value, format);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
             });
-        }
+        });
     };
     /** @description Returns the number of the input.
-    */
+    * @returns {number}
+  */
     NumberInputComponent.prototype.getValue = function () {
-        var _this = this;
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.getValue();
-        }
-        else {
-            this.nativeElement.whenRendered(function () {
-                _this.nativeElement.getValue();
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.getValue();
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
             });
-        }
+        });
     };
     /** @description Selects the text inside the input or if it is readonly then the element is focused.
     */
@@ -576,7 +602,7 @@ var NumberInputComponent = /** @class */ (function (_super) {
     ], NumberInputComponent.prototype, "onChange", void 0);
     NumberInputComponent = __decorate([
         Directive({
-            selector: 'smart-number-input, [smart-number-input]',
+            exportAs: 'smart-number-input', selector: 'smart-number-input, [smart-number-input]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], NumberInputComponent);

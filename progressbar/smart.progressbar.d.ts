@@ -14,7 +14,7 @@ export declare class ProgressBarComponent extends BaseElement implements OnInit,
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Enables or disables the element.  */
     disabled: boolean;
     /** @description Sets the value of the Progress bar to indeterminate state(null) and starts the animation. */
@@ -36,7 +36,7 @@ export declare class ProgressBarComponent extends BaseElement implements OnInit,
     /** @description Sets the orientation of the progress bar */
     min: number;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
-    orientation: Orientation;
+    orientation: Orientation | string;
     /** @description Enables/Disabled the label for the Progress Bar. */
     rightToLeft: boolean;
     /** @description Determines the theme. Theme defines the look of the element */

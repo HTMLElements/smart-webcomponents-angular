@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.barcode';
+
 import { __decorate, __extends, __awaiter, __generator } from 'tslib';
 import { EventEmitter, Output, Input, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -122,15 +131,17 @@ var BaseElement = /** @class */ (function () {
 }());
 var Smart = window.Smart;
 
-var BarCodeComponent = /** @class */ (function (_super) {
-    __extends(BarCodeComponent, _super);
-    function BarCodeComponent(ref) {
+var BarcodeComponent = /** @class */ (function (_super) {
+    __extends(BarcodeComponent, _super);
+    function BarcodeComponent(ref) {
         var _this = _super.call(this, ref) || this;
         _this.eventHandlers = [];
         /** @description This event is triggered when the value of the barcode is invalid.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	invalidCharacters)
-        *   value - the invalid value of the barcode.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	invalidCharacters, 	lengthValidity, 	patternValidity, 	value)
         *   invalidCharacters - An array indicating the invalid characters.
+        *   lengthValidity - A boolean indicating the length validity.
+        *   patternValidity - A boolean indicating the pattern validity.
+        *   value - the invalid value of the barcode.
         */
         _this.onInvalid = new EventEmitter();
         _this.nativeElement = ref.nativeElement;
@@ -139,7 +150,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
     /** @description Creates the component on demand.
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
-    BarCodeComponent.prototype.createComponent = function (properties) {
+    BarcodeComponent.prototype.createComponent = function (properties) {
         if (properties === void 0) { properties = {}; }
         this.nativeElement = document.createElement('smart-barcode');
         for (var propertyName in properties) {
@@ -147,7 +158,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         }
         return this.nativeElement;
     };
-    Object.defineProperty(BarCodeComponent.prototype, "backgroundColor", {
+    Object.defineProperty(BarcodeComponent.prototype, "backgroundColor", {
         /** @description Sets the background color of the barcode element. */
         get: function () {
             return this.nativeElement ? this.nativeElement.backgroundColor : undefined;
@@ -158,29 +169,29 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "disaplyLabel", {
+    Object.defineProperty(BarcodeComponent.prototype, "displayLabel", {
         /** @description Sets whether the barcode label is visible. */
         get: function () {
-            return this.nativeElement ? this.nativeElement.disaplyLabel : undefined;
+            return this.nativeElement ? this.nativeElement.displayLabel : undefined;
         },
         set: function (value) {
-            this.nativeElement ? this.nativeElement.disaplyLabel = value : undefined;
+            this.nativeElement ? this.nativeElement.displayLabel = value : undefined;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "labelCOlor", {
+    Object.defineProperty(BarcodeComponent.prototype, "labelColor", {
         /** @description Sets the color of the barcode label. */
         get: function () {
-            return this.nativeElement ? this.nativeElement.labelCOlor : undefined;
+            return this.nativeElement ? this.nativeElement.labelColor : undefined;
         },
         set: function (value) {
-            this.nativeElement ? this.nativeElement.labelCOlor = value : undefined;
+            this.nativeElement ? this.nativeElement.labelColor = value : undefined;
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "labelFont", {
+    Object.defineProperty(BarcodeComponent.prototype, "labelFont", {
         /** @description Sets the font family of the barcode label. */
         get: function () {
             return this.nativeElement ? this.nativeElement.labelFont : undefined;
@@ -191,7 +202,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "labelFontSize", {
+    Object.defineProperty(BarcodeComponent.prototype, "labelFontSize", {
         /** @description Sets the font size of the barcode label. */
         get: function () {
             return this.nativeElement ? this.nativeElement.labelFontSize : undefined;
@@ -202,7 +213,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "labelMarginBottom", {
+    Object.defineProperty(BarcodeComponent.prototype, "labelMarginBottom", {
         /** @description Sets the bottom margin of the barcode label. */
         get: function () {
             return this.nativeElement ? this.nativeElement.labelMarginBottom : undefined;
@@ -213,7 +224,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "labelMarginTop", {
+    Object.defineProperty(BarcodeComponent.prototype, "labelMarginTop", {
         /** @description Sets the top margin of the barcode label. */
         get: function () {
             return this.nativeElement ? this.nativeElement.labelMarginTop : undefined;
@@ -224,7 +235,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "labelPosition", {
+    Object.defineProperty(BarcodeComponent.prototype, "labelPosition", {
         /** @description Sets the position of the barcode label. */
         get: function () {
             return this.nativeElement ? this.nativeElement.labelPosition : undefined;
@@ -235,7 +246,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "lineColor", {
+    Object.defineProperty(BarcodeComponent.prototype, "lineColor", {
         /** @description Sets the color of the barcode lines. */
         get: function () {
             return this.nativeElement ? this.nativeElement.lineColor : undefined;
@@ -246,7 +257,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "lineHeight", {
+    Object.defineProperty(BarcodeComponent.prototype, "lineHeight", {
         /** @description Sets the height of the barcode line. */
         get: function () {
             return this.nativeElement ? this.nativeElement.lineHeight : undefined;
@@ -257,7 +268,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "lineWidth", {
+    Object.defineProperty(BarcodeComponent.prototype, "lineWidth", {
         /** @description Sets the width of the barcode line. */
         get: function () {
             return this.nativeElement ? this.nativeElement.lineWidth : undefined;
@@ -268,7 +279,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "renderAs", {
+    Object.defineProperty(BarcodeComponent.prototype, "renderAs", {
         /** @description Sets the rendering mode of the barcode. */
         get: function () {
             return this.nativeElement ? this.nativeElement.renderAs : undefined;
@@ -279,7 +290,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "type", {
+    Object.defineProperty(BarcodeComponent.prototype, "type", {
         /** @description Sets the barcode type */
         get: function () {
             return this.nativeElement ? this.nativeElement.type : undefined;
@@ -290,7 +301,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(BarCodeComponent.prototype, "value", {
+    Object.defineProperty(BarcodeComponent.prototype, "value", {
         /** @description Sets or gets the value of the barcode. */
         get: function () {
             return this.nativeElement ? this.nativeElement.value : undefined;
@@ -305,7 +316,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
     * @param {string} format. The format of the exported file - svg, png, jpg
     * @param {string} fileName?. The name of the exported file
     */
-    BarCodeComponent.prototype.export = function (format, fileName) {
+    BarcodeComponent.prototype.export = function (format, fileName) {
         var _this = this;
         if (this.nativeElement.isRendered) {
             this.nativeElement.export(format, fileName);
@@ -320,7 +331,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
     * @param {string} format. The dataURL format of the string - svg, png, jpg
     * @returns {string}
   */
-    BarCodeComponent.prototype.getDataURL = function (format) {
+    BarcodeComponent.prototype.getDataURL = function (format) {
         return __awaiter(this, void 0, void 0, function () {
             var getResultOnRender, result;
             var _this = this;
@@ -347,7 +358,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
     * @param {string} format. The dataURL format of the string - svg, png, jpg
     * @returns {any}
   */
-    BarCodeComponent.prototype.getDataURLAsync = function (format) {
+    BarcodeComponent.prototype.getDataURLAsync = function (format) {
         return __awaiter(this, void 0, void 0, function () {
             var getResultOnRender, result;
             var _this = this;
@@ -373,7 +384,7 @@ var BarCodeComponent = /** @class */ (function (_super) {
     /** @description Gets the validity of the barcode
     * @returns {boolean}
   */
-    BarCodeComponent.prototype.isValid = function () {
+    BarcodeComponent.prototype.isValid = function () {
         return __awaiter(this, void 0, void 0, function () {
             var getResultOnRender, result;
             var _this = this;
@@ -396,16 +407,16 @@ var BarCodeComponent = /** @class */ (function (_super) {
             });
         });
     };
-    Object.defineProperty(BarCodeComponent.prototype, "isRendered", {
+    Object.defineProperty(BarcodeComponent.prototype, "isRendered", {
         get: function () {
             return this.nativeElement ? this.nativeElement.isRendered : false;
         },
         enumerable: true,
         configurable: true
     });
-    BarCodeComponent.prototype.ngOnInit = function () {
+    BarcodeComponent.prototype.ngOnInit = function () {
     };
-    BarCodeComponent.prototype.ngAfterViewInit = function () {
+    BarcodeComponent.prototype.ngAfterViewInit = function () {
         var that = this;
         that.onCreate.emit(that.nativeElement);
         Smart.Render();
@@ -413,10 +424,10 @@ var BarCodeComponent = /** @class */ (function (_super) {
         this.nativeElement.whenRendered(function () { that.onReady.emit(that.nativeElement); });
         this.listen();
     };
-    BarCodeComponent.prototype.ngOnDestroy = function () {
+    BarcodeComponent.prototype.ngOnDestroy = function () {
         this.unlisten();
     };
-    BarCodeComponent.prototype.ngOnChanges = function (changes) {
+    BarcodeComponent.prototype.ngOnChanges = function (changes) {
         if (this.nativeElement && this.nativeElement.isRendered) {
             for (var propName in changes) {
                 if (changes.hasOwnProperty(propName)) {
@@ -426,90 +437,90 @@ var BarCodeComponent = /** @class */ (function (_super) {
         }
     };
     /** @description Add event listeners. */
-    BarCodeComponent.prototype.listen = function () {
+    BarcodeComponent.prototype.listen = function () {
         var that = this;
         that.eventHandlers['invalidHandler'] = function (event) { that.onInvalid.emit(event); };
         that.nativeElement.addEventListener('invalid', that.eventHandlers['invalidHandler']);
     };
     /** @description Remove event listeners. */
-    BarCodeComponent.prototype.unlisten = function () {
+    BarcodeComponent.prototype.unlisten = function () {
         var that = this;
         if (that.eventHandlers['invalidHandler']) {
             that.nativeElement.removeEventListener('invalid', that.eventHandlers['invalidHandler']);
         }
     };
-    BarCodeComponent.ctorParameters = function () { return [
+    BarcodeComponent.ctorParameters = function () { return [
         { type: ElementRef }
     ]; };
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "backgroundColor", null);
+    ], BarcodeComponent.prototype, "backgroundColor", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "disaplyLabel", null);
+    ], BarcodeComponent.prototype, "displayLabel", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "labelCOlor", null);
+    ], BarcodeComponent.prototype, "labelColor", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "labelFont", null);
+    ], BarcodeComponent.prototype, "labelFont", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "labelFontSize", null);
+    ], BarcodeComponent.prototype, "labelFontSize", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "labelMarginBottom", null);
+    ], BarcodeComponent.prototype, "labelMarginBottom", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "labelMarginTop", null);
+    ], BarcodeComponent.prototype, "labelMarginTop", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "labelPosition", null);
+    ], BarcodeComponent.prototype, "labelPosition", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "lineColor", null);
+    ], BarcodeComponent.prototype, "lineColor", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "lineHeight", null);
+    ], BarcodeComponent.prototype, "lineHeight", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "lineWidth", null);
+    ], BarcodeComponent.prototype, "lineWidth", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "renderAs", null);
+    ], BarcodeComponent.prototype, "renderAs", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "type", null);
+    ], BarcodeComponent.prototype, "type", null);
     __decorate([
         Input()
-    ], BarCodeComponent.prototype, "value", null);
+    ], BarcodeComponent.prototype, "value", null);
     __decorate([
         Output()
-    ], BarCodeComponent.prototype, "onInvalid", void 0);
-    BarCodeComponent = __decorate([
+    ], BarcodeComponent.prototype, "onInvalid", void 0);
+    BarcodeComponent = __decorate([
         Directive({
-            selector: 'smart-barcode, [smart-barcode]'
+            exportAs: 'smart-barcode', selector: 'smart-barcode, [smart-barcode]'
         })
-    ], BarCodeComponent);
-    return BarCodeComponent;
+    ], BarcodeComponent);
+    return BarcodeComponent;
 }(BaseElement));
 
-var BarCodeModule = /** @class */ (function () {
-    function BarCodeModule() {
+var BarcodeModule = /** @class */ (function () {
+    function BarcodeModule() {
     }
-    BarCodeModule = __decorate([
+    BarcodeModule = __decorate([
         NgModule({
-            declarations: [BarCodeComponent],
+            declarations: [BarcodeComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            exports: [BarCodeComponent]
+            exports: [BarcodeComponent]
         })
-    ], BarCodeModule);
-    return BarCodeModule;
+    ], BarcodeModule);
+    return BarcodeModule;
 }());
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { BarCodeComponent, BarCodeModule, Smart, BaseElement as ɵa };
+export { BarcodeComponent, BarcodeModule, Smart, BaseElement as ɵa };
 //# sourceMappingURL=smart-webcomponents-angular-barcode.js.map

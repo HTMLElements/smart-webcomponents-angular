@@ -519,7 +519,7 @@ var CheckBoxComponent = /** @class */ (function (_super) {
     ], CheckBoxComponent.prototype, "onUncheckValue", void 0);
     CheckBoxComponent = __decorate([
         Directive({
-            selector: 'smart-check-box, [smart-check-box]',
+            exportAs: 'smart-check-box', selector: 'smart-check-box, [smart-check-box]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], CheckBoxComponent);

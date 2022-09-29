@@ -1,8 +1,8 @@
 import { Scheduler } from './../index';
-import { SchedulerEventRenderMode, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerScrollButtonsPosition, SchedulerSortOrder, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerEvent, SchedulerResource, SchedulerStatuse } from './../index';
+import { SchedulerEventRenderMode, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerScrollButtonsPosition, SchedulerSortOrder, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, SchedulerViewStartDay, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerEvent, SchedulerResource, SchedulerStatuse } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { SchedulerEventRenderMode, SchedulerRepeatFreq, SchedulerNotificationType, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerResourceSortOrder, SchedulerScrollButtonsPosition, SchedulerSortOrder, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerEvent, SchedulerEventRepeat, SchedulerNotification, SchedulerResource, SchedulerStatuse, ElementRenderMode } from './../index';
+export { SchedulerEventRenderMode, SchedulerRepeatFreq, SchedulerNotificationType, SchedulerDayFormat, FilterMode, SchedulerGroupOrientation, SchedulerHourFormat, SchedulerHeaderDatePosition, SchedulerHeaderNavigationStyle, SchedulerHeaderViewPosition, SchedulerLegendLocation, SchedulerLegendPosition, HorizontalScrollBarVisibility, MinuteFormat, MonthFormat, ResizeHandlesVisibility, SchedulerResourceSortOrder, SchedulerScrollButtonsPosition, SchedulerSortOrder, SchedulerTimelineDayScale, SchedulerTimeZone, VerticalScrollBarVisibility, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, SchedulerViewStartDay, WeekDayFormat, YearFormat, SchedulerDataExport, SchedulerEvent, SchedulerEventRepeat, SchedulerNotification, SchedulerResource, SchedulerStatuse, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { Scheduler } from './../index';
 export { DataAdapter } from './../index';
@@ -16,6 +16,8 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     createComponent(properties?: {}): any;
     /** @description Determines the scroll speed while dragging an event.  */
     autoScrollStep: number;
+    /** @description Determines whether the all day cells in Day and Week views automatically change their height depending on the events count in these cells.  */
+    autoHeightAllDayCells: boolean;
     /** @description Determines the color scheme for the event background selector in the event window editor.  */
     colorScheme: string[];
     /** @description Enables/Disables the current time indicator. Current time indicator shows the current time in the appropriate view cells.  */
@@ -31,7 +33,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Allows to customize the content of the event collector elements. It can be an HTMLTemplateElement that will be applied to all events or it's id as a string or a function that will be called for each event with the following parameters: eventContent - the content holder for the event,eventObj - the event object.. When using an HTMLTemplateElement it's possible to add property bindings inside the template that will be mapped to the corresponding object properties. */
     eventCollectorTemplate: any;
     /** @description  Determines how the events inside the Scheduler are rendered.classic - the events are arranged next to each other and try to fit inside the cells.modern - the events obey the CSS property that determines their size and if there's not enough space inside the cell for all events to appear, an event collector is created to hold the rest of the events. On mobile phones only collectors are created. */
-    eventRenderMode: SchedulerEventRenderMode;
+    eventRenderMode: SchedulerEventRenderMode | string;
     /** @description Allows to customize the content of the event menu items (tooltip). When clicked on an event element an event menu with details opens. It can be an HTMLTemplateElement that will be applied to all events or it's id as a string or a function that will be called for each event with the following parameters: eventContent - the content holder for the event,eventObj - the event object.. When using an HTMLTemplateElement it's possible to add property bindings inside the template that will be mapped to the corresponding object properties. */
     eventTooltipTemplate: any;
     /** @description Allows to customize the content of the timeline cells. It can be an HTMLTemplateElement that will be applied to all cells or it's id as a string or a function that will be called for each cell with the following parameters: cellContent - the content holder for the cell,cellDate - the cell date.. When using an HTMLTemplateElement it's possible to add property bindings inside the template that will be mapped to the value of the cell. */
@@ -45,7 +47,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description A callback that can be used to customize the text inside the date selector located in the header. The callback has one parameter - the current date. */
     dateSelectorFormatFunction: any;
     /** @description Determines the day format of the dates in the timeline. */
-    dayFormat: SchedulerDayFormat;
+    dayFormat: SchedulerDayFormat | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Disables auto scrolling of the timeline while dragging/resizing an event. */
@@ -77,7 +79,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Determines whether Scheduler's filtering is enabled or not. */
     filterable: any;
     /** @description Determines the filter mode. */
-    filterMode: FilterMode;
+    filterMode: FilterMode | string;
     /** @description A getter that returns  an array of all Scheduler events. */
     events: SchedulerEvent[];
     /** @description Determines the first day of week for the Scheduler. By default it's Sunday. */
@@ -87,7 +89,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Determines whether the events will be grouped by date. */
     groupByDate: boolean;
     /** @description Determines the grouping orientation. */
-    groupOrientation: SchedulerGroupOrientation;
+    groupOrientation: SchedulerGroupOrientation | string;
     /** @description Allows to customize the content of the group cells that are visible inside the header. It can be an HTMLTemplateElement that will be applied to all cells or it's id as a string or a function that will be called for each group cell with the following parameters: cellContent - the content holder for the group cell.cellObj - the group cell object.. When using an HTMLTemplateElement it's possible to add property bindings inside the template that will be mapped to the corresponding object properties. */
     groupTemplate: any;
     /** @description Determines the resources that the events are grouped by. */
@@ -97,15 +99,15 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Determines the start hour that will be displayed in 'day' and 'week' views. */
     hourStart: number;
     /** @description Determines the formatting of hours inside the element. */
-    hourFormat: SchedulerHourFormat;
+    hourFormat: SchedulerHourFormat | string;
     /** @description Allows to customize the header of the Scheduler. It can be an HTMLTemplateElement, it's id as a string or a function with the following parameters: headerContent - the header container.. */
     headerTemplate: any;
     /** @description  Determines the position of the Date selector inside the Header of the element. */
-    headerDatePosition: SchedulerHeaderDatePosition;
+    headerDatePosition: SchedulerHeaderDatePosition | string;
     /** @description  Determines the styling of the Header navigation controls. */
-    headerNavigationStyle: SchedulerHeaderNavigationStyle;
+    headerNavigationStyle: SchedulerHeaderNavigationStyle | string;
     /** @description  Determines the position of the view selector control inside the Header of the element. */
-    headerViewPosition: SchedulerHeaderViewPosition;
+    headerViewPosition: SchedulerHeaderViewPosition | string;
     /** @description Determines whether the 'All Day' container with the all day events is hidden or not. */
     hideAllDay: boolean;
     /** @description Determines whether the days set by 'nonworkingDays' property are hidden or not. */
@@ -119,13 +121,13 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Determines whether the weekend days are hidden or not. */
     hideWeekend: boolean;
     /** @description Determines the location of the legend inside the Scheduler. By default the location is inside the footer but it can also reside in the header. */
-    legendLocation: SchedulerLegendLocation;
+    legendLocation: SchedulerLegendLocation | string;
     /** @description Determines the position of the legend. By default it's positioned to the near side but setting it to 'far' will change that. */
-    legendPosition: SchedulerLegendPosition;
+    legendPosition: SchedulerLegendPosition | string;
     /** @description Determines the mouse wheel step. When this property is set to a positive number, the scroll step with mouse wheel or trackpad will depend on the property value. */
     mouseWheelStep: number;
     /** @description Determines weather or not horizontal scrollbar is shown. */
-    horizontalScrollBarVisibility: HorizontalScrollBarVisibility;
+    horizontalScrollBarVisibility: HorizontalScrollBarVisibility | string;
     /** @description  Determines the language of the Scheduler.  */
     locale: string;
     /** @description Detetmines the maximum view date for the Scheduler. */
@@ -137,9 +139,9 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Determines the minute formatting inside the Scheduler. */
-    minuteFormat: MinuteFormat;
+    minuteFormat: MinuteFormat | string;
     /** @description Determines the month name formatting inside the Scheduler. */
-    monthFormat: MonthFormat;
+    monthFormat: MonthFormat | string;
     /** @description Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be colored differently inside the Timeline. The color is determined by a CSS variable. */
     nonworkingDays: any;
     /** @description Determines the nonworking hours of the day. Hours are represented as numbers inside an array, however ranges of hours can be defined as an array with starting and ending hour separated by a comma. In the timline the cells that represent nonworking days are colored differently from the rest. */
@@ -147,7 +149,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Determines the interval (in seconds) at which the element will check for notifications. */
     notificationInterval: number;
     /** @description Determines the visibility of the resize handles. */
-    resizeHandlesVisibility: ResizeHandlesVisibility;
+    resizeHandlesVisibility: ResizeHandlesVisibility | string;
     /** @description Determines the rate at which the element will refresh it's content on element resize. By default it's refresh immediately. This property is used for element resize throttling */
     resizeInterval: number;
     /** @description An array of resources that can be assigned to the events. */
@@ -159,7 +161,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description  Determines the position of the date navigation navigation buttons inside the header of the element. */
-    scrollButtonsPosition: SchedulerScrollButtonsPosition;
+    scrollButtonsPosition: SchedulerScrollButtonsPosition | string;
     /** @description Enables/Disables the current time shader. If enabled all cells that represent past time will be shaded. */
     shadeUntilCurrentTime: boolean;
     /** @description Determines whether the resource legend is visible or not. The Legend shows the resources and their items in the footer section of the Scheduler. If filterable is enabled it is possible to filter by resource items by clicking on the corresponding resource item from the legend. */
@@ -169,7 +171,7 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Allows to define a custom sorting function that will be used to sort the resource data. The sortFunction is used when sortOrder is set to custom. */
     sortFunction: any;
     /** @description Determines the sorting order of the resource data items. When set to custom, a custom sorting function has to be defined for the sortFunction property. The asc stands for 'ascending' while desc means 'descending' sorting order. */
-    sortOrder: SchedulerSortOrder;
+    sortOrder: SchedulerSortOrder | string;
     /** @description Determines the repeating delay of the repeat buttons inside the header of the element. Such buttons are the Date navigation buttons and the view scroll buttons. */
     spinButtonsDelay: number;
     /** @description Determines the initial delay of the repeat buttons inside the header of the element. Such buttons are the Date navigation buttons and the view scroll buttons. */
@@ -181,11 +183,11 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description A format function for the Header of the Timeline. Allows to modify the date labels in the header cells. */
     timelineHeaderFormatFunction: any;
     /** @description Determines the date scale for the timeline cells. */
-    timelineDayScale: SchedulerTimelineDayScale;
+    timelineDayScale: SchedulerTimelineDayScale | string;
     /** @description Enables/Disables the tick marks next to the time cells in the vertical header of the element. Time header appears in 'day' and 'week' views. */
     timeRulerTicks: boolean;
     /** @description Determines the timeZone for the element. By default if the local time zone is used if the property is not set. */
-    timeZone: SchedulerTimeZone;
+    timeZone: SchedulerTimeZone | string;
     /** @description Allows to display additional timeZones at once along with the default that is set via the timeZone property. Accepts an array values that represent the ids of valid time zones. The possbile time zones can be viewed in the timeZone property description. By default the local time zone is displayed. */
     timeZones: any;
     /** @description Determines the delay ( in miliseconds) before the tooltip/menu appears. */
@@ -193,19 +195,21 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Determines the offset ot the tooltip/menu. */
     tooltipOffset: number[];
     /** @description Determines weather or not vertical scrollbar is shown. */
-    verticalScrollBarVisibility: VerticalScrollBarVisibility;
+    verticalScrollBarVisibility: VerticalScrollBarVisibility | string;
     /** @description Determines the current view. The property accepts view values that are defined in the views property. Custom views should contain a valid value that will be set as the current view. */
     view: string;
     /** @description Indicates the current Scheduler viewType. Custom views must contain a valid type property that corresponds to one of the view types. This property should not be set. */
-    viewType: SchedulerViewType;
+    viewType: SchedulerViewType | string;
     /** @description Determines the viewing date range of the timeline. The property should be set to an array of strings or view objects. When you set it to a string, you should use any of the following: 'day', 'week', 'month', 'agenda', 'timelineDay', 'timelineWeek', 'timelineMonth'. Custom views can be defined as objects instead of strings. The view object should contain the following properties: label - the label for the view.value - the value for the view. The value is the unique identifier for the view.type - the type of view. The type should be one of the default allowed values for a view.hideWeekend - an Optional property that allows to hide the weekend only for this specific view.hideNonworkingWeekdays - an Optional property that allows to hide the nonwrking weekdays for this specific view.shortcutKey - an Optional property that allows to set a custom shortcut key for the view.hideHours - an Optional property applicable only to timelineWeek view that allows to hide the hour cells and only show the day cells. */
-    views: SchedulerViews;
+    views: SchedulerViews | string;
     /** @description Determines type of the view selector located in the header of the element. */
-    viewSelectorType: SchedulerViewSelectorType;
+    viewSelectorType: SchedulerViewSelectorType | string;
+    /** @description Determines the Start Date rule. The Week and TimelineWeek views start by default from the current date taking into account the firstDayOfWeek property. When this property is set to 'dateCurrent', these views will start from the value of the 'dateCurrent'. */
+    viewStartDay: SchedulerViewStartDay | string;
     /** @description Determines the format of the week days inside the element.  */
-    weekdayFormat: WeekDayFormat;
+    weekdayFormat: WeekDayFormat | string;
     /** @description Determines the format of the dates inside the timeline header when they represent years. */
-    yearFormat: YearFormat;
+    yearFormat: YearFormat | string;
     /** @description Sets or gets if the element can be focused. */
     unfocusable: boolean;
     /** @description Determines the maximum number of redo/undo steps that will be remembered by the Scheduler. When the number is reached the oldest records are removed in order to add new. */
@@ -449,6 +453,15 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     * @param {any} eventObj. An object describing a Scheduler event that is not already present in the element.
     */
     addEvent(eventObj: any): void;
+    /** @description Adds a new view. Example: scheduler.addView('week', 'My View', 'myView', false, false, 10); scheduler.setView('myView');
+    * @param {string} type. The view type.
+    * @param {string} label. The view's label displayed in the header.
+    * @param {string} value. The view's value used to identify the view.
+    * @param {boolean} hideWeekend. Determines whether to hide the weekend.
+    * @param {boolean} hideNonworkingWeekdays. Determines whether to hide the non working days.
+    * @param {number} additionalDays. Determines whether to add additional days to the view.
+    */
+    addView(type: string, label: string, value: string, hideWeekend: boolean, hideNonworkingWeekdays: boolean, additionalDays: number): void;
     /** @description Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
     */
     beginUpdate(): void;
@@ -463,6 +476,10 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     /** @description Ends the update operation. This method will resume the rendering and will refresh the element.
     */
     endUpdate(): void;
+    /** @description Returns an array of the start and end view dates.
+    * @returns {Date[]}
+  */
+    getViewDates(): Promise<any>;
     /** @description Refereshes the Scheduler by recalculating the Scrollbars.
     * @param {boolean} fullRefresh?. If set the Scheduler will be re-rendered completely.
     */
@@ -507,6 +524,10 @@ export declare class SchedulerComponent extends BaseElement implements OnInit, A
     * @param {any[]} state?. An Array containing a valid structure of Scheduler events.
     */
     saveState(state?: any[]): void;
+    /** @description Sets the Scheduler's view. Example: scheduler.addView('week', 'My View', 'myView', false, false, 10); scheduler.setView('myView');
+    * @param {string} view?. The view's value. For example: 'day'.
+    */
+    setView(view?: string): void;
     /** @description Checks whether the Scheduler contains the event.
     * @param {any} eventObj. A Scheduler event object.
     * @returns {boolean}

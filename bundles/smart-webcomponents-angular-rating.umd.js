@@ -696,7 +696,7 @@ import './../source/modules/smart.rating';
         ], RatingComponent.prototype, "onChange", void 0);
         RatingComponent = __decorate([
             core.Directive({
-                selector: 'smart-rating, [smart-rating]',
+                exportAs: 'smart-rating', selector: 'smart-rating, [smart-rating]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], RatingComponent);

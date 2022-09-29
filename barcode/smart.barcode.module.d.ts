@@ -1,2 +1,2 @@
-export declare class BarCodeModule {
+export declare class BarcodeModule {
 }

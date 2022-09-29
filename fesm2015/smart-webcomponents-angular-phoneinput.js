@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.phoneinput';
+
 import { __decorate, __awaiter } from 'tslib';
 import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -560,7 +569,7 @@ __decorate([
 ], PhoneInputComponent.prototype, "onItemClick", void 0);
 PhoneInputComponent = __decorate([
     Directive({
-        selector: 'smart-phone-input, [smart-phone-input]',
+        exportAs: 'smart-phone-input', selector: 'smart-phone-input, [smart-phone-input]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], PhoneInputComponent);

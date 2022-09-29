@@ -317,7 +317,7 @@ __decorate([
 ], CardComponent.prototype, "onSwipetop", void 0);
 CardComponent = __decorate([
     Directive({
-        selector: 'smart-card, [smart-card]'
+        exportAs: 'smart-card', selector: 'smart-card, [smart-card]'
     })
 ], CardComponent);
 

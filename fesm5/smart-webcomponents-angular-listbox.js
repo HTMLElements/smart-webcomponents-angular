@@ -1392,7 +1392,7 @@ var ListBoxComponent = /** @class */ (function (_super) {
     ], ListBoxComponent.prototype, "onSwiperight", void 0);
     ListBoxComponent = __decorate([
         Directive({
-            selector: 'smart-list-box, [smart-list-box]',
+            exportAs: 'smart-list-box', selector: 'smart-list-box, [smart-list-box]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], ListBoxComponent);
@@ -1602,7 +1602,7 @@ var ListItemComponent = /** @class */ (function (_super) {
     ], ListItemComponent.prototype, "readonly", null);
     ListItemComponent = __decorate([
         Directive({
-            selector: 'smart-list-item, [smart-list-item]'
+            exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
         })
     ], ListItemComponent);
     return ListItemComponent;
@@ -1671,7 +1671,7 @@ var ListItemsGroupComponent = /** @class */ (function (_super) {
     ], ListItemsGroupComponent.prototype, "label", null);
     ListItemsGroupComponent = __decorate([
         Directive({
-            selector: 'smart-list-items-group, [smart-list-items-group]'
+            exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
         })
     ], ListItemsGroupComponent);
     return ListItemsGroupComponent;

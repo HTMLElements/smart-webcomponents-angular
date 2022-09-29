@@ -14,7 +14,7 @@ export declare class ChartComponent extends BaseElement implements OnInit, After
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none'. */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the animation duration in milliseconds. The value must be between 0 and 5000. If it is outside of this range jqxChart will reset it to the default value. */
     animationDuration: number;
     /** @description Sets the chart's background color. For example: '#DDFFE8' */
@@ -30,7 +30,7 @@ export declare class ChartComponent extends BaseElement implements OnInit, After
     /** @description Determines whether to clip plotted elements that overflow the axis boundaries. */
     clip: boolean;
     /** @description Sets the chart's color pallete. jqxChart suppports 32 color schemes from 'scheme01' to 'scheme32'. */
-    colorScheme: ChartColorScheme;
+    colorScheme: ChartColorScheme | string;
     /** @description Enables or disables overlapping of the column series. */
     columnSeriesOverlap: boolean;
     /** @description Gets or sets the color of the crosshairs lines. The 'enableCrosshairs' property should be 'true'. */
@@ -66,7 +66,7 @@ export declare class ChartComponent extends BaseElement implements OnInit, After
     /** @description Sets the left, top, right and bottom padding of the Chart. */
     padding: Padding;
     /** @description Determines the rendering engine used to display the chart. When the property is set to an empty string, jqxChart will automatically select an optimal rendering engine depending on the browser capabilities. */
-    renderEngine: ChartRenderEngine;
+    renderEngine: ChartRenderEngine | string;
     /** @description Sets or gets a value indicating whether the Chart's layout is mirrored. */
     rightToLeft: boolean;
     /** @description The seriesGroups property is used to describe all series displayed on the chart. jqxChart supports multiple series of different types and series grouping. Each series group may have its own Value Axis (Y-axis) which allows you to have values with different scales displayed on the same chart at the same time. It also allows you to display multiple series types together on the same chart. For example, you can display all series in one group as lines and the series in a second group as columns. seriesGroups is an array of objects where each object represents one group. */

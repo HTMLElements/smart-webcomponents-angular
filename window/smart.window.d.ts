@@ -16,9 +16,9 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description Determines if 'Add New' Tab inside the Tabs element is visible. Applicable only to TabsWindow */
     addNewTab: boolean;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines whether and how the value should be automatically capitalized as it is entered/edited by the user. Applicable only to MultilinePromptWindow. */
-    autoCapitalize: WindowAutoCapitalize;
+    autoCapitalize: WindowAutoCapitalize | string;
     /** @description Determines whether element will auto expand when the input overflows vertically. Applicable only to MultilinePromptWindow. */
     autoExpand: boolean;
     /** @description Determines the label for the 'cancel' button inside the Prompt Window. */
@@ -40,14 +40,18 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     disabled: boolean;
     /** @description Enables or disables the window snapping feature. */
     disableSnap: boolean;
+    /** @description By default the window is closing after the 'Escape' key is pressed. Set this property to true, if you want to disable that. */
+    disableEscape: boolean;
+    /** @description By default the window is handling keyboard keys like 'Arrows', 'Escape', etc. Set this property to true, if you want to disable that. */
+    disableKeyboard: boolean;
     /** @description Determines how the characters are displayed inside the input. Applicable to Prompt Window. */
-    displayMode: WindowDisplayMode;
+    displayMode: WindowDisplayMode | string;
     /** @description Applicable to TabsWindow when docked inside a DockingLayout Custom Element.  Determines where the window(it's tab items as well) can be dropped inside the DockingLayout.  The property is an array that accepts multiple positions. Note: Positions with prefix 'layout-' are applied to the Tab item children of the TabsWidnow owner that is being dragged. The rest of the positions indicate the allowed drop position inside the hovered target(TabsWindow). Used only by jqxDockingLayout custom elements. Determines the possible drop position inside the DockingLayout. The following values are allowed. */
-    dropPosition: WindowDropPosition;
+    dropPosition: WindowDropPosition | string;
     /** @description A callback function defining the new format for the label of the Progress Bar. Applicable only to ProgressWindow. */
     formatFunction: any;
     /** @description Determines the position of the footer of the window element. */
-    footerPosition: WindowFooterPosition;
+    footerPosition: WindowFooterPosition | string;
     /** @description Determines the template for the Dialog section of the window. By default footerTemplate is null. */
     footerTemplate: any;
     /** @description Set's the buttons that will be visible in the header section. */
@@ -55,7 +59,7 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description Determines the template for the Dialog section of the window. By default headerTemplate is null. */
     headerTemplate: any;
     /** @description Determines the position of the header of the window element. */
-    headerPosition: TabPosition;
+    headerPosition: TabPosition | string;
     /** @description Sets additional helper text below the text box. The hint is visible only when the text box is focued. Applicable to Prompt Window. */
     hint: any;
     /** @description Sets the value of the Progress bar to indeterminate state(null) and starts the animation. Applicable only to ProgressWindow. */
@@ -103,7 +107,7 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description When applied a resize indicator is displayed in the bottom right corner of the window and resizing operation can be initiated only from its position. */
     resizeIndicator: boolean;
     /** @description Determines the resizing mode of the window.  Several modes are available:   none - resizing is disabled.  vertical - vertical resizing is allowed.  horizontal - horizontal resizing is allowed. both - horizontal and vertical resizing is allowed. top - the window can only be resized from the top side. bottom - the window is resizable only from the bottom side. left - the window can be resized only from the left side. right - the window can be resized only from the right side.  */
-    resizeMode: WindowResizeMode;
+    resizeMode: WindowResizeMode | string;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Specifies that the user must fill the input before submitting a form with the text box.Applicable to Prompt Window. */
@@ -115,7 +119,7 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description Sets or gets which tab is selected. Applicable only to TabsWindow. */
     selectedIndex: number | null;
     /** @description Determines the way the user can switch between tabs. Applicable only to TabsWindow. */
-    selectionMode: TabSelectionMode;
+    selectionMode: TabSelectionMode | string;
     /** @description Indicates the index of the last character in the current selection. Applicable only to MultilinePromptWindow. */
     selectionEnd: number;
     /** @description Indicates the index to the first character in the current selection. Applicable only to MultilinePromptWindow. */
@@ -131,15 +135,15 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description Sets or gets whether close buttons are displayed inside the Tab Strip of the TabsWindow. Applicable only to TabsWindow. */
     tabCloseButtons: boolean;
     /** @description Determines if the close button is visible on select or always. Applicable only to TabsWindow. */
-    tabCloseButtonMode: WindowTabCloseButtonMode;
+    tabCloseButtonMode: WindowTabCloseButtonMode | string;
     /** @description Sets or gets the Tabs scroll buttons behavior. Applicable only when tabLayout is 'scroll'. Applicable only to TabsWindow. */
-    tabOverflow: Overflow;
+    tabOverflow: Overflow | string;
     /** @description Detetmines Tab Strip is positioned of the TabsWindow. Applicable only to TabsWindow. */
-    tabPosition: TabPosition;
+    tabPosition: TabPosition | string;
     /** @description Sets or gets the position of the scroll buttons inside the Tab header of the TabsWindow. Applicable only to TabsWindow. */
-    tabScrollButtonsPosition: LayoutPosition;
+    tabScrollButtonsPosition: LayoutPosition | string;
     /** @description Sets or gets the orientation of the text in the tabs labels of the TabsWindow. Applicable only to TabsWindow. */
-    tabTextOrientation: Orientation;
+    tabTextOrientation: Orientation | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */
@@ -149,7 +153,7 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description Determines the actual parent of the element. The window can size and move only in the area of that element. */
     windowParent: any;
     /** @description Indicates how the input wraps text. Applicable only to MultilinePromptWindow. */
-    wrap: WindowWrap;
+    wrap: WindowWrap | string;
     /** @description This event is triggered just before the window starts opening.
     *  @param event. The custom event. 	*/
     onOpening: EventEmitter<CustomEvent>;
@@ -226,15 +230,11 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     * @returns {Node}
   */
     insertBefore(newNode: any, referenceNode?: any): Promise<any>;
-    /** @description Removes a tab and its associated content section. Applicable only to TabsWindow.
-    * @param {number} index. The index of the tab to remove.
+    /** @description Moves the window to a new position
+    * @param {string | number} left. Left position. For example: '100px'.
+    * @param {string | number} top. Top position. For example: '100px'.
     */
-    removeAt(index: number): void;
-    /** @description Removes a child "smart-tab-item" node. Applicable only to TabsWindow.
-    * @param {Node} node. The "smart-tab-item" node to remove.
-    * @returns {Node}
-  */
-    removeChild(node: any): Promise<any>;
+    move(left: string | number, top: string | number): void;
     /** @description Maximizes the window to fill the area.
     */
     maximize(): void;
@@ -247,6 +247,15 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description Pins the window. Disables window dragging.
     */
     pin(): void;
+    /** @description Removes a tab and its associated content section. Applicable only to TabsWindow.
+    * @param {number} index. The index of the tab to remove.
+    */
+    removeAt(index: number): void;
+    /** @description Removes a child "smart-tab-item" node. Applicable only to TabsWindow.
+    * @param {Node} node. The "smart-tab-item" node to remove.
+    * @returns {Node}
+  */
+    removeChild(node: any): Promise<any>;
     /** @description Restores the window to it's previous size before maximization/minimization.
     */
     restore(): void;
@@ -257,7 +266,15 @@ export declare class WindowComponent extends BaseElement implements OnInit, Afte
     /** @description Unpins the window. Enables window dragging.
     */
     unpin(): void;
-    /** @description Updates a tab and its associated content section.  Applicalbe only to TabsWindow elements.
+    /** @description Updates the header label.
+    * @param {string} label. The new label of the Header.
+    */
+    updateLabel(label: string): void;
+    /** @description Updates the content.
+    * @param {string | HTMLElement} content. The new content of the window.
+    */
+    updateContent(content: string | HTMLElement): void;
+    /** @description Updates a TAB in TAB Window and its associated content section.  Applies only to TabsWindow elements.
     * @param {number} index. The index of the tab to update.
     * @param {string} label. The new label of the tab. The value can be the id of an HTMLTemplateElement
     * @param {string | HTMLElement} content. The new content of the tab.

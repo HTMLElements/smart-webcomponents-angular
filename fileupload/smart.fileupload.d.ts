@@ -16,7 +16,7 @@ export declare class FileUploadComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the file types that can be submitted to the server via the element. This property corresponds to the 'accept' attribute of the hidden file input which is submitted to the URL specified by the uploadUrl property. */
     accept: string | null;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Appends the list with selected files to a new custom container specified by the user. If the value of the property is a string it must represent a valid id of an HTML element inside the DOM that will be used as the new container for the uploaded files list. */
     appendTo: string;
     /** @description Sets or gets whether files will be automatically uploaded after selection. */
@@ -78,12 +78,13 @@ export declare class FileUploadComponent extends BaseElement implements OnInit, 
     */
     onUploadCanceled: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a file upload operation is completed.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	filename, 	type, 	size, 	index, 	status)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	filename, 	type, 	size, 	index, 	status, 	serverResponse)
     *   filename - The name of the canceled file.
     *   type - The type of the canceled file.
     *   size - The size of the canceled file.
     *   index - The index of the canceled file.
     *   status - The status of the uploaded file. Whether there was an error or success.
+    *   serverResponse - The response of the remote server.
     */
     onUploadCompleted: EventEmitter<CustomEvent>;
     /** @description This event is triggered when during the file upload process something happens and upload fails.

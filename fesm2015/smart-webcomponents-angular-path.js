@@ -599,7 +599,7 @@ __decorate([
 ], PathComponent.prototype, "onOpening", void 0);
 PathComponent = __decorate([
     Directive({
-        selector: 'smart-path, [smart-path]'
+        exportAs: 'smart-path', selector: 'smart-path, [smart-path]'
     })
 ], PathComponent);
 

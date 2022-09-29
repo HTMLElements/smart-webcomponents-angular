@@ -25,7 +25,7 @@ export declare class MaskedTextBoxComponent extends BaseElement implements OnIni
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines whether promptChar can be entered as valid input by the user. */
     allowPromptAsInput: boolean;
     /** @description Determines whether the input accepts characters only from the ASCII character set. */
@@ -35,11 +35,11 @@ export declare class MaskedTextBoxComponent extends BaseElement implements OnIni
     /** @description Determines whether the mask is shown/hidden on focus/blur even if placeholder is not set. */
     autoShowMask: boolean;
     /** @description Determines whether literals and prompt characters are copied to the clipboard on cut/copy operations. */
-    cutCopyMaskFormat: MaskedTextBoxCutCopyMaskFormat;
+    cutCopyMaskFormat: MaskedTextBoxCutCopyMaskFormat | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Specifies the behavior on "Enter" key press. Default mode is "submit". */
-    enterKeyBehavior: EnterKeyBehavior;
+    enterKeyBehavior: EnterKeyBehavior | string;
     /** @description Determines whether the prompt character in the input mask is hidden when the masked text box isn't focused anymore. */
     hidePromptOnLeave: boolean;
     /** @description Sets additional helper text below the element. The hint is visible only when the element is focused. */
@@ -83,7 +83,7 @@ export declare class MaskedTextBoxComponent extends BaseElement implements OnIni
     /** @description Specifies whether the value of the input will be selected on focus or not. */
     selectAllOnFocus: boolean;
     /** @description Determines whether the value of the input should contain or not the prompt/literals of the mask. */
-    textMaskFormat: MaskedTextBoxTextMaskFormat;
+    textMaskFormat: MaskedTextBoxTextMaskFormat | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */

@@ -14,9 +14,9 @@ export declare class SplitterComponent extends BaseElement implements OnInit, Af
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines how the items are arranged inside the Splitter. Possible values:   end - all items will fit the size of the Splitter. When inserting a new item the space required for the item to fit will be deducted from it's neighbour. proportional - all items will fit the size of the Splitter. When inserting a new item the space required for it to fit will be the result from the proportional deduction of the size from the rest of the items inside the element. overflow - the items inside the Splitter will not fit it's size. Instead they overflow by taking the exact amount of space they need and a scrollbar is displayed in order to view the content. */
-    autoFitMode: SplitterAutoFitMode;
+    autoFitMode: SplitterAutoFitMode | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Sets or gets splitter's data source. */
@@ -32,11 +32,11 @@ export declare class SplitterComponent extends BaseElement implements OnInit, Af
     /** @description Sets an object with string values, related to the different states of passwords strength. */
     messages: any;
     /** @description Sets or gets splitter's orientation. */
-    orientation: Orientation;
+    orientation: Orientation | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Determines the resize mode of the splitter. Possible values are:  - None - resizing is disabled.  - Adjacent - only the two adjacent items between the target splitter bar are being affected. This is the default behavior.  - End - only the first item( left or top according to the orientation) of the target Splitter bar and the last item are affected.  Proportional - all of the items positioned in the direction to which the splitter bar is dragged will be affected. For example, when a splitter bar is dragged to the right all the items positioned on it's the right side will be affected. The items will obtain a proportional size corresponding to their current size. */
-    resizeMode: SplitterResizeMode;
+    resizeMode: SplitterResizeMode | string;
     /** @description Determines the resize step during reisizing */
     resizeStep: number;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */

@@ -1369,7 +1369,7 @@ import './../source/modules/smart.pivottable';
         ], PivotTableComponent.prototype, "onSort", void 0);
         PivotTableComponent = __decorate([
             core.Directive({
-                selector: 'smart-pivot-table, [smart-pivot-table]'
+                exportAs: 'smart-pivot-table', selector: 'smart-pivot-table, [smart-pivot-table]'
             })
         ], PivotTableComponent);
         return PivotTableComponent;

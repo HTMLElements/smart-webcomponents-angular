@@ -1,6 +1,6 @@
 
-/* Smart UI v13.1.1 (2022-03-23) 
-Copyright (c) 2011-2021 jQWidgets. 
+/* Smart UI v14.4.4 (2022-09-29) 
+Copyright (c) 2011-2022 jQWidgets. 
 License: https://htmlelements.com/license/ */ //
 
 const namespace = 'Smart';

@@ -265,7 +265,7 @@ var EditorComponent = /** @class */ (function (_super) {
         */
         _this.onDialogClosing = new EventEmitter();
         /** @description This event is triggered when the uploading of an image/video is successful.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status, 	serverResponse)
         *   target - The file upload element that is the target of the operation.
         *   item - The toolbar item that is the target of the operation.
         *   filename - The name of the uploaded file.
@@ -273,10 +273,11 @@ var EditorComponent = /** @class */ (function (_super) {
         *   size - The size of the uploaded file.
         *   index - The index of the uploaded file.
         *   status - The status of the uploaded file. Whether there was an error or success.
+        *   serverResponse - The response of the remote server.
         */
         _this.onImageUploadSuccess = new EventEmitter();
         /** @description This event is triggered when the uploading of an image/video is unsuccessful.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status, 	serverResponse)
         *   target - The file upload element that is the target of the operation.
         *   item - The toolbar item that is the target of the operation.
         *   filename - The name of the canceled file.
@@ -284,6 +285,7 @@ var EditorComponent = /** @class */ (function (_super) {
         *   size - The size of the canceled file.
         *   index - The index of the canceled file.
         *   status - The status of the uploaded file. Whether there was an error or success.
+        *   serverResponse - The response of the remote server.
         */
         _this.onImageUploadFailed = new EventEmitter();
         /** @description This event is triggered when a Toolbar item is clicked.
@@ -1658,7 +1660,7 @@ var EditorComponent = /** @class */ (function (_super) {
     ], EditorComponent.prototype, "onMessageOpen", void 0);
     EditorComponent = __decorate([
         Directive({
-            selector: 'smart-editor, [smart-editor]'
+            exportAs: 'smart-editor', selector: 'smart-editor, [smart-editor]'
         })
     ], EditorComponent);
     return EditorComponent;

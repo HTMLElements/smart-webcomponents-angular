@@ -873,7 +873,7 @@ var ListMenuComponent = /** @class */ (function (_super) {
     ], ListMenuComponent.prototype, "onSwiperight", void 0);
     ListMenuComponent = __decorate([
         Directive({
-            selector: 'smart-list-menu, [smart-list-menu]'
+            exportAs: 'smart-list-menu', selector: 'smart-list-menu, [smart-list-menu]'
         })
     ], ListMenuComponent);
     return ListMenuComponent;
@@ -1026,7 +1026,7 @@ var MenuItemComponent = /** @class */ (function (_super) {
     ], MenuItemComponent.prototype, "value", null);
     MenuItemComponent = __decorate([
         Directive({
-            selector: 'smart-menu-item, [smart-menu-item]'
+            exportAs: 'smart-menu-item', selector: 'smart-menu-item, [smart-menu-item]'
         })
     ], MenuItemComponent);
     return MenuItemComponent;
@@ -1221,7 +1221,7 @@ var MenuItemsGroupComponent = /** @class */ (function (_super) {
     ], MenuItemsGroupComponent.prototype, "value", null);
     MenuItemsGroupComponent = __decorate([
         Directive({
-            selector: 'smart-menu-items-group, [smart-menu-items-group]'
+            exportAs: 'smart-menu-items-group', selector: 'smart-menu-items-group, [smart-menu-items-group]'
         })
     ], MenuItemsGroupComponent);
     return MenuItemsGroupComponent;

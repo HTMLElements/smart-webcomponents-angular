@@ -762,7 +762,7 @@ import './../source/modules/smart.tooltip';
         ], TooltipComponent.prototype, "onClosing", void 0);
         TooltipComponent = __decorate([
             core.Directive({
-                selector: 'smart-tooltip, [smart-tooltip]'
+                exportAs: 'smart-tooltip', selector: 'smart-tooltip, [smart-tooltip]'
             })
         ], TooltipComponent);
         return TooltipComponent;

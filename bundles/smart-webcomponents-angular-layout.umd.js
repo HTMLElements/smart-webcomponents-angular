@@ -752,7 +752,7 @@ import './../source/modules/smart.layout';
         ], LayoutComponent.prototype, "onMenuItemClick", void 0);
         LayoutComponent = __decorate([
             core.Directive({
-                selector: 'smart-layout, [smart-layout]'
+                exportAs: 'smart-layout', selector: 'smart-layout, [smart-layout]'
             })
         ], LayoutComponent);
         return LayoutComponent;
@@ -902,7 +902,7 @@ import './../source/modules/smart.layout';
         ], LayoutItemComponent.prototype, "unfocusable", null);
         LayoutItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-layout-item, [smart-layout-item]'
+                exportAs: 'smart-layout-item', selector: 'smart-layout-item, [smart-layout-item]'
             })
         ], LayoutItemComponent);
         return LayoutItemComponent;
@@ -1067,7 +1067,7 @@ import './../source/modules/smart.layout';
         ], LayoutGroupComponent.prototype, "unfocusable", null);
         LayoutGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-layout-group, [smart-layout-group]'
+                exportAs: 'smart-layout-group', selector: 'smart-layout-group, [smart-layout-group]'
             })
         ], LayoutGroupComponent);
         return LayoutGroupComponent;
@@ -1231,7 +1231,7 @@ import './../source/modules/smart.layout';
         ], TabLayoutItemComponent.prototype, "unfocusable", null);
         TabLayoutItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-tab-layout-item, [smart-tab-layout-item]'
+                exportAs: 'smart-tab-layout-item', selector: 'smart-tab-layout-item, [smart-tab-layout-item]'
             })
         ], TabLayoutItemComponent);
         return TabLayoutItemComponent;
@@ -1409,7 +1409,7 @@ import './../source/modules/smart.layout';
         ], TabLayoutGroupComponent.prototype, "unfocusable", null);
         TabLayoutGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-tab-layout-group, [smart-tab-layout-group]'
+                exportAs: 'smart-tab-layout-group', selector: 'smart-tab-layout-group, [smart-tab-layout-group]'
             })
         ], TabLayoutGroupComponent);
         return TabLayoutGroupComponent;

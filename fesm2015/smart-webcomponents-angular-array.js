@@ -884,7 +884,7 @@ __decorate([
 ], ArrayComponent.prototype, "onSizeChange", void 0);
 ArrayComponent = __decorate([
     Directive({
-        selector: 'smart-array, [smart-array]'
+        exportAs: 'smart-array', selector: 'smart-array, [smart-array]'
     })
 ], ArrayComponent);
 

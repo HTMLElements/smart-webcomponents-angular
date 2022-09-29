@@ -819,7 +819,7 @@ __decorate([
 ], TextBoxComponent.prototype, "onChanging", void 0);
 TextBoxComponent = __decorate([
     Directive({
-        selector: 'smart-text-box, [smart-text-box]',
+        exportAs: 'smart-text-box', selector: 'smart-text-box, [smart-text-box]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], TextBoxComponent);
@@ -977,7 +977,7 @@ __decorate([
 ], ListItemComponent.prototype, "readonly", null);
 ListItemComponent = __decorate([
     Directive({
-        selector: 'smart-list-item, [smart-list-item]'
+        exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
     })
 ], ListItemComponent);
 
@@ -1034,7 +1034,7 @@ __decorate([
 ], ListItemsGroupComponent.prototype, "label", null);
 ListItemsGroupComponent = __decorate([
     Directive({
-        selector: 'smart-list-items-group, [smart-list-items-group]'
+        exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
     })
 ], ListItemsGroupComponent);
 

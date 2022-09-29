@@ -14,7 +14,7 @@ export declare class CustomizationDialogComponent extends BaseElement implements
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Array with filtered fields and their settings. */
     dataSource: any;
     /** @description Sets or gets the displayMember. The displayMember specifies the name of an object property to display. The name is contained in the collection specified by the 'dataSource' property. */

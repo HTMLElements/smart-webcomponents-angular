@@ -25,7 +25,7 @@ export declare class TankComponent extends BaseElement implements OnInit, AfterV
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description If is set to true all values coerce to the interval, set in the interval property. */
     coerce: boolean;
     /** @description Sets or gets whether custom ticks at (possibly) uneven interval will be plotted. The ticks to be plotted are defined with the property customTicks. */
@@ -45,7 +45,7 @@ export declare class TankComponent extends BaseElement implements OnInit, AfterV
     /** @description A callback function that can be used to format the values displayed on the tank labels. */
     labelFormatFunction: any;
     /** @description Sets or gets the widget's label visibility */
-    labelsVisibility: LabelsVisibility;
+    labelsVisibility: LabelsVisibility | string;
     /** @description Sets or gets the locale. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback, related to localization module.  */
@@ -55,17 +55,17 @@ export declare class TankComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets the maximum value of the widget. */
     max: string | number;
     /** @description Sets or gets the type of used mechanical action. */
-    mechanicalAction: DragMechanicalAction;
+    mechanicalAction: DragMechanicalAction | string;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Sets or gets the minimum value of the widget.  */
     min: string | number;
     /** @description Sets or gets whether the widget works with numbers or dates. */
-    mode: ScaleMode;
+    mode: ScaleMode | string;
     /** @description Sets or gets the element's name, which is used as a reference when the data is submitted. */
     name: string;
     /** @description Sets the orientation of the widget */
-    orientation: Orientation;
+    orientation: Orientation | string;
     /** @description Determines the number of digits after the decimal point. Applicable only when scaleType is 'integer'. */
     precisionDigits: number;
     /** @description If the widgets is readonly, the users cannot iteract with the element. */
@@ -73,9 +73,9 @@ export declare class TankComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Sets the position of the widget's scales.  */
-    scalePosition: ScalePosition;
+    scalePosition: ScalePosition | string;
     /** @description Sets the type of the tank's scale.  */
-    scaleType: ScaleType;
+    scaleType: ScaleType | string;
     /** @description Enables or disables scientific notation. */
     scientificNotation: boolean;
     /** @description Enables or disables displaying of the thumb label. */
@@ -89,23 +89,23 @@ export declare class TankComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets the element's visual theme.  */
     theme: string;
     /** @description Sets or gets the position of the thumb label. */
-    thumbLabelPosition: Position;
+    thumbLabelPosition: Position | string;
     /** @description Sets or gets the position of the ticks in jqxTank widget. */
-    ticksPosition: TicksPosition;
+    ticksPosition: TicksPosition | string;
     /** @description Sets or gets the visibility of the ticks. */
-    ticksVisibility: TicksVisibility;
+    ticksVisibility: TicksVisibility | string;
     /** @description Sets or gets the position of the tooltip in jqxTank widget. */
-    tooltipPosition: Position;
+    tooltipPosition: Position | string;
     /** @description Sets or gets if the element can be focused. */
     unfocusable: boolean;
     /** @description Sets or gets the name of unit used in jqxTank widget. */
     unit: string;
     /** @description Sets the value's validation by min/max. If 'strict' is applied, the value is always validated by min and max. If 'interaction' is applied, programmatic value changes are not coerced to min/max and if min/max are changed, resulting in the current value being out of range, the value is not coerced, and no change event is fired. */
-    validation: Validation;
+    validation: Validation | string;
     /** @description Sets or gets the value of the jqxTank widget.  */
     value: any;
     /** @description Sets or gets the word length. Applicable only when scaleType is 'integer'. */
-    wordLength: WordLength;
+    wordLength: WordLength | string;
     /** @description This event is triggered when the value of the tank is changed.
     *  @param event. The custom event. 	*/
     onChange: EventEmitter<CustomEvent>;

@@ -838,7 +838,7 @@ import './../source/modules/smart.pager';
         ], PagerComponent.prototype, "onPageSizeChanged", void 0);
         PagerComponent = __decorate([
             core.Directive({
-                selector: 'smart-pager, [smart-pager]'
+                exportAs: 'smart-pager', selector: 'smart-pager, [smart-pager]'
             })
         ], PagerComponent);
         return PagerComponent;

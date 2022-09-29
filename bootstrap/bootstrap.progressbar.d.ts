@@ -24,7 +24,7 @@ export declare class BootstrapProgressBarComponent extends BaseElement implement
     /** @description Sets whether stripes are displayed in the progress.  */
     striped: boolean;
     /** @description Sets or gets the style mode of the button. */
-    styleMode: BootstrapProgressBarStyleMode;
+    styleMode: BootstrapProgressBarStyleMode | string;
     /** @description Sets or gets the value */
     value: number;
     /** @description Change event is triggered when the value of the element is changed.

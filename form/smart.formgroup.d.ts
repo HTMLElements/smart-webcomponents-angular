@@ -22,7 +22,7 @@ export declare class FormGroupComponent extends BaseElement implements OnInit, A
     /** @description Callback function for handling value changes */
     onValueChanges: any;
     /** @description Sets or Gets the labels position. */
-    labelPosition: FormGroupLabelPosition;
+    labelPosition: FormGroupLabelPosition | string;
     /** @description Makes the form readonly. */
     readonly: boolean;
     /** @description Shows / hides the colon after the labels. */

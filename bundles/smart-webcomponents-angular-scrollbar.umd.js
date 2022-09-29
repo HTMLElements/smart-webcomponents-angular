@@ -681,7 +681,7 @@ import './../source/modules/smart.scrollbar';
         ], ScrollBarComponent.prototype, "onChange", void 0);
         ScrollBarComponent = __decorate([
             core.Directive({
-                selector: 'smart-scroll-bar, [smart-scroll-bar]'
+                exportAs: 'smart-scroll-bar', selector: 'smart-scroll-bar, [smart-scroll-bar]'
             })
         ], ScrollBarComponent);
         return ScrollBarComponent;

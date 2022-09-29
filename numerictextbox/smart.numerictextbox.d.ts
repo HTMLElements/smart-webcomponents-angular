@@ -25,7 +25,7 @@ export declare class NumericTextBoxComponent extends BaseElement implements OnIn
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the char to use as the decimal separator in numeric values.  */
     decimalSeparator: string;
     /** @description Enables or disables the jqxNumericTextBox.  */
@@ -39,7 +39,7 @@ export declare class NumericTextBoxComponent extends BaseElement implements OnIn
     /** @description Sets additional helper text below the element.  */
     hint: string;
     /** @description Sets or gets the input format of the widget. Setting this property dynamically can lead to precision loss.  */
-    inputFormat: NumericTextBoxInputFormat;
+    inputFormat: NumericTextBoxInputFormat | string;
     /** @description Sets a label above the element.  */
     label: string;
     /** @description If this property is enabled, leading zeros are added (if necessary) to the binary and hexadecimal representations of a number based on wordLength. */
@@ -67,11 +67,11 @@ export declare class NumericTextBoxComponent extends BaseElement implements OnIn
     /** @description Determines the number of digits after the decimal point. Applicable when inputFormat is either 'floatingPoint' or 'complex'.  */
     precisionDigits: number;
     /** @description Sets or gets the radix of the jqxNumericTextBox. The radix specifies the numeral system in which to display the widget's value. Applicable only when inputFormat is 'integer'.  */
-    radix: NumericTextBoxRadix;
+    radix: NumericTextBoxRadix | string;
     /** @description Enables or disables the radix display button of the jqxNumericTextBox. Applicable only when inputFormat is 'integer'.  */
     radixDisplay: boolean;
     /** @description Sets or gets the position of the radix display button of the jqxNumericTextBox.  */
-    radixDisplayPosition: NumericTextBoxDisplayPosition;
+    radixDisplayPosition: NumericTextBoxDisplayPosition | string;
     /** @description Sets or gets the readonly state of the jqxNumericTextBox.  */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
@@ -91,7 +91,7 @@ export declare class NumericTextBoxComponent extends BaseElement implements OnIn
     /** @description Sets a delay before the first repeat iteration of spin buttons in miliseconds.  */
     spinButtonsInitialDelay: number;
     /** @description Sets or gets the position of the spin buttons of the jqxNumericTextBox.  */
-    spinButtonsPosition: NumericTextBoxDisplayPosition;
+    spinButtonsPosition: NumericTextBoxDisplayPosition | string;
     /** @description Sets or gets the increase/decrease step.  */
     spinButtonsStep: number | string;
     /** @description Determines the theme. Theme defines the look of the element */
@@ -101,11 +101,11 @@ export declare class NumericTextBoxComponent extends BaseElement implements OnIn
     /** @description Sets or gets the name of unit used in jqxNumericTextBox widget.  */
     unit: string;
     /** @description Sets the value's validation by min/max. If 'strict' is applied, the value is always validated by min and max. If 'interaction' is applied, programmatic value changes are not coerced to min/max and if min/max are changed, resulting in the current value being out of range, the value is not coerced, and no change event is fired. */
-    validation: Validation;
+    validation: Validation | string;
     /** @description Sets or gets the value of the jqxNumericTextBox widget.  */
     value: any;
     /** @description Sets or gets the word length. Applicable only when inputFormat is 'integer'. If min and/or max are not set by default, they will be set automatically based on the specified word length.  */
-    wordLength: WordLength;
+    wordLength: WordLength | string;
     /** @description This event is triggered when the value is changed.
     *  @param event. The custom event. 	*/
     onChange: EventEmitter<CustomEvent>;

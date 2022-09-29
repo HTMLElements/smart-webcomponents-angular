@@ -835,7 +835,7 @@ import './../source/modules/smart.timeinput';
         ], TimeInputComponent.prototype, "onChange", void 0);
         TimeInputComponent = __decorate([
             core.Directive({
-                selector: 'smart-time-input, [smart-time-input]',
+                exportAs: 'smart-time-input', selector: 'smart-time-input, [smart-time-input]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], TimeInputComponent);

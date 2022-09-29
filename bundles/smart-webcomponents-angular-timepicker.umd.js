@@ -782,7 +782,7 @@ import './../source/modules/smart.timepicker';
         ], TimePickerComponent.prototype, "onChange", void 0);
         TimePickerComponent = __decorate([
             core.Directive({
-                selector: 'smart-time-picker, [smart-time-picker]',
+                exportAs: 'smart-time-picker', selector: 'smart-time-picker, [smart-time-picker]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], TimePickerComponent);

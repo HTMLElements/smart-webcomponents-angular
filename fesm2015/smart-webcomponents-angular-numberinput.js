@@ -7,7 +7,7 @@ else {
 }
 import './../source/modules/smart.numberinput';
 
-import { __decorate } from 'tslib';
+import { __decorate, __awaiter } from 'tslib';
 import { EventEmitter, Output, Input, forwardRef, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -271,28 +271,38 @@ let NumberInputComponent = class NumberInputComponent extends BaseElement {
     /** @description Returns the value in the desired format.
     * @param {string | number} value. The value to be formatted by the method.
     * @param {any} format?. The object that contains the formatting properties. The argument should contain Intl.NumberFormat valid properties. For example, { style: 'currency', currency: 'EUR' }
-    */
+    * @returns {string}
+  */
     getFormattedValue(value, format) {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.getFormattedValue(value, format);
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.getFormattedValue(value, format);
-            });
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getFormattedValue(value, format);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
     }
     /** @description Returns the number of the input.
-    */
+    * @returns {number}
+  */
     getValue() {
-        if (this.nativeElement.isRendered) {
-            this.nativeElement.getValue();
-        }
-        else {
-            this.nativeElement.whenRendered(() => {
-                this.nativeElement.getValue();
-            });
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getValue();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
     }
     /** @description Selects the text inside the input or if it is readonly then the element is focused.
     */
@@ -471,7 +481,7 @@ __decorate([
 ], NumberInputComponent.prototype, "onChange", void 0);
 NumberInputComponent = __decorate([
     Directive({
-        selector: 'smart-number-input, [smart-number-input]',
+        exportAs: 'smart-number-input', selector: 'smart-number-input, [smart-number-input]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], NumberInputComponent);

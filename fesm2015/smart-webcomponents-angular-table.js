@@ -516,62 +516,76 @@ let TableComponent = class TableComponent extends BaseElement {
         this.nativeElement ? this.nativeElement.onInit = value : undefined;
     }
     /** @description Sets or gets an array of the Table's selected row's ids. */
+    get onLoad() {
+        return this.nativeElement ? this.nativeElement.onLoad : undefined;
+    }
+    set onLoad(value) {
+        this.nativeElement ? this.nativeElement.onLoad = value : undefined;
+    }
+    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+    get onUpdateComplete() {
+        return this.nativeElement ? this.nativeElement.onUpdateComplete : undefined;
+    }
+    set onUpdateComplete(value) {
+        this.nativeElement ? this.nativeElement.onUpdateComplete = value : undefined;
+    }
+    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
     get pageSize() {
         return this.nativeElement ? this.nativeElement.pageSize : undefined;
     }
     set pageSize(value) {
         this.nativeElement ? this.nativeElement.pageSize = value : undefined;
     }
-    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+    /** @description Sets or gets whether row selection (via checkboxes) is hierarchical. When a parent row is selected, all sub rows are selected, too. */
     get pageIndex() {
         return this.nativeElement ? this.nativeElement.pageIndex : undefined;
     }
     set pageIndex(value) {
         this.nativeElement ? this.nativeElement.pageIndex = value : undefined;
     }
-    /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+    /** @description Determines the sorting mode of the Table. */
     get paging() {
         return this.nativeElement ? this.nativeElement.paging : undefined;
     }
     set paging(value) {
         this.nativeElement ? this.nativeElement.paging = value : undefined;
     }
-    /** @description Sets or gets whether row selection (via checkboxes) is hierarchical. When a parent row is selected, all sub rows are selected, too. */
+    /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
     get rightToLeft() {
         return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
     }
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
     }
-    /** @description Determines the sorting mode of the Table. */
+    /** @description Determines the theme. Theme defines the look of the element */
     get rowDetailTemplate() {
         return this.nativeElement ? this.nativeElement.rowDetailTemplate : undefined;
     }
     set rowDetailTemplate(value) {
         this.nativeElement ? this.nativeElement.rowDetailTemplate = value : undefined;
     }
-    /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
+    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
     get selected() {
         return this.nativeElement ? this.nativeElement.selected : undefined;
     }
     set selected(value) {
         this.nativeElement ? this.nativeElement.selected = value : undefined;
     }
-    /** @description Determines the theme. Theme defines the look of the element */
+    /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
     get selection() {
         return this.nativeElement ? this.nativeElement.selection : undefined;
     }
     set selection(value) {
         this.nativeElement ? this.nativeElement.selection = value : undefined;
     }
-    /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+    /** @description undefined */
     get selectionMode() {
         return this.nativeElement ? this.nativeElement.selectionMode : undefined;
     }
     set selectionMode(value) {
         this.nativeElement ? this.nativeElement.selectionMode = value : undefined;
     }
-    /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
+    /** @description undefined */
     get selectionByHierarchy() {
         return this.nativeElement ? this.nativeElement.selectionByHierarchy : undefined;
     }
@@ -635,7 +649,7 @@ let TableComponent = class TableComponent extends BaseElement {
     }
     /** @description Adds a filter to a specific column.
     * @param {string} dataField. The column's data field.
-    * @param {any} filter. FilterGroup object.
+    * @param {any} filter. FilterGroup object or a Filter expression. Filter expression like: 'startsWith B'. Example 2: ['contains Andrew or contains Nancy'], Example 3:  ['quantity', '&lt;= 3 and &gt;= 8'].  Filter conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
     */
     addFilter(dataField, filter) {
         if (this.nativeElement.isRendered) {
@@ -1452,6 +1466,12 @@ __decorate([
 ], TableComponent.prototype, "onInit", null);
 __decorate([
     Input()
+], TableComponent.prototype, "onLoad", null);
+__decorate([
+    Input()
+], TableComponent.prototype, "onUpdateComplete", null);
+__decorate([
+    Input()
 ], TableComponent.prototype, "pageSize", null);
 __decorate([
     Input()
@@ -1545,7 +1565,7 @@ __decorate([
 ], TableComponent.prototype, "onSort", void 0);
 TableComponent = __decorate([
     Directive({
-        selector: 'smart-table, [smart-table]'
+        exportAs: 'smart-table', selector: 'smart-table, [smart-table]'
     })
 ], TableComponent);
 

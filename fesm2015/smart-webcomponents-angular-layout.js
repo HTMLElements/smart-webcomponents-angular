@@ -445,7 +445,7 @@ __decorate([
 ], LayoutComponent.prototype, "onMenuItemClick", void 0);
 LayoutComponent = __decorate([
     Directive({
-        selector: 'smart-layout, [smart-layout]'
+        exportAs: 'smart-layout', selector: 'smart-layout, [smart-layout]'
     })
 ], LayoutComponent);
 
@@ -563,7 +563,7 @@ __decorate([
 ], LayoutItemComponent.prototype, "unfocusable", null);
 LayoutItemComponent = __decorate([
     Directive({
-        selector: 'smart-layout-item, [smart-layout-item]'
+        exportAs: 'smart-layout-item', selector: 'smart-layout-item, [smart-layout-item]'
     })
 ], LayoutItemComponent);
 
@@ -692,7 +692,7 @@ __decorate([
 ], LayoutGroupComponent.prototype, "unfocusable", null);
 LayoutGroupComponent = __decorate([
     Directive({
-        selector: 'smart-layout-group, [smart-layout-group]'
+        exportAs: 'smart-layout-group', selector: 'smart-layout-group, [smart-layout-group]'
     })
 ], LayoutGroupComponent);
 
@@ -820,7 +820,7 @@ __decorate([
 ], TabLayoutItemComponent.prototype, "unfocusable", null);
 TabLayoutItemComponent = __decorate([
     Directive({
-        selector: 'smart-tab-layout-item, [smart-tab-layout-item]'
+        exportAs: 'smart-tab-layout-item', selector: 'smart-tab-layout-item, [smart-tab-layout-item]'
     })
 ], TabLayoutItemComponent);
 
@@ -958,7 +958,7 @@ __decorate([
 ], TabLayoutGroupComponent.prototype, "unfocusable", null);
 TabLayoutGroupComponent = __decorate([
     Directive({
-        selector: 'smart-tab-layout-group, [smart-tab-layout-group]'
+        exportAs: 'smart-tab-layout-group', selector: 'smart-tab-layout-group, [smart-tab-layout-group]'
     })
 ], TabLayoutGroupComponent);
 

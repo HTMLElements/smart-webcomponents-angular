@@ -396,7 +396,7 @@ __decorate([
 ], BreadcrumbComponent.prototype, "onAddNewItem", void 0);
 BreadcrumbComponent = __decorate([
     Directive({
-        selector: 'smart-breadcrumb, [smart-breadcrumb]'
+        exportAs: 'smart-breadcrumb', selector: 'smart-breadcrumb, [smart-breadcrumb]'
     })
 ], BreadcrumbComponent);
 

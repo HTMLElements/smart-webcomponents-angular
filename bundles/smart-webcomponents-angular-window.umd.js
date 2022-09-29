@@ -543,6 +543,28 @@ import './../source/modules/smart.window';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(WindowComponent.prototype, "disableEscape", {
+            /** @description By default the window is closing after the 'Escape' key is pressed. Set this property to true, if you want to disable that. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.disableEscape : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.disableEscape = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(WindowComponent.prototype, "disableKeyboard", {
+            /** @description By default the window is handling keyboard keys like 'Arrows', 'Escape', etc. Set this property to true, if you want to disable that. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.disableKeyboard : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.disableKeyboard = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(WindowComponent.prototype, "displayMode", {
             /** @description Determines how the characters are displayed inside the input. Applicable to Prompt Window. */
             get: function () {
@@ -1323,46 +1345,20 @@ import './../source/modules/smart.window';
                 });
             });
         };
-        /** @description Removes a tab and its associated content section. Applicable only to TabsWindow.
-        * @param {number} index. The index of the tab to remove.
+        /** @description Moves the window to a new position
+        * @param {string | number} left. Left position. For example: '100px'.
+        * @param {string | number} top. Top position. For example: '100px'.
         */
-        WindowComponent.prototype.removeAt = function (index) {
+        WindowComponent.prototype.move = function (left, top) {
             var _this = this;
             if (this.nativeElement.isRendered) {
-                this.nativeElement.removeAt(index);
+                this.nativeElement.move(left, top);
             }
             else {
                 this.nativeElement.whenRendered(function () {
-                    _this.nativeElement.removeAt(index);
+                    _this.nativeElement.move(left, top);
                 });
             }
-        };
-        /** @description Removes a child "smart-tab-item" node. Applicable only to TabsWindow.
-        * @param {Node} node. The "smart-tab-item" node to remove.
-        * @returns {Node}
-      */
-        WindowComponent.prototype.removeChild = function (node) {
-            return __awaiter(this, void 0, void 0, function () {
-                var getResultOnRender, result;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            getResultOnRender = function () {
-                                return new Promise(function (resolve) {
-                                    _this.nativeElement.whenRendered(function () {
-                                        var result = _this.nativeElement.removeChild(node);
-                                        resolve(result);
-                                    });
-                                });
-                            };
-                            return [4 /*yield*/, getResultOnRender()];
-                        case 1:
-                            result = _a.sent();
-                            return [2 /*return*/, result];
-                    }
-                });
-            });
         };
         /** @description Maximizes the window to fill the area.
         */
@@ -1416,6 +1412,47 @@ import './../source/modules/smart.window';
                 });
             }
         };
+        /** @description Removes a tab and its associated content section. Applicable only to TabsWindow.
+        * @param {number} index. The index of the tab to remove.
+        */
+        WindowComponent.prototype.removeAt = function (index) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.removeAt(index);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.removeAt(index);
+                });
+            }
+        };
+        /** @description Removes a child "smart-tab-item" node. Applicable only to TabsWindow.
+        * @param {Node} node. The "smart-tab-item" node to remove.
+        * @returns {Node}
+      */
+        WindowComponent.prototype.removeChild = function (node) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.removeChild(node);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Restores the window to it's previous size before maximization/minimization.
         */
         WindowComponent.prototype.restore = function () {
@@ -1456,7 +1493,35 @@ import './../source/modules/smart.window';
                 });
             }
         };
-        /** @description Updates a tab and its associated content section.  Applicalbe only to TabsWindow elements.
+        /** @description Updates the header label.
+        * @param {string} label. The new label of the Header.
+        */
+        WindowComponent.prototype.updateLabel = function (label) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.updateLabel(label);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.updateLabel(label);
+                });
+            }
+        };
+        /** @description Updates the content.
+        * @param {string | HTMLElement} content. The new content of the window.
+        */
+        WindowComponent.prototype.updateContent = function (content) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.updateContent(content);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.updateContent(content);
+                });
+            }
+        };
+        /** @description Updates a TAB in TAB Window and its associated content section.  Applies only to TabsWindow elements.
         * @param {number} index. The index of the tab to update.
         * @param {string} label. The new label of the tab. The value can be the id of an HTMLTemplateElement
         * @param {string | HTMLElement} content. The new content of the tab.
@@ -1613,6 +1678,12 @@ import './../source/modules/smart.window';
         __decorate([
             core.Input()
         ], WindowComponent.prototype, "disableSnap", null);
+        __decorate([
+            core.Input()
+        ], WindowComponent.prototype, "disableEscape", null);
+        __decorate([
+            core.Input()
+        ], WindowComponent.prototype, "disableKeyboard", null);
         __decorate([
             core.Input()
         ], WindowComponent.prototype, "displayMode", null);
@@ -1819,7 +1890,7 @@ import './../source/modules/smart.window';
         ], WindowComponent.prototype, "onRestore", void 0);
         WindowComponent = __decorate([
             core.Directive({
-                selector: 'smart-window, [smart-window], smart-tabs-window, smart-prompt-window, smart-multilineprompt-window, smart-dialog-window,  smart-alert-window, smart-progress-window, smart-wait-window'
+                exportAs: 'smart-window', selector: 'smart-window, [smart-window], smart-tabs-window, smart-prompt-window, smart-multilineprompt-window, smart-dialog-window,  smart-alert-window, smart-progress-window, smart-wait-window'
             })
         ], WindowComponent);
         return WindowComponent;

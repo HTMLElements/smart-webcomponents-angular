@@ -129,12 +129,13 @@ let FileUploadComponent = class FileUploadComponent extends BaseElement {
         */
         this.onUploadCanceled = new EventEmitter();
         /** @description This event is triggered when a file upload operation is completed.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	filename, 	type, 	size, 	index, 	status)
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	filename, 	type, 	size, 	index, 	status, 	serverResponse)
         *   filename - The name of the canceled file.
         *   type - The type of the canceled file.
         *   size - The size of the canceled file.
         *   index - The index of the canceled file.
         *   status - The status of the uploaded file. Whether there was an error or success.
+        *   serverResponse - The response of the remote server.
         */
         this.onUploadCompleted = new EventEmitter();
         /** @description This event is triggered when during the file upload process something happens and upload fails.
@@ -603,7 +604,7 @@ __decorate([
 ], FileUploadComponent.prototype, "onValidationError", void 0);
 FileUploadComponent = __decorate([
     Directive({
-        selector: 'smart-file-upload, [smart-file-upload]'
+        exportAs: 'smart-file-upload', selector: 'smart-file-upload, [smart-file-upload]'
     })
 ], FileUploadComponent);
 

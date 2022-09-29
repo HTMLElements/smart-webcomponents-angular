@@ -765,7 +765,7 @@ __decorate([
 ], GaugeComponent.prototype, "onChange", void 0);
 GaugeComponent = __decorate([
     Directive({
-        selector: 'smart-gauge, [smart-gauge]',
+        exportAs: 'smart-gauge', selector: 'smart-gauge, [smart-gauge]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], GaugeComponent);

@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../../source/modules/smart.barcode';
+
 /**
  * Generated bundle index. Do not edit.
  */

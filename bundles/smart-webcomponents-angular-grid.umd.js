@@ -358,13 +358,15 @@ import './../source/modules/smart.grid';
         function GridComponent(ref) {
             var _this = _super.call(this, ref) || this;
             _this.eventHandlers = [];
-            /** @description This event is triggered, when the edit begins.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+            /** @description This event is triggered, when the edit begins. After the event occurs, editing starts. If you need to prevent the editing for specific cells, rows or columns, you can call event.preventDefault();.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell, 	data, 	value)
             *   id - The edited row id.
             *   dataField - The edited column data field.
             *   row - The edited row.
             *   column - The edited column.
             *   cell - The edited cell.
+            *   data - The edited row's data.
+            *   value - The edited cell's value.
             */
             _this.onBeginEdit = new core.EventEmitter();
             /** @description This event is triggered, when the Grid's header toolbar is displayed and the 'OK' button of a header dropdown is clicked. For example, when you open the columns customize panel, reorder columns and click the 'OK' button.
@@ -455,6 +457,13 @@ import './../source/modules/smart.grid';
             *   comment - The comment object. The comment object has 'text: string', 'id: string', 'userId: string | number', and 'time: date' fields. The 'text' is the comment's text. 'id' is the comment's unique id, 'userId' is the user's id who entered the comment and 'time' is a javascript date object.
             */
             _this.onCommentRemove = new core.EventEmitter();
+            /** @description This event is triggered, when the user clicks on a context menu item.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	command)
+            *   id - The row's id.
+            *   dataField - The column's data field.
+            *   command - Command function.
+            */
+            _this.onContextMenuItemClick = new core.EventEmitter();
             /** @description This event is triggered, when the user starts a row drag.
             *  @param event. The custom event. 	Custom event was created with: event.detail(	row, 	id, 	index, 	originalEvent)
             *   row - The row.
@@ -565,12 +574,14 @@ import './../source/modules/smart.grid';
             */
             _this.onCellDoubleClick = new core.EventEmitter();
             /** @description This event is triggered, when the edit ends.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	id, 	dataField, 	row, 	column, 	cell, 	data, 	value)
             *   id - The edited row id.
             *   dataField - The edited column data field.
             *   row - The edited row.
             *   column - The edited column.
             *   cell - The edited cell.
+            *   data - The edited row's data.
+            *   value - The edited cell's value.
             */
             _this.onEndEdit = new core.EventEmitter();
             /** @description This event is triggered, when a filter is added or removed.
@@ -614,9 +625,13 @@ import './../source/modules/smart.grid';
             *  @param event. The custom event. 	*/
             _this.onPage = new core.EventEmitter();
             /** @description This event is triggered, when a sorting column is added or removed.
-            *  @param event. The custom event. 	Custom event was created with: event.detail(	columns, 	data)
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	columns, 	data, 	sortDataFields, 	sortDataTypes, 	sortOrders, 	sortIndexes)
             *   columns - Array of columns.
             *   data - Array of {dataField: string, sortOrder: string, sortIndex: number}. <em>dataField</em> is the column's data field. <em>sortOrder</em> is 'asc' or 'desc', <em>sortIndex</em> is the index of the column in multi column sorting.
+            *   sortDataFields - Array of column data fields.
+            *   sortDataTypes - Array of column data types. The values in the array would be 'string', 'date', 'boolean' or 'number'.
+            *   sortOrders - Array of column orders. The values in the array would be 'asc' or 'desc'.
+            *   sortIndexes - Array of column sort indexes. When multiple sorting is applied the sort index is an important parameter as it specifies the priority of sorting.
             */
             _this.onSort = new core.EventEmitter();
             /** @description This event is triggered, when the user reaches the bottom of the grid.
@@ -701,6 +716,17 @@ import './../source/modules/smart.grid';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.columns = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "contextMenu", {
+            /** @description Context Menu is the drop-down menu displayed after right-clicking a Grid row. It allows you to delete row, edit cell or row depending on the edit mode. The 'contextMenuItemCustom' dataSource option allows you to add custom menu item to the context menu. You can replace the context menu by using the 'selector' property and setting it to ID of a Smart.Menu component. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.contextMenu : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.contextMenu = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -860,7 +886,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onCellRender", {
-            /** @description Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties. */
+            /** @description Callback function() called when the grid has been rendered for first time and bindings are completed. The component is ready. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onCellRender : undefined;
             },
@@ -871,7 +897,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onBeforeInit", {
-            /** @description Sets the grid users. Expects an array with 'id', 'name' and optionally 'color' and 'image' properties. */
+            /** @description Sets or gets the rows  CSS class rules. Different CSS class names are conditionally applied. Example: rowCSSRules: { 'cell-class-1': settings =&gt; settings.data.quantity === 5, 'cell-class-2': settings =&gt; settings.data.quantity &lt; 5, 'cell-class-3': settings =&gt; settings.data.quantity &gt; 5 }.  The settings object contains the following properties: index, data, row, api. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onBeforeInit : undefined;
             },
@@ -882,7 +908,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onInit", {
-            /** @description Describes the paging settings. */
+            /** @description Sets or gets the id of the current user. Has to correspond to the id of an item from the users property/array. Depending on the current user, different privileges are enabled. If no current user is set, privileges depend on the element's properties. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onInit : undefined;
             },
@@ -893,7 +919,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onAfterInit", {
-            /** @description Describes the pager settings. */
+            /** @description Sets the grid users. Expects an array with 'id', 'name' and optionally 'color' and 'image' properties. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onAfterInit : undefined;
             },
@@ -904,7 +930,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onChartInit", {
-            /** @description Sets the row details. */
+            /** @description Sets the grid's image upload settings for the image columns. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onChartInit : undefined;
             },
@@ -915,7 +941,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRender", {
-            /** @description Sets the scroll mode settings. */
+            /** @description Describes the paging settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRender : undefined;
             },
@@ -925,8 +951,19 @@ import './../source/modules/smart.grid';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GridComponent.prototype, "onLoad", {
+            /** @description Describes the pager settings. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onLoad : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onLoad = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GridComponent.prototype, "onKey", {
-            /** @description Describes the column header settings. */
+            /** @description Sets the row details. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onKey : undefined;
             },
@@ -937,7 +974,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowInit", {
-            /** @description Describes the summary row settings. */
+            /** @description Sets the scroll mode settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowInit : undefined;
             },
@@ -948,7 +985,7 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowDetailInit", {
-            /** @description Describes the settings for the group header. */
+            /** @description Describes the column header settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowDetailInit : undefined;
             },
@@ -959,12 +996,34 @@ import './../source/modules/smart.grid';
             configurable: true
         });
         Object.defineProperty(GridComponent.prototype, "onRowDetailUpdated", {
-            /** @description Describes the header settings of the grid. */
+            /** @description Describes the summary row settings. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onRowDetailUpdated : undefined;
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.onRowDetailUpdated = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "onRowHistory", {
+            /** @description Describes the settings for the group header. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onRowHistory : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onRowHistory = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "onRowStyle", {
+            /** @description Describes the header settings of the grid. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onRowStyle : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onRowStyle = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1013,8 +1072,30 @@ import './../source/modules/smart.grid';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(GridComponent.prototype, "onColumnInit", {
+        Object.defineProperty(GridComponent.prototype, "onRowClass", {
             /** @description Describes sorting settings. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onRowClass : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onRowClass = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "onCellClass", {
+            /** @description undefined */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onCellClass : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onCellClass = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "onColumnInit", {
+            /** @description undefined */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onColumnInit : undefined;
             },
@@ -1057,6 +1138,17 @@ import './../source/modules/smart.grid';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(GridComponent.prototype, "onColumnClone", {
+            /** @description undefined */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onColumnClone : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onColumnClone = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(GridComponent.prototype, "onCommand", {
             /** @description undefined */
             get: function () {
@@ -1064,6 +1156,17 @@ import './../source/modules/smart.grid';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.onCommand = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "rowCSSRules", {
+            /** @description undefined */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.rowCSSRules : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.rowCSSRules = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1086,6 +1189,17 @@ import './../source/modules/smart.grid';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.users = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GridComponent.prototype, "uploadSettings", {
+            /** @description undefined */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.uploadSettings : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.uploadSettings = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1236,7 +1350,7 @@ import './../source/modules/smart.grid';
         /** @description Adds a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
         * @param {any} data. row data matching the data source
         * @param {boolean} insertAtBottom?. Determines whether to add the new row to the bottom or top of the collection. The default value is 'true'
-        * @param {any} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
+        * @param {{(row: GridRow): void}} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
         */
         GridComponent.prototype.addRow = function (data, insertAtBottom, callback) {
             var _this = this;
@@ -1331,7 +1445,7 @@ import './../source/modules/smart.grid';
                 });
             });
         };
-        /** @description Adds a filter to a column. This method will apply a filter to the Grid data.
+        /** @description Adds a filter to a column. This method will apply a filter to the Grid data. Example for adding multiple filters to a column: grid.addFilter('lastName', ['CONTAINS "burke"', 'or', 'CONTAINS "peterson"']). Example for adding single filter to a column: grid.addFilter('lastName', 'CONTAINS "burke"'). Example for adding numeric filter:  grid.addFilter('quantity', '&lt;= 5')
         * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
         * @param {string} filter. Filter expression like: 'startsWith B'. Example 2: ['contains Andrew or contains Nancy'], Example 3:  ['quantity', '&lt;= 3 and &gt;= 8'].  Filter conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
         * @param {boolean} refreshFilters?. Set this to false, if you will use multiple 'addFilter' calls. By doing this, you will avoid unnecessary renders.
@@ -1399,6 +1513,20 @@ import './../source/modules/smart.grid';
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.autoSizeColumns();
+                });
+            }
+        };
+        /** @description Auto-sizes grid column. This method will update the width of a Grid column by measuring the cells and column header label width.
+        * @param {string} dataField?. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
+        */
+        GridComponent.prototype.autoSizeColumn = function (dataField) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.autoSizeColumn(dataField);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.autoSizeColumn(dataField);
                 });
             }
         };
@@ -1618,7 +1746,7 @@ import './../source/modules/smart.grid';
         };
         /** @description Delete a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
         * @param {string | number} rowId. row bound id
-        * @param {any} callback?. Sets a callback function, which is called after the row is deleted. The callback's argument is the deleted row.
+        * @param {{(row: GridRow): void}} callback?. Sets a callback function, which is called after the row is deleted. The callback's argument is the deleted row.
         */
         GridComponent.prototype.deleteRow = function (rowId, callback) {
             var _this = this;
@@ -1686,7 +1814,7 @@ import './../source/modules/smart.grid';
                 });
             }
         };
-        /** @description Expands a TreeGrid or Grouping row.
+        /** @description Expands a TreeGrid or Grouping row. For example, if you want to expand the first group, then its second sub grup, then the first sub sub group, you can use: grid.expandRow('0.1.0');
         * @param {string | number} rowId. row bound id
         */
         GridComponent.prototype.expandRow = function (rowId) {
@@ -1697,6 +1825,20 @@ import './../source/modules/smart.grid';
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.expandRow(rowId);
+                });
+            }
+        };
+        /** @description Expands rows to a given group level. For example 'grid.expandRowsToGroupLevel(1);' means that all groups at the root level will be expanded.
+        * @param {number} level. row group level
+        */
+        GridComponent.prototype.expandRowsToGroupLevel = function (level) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.expandRowsToGroupLevel(level);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.expandRowsToGroupLevel(level);
                 });
             }
         };
@@ -1726,6 +1868,62 @@ import './../source/modules/smart.grid';
                     _this.nativeElement.exportData(Dataformat);
                 });
             }
+        };
+        /** @description Finds entries by using a query and returns an array of row ids. Example: const rows = grid.find('nancy'); returns all rows that have 'nancy' value. Example 2: const rows = grid.find('nancy, davolio'); returns all rows that have 'nancy' and 'davolio' values in the same row. Example 3: const rows = grid.find(5, 'quantity', '>'); returns all rows where the value of the 'quantity' field is > 5.
+        * @param {string} query. Search query
+        * @param {string} dataField?. Column data field.
+        * @param {string} condition?. Conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
+        * @returns {any[]}
+      */
+        GridComponent.prototype.find = function (query, dataField, condition) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.find(query, dataField, condition);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Finds entries by using a query and returns an array of cells. Each cell in the array is also an array in this format: [id, dataField, value]. Example: const cells = grid.findCells('nancy'); returns all cells that have 'nancy' value. Example 2: const cells = grid.findCells('nancy, davolio'); returns all cells that have 'nancy' and 'davolio' values.
+        * @param {string} query. Search query. You can enter multiple search strings, by using ','. Example: 'nancy, davolio'
+        * @returns {any[]}
+      */
+        GridComponent.prototype.findCells = function (query) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.findCells(query);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
         };
         /** @description Navigates to a page, when paging is enabled.
         * @param {number} index. page index
@@ -1790,6 +1988,49 @@ import './../source/modules/smart.grid';
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.lastPage();
+                });
+            }
+        };
+        /** @description Focuses and selects a cell or row. The keyboard navigation starts from the focused cell or row. Any previously applied selection will be cleared after calling this method.
+        * @param {string | number} rowId. row bound id
+        * @param {string} dataField?. column bound data field
+        */
+        GridComponent.prototype.focusAndSelect = function (rowId, dataField) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.focusAndSelect(rowId, dataField);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.focusAndSelect(rowId, dataField);
+                });
+            }
+        };
+        /** @description Iterates through each row in the grid and calls the callback for each row. This is similar to the forEach method on a JavaScript array. This is called for each row, ignoring grouping, filtering or sorting applied in the Grid.
+        * @param {any} rowCallback. Callback function with a row object as parameter. Example: grid.forEachRow((row) => { console.log(row.id) });
+        */
+        GridComponent.prototype.forEachRow = function (rowCallback) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.forEachRow(rowCallback);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.forEachRow(rowCallback);
+                });
+            }
+        };
+        /** @description Similar to forEachRow. Iterates through each row in the grid and calls the callback for each row. This method takes into account filtering and sorting applied to the Grid.
+        * @param {any} rowCallback. Callback function with a row object as parameter. Example: grid.forEachRow((row) => { console.log(row.id) });
+        */
+        GridComponent.prototype.forEachRowAfterFilterAndSort = function (rowCallback) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.forEachRowAfterFilterAndSort(rowCallback);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.forEachRowAfterFilterAndSort(rowCallback);
                 });
             }
         };
@@ -1923,6 +2164,32 @@ import './../source/modules/smart.grid';
                 });
             });
         };
+        /** @description Gets the editing cell(s), when the grid is editing.
+        * @returns {any[]}
+      */
+        GridComponent.prototype.getEditCells = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getEditCells();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Gets the groups array.
         * @returns {any[]}
       */
@@ -2001,7 +2268,7 @@ import './../source/modules/smart.grid';
                 });
             });
         };
-        /** @description Gets the selected row ids.
+        /** @description Gets an Array where each item is an Array of row id and row data. If the Grid is used in virtual mode, the row data parameter is empty object, because the data is loaded on demand.
         * @returns {any[]}
       */
         GridComponent.prototype.getSelectedRows = function () {
@@ -2015,6 +2282,58 @@ import './../source/modules/smart.grid';
                                 return new Promise(function (resolve) {
                                     _this.nativeElement.whenRendered(function () {
                                         var result = _this.nativeElement.getSelectedRows();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Gets the selected row ids.
+        * @returns {any[]}
+      */
+        GridComponent.prototype.getSelectedRowIds = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getSelectedRowIds();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Gets the selected row indexes.
+        * @returns {any[]}
+      */
+        GridComponent.prototype.getSelectedRowIndexes = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getSelectedRowIndexes();
                                         resolve(result);
                                     });
                                 });
@@ -2211,6 +2530,33 @@ import './../source/modules/smart.grid';
                 });
             });
         };
+        /** @description Gets a column. Returns a Grid column object.
+        * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
+        * @returns {GridColumn}
+      */
+        GridComponent.prototype.getColumn = function (dataField) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getColumn(dataField);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Gets a value of a column.
         * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
         * @param {string} propertyName. The property name.
@@ -2267,6 +2613,60 @@ import './../source/modules/smart.grid';
                 });
             });
         };
+        /** @description Gets a row. Returns a Grid row object.
+        * @param {string | number} rowId. row bound id
+        * @returns {GridRow}
+      */
+        GridComponent.prototype.getRow = function (rowId) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getRow(rowId);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Gets a row by its index. Returns a Grid row object.
+        * @param {number} rowIndex. row bound index
+        * @returns {GridRow}
+      */
+        GridComponent.prototype.getRowByIndex = function (rowIndex) {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getRowByIndex(rowIndex);
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
         /** @description Gets the Data source data associated to the row.
         * @param {string | number} rowId. row bound id
         * @returns {any}
@@ -2294,9 +2694,9 @@ import './../source/modules/smart.grid';
                 });
             });
         };
-        /** @description Gets the Row's id.
+        /** @description Gets the Row's id by a row index.
         * @param {number} rowIndex. row index
-        * @returns {any}
+        * @returns {string | number}
       */
         GridComponent.prototype.getRowId = function (rowIndex) {
             return __awaiter(this, void 0, void 0, function () {
@@ -2435,7 +2835,7 @@ import './../source/modules/smart.grid';
         /** @description Inserts a row. When batch editing is enabled, the row is not saved until the batch edit is saved.
         * @param {any} data. row data matching the data source
         * @param {number} index?. Determines the insert index. The default value is the last index.
-        * @param {any} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
+        * @param {{(row: GridRow): void}} callback?. Sets a callback function, which is called after the new row is added. The callback's argument is the new row.
         */
         GridComponent.prototype.insertRow = function (data, index, callback) {
             var _this = this;
@@ -2459,6 +2859,21 @@ import './../source/modules/smart.grid';
             else {
                 this.nativeElement.whenRendered(function () {
                     _this.nativeElement.openMenu(dataField);
+                });
+            }
+        };
+        /** @description Opens a context menu. Note that context menu should be enabled.
+        * @param {number} left. Left Position.
+        * @param {number} top. Top Position.
+        */
+        GridComponent.prototype.openContextMenu = function (left, top) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.openContextMenu(left, top);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.openContextMenu(left, top);
                 });
             }
         };
@@ -2718,6 +3133,51 @@ import './../source/modules/smart.grid';
             }
         };
         /** @description Selects multiple rows by their index.
+        * @param {string} query. Search query
+        * @param {string} dataField?. Column data field.
+        * @param {string} condition?. Conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
+        */
+        GridComponent.prototype.selectRowsByQuery = function (query, dataField, condition) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.selectRowsByQuery(query, dataField, condition);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.selectRowsByQuery(query, dataField, condition);
+                });
+            }
+        };
+        /** @description Selects rows by using a query. Example: grid.selectRowsByQuery('nancy'); selects all rows that have 'nancy' value. Example 2: grid.selectRowsByQuery('nancy, davolio'); selects all rows that have 'nancy' and 'davolio' values in the same row. Example 3: grid.selectRowsByQuery(5, 'quantity', '>'); selects all rows where the value of the 'quantity' field is > 5.
+        * @param {(string | number)[]} rowIds. Array of row ids
+        * @param {string[]} dataFields. Array of data fields.
+        */
+        GridComponent.prototype.selectCells = function (rowIds, dataFields) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.selectCells(rowIds, dataFields);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.selectCells(rowIds, dataFields);
+                });
+            }
+        };
+        /** @description Selects multiple cells by their ids and dataFields. Example: grid.selectCells([0, 1, 2], ['firstName', 'quantity', 'date']); - selects the 'firstName', 'quantity' and 'date' cells from the first, second and third rows.
+        * @param {string} query. Search query
+        */
+        GridComponent.prototype.selectCellsByQuery = function (query) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.selectCellsByQuery(query);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.selectCellsByQuery(query);
+                });
+            }
+        };
+        /** @description Selects cells by using a query. Example: grid.selectCellsByQuery('nancy'); selects all cells that have 'nancy' value. Example 2: grid.selectCellsByQuery('nancy, davolio'); selects all cells that have 'nancy' and 'davolio' values in the same row.
         * @param {string | number} rowId. row bound id
         * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
         * @param {string | number | Date | boolean} value. New Cell value.
@@ -2734,6 +3194,20 @@ import './../source/modules/smart.grid';
             }
         };
         /** @description Sets a new value to a cell.
+        * @param {GridColumn[]} columns. Columns array.
+        */
+        GridComponent.prototype.setColumns = function (columns) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.setColumns(columns);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.setColumns(columns);
+                });
+            }
+        };
+        /** @description Sets new columns to the Grid. The grid will redraw all the column headers, and then redraw all of the rows. By using 'setColumns', the grid will compare the new columns passed as argument to the method with existing columns. The Grid will automatically create new columns, keep old columns if they already exist and remove columns which are not in the 'setColumns' method argument. The benefit of that is that the state of the column like(sort, filter, width or other) will be kept, if the column exsits after the new columns are applied.
         * @param {string} dataField. column bound data field. For example, if you have a column with dataField: 'firstName', set 'firstName' here.
         * @param {string} propertyName. The column property's name.
         * @param {any} value. The new property value.
@@ -2766,6 +3240,37 @@ import './../source/modules/smart.grid';
             }
         };
         /** @description Sets a property to a row.
+        * @param {string | number} rowId. row bound id
+        * @param {{background?: string, color?: string, fontSize?: string, fontFamily?: string, textDecoration?: string, fontStyle?: string, fontWeight?: string}} rowStyle. The row style object. The object may have one or all of the following properties: 'background', 'color', 'fontSize', 'fontFamily', 'textDecoration', 'fontStyle', 'fontWeight'.
+        */
+        GridComponent.prototype.setRowStyle = function (rowId, rowStyle) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.setRowStyle(rowId, rowStyle);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.setRowStyle(rowId, rowStyle);
+                });
+            }
+        };
+        /** @description Sets a style to a row.
+        * @param {string | number} rowId. row bound id
+        * @param {string} dataField. Column bound field name.
+        * @param {{background?: string, color?: string, fontSize?: string, fontFamily?: string, textDecoration?: string, fontStyle?: string, fontWeight?: string}} rowStyle. The cell style object. The object may have one or all of the following properties: 'background', 'color', 'fontSize', 'fontFamily', 'textDecoration', 'fontStyle', 'fontWeight'.
+        */
+        GridComponent.prototype.setCellStyle = function (rowId, dataField, rowStyle) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.setCellStyle(rowId, dataField, rowStyle);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.setCellStyle(rowId, dataField, rowStyle);
+                });
+            }
+        };
+        /** @description Sets a style to a row.
         * @param {number} value. The new scroll position
         */
         GridComponent.prototype.setVerticalScrollValue = function (value) {
@@ -2810,7 +3315,7 @@ import './../source/modules/smart.grid';
         /** @description Shows the Details of a Row, when row details are enabled.
         * @param {string | number} rowId. row bound id
         * @param {any} data. row data matching the data source
-        * @param {any} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
+        * @param {{(row: GridRow): void}} callback?. Sets a callback function, which is called after the row is updated. The callback's argument is the updated row.
         */
         GridComponent.prototype.updateRow = function (rowId, data, callback) {
             var _this = this;
@@ -2937,6 +3442,8 @@ import './../source/modules/smart.grid';
             that.nativeElement.addEventListener('commentAdd', that.eventHandlers['commentAddHandler']);
             that.eventHandlers['commentRemoveHandler'] = function (event) { that.onCommentRemove.emit(event); };
             that.nativeElement.addEventListener('commentRemove', that.eventHandlers['commentRemoveHandler']);
+            that.eventHandlers['contextMenuItemClickHandler'] = function (event) { that.onContextMenuItemClick.emit(event); };
+            that.nativeElement.addEventListener('contextMenuItemClick', that.eventHandlers['contextMenuItemClickHandler']);
             that.eventHandlers['rowDragStartHandler'] = function (event) { that.onRowDragStart.emit(event); };
             that.nativeElement.addEventListener('rowDragStart', that.eventHandlers['rowDragStartHandler']);
             that.eventHandlers['rowDraggingHandler'] = function (event) { that.onRowDragging.emit(event); };
@@ -3027,6 +3534,9 @@ import './../source/modules/smart.grid';
             }
             if (that.eventHandlers['commentRemoveHandler']) {
                 that.nativeElement.removeEventListener('commentRemove', that.eventHandlers['commentRemoveHandler']);
+            }
+            if (that.eventHandlers['contextMenuItemClickHandler']) {
+                that.nativeElement.removeEventListener('contextMenuItemClick', that.eventHandlers['contextMenuItemClickHandler']);
             }
             if (that.eventHandlers['rowDragStartHandler']) {
                 that.nativeElement.removeEventListener('rowDragStart', that.eventHandlers['rowDragStartHandler']);
@@ -3124,6 +3634,9 @@ import './../source/modules/smart.grid';
         ], GridComponent.prototype, "columns", null);
         __decorate([
             core.Input()
+        ], GridComponent.prototype, "contextMenu", null);
+        __decorate([
+            core.Input()
         ], GridComponent.prototype, "columnMenu", null);
         __decorate([
             core.Input()
@@ -3184,6 +3697,9 @@ import './../source/modules/smart.grid';
         ], GridComponent.prototype, "onRender", null);
         __decorate([
             core.Input()
+        ], GridComponent.prototype, "onLoad", null);
+        __decorate([
+            core.Input()
         ], GridComponent.prototype, "onKey", null);
         __decorate([
             core.Input()
@@ -3194,6 +3710,12 @@ import './../source/modules/smart.grid';
         __decorate([
             core.Input()
         ], GridComponent.prototype, "onRowDetailUpdated", null);
+        __decorate([
+            core.Input()
+        ], GridComponent.prototype, "onRowHistory", null);
+        __decorate([
+            core.Input()
+        ], GridComponent.prototype, "onRowStyle", null);
         __decorate([
             core.Input()
         ], GridComponent.prototype, "onRowInserted", null);
@@ -3208,6 +3730,12 @@ import './../source/modules/smart.grid';
         ], GridComponent.prototype, "onRowUpdated", null);
         __decorate([
             core.Input()
+        ], GridComponent.prototype, "onRowClass", null);
+        __decorate([
+            core.Input()
+        ], GridComponent.prototype, "onCellClass", null);
+        __decorate([
+            core.Input()
         ], GridComponent.prototype, "onColumnInit", null);
         __decorate([
             core.Input()
@@ -3220,13 +3748,22 @@ import './../source/modules/smart.grid';
         ], GridComponent.prototype, "onColumnUpdated", null);
         __decorate([
             core.Input()
+        ], GridComponent.prototype, "onColumnClone", null);
+        __decorate([
+            core.Input()
         ], GridComponent.prototype, "onCommand", null);
+        __decorate([
+            core.Input()
+        ], GridComponent.prototype, "rowCSSRules", null);
         __decorate([
             core.Input()
         ], GridComponent.prototype, "currentUser", null);
         __decorate([
             core.Input()
         ], GridComponent.prototype, "users", null);
+        __decorate([
+            core.Input()
+        ], GridComponent.prototype, "uploadSettings", null);
         __decorate([
             core.Input()
         ], GridComponent.prototype, "paging", null);
@@ -3307,6 +3844,9 @@ import './../source/modules/smart.grid';
         ], GridComponent.prototype, "onCommentRemove", void 0);
         __decorate([
             core.Output()
+        ], GridComponent.prototype, "onContextMenuItemClick", void 0);
+        __decorate([
+            core.Output()
         ], GridComponent.prototype, "onRowDragStart", void 0);
         __decorate([
             core.Output()
@@ -3379,7 +3919,7 @@ import './../source/modules/smart.grid';
         ], GridComponent.prototype, "onScrollTopReached", void 0);
         GridComponent = __decorate([
             core.Directive({
-                selector: 'smart-grid, [smart-grid]'
+                exportAs: 'smart-grid', selector: 'smart-grid, [smart-grid]'
             })
         ], GridComponent);
         return GridComponent;

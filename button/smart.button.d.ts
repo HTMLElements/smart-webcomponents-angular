@@ -14,9 +14,9 @@ export declare class ButtonComponent extends BaseElement implements OnInit, Afte
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the click mode for the element. */
-    clickMode: ClickMode;
+    clickMode: ClickMode | string;
     /** @description Sets the content of the element. */
     content: any;
     /** @description Enables or disables the button.  */

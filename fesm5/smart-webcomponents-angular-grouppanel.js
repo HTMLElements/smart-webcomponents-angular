@@ -390,7 +390,7 @@ var GroupPanelComponent = /** @class */ (function (_super) {
     ], GroupPanelComponent.prototype, "onExpandAll", void 0);
     GroupPanelComponent = __decorate([
         Directive({
-            selector: 'smart-group-panel, [smart-group-panel]'
+            exportAs: 'smart-group-panel', selector: 'smart-group-panel, [smart-group-panel]'
         })
     ], GroupPanelComponent);
     return GroupPanelComponent;

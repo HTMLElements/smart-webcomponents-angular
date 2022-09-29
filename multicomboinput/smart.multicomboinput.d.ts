@@ -25,7 +25,7 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the delay before the drop down opens to show the matches from the auto complete operation. The delay is measured in miliseconds. */
     autoCompleteDelay: number;
     /** @description Enables or disables the close buttons when multiple items are selected. */
@@ -37,7 +37,7 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
     dropDownHeight: string | number;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */
@@ -65,7 +65,7 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     /** @description Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied. */
     query: string | number;
     /** @description Determines the auto complete query mode. This property also determines the matching algorithm for the autocomplete operation. */
-    queryMode: MultiComboInputQueryMode;
+    queryMode: MultiComboInputQueryMode | string;
     /** @description Determines whether ot not the user can enter text inside the input. if dropDownButtonPosition is set to 'left' or 'right' then readonly determines whether the element acts as a ComboBox or a DropDownList if a dataSource is provided. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
@@ -83,7 +83,7 @@ export declare class MultiComboInputComponent extends BaseElement implements OnI
     /** @description Determines the sorting algorithm - ascending(asc) or descending(desc) if sort is enabled. */
     sortDirection: string;
     /** @description Determines whether the input field will contain tags for each selected item from the popup or just one that shows the number of selected items. */
-    inputTagsMode: MultiComboInputInputTagsMode;
+    inputTagsMode: MultiComboInputInputTagsMode | string;
     /** @description Determines the theme for the element. Themes define the look of the elements. */
     theme: string;
     /** @description Determines the input type. Input type determines what input can be entered. */

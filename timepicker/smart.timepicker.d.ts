@@ -25,7 +25,7 @@ export declare class TimePickerComponent extends BaseElement implements OnInit, 
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets whether after selecting hours, the element will automatically switch to minute selection. */
     autoSwitchToMinutes: boolean;
     /** @description Enables or disables the element. */
@@ -35,7 +35,7 @@ export declare class TimePickerComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the footer template. The value of this property can be the id of an HTMLTemplateElement or the HTMLTemplateElement itself. If set to null, a default, empty, template is applied. */
     footerTemplate: string | HTMLTemplateElement;
     /** @description Determines the hour selection format. */
-    format: TimePickerFormat;
+    format: TimePickerFormat | string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback used to customize the format of the messages that are returned from the Localization Module. */
@@ -51,7 +51,7 @@ export declare class TimePickerComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Determines the view that is currently being shown. By default the hours view is visible. */
-    selection: TimePickerSelection;
+    selection: TimePickerSelection | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */
@@ -59,7 +59,7 @@ export declare class TimePickerComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the value of the element. The value can be a valid Date object or a string representing a valid time. */
     value: any;
     /** @description Determines whether the element is in landscape or portrait mode. */
-    view: ViewLayout;
+    view: ViewLayout | string;
     /** @description This event is triggered when the value is changed.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
     *   oldValue - The old value before it was changed presented as a Date object.

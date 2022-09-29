@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-qrcode.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-qrcode.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-qrcode.js",
+  "esm5": "../esm5/qrcode/smart-webcomponents-angular-qrcode.js",
+  "esm2015": "../esm2015/qrcode/smart-webcomponents-angular-qrcode.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-qrcode.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-qrcode.js",
+  "typings": "smart-webcomponents-angular-qrcode.d.ts",
+  "metadata": "smart-webcomponents-angular-qrcode.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/qrcode"
+}

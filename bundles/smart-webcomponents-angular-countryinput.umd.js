@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.countryinput';
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
     typeof define === 'function' && define.amd ? define('smart-webcomponents-angular/countryinput', ['exports', '@angular/core', '@angular/forms'], factory) :
@@ -772,7 +781,7 @@
         ], CountryInputComponent.prototype, "onItemClick", void 0);
         CountryInputComponent = __decorate([
             core.Directive({
-                selector: 'smart-country-input, [smart-country-input]',
+                exportAs: 'smart-country-input', selector: 'smart-country-input, [smart-country-input]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], CountryInputComponent);

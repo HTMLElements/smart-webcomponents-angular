@@ -562,7 +562,7 @@ import './../source/modules/smart.gridpanel';
         ], SortPanelComponent.prototype, "onCancel", void 0);
         SortPanelComponent = __decorate([
             core.Directive({
-                selector: 'smart-sort-panel, [smart-sort-panel]'
+                exportAs: 'smart-sort-panel', selector: 'smart-sort-panel, [smart-sort-panel]'
             })
         ], SortPanelComponent);
         return SortPanelComponent;

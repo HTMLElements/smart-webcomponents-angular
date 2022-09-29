@@ -1105,7 +1105,7 @@ __decorate([
 ], ListBoxComponent.prototype, "onSwiperight", void 0);
 ListBoxComponent = __decorate([
     Directive({
-        selector: 'smart-list-box, [smart-list-box]',
+        exportAs: 'smart-list-box', selector: 'smart-list-box, [smart-list-box]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], ListBoxComponent);
@@ -1263,7 +1263,7 @@ __decorate([
 ], ListItemComponent.prototype, "readonly", null);
 ListItemComponent = __decorate([
     Directive({
-        selector: 'smart-list-item, [smart-list-item]'
+        exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
     })
 ], ListItemComponent);
 
@@ -1320,7 +1320,7 @@ __decorate([
 ], ListItemsGroupComponent.prototype, "label", null);
 ListItemsGroupComponent = __decorate([
     Directive({
-        selector: 'smart-list-items-group, [smart-list-items-group]'
+        exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
     })
 ], ListItemsGroupComponent);
 

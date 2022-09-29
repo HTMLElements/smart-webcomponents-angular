@@ -414,7 +414,7 @@ var ButtonComponent = /** @class */ (function (_super) {
     ], ButtonComponent.prototype, "onClick", void 0);
     ButtonComponent = __decorate([
         Directive({
-            selector: 'smart-button, [smart-button]'
+            exportAs: 'smart-button', selector: 'smart-button, [smart-button]'
         })
     ], ButtonComponent);
     return ButtonComponent;
@@ -688,7 +688,7 @@ var RepeatButtonComponent = /** @class */ (function (_super) {
     ], RepeatButtonComponent.prototype, "onClick", void 0);
     RepeatButtonComponent = __decorate([
         Directive({
-            selector: 'smart-repeat-button, [smart-repeat-button]'
+            exportAs: 'smart-repeat-button', selector: 'smart-repeat-button, [smart-repeat-button]'
         })
     ], RepeatButtonComponent);
     return RepeatButtonComponent;
@@ -978,7 +978,7 @@ var ToggleButtonComponent = /** @class */ (function (_super) {
     ], ToggleButtonComponent.prototype, "onUncheckValue", void 0);
     ToggleButtonComponent = __decorate([
         Directive({
-            selector: 'smart-toggle-button, [smart-toggle-button]'
+            exportAs: 'smart-toggle-button', selector: 'smart-toggle-button, [smart-toggle-button]'
         })
     ], ToggleButtonComponent);
     return ToggleButtonComponent;
@@ -1298,7 +1298,7 @@ var PowerButtonComponent = /** @class */ (function (_super) {
     ], PowerButtonComponent.prototype, "onChange", void 0);
     PowerButtonComponent = __decorate([
         Directive({
-            selector: 'smart-power-button, [smart-power-button]',
+            exportAs: 'smart-power-button', selector: 'smart-power-button, [smart-power-button]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], PowerButtonComponent);

@@ -14,7 +14,7 @@ export declare class AccordionItemComponent extends BaseElement implements OnIni
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets header's arrow position. If the value is 'none' the arrow is not shown. */
-    arrow: AccordionItemArrow;
+    arrow: AccordionItemArrow | string;
     /** @description Sets or gets the content if the item. */
     content: string | HTMLElement;
     /** @description Sets or gets the expanded state. */

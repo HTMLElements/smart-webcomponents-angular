@@ -14,7 +14,7 @@ export declare class AccordionComponent extends BaseElement implements OnInit, A
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the data source that will be loaded to the Accordion. */
     dataSource: any;
     /** @description Enables or disables the accordion. Disabled elements can not be interacted with. */
@@ -22,7 +22,7 @@ export declare class AccordionComponent extends BaseElement implements OnInit, A
     /** @description Sets or gets the expanded item indexes. Using this property items can be expanded by passing in their indexes. The number of expanded items is limited by the expandMode. */
     expandedIndexes: number[];
     /** @description Sets or gets the expand mode. Expand mode determines how the items will expand or collapse. */
-    expandMode: AccordionExpandMode;
+    expandMode: AccordionExpandMode | string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback used to customize the format of the messages that are returned from the Localization Module. */

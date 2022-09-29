@@ -639,7 +639,7 @@ __decorate([
 ], MaskedTextBoxComponent.prototype, "onValidation", void 0);
 MaskedTextBoxComponent = __decorate([
     Directive({
-        selector: 'smart-masked-text-box, [smart-masked-text-box]',
+        exportAs: 'smart-masked-text-box', selector: 'smart-masked-text-box, [smart-masked-text-box]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], MaskedTextBoxComponent);

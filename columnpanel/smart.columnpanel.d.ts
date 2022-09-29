@@ -14,7 +14,7 @@ export declare class ColumnPanelComponent extends BaseElement implements OnInit,
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the data source that will be loaded to the column panel. */
     dataSource: ColumnPanelDataSource[];
     /** @description Enables or disables the column panel. */

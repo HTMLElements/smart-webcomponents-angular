@@ -1181,7 +1181,7 @@ import './../source/modules/smart.textbox';
         ], NumericTextBoxComponent.prototype, "onRadixChange", void 0);
         NumericTextBoxComponent = __decorate([
             core.Directive({
-                selector: 'smart-numeric-text-box, [smart-numeric-text-box]',
+                exportAs: 'smart-numeric-text-box', selector: 'smart-numeric-text-box, [smart-numeric-text-box]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], NumericTextBoxComponent);

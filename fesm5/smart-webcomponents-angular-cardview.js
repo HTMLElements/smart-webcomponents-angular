@@ -776,7 +776,7 @@ var CardViewComponent = /** @class */ (function (_super) {
     ], CardViewComponent.prototype, "onDragEnd", void 0);
     CardViewComponent = __decorate([
         Directive({
-            selector: 'smart-card-view, [smart-card-view]'
+            exportAs: 'smart-card-view', selector: 'smart-card-view, [smart-card-view]'
         })
     ], CardViewComponent);
     return CardViewComponent;

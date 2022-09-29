@@ -16,11 +16,11 @@ export declare class BootstrapSplitButtonComponent extends BaseElement implement
     /** @description Enables or disables the element.  */
     disabled: boolean;
     /** @description Sets or gets the drop down position of the element.  */
-    dropDownPosition: BootstrapSplitButtonDropDownPosition;
+    dropDownPosition: BootstrapSplitButtonDropDownPosition | string;
     /** @description Sets or gets the Label of the element. */
     label: string;
     /** @description Sets or gets the Label type of the element. */
-    labelType: BootstrapSplitButtonLabelType;
+    labelType: BootstrapSplitButtonLabelType | string;
     /** @description Sets or gets the Href of the element. */
     href: string;
     /** @description Sets or gets the name attribute for the element. Name is used when submiting HTML forms. */
@@ -30,7 +30,7 @@ export declare class BootstrapSplitButtonComponent extends BaseElement implement
     /** @description Gets or sets whether the dropdown is outlined.  */
     outlined: boolean;
     /** @description Sets or gets the style mode of the element. */
-    styleMode: BootstrapSplitButtonStyleMode;
+    styleMode: BootstrapSplitButtonStyleMode | string;
     /** @description Sets or gets the size mode of the element. */
     sizeMode: string;
     /** @description Show event is triggered when the dropdown is going to show.

@@ -741,7 +741,7 @@ var CheckInputComponent = /** @class */ (function (_super) {
     ], CheckInputComponent.prototype, "onChange", void 0);
     CheckInputComponent = __decorate([
         Directive({
-            selector: 'smart-check-input, [smart-check-input]',
+            exportAs: 'smart-check-input', selector: 'smart-check-input, [smart-check-input]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], CheckInputComponent);

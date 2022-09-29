@@ -1089,7 +1089,7 @@ var ArrayComponent = /** @class */ (function (_super) {
     ], ArrayComponent.prototype, "onSizeChange", void 0);
     ArrayComponent = __decorate([
         Directive({
-            selector: 'smart-array, [smart-array]'
+            exportAs: 'smart-array', selector: 'smart-array, [smart-array]'
         })
     ], ArrayComponent);
     return ArrayComponent;

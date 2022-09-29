@@ -25,15 +25,15 @@ export declare class ColorPanelComponent extends BaseElement implements OnInit, 
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Specifies how the value is applied. */
-    applyValueMode: ColorApplyValueMode;
+    applyValueMode: ColorApplyValueMode | string;
     /** @description Defines the number of columns for the colors in displayModes 'grid', 'hexagonal' and 'spectrumGrid'. */
     columnCount: number;
     /** @description Enables or disables the element. Disabled elements can not be interacted with. */
     disabled: boolean;
     /** @description Determines the colors that will be displayed and their layout. */
-    displayMode: ColorDisplayMode;
+    displayMode: ColorDisplayMode | string;
     /** @description By default clicking on color panel's preview container returns the color value to it's previous state. 'disableUndo' prevents this functionality. */
     disableUndo: boolean;
     /** @description Allows to edit the alpha(transparency) of the colors via an editor/slider in the following displayModes: 'palette', 'radial', 'hexagonal' */
@@ -67,7 +67,7 @@ export declare class ColorPanelComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the name attribute for the element. Name is used when submiting HTML forms. */
     name: string;
     /** @description Determines what colors will be displayed in 'spectrumGrid', 'grid' and 'hexagonal' displayModes. */
-    palette: ColorPalette;
+    palette: ColorPalette | string;
     /** @description Defines an array of colors that form a custom palette. This palette can be used in displayModes 'grid' and 'spectrum grid' if the palette property is set to custom. The value of the property can be an array of strings or objects that contain valid colors ( HEX, RGBA, etc). */
     paletteColors: any;
     /** @description Defines an array of colors that represent a predefined list of custom colors. This palette can be used in displayModes 'grid', 'default' and 'spectrum grid'. Custom colors are displayed at the bottom of the color grid below the button for custom color selection. They are only visible if enableCustomColors property is true. */
@@ -79,11 +79,11 @@ export declare class ColorPanelComponent extends BaseElement implements OnInit, 
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description Determines how the tooltip displays the value of the color that is being hovered. */
-    tooltipDisplayMode: ColorTooltipDisplayMode;
+    tooltipDisplayMode: ColorTooltipDisplayMode | string;
     /** @description Represents the value of the selected color. */
     value: string;
     /** @description Determines the format of the color. Whether it's in HEX, RGB or RGBA. By default it shows the color depending on the displayMode. */
-    valueFormat: ColorValueFormat;
+    valueFormat: ColorValueFormat | string;
     /** @description Determines the value member for the color when the paletteColors consists of objects. Usefull in cases where the colors are loaded as objects in an array and the attribute that holds the color key is not named 'value'. */
     valueMember: string;
     /** @description If is set to true, the element cannot be focused. */

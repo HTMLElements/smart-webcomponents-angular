@@ -846,7 +846,7 @@ var InputComponent = /** @class */ (function (_super) {
     ], InputComponent.prototype, "onItemClick", void 0);
     InputComponent = __decorate([
         Directive({
-            selector: 'smart-input, [smart-input]',
+            exportAs: 'smart-input', selector: 'smart-input, [smart-input]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], InputComponent);

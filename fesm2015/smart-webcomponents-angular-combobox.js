@@ -493,6 +493,13 @@ let ComboBoxComponent = class ComboBoxComponent extends BaseElement {
     set minLength(value) {
         this.nativeElement ? this.nativeElement.minLength = value : undefined;
     }
+    /** @description Determines the maximum number of characters inside the input. */
+    get maxLength() {
+        return this.nativeElement ? this.nativeElement.maxLength : undefined;
+    }
+    set maxLength(value) {
+        this.nativeElement ? this.nativeElement.maxLength = value : undefined;
+    }
     /** @description Sets or gets the name attribute for the element. Name is used when submiting HTML forms. */
     get name() {
         return this.nativeElement ? this.nativeElement.name : undefined;
@@ -1130,6 +1137,9 @@ __decorate([
 ], ComboBoxComponent.prototype, "minLength", null);
 __decorate([
     Input()
+], ComboBoxComponent.prototype, "maxLength", null);
+__decorate([
+    Input()
 ], ComboBoxComponent.prototype, "name", null);
 __decorate([
     Input()
@@ -1223,7 +1233,7 @@ __decorate([
 ], ComboBoxComponent.prototype, "onTokenClick", void 0);
 ComboBoxComponent = __decorate([
     Directive({
-        selector: 'smart-combo-box, [smart-combo-box]',
+        exportAs: 'smart-combo-box', selector: 'smart-combo-box, [smart-combo-box]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], ComboBoxComponent);
@@ -1381,7 +1391,7 @@ __decorate([
 ], ListItemComponent.prototype, "readonly", null);
 ListItemComponent = __decorate([
     Directive({
-        selector: 'smart-list-item, [smart-list-item]'
+        exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
     })
 ], ListItemComponent);
 
@@ -1438,7 +1448,7 @@ __decorate([
 ], ListItemsGroupComponent.prototype, "label", null);
 ListItemsGroupComponent = __decorate([
     Directive({
-        selector: 'smart-list-items-group, [smart-list-items-group]'
+        exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
     })
 ], ListItemsGroupComponent);
 

@@ -1717,7 +1717,7 @@ import './../source/modules/smart.dropdownlist';
         ], DropDownListComponent.prototype, "onScrollTopReached", void 0);
         DropDownListComponent = __decorate([
             core.Directive({
-                selector: 'smart-drop-down-list, [smart-drop-down-list]',
+                exportAs: 'smart-drop-down-list', selector: 'smart-drop-down-list, [smart-drop-down-list]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], DropDownListComponent);
@@ -1927,7 +1927,7 @@ import './../source/modules/smart.dropdownlist';
         ], ListItemComponent.prototype, "readonly", null);
         ListItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-list-item, [smart-list-item]'
+                exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
             })
         ], ListItemComponent);
         return ListItemComponent;
@@ -1996,7 +1996,7 @@ import './../source/modules/smart.dropdownlist';
         ], ListItemsGroupComponent.prototype, "label", null);
         ListItemsGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-list-items-group, [smart-list-items-group]'
+                exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
             })
         ], ListItemsGroupComponent);
         return ListItemsGroupComponent;

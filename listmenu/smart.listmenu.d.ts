@@ -14,7 +14,7 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines whether the element becomes focused on hover or not. */
     autoFocusOnMouseenter: boolean;
     /** @description Allows top-level ListMenu items to be checkable. */
@@ -22,7 +22,7 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
     /** @description Sets or gets whether checkboxes and radio buttons can be displayed in the top level menu groups. This property is applicable only to the ListMenu itself, and not its smart-menu-item/smart-menu-items-group subitems. See also the property checkable. */
     checkboxes: boolean;
     /** @description Sets the check mode of top-level ListMenu items(groups). */
-    checkMode: MenuCheckMode;
+    checkMode: MenuCheckMode | string;
     /** @description Determines the data source that will be loaded to the ListMenu. The data source represents an array of objects with the following properties: label - a string representing the text content of the item.value - the value of the item.shortcut - a string representing a shortuct for the item. It will be displayed inside the item.items - allows to define an array of sub menu items. */
     dataSource: any;
     /** @description Enables or disables the element. */
@@ -36,7 +36,7 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
     /** @description If this property is enabled, when the element's minimized dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */
     dropDownOverlay: boolean;
     /** @description Sets or gets the opening direction of the ListMenu minimized dropdown. */
-    dropDownPosition: MenuDropDownPosition;
+    dropDownPosition: MenuDropDownPosition | string;
     /** @description Enables or disables scrolling using the mouse wheel through overflowing menu items. */
     enableMouseWheelAction: boolean;
     /** @description Determines whether menu item filtering is enabled. When enabled a filter input is shown at the top of the element. Only items in the current view can be filtered. */
@@ -46,7 +46,7 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
     /** @description Determines the MenuItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the 'value' property or 'textContent' if the user wants to filter by text inside the MenuItem's content or any other property. */
     filterMember: string;
     /** @description Determines the filtering mode. */
-    filterMode: FilterMode;
+    filterMode: FilterMode | string;
     /** @description If enabled, the items will be grouped by their first letter and sorted. */
     grouped: boolean;
     /** @description Determines the field in the data source that corresponds to an item group's subitems collection. */
@@ -54,7 +54,7 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
     /** @description Determines the text that will be displayed next to the loading indicator when the loader is visible and it's position is top or bottom. */
     loadingIndicatorPlaceholder: string;
     /** @description Determines the position of the loading indicator inside the element. */
-    loadingIndicatorPosition: VerticalAlignment;
+    loadingIndicatorPosition: VerticalAlignment | string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback used to customize the format of the messages that are returned from the Localization Module. */
@@ -66,13 +66,13 @@ export declare class ListMenuComponent extends BaseElement implements OnInit, Af
     /** @description Determines the minimum width of the ListMenu at which it will switch from normal to minimized mode. If set to null, the ListMenu does not minimize automatically. */
     minimizeWidth: number | null;
     /** @description Sets or gets the ListMenu's scroll buttons behavior. */
-    overflow: Overflow;
+    overflow: Overflow | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Determines whether to use scrollbar or scrollButtons when content overflows an element's box. */
-    scrollMode: ListMenuScrollMode;
+    scrollMode: ListMenuScrollMode | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */

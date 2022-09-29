@@ -644,7 +644,7 @@ var CarouselComponent = /** @class */ (function (_super) {
     ], CarouselComponent.prototype, "onSwiperight", void 0);
     CarouselComponent = __decorate([
         Directive({
-            selector: 'smart-carousel, [smart-carousel]'
+            exportAs: 'smart-carousel', selector: 'smart-carousel, [smart-carousel]'
         })
     ], CarouselComponent);
     return CarouselComponent;

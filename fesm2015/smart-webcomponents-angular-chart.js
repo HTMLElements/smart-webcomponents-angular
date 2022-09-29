@@ -1034,7 +1034,7 @@ __decorate([
 ], ChartComponent.prototype, "onToggle", void 0);
 ChartComponent = __decorate([
     Directive({
-        selector: 'smart-chart, [smart-chart]'
+        exportAs: 'smart-chart', selector: 'smart-chart, [smart-chart]'
     })
 ], ChartComponent);
 

@@ -24,7 +24,7 @@ export declare class BootstrapInputGroupComponent extends BaseElement implements
     /** @description Enables or disables the wrapping.  */
     noWrap: boolean;
     /** @description Sets or gets the style mode of the input group. */
-    styleMode: BootstrapInputGroupStyleMode;
+    styleMode: BootstrapInputGroupStyleMode | string;
     /** @description Sets or gets the size mode of the element. */
     sizeMode: string;
     /** @description Sets or gets the type of the input. */

@@ -1032,7 +1032,7 @@ import './../source/modules/smart.multicomboinput';
         ], MultiComboInputComponent.prototype, "onChange", void 0);
         MultiComboInputComponent = __decorate([
             core.Directive({
-                selector: 'smart-multi-combo-input, [smart-multi-combo-input]',
+                exportAs: 'smart-multi-combo-input', selector: 'smart-multi-combo-input, [smart-multi-combo-input]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], MultiComboInputComponent);

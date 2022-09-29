@@ -570,6 +570,21 @@ let DockingLayoutComponent = class DockingLayoutComponent extends BaseElement {
             });
         }
     }
+    /** @description Inserts a new TabsWindow. The window is in floating mode and is undocked.
+    * @param {any} item. An instance of a TabsWindow or an Object with the fields "label", "items" and other additional.
+    * @param {number | string} left?. The left position of the new window. You can use number, px or %. For example: '10px'.
+    * @param {number | string} top?. The top position of the new window. You can use number, px or %. For example: '10px'.
+    */
+    insertFloatingWindow(item, left, top) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.insertFloatingWindow(item, left, top);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.insertFloatingWindow(item, left, top);
+            });
+        }
+    }
     /** @description The method returns an array of all autohidden items.
     * @param {string} orientation?. Determines which auto hidden items to return ( vertical or horizontal ). If not set the method will return all autohidden items. Possible values: 'vertical', 'horizontal'.
     * @returns {any[]}
@@ -907,7 +922,7 @@ __decorate([
 ], DockingLayoutComponent.prototype, "onResizeEnd", void 0);
 DockingLayoutComponent = __decorate([
     Directive({
-        selector: 'smart-docking-layout, [smart-docking-layout]'
+        exportAs: 'smart-docking-layout', selector: 'smart-docking-layout, [smart-docking-layout]'
     })
 ], DockingLayoutComponent);
 

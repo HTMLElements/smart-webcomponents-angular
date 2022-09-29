@@ -1313,7 +1313,7 @@ import './../source/modules/smart.colorpicker';
         ], ColorPickerComponent.prototype, "onResizeEnd", void 0);
         ColorPickerComponent = __decorate([
             core.Directive({
-                selector: 'smart-color-picker, [smart-color-picker]',
+                exportAs: 'smart-color-picker', selector: 'smart-color-picker, [smart-color-picker]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], ColorPickerComponent);

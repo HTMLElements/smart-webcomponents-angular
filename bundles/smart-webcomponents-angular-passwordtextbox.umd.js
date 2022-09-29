@@ -920,7 +920,7 @@ import './../source/modules/smart.textbox';
         ], PasswordTextBoxComponent.prototype, "onChanging", void 0);
         PasswordTextBoxComponent = __decorate([
             core.Directive({
-                selector: 'smart-password-text-box, [smart-password-text-box]',
+                exportAs: 'smart-password-text-box', selector: 'smart-password-text-box, [smart-password-text-box]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], PasswordTextBoxComponent);

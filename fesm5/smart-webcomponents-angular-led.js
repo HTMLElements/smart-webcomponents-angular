@@ -500,7 +500,7 @@ var LedComponent = /** @class */ (function (_super) {
     ], LedComponent.prototype, "onChange", void 0);
     LedComponent = __decorate([
         Directive({
-            selector: 'smart-led, [smart-led]'
+            exportAs: 'smart-led', selector: 'smart-led, [smart-led]'
         })
     ], LedComponent);
     return LedComponent;

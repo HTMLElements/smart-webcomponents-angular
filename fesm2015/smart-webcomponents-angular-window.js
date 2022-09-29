@@ -247,6 +247,20 @@ let WindowComponent = class WindowComponent extends BaseElement {
     set disableSnap(value) {
         this.nativeElement ? this.nativeElement.disableSnap = value : undefined;
     }
+    /** @description By default the window is closing after the 'Escape' key is pressed. Set this property to true, if you want to disable that. */
+    get disableEscape() {
+        return this.nativeElement ? this.nativeElement.disableEscape : undefined;
+    }
+    set disableEscape(value) {
+        this.nativeElement ? this.nativeElement.disableEscape = value : undefined;
+    }
+    /** @description By default the window is handling keyboard keys like 'Arrows', 'Escape', etc. Set this property to true, if you want to disable that. */
+    get disableKeyboard() {
+        return this.nativeElement ? this.nativeElement.disableKeyboard : undefined;
+    }
+    set disableKeyboard(value) {
+        this.nativeElement ? this.nativeElement.disableKeyboard = value : undefined;
+    }
     /** @description Determines how the characters are displayed inside the input. Applicable to Prompt Window. */
     get displayMode() {
         return this.nativeElement ? this.nativeElement.displayMode : undefined;
@@ -766,36 +780,19 @@ let WindowComponent = class WindowComponent extends BaseElement {
             return result;
         });
     }
-    /** @description Removes a tab and its associated content section. Applicable only to TabsWindow.
-    * @param {number} index. The index of the tab to remove.
+    /** @description Moves the window to a new position
+    * @param {string | number} left. Left position. For example: '100px'.
+    * @param {string | number} top. Top position. For example: '100px'.
     */
-    removeAt(index) {
+    move(left, top) {
         if (this.nativeElement.isRendered) {
-            this.nativeElement.removeAt(index);
+            this.nativeElement.move(left, top);
         }
         else {
             this.nativeElement.whenRendered(() => {
-                this.nativeElement.removeAt(index);
+                this.nativeElement.move(left, top);
             });
         }
-    }
-    /** @description Removes a child "smart-tab-item" node. Applicable only to TabsWindow.
-    * @param {Node} node. The "smart-tab-item" node to remove.
-    * @returns {Node}
-  */
-    removeChild(node) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const getResultOnRender = () => {
-                return new Promise(resolve => {
-                    this.nativeElement.whenRendered(() => {
-                        const result = this.nativeElement.removeChild(node);
-                        resolve(result);
-                    });
-                });
-            };
-            const result = yield getResultOnRender();
-            return result;
-        });
     }
     /** @description Maximizes the window to fill the area.
     */
@@ -845,6 +842,37 @@ let WindowComponent = class WindowComponent extends BaseElement {
             });
         }
     }
+    /** @description Removes a tab and its associated content section. Applicable only to TabsWindow.
+    * @param {number} index. The index of the tab to remove.
+    */
+    removeAt(index) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.removeAt(index);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.removeAt(index);
+            });
+        }
+    }
+    /** @description Removes a child "smart-tab-item" node. Applicable only to TabsWindow.
+    * @param {Node} node. The "smart-tab-item" node to remove.
+    * @returns {Node}
+  */
+    removeChild(node) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.removeChild(node);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Restores the window to it's previous size before maximization/minimization.
     */
     restore() {
@@ -882,7 +910,33 @@ let WindowComponent = class WindowComponent extends BaseElement {
             });
         }
     }
-    /** @description Updates a tab and its associated content section.  Applicalbe only to TabsWindow elements.
+    /** @description Updates the header label.
+    * @param {string} label. The new label of the Header.
+    */
+    updateLabel(label) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateLabel(label);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.updateLabel(label);
+            });
+        }
+    }
+    /** @description Updates the content.
+    * @param {string | HTMLElement} content. The new content of the window.
+    */
+    updateContent(content) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.updateContent(content);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.updateContent(content);
+            });
+        }
+    }
+    /** @description Updates a TAB in TAB Window and its associated content section.  Applies only to TabsWindow elements.
     * @param {number} index. The index of the tab to update.
     * @param {string} label. The new label of the tab. The value can be the id of an HTMLTemplateElement
     * @param {string | HTMLElement} content. The new content of the tab.
@@ -1035,6 +1089,12 @@ __decorate([
 __decorate([
     Input()
 ], WindowComponent.prototype, "disableSnap", null);
+__decorate([
+    Input()
+], WindowComponent.prototype, "disableEscape", null);
+__decorate([
+    Input()
+], WindowComponent.prototype, "disableKeyboard", null);
 __decorate([
     Input()
 ], WindowComponent.prototype, "displayMode", null);
@@ -1241,7 +1301,7 @@ __decorate([
 ], WindowComponent.prototype, "onRestore", void 0);
 WindowComponent = __decorate([
     Directive({
-        selector: 'smart-window, [smart-window], smart-tabs-window, smart-prompt-window, smart-multilineprompt-window, smart-dialog-window,  smart-alert-window, smart-progress-window, smart-wait-window'
+        exportAs: 'smart-window', selector: 'smart-window, [smart-window], smart-tabs-window, smart-prompt-window, smart-multilineprompt-window, smart-dialog-window,  smart-alert-window, smart-progress-window, smart-wait-window'
     })
 ], WindowComponent);
 

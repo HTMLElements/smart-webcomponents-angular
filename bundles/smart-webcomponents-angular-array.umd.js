@@ -1311,7 +1311,7 @@ import './../source/modules/smart.array';
         ], ArrayComponent.prototype, "onSizeChange", void 0);
         ArrayComponent = __decorate([
             core.Directive({
-                selector: 'smart-array, [smart-array]'
+                exportAs: 'smart-array', selector: 'smart-array, [smart-array]'
             })
         ], ArrayComponent);
         return ArrayComponent;

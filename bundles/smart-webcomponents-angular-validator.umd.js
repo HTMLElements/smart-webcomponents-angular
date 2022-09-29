@@ -469,7 +469,7 @@ import './../source/modules/smart.validator';
         ], ValidatorComponent.prototype, "validationSummarySelector", null);
         ValidatorComponent = __decorate([
             core.Directive({
-                selector: 'jqxValidator, [jqxValidator]'
+                exportAs: 'jqxValidator', selector: 'jqxValidator, [jqxValidator]'
             })
         ], ValidatorComponent);
         return ValidatorComponent;

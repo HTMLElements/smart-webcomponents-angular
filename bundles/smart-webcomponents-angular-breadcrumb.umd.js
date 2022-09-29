@@ -699,7 +699,7 @@ import './../source/modules/smart.breadcrumb';
         ], BreadcrumbComponent.prototype, "onAddNewItem", void 0);
         BreadcrumbComponent = __decorate([
             core.Directive({
-                selector: 'smart-breadcrumb, [smart-breadcrumb]'
+                exportAs: 'smart-breadcrumb', selector: 'smart-breadcrumb, [smart-breadcrumb]'
             })
         ], BreadcrumbComponent);
         return BreadcrumbComponent;

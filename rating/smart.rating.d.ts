@@ -25,7 +25,7 @@ export declare class RatingComponent extends BaseElement implements OnInit, Afte
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Disables the interaction with the element. */
     disabled: boolean;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */

@@ -14,7 +14,7 @@ export declare class ScrollBarComponent extends BaseElement implements OnInit, A
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Sets or gets the scrollbar's largestep. The value is increased/decreased with this largestep when the user presses the left mouse button in the area between a scrollbar button and thumb. */
@@ -26,13 +26,13 @@ export declare class ScrollBarComponent extends BaseElement implements OnInit, A
     /** @description Sets or gets the scrollbar's maximum value. */
     max: number;
     /** @description Sets or gets the type of used mechanical action. The mechanical action defines in which moment the value of the element will be updated. */
-    mechanicalAction: DragMechanicalAction;
+    mechanicalAction: DragMechanicalAction | string;
     /** @description Sets an object with string values, related to the different states of passwords strength. */
     messages: any;
     /** @description Sets or gets the scrollbar's minimum value. */
     min: number;
     /** @description Sets or gets the scrollbar's orientation */
-    orientation: Orientation;
+    orientation: Orientation | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */

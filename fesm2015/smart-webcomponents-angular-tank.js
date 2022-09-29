@@ -702,7 +702,7 @@ __decorate([
 ], TankComponent.prototype, "onChange", void 0);
 TankComponent = __decorate([
     Directive({
-        selector: 'smart-tank, [smart-tank]',
+        exportAs: 'smart-tank', selector: 'smart-tank, [smart-tank]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], TankComponent);

@@ -616,7 +616,7 @@ var PagerComponent = /** @class */ (function (_super) {
     ], PagerComponent.prototype, "onPageSizeChanged", void 0);
     PagerComponent = __decorate([
         Directive({
-            selector: 'smart-pager, [smart-pager]'
+            exportAs: 'smart-pager', selector: 'smart-pager, [smart-pager]'
         })
     ], PagerComponent);
     return PagerComponent;

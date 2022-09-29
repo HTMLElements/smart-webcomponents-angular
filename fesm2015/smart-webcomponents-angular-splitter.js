@@ -602,7 +602,7 @@ __decorate([
 ], SplitterComponent.prototype, "onResizeEnd", void 0);
 SplitterComponent = __decorate([
     Directive({
-        selector: 'smart-splitter, [smart-splitter]'
+        exportAs: 'smart-splitter', selector: 'smart-splitter, [smart-splitter]'
     })
 ], SplitterComponent);
 
@@ -778,7 +778,7 @@ __decorate([
 ], SplitterItemComponent.prototype, "size", null);
 SplitterItemComponent = __decorate([
     Directive({
-        selector: 'smart-splitter-item, [smart-splitter-item]'
+        exportAs: 'smart-splitter-item', selector: 'smart-splitter-item, [smart-splitter-item]'
     })
 ], SplitterItemComponent);
 
@@ -874,7 +874,7 @@ SplitterBarComponent.ctorParameters = () => [
 ];
 SplitterBarComponent = __decorate([
     Directive({
-        selector: 'smart-splitter-bar, [smart-splitter-bar]'
+        exportAs: 'smart-splitter-bar', selector: 'smart-splitter-bar, [smart-splitter-bar]'
     })
 ], SplitterBarComponent);
 

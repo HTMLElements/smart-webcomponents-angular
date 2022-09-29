@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.phoneinput';
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
     typeof define === 'function' && define.amd ? define('smart-webcomponents-angular/phoneinput', ['exports', '@angular/core', '@angular/forms'], factory) :
@@ -919,7 +928,7 @@
         ], PhoneInputComponent.prototype, "onItemClick", void 0);
         PhoneInputComponent = __decorate([
             core.Directive({
-                selector: 'smart-phone-input, [smart-phone-input]',
+                exportAs: 'smart-phone-input', selector: 'smart-phone-input, [smart-phone-input]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], PhoneInputComponent);

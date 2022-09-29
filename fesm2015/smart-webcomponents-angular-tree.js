@@ -320,6 +320,13 @@ let TreeComponent = class TreeComponent extends BaseElement {
     set filterable(value) {
         this.nativeElement ? this.nativeElement.filterable = value : undefined;
     }
+    /** @description Applies a filter only after the 'Enter' key is pressed. */
+    get filterOnEnter() {
+        return this.nativeElement ? this.nativeElement.filterOnEnter : undefined;
+    }
+    set filterOnEnter(value) {
+        this.nativeElement ? this.nativeElement.filterOnEnter = value : undefined;
+    }
     /** @description Sets custom text for placeholder in the filter input. */
     get filterInputPlaceholder() {
         return this.nativeElement ? this.nativeElement.filterInputPlaceholder : undefined;
@@ -668,6 +675,23 @@ let TreeComponent = class TreeComponent extends BaseElement {
             return result;
         });
     }
+    /** @description Gets the selected values. If value is not defined, returns the selected labels.
+    * @returns {string[]}
+  */
+    getSelectedValues() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getSelectedValues();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
     /** @description Returns SmartTree's state
     * @returns {any}
   */
@@ -768,7 +792,7 @@ let TreeComponent = class TreeComponent extends BaseElement {
             return result;
         });
     }
-    /** @description Selects an item.
+    /** @description Selects an item by its index or by HTMLElement id.
     * @param {HTMLElement | string} item. The smart-tree-item/smart-tree-items-group (or its id or numeric path) to remove.
     */
     select(item) {
@@ -781,7 +805,20 @@ let TreeComponent = class TreeComponent extends BaseElement {
             });
         }
     }
-    /** @description Unselects an item.
+    /** @description Selects an item or items by values.
+    * @param {string | string[]} items. The smart-tree-item/smart-tree-items-group values or labels, if values are not defined.
+    */
+    setSelectedValues(items) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setSelectedValues(items);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setSelectedValues(items);
+            });
+        }
+    }
+    /** @description Unselects an item by its index or by HTMLElement id.
     * @param {HTMLElement | string} item. The smart-tree-item/smart-tree-items-group (or its id or numeric path) to remove.
     */
     unselect(item) {
@@ -791,6 +828,19 @@ let TreeComponent = class TreeComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.unselect(item);
+            });
+        }
+    }
+    /** @description Unselects an item or items by values.
+    * @param {string | string[]} items. The smart-tree-item/smart-tree-items-group values or labels, if values are not defined.
+    */
+    unselectValues(items) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.unselectValues(items);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.unselectValues(items);
             });
         }
     }
@@ -955,6 +1005,9 @@ __decorate([
 ], TreeComponent.prototype, "filterable", null);
 __decorate([
     Input()
+], TreeComponent.prototype, "filterOnEnter", null);
+__decorate([
+    Input()
 ], TreeComponent.prototype, "filterInputPlaceholder", null);
 __decorate([
     Input()
@@ -1075,7 +1128,7 @@ __decorate([
 ], TreeComponent.prototype, "onSwiperight", void 0);
 TreeComponent = __decorate([
     Directive({
-        selector: 'smart-tree, [smart-tree]'
+        exportAs: 'smart-tree', selector: 'smart-tree, [smart-tree]'
     })
 ], TreeComponent);
 
@@ -1202,7 +1255,7 @@ __decorate([
 ], TreeItemComponent.prototype, "readonly", null);
 TreeItemComponent = __decorate([
     Directive({
-        selector: 'smart-tree-item, [smart-tree-item]'
+        exportAs: 'smart-tree-item', selector: 'smart-tree-item, [smart-tree-item]'
     })
 ], TreeItemComponent);
 
@@ -1329,7 +1382,7 @@ __decorate([
 ], TreeItemsGroupComponent.prototype, "readonly", null);
 TreeItemsGroupComponent = __decorate([
     Directive({
-        selector: 'smart-tree-items-group, [smart-tree-items-group]'
+        exportAs: 'smart-tree-items-group', selector: 'smart-tree-items-group, [smart-tree-items-group]'
     })
 ], TreeItemsGroupComponent);
 

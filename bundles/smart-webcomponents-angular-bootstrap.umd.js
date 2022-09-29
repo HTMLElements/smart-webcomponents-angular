@@ -537,7 +537,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapButtonComponent.prototype, "onClick", void 0);
         BootstrapButtonComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-button, [bootstrap-button]'
+                exportAs: 'bootstrap-button', selector: 'bootstrap-button, [bootstrap-button]'
             })
         ], BootstrapButtonComponent);
         return BootstrapButtonComponent;
@@ -726,7 +726,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapCheckBoxComponent.prototype, "onChange", void 0);
         BootstrapCheckBoxComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-check-box, [bootstrap-check-box]'
+                exportAs: 'bootstrap-check-box', selector: 'bootstrap-check-box, [bootstrap-check-box]'
             })
         ], BootstrapCheckBoxComponent);
         return BootstrapCheckBoxComponent;
@@ -902,7 +902,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapCircularComponent.prototype, "onChange", void 0);
         BootstrapCircularComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-circular, [bootstrap-circular]'
+                exportAs: 'bootstrap-circular', selector: 'bootstrap-circular, [bootstrap-circular]'
             })
         ], BootstrapCircularComponent);
         return BootstrapCircularComponent;
@@ -1192,7 +1192,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapDropDownComponent.prototype, "onHidden", void 0);
         BootstrapDropDownComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-drop-down, [bootstrap-drop-down]'
+                exportAs: 'bootstrap-drop-down', selector: 'bootstrap-drop-down, [bootstrap-drop-down]'
             })
         ], BootstrapDropDownComponent);
         return BootstrapDropDownComponent;
@@ -1340,7 +1340,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapFileInputComponent.prototype, "onChange", void 0);
         BootstrapFileInputComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-file-input, [bootstrap-file-input]'
+                exportAs: 'bootstrap-file-input', selector: 'bootstrap-file-input, [bootstrap-file-input]'
             })
         ], BootstrapFileInputComponent);
         return BootstrapFileInputComponent;
@@ -1530,7 +1530,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapInputComponent.prototype, "onChange", void 0);
         BootstrapInputComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-input, [bootstrap-input]'
+                exportAs: 'bootstrap-input', selector: 'bootstrap-input, [bootstrap-input]'
             })
         ], BootstrapInputComponent);
         return BootstrapInputComponent;
@@ -1748,7 +1748,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapInputGroupComponent.prototype, "onClick", void 0);
         BootstrapInputGroupComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-input-group, [bootstrap-input-group]'
+                exportAs: 'bootstrap-input-group', selector: 'bootstrap-input-group, [bootstrap-input-group]'
             })
         ], BootstrapInputGroupComponent);
         return BootstrapInputGroupComponent;
@@ -1974,7 +1974,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapModalComponent.prototype, "onHide", void 0);
         BootstrapModalComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-modal, [bootstrap-modal]'
+                exportAs: 'bootstrap-modal', selector: 'bootstrap-modal, [bootstrap-modal]'
             })
         ], BootstrapModalComponent);
         return BootstrapModalComponent;
@@ -2150,7 +2150,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapProgressBarComponent.prototype, "onChange", void 0);
         BootstrapProgressBarComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-progress-bar, [bootstrap-progress-bar]'
+                exportAs: 'bootstrap-progress-bar', selector: 'bootstrap-progress-bar, [bootstrap-progress-bar]'
             })
         ], BootstrapProgressBarComponent);
         return BootstrapProgressBarComponent;
@@ -2325,7 +2325,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapRadioButtonComponent.prototype, "onChange", void 0);
         BootstrapRadioButtonComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-radio-button, [bootstrap-radio-button]'
+                exportAs: 'bootstrap-radio-button', selector: 'bootstrap-radio-button, [bootstrap-radio-button]'
             })
         ], BootstrapRadioButtonComponent);
         return BootstrapRadioButtonComponent;
@@ -2473,7 +2473,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapRangeComponent.prototype, "onChange", void 0);
         BootstrapRangeComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-range, [bootstrap-range]'
+                exportAs: 'bootstrap-range', selector: 'bootstrap-range, [bootstrap-range]'
             })
         ], BootstrapRangeComponent);
         return BootstrapRangeComponent;
@@ -2763,7 +2763,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapSplitButtonComponent.prototype, "onHidden", void 0);
         BootstrapSplitButtonComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-split-button, [bootstrap-split-button]'
+                exportAs: 'bootstrap-split-button', selector: 'bootstrap-split-button, [bootstrap-split-button]'
             })
         ], BootstrapSplitButtonComponent);
         return BootstrapSplitButtonComponent;
@@ -2952,7 +2952,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapSwitchButtonComponent.prototype, "onChange", void 0);
         BootstrapSwitchButtonComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-switch-button, [bootstrap-switch-button]'
+                exportAs: 'bootstrap-switch-button', selector: 'bootstrap-switch-button, [bootstrap-switch-button]'
             })
         ], BootstrapSwitchButtonComponent);
         return BootstrapSwitchButtonComponent;
@@ -3156,7 +3156,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapTabsComponent.prototype, "onShow", void 0);
         BootstrapTabsComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-tabs, [bootstrap-tabs]'
+                exportAs: 'bootstrap-tabs', selector: 'bootstrap-tabs, [bootstrap-tabs]'
             })
         ], BootstrapTabsComponent);
         return BootstrapTabsComponent;
@@ -3346,7 +3346,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapTextareaComponent.prototype, "onChange", void 0);
         BootstrapTextareaComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-textarea, [bootstrap-textarea]'
+                exportAs: 'bootstrap-textarea', selector: 'bootstrap-textarea, [bootstrap-textarea]'
             })
         ], BootstrapTextareaComponent);
         return BootstrapTextareaComponent;
@@ -3521,7 +3521,7 @@ import './../source/modules/smart.bootstrap';
         ], BootstrapToggleButtonComponent.prototype, "onChange", void 0);
         BootstrapToggleButtonComponent = __decorate([
             core.Directive({
-                selector: 'bootstrap-toggle-button, [bootstrap-toggle-button]'
+                exportAs: 'bootstrap-toggle-button', selector: 'bootstrap-toggle-button, [bootstrap-toggle-button]'
             })
         ], BootstrapToggleButtonComponent);
         return BootstrapToggleButtonComponent;

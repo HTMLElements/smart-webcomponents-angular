@@ -546,7 +546,7 @@ __decorate([
 ], DateRangeInputComponent.prototype, "onChange", void 0);
 DateRangeInputComponent = __decorate([
     Directive({
-        selector: 'smart-date-range-input, [smart-date-range-input]',
+        exportAs: 'smart-date-range-input', selector: 'smart-date-range-input, [smart-date-range-input]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], DateRangeInputComponent);

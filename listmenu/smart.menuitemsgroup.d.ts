@@ -18,7 +18,7 @@ export declare class MenuItemsGroupComponent extends BaseElement implements OnIn
     /** @description  */
     checked: boolean;
     /** @description  */
-    checkMode: MenuCheckMode;
+    checkMode: MenuCheckMode | string;
     /** @description Enables or disables element. */
     disabled: boolean;
     /** @description  */

@@ -20,7 +20,7 @@ export declare class BreadcrumbComponent extends BaseElement implements OnInit, 
     /** @description Enables or disables the dropping of dragged breadcrumb items. */
     allowDrop: boolean;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Show/Hide the close button of breadcrumb items. */
     closeButtons: boolean;
     /** @description Determines the data source to load breadcrumb items from. The Array should contain objects. Each object defines a single breadcrumb item. */

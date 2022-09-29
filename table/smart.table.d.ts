@@ -36,7 +36,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets the column menu. When you set this property to true, each column will have a column menu. From the column menu, you will be able to sort, filter, show or hide columns. */
     columnMenu: boolean;
     /** @description Sets or gets the column sizing behavior. In 'auto' mode Columns are automatically sized based on their content and the value of the columnMinWidth property, unless there is not enough space in the Table, in which case ellipses are shown. User-set static column width is still respected. In 'default' mode Columns are sized according to the rules of the standard HTML table element's table-layout: fixed. Custom width can also be applied to columns in this case by setting the column width property. */
-    columnSizeMode: TableColumnSizeMode;
+    columnSizeMode: TableColumnSizeMode | string;
     /** @description Sets or gets whether the "Conditional Formatting" button appears in the Table's header (toolbar). Clicking this button opens a dialog with formatting options. */
     conditionalFormattingButton: boolean;
     /** @description This property determines the time in milliseconds after which the Table data is updated, when you vertically scroll. */
@@ -56,7 +56,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets the edit mode. */
     editing: boolean;
     /** @description Sets or gets whether Row hierarchies are expanded by default, when created. Use this property when you want your groups to be expanded by default, when the Table is grouped or when you use the Table in tree mode. */
-    editMode: TableEditMode;
+    editMode: TableEditMode | string;
     /** @description Sets or gets whether the Table can be filtered. By default, the Table can be filtered by all string and numeric columns through a filter input in the header. */
     expandHierarchy: boolean;
     /** @description Sets or gets whether the Table can be filtered via a filter row. */
@@ -93,7 +93,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     hideSelectionColumn: boolean;
     /** @description Sets or gets an object specifying strings used in the element that can be localized. Used in conjunction with the property locale.  */
-    loadColumnStateBehavior: TableLoadColumnStateBehavior;
+    loadColumnStateBehavior: TableLoadColumnStateBehavior | string;
     /** @description Sets or gets the page size (when paging is enabled). */
     locale: string;
     /** @description Sets or gets the current (zero-based) page index (when paging is enabled). */
@@ -111,22 +111,30 @@ export declare class TableComponent extends BaseElement implements OnInit, After
         (): void;
     };
     /** @description Sets or gets an array of the Table's selected row's ids. */
-    pageSize: TablePageSize;
+    onLoad: {
+        (): void;
+    };
     /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
-    pageIndex: number;
+    onUpdateComplete: {
+        (): void;
+    };
     /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
-    paging: boolean;
+    pageSize: TablePageSize | string;
     /** @description Sets or gets whether row selection (via checkboxes) is hierarchical. When a parent row is selected, all sub rows are selected, too. */
-    rightToLeft: boolean;
+    pageIndex: number;
     /** @description Determines the sorting mode of the Table. */
-    rowDetailTemplate: string;
+    paging: boolean;
     /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
-    selected: any[];
+    rightToLeft: boolean;
     /** @description Determines the theme. Theme defines the look of the element */
-    selection: boolean;
+    rowDetailTemplate: string;
     /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
-    selectionMode: TableSelectionMode;
+    selected: any[];
     /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
+    selection: boolean;
+    /** @description undefined */
+    selectionMode: TableSelectionMode | string;
+    /** @description undefined */
     selectionByHierarchy: boolean;
     /** @description undefined */
     sort: {
@@ -135,7 +143,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
         }[]): void;
     };
     /** @description undefined */
-    sortMode: TableSortMode;
+    sortMode: TableSortMode | string;
     /** @description undefined */
     stateSettings: string[];
     /** @description undefined */
@@ -254,7 +262,7 @@ export declare class TableComponent extends BaseElement implements OnInit, After
     addRow(data: any): void;
     /** @description Adds a filter to a specific column.
     * @param {string} dataField. The column's data field.
-    * @param {any} filter. FilterGroup object.
+    * @param {any} filter. FilterGroup object or a Filter expression. Filter expression like: 'startsWith B'. Example 2: ['contains Andrew or contains Nancy'], Example 3:  ['quantity', '&lt;= 3 and &gt;= 8'].  Filter conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
     */
     addFilter(dataField: string, filter: any): void;
     /** @description Groups by a column.

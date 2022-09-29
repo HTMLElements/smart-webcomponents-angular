@@ -750,7 +750,7 @@ import './../source/modules/smart.filterpanel';
         ], FilterPanelComponent.prototype, "onFilter", void 0);
         FilterPanelComponent = __decorate([
             core.Directive({
-                selector: 'smart-filter-panel, [smart-filter-panel]'
+                exportAs: 'smart-filter-panel', selector: 'smart-filter-panel, [smart-filter-panel]'
             })
         ], FilterPanelComponent);
         return FilterPanelComponent;

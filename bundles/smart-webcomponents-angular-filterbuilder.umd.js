@@ -961,7 +961,7 @@ import './../source/modules/smart.filterbuilder';
         ], FilterBuilderComponent.prototype, "onClosing", void 0);
         FilterBuilderComponent = __decorate([
             core.Directive({
-                selector: 'smart-filter-builder, [smart-filter-builder]'
+                exportAs: 'smart-filter-builder', selector: 'smart-filter-builder, [smart-filter-builder]'
             })
         ], FilterBuilderComponent);
         return FilterBuilderComponent;

@@ -1122,7 +1122,7 @@ import './../source/modules/smart.tabs';
         ], TabsComponent.prototype, "onReorder", void 0);
         TabsComponent = __decorate([
             core.Directive({
-                selector: 'smart-tabs, [smart-tabs]'
+                exportAs: 'smart-tabs', selector: 'smart-tabs, [smart-tabs]'
             })
         ], TabsComponent);
         return TabsComponent;
@@ -1275,7 +1275,7 @@ import './../source/modules/smart.tabs';
         ], TabItemComponent.prototype, "labelSize", null);
         TabItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-tab-item, [smart-tab-item]'
+                exportAs: 'smart-tab-item', selector: 'smart-tab-item, [smart-tab-item]'
             })
         ], TabItemComponent);
         return TabItemComponent;
@@ -1358,7 +1358,7 @@ import './../source/modules/smart.tabs';
         ], TabItemsGroupComponent.prototype, "labelSize", null);
         TabItemsGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-tab-items-group, [smart-tab-items-group]'
+                exportAs: 'smart-tab-items-group', selector: 'smart-tab-items-group, [smart-tab-items-group]'
             })
         ], TabItemsGroupComponent);
         return TabItemsGroupComponent;

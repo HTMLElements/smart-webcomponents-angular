@@ -506,7 +506,7 @@ __decorate([
 ], ToastComponent.prototype, "onSwipetop", void 0);
 ToastComponent = __decorate([
     Directive({
-        selector: 'smart-toast, [smart-toast]'
+        exportAs: 'smart-toast', selector: 'smart-toast, [smart-toast]'
     })
 ], ToastComponent);
 

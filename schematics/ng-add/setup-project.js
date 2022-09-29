@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const schematics_1 = require("@angular-devkit/schematics");
-const schematics_2 = require("@angular/cdk/schematics");
+const schematics_2 = require("../cdk/schematics");
 const config_1 = require("@schematics/angular/utility/config");
 const material_fonts_1 = require("../../fonts/material-fonts");
 const theming_1 = require("../../theming/theming");

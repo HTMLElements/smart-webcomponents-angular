@@ -14,7 +14,7 @@ export declare class BootstrapModalComponent extends BaseElement implements OnIn
      */
     createComponent(properties?: {}): any;
     /** @description Clicking on the modal “backdrop” will automatically close the modal.  */
-    backdrop: BootstrapModalBackdrop;
+    backdrop: BootstrapModalBackdrop | string;
     /** @description Sets or gets whether the modal is centered.  */
     centered: boolean;
     /** @description Enables or disables the element.  */
@@ -24,7 +24,7 @@ export declare class BootstrapModalComponent extends BaseElement implements OnIn
     /** @description Gets or sets whether the modal is scrollable.  */
     scrollable: boolean;
     /** @description Sets or gets the style mode of the element. */
-    styleMode: BootstrapModalStyleMode;
+    styleMode: BootstrapModalStyleMode | string;
     /** @description Sets or gets the size mode of the element. */
     sizeMode: string;
     /** @description Show event is triggered when the modal is going to show.

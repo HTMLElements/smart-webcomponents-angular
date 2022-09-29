@@ -6,7 +6,7 @@ import {
   getProjectFromWorkspace,
   getProjectMainFile,  
   getProjectStyleFile
-} from '@angular/cdk/schematics';
+} from '../../cdk/schematics';
 import {Schema} from './schema';
 import {getWorkspace} from '@schematics/angular/utility/config';
 import {addFontsToIndex} from '../../fonts/material-fonts';

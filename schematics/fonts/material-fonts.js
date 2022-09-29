@@ -18,7 +18,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addFontsToIndex = void 0;
 const schematics_1 = require("@angular-devkit/schematics");
-const schematics_2 = require("@angular/cdk/schematics");
+const schematics_2 = require("../cdk/schematics");
 const workspace_1 = require("@schematics/angular/utility/workspace");
 /** Adds the Material Design fonts to the index HTML file. */
 function addFontsToIndex(options) {

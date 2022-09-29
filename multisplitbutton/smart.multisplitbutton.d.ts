@@ -14,7 +14,7 @@ export declare class MultiSplitButtonComponent extends BaseElement implements On
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines a data source used to generate element's permanently visible buttons. */
     buttonsDataSource: string[];
     /** @description Determines the data source of the multi split button's dropdown. */
@@ -28,17 +28,17 @@ export declare class MultiSplitButtonComponent extends BaseElement implements On
     /** @description Sets the parent container of the button's dropDown list (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown list. */
     dropDownAppendTo: string;
     /** @description Determines position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Defines how element's drop down behaves. In 'none' mode drop down never opens. In 'dropDownButton' mode drop down is opened only via elelent's drop down button. In 'auto' mode drop down is opened on click on the whole top section. */
-    dropDownOpenMode: DropDownOpenMode;
+    dropDownOpenMode: DropDownOpenMode | string;
     /** @description If this property is enabled, when the element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */
     dropDownOverlay: boolean;
     /** @description Determines the vertical position of the dropDown list. 'Auto' means its automatically determined depending on the viewport size. */
-    dropDownPosition: DropDownPosition;
+    dropDownPosition: DropDownPosition | string;
     /** @description Determines whether the Filtering is enabled. */
     filterable: boolean;
     /** @description Determines the filtering for the drop down list mode. */
-    filterMode: FilterMode;
+    filterMode: FilterMode | string;
     /** @description Determines the placeholder for the drop down list filter input field. */
     filterInputPlaceholder: string;
     /** @description If enabled, the items will be grouped by their first letter. Can't be applied if the dataSource already contains groups. */
@@ -48,7 +48,7 @@ export declare class MultiSplitButtonComponent extends BaseElement implements On
     /** @description Sets ot gets the incrementalSearchDelay property. The incrementalSearchDelay specifies the time-interval in milliseconds after which the previous search string is deleted. The timer starts when you stop typing. */
     incrementalSearchDelay: number;
     /** @description Sets ot gets the mode of the incremental search mode. */
-    incrementalSearchMode: SearchMode;
+    incrementalSearchMode: SearchMode | string;
     /** @description Determines the height of the items. */
     itemHeight: number | null;
     /** @description The itemTemplate property is a string that represents the id of an HTMLTemplateElement in the DOM. It's used to load list items from the HTMLTemplateElement. */
@@ -56,7 +56,7 @@ export declare class MultiSplitButtonComponent extends BaseElement implements On
     /** @description Determines the text that will be displayed next to the loading indicator when the loader is visible and it's position is top or bottom. */
     loadingIndicatorPlaceholder: string;
     /** @description The position of the loading indicator. */
-    loadingIndicatorPosition: VerticalAlignment;
+    loadingIndicatorPosition: VerticalAlignment | string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback, related to localization module.  */
@@ -72,7 +72,7 @@ export declare class MultiSplitButtonComponent extends BaseElement implements On
     /** @description Sets or gets selected values of buttons's dropDown. */
     selectedValues: string[];
     /** @description Determines how many items can be selected. */
-    selectionMode: MultiSplitButtonSelectionMode;
+    selectionMode: MultiSplitButtonSelectionMode | string;
     /** @description Determines whether the items in the dropDown are sorted alphabetically or not */
     sorted: boolean;
     /** @description Determines the theme. Theme defines the look of the element */

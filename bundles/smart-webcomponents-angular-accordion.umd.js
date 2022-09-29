@@ -764,7 +764,7 @@ import './../source/modules/smart.accordion';
         ], AccordionComponent.prototype, "onExpanding", void 0);
         AccordionComponent = __decorate([
             core.Directive({
-                selector: 'smart-accordion, [smart-accordion]'
+                exportAs: 'smart-accordion', selector: 'smart-accordion, [smart-accordion]'
             })
         ], AccordionComponent);
         return AccordionComponent;
@@ -922,7 +922,7 @@ import './../source/modules/smart.accordion';
         ], AccordionItemComponent.prototype, "onExpand", void 0);
         AccordionItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-accordion-item, [smart-accordion-item]'
+                exportAs: 'smart-accordion-item', selector: 'smart-accordion-item, [smart-accordion-item]'
             })
         ], AccordionItemComponent);
         return AccordionItemComponent;

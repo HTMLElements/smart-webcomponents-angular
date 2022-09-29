@@ -26,7 +26,7 @@ export declare class BootstrapCheckBoxComponent extends BaseElement implements O
     /** @description Gets or sets whether the element is required.  */
     required: boolean;
     /** @description Sets or gets the style mode of the element. */
-    styleMode: BootstrapCheckBoxStyleMode;
+    styleMode: BootstrapCheckBoxStyleMode | string;
     /** @description Change event is triggered when the value of the checkbox is changed.
     *  @param event. The custom event. 	*/
     onChange: EventEmitter<CustomEvent>;

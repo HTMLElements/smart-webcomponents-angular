@@ -476,7 +476,7 @@ __decorate([
 ], SwitchButtonComponent.prototype, "onUncheckValue", void 0);
 SwitchButtonComponent = __decorate([
     Directive({
-        selector: 'smart-switch-button, [smart-switch-button]',
+        exportAs: 'smart-switch-button', selector: 'smart-switch-button, [smart-switch-button]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], SwitchButtonComponent);

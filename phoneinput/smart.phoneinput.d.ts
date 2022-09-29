@@ -29,7 +29,7 @@ export declare class PhoneInputComponent extends BaseElement implements OnInit, 
     /** @description Sets additional class names to the Input drop down. */
     dropDownClassList: any;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
     dropDownHeight: string | number;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */

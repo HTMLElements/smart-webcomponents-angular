@@ -691,6 +691,17 @@ var ComboBoxComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(ComboBoxComponent.prototype, "maxLength", {
+        /** @description Determines the maximum number of characters inside the input. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.maxLength : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.maxLength = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ComboBoxComponent.prototype, "name", {
         /** @description Sets or gets the name attribute for the element. Name is used when submiting HTML forms. */
         get: function () {
@@ -1462,6 +1473,9 @@ var ComboBoxComponent = /** @class */ (function (_super) {
     ], ComboBoxComponent.prototype, "minLength", null);
     __decorate([
         Input()
+    ], ComboBoxComponent.prototype, "maxLength", null);
+    __decorate([
+        Input()
     ], ComboBoxComponent.prototype, "name", null);
     __decorate([
         Input()
@@ -1555,7 +1569,7 @@ var ComboBoxComponent = /** @class */ (function (_super) {
     ], ComboBoxComponent.prototype, "onTokenClick", void 0);
     ComboBoxComponent = __decorate([
         Directive({
-            selector: 'smart-combo-box, [smart-combo-box]',
+            exportAs: 'smart-combo-box', selector: 'smart-combo-box, [smart-combo-box]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], ComboBoxComponent);
@@ -1765,7 +1779,7 @@ var ListItemComponent = /** @class */ (function (_super) {
     ], ListItemComponent.prototype, "readonly", null);
     ListItemComponent = __decorate([
         Directive({
-            selector: 'smart-list-item, [smart-list-item]'
+            exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
         })
     ], ListItemComponent);
     return ListItemComponent;
@@ -1834,7 +1848,7 @@ var ListItemsGroupComponent = /** @class */ (function (_super) {
     ], ListItemsGroupComponent.prototype, "label", null);
     ListItemsGroupComponent = __decorate([
         Directive({
-            selector: 'smart-list-items-group, [smart-list-items-group]'
+            exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
         })
     ], ListItemsGroupComponent);
     return ListItemsGroupComponent;

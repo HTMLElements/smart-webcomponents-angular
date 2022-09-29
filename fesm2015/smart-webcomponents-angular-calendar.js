@@ -905,7 +905,7 @@ __decorate([
 ], CalendarComponent.prototype, "onClose", void 0);
 CalendarComponent = __decorate([
     Directive({
-        selector: 'smart-calendar, [smart-calendar]',
+        exportAs: 'smart-calendar', selector: 'smart-calendar, [smart-calendar]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], CalendarComponent);

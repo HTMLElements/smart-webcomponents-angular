@@ -22,9 +22,9 @@ export declare class TabLayoutGroupComponent extends BaseElement implements OnIn
     /** @description Determines the label of the item. */
     label: string;
     /** @description Determines the group orientation. */
-    orientation: TabLayoutGroupOrientation;
+    orientation: TabLayoutGroupOrientation | string;
     /** @description Determines the position of the tab items group. */
-    position: TabLayoutGroupPosition;
+    position: TabLayoutGroupPosition | string;
     /** @description Determines the size of the item. */
     size: any;
     /** @description If is set to true, the element cannot be focused. */

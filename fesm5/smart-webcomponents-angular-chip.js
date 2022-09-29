@@ -400,7 +400,7 @@ var ChipComponent = /** @class */ (function (_super) {
     ], ChipComponent.prototype, "onClose", void 0);
     ChipComponent = __decorate([
         Directive({
-            selector: 'smart-chip, [smart-chip]'
+            exportAs: 'smart-chip', selector: 'smart-chip, [smart-chip]'
         })
     ], ChipComponent);
     return ChipComponent;

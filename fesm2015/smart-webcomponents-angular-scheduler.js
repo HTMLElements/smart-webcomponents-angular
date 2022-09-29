@@ -366,6 +366,13 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     set autoScrollStep(value) {
         this.nativeElement ? this.nativeElement.autoScrollStep = value : undefined;
     }
+    /** @description Determines whether the all day cells in Day and Week views automatically change their height depending on the events count in these cells.  */
+    get autoHeightAllDayCells() {
+        return this.nativeElement ? this.nativeElement.autoHeightAllDayCells : undefined;
+    }
+    set autoHeightAllDayCells(value) {
+        this.nativeElement ? this.nativeElement.autoHeightAllDayCells = value : undefined;
+    }
     /** @description Determines the color scheme for the event background selector in the event window editor.  */
     get colorScheme() {
         return this.nativeElement ? this.nativeElement.colorScheme : undefined;
@@ -1017,6 +1024,13 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     set viewSelectorType(value) {
         this.nativeElement ? this.nativeElement.viewSelectorType = value : undefined;
     }
+    /** @description Determines the Start Date rule. The Week and TimelineWeek views start by default from the current date taking into account the firstDayOfWeek property. When this property is set to 'dateCurrent', these views will start from the value of the 'dateCurrent'. */
+    get viewStartDay() {
+        return this.nativeElement ? this.nativeElement.viewStartDay : undefined;
+    }
+    set viewStartDay(value) {
+        this.nativeElement ? this.nativeElement.viewStartDay = value : undefined;
+    }
     /** @description Determines the format of the week days inside the element.  */
     get weekdayFormat() {
         return this.nativeElement ? this.nativeElement.weekdayFormat : undefined;
@@ -1065,6 +1079,24 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
             });
         }
     }
+    /** @description Adds a new view. Example: scheduler.addView('week', 'My View', 'myView', false, false, 10); scheduler.setView('myView');
+    * @param {string} type. The view type.
+    * @param {string} label. The view's label displayed in the header.
+    * @param {string} value. The view's value used to identify the view.
+    * @param {boolean} hideWeekend. Determines whether to hide the weekend.
+    * @param {boolean} hideNonworkingWeekdays. Determines whether to hide the non working days.
+    * @param {number} additionalDays. Determines whether to add additional days to the view.
+    */
+    addView(type, label, value, hideWeekend, hideNonworkingWeekdays, additionalDays) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.addView(type, label, value, hideWeekend, hideNonworkingWeekdays, additionalDays);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.addView(type, label, value, hideWeekend, hideNonworkingWeekdays, additionalDays);
+            });
+        }
+    }
     /** @description Starts an update operation. This is appropriate when calling multiple methods or set multiple properties at once.
     */
     beginUpdate() {
@@ -1105,6 +1137,23 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
                 this.nativeElement.endUpdate();
             });
         }
+    }
+    /** @description Returns an array of the start and end view dates.
+    * @returns {Date[]}
+  */
+    getViewDates() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.getViewDates();
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
     }
     /** @description Refereshes the Scheduler by recalculating the Scrollbars.
     * @param {boolean} fullRefresh?. If set the Scheduler will be re-rendered completely.
@@ -1257,6 +1306,19 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
         else {
             this.nativeElement.whenRendered(() => {
                 this.nativeElement.saveState(state);
+            });
+        }
+    }
+    /** @description Sets the Scheduler's view. Example: scheduler.addView('week', 'My View', 'myView', false, false, 10); scheduler.setView('myView');
+    * @param {string} view?. The view's value. For example: 'day'.
+    */
+    setView(view) {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.setView(view);
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.setView(view);
             });
         }
     }
@@ -1947,6 +2009,9 @@ __decorate([
 ], SchedulerComponent.prototype, "autoScrollStep", null);
 __decorate([
     Input()
+], SchedulerComponent.prototype, "autoHeightAllDayCells", null);
+__decorate([
+    Input()
 ], SchedulerComponent.prototype, "colorScheme", null);
 __decorate([
     Input()
@@ -2226,6 +2291,9 @@ __decorate([
 ], SchedulerComponent.prototype, "viewSelectorType", null);
 __decorate([
     Input()
+], SchedulerComponent.prototype, "viewStartDay", null);
+__decorate([
+    Input()
 ], SchedulerComponent.prototype, "weekdayFormat", null);
 __decorate([
     Input()
@@ -2349,7 +2417,7 @@ __decorate([
 ], SchedulerComponent.prototype, "onNotificationClose", void 0);
 SchedulerComponent = __decorate([
     Directive({
-        selector: 'smart-scheduler, [smart-scheduler]'
+        exportAs: 'smart-scheduler', selector: 'smart-scheduler, [smart-scheduler]'
     })
 ], SchedulerComponent);
 

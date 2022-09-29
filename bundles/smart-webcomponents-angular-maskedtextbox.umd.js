@@ -1031,7 +1031,7 @@ import './../source/modules/smart.textbox';
         ], MaskedTextBoxComponent.prototype, "onValidation", void 0);
         MaskedTextBoxComponent = __decorate([
             core.Directive({
-                selector: 'smart-masked-text-box, [smart-masked-text-box]',
+                exportAs: 'smart-masked-text-box', selector: 'smart-masked-text-box, [smart-masked-text-box]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], MaskedTextBoxComponent);

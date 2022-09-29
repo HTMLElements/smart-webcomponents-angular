@@ -974,7 +974,7 @@ import './../source/modules/smart.path';
         ], PathComponent.prototype, "onOpening", void 0);
         PathComponent = __decorate([
             core.Directive({
-                selector: 'smart-path, [smart-path]'
+                exportAs: 'smart-path', selector: 'smart-path, [smart-path]'
             })
         ], PathComponent);
         return PathComponent;

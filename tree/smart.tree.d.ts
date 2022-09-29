@@ -18,7 +18,7 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     /** @description Allows drop operation. Dropped items could originate from the current tree or another tree. */
     allowDrop: boolean;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Automatically hides the tree's toggle element (arrow) on mouseleave and shows it on mouseenter. */
     autoHideToggleElement: boolean;
     /** @description Enables or disables auto load state from the browser's localStorage. Information about filtering, sorting, expanded and selected items is loaded. */
@@ -42,15 +42,17 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     /** @description Enables or disables item's editting. An edit operation can be initiated by double-clicking a tree item or pressing F2 while an item is selected. */
     editable: boolean;
     /** @description Determines the expand behavior of TreeItemsGroups in the Tree. */
-    expandMode: TreeExpandMode;
+    expandMode: TreeExpandMode | string;
     /** @description Enables or disables filtering. Shows or hides filter input. */
     filterable: boolean;
+    /** @description Applies a filter only after the 'Enter' key is pressed. */
+    filterOnEnter: boolean;
     /** @description Sets custom text for placeholder in the filter input. */
     filterInputPlaceholder: string;
     /** @description Determines the TreeItem property that will be used as a filtering criteria. By default the label property is used. It can be set to 'value' if the user wants to filter by the value property or 'textContent' if the user wants to filter by text inside the TreeItem's content or any other property. */
     filterMember: string;
     /** @description Sets filter mode. */
-    filterMode: FilterMode;
+    filterMode: FilterMode | string;
     /** @description Sets or gets whether the tree checkboxes have three states - checked, unchecked and indeterminate. Whorks on selectionMode: 'checkBox' */
     hasThreeStates: boolean;
     /** @description Determines the field in the data source that corresponds to an item group's subitems collection. */
@@ -58,7 +60,7 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets custom text for placeholder in the loading indicator if loadingIndicatorPosition is set to 'top' or 'bottom'. */
     loadingIndicatorPlaceholder: string;
     /** @description Sets the position of the loading indicator. */
-    loadingIndicatorPosition: VerticalAlignment;
+    loadingIndicatorPosition: VerticalAlignment | string;
     /** @description Sets or gets the locale. Used in conjunction with the property messages. */
     locale: string;
     /** @description Callback, related to localization module.  */
@@ -66,21 +68,21 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale. */
     messages: any;
     /** @description Specifies what should happen with the scrollbar (or scroll buttons in scrollMode: 'scrollButtons') if content overflows the element's box. */
-    overflow: Overflow;
+    overflow: Overflow | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Determines whether the right-to-left support is enabled. */
     rightToLeft: boolean;
     /** @description Determines whether to use scrollbar or scrollButtons when content overflows an element's box. */
-    scrollMode: TreeScrollMode;
+    scrollMode: TreeScrollMode | string;
     /** @description An array with indexes (paths) of the selected items. */
     selectedIndexes: string[];
     /** @description Determines the way selected items are highlighted. */
-    selectionDisplayMode: TreeSelectionDisplayMode;
+    selectionDisplayMode: TreeSelectionDisplayMode | string;
     /** @description Determines selection mode. */
-    selectionMode: TreeSelectionMode;
+    selectionMode: TreeSelectionMode | string;
     /** @description Determines whether smart-tree-items-groups can be selected. */
-    selectionTarget: TreeSelectionTarget;
+    selectionTarget: TreeSelectionTarget | string;
     /** @description Shows or hides lines, displaying the relation between elements in group. */
     showLines: boolean;
     /** @description Shows or hides lines starting from the root node. Enabled when 'showLines' is set to true. */
@@ -88,15 +90,15 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets user-defined function about custom sorting. */
     sort: any;
     /** @description Determines sort direction - ascending or descending. */
-    sortDirection: TreeSortDirection;
+    sortDirection: TreeSortDirection | string;
     /** @description Enables or disables sorting. */
     sorted: boolean;
     /** @description Sets or gets the element's visual theme. */
     theme: string;
     /** @description Determines togle element (arrow) position. */
-    toggleElementPosition: Position;
+    toggleElementPosition: Position | string;
     /** @description Determines the way to toggle smart-tree-items-groups. */
-    toggleMode: TreeToggleMode;
+    toggleMode: TreeToggleMode | string;
     /** @description Sets or gets if the element can be focused. */
     unfocusable: boolean;
     /** @description Determines the field in the data source that corresponds to an item's value. */
@@ -234,6 +236,10 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     * @returns {HTMLElement}
   */
     getItem(id: any): Promise<any>;
+    /** @description Gets the selected values. If value is not defined, returns the selected labels.
+    * @returns {string[]}
+  */
+    getSelectedValues(): Promise<any>;
     /** @description Returns SmartTree's state
     * @returns {any}
   */
@@ -263,14 +269,22 @@ export declare class TreeComponent extends BaseElement implements OnInit, AfterV
     * @returns {any}
   */
     saveState(): Promise<any>;
-    /** @description Selects an item.
+    /** @description Selects an item by its index or by HTMLElement id.
     * @param {HTMLElement | string} item. The smart-tree-item/smart-tree-items-group (or its id or numeric path) to remove.
     */
     select(item: HTMLElement | string): void;
-    /** @description Unselects an item.
+    /** @description Selects an item or items by values.
+    * @param {string | string[]} items. The smart-tree-item/smart-tree-items-group values or labels, if values are not defined.
+    */
+    setSelectedValues(items: string | string[]): void;
+    /** @description Unselects an item by its index or by HTMLElement id.
     * @param {HTMLElement | string} item. The smart-tree-item/smart-tree-items-group (or its id or numeric path) to remove.
     */
     unselect(item: HTMLElement | string): void;
+    /** @description Unselects an item or items by values.
+    * @param {string | string[]} items. The smart-tree-item/smart-tree-items-group values or labels, if values are not defined.
+    */
+    unselectValues(items: string | string[]): void;
     /** @description Updates an item.
     * @param {HTMLElement | string} item. smart-tree-item/smart-tree-items-group (or its id or numeric path).
     * @param {any} newItem. An object with updated properties.

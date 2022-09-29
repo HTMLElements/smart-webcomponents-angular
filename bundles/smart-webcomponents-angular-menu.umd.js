@@ -1174,7 +1174,7 @@ import './../source/modules/smart.menu';
         ], MenuComponent.prototype, "onOpening", void 0);
         MenuComponent = __decorate([
             core.Directive({
-                selector: 'smart-menu, [smart-menu]'
+                exportAs: 'smart-menu', selector: 'smart-menu, [smart-menu]'
             })
         ], MenuComponent);
         return MenuComponent;
@@ -1327,7 +1327,7 @@ import './../source/modules/smart.menu';
         ], MenuItemComponent.prototype, "value", null);
         MenuItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-menu-item, [smart-menu-item]'
+                exportAs: 'smart-menu-item', selector: 'smart-menu-item, [smart-menu-item]'
             })
         ], MenuItemComponent);
         return MenuItemComponent;
@@ -1522,7 +1522,7 @@ import './../source/modules/smart.menu';
         ], MenuItemsGroupComponent.prototype, "value", null);
         MenuItemsGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-menu-items-group, [smart-menu-items-group]'
+                exportAs: 'smart-menu-items-group', selector: 'smart-menu-items-group, [smart-menu-items-group]'
             })
         ], MenuItemsGroupComponent);
         return MenuItemsGroupComponent;

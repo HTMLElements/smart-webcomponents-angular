@@ -14,9 +14,9 @@ export declare class GroupPanelComponent extends BaseElement implements OnInit, 
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the the position of the close button of group panel items. */
-    closeButtonPosition: GroupPanelCloseButtonPosition;
+    closeButtonPosition: GroupPanelCloseButtonPosition | string;
     /** @description Determines the data source that will be loaded to the group panel.Each member of the dataSource array is an object with the following fields:dataField - the dataField of the column to be grouped.dataType - the data type of the column to be grouped.groupIndex - the group order of columns. If this value is -1, the grouping will not be applied by this column initially.label - the column label to be displayed in the column selection input.icon - a specific class to be applied to the respective item in the column selection input.sortDirection - the sort direction to be applied when grouping. Possible values: 'ascending' and 'descending'. */
     dataSource: {
         label: string;

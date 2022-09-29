@@ -741,7 +741,7 @@ var MultiInputComponent = /** @class */ (function (_super) {
     ], MultiInputComponent.prototype, "onChange", void 0);
     MultiInputComponent = __decorate([
         Directive({
-            selector: 'smart-multi-input, [smart-multi-input]',
+            exportAs: 'smart-multi-input', selector: 'smart-multi-input, [smart-multi-input]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], MultiInputComponent);

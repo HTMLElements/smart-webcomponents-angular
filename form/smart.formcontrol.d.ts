@@ -14,15 +14,15 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
      */
     createComponent(properties?: {}): any;
     /** @description Gets or Sets the FormControl Action. This property is used when the 'controlType' is 'button' or 'submit' */
-    action: FormControlAction;
+    action: FormControlAction | string;
     /** @description Sets or Gets the alignment of the FormControl */
-    align: FormControlAlign;
+    align: FormControlAlign | string;
     /** @description HTML Content displayed after the Form Control */
     appendHTML: any;
     /** @description JSON object with initialization properties of the UI component. Example: { dataSource: ['item 1', 'item 2', 'item 3'] } will set the dataSource property of the Form control. */
     controlOptions: any;
     /** @description The type of the control. */
-    controlType: FormControlControlType;
+    controlType: FormControlControlType | string;
     /** @description Sets the Form Group columns. */
     columns: number;
     /** @description Sets the Form control column span. */
@@ -40,11 +40,11 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
     /** @description Gets or Sets the Form control's label. */
     label: string;
     /** @description Gets or Sets the Form control's label position. */
-    labelPosition: FormControlLabelPosition;
+    labelPosition: FormControlLabelPosition | string;
     /** @description Gets or Sets the offset between the label and the control. */
     labelOffset: number;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets whether the navigation buttons are displayed. The property has effect when the viewMode property is set. */
-    labelAlign: FormControlAlign;
+    labelAlign: FormControlAlign | string;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets the next button label. */
     nextButtonLabel: string;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets the back button label. */
@@ -70,7 +70,7 @@ export declare class FormControlComponent extends BaseElement implements OnInit,
     /** @description Sets or gets the column's validation rules. The expected value is an Array of Objects. Each object should have a 'type' property that can be set to 'required', 'min', 'max', 'minLength', 'maxLength', 'email', 'null', 'requiredTrue', 'minData', 'maxDate', 'pattern'. The 'value' property should be set, too. For validation rule types 'required', 'requiredTrue' and 'null' you can skip the 'value' property. Optional property is 'message', which determines the error message. */
     validationRules: [] | null;
     /** @description FormGroup only(when controlType is set to 'group'). Gets or Sets the form'group view mode. */
-    viewMode: FormControlViewMode;
+    viewMode: FormControlViewMode | string;
     readonly isRendered: boolean;
     ngOnInit(): void;
     ngAfterViewInit(): void;

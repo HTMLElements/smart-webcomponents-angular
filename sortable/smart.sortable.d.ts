@@ -14,15 +14,15 @@ export declare class SortableComponent extends BaseElement implements OnInit, Af
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Enables or disables sorting. */
     disabled: boolean;
     /** @description Sets or gets the way a sortable item can be dragged - by dragging the item itself ('item') or by dragging a handle that appears next to the item ('handle'). */
-    dragMode: SortableDragMode;
+    dragMode: SortableDragMode | string;
     /** @description Sets or gets the the position of the drag handle relative to its respective sortable item. Applicable only when dragMode is 'handle'. */
-    handlePosition: SortableHandlePosition;
+    handlePosition: SortableHandlePosition | string;
     /** @description Sets or gets whether a sortable item's drag handle is always visible or is shown when the item is hovered. Applicable only when dragMode is 'handle'. */
-    handleVisibility: SortableHandleVisibility;
+    handleVisibility: SortableHandleVisibility | string;
     /** @description Sets or gets a selector to determine the sortable items by. By default, sortable items are all children of the smart-sortable custom element. */
     items: string | null;
     /** @description Sets or gets the language. Used in conjunction with the property messages. */
@@ -32,7 +32,7 @@ export declare class SortableComponent extends BaseElement implements OnInit, Af
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Sets or gets the direction sortable items are stacked and can be dragged. */
-    mode: Orientation;
+    mode: Orientation | string;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description This event is triggered when sortable items have been reordered.

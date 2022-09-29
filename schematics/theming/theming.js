@@ -19,7 +19,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addTypographyClass = exports.addThemeToAppStyles = void 0;
 const core_1 = require("@angular-devkit/core");
 const schematics_1 = require("@angular-devkit/schematics");
-const schematics_2 = require("@angular/cdk/schematics");
+const schematics_2 = require("../cdk/schematics");
 const change_1 = require("@schematics/angular/utility/change");
 const workspace_1 = require("@schematics/angular/utility/workspace");
 const path_1 = require("path");

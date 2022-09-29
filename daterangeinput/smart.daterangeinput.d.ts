@@ -25,13 +25,13 @@ export declare class DateRangeInputComponent extends BaseElement implements OnIn
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. By default the date format is determined by the 'locale' property. Intl.DateTimeFormat is used to format date strings in JavaScript */
     dateFormat: DateRangeFormat;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
     dropDownHeight: string | number;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */
@@ -75,7 +75,7 @@ export declare class DateRangeInputComponent extends BaseElement implements OnIn
     /** @description Sets or gets the value of the element. The type of the value depends on the valueType property. */
     value: any;
     /** @description Determines the value type returned from the `value` property. */
-    valueType: DateRangeInputValueType;
+    valueType: DateRangeInputValueType | string;
     /** @description This event is triggered when the selection is changed.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	label, 	oldLabel, 	oldValue, 	value)
     *   label - The label of the new selected item.

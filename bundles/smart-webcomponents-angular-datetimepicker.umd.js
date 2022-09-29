@@ -638,7 +638,7 @@ import './../source/modules/smart.datetimepicker';
             configurable: true
         });
         Object.defineProperty(DateTimePickerComponent.prototype, "formatString", {
-            /** @description Determines the pattern that is used to display the value in. */
+            /** @description Determines the pattern that is used to display the value in. Built-in Date formats:// short date pattern'd' - 'M/d/yyyy',// long date pattern'D' - 'dddd, MMMM dd, yyyy',// short time pattern't' - 'h:mm tt',// long time pattern'T' - 'h:mm:ss tt',// long date, short time pattern'f' - 'dddd, MMMM dd, yyyy h:mm tt',// long date, long time pattern'F' - 'dddd, MMMM dd, yyyy h:mm:ss tt',// month/day pattern'M' - 'MMMM dd',// month/year pattern'Y' - 'yyyy MMMM',// S is a sortable format that does not vary by culture'S' - 'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Date format strings:'d'-the day of the month;'dd'-the day of the month'ddd'-the abbreviated name of the day of the week'dddd'- the full name of the day of the week'h'-the hour, using a 12-hour clock from 1 to 12'hh'-the hour, using a 12-hour clock from 01 to 12'H'-the hour, using a 24-hour clock from 0 to 23'HH'- the hour, using a 24-hour clock from 00 to 23'm'-the minute, from 0 through 59'mm'-the minutes,from 00 though59'M'- the month, from 1 through 12'MM'- the month, from 01 through 12'MMM'-the abbreviated name of the month'MMMM'-the full name of the month's'-the second, from 0 through 59'ss'-the second, from 00 through 59't'- the first character of the AM/PM designator'tt'-the AM/PM designator'y'- the year, from 0 to 99'yy'- the year, from 00 to 99'yyy'-the year, with a minimum of three digits'yyyy'-the year as a four-digit number;'yyyyy'-the year as a four-digit number. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.formatString : undefined;
             },
@@ -1096,6 +1096,46 @@ import './../source/modules/smart.datetimepicker';
                 });
             }
         };
+        /** @description Gets a Date object.
+        * @returns {Date}
+      */
+        DateTimePickerComponent.prototype.getDate = function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var getResultOnRender, result;
+                var _this = this;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            getResultOnRender = function () {
+                                return new Promise(function (resolve) {
+                                    _this.nativeElement.whenRendered(function () {
+                                        var result = _this.nativeElement.getDate();
+                                        resolve(result);
+                                    });
+                                });
+                            };
+                            return [4 /*yield*/, getResultOnRender()];
+                        case 1:
+                            result = _a.sent();
+                            return [2 /*return*/, result];
+                    }
+                });
+            });
+        };
+        /** @description Sets the date of the DateTimePicker.
+        * @param {Date} date. The date object to be set.
+        */
+        DateTimePickerComponent.prototype.setDate = function (date) {
+            var _this = this;
+            if (this.nativeElement.isRendered) {
+                this.nativeElement.setDate(date);
+            }
+            else {
+                this.nativeElement.whenRendered(function () {
+                    _this.nativeElement.setDate(date);
+                });
+            }
+        };
         Object.defineProperty(DateTimePickerComponent.prototype, "isRendered", {
             get: function () {
                 return this.nativeElement ? this.nativeElement.isRendered : false;
@@ -1412,7 +1452,7 @@ import './../source/modules/smart.datetimepicker';
         ], DateTimePickerComponent.prototype, "onOpening", void 0);
         DateTimePickerComponent = __decorate([
             core.Directive({
-                selector: 'smart-date-time-picker, [smart-date-time-picker]',
+                exportAs: 'smart-date-time-picker', selector: 'smart-date-time-picker, [smart-date-time-picker]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], DateTimePickerComponent);

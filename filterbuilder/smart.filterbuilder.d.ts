@@ -14,7 +14,7 @@ export declare class FilterBuilderComponent extends BaseElement implements OnIni
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Adds more operations, that can be used in the filter bilder's conditions structure. */
     customOperations: {
         name: string;

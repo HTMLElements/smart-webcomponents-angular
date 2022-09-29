@@ -14,7 +14,7 @@ export declare class PathComponent extends BaseElement implements OnInit, AfterV
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the data source for the item that will be displayed inside the drop down. */
     dataSource: any;
     /** @description Enables or disables the element. */
@@ -36,7 +36,7 @@ export declare class PathComponent extends BaseElement implements OnInit, AfterV
     /** @description If this property is enabled, when the element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */
     dropDownOverlay: boolean;
     /** @description Determines the vertical position of the dropDown. 'Auto' means its automatically determined depending on the viewport size. */
-    dropDownPosition: DropDownPosition;
+    dropDownPosition: DropDownPosition | string;
     /** @description Sets the width of the drop down. Default value of empty string means that CSS variables are used. This property should be used when the browser doesn't support CSS variables. */
     dropDownWidth: string | number;
     /** @description Sets additional helper text below the element.  */
@@ -58,7 +58,7 @@ export declare class PathComponent extends BaseElement implements OnInit, AfterV
     /** @description Determines the element's placeholder. */
     placeholder: string;
     /** @description Determines the format of the path. Follows specific operation system criteria by changing the drive,folder separators.  */
-    pathFormat: PathFormat;
+    pathFormat: PathFormat | string;
     /** @description Disables user interaction with the element. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */

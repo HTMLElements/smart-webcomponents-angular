@@ -33,7 +33,7 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     /** @description Sets additional class names to the Input drop down. */
     dropDownClassList: any;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
     dropDownHeight: string | number;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */
@@ -59,7 +59,7 @@ export declare class InputComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied. */
     query: string | number;
     /** @description Determines the auto complete query mode. This property also determines the matching algorithm for the autocomplete operation. */
-    queryMode: InputQueryMode;
+    queryMode: InputQueryMode | string;
     /** @description Determines whether ot not the user can enter text inside the input. if dropDownButtonPosition is set to 'left' or 'right' then readonly determines whether the element acts as a ComboBox or a DropDownList if a dataSource is provided. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */

@@ -1,8 +1,8 @@
 import { DateInput } from './../index';
-import { Animation, DropDownButtonPosition, DateTimeFormat } from './../index';
+import { DropDownButtonPosition } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, DateTimeFormatDay, DateTimeFormatMonth, DateTimeFormatYear, DropDownButtonPosition, DateTimeFormat, ElementRenderMode } from './../index';
+export { DropDownButtonPosition, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { DateInput } from './../index';
 import { ControlValueAccessor } from '@angular/forms';
@@ -24,22 +24,22 @@ export declare class DateInputComponent extends BaseElement implements OnInit, A
     * The registered callback function called when a blur event occurs on the form elements.
     */
     _onTouched: () => any;
-    /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
     /** @description Determines whether the calendar button pop-up will be closed automatically when date or time is selected through it. */
     autoClose: boolean;
     /** @description Determines the delay before the calendar pop-up is automatically closed. Applicable only when autoClose is set to true. */
     autoCloseDelay: number;
     /** @description Determines the format of the dates displayed in the input. Accepts valid ECMAScript Internationalization API format. Intl.DateTimeFormat is used to format date strings in JavaScript. By default the date format is 'numeric'. The default value is: { day: 'numeric', month: 'numeric', year: 'numeric' } */
-    dateTimeFormat: DateTimeFormat;
+    dateTimeFormat: any;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to 'auto'. */
     dropDownHeight: string | number;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */
     dropDownWidth: string | number;
+    /** @description Sets the format string. When this property is set, the dateTimeFormat property will be disabled and the formatting will use the value of the formatString. Built-in Date formats:// short date pattern'd' - 'M/d/yyyy',// long date pattern'D' - 'dddd, MMMM dd, yyyy',// short time pattern't' - 'h:mm tt',// long time pattern'T' - 'h:mm:ss tt',// long date, short time pattern'f' - 'dddd, MMMM dd, yyyy h:mm tt',// long date, long time pattern'F' - 'dddd, MMMM dd, yyyy h:mm:ss tt',// month/day pattern'M' - 'MMMM dd',// month/year pattern'Y' - 'yyyy MMMM',// S is a sortable format that does not vary by culture'S' - 'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Date format strings:'d'-the day of the month;'dd'-the day of the month'ddd'-the abbreviated name of the day of the week'dddd'- the full name of the day of the week'h'-the hour, using a 12-hour clock from 1 to 12'hh'-the hour, using a 12-hour clock from 01 to 12'H'-the hour, using a 24-hour clock from 0 to 23'HH'- the hour, using a 24-hour clock from 00 to 23'm'-the minute, from 0 through 59'mm'-the minutes,from 00 though59'M'- the month, from 1 through 12'MM'- the month, from 01 through 12'MMM'-the abbreviated name of the month'MMMM'-the full name of the month's'-the second, from 0 through 59'ss'-the second, from 00 through 59't'- the first character of the AM/PM designator'tt'-the AM/PM designator'y'- the year, from 0 to 99'yy'- the year, from 00 to 99'yyy'-the year, with a minimum of three digits'yyyy'-the year as a four-digit number;'yyyyy'-the year as a four-digit number. */
+    formatString: string;
     /** @description Sets the purpose of the input and what, if any, permission the user agent has to provide automated assistance in filling out the element's input when in a form, as well as guidance to the browser as to the type of information expected in the element. This value corresponds to the standard HTML autocomplete attribute and can be set to values such as 'on', 'name', 'organization', 'street-address', etc. */
     inputPurpose: string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */

@@ -24,7 +24,7 @@ export declare class BootstrapToggleButtonComponent extends BaseElement implemen
     /** @description Sets or gets the name attribute for the element. Name is used when submiting HTML forms. */
     name: string;
     /** @description Sets or gets the style mode of the element. */
-    styleMode: BootstrapToggleButtonStyleMode;
+    styleMode: BootstrapToggleButtonStyleMode | string;
     /** @description Change event is triggered when the value of the element is changed.
     *  @param event. The custom event. 	*/
     onChange: EventEmitter<CustomEvent>;

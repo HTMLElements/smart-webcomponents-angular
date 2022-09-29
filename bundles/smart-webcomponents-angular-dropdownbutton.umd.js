@@ -1048,7 +1048,7 @@ import './../source/modules/smart.button';
         ], DropDownButtonComponent.prototype, "onResizeEnd", void 0);
         DropDownButtonComponent = __decorate([
             core.Directive({
-                selector: 'smart-drop-down-button, [smart-drop-down-button]'
+                exportAs: 'smart-drop-down-button', selector: 'smart-drop-down-button, [smart-drop-down-button]'
             })
         ], DropDownButtonComponent);
         return DropDownButtonComponent;

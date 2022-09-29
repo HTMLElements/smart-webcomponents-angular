@@ -918,7 +918,7 @@ var MultiSplitButtonComponent = /** @class */ (function (_super) {
     ], MultiSplitButtonComponent.prototype, "onScrollTopReached", void 0);
     MultiSplitButtonComponent = __decorate([
         Directive({
-            selector: 'smart-multi-split-button, [smart-multi-split-button]'
+            exportAs: 'smart-multi-split-button', selector: 'smart-multi-split-button, [smart-multi-split-button]'
         })
     ], MultiSplitButtonComponent);
     return MultiSplitButtonComponent;
@@ -1127,7 +1127,7 @@ var ListItemComponent = /** @class */ (function (_super) {
     ], ListItemComponent.prototype, "readonly", null);
     ListItemComponent = __decorate([
         Directive({
-            selector: 'smart-list-item, [smart-list-item]'
+            exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
         })
     ], ListItemComponent);
     return ListItemComponent;
@@ -1196,7 +1196,7 @@ var ListItemsGroupComponent = /** @class */ (function (_super) {
     ], ListItemsGroupComponent.prototype, "label", null);
     ListItemsGroupComponent = __decorate([
         Directive({
-            selector: 'smart-list-items-group, [smart-list-items-group]'
+            exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
         })
     ], ListItemsGroupComponent);
     return ListItemsGroupComponent;

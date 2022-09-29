@@ -514,7 +514,7 @@ var CustomizationDialogComponent = /** @class */ (function (_super) {
     ], CustomizationDialogComponent.prototype, "onApply", void 0);
     CustomizationDialogComponent = __decorate([
         Directive({
-            selector: 'smart-customization-dialog, [smart-customization-dialog]'
+            exportAs: 'smart-customization-dialog', selector: 'smart-customization-dialog, [smart-customization-dialog]'
         })
     ], CustomizationDialogComponent);
     return CustomizationDialogComponent;

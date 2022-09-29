@@ -14,7 +14,7 @@ export declare class LayoutComponent extends BaseElement implements OnInit, Afte
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the options that will be available for selection inside the context menu. */
     contextMenuDataSource: any;
     /** @description Enables or disables the element. */
@@ -26,7 +26,7 @@ export declare class LayoutComponent extends BaseElement implements OnInit, Afte
     /** @description Sets an object with string values, related to the different states of passwords strength. */
     messages: any;
     /** @description Sets or gets Layout's main orientation. The orientation is applied to all Splitters inside the Layout unless they have their orientation explicitly set in the dataSource. */
-    orientation: Orientation;
+    orientation: Orientation | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Determines whether splitting is live or not. */

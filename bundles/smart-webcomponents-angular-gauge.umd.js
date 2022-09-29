@@ -1226,7 +1226,7 @@ import './../source/modules/smart.gauge';
         ], GaugeComponent.prototype, "onChange", void 0);
         GaugeComponent = __decorate([
             core.Directive({
-                selector: 'smart-gauge, [smart-gauge]',
+                exportAs: 'smart-gauge', selector: 'smart-gauge, [smart-gauge]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], GaugeComponent);

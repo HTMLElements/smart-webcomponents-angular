@@ -25,13 +25,13 @@ export declare class RadioButtonComponent extends BaseElement implements OnInit,
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the check state. */
     checked: boolean;
     /** @description Sets or gets the part that toggles the element. */
-    checkMode: CheckMode;
+    checkMode: CheckMode | string;
     /** @description Sets the click mode of the radio button. */
-    clickMode: ClickMode;
+    clickMode: ClickMode | string;
     /** @description Enables or disables the ratio button. */
     disabled: boolean;
     /** @description Sets or gets the widget's group name. */

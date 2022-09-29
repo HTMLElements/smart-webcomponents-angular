@@ -977,7 +977,7 @@ var SliderComponent = /** @class */ (function (_super) {
     ], SliderComponent.prototype, "onChange", void 0);
     SliderComponent = __decorate([
         Directive({
-            selector: 'smart-slider, [smart-slider]',
+            exportAs: 'smart-slider', selector: 'smart-slider, [smart-slider]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], SliderComponent);

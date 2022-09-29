@@ -25,7 +25,7 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Used only when dropDownOpenMode is set to 'auto'. Determines the delay before the opened drop down closes if the pointer is not over the element. */
     autoCloseDelay: number;
     /** @description Determines the data source that will be loaded to the DropDownList. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value, group. It can also be a callback that returns an Array of items as previously described. */
@@ -39,7 +39,7 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     /** @description Determines the drop down parent. The expected value is CSS Selector, ID or 'body'. The drop down can be removed from the body of the element and continue to work in another container. This is usefull when one of the parents of the element doesn't allow overflowing, by settings this property to 'body' the drop down will be appended to the DOM and the popup will open/close as usual. dropDownAppendTo can be a string representing the id of an HTML element on the page or a direct reference to that element. Reseting it back to null will take the drop down back to it's original place. */
     dropDownAppendTo: string;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
     dropDownHeight: string | number;
     /** @description Sets the maximum Height of the drop down. By default it's set to an empty string. In this case the maxHeight of the drop down is controlled by a CSS variable. */
@@ -51,13 +51,13 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     /** @description Sets the minimum Width of the drop down. By default it's set to an empty string. In this case the minWidth of the drop down is controlled by a CSS variable. */
     dropDownMinWidth: string | number;
     /** @description Determines how the drop down is going to open. */
-    dropDownOpenMode: DropDownOpenMode;
+    dropDownOpenMode: DropDownOpenMode | string;
     /** @description If this property is enabled, when the element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. The purpose of the overlay is to make sure that clicking anywhere outside the popup will will target the overlay and not the DOM. */
     dropDownOverlay: boolean;
     /** @description Determines the placeholder for the drop down list when it's empty. */
     dropDownPlaceholder: string;
     /** @description Determines the position of the drop down when opened. */
-    dropDownPosition: DropDownPosition;
+    dropDownPosition: DropDownPosition | string;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */
     dropDownWidth: string | number;
     /** @description Determines whether filtering is enabled. */
@@ -65,7 +65,7 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     /** @description Determines the placeholder for the filter input inside the drop down that is only visible when filterable is enabled. */
     filterInputPlaceholder: string;
     /** @description Determines the filtering mode of the drop down list. */
-    filterMode: FilterMode;
+    filterMode: FilterMode | string;
     /** @description If enabled, the items will be grouped by their first letter. Can't be applied if the dataSource already contains groups. */
     grouped: boolean;
     /** @description Determines which attribute from the dataSource object will be used as the group member for the items. If not set, by default 'group' property is used from the source object. groupMember is especially usefull when loading the data from a JSON file as a dataSource for the ListBox and there's a specific property that should be used to group the items. */
@@ -73,17 +73,17 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     /** @description Sets additional helper text below the element. The hint is visible only when the element is focused. */
     hint: string;
     /** @description Determines the visibility of the horizontal Scroll bar inside the drop down. */
-    horizontalScrollBarVisibility: HorizontalScrollBarVisibility;
+    horizontalScrollBarVisibility: HorizontalScrollBarVisibility | string;
     /** @description Represents the property name of a List item. Determines the value of the input when a ListItem is selected. Usefull in cases where the user wants to display for example the value of an item instead of it's label. By default the label is displayed in the input. */
     inputMember: string;
     /** @description IncrementalSearchDelay property specifies the time-interval in milliseconds until the previous search query is cleared. The timer starts when the user stops typing. A new query can be started only when the delay has passed. */
     incrementalSearchDelay: number;
     /** @description Sets ot gets the mode of the incremental search mode. Incremental search is enabled by default. Typing while the drop down is focused starts the incremental search. */
-    incrementalSearchMode: SearchMode;
+    incrementalSearchMode: SearchMode | string;
     /** @description Sets the height for all list items. Used only when virtualization is enabled. */
     itemHeight: number | null;
     /** @description Determines the item width measuring algorithm. */
-    itemMeasureMode: ListItemMeasureMode;
+    itemMeasureMode: ListItemMeasureMode | string;
     /** @description A getter that returns an array of all List items inside the drop down. */
     items: any;
     /** @description The itemTemplate property is a string that represents the id of an HTMLTemplateElement in the DOM or it's direct reference. It's used to set a customize the content of the list items. */
@@ -93,7 +93,7 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     /** @description Determines the text that will be displayed next to the loading indicator when the loader is visible and it's position is top or bottom. */
     loadingIndicatorPlaceholder: string;
     /** @description Determines the position of the loading indicator. */
-    loadingIndicatorPosition: VerticalAlignment;
+    loadingIndicatorPosition: VerticalAlignment | string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback used to customize the format of the messages that are returned from the Localization Module. */
@@ -113,15 +113,15 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     /** @description Determines whether the resize indicator in the bottom right corner of the drop down is visible or not. This property is used in conjunction with resizeMode. */
     resizeIndicator: boolean;
     /** @description Determines whether the dropDown can be resized or not. When resizing is enabled, a resize bar appears on the top/bottom side of the drop down. */
-    resizeMode: ResizeMode;
+    resizeMode: ResizeMode | string;
     /** @description Determines what will be displayed in the dropDown selection field. */
-    selectionDisplayMode: SelectionDisplayMode;
+    selectionDisplayMode: SelectionDisplayMode | string;
     /** @description Sets or gets the selected indexes. Selected indexes represents an array of the indexes of the items that should be selected. */
     selectedIndexes: number[];
     /** @description Sets or gets elected indexes. Selected values represents the values of the items that should be selected. */
     selectedValues: string[];
     /** @description Determines how many items can be selected. */
-    selectionMode: ListSelectionMode;
+    selectionMode: ListSelectionMode | string;
     /** @description Determines whether the items are sorted alphabetically or not */
     sorted: boolean;
     /** @description Determines sorting direction - ascending(asc) or descending(desc) */
@@ -137,7 +137,7 @@ export declare class DropDownListComponent extends BaseElement implements OnInit
     /** @description Determines the value member of an item. Stored as value in the item object. Similar to groupMember, valueMember is especially usefull when using data from a JSON file as a dataSource for the ListBox and there's a specific property that should be used for the value the items. */
     valueMember: string;
     /** @description Determines the visibility of the vertical scroll bar. */
-    verticalScrollBarVisibility: VerticalScrollBarVisibility;
+    verticalScrollBarVisibility: VerticalScrollBarVisibility | string;
     /** @description Determines weather or not Virtualization is used. Virtualization allows a huge amount of items to be loaded to the drop down while preserving the performance. For example a milion items can be loaded. */
     virtualized: boolean;
     /** @description This event is triggered when user clicks on the action button. The action button is only visible when dropDownOpenMode is set to 'dropDownbutton'.

@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.barcode';
+
 import { __decorate, __awaiter } from 'tslib';
 import { EventEmitter, Output, Input, ElementRef, Directive, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -99,14 +108,16 @@ __decorate([
 ], BaseElement.prototype, "theme", null);
 const Smart = window.Smart;
 
-let BarCodeComponent = class BarCodeComponent extends BaseElement {
+let BarcodeComponent = class BarcodeComponent extends BaseElement {
     constructor(ref) {
         super(ref);
         this.eventHandlers = [];
         /** @description This event is triggered when the value of the barcode is invalid.
-        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	invalidCharacters)
-        *   value - the invalid value of the barcode.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	invalidCharacters, 	lengthValidity, 	patternValidity, 	value)
         *   invalidCharacters - An array indicating the invalid characters.
+        *   lengthValidity - A boolean indicating the length validity.
+        *   patternValidity - A boolean indicating the pattern validity.
+        *   value - the invalid value of the barcode.
         */
         this.onInvalid = new EventEmitter();
         this.nativeElement = ref.nativeElement;
@@ -129,18 +140,18 @@ let BarCodeComponent = class BarCodeComponent extends BaseElement {
         this.nativeElement ? this.nativeElement.backgroundColor = value : undefined;
     }
     /** @description Sets whether the barcode label is visible. */
-    get disaplyLabel() {
-        return this.nativeElement ? this.nativeElement.disaplyLabel : undefined;
+    get displayLabel() {
+        return this.nativeElement ? this.nativeElement.displayLabel : undefined;
     }
-    set disaplyLabel(value) {
-        this.nativeElement ? this.nativeElement.disaplyLabel = value : undefined;
+    set displayLabel(value) {
+        this.nativeElement ? this.nativeElement.displayLabel = value : undefined;
     }
     /** @description Sets the color of the barcode label. */
-    get labelCOlor() {
-        return this.nativeElement ? this.nativeElement.labelCOlor : undefined;
+    get labelColor() {
+        return this.nativeElement ? this.nativeElement.labelColor : undefined;
     }
-    set labelCOlor(value) {
-        this.nativeElement ? this.nativeElement.labelCOlor = value : undefined;
+    set labelColor(value) {
+        this.nativeElement ? this.nativeElement.labelColor = value : undefined;
     }
     /** @description Sets the font family of the barcode label. */
     get labelFont() {
@@ -325,73 +336,73 @@ let BarCodeComponent = class BarCodeComponent extends BaseElement {
         }
     }
 };
-BarCodeComponent.ctorParameters = () => [
+BarcodeComponent.ctorParameters = () => [
     { type: ElementRef }
 ];
 __decorate([
     Input()
-], BarCodeComponent.prototype, "backgroundColor", null);
+], BarcodeComponent.prototype, "backgroundColor", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "disaplyLabel", null);
+], BarcodeComponent.prototype, "displayLabel", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "labelCOlor", null);
+], BarcodeComponent.prototype, "labelColor", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "labelFont", null);
+], BarcodeComponent.prototype, "labelFont", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "labelFontSize", null);
+], BarcodeComponent.prototype, "labelFontSize", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "labelMarginBottom", null);
+], BarcodeComponent.prototype, "labelMarginBottom", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "labelMarginTop", null);
+], BarcodeComponent.prototype, "labelMarginTop", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "labelPosition", null);
+], BarcodeComponent.prototype, "labelPosition", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "lineColor", null);
+], BarcodeComponent.prototype, "lineColor", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "lineHeight", null);
+], BarcodeComponent.prototype, "lineHeight", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "lineWidth", null);
+], BarcodeComponent.prototype, "lineWidth", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "renderAs", null);
+], BarcodeComponent.prototype, "renderAs", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "type", null);
+], BarcodeComponent.prototype, "type", null);
 __decorate([
     Input()
-], BarCodeComponent.prototype, "value", null);
+], BarcodeComponent.prototype, "value", null);
 __decorate([
     Output()
-], BarCodeComponent.prototype, "onInvalid", void 0);
-BarCodeComponent = __decorate([
+], BarcodeComponent.prototype, "onInvalid", void 0);
+BarcodeComponent = __decorate([
     Directive({
-        selector: 'smart-barcode, [smart-barcode]'
+        exportAs: 'smart-barcode', selector: 'smart-barcode, [smart-barcode]'
     })
-], BarCodeComponent);
+], BarcodeComponent);
 
-let BarCodeModule = class BarCodeModule {
+let BarcodeModule = class BarcodeModule {
 };
-BarCodeModule = __decorate([
+BarcodeModule = __decorate([
     NgModule({
-        declarations: [BarCodeComponent],
+        declarations: [BarcodeComponent],
         schemas: [CUSTOM_ELEMENTS_SCHEMA],
-        exports: [BarCodeComponent]
+        exports: [BarcodeComponent]
     })
-], BarCodeModule);
+], BarcodeModule);
 
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { BarCodeComponent, BarCodeModule, Smart, BaseElement as ɵa };
+export { BarcodeComponent, BarcodeModule, Smart, BaseElement as ɵa };
 //# sourceMappingURL=smart-webcomponents-angular-barcode.js.map

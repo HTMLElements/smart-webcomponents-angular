@@ -1095,7 +1095,7 @@ import './../source/modules/smart.listmenu';
         ], ListMenuComponent.prototype, "onSwiperight", void 0);
         ListMenuComponent = __decorate([
             core.Directive({
-                selector: 'smart-list-menu, [smart-list-menu]'
+                exportAs: 'smart-list-menu', selector: 'smart-list-menu, [smart-list-menu]'
             })
         ], ListMenuComponent);
         return ListMenuComponent;
@@ -1248,7 +1248,7 @@ import './../source/modules/smart.listmenu';
         ], MenuItemComponent.prototype, "value", null);
         MenuItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-menu-item, [smart-menu-item]'
+                exportAs: 'smart-menu-item', selector: 'smart-menu-item, [smart-menu-item]'
             })
         ], MenuItemComponent);
         return MenuItemComponent;
@@ -1443,7 +1443,7 @@ import './../source/modules/smart.listmenu';
         ], MenuItemsGroupComponent.prototype, "value", null);
         MenuItemsGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-menu-items-group, [smart-menu-items-group]'
+                exportAs: 'smart-menu-items-group', selector: 'smart-menu-items-group, [smart-menu-items-group]'
             })
         ], MenuItemsGroupComponent);
         return MenuItemsGroupComponent;

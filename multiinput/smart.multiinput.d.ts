@@ -25,7 +25,7 @@ export declare class MultiInputComponent extends BaseElement implements OnInit, 
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the delay before the drop down opens to show the matches from the auto complete operation. The delay is measured in miliseconds. */
     autoCompleteDelay: number;
     /** @description Determines the data source that will be loaded to the MutliInput. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
@@ -33,7 +33,7 @@ export declare class MultiInputComponent extends BaseElement implements OnInit, 
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. By default it's set to an empty string. In this case the height of the drop down is controlled by a CSS variable. */
     dropDownHeight: string | number;
     /** @description Sets the width of the drop down. By default it's set to an empty string. In this case the width of the drop down is controlled by a CSS variable. */
@@ -59,7 +59,7 @@ export declare class MultiInputComponent extends BaseElement implements OnInit, 
     /** @description Sets or gets the query that is used to filter the items. Query is used by the autoComplete operation. Empty string means that all items from the data source will be displayed and no filter query is applied. */
     query: string | number;
     /** @description Determines the auto complete query mode. This property also determines the matching algorithm for the autocomplete operation. */
-    queryMode: MultiInputQueryMode;
+    queryMode: MultiInputQueryMode | string;
     /** @description Determines whether ot not the user can enter text inside the input. if dropDownButtonPosition is set to 'left' or 'right' then readonly determines whether the element acts as a ComboBox or a DropDownList if a dataSource is provided. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */

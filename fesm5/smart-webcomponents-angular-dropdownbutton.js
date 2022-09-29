@@ -826,7 +826,7 @@ var DropDownButtonComponent = /** @class */ (function (_super) {
     ], DropDownButtonComponent.prototype, "onResizeEnd", void 0);
     DropDownButtonComponent = __decorate([
         Directive({
-            selector: 'smart-drop-down-button, [smart-drop-down-button]'
+            exportAs: 'smart-drop-down-button', selector: 'smart-drop-down-button, [smart-drop-down-button]'
         })
     ], DropDownButtonComponent);
     return DropDownButtonComponent;

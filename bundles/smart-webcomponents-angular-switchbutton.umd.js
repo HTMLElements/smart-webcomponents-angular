@@ -810,7 +810,7 @@ import './../source/modules/smart.button';
         ], SwitchButtonComponent.prototype, "onUncheckValue", void 0);
         SwitchButtonComponent = __decorate([
             core.Directive({
-                selector: 'smart-switch-button, [smart-switch-button]',
+                exportAs: 'smart-switch-button', selector: 'smart-switch-button, [smart-switch-button]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], SwitchButtonComponent);

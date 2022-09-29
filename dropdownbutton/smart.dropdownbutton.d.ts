@@ -14,7 +14,7 @@ export declare class DropDownButtonComponent extends BaseElement implements OnIn
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the delay before the opened drop down closes when dropDownOpenMode is set to 'auto'. */
     autoCloseDelay: number;
     /** @description Enables or disables the element. */
@@ -22,7 +22,7 @@ export declare class DropDownButtonComponent extends BaseElement implements OnIn
     /** @description Sets the parent container of the dropDown (the popup). Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. */
     dropDownAppendTo: string;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Sets the height of the drop down. Default value of empty string means that CSS variables are used. This property should be used when the browser doesn't support CSS variables. */
     dropDownHeight: string | number;
     /** @description Sets the max height of the drop down. Default value of empty string means that CSS variables are used. This property should be used when the browser doesn't support CSS variables. */
@@ -34,19 +34,19 @@ export declare class DropDownButtonComponent extends BaseElement implements OnIn
     /** @description Sets the min width of the drop down. Default value of empty string means that CSS variables are used. This property should be used when the browser doesn't support CSS variables. */
     dropDownMinWidth: string | number;
     /** @description Determines how the drop down is going to open. */
-    dropDownOpenMode: DropDownOpenMode;
+    dropDownOpenMode: DropDownOpenMode | string;
     /** @description If this property is enabled, when the element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */
     dropDownOverlay: boolean;
     /** @description Sets a placeholder text to appear when there is no content inside the dropdown. */
     dropDownPlaceholder: string;
     /** @description Determines the vertical position of the dropDown. 'Auto' means its automatically determined depending on the viewport size. */
-    dropDownPosition: DropDownPosition;
+    dropDownPosition: DropDownPosition | string;
     /** @description Sets the width of the drop down. Default value of empty string means that CSS variables are used. This property should be used when the browser doesn't support CSS variables. */
     dropDownWidth: string | number;
     /** @description Sets additional helper text below the element. The hint is visible only when the element is focused. */
     hint: string;
     /** @description Determines the visibility of the horizontal Scroll bar inside the drop down. */
-    horizontalScrollBarVisibility: HorizontalScrollBarVisibility;
+    horizontalScrollBarVisibility: HorizontalScrollBarVisibility | string;
     /** @description Sets a label above the element. The label is always visible. */
     label: string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
@@ -66,7 +66,7 @@ export declare class DropDownButtonComponent extends BaseElement implements OnIn
     /** @description Determines whether the resize indicator in the bottom right corner is visible or not. */
     resizeIndicator: boolean;
     /** @description Determines whether the dropDown can be resized or not. When resizing is enabled, a resize bar appears on the top/bottom side of the drop down. */
-    resizeMode: ResizeMode;
+    resizeMode: ResizeMode | string;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Determines the theme. Theme defines the look of the element */
@@ -74,7 +74,7 @@ export declare class DropDownButtonComponent extends BaseElement implements OnIn
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
     /** @description Determines the visibility of the vertical scroll bar. */
-    verticalScrollBarVisibility: VerticalScrollBarVisibility;
+    verticalScrollBarVisibility: VerticalScrollBarVisibility | string;
     /** @description This event is triggered when user clicks on the action button. The action button is visible when the placeholder is set.
     *  @param event. The custom event. 	*/
     onActionButtonClick: EventEmitter<CustomEvent>;

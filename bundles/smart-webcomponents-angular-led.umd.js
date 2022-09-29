@@ -722,7 +722,7 @@ import './../source/modules/smart.led';
         ], LedComponent.prototype, "onChange", void 0);
         LedComponent = __decorate([
             core.Directive({
-                selector: 'smart-led, [smart-led]'
+                exportAs: 'smart-led', selector: 'smart-led, [smart-led]'
             })
         ], LedComponent);
         return LedComponent;

@@ -14,7 +14,7 @@ export declare class MenuComponent extends BaseElement implements OnInit, AfterV
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines delay (in milliseconds) before a Menu dropdown is closed when leaving the Menu with the mouse. Applicable only when selectionMode is 'mouseenter'. */
     autoCloseDelay: number;
     /** @description If set to true, on mouseenter, the element receives focus automatically. */
@@ -24,9 +24,9 @@ export declare class MenuComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets whether checkboxes and radio buttons can be displayed in the Menu. This property is applicable only to the Menu itself, and not its smart-menu-item/smart-menu-items-group subitems. See also the property checkable. */
     checkboxes: boolean;
     /** @description Sets the check mode of top-level Menu items (immediate children of the Menu). checkMode can be set to 'checkbox', 'radioButton', or a comma-separated list containing 'checkbox', 'radioButton', or 'none' (e.g. 'checkbox, radioButton, none, checkbox'). When set to a list, each value in the list is applied to groups of Menu items separated by an item with separator (item after the one with separator is the start of a new checkMode context). Sublevels are controlled by setting checkMode to the respective smart-menu-items-group. */
-    checkMode: MenuCheckMode;
+    checkMode: MenuCheckMode | string;
     /** @description Sets the document event which closes any open Menu drop downs (or the Menu itself when mode is 'dropDown'). */
-    closeAction: MenuCloseAction;
+    closeAction: MenuCloseAction | string;
     /** @description Determines the data source that will be loaded to the Menu. The data source represents an array of objects with the following properties: label - a string representing the text content of the item.value - the value of the item.shortcut - a string representing a shortuct for the item. It will be displayed inside the item.items - allows to define an array of sub menu items. */
     dataSource: any;
     /** @description Enables or disables element. */
@@ -38,7 +38,7 @@ export declare class MenuComponent extends BaseElement implements OnInit, AfterV
     /** @description If this property is enabled, when an element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */
     dropDownOverlay: boolean;
     /** @description Determines the opening direction of Menu dropdowns. */
-    dropDownPosition: MenuDropDownPosition;
+    dropDownPosition: MenuDropDownPosition | string;
     /** @description A getter that returns an array of all Menu items. */
     items: any;
     /** @description Determines the field in the data source that corresponds to an item group's subitems collection. */
@@ -54,11 +54,11 @@ export declare class MenuComponent extends BaseElement implements OnInit, AfterV
     /** @description Determines the minimum width of the Menu at which it will switch from normal to minimized mode. If set to null, the Menu does not minimize automatically. */
     minimizeWidth: number;
     /** @description Determines the menu's display mode. */
-    mode: MenuMode;
+    mode: MenuMode | string;
     /** @description Opens or closes thte menu when it's in 'dropDown' mode. */
     opened: boolean;
     /** @description Sets or gets the menu's scroll buttons behavior. Applicable only when dropDownAppendTo is not null. */
-    overflow: Overflow;
+    overflow: Overflow | string;
     /** @description If set to true, prevents the closing of the Menu or its dropdowns when Menu items are checked/unchecked. */
     preventCloseOnCheck: boolean;
     /** @description If the element is readonly, users cannot interact with it. */
@@ -66,7 +66,7 @@ export declare class MenuComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Determines the menu's selection mode. */
-    selectionMode: MenuSelectionMode;
+    selectionMode: MenuSelectionMode | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */

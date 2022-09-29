@@ -3043,7 +3043,7 @@ import './../source/modules/smart.ganttchart';
         ], GanttChartComponent.prototype, "onScrollRightReached", void 0);
         GanttChartComponent = __decorate([
             core.Directive({
-                selector: 'smart-gantt-chart, [smart-gantt-chart]'
+                exportAs: 'smart-gantt-chart', selector: 'smart-gantt-chart, [smart-gantt-chart]'
             })
         ], GanttChartComponent);
         return GanttChartComponent;

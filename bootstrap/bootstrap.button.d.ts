@@ -22,7 +22,7 @@ export declare class BootstrapButtonComponent extends BaseElement implements OnI
     /** @description Outlines the button.  */
     outlined: boolean;
     /** @description Sets or gets the style mode of the button. */
-    styleMode: BootstrapButtonStyleMode;
+    styleMode: BootstrapButtonStyleMode | string;
     /** @description Sets or gets the size mode of the element. */
     sizeMode: string;
     /** @description Sets or gets the type of the button. */

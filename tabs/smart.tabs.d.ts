@@ -18,9 +18,9 @@ export declare class TabsComponent extends BaseElement implements OnInit, AfterV
     /** @description Allows toggle. If set to true, **selectedIndex** can be set to null (no selected tab). */
     allowToggle: boolean;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the close button mode. */
-    closeButtonMode: TabsCloseButtonMode;
+    closeButtonMode: TabsCloseButtonMode | string;
     /** @description Sets or gets whether close buttons are displayed. */
     closeButtons: boolean;
     /** @description Sets or gets whether the Tabs content section is collapsed. */
@@ -42,7 +42,7 @@ export declare class TabsComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets the widget's name. */
     name: string;
     /** @description Sets or gets the Tabs scroll buttons behavior. Applicable only when tabLayout is 'scroll'. */
-    overflow: Overflow;
+    overflow: Overflow | string;
     /** @description Disables user interaction with the element. */
     readonly: boolean;
     /** @description Enables or disables the reorder feature. When this feature is enabled, the end-user can drag a tab and drop it over another tab. As a result the tabs will be reordered. */
@@ -52,19 +52,19 @@ export declare class TabsComponent extends BaseElement implements OnInit, AfterV
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Sets or gets the position of the scroll buttons. */
-    scrollButtonsPosition: LayoutPosition;
+    scrollButtonsPosition: LayoutPosition | string;
     /** @description Sets or gets the behavior when scrolling the tab strip via the scroll buttons. */
-    scrollMode: TabsScrollMode;
+    scrollMode: TabsScrollMode | string;
     /** @description Sets or gets which tab is selected. */
     selectedIndex: number | null;
     /** @description Determines the way the user can switch between tabs. */
-    selectionMode: TabSelectionMode;
+    selectionMode: TabSelectionMode | string;
     /** @description Applies one of four behaviors when the element is not wide enough to display all tab labels. */
-    tabLayout: TabsTabLayout;
+    tabLayout: TabsTabLayout | string;
     /** @description Sets or gets where the tab strip is positioned. */
-    tabPosition: TabPosition;
+    tabPosition: TabPosition | string;
     /** @description Sets or gets the orientation of the text in the tabs. */
-    tabTextOrientation: Orientation;
+    tabTextOrientation: Orientation | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description If is set to true, the element cannot be focused. */

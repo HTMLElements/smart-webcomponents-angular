@@ -26,7 +26,7 @@ export declare class BootstrapSwitchButtonComponent extends BaseElement implemen
     /** @description Gets or sets whether the element is required.  */
     required: boolean;
     /** @description Sets or gets the style mode of the element. */
-    styleMode: BootstrapSwitchButtonStyleMode;
+    styleMode: BootstrapSwitchButtonStyleMode | string;
     /** @description Change event is triggered when the value of the element is changed.
     *  @param event. The custom event. 	*/
     onChange: EventEmitter<CustomEvent>;

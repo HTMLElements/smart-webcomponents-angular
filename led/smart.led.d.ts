@@ -14,11 +14,11 @@ export declare class LedComponent extends BaseElement implements OnInit, AfterVi
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the check state. */
     checked: boolean;
     /** @description Determines when the element fires a click event. */
-    clickMode: ClickMode;
+    clickMode: ClickMode | string;
     /** @description Enables or disables the LED. */
     disabled: boolean;
     /** @description Sets the content for the 'false' state. */
@@ -44,7 +44,7 @@ export declare class LedComponent extends BaseElement implements OnInit, AfterVi
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Sets the shape of LED. */
-    shape: LedShape;
+    shape: LedShape | string;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description Sets the content for the 'true' state. */

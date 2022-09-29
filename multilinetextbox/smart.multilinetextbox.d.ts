@@ -25,11 +25,11 @@ export declare class MultilineTextBoxComponent extends BaseElement implements On
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines whether and how the value should be automatically capitalized as it is entered/edited by the user. */
-    autoCapitalize: MultilineTextBoxAutoCapitalize;
+    autoCapitalize: MultilineTextBoxAutoCapitalize | string;
     /** @description Determines whether the value of the control can be automatically completed by the browser. */
-    autoComplete: MultiLineTextBoxAutoComplete;
+    autoComplete: MultiLineTextBoxAutoComplete | string;
     /** @description Determines whether element will auto expand when the input overflows vertically. */
     autoExpand: boolean;
     /** @description Determines whether the input should be focused when the page is loaded. */
@@ -39,15 +39,15 @@ export declare class MultilineTextBoxComponent extends BaseElement implements On
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Specifies how the characters are displayed inside the input. */
-    displayMode: TextBoxDisplayMode;
+    displayMode: TextBoxDisplayMode | string;
     /** @description Determines the behavior on "Enter" key. */
-    enterKeyBehavior: MultilineTextBoxEnterKeyBehavior;
+    enterKeyBehavior: MultilineTextBoxEnterKeyBehavior | string;
     /** @description The form element that the element is associated with (its "form owner"). The value of the attribute must be the ID of a form element in the same document. */
     form: string;
     /** @description Sets additional helper text below the element. Appears only when the element is focused. */
     hint: any;
     /** @description Controls horizontal scrollbar's visibility.  */
-    horizontalScrollBarVisibility: HorizontalScrollBarVisibility;
+    horizontalScrollBarVisibility: HorizontalScrollBarVisibility | string;
     /** @description Sets the purpose of the input and what, if any, permission the user agent has to provide automated assistance in filling out the element's input when in a form, as well as guidance to the browser as to the type of information expected in the element. This value corresponds to the standard HTML autocomplete attribute and can be set to values such as 'on', 'name', 'organization', 'street-address', etc. */
     inputPurpose: string;
     /** @description Sets label above the element. The label is displayed above the input and it's always visible. */
@@ -91,9 +91,9 @@ export declare class MultilineTextBoxComponent extends BaseElement implements On
     /** @description Sets or gets the value of the element. */
     value: string;
     /** @description Controls vertical scrollbar's visibility.  */
-    verticalScrollBarVisibility: VerticalScrollBarVisibility;
+    verticalScrollBarVisibility: VerticalScrollBarVisibility | string;
     /** @description Indicates how the control wraps text. */
-    wrap: MultilineTextBoxWrap;
+    wrap: MultilineTextBoxWrap | string;
     /** @description This event is triggered when the value of the text box is changed.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value, 	type)
     *   oldValue - The previous value of the element before it was changed.

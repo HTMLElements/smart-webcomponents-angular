@@ -482,6 +482,17 @@ import './../source/modules/smart.form';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(FormComponent.prototype, "validateOnLoad", {
+            /** @description Automatically validates the form when it is created. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.validateOnLoad : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.validateOnLoad = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         /** @description Adds a control to the Form.
         * @param {any} controlOptions. Control options. The control options description is available in the <em>controls</em> property.
         */
@@ -662,9 +673,12 @@ import './../source/modules/smart.form';
         __decorate([
             core.Input()
         ], FormComponent.prototype, "value", null);
+        __decorate([
+            core.Input()
+        ], FormComponent.prototype, "validateOnLoad", null);
         FormComponent = __decorate([
             core.Directive({
-                selector: 'smart-form, [smart-form]'
+                exportAs: 'smart-form', selector: 'smart-form, [smart-form]'
             })
         ], FormComponent);
         return FormComponent;
@@ -1136,7 +1150,7 @@ import './../source/modules/smart.form';
         ], FormControlComponent.prototype, "viewMode", null);
         FormControlComponent = __decorate([
             core.Directive({
-                selector: 'smart-form-control, [smart-form-control]'
+                exportAs: 'smart-form-control', selector: 'smart-form-control, [smart-form-control]'
             })
         ], FormControlComponent);
         return FormControlComponent;
@@ -1398,7 +1412,7 @@ import './../source/modules/smart.form';
         ], FormGroupComponent.prototype, "value", null);
         FormGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-form-group, [smart-form-group]'
+                exportAs: 'smart-form-group', selector: 'smart-form-group, [smart-form-group]'
             })
         ], FormGroupComponent);
         return FormGroupComponent;

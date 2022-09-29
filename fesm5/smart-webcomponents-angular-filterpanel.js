@@ -528,7 +528,7 @@ var FilterPanelComponent = /** @class */ (function (_super) {
     ], FilterPanelComponent.prototype, "onFilter", void 0);
     FilterPanelComponent = __decorate([
         Directive({
-            selector: 'smart-filter-panel, [smart-filter-panel]'
+            exportAs: 'smart-filter-panel', selector: 'smart-filter-panel, [smart-filter-panel]'
         })
     ], FilterPanelComponent);
     return FilterPanelComponent;

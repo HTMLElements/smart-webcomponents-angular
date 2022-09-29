@@ -501,7 +501,7 @@ import './../source/modules/smart.map';
         ], MapComponent.prototype, "zoom", null);
         MapComponent = __decorate([
             core.Directive({
-                selector: 'smart-map, [smart-map]'
+                exportAs: 'smart-map', selector: 'smart-map, [smart-map]'
             })
         ], MapComponent);
         return MapComponent;

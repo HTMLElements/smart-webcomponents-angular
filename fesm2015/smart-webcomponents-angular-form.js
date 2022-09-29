@@ -194,6 +194,13 @@ let FormComponent = class FormComponent extends BaseElement {
     set value(value) {
         this.nativeElement ? this.nativeElement.value = value : undefined;
     }
+    /** @description Automatically validates the form when it is created. */
+    get validateOnLoad() {
+        return this.nativeElement ? this.nativeElement.validateOnLoad : undefined;
+    }
+    set validateOnLoad(value) {
+        this.nativeElement ? this.nativeElement.validateOnLoad = value : undefined;
+    }
     /** @description Adds a control to the Form.
     * @param {any} controlOptions. Control options. The control options description is available in the <em>controls</em> property.
     */
@@ -356,9 +363,12 @@ __decorate([
 __decorate([
     Input()
 ], FormComponent.prototype, "value", null);
+__decorate([
+    Input()
+], FormComponent.prototype, "validateOnLoad", null);
 FormComponent = __decorate([
     Directive({
-        selector: 'smart-form, [smart-form]'
+        exportAs: 'smart-form', selector: 'smart-form, [smart-form]'
     })
 ], FormComponent);
 
@@ -706,7 +716,7 @@ __decorate([
 ], FormControlComponent.prototype, "viewMode", null);
 FormControlComponent = __decorate([
     Directive({
-        selector: 'smart-form-control, [smart-form-control]'
+        exportAs: 'smart-form-control', selector: 'smart-form-control, [smart-form-control]'
     })
 ], FormControlComponent);
 
@@ -912,7 +922,7 @@ __decorate([
 ], FormGroupComponent.prototype, "value", null);
 FormGroupComponent = __decorate([
     Directive({
-        selector: 'smart-form-group, [smart-form-group]'
+        exportAs: 'smart-form-group', selector: 'smart-form-group, [smart-form-group]'
     })
 ], FormGroupComponent);
 

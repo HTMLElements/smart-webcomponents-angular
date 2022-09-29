@@ -327,7 +327,7 @@ __decorate([
 ], ButtonGroupComponent.prototype, "onChange", void 0);
 ButtonGroupComponent = __decorate([
     Directive({
-        selector: 'smart-button-group, [smart-button-group]'
+        exportAs: 'smart-button-group', selector: 'smart-button-group, [smart-button-group]'
     })
 ], ButtonGroupComponent);
 

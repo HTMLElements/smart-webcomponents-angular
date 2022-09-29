@@ -22,7 +22,7 @@ export declare class LayoutGroupComponent extends BaseElement implements OnInit,
     /** @description Determines the label of the item. */
     label: string;
     /** @description Determines the group orientation. */
-    orientation: LayoutGroupOrientation;
+    orientation: LayoutGroupOrientation | string;
     /** @description Determines the size of the item. */
     size: any;
     /** @description If is set to true, the element cannot be focused. */

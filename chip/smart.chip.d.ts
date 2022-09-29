@@ -14,7 +14,7 @@ export declare class ChipComponent extends BaseElement implements OnInit, AfterV
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets a custom avatar that is positioned on the left side of the chip. The avatar can be an image(if the value is a url to an image), plain text or HTML. */
     avatar: string | null;
     /** @description Determines whether a close button is displayed on the right side of the element. */

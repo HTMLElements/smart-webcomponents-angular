@@ -14,9 +14,9 @@ export declare class ArrayComponent extends BaseElement implements OnInit, After
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the indexing mode of the Array. */
-    arrayIndexingMode: ArrayArrayIndexingMode;
+    arrayIndexingMode: ArrayArrayIndexingMode | string;
     /** @description A callback function that is called when the width, height or disabled properties of an inner element need to be updated. Applicable only when type is 'custom'. */
     changeProperty: any;
     /** @description Sets or gets the number of visible columns in the Array. */
@@ -62,7 +62,7 @@ export declare class ArrayComponent extends BaseElement implements OnInit, After
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description Sets or gets the data type and element widgets to be used in the Array. */
-    type: ArrayType;
+    type: ArrayType | string;
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
     /** @description Sets or gets the value of the Array. */

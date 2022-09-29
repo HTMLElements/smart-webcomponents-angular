@@ -25,7 +25,7 @@ export declare class NumberInputComponent extends BaseElement implements OnInit,
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Sets the purpose of the input and what, if any, permission the user agent has to provide automated assistance in filling out the element's input when in a form, as well as guidance to the browser as to the type of information expected in the element. This value corresponds to the standard HTML autocomplete attribute and can be set to values such as 'on', 'name', 'organization', 'street-address', etc. */
@@ -69,11 +69,13 @@ export declare class NumberInputComponent extends BaseElement implements OnInit,
     /** @description Returns the value in the desired format.
     * @param {string | number} value. The value to be formatted by the method.
     * @param {any} format?. The object that contains the formatting properties. The argument should contain Intl.NumberFormat valid properties. For example, { style: 'currency', currency: 'EUR' }
-    */
-    getFormattedValue(value: string | number, format?: any): void;
+    * @returns {string}
+  */
+    getFormattedValue(value: any, format?: any): Promise<any>;
     /** @description Returns the number of the input.
-    */
-    getValue(): void;
+    * @returns {number}
+  */
+    getValue(): Promise<any>;
     /** @description Selects the text inside the input or if it is readonly then the element is focused.
     */
     select(): void;

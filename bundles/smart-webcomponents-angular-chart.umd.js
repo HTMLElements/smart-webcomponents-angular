@@ -1546,7 +1546,7 @@ import './../source/modules/smart.chart';
         ], ChartComponent.prototype, "onToggle", void 0);
         ChartComponent = __decorate([
             core.Directive({
-                selector: 'smart-chart, [smart-chart]'
+                exportAs: 'smart-chart', selector: 'smart-chart, [smart-chart]'
             })
         ], ChartComponent);
         return ChartComponent;

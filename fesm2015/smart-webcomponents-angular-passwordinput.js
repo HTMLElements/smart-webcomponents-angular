@@ -304,7 +304,7 @@ __decorate([
 ], PasswordInputComponent.prototype, "onChanging", void 0);
 PasswordInputComponent = __decorate([
     Directive({
-        selector: 'smart-password-input, [smart-password-input]'
+        exportAs: 'smart-password-input', selector: 'smart-password-input, [smart-password-input]'
     })
 ], PasswordInputComponent);
 

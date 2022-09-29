@@ -25,13 +25,13 @@ export declare class PasswordTextBoxComponent extends BaseElement implements OnI
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Specifies that the element should be focused when the page is loaded. */
     autoFocus: boolean;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Specifies the behavior on "Enter" key press. Default mode is "submit". */
-    enterKeyBehavior: EnterKeyBehavior;
+    enterKeyBehavior: EnterKeyBehavior | string;
     /** @description The form that the element is associated with (its "form owner"). The value of the attribute must be the ID of a form element in the same document. */
     form: string;
     /** @description Sets additional helper text below the element. Appears only when the element is focused. */
@@ -71,7 +71,7 @@ export declare class PasswordTextBoxComponent extends BaseElement implements OnI
     /** @description Determines the delay before the tooltip appears in miliseconds. */
     tooltipDelay: number;
     /** @description Determines the position of the tooltip. */
-    tooltipPosition: PasswordTextBoxTooltipPosition;
+    tooltipPosition: PasswordTextBoxTooltipPosition | string;
     /** @description Sets a custom template for the content of the tooltip. */
     tooltipTemplate: string;
     /** @description If true, the element cannot be focused. */

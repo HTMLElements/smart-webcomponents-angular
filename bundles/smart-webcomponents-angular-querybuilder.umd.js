@@ -401,6 +401,12 @@ import './../source/modules/smart.querybuilder';
             *   value - The value of the selected property.
             */
             _this.onPropertySelected = new core.EventEmitter();
+            /** @description This event is triggered when the component validates the input values. This happens when you input a new value and focus another component.
+            *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	newValue)
+            *   oldValue - Old validation status.
+            *   newValue - New validation status.
+            */
+            _this.onValidationChange = new core.EventEmitter();
             _this.nativeElement = ref.nativeElement;
             return _this;
         }
@@ -444,6 +450,17 @@ import './../source/modules/smart.querybuilder';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.applyMode = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(QueryBuilderComponent.prototype, "autoApplyValue", {
+            /** @description When 'applyMode' is set to 'immediately', the default value is applied to the editor's value and the QueryBuilder's value is updated automatically. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.autoApplyValue : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.autoApplyValue = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -793,6 +810,8 @@ import './../source/modules/smart.querybuilder';
             that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
             that.eventHandlers['propertySelectedHandler'] = function (event) { that.onPropertySelected.emit(event); };
             that.nativeElement.addEventListener('propertySelected', that.eventHandlers['propertySelectedHandler']);
+            that.eventHandlers['validationChangeHandler'] = function (event) { that.onValidationChange.emit(event); };
+            that.nativeElement.addEventListener('validationChange', that.eventHandlers['validationChangeHandler']);
         };
         /** @description Remove event listeners. */
         QueryBuilderComponent.prototype.unlisten = function () {
@@ -815,6 +834,9 @@ import './../source/modules/smart.querybuilder';
             if (that.eventHandlers['propertySelectedHandler']) {
                 that.nativeElement.removeEventListener('propertySelected', that.eventHandlers['propertySelectedHandler']);
             }
+            if (that.eventHandlers['validationChangeHandler']) {
+                that.nativeElement.removeEventListener('validationChange', that.eventHandlers['validationChangeHandler']);
+            }
         };
         QueryBuilderComponent.ctorParameters = function () { return [
             { type: core.ElementRef }
@@ -828,6 +850,9 @@ import './../source/modules/smart.querybuilder';
         __decorate([
             core.Input()
         ], QueryBuilderComponent.prototype, "applyMode", null);
+        __decorate([
+            core.Input()
+        ], QueryBuilderComponent.prototype, "autoApplyValue", null);
         __decorate([
             core.Input()
         ], QueryBuilderComponent.prototype, "autoPrompt", null);
@@ -921,9 +946,12 @@ import './../source/modules/smart.querybuilder';
         __decorate([
             core.Output()
         ], QueryBuilderComponent.prototype, "onPropertySelected", void 0);
+        __decorate([
+            core.Output()
+        ], QueryBuilderComponent.prototype, "onValidationChange", void 0);
         QueryBuilderComponent = __decorate([
             core.Directive({
-                selector: 'smart-query-builder, [smart-query-builder]'
+                exportAs: 'smart-query-builder', selector: 'smart-query-builder, [smart-query-builder]'
             })
         ], QueryBuilderComponent);
         return QueryBuilderComponent;

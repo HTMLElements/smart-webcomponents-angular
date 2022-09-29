@@ -310,7 +310,7 @@ __decorate([
 ], SortableComponent.prototype, "onDragEnd", void 0);
 SortableComponent = __decorate([
     Directive({
-        selector: 'smart-sortable, [smart-sortable]'
+        exportAs: 'smart-sortable', selector: 'smart-sortable, [smart-sortable]'
     })
 ], SortableComponent);
 

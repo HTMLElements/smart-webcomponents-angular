@@ -14,7 +14,7 @@ export declare class CarouselComponent extends BaseElement implements OnInit, Af
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description The items switch automatically if set to true or to a custom number(representing the timeout in milliseconds). This property works if slideShow property is enabled. */
     autoPlay: boolean;
     /** @description An array of objects. Each object defines an item. The following object properties are available: label - a string representing the label of the item.content - a string representing the content of the itemimage - a string representing a url link to an image.HTMLcontent - a string representing some HTML structure taht will be generated inside the item. */
@@ -26,7 +26,7 @@ export declare class CarouselComponent extends BaseElement implements OnInit, Af
     /** @description Disabled the possibility to navigated to an item by clicking on item in displayMode 3d. By default users can navigate to items that are not currently active by clicking on them. */
     disableItemClick: boolean;
     /** @description Determines the display mode. */
-    displayMode: CarouselDisplayMode;
+    displayMode: CarouselDisplayMode | string;
     /** @description Hides the navigation buttons. */
     hideArrows: boolean;
     /** @description Hides the slide indication panel that shows which item is currently in view (active item). */

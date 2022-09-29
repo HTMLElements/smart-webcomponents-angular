@@ -1,14 +1,14 @@
-import { BarCode } from './../index';
-import { BarCodeLabelPosition, BarCodeRenderAs, BarCodeType } from './../index';
+import { Barcode } from './../index';
+import { BarcodeLabelPosition, BarcodeRenderAs, BarcodeType } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { BarCodeLabelPosition, BarCodeRenderAs, BarCodeType, ElementRenderMode } from './../index';
+export { BarcodeLabelPosition, BarcodeRenderAs, BarcodeType, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
-export { BarCode } from './../index';
-export declare class BarCodeComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
-    constructor(ref: ElementRef<BarCode>);
+export { Barcode } from './../index';
+export declare class BarcodeComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
+    constructor(ref: ElementRef<Barcode>);
     private eventHandlers;
-    nativeElement: BarCode;
+    nativeElement: Barcode;
     /** @description Creates the component on demand.
      * @param properties An optional object of properties, which will be added to the template binded ones.
      */
@@ -16,9 +16,9 @@ export declare class BarCodeComponent extends BaseElement implements OnInit, Aft
     /** @description Sets the background color of the barcode element. */
     backgroundColor: string;
     /** @description Sets whether the barcode label is visible. */
-    disaplyLabel: boolean;
+    displayLabel: boolean;
     /** @description Sets the color of the barcode label. */
-    labelCOlor: string;
+    labelColor: string;
     /** @description Sets the font family of the barcode label. */
     labelFont: string;
     /** @description Sets the font size of the barcode label. */
@@ -28,7 +28,7 @@ export declare class BarCodeComponent extends BaseElement implements OnInit, Aft
     /** @description Sets the top margin of the barcode label. */
     labelMarginTop: number;
     /** @description Sets the position of the barcode label. */
-    labelPosition: BarCodeLabelPosition;
+    labelPosition: BarcodeLabelPosition | string;
     /** @description Sets the color of the barcode lines. */
     lineColor: string;
     /** @description Sets the height of the barcode line. */
@@ -36,15 +36,17 @@ export declare class BarCodeComponent extends BaseElement implements OnInit, Aft
     /** @description Sets the width of the barcode line. */
     lineWidth: number;
     /** @description Sets the rendering mode of the barcode. */
-    renderAs: BarCodeRenderAs;
+    renderAs: BarcodeRenderAs | string;
     /** @description Sets the barcode type */
-    type: BarCodeType;
+    type: BarcodeType | string;
     /** @description Sets or gets the value of the barcode. */
     value: string;
     /** @description This event is triggered when the value of the barcode is invalid.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	invalidCharacters)
-    *   value - the invalid value of the barcode.
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	invalidCharacters, 	lengthValidity, 	patternValidity, 	value)
     *   invalidCharacters - An array indicating the invalid characters.
+    *   lengthValidity - A boolean indicating the length validity.
+    *   patternValidity - A boolean indicating the pattern validity.
+    *   value - the invalid value of the barcode.
     */
     onInvalid: EventEmitter<CustomEvent>;
     /** @description Exports the barcode.

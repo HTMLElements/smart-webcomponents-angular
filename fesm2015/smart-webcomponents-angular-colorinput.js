@@ -546,7 +546,7 @@ __decorate([
 ], ColorInputComponent.prototype, "onChange", void 0);
 ColorInputComponent = __decorate([
     Directive({
-        selector: 'smart-color-input, [smart-color-input]',
+        exportAs: 'smart-color-input', selector: 'smart-color-input, [smart-color-input]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], ColorInputComponent);

@@ -14,11 +14,11 @@ export declare class ButtonGroupComponent extends BaseElement implements OnInit,
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines the buttons configuration. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value. It can also be a callback that returns an Array of items as previously described. */
     dataSource: any;
     /** @description Determines the selection mode for the element. */
-    selectionMode: ButtonGroupSelectionMode;
+    selectionMode: ButtonGroupSelectionMode | string;
     /** @description Enables or disables the element.  */
     disabled: boolean;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */

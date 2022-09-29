@@ -561,7 +561,7 @@ var TimePickerComponent = /** @class */ (function (_super) {
     ], TimePickerComponent.prototype, "onChange", void 0);
     TimePickerComponent = __decorate([
         Directive({
-            selector: 'smart-time-picker, [smart-time-picker]',
+            exportAs: 'smart-time-picker', selector: 'smart-time-picker, [smart-time-picker]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], TimePickerComponent);

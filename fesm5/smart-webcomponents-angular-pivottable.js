@@ -1147,7 +1147,7 @@ var PivotTableComponent = /** @class */ (function (_super) {
     ], PivotTableComponent.prototype, "onSort", void 0);
     PivotTableComponent = __decorate([
         Directive({
-            selector: 'smart-pivot-table, [smart-pivot-table]'
+            exportAs: 'smart-pivot-table', selector: 'smart-pivot-table, [smart-pivot-table]'
         })
     ], PivotTableComponent);
     return PivotTableComponent;

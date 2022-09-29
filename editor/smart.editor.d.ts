@@ -14,7 +14,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Automatically loads the last saved state of the editor (from local storage) on element initialization. An id must be provided in order to load a previously saved state. */
     autoLoad: boolean;
     /** @description Automatically saves the current content of the editor. Saving happens at time intervas determined by the autoSaveInterval property while the element on focus. An id must be provided to the element in order to store the state. */
@@ -26,7 +26,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     /** @description Determines the content filtering settings. */
     contentFiltering: EditorContentFiltering;
     /** @description Determines the context menu for the Editor. The context menu is triggered when the user right clicks on the content area of the Editor. */
-    contextMenu: EditorContextMenu;
+    contextMenu: EditorContextMenu | string;
     /** @description Allows to customize default the context menu of the Editor. The property accepts an array of items which can be strings that represent the value of the item, or objects of the following format: { label: string, value: string }, where the label will be displayed and the value will be action value for the item. The property also accepts a function that must return an array of items with the following format function (target: HTMLElement, type: string, defaultItems: string[]) { return defaultItems } and the following arguments: target - the element that is the target of the context menu.type - the type of context menu ( whether it's a table, image, link or other)defaultItems - an array of strings which represent the default items for the context menu. */
     contextMenuDataSource: string[] | {
         label: string;
@@ -41,7 +41,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     /** @description Disables the Quick Search Bar. */
     disableSearchBar: boolean;
     /** @description Determines the edit mode for the Editor. By default the editor's content accepts and parses HTML. However if set to 'markdown' the Editor can be used as a full time Markdown Editor by parsing the makrdown to HTML in preview mode. */
-    editMode: EditMode;
+    editMode: EditMode | string;
     /** @description Determines whether the value returned from getHTML method and Source Code view are encoded or not. */
     enableHtmlEncode: boolean;
     /** @description Determines whether the Tab key can insert tab chars inside the Editor or change focus (default) */
@@ -53,7 +53,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     /** @description Determines whether the Inline Toolbar is hidden or not. */
     hideInlineToolbar: boolean;
     /** @description Determines the file format of the image/video that are uploaded from local storage. By default images/videos are stroed as base64. */
-    imageFormat: EditorImageFormat;
+    imageFormat: EditorImageFormat | string;
     /** @description Sets the content of the Editor as HTML. Allows to insert text and HTML. */
     innerHTML: string;
     /** @description Defines an offset(x,y) for the Inline Toolbar positioning on the page. */
@@ -69,7 +69,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     /** @description Sets a to the element which can be used to submit the value of the Editor via a form. */
     name: string | null;
     /** @description Determines the format of the content that will be pasted inside the Editor. */
-    pasteFormat: PasteFormat;
+    pasteFormat: PasteFormat | string;
     /** @description Determines the placeholder that will be shown when there's no content inside the Editor. */
     placeholder: string;
     /** @description Determines whether the clearFormat toolbar action should also remove inline styles from the currently selected node. */
@@ -91,7 +91,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     /** @description Determines the Toolbar items list. Each item can be string pointing to the name of the item or an object that defines a custom item or adds aditional settings to an item. The name of the items are case insensitive. An object definition should contain a name attribute that refers to the name of the item when modifing an existing toolbar item. The name attribute determines the action of the item. If set to 'custom' it is possible to create a custom toolbar item. If name attribute is not set or not valid it is treated as a separator, no a toolbar item. The following items are supported by default by the Editor: SourceCode - shows the HTML/Preview Panel by hiding the input panel. Item type - 'Toggle button'.SplitMode - shows both input and HTML/Preview Panel by splitting the Editor content in two sections. Item type - 'Toggle button'FullScreen - fits the viewport with the Editor by expanding it over the page content. Item type - 'Toggle button'.Alignment - aligns the selected content. Item type - 'Drop down'.FontName - changes the font family of the selected content. Item type - 'drop-down'.FontSize - changes the font size of the selected content. Item type - 'drop-down'.Formats - changes the format of the current selection. Itme type - 'drop-down'.TableRows - allows to insert/remove a row into a selected table element. Item type - 'drop-down'.TableColumns - allows to insert/remove a column into a selected table element. Itme type - 'drop-down'.TableVAlign - sets the vertical alignment of a selected table cell. Item type - 'drop-down'.TableStyle - sets additional styling to a selected table inside the Editor. Item type - 'drop-down'.BackgroundColor - changes the background color of the current selection. Item type - 'color-input'.FontColor - changes the font color of the current selection. Item type = 'color-input'.Bold - sets the currently selected text as bold or not. Item type - 'button'.Italic - sets the currently selected text as italic. Item type - 'button'. Underline - sets the currently selected text as underlined. Itme type - 'button'.Strikethrough - set the currently selected text as strikethrough. Item type - 'button'.Delete - deletes the current selection. Item type - 'button'.Undo - undoes the last operation. Item type - 'button'.Redo - redoes the previous operation. Item type - 'button'.Indent - indents the current selection once. Item type - 'button'.Outdent - outdents the current selection once. Item type - 'button'.OpenLink - triggers a hyperlink. Item type - 'button'.EditLink - creates/edits the selected hyperlink. Item type - 'button'.CreateLink - creates/edits the selected hyperlink. Item type - 'button'.RemoveLink - removes the currently selected hyperlink. Item type - 'button'.Hyperlink - same as createLink, triggers a Dialog Window for link creation. Item type - 'button'.Cut - Cuts the currently selected text. Item type - 'button'.Copy - copies the currently selected text. Item type - 'button'Paste - pastes the currenly copied/cut text from the Clipboard. Item type = 'button' or 'drop-down' when advanced attribute is set to 'true'.Image - triggers a Dialog Window to insert/edit an image. Item type - 'button'.Video - triggers a Dialog Window to insert/edit a video. Item type - 'button'.LowerCase - changes the current selection to lower case. Item type - 'button'.UpperCase - changes the current selection to upper case. Item type - 'button'.Print - opens the browser print preview window. Item type - 'button'.Caption - insert/remove a caption when a table is selected. Item type - 'button'.ClearFormat - removes the formatting of the currntly selected text. Item type - 'button'.Table - triggers a Dialog Window to insert a table. Item type - 'button'.TableHeader - insert/remove a header row to the currently selected table. Item type - 'button'.OrderedList - insert/remove an order list. Item type = 'button'.UnorderedList - insert/remove an unordered list. Item type - 'button'.Subscript - changes the currently selected text to subscript. Item type - 'button'.Superscript - changes the currently selected text to superscript. Item type - 'button'.FindAndReplace - opens a dialog that allows to find and replace text inside the Editor's content section. Item type - 'button'.  The inlineToolbarItems attribute is applicable only to the following items: 'table', 'image', 'hyperlink'. It accepts the same type of value as toolbarItems property but the toolbar items will be placed insinde the Inline Toolbar instead. */
     toolbarItems: ToolbarItem[];
     /** @description Determines the toolbar mode of the Editor. The main toolbar of the Editor can appear as a Ribbon or as a Menu. */
-    toolbarMode: ToolbarMode;
+    toolbarMode: ToolbarMode | string;
     /** @description Allows to configure the SingleLineRibbon appearance by changing the order and items of the groups. */
     toolbarRibbonConfig: {
         name: string;
@@ -101,7 +101,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
         }[];
     }[];
     /** @description Determines the format of the content that will be pasted inside the Editor. */
-    toolbarViewMode: ToolbarViewMode;
+    toolbarViewMode: ToolbarViewMode | string;
     /** @description Sticks the Toolbar to the top of the window and stays there while scrolling. */
     toolbarSticky: boolean;
     /** @description If is set to true, the element cannot be focused. */
@@ -237,7 +237,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     */
     onDialogClosing: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the uploading of an image/video is successful.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status, 	serverResponse)
     *   target - The file upload element that is the target of the operation.
     *   item - The toolbar item that is the target of the operation.
     *   filename - The name of the uploaded file.
@@ -245,10 +245,11 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     *   size - The size of the uploaded file.
     *   index - The index of the uploaded file.
     *   status - The status of the uploaded file. Whether there was an error or success.
+    *   serverResponse - The response of the remote server.
     */
     onImageUploadSuccess: EventEmitter<CustomEvent>;
     /** @description This event is triggered when the uploading of an image/video is unsuccessful.
-    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status)
+    *  @param event. The custom event. 	Custom event was created with: event.detail(	target, 	item, 	filename, 	type, 	size, 	index, 	status, 	serverResponse)
     *   target - The file upload element that is the target of the operation.
     *   item - The toolbar item that is the target of the operation.
     *   filename - The name of the canceled file.
@@ -256,6 +257,7 @@ export declare class EditorComponent extends BaseElement implements OnInit, Afte
     *   size - The size of the canceled file.
     *   index - The index of the canceled file.
     *   status - The status of the uploaded file. Whether there was an error or success.
+    *   serverResponse - The response of the remote server.
     */
     onImageUploadFailed: EventEmitter<CustomEvent>;
     /** @description This event is triggered when a Toolbar item is clicked.

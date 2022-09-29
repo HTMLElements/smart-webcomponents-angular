@@ -155,6 +155,12 @@ let QueryBuilderComponent = class QueryBuilderComponent extends BaseElement {
         *   value - The value of the selected property.
         */
         this.onPropertySelected = new EventEmitter();
+        /** @description This event is triggered when the component validates the input values. This happens when you input a new value and focus another component.
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	newValue)
+        *   oldValue - Old validation status.
+        *   newValue - New validation status.
+        */
+        this.onValidationChange = new EventEmitter();
         this.nativeElement = ref.nativeElement;
     }
     /** @description Creates the component on demand.
@@ -187,6 +193,13 @@ let QueryBuilderComponent = class QueryBuilderComponent extends BaseElement {
     }
     set applyMode(value) {
         this.nativeElement ? this.nativeElement.applyMode = value : undefined;
+    }
+    /** @description When 'applyMode' is set to 'immediately', the default value is applied to the editor's value and the QueryBuilder's value is updated automatically. */
+    get autoApplyValue() {
+        return this.nativeElement ? this.nativeElement.autoApplyValue : undefined;
+    }
+    set autoApplyValue(value) {
+        this.nativeElement ? this.nativeElement.autoApplyValue = value : undefined;
     }
     /** @description Determines whether QueryBuilder will automatically prompt the user to enter a condition value when a new condition is created. When 'applyMode' is set to 'immediately', the operation field is automatically populated if empty when the selected condition operator is changed. The input field prompts the user when the operation or operator of the condition is changed. */
     get autoPrompt() {
@@ -420,6 +433,8 @@ let QueryBuilderComponent = class QueryBuilderComponent extends BaseElement {
         that.nativeElement.addEventListener('itemClick', that.eventHandlers['itemClickHandler']);
         that.eventHandlers['propertySelectedHandler'] = (event) => { that.onPropertySelected.emit(event); };
         that.nativeElement.addEventListener('propertySelected', that.eventHandlers['propertySelectedHandler']);
+        that.eventHandlers['validationChangeHandler'] = (event) => { that.onValidationChange.emit(event); };
+        that.nativeElement.addEventListener('validationChange', that.eventHandlers['validationChangeHandler']);
     }
     /** @description Remove event listeners. */
     unlisten() {
@@ -442,6 +457,9 @@ let QueryBuilderComponent = class QueryBuilderComponent extends BaseElement {
         if (that.eventHandlers['propertySelectedHandler']) {
             that.nativeElement.removeEventListener('propertySelected', that.eventHandlers['propertySelectedHandler']);
         }
+        if (that.eventHandlers['validationChangeHandler']) {
+            that.nativeElement.removeEventListener('validationChange', that.eventHandlers['validationChangeHandler']);
+        }
     }
 };
 QueryBuilderComponent.ctorParameters = () => [
@@ -456,6 +474,9 @@ __decorate([
 __decorate([
     Input()
 ], QueryBuilderComponent.prototype, "applyMode", null);
+__decorate([
+    Input()
+], QueryBuilderComponent.prototype, "autoApplyValue", null);
 __decorate([
     Input()
 ], QueryBuilderComponent.prototype, "autoPrompt", null);
@@ -549,9 +570,12 @@ __decorate([
 __decorate([
     Output()
 ], QueryBuilderComponent.prototype, "onPropertySelected", void 0);
+__decorate([
+    Output()
+], QueryBuilderComponent.prototype, "onValidationChange", void 0);
 QueryBuilderComponent = __decorate([
     Directive({
-        selector: 'smart-query-builder, [smart-query-builder]'
+        exportAs: 'smart-query-builder', selector: 'smart-query-builder, [smart-query-builder]'
     })
 ], QueryBuilderComponent);
 

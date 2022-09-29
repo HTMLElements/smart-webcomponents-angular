@@ -222,7 +222,7 @@ __decorate([
 ], MapComponent.prototype, "zoom", null);
 MapComponent = __decorate([
     Directive({
-        selector: 'smart-map, [smart-map]'
+        exportAs: 'smart-map', selector: 'smart-map, [smart-map]'
     })
 ], MapComponent);
 

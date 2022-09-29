@@ -260,6 +260,17 @@ var FormComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(FormComponent.prototype, "validateOnLoad", {
+        /** @description Automatically validates the form when it is created. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.validateOnLoad : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.validateOnLoad = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /** @description Adds a control to the Form.
     * @param {any} controlOptions. Control options. The control options description is available in the <em>controls</em> property.
     */
@@ -440,9 +451,12 @@ var FormComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], FormComponent.prototype, "value", null);
+    __decorate([
+        Input()
+    ], FormComponent.prototype, "validateOnLoad", null);
     FormComponent = __decorate([
         Directive({
-            selector: 'smart-form, [smart-form]'
+            exportAs: 'smart-form', selector: 'smart-form, [smart-form]'
         })
     ], FormComponent);
     return FormComponent;
@@ -914,7 +928,7 @@ var FormControlComponent = /** @class */ (function (_super) {
     ], FormControlComponent.prototype, "viewMode", null);
     FormControlComponent = __decorate([
         Directive({
-            selector: 'smart-form-control, [smart-form-control]'
+            exportAs: 'smart-form-control', selector: 'smart-form-control, [smart-form-control]'
         })
     ], FormControlComponent);
     return FormControlComponent;
@@ -1176,7 +1190,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
     ], FormGroupComponent.prototype, "value", null);
     FormGroupComponent = __decorate([
         Directive({
-            selector: 'smart-form-group, [smart-form-group]'
+            exportAs: 'smart-form-group', selector: 'smart-form-group, [smart-form-group]'
         })
     ], FormGroupComponent);
     return FormGroupComponent;

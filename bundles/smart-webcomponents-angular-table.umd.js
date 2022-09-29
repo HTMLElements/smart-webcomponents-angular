@@ -927,8 +927,30 @@ import './../source/modules/smart.table';
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(TableComponent.prototype, "pageSize", {
+        Object.defineProperty(TableComponent.prototype, "onLoad", {
             /** @description Sets or gets an array of the Table's selected row's ids. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onLoad : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onLoad = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "onUpdateComplete", {
+            /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.onUpdateComplete : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.onUpdateComplete = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(TableComponent.prototype, "pageSize", {
+            /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.pageSize : undefined;
             },
@@ -939,7 +961,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "pageIndex", {
-            /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+            /** @description Sets or gets whether row selection (via checkboxes) is hierarchical. When a parent row is selected, all sub rows are selected, too. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.pageIndex : undefined;
             },
@@ -950,7 +972,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "paging", {
-            /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
+            /** @description Determines the sorting mode of the Table. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.paging : undefined;
             },
@@ -961,7 +983,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "rightToLeft", {
-            /** @description Sets or gets whether row selection (via checkboxes) is hierarchical. When a parent row is selected, all sub rows are selected, too. */
+            /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
             get: function () {
                 return this.nativeElement ? this.nativeElement.rightToLeft : undefined;
             },
@@ -972,7 +994,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "rowDetailTemplate", {
-            /** @description Determines the sorting mode of the Table. */
+            /** @description Determines the theme. Theme defines the look of the element */
             get: function () {
                 return this.nativeElement ? this.nativeElement.rowDetailTemplate : undefined;
             },
@@ -983,7 +1005,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "selected", {
-            /** @description Sets or gets what settings of the Table's state can be saved (by autoSaveState or saveState) or loaded (by autoLoadState or loadState). */
+            /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.selected : undefined;
             },
@@ -994,7 +1016,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "selection", {
-            /** @description Determines the theme. Theme defines the look of the element */
+            /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.selection : undefined;
             },
@@ -1005,7 +1027,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "selectionMode", {
-            /** @description Sets or gets whether when hovering a cell with truncated content, a tooltip with the full content will be shown. */
+            /** @description undefined */
             get: function () {
                 return this.nativeElement ? this.nativeElement.selectionMode : undefined;
             },
@@ -1016,7 +1038,7 @@ import './../source/modules/smart.table';
             configurable: true
         });
         Object.defineProperty(TableComponent.prototype, "selectionByHierarchy", {
-            /** @description Enables or disables HTML virtualization. This functionality allows for only visible rows to be rendered, resulting in an increased Table performance. */
+            /** @description undefined */
             get: function () {
                 return this.nativeElement ? this.nativeElement.selectionByHierarchy : undefined;
             },
@@ -1108,7 +1130,7 @@ import './../source/modules/smart.table';
         };
         /** @description Adds a filter to a specific column.
         * @param {string} dataField. The column's data field.
-        * @param {any} filter. FilterGroup object.
+        * @param {any} filter. FilterGroup object or a Filter expression. Filter expression like: 'startsWith B'. Example 2: ['contains Andrew or contains Nancy'], Example 3:  ['quantity', '&lt;= 3 and &gt;= 8'].  Filter conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
         */
         TableComponent.prototype.addFilter = function (dataField, filter) {
             var _this = this;
@@ -2026,6 +2048,12 @@ import './../source/modules/smart.table';
         ], TableComponent.prototype, "onInit", null);
         __decorate([
             core.Input()
+        ], TableComponent.prototype, "onLoad", null);
+        __decorate([
+            core.Input()
+        ], TableComponent.prototype, "onUpdateComplete", null);
+        __decorate([
+            core.Input()
         ], TableComponent.prototype, "pageSize", null);
         __decorate([
             core.Input()
@@ -2119,7 +2147,7 @@ import './../source/modules/smart.table';
         ], TableComponent.prototype, "onSort", void 0);
         TableComponent = __decorate([
             core.Directive({
-                selector: 'smart-table, [smart-table]'
+                exportAs: 'smart-table', selector: 'smart-table, [smart-table]'
             })
         ], TableComponent);
         return TableComponent;

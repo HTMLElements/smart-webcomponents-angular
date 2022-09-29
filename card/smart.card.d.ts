@@ -14,7 +14,7 @@ export declare class CardComponent extends BaseElement implements OnInit, AfterV
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description A callback function, used to add event handlers and other custom logic related to the content inside the card element. */
     contentHandler: any;
     /** @description This object is used to populate card's template. Object keys represent the placeholders surrounded in braces ( e.g. {{proeprty}} ) inside the template of an item and their values are used to replace the bindings. */

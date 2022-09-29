@@ -754,7 +754,7 @@ import './../source/modules/smart.button';
         ], RadioButtonComponent.prototype, "onUncheckValue", void 0);
         RadioButtonComponent = __decorate([
             core.Directive({
-                selector: 'smart-radio-button, [smart-radio-button]',
+                exportAs: 'smart-radio-button', selector: 'smart-radio-button, [smart-radio-button]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], RadioButtonComponent);

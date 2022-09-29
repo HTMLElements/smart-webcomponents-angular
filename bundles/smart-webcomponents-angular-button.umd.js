@@ -635,7 +635,7 @@ import './../source/modules/smart.button';
         ], ButtonComponent.prototype, "onClick", void 0);
         ButtonComponent = __decorate([
             core.Directive({
-                selector: 'smart-button, [smart-button]'
+                exportAs: 'smart-button', selector: 'smart-button, [smart-button]'
             })
         ], ButtonComponent);
         return ButtonComponent;
@@ -909,7 +909,7 @@ import './../source/modules/smart.button';
         ], RepeatButtonComponent.prototype, "onClick", void 0);
         RepeatButtonComponent = __decorate([
             core.Directive({
-                selector: 'smart-repeat-button, [smart-repeat-button]'
+                exportAs: 'smart-repeat-button', selector: 'smart-repeat-button, [smart-repeat-button]'
             })
         ], RepeatButtonComponent);
         return RepeatButtonComponent;
@@ -1199,7 +1199,7 @@ import './../source/modules/smart.button';
         ], ToggleButtonComponent.prototype, "onUncheckValue", void 0);
         ToggleButtonComponent = __decorate([
             core.Directive({
-                selector: 'smart-toggle-button, [smart-toggle-button]'
+                exportAs: 'smart-toggle-button', selector: 'smart-toggle-button, [smart-toggle-button]'
             })
         ], ToggleButtonComponent);
         return ToggleButtonComponent;
@@ -1519,7 +1519,7 @@ import './../source/modules/smart.button';
         ], PowerButtonComponent.prototype, "onChange", void 0);
         PowerButtonComponent = __decorate([
             core.Directive({
-                selector: 'smart-power-button, [smart-power-button]',
+                exportAs: 'smart-power-button', selector: 'smart-power-button, [smart-power-button]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], PowerButtonComponent);

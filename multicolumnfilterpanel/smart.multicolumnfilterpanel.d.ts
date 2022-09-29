@@ -14,9 +14,9 @@ export declare class MultiColumnFilterPanelComponent extends BaseElement impleme
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets the position of the close button of multi column filter panel items. */
-    closeButtonPosition: MultiColumnFilterPanelCloseButtonPosition;
+    closeButtonPosition: MultiColumnFilterPanelCloseButtonPosition | string;
     /** @description Determines the data source that will be loaded to the multi column filter panel.Each member of the dataSource array is an object with the following fields:dataField - the dataField of the column to be grouped.dataType - the data type of the column to be grouped.groupIndex - the group order of columns. If this value is -1, the grouping will not be applied by this column initially.label - the column label to be displayed in the column selection input.icon - a specific class to be applied to the respective item in the column selection input.sortDirection - the sort direction to be applied when grouping. Possible values: 'ascending' and 'descending'. */
     dataSource: {
         label: string;
@@ -40,7 +40,7 @@ export declare class MultiColumnFilterPanelComponent extends BaseElement impleme
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Determines the logical operator between the items. */
-    operator: MultiColumnFilterPanelOperator;
+    operator: MultiColumnFilterPanelOperator | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */

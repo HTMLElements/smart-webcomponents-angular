@@ -18,7 +18,7 @@ export declare class ListItemComponent extends BaseElement implements OnInit, Af
     /** @description  */
     color: string;
     /** @description  */
-    displayMode: ListItemDisplayMode;
+    displayMode: ListItemDisplayMode | string;
     /** @description  */
     grouped: boolean;
     /** @description  */

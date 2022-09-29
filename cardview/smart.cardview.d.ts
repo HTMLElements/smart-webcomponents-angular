@@ -19,11 +19,11 @@ export declare class CardViewComponent extends BaseElement implements OnInit, Af
     /** @description Allows reordering by dragging cards. */
     allowDrag: boolean;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Describes the height for each card. */
     cardHeight: number | null;
     /** @description Describes the orientation of the card cells. */
-    cellOrientation: Orientation;
+    cellOrientation: Orientation | string;
     /** @description Allows collapsing the card content. */
     collapsible: boolean;
     /** @description Describes the columns properties:label - Sets the column namedataField - Sets the dataField nameicon - Sets the icon for the columnformatSettings - Sets the settings about the format for the current columnformatFunction - Function for customizing the value */
@@ -31,7 +31,7 @@ export declare class CardViewComponent extends BaseElement implements OnInit, Af
     /** @description Describes which data field to be set as cover. */
     coverField: string;
     /** @description Describes the cover image fit property. */
-    coverMode: CardViewCoverMode;
+    coverMode: CardViewCoverMode | string;
     /** @description Determines the data source for the item that will be displayed inside the card. */
     dataSource: any;
     /** @description Sets the grid's data source settings when the dataSource property is set to an Array or URL. */
@@ -39,7 +39,7 @@ export declare class CardViewComponent extends BaseElement implements OnInit, Af
     /** @description Allows the edit option for the cards. */
     editable: boolean;
     /** @description Sets or gets the header position. The header contains the Customize, Filter, Sort, and Search buttons. */
-    headerPosition: CardViewHeaderPosition;
+    headerPosition: CardViewHeaderPosition | string;
     /** @description Sets or gets the locale. Used in conjunction with the property messages. */
     locale: string;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
@@ -49,7 +49,7 @@ export declare class CardViewComponent extends BaseElement implements OnInit, Af
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description Describes the scrolling behavior of the element. */
-    scrolling: Scrolling;
+    scrolling: Scrolling | string;
     /** @description Describes which data field to be set as title. */
     titleField: string;
     /** @description This event is triggered when a filter has been applied.

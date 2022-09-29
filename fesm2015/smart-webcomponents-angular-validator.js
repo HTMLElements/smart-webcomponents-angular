@@ -208,7 +208,7 @@ __decorate([
 ], ValidatorComponent.prototype, "validationSummarySelector", null);
 ValidatorComponent = __decorate([
     Directive({
-        selector: 'jqxValidator, [jqxValidator]'
+        exportAs: 'jqxValidator', selector: 'jqxValidator, [jqxValidator]'
     })
 ], ValidatorComponent);
 

@@ -20,7 +20,7 @@ export declare class BootstrapFileInputComponent extends BaseElement implements 
     /** @description Gets or sets the placeholder of the element.  */
     placeholder: string;
     /** @description Sets or gets the style mode of the element. */
-    styleMode: BootstrapFileInputStyleMode;
+    styleMode: BootstrapFileInputStyleMode | string;
     /** @description Gets or sets the value of the element.  */
     value: string;
     /** @description Change event is triggered when the value of the element is changed.

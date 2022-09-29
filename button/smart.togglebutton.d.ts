@@ -14,11 +14,11 @@ export declare class ToggleButtonComponent extends BaseElement implements OnInit
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets the state of the element. */
     checked: boolean;
     /** @description Sets the click mode of the button. */
-    clickMode: ClickMode;
+    clickMode: ClickMode | string;
     /** @description Enables or disables the ratio button. */
     disabled: boolean;
     /** @description Sets the inner HTML of the element. */

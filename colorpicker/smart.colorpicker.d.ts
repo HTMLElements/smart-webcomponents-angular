@@ -25,17 +25,17 @@ export declare class ColorPickerComponent extends BaseElement implements OnInit,
     */
     _onTouched: () => any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description This property allows editting of colors via the input inside the element's action section. Accepts values in all supported types. This property works when 'valueDisplayMode' is set to default or colorCode. */
     editable: boolean;
     /** @description Determines the delay before the opened drop down closes when dropDownOpenMode is set to 'auto'. */
     autoCloseDelay: number;
     /** @description Specifies how the user applies the selected value. In 'instantly' mode the value is applied immediately when color is selected. In 'useButtons' mode are shown 'Ok' and 'Cancel' buttons at the botom of the colorpicker's drop down. Only click on 'OK' button applies the value. */
-    applyValueMode: ColorApplyValueMode;
+    applyValueMode: ColorApplyValueMode | string;
     /** @description Defines the number of columns for the colors in displayModes 'grid', 'hexagonal' and 'spectrumGrid'. */
     columnCount: number;
     /** @description Determines the colors that will be displayed and their layout. */
-    displayMode: ColorDisplayMode;
+    displayMode: ColorDisplayMode | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description By default clicking on color panel's preview container returns the color value to it's previous state. 'disableUndo' prevents this functionality. */
@@ -43,11 +43,11 @@ export declare class ColorPickerComponent extends BaseElement implements OnInit,
     /** @description Sets the parent container of the dropDown (the popup). The expected value is CSS Selector, ID or 'body'. Used when a CSS property of unknowned parent is interfering with the visibility of the dropDown. Example: 'body'. */
     dropDownAppendTo: string;
     /** @description Determines how the drop down is going to open. */
-    dropDownOpenMode: DropDownOpenMode;
+    dropDownOpenMode: DropDownOpenMode | string;
     /** @description Determines the position of the drop down button. */
-    dropDownButtonPosition: DropDownButtonPosition;
+    dropDownButtonPosition: DropDownButtonPosition | string;
     /** @description Determines the vertical position of the dropDown. 'Auto' means its automatically determined depending on the viewport size. */
-    dropDownPosition: DropDownPosition;
+    dropDownPosition: DropDownPosition | string;
     /** @description Sets the height of the drop down. Default value of null means that CSS variables are used. This property should be used when the browser doesn not support CSS variables. */
     dropDownHeight: string;
     /** @description If this property is enabled, when the element's dropdown is opened, a transparent overlay is positioned between the dropdown and the rest of the document. */
@@ -91,7 +91,7 @@ export declare class ColorPickerComponent extends BaseElement implements OnInit,
     /** @description Determines whether the popup is opened or closed */
     opened: boolean;
     /** @description Determines what colors will be displayed in 'spectrumGrid', 'grid' and 'hexagonal' displayModes. */
-    palette: ColorPalette;
+    palette: ColorPalette | string;
     /** @description Defines an array of colors that form a custom palette. This palette can be used in displayModes 'grid' and 'spectrum grid' if the palette property is set to custom. The value of the property can be an array of strings or objects that contain valid colors ( HEX, RGBA, etc). */
     paletteColors: {
         name: string;
@@ -106,21 +106,21 @@ export declare class ColorPickerComponent extends BaseElement implements OnInit,
     /** @description Determines whether the resize indicator in the bottom right corner of the drop down is visible or not. This property is used in conjunction with resizeMode. */
     resizeIndicator: boolean;
     /** @description Determines whether the dropDown can be resized or not. When resizing is enabled, a resize bar appears on the top/bottom side of the drop down. */
-    resizeMode: ResizeMode;
+    resizeMode: ResizeMode | string;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     rightToLeft: boolean;
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description Determines how the tooltip displays the value of the color that is being hovered. */
-    tooltipDisplayMode: ColorTooltipDisplayMode;
+    tooltipDisplayMode: ColorTooltipDisplayMode | string;
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
     /** @description Represents the value of the selected color as the value of the element. */
     value: string;
     /** @description Determines the format of the color. Whether it's in HEX, RGB or RGBA. By default it shows the color depending on the displayMode. */
-    valueFormat: ColorValueFormat;
+    valueFormat: ColorValueFormat | string;
     /** @description Determines which elements will be displayed in color picker's action section. */
-    valueDisplayMode: ColorValueDisplayMode;
+    valueDisplayMode: ColorValueDisplayMode | string;
     /** @description This event is triggered when user clicks on the action button. 'Ok' button is visible only when applyValueMode is set to useButtons.
     *  @param event. The custom event. 	*/
     onActionButtonClick: EventEmitter<CustomEvent>;

@@ -315,7 +315,7 @@ var BootstrapButtonComponent = /** @class */ (function (_super) {
     ], BootstrapButtonComponent.prototype, "onClick", void 0);
     BootstrapButtonComponent = __decorate([
         Directive({
-            selector: 'bootstrap-button, [bootstrap-button]'
+            exportAs: 'bootstrap-button', selector: 'bootstrap-button, [bootstrap-button]'
         })
     ], BootstrapButtonComponent);
     return BootstrapButtonComponent;
@@ -504,7 +504,7 @@ var BootstrapCheckBoxComponent = /** @class */ (function (_super) {
     ], BootstrapCheckBoxComponent.prototype, "onChange", void 0);
     BootstrapCheckBoxComponent = __decorate([
         Directive({
-            selector: 'bootstrap-check-box, [bootstrap-check-box]'
+            exportAs: 'bootstrap-check-box', selector: 'bootstrap-check-box, [bootstrap-check-box]'
         })
     ], BootstrapCheckBoxComponent);
     return BootstrapCheckBoxComponent;
@@ -680,7 +680,7 @@ var BootstrapCircularComponent = /** @class */ (function (_super) {
     ], BootstrapCircularComponent.prototype, "onChange", void 0);
     BootstrapCircularComponent = __decorate([
         Directive({
-            selector: 'bootstrap-circular, [bootstrap-circular]'
+            exportAs: 'bootstrap-circular', selector: 'bootstrap-circular, [bootstrap-circular]'
         })
     ], BootstrapCircularComponent);
     return BootstrapCircularComponent;
@@ -970,7 +970,7 @@ var BootstrapDropDownComponent = /** @class */ (function (_super) {
     ], BootstrapDropDownComponent.prototype, "onHidden", void 0);
     BootstrapDropDownComponent = __decorate([
         Directive({
-            selector: 'bootstrap-drop-down, [bootstrap-drop-down]'
+            exportAs: 'bootstrap-drop-down', selector: 'bootstrap-drop-down, [bootstrap-drop-down]'
         })
     ], BootstrapDropDownComponent);
     return BootstrapDropDownComponent;
@@ -1118,7 +1118,7 @@ var BootstrapFileInputComponent = /** @class */ (function (_super) {
     ], BootstrapFileInputComponent.prototype, "onChange", void 0);
     BootstrapFileInputComponent = __decorate([
         Directive({
-            selector: 'bootstrap-file-input, [bootstrap-file-input]'
+            exportAs: 'bootstrap-file-input', selector: 'bootstrap-file-input, [bootstrap-file-input]'
         })
     ], BootstrapFileInputComponent);
     return BootstrapFileInputComponent;
@@ -1308,7 +1308,7 @@ var BootstrapInputComponent = /** @class */ (function (_super) {
     ], BootstrapInputComponent.prototype, "onChange", void 0);
     BootstrapInputComponent = __decorate([
         Directive({
-            selector: 'bootstrap-input, [bootstrap-input]'
+            exportAs: 'bootstrap-input', selector: 'bootstrap-input, [bootstrap-input]'
         })
     ], BootstrapInputComponent);
     return BootstrapInputComponent;
@@ -1526,7 +1526,7 @@ var BootstrapInputGroupComponent = /** @class */ (function (_super) {
     ], BootstrapInputGroupComponent.prototype, "onClick", void 0);
     BootstrapInputGroupComponent = __decorate([
         Directive({
-            selector: 'bootstrap-input-group, [bootstrap-input-group]'
+            exportAs: 'bootstrap-input-group', selector: 'bootstrap-input-group, [bootstrap-input-group]'
         })
     ], BootstrapInputGroupComponent);
     return BootstrapInputGroupComponent;
@@ -1752,7 +1752,7 @@ var BootstrapModalComponent = /** @class */ (function (_super) {
     ], BootstrapModalComponent.prototype, "onHide", void 0);
     BootstrapModalComponent = __decorate([
         Directive({
-            selector: 'bootstrap-modal, [bootstrap-modal]'
+            exportAs: 'bootstrap-modal', selector: 'bootstrap-modal, [bootstrap-modal]'
         })
     ], BootstrapModalComponent);
     return BootstrapModalComponent;
@@ -1928,7 +1928,7 @@ var BootstrapProgressBarComponent = /** @class */ (function (_super) {
     ], BootstrapProgressBarComponent.prototype, "onChange", void 0);
     BootstrapProgressBarComponent = __decorate([
         Directive({
-            selector: 'bootstrap-progress-bar, [bootstrap-progress-bar]'
+            exportAs: 'bootstrap-progress-bar', selector: 'bootstrap-progress-bar, [bootstrap-progress-bar]'
         })
     ], BootstrapProgressBarComponent);
     return BootstrapProgressBarComponent;
@@ -2103,7 +2103,7 @@ var BootstrapRadioButtonComponent = /** @class */ (function (_super) {
     ], BootstrapRadioButtonComponent.prototype, "onChange", void 0);
     BootstrapRadioButtonComponent = __decorate([
         Directive({
-            selector: 'bootstrap-radio-button, [bootstrap-radio-button]'
+            exportAs: 'bootstrap-radio-button', selector: 'bootstrap-radio-button, [bootstrap-radio-button]'
         })
     ], BootstrapRadioButtonComponent);
     return BootstrapRadioButtonComponent;
@@ -2251,7 +2251,7 @@ var BootstrapRangeComponent = /** @class */ (function (_super) {
     ], BootstrapRangeComponent.prototype, "onChange", void 0);
     BootstrapRangeComponent = __decorate([
         Directive({
-            selector: 'bootstrap-range, [bootstrap-range]'
+            exportAs: 'bootstrap-range', selector: 'bootstrap-range, [bootstrap-range]'
         })
     ], BootstrapRangeComponent);
     return BootstrapRangeComponent;
@@ -2541,7 +2541,7 @@ var BootstrapSplitButtonComponent = /** @class */ (function (_super) {
     ], BootstrapSplitButtonComponent.prototype, "onHidden", void 0);
     BootstrapSplitButtonComponent = __decorate([
         Directive({
-            selector: 'bootstrap-split-button, [bootstrap-split-button]'
+            exportAs: 'bootstrap-split-button', selector: 'bootstrap-split-button, [bootstrap-split-button]'
         })
     ], BootstrapSplitButtonComponent);
     return BootstrapSplitButtonComponent;
@@ -2730,7 +2730,7 @@ var BootstrapSwitchButtonComponent = /** @class */ (function (_super) {
     ], BootstrapSwitchButtonComponent.prototype, "onChange", void 0);
     BootstrapSwitchButtonComponent = __decorate([
         Directive({
-            selector: 'bootstrap-switch-button, [bootstrap-switch-button]'
+            exportAs: 'bootstrap-switch-button', selector: 'bootstrap-switch-button, [bootstrap-switch-button]'
         })
     ], BootstrapSwitchButtonComponent);
     return BootstrapSwitchButtonComponent;
@@ -2934,7 +2934,7 @@ var BootstrapTabsComponent = /** @class */ (function (_super) {
     ], BootstrapTabsComponent.prototype, "onShow", void 0);
     BootstrapTabsComponent = __decorate([
         Directive({
-            selector: 'bootstrap-tabs, [bootstrap-tabs]'
+            exportAs: 'bootstrap-tabs', selector: 'bootstrap-tabs, [bootstrap-tabs]'
         })
     ], BootstrapTabsComponent);
     return BootstrapTabsComponent;
@@ -3124,7 +3124,7 @@ var BootstrapTextareaComponent = /** @class */ (function (_super) {
     ], BootstrapTextareaComponent.prototype, "onChange", void 0);
     BootstrapTextareaComponent = __decorate([
         Directive({
-            selector: 'bootstrap-textarea, [bootstrap-textarea]'
+            exportAs: 'bootstrap-textarea', selector: 'bootstrap-textarea, [bootstrap-textarea]'
         })
     ], BootstrapTextareaComponent);
     return BootstrapTextareaComponent;
@@ -3299,7 +3299,7 @@ var BootstrapToggleButtonComponent = /** @class */ (function (_super) {
     ], BootstrapToggleButtonComponent.prototype, "onChange", void 0);
     BootstrapToggleButtonComponent = __decorate([
         Directive({
-            selector: 'bootstrap-toggle-button, [bootstrap-toggle-button]'
+            exportAs: 'bootstrap-toggle-button', selector: 'bootstrap-toggle-button, [bootstrap-toggle-button]'
         })
     ], BootstrapToggleButtonComponent);
     return BootstrapToggleButtonComponent;

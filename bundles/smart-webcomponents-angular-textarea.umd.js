@@ -1,3 +1,12 @@
+
+if (!window['Smart']) {
+	window['Smart'] = { RenderMode: 'manual' };
+}
+else {
+	window['Smart'].RenderMode = 'manual';
+}
+import './../source/modules/smart.textarea';
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
     typeof define === 'function' && define.amd ? define('smart-webcomponents-angular/textarea', ['exports', '@angular/core', '@angular/forms'], factory) :
@@ -925,7 +934,7 @@
         ], TextAreaComponent.prototype, "onChanging", void 0);
         TextAreaComponent = __decorate([
             core.Directive({
-                selector: 'smart-text-area, [smart-text-area]',
+                exportAs: 'smart-text-area', selector: 'smart-text-area, [smart-text-area]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], TextAreaComponent);

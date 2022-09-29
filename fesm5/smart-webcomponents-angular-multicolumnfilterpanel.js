@@ -446,7 +446,7 @@ var MultiColumnFilterPanelComponent = /** @class */ (function (_super) {
     ], MultiColumnFilterPanelComponent.prototype, "onExpandAll", void 0);
     MultiColumnFilterPanelComponent = __decorate([
         Directive({
-            selector: 'smart-multi-column-filter-panel, [smart-multi-column-filter-panel]'
+            exportAs: 'smart-multi-column-filter-panel', selector: 'smart-multi-column-filter-panel, [smart-multi-column-filter-panel]'
         })
     ], MultiColumnFilterPanelComponent);
     return MultiColumnFilterPanelComponent;

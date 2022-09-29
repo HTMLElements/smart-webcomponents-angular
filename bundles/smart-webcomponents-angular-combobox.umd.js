@@ -912,6 +912,17 @@ import './../source/modules/smart.combobox';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(ComboBoxComponent.prototype, "maxLength", {
+            /** @description Determines the maximum number of characters inside the input. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.maxLength : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.maxLength = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(ComboBoxComponent.prototype, "name", {
             /** @description Sets or gets the name attribute for the element. Name is used when submiting HTML forms. */
             get: function () {
@@ -1683,6 +1694,9 @@ import './../source/modules/smart.combobox';
         ], ComboBoxComponent.prototype, "minLength", null);
         __decorate([
             core.Input()
+        ], ComboBoxComponent.prototype, "maxLength", null);
+        __decorate([
+            core.Input()
         ], ComboBoxComponent.prototype, "name", null);
         __decorate([
             core.Input()
@@ -1776,7 +1790,7 @@ import './../source/modules/smart.combobox';
         ], ComboBoxComponent.prototype, "onTokenClick", void 0);
         ComboBoxComponent = __decorate([
             core.Directive({
-                selector: 'smart-combo-box, [smart-combo-box]',
+                exportAs: 'smart-combo-box', selector: 'smart-combo-box, [smart-combo-box]',
                 providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
             })
         ], ComboBoxComponent);
@@ -1986,7 +2000,7 @@ import './../source/modules/smart.combobox';
         ], ListItemComponent.prototype, "readonly", null);
         ListItemComponent = __decorate([
             core.Directive({
-                selector: 'smart-list-item, [smart-list-item]'
+                exportAs: 'smart-list-item', selector: 'smart-list-item, [smart-list-item]'
             })
         ], ListItemComponent);
         return ListItemComponent;
@@ -2055,7 +2069,7 @@ import './../source/modules/smart.combobox';
         ], ListItemsGroupComponent.prototype, "label", null);
         ListItemsGroupComponent = __decorate([
             core.Directive({
-                selector: 'smart-list-items-group, [smart-list-items-group]'
+                exportAs: 'smart-list-items-group', selector: 'smart-list-items-group, [smart-list-items-group]'
             })
         ], ListItemsGroupComponent);
         return ListItemsGroupComponent;

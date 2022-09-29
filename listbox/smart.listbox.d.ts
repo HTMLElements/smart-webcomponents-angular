@@ -35,7 +35,7 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description Determines the starting index of color alternations in rows */
     alternationStart: number;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Enables or disables auto sorting. If sorted is enabled, but autoSort is false, the element will not be re-sorted automatically. */
     autoSort: boolean;
     /** @description Determines the data source that will be loaded to the ListBox. The dataSource can be an array of strings/numbers or objects where the attributes represent the properties of a List Item. For example label, value, group. It can also be a callback that returns an Array of items as previously described. */
@@ -51,7 +51,7 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description Determines the offset of the drag feedback element from the mouse cursor when dragging an item. The first member of the array is the horizontal offset and the second one - the vertical offset. */
     dragOffset: number[];
     /** @description Determines what happens when an item is dropped. */
-    dropAction: ListBoxDropAction;
+    dropAction: ListBoxDropAction | string;
     /** @description Determines if list items can be edited or not. If enabled, items can be edited by double clicking on a target item ( that is not disabled ) or pressing the F2 key on the keyboard. */
     editable: boolean;
     /** @description Determines whether list items can be filtered or not. If enable a filter input appears at the top of the list box. */
@@ -59,7 +59,7 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description A callback that should return a condition that will be used for custom item filtering. Used in conjunction with filterMode 'custom' */
     filterCallback: any;
     /** @description Determines the filtering mode. */
-    filterMode: FilterMode;
+    filterMode: FilterMode | string;
     /** @description Determines the placeholder for the filter input field. */
     filterInputPlaceholder: string;
     /** @description If enabled, the items will be grouped by their first letter. Can't be applied if the dataSource already contains groups. */
@@ -67,15 +67,15 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description Determines which attribute from the dataSource object will be used as the group member for the items. If not set, by default 'group' property is used from the source object. groupMember is especially usefull when loading the data from a JSON file as a dataSource for the ListBox and there's a specific property that should be used to group the items. */
     groupMember: string | null;
     /** @description Determines the visibility of the horizontal Scroll bar. */
-    horizontalScrollBarVisibility: HorizontalScrollBarVisibility;
+    horizontalScrollBarVisibility: HorizontalScrollBarVisibility | string;
     /** @description IncrementalSearchDelay property specifies the time-interval in milliseconds until the previous search query is cleared. The timer starts when the user stops typing. A new query can be started only when the delay has passed. */
     incrementalSearchDelay: number;
     /** @description Sets ot gets the mode of the incremental search mode. Incremental search is enabled by default. Typing while the List box is focused starts the incremental search. */
-    incrementalSearchMode: SearchMode;
+    incrementalSearchMode: SearchMode | string;
     /** @description Sets the height for all list box items. Used only when virtualization is enabled. */
     itemHeight: number;
     /** @description Determines the item width measuring algorithm. */
-    itemMeasureMode: ListItemMeasureMode;
+    itemMeasureMode: ListItemMeasureMode | string;
     /** @description A getter that returns an array of all ListBox items. */
     items: ListBoxItem[];
     /** @description A string that represents the id of an HTMLTemplateElement inside the DOM or a reference to the template itself. It's used to set a custom template for the list items. */
@@ -83,7 +83,7 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description Determines the text that will be displayed next to the loading indicator when the loader is visible and it's position is top or bottom. */
     loadingIndicatorPlaceholder: string;
     /** @description Determines the position of the loading indicator. */
-    loadingIndicatorPosition: VerticalAlignment;
+    loadingIndicatorPosition: VerticalAlignment | string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback used to customize the format of the messages that are returned from the Localization Module. */
@@ -103,9 +103,9 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description Sets or gets elected indexes. Selected values represents the values of the items that should be selected. */
     selectedValues: string[];
     /** @description Determines how many items can be selected depending on the selection mode. */
-    selectionMode: ListSelectionMode;
+    selectionMode: ListSelectionMode | string;
     /** @description Determines when listbox selection is achieved - on 'press' or 'release'. */
-    selectionChangeAction: ListBoxSelectionChangeAction;
+    selectionChangeAction: ListBoxSelectionChangeAction | string;
     /** @description Determines whether the items are sorted alphabetically or not */
     sorted: boolean;
     /** @description Determines sorting direction - ascending(asc) or descending(desc) */
@@ -121,7 +121,7 @@ export declare class ListBoxComponent extends BaseElement implements OnInit, Aft
     /** @description Determines the value member of an item. Stored as value in the item object. Similar to groupMember, valueMember is especially usefull when using data from a JSON file as a dataSource for the ListBox and there's a specific property that should be used for the value the items. */
     valueMember: string;
     /** @description Determines the visibility of the vertical scroll bar. */
-    verticalScrollBarVisibility: VerticalScrollBarVisibility;
+    verticalScrollBarVisibility: VerticalScrollBarVisibility | string;
     /** @description Determines weather or not Virtualization is used for the ListBox. Virtualization allows a huge amount of items to be loaded to the List box while preserving the performance. For example a milion items can be loaded to the list box. */
     virtualized: boolean;
     /** @description This event is triggered when listbox binding is completed.

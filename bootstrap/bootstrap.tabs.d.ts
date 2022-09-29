@@ -14,7 +14,7 @@ export declare class BootstrapTabsComponent extends BaseElement implements OnIni
      */
     createComponent(properties?: {}): any;
     /** @description Sets the tabs alignment */
-    alignment: BootstrapTabsAlignment;
+    alignment: BootstrapTabsAlignment | string;
     /** @description Enables or disables the tabs.  */
     disabled: boolean;
     /** @description Sets the tabs fill */
@@ -22,13 +22,13 @@ export declare class BootstrapTabsComponent extends BaseElement implements OnIni
     /** @description Sets the tabs justified */
     justified: boolean;
     /** @description Sets or gets the tab type. */
-    listType: BootstrapTabsListType;
+    listType: BootstrapTabsListType | string;
     /** @description Sets or gets the style mode of the tabs. */
-    styleMode: BootstrapTabsStyleMode;
+    styleMode: BootstrapTabsStyleMode | string;
     /** @description Sets or gets the size mode of the element. */
     sizeMode: string;
     /** @description Sets or gets the tab type . */
-    tabType: BootstrapTabsTabType;
+    tabType: BootstrapTabsTabType | string;
     /** @description Show event.
     *  @param event. The custom event. 	*/
     onShow: EventEmitter<CustomEvent>;

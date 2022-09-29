@@ -24,7 +24,7 @@ export declare class BootstrapCircularComponent extends BaseElement implements O
     /** @description Sets whether stripes are displayed in the progress.  */
     striped: boolean;
     /** @description Sets or gets the style mode of the button. */
-    styleMode: BootstrapCircularStyleMode;
+    styleMode: BootstrapCircularStyleMode | string;
     /** @description Sets or gets the value */
     value: number;
     /** @description Change event is triggered when the value of the element is changed.

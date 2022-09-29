@@ -603,7 +603,7 @@ __decorate([
 ], ColorPanelComponent.prototype, "onOkButtonClick", void 0);
 ColorPanelComponent = __decorate([
     Directive({
-        selector: 'smart-color-panel, [smart-color-panel]',
+        exportAs: 'smart-color-panel', selector: 'smart-color-panel, [smart-color-panel]',
         providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
     })
 ], ColorPanelComponent);

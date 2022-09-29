@@ -14,7 +14,7 @@ export declare class FilterPanelComponent extends BaseElement implements OnInit,
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Defines which operation buttons will be shown in the filter panel */
     buttons: string[];
     /** @description Array in mode: 'excel', determines the data to extract unique filter values from. The expected format of the data is an array of objects with key-value pairs (JSON array) */
@@ -28,7 +28,7 @@ export declare class FilterPanelComponent extends BaseElement implements OnInit,
     /** @description Callback function, used for custom evaluations in filter panel. */
     evaluateFilterExpression: any;
     /** @description Defines which filter type is used. */
-    filterType: FilterPanelFilterType;
+    filterType: FilterPanelFilterType | string;
     /** @description Format string used in filterType 'Date'. */
     formatString: string;
     /** @description Sets or gets the language. Used in conjunction with the property messages.  */
@@ -36,7 +36,7 @@ export declare class FilterPanelComponent extends BaseElement implements OnInit,
     /** @description Defines field names of the filtered element. */
     messages: any;
     /** @description Desfines filter panel's  mode */
-    mode: FilterPanelMode;
+    mode: FilterPanelMode | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Determines the theme. Theme defines the look of the element */

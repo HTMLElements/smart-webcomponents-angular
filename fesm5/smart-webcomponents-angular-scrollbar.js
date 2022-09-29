@@ -459,7 +459,7 @@ var ScrollBarComponent = /** @class */ (function (_super) {
     ], ScrollBarComponent.prototype, "onChange", void 0);
     ScrollBarComponent = __decorate([
         Directive({
-            selector: 'smart-scroll-bar, [smart-scroll-bar]'
+            exportAs: 'smart-scroll-bar', selector: 'smart-scroll-bar, [smart-scroll-bar]'
         })
     ], ScrollBarComponent);
     return ScrollBarComponent;

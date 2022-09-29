@@ -25,9 +25,9 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     */
     _onTouched: () => any;
     /** @description Determines the type of gauge's indicator. */
-    analogDisplayType: GaugeAnalogDisplayType;
+    analogDisplayType: GaugeAnalogDisplayType | string;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Sets or gets gauge's animation duration. Applicable only when animation is not 'none'. */
     animationDuration: number;
     /** @description With the coerce property true, the value is set to the nearest value allowed by the interval property.  */
@@ -43,7 +43,7 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     /** @description Enables or disables the digital display of the element. */
     digitalDisplay: boolean;
     /** @description Sets the position of the digital display inside the element. */
-    digitalDisplayPosition: GaugeDigitalDisplayPosition;
+    digitalDisplayPosition: GaugeDigitalDisplayPosition | string;
     /** @description Enables or disables the element. */
     disabled: boolean;
     /** @description Callback function which allows rendering of a custom needle. Applicable only to analogDisplayType needle. */
@@ -57,7 +57,7 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     /** @description A callback function that can be used to format the values displayed inside the gauge labels. */
     labelFormatFunction: any;
     /** @description Determines the visibility of the labels inside the element. */
-    labelsVisibility: LabelsVisibility;
+    labelsVisibility: LabelsVisibility | string;
     /** @description Sets or gets the locale. Used in conjunction with the property messages.  */
     locale: string;
     /** @description Callback used to customize the format of the messages that are returned from the Localization Module. */
@@ -67,17 +67,17 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     /** @description Determines the maximum value for the scale of the element. */
     max: number;
     /** @description Determines when the value of the element is updated. */
-    mechanicalAction: DragMechanicalAction;
+    mechanicalAction: DragMechanicalAction | string;
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property locale.  */
     messages: any;
     /** @description Determines the minimum value for the scale of the element.  */
     min: number;
     /** @description Determines whether the element works with numbers or dates. */
-    mode: ScaleMode;
+    mode: ScaleMode | string;
     /** @description Sets or gets the element's name, which is used as a reference when the data is submitted. */
     name: string;
     /** @description Determines the position of the needle when analogDisplayType is 'needle'.  */
-    needlePosition: GaugeNeedlePosition;
+    needlePosition: GaugeNeedlePosition | string;
     /** @description Determines the number of digits after the decimal point. Applicable only when scaleType is 'floatingPoint'. */
     precisionDigits: number;
     /** @description This property represents an array of objects. Each object is a different range. The range is a colored area with specific size. */
@@ -91,9 +91,9 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. If enabled, the scale is inverted and the labels and digital display are oriented from right to left. */
     rightToLeft: boolean;
     /** @description Determines the position of the scale in the element.  */
-    scalePosition: GaugeScalePosition;
+    scalePosition: GaugeScalePosition | string;
     /** @description Determines the type of the gauge's value and scale.  */
-    scaleType: ScaleType;
+    scaleType: ScaleType | string;
     /** @description Enables or disables scientific notation. */
     scientificNotation: boolean;
     /** @description This property indicates whether the gauge ranges are visible or not. */
@@ -103,25 +103,25 @@ export declare class GaugeComponent extends BaseElement implements OnInit, After
     /** @description Determining how many significant digits are in a number. Applicable only when scaleType is 'integer'. */
     significantDigits: number | null;
     /** @description Determines how the Gauge will size. */
-    sizeMode: GaugeSizeMode;
+    sizeMode: GaugeSizeMode | string;
     /** @description Sets or gets gauge's start angle. This property specifies the beggining of the gauge's scale and is measured in degrees. */
     startAngle: number;
     /** @description Sets or gets the element's visual theme. */
     theme: string;
     /** @description Determines the position of the ticks in the Gauge. */
-    ticksPosition: TicksPosition;
+    ticksPosition: TicksPosition | string;
     /** @description Determines the visibility of the ticks. */
-    ticksVisibility: TicksVisibility;
+    ticksVisibility: TicksVisibility | string;
     /** @description Sets or gets if the element can be focused. */
     unfocusable: boolean;
     /** @description Sets or gets the name of unit used for the values on the scale of the element. */
     unit: string;
     /** @description Sets the value's validation by min/max. */
-    validation: Validation;
+    validation: Validation | string;
     /** @description Sets or gets the value of the element. The value can be a date only when scaleType is 'date'. */
     value: string | number | Date;
     /** @description Sets or gets the word length. Applicable only when scaleType is 'integer'. */
-    wordLength: WordLength;
+    wordLength: WordLength | string;
     /** @description This event is triggered when the value of the element is changed.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	oldValue, 	value)
     *   oldValue - The previous value of the element.

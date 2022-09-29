@@ -14,13 +14,13 @@ export declare class TooltipComponent extends BaseElement implements OnInit, Aft
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Determines how to align the tooltip. */
     align: string;
     /** @description Gets or sets whether a tooltip's arrow will be shown. */
     arrow: boolean;
     /** @description Sets the position of the arrow. */
-    arrowDirection: TooltipArrowDirection;
+    arrowDirection: TooltipArrowDirection | string;
     /** @description Gets or sets whether a tooltip's arrow will be shown. */
     delay: number;
     /** @description Enables or disables the tooltip. */
@@ -34,9 +34,9 @@ export declare class TooltipComponent extends BaseElement implements OnInit, Aft
     /** @description Sets or gets an object specifying strings used in the widget that can be localized. Used in conjunction with the property language.  */
     messages: any;
     /** @description Sets or gets the way of triggering the tooltip. */
-    openMode: TooltipOpenMode;
+    openMode: TooltipOpenMode | string;
     /** @description Gets or sets the position of the tooltip. */
-    position: TooltipPosition;
+    position: TooltipPosition | string;
     /** @description Sets the element which triggers the tooltip. */
     selector: string | HTMLElement;
     /** @description Determines the theme. Theme defines the look of the element */

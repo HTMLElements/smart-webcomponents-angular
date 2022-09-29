@@ -533,7 +533,7 @@ var RadioButtonComponent = /** @class */ (function (_super) {
     ], RadioButtonComponent.prototype, "onUncheckValue", void 0);
     RadioButtonComponent = __decorate([
         Directive({
-            selector: 'smart-radio-button, [smart-radio-button]',
+            exportAs: 'smart-radio-button', selector: 'smart-radio-button, [smart-radio-button]',
             providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
         })
     ], RadioButtonComponent);

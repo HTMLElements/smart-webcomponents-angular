@@ -866,7 +866,7 @@ import './../source/modules/smart.carousel';
         ], CarouselComponent.prototype, "onSwiperight", void 0);
         CarouselComponent = __decorate([
             core.Directive({
-                selector: 'smart-carousel, [smart-carousel]'
+                exportAs: 'smart-carousel', selector: 'smart-carousel, [smart-carousel]'
             })
         ], CarouselComponent);
         return CarouselComponent;

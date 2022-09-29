@@ -14,7 +14,7 @@ export declare class ToastComponent extends BaseElement implements OnInit, After
      */
     createComponent(properties?: {}): any;
     /** @description Sets or gets the animation mode. Animation is disabled when the property is set to 'none' */
-    animation: Animation;
+    animation: Animation | string;
     /** @description Specifies the container where new openned toast items will be displayed. The value can be an HTMLElement or element's id. This property is in relation with modal(lower priority than modal) and position(higher priority than position) properties. */
     appendTo: string;
     /** @description Sets or gets whether the toast will automatically close after duration equal to the autoCloseDelay property. */
@@ -40,7 +40,7 @@ export declare class ToastComponent extends BaseElement implements OnInit, After
     /** @description In modal mode the toast item is positioned in the center of the screen. This property is with higher priority than position and appendTo. If modal is set to true these properties are disregarded. */
     modal: boolean;
     /** @description Sets the part of the browser window where the toast will be positioned. The position property is disregarded if appendTo or modal are set. */
-    position: ToastPosition;
+    position: ToastPosition | string;
     /** @description If the element is readonly, users cannot interact with it. */
     readonly: boolean;
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
@@ -50,7 +50,7 @@ export declare class ToastComponent extends BaseElement implements OnInit, After
     /** @description Determines the theme. Theme defines the look of the element */
     theme: string;
     /** @description Sets speciffic CSS settings and icon to the toast items. */
-    type: ToastType | null;
+    type: ToastType | null | string;
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
     /** @description Sets a text value to an toast item. */

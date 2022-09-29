@@ -244,7 +244,7 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
         /** @description This event is triggered when the edit/prompt dialog is opened.
         *  @param event. The custom event. 	*/
         this.onOpen = new EventEmitter();
-        /** @description This event is triggered when the edit/prompt dialog is about to be opened. The opening operation can be canceled by calling event.preventDefault() in the event handler function.
+        /** @description This event is triggered when the edit/prompt dialog is about to be opened. The opening operation can be canceled by calling event.preventDefault() in the event handler function. If you want to cancel the default Kanban dialog, call event.preventDefault();
         *  @param event. The custom event. 	Custom event was created with: event.detail(	comment, 	purpose, 	task)
         *   comment - The comment that is about to be removed (if applicable).
         *   purpose - The purpose of the dialog to be opened - <em>'edit'</em> or <em>'prompt'</em>.
@@ -254,7 +254,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
         /** @description This event is triggered when sorting has been applied.
         *  @param event. The custom event. 	*/
         this.onSort = new EventEmitter();
-        /** @description This event is triggered when a new task is added.
+        /** @description This event is triggered before a new task is added. You can use the event.detail.value and event.detail.id to customize the new Task before adding it to the Kanban. Example: kanban.onTaskBeforeAdd = (event) => { const data = event.detail.value; const id = event.detail.id; event.detail.id = 'BG12';}
+        *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
+        *   value - The task data that is added to the Kanban.
+        *   id - The task data id.
+        */
+        this.onTaskBeforeAdd = new EventEmitter();
+        /** @description This event is triggered when a new task is added. Example: kanban.onTaskAdd = (event) => { const data = event.detail.value; const id = event.detail.id; }
         *  @param event. The custom event. 	Custom event was created with: event.detail(	value, 	id)
         *   value - The task data that is added to the Kanban.
         *   id - The task data id.
@@ -346,6 +352,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set addNewColumn(value) {
         this.nativeElement ? this.nativeElement.addNewColumn = value : undefined;
     }
+    /** @description Sets the width of the add new column. The property is used, if the 'columnWidth' property is set, too. It specifies the width of the dynamic new column. */
+    get addNewColumnWidth() {
+        return this.nativeElement ? this.nativeElement.addNewColumnWidth : undefined;
+    }
+    set addNewColumnWidth(value) {
+        this.nativeElement ? this.nativeElement.addNewColumnWidth = value : undefined;
+    }
     /** @description Allows the dragging of tasks. */
     get allowDrag() {
         return this.nativeElement ? this.nativeElement.allowDrag : undefined;
@@ -359,6 +372,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     set allowDrop(value) {
         this.nativeElement ? this.nativeElement.allowDrop = value : undefined;
+    }
+    /** @description This property changes the visual appeal of the Kanban columns and tasks. When set to true and the Kanban columns have their 'color' property set, the color is also applied to the tasks and edit dialog. */
+    get applyColumnColorToTasks() {
+        return this.nativeElement ? this.nativeElement.applyColumnColorToTasks : undefined;
+    }
+    set applyColumnColorToTasks(value) {
+        this.nativeElement ? this.nativeElement.applyColumnColorToTasks = value : undefined;
     }
     /** @description Enables or disables auto load state from the browser's localStorage. Information about tasks and their position and selected state, filtering, sorting, collapsed columns, as well as the values of the properties taskActions, taskComments, taskDue, taskPriority, taskProgress, taskTags, and taskUserIcon is loaded. */
     get autoLoadState() {
@@ -374,6 +394,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set autoSaveState(value) {
         this.nativeElement ? this.nativeElement.autoSaveState = value : undefined;
     }
+    /** @description Automatically updates the columns height depending on the tasks inside the column. The effect of this property is observed when 'columnColorEntireSurface' is true. */
+    get autoColumnHeight() {
+        return this.nativeElement ? this.nativeElement.autoColumnHeight : undefined;
+    }
+    set autoColumnHeight(value) {
+        this.nativeElement ? this.nativeElement.autoColumnHeight = value : undefined;
+    }
     /** @description Allows collapsing the card content. */
     get collapsible() {
         return this.nativeElement ? this.nativeElement.collapsible : undefined;
@@ -387,6 +414,27 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     set columnColors(value) {
         this.nativeElement ? this.nativeElement.columnColors = value : undefined;
+    }
+    /** @description Sets the Kanban columns width. When this property is set, the kanban columns width is set and a horizontal scrollbar may appear. */
+    get columnWidth() {
+        return this.nativeElement ? this.nativeElement.columnWidth : undefined;
+    }
+    set columnWidth(value) {
+        this.nativeElement ? this.nativeElement.columnWidth = value : undefined;
+    }
+    /** @description Displays background in the Kanban column. */
+    get columnColorEntireSurface() {
+        return this.nativeElement ? this.nativeElement.columnColorEntireSurface : undefined;
+    }
+    set columnColorEntireSurface(value) {
+        this.nativeElement ? this.nativeElement.columnColorEntireSurface = value : undefined;
+    }
+    /** @description Displays a column footer which shows the summary of the column. */
+    get columnFooter() {
+        return this.nativeElement ? this.nativeElement.columnFooter : undefined;
+    }
+    set columnFooter(value) {
+        this.nativeElement ? this.nativeElement.columnFooter = value : undefined;
     }
     /** @description Describes the columns properties. */
     get columns() {
@@ -429,6 +477,27 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     set currentUser(value) {
         this.nativeElement ? this.nativeElement.currentUser = value : undefined;
+    }
+    /** @description Sets or gets whether the default dialog for adding/removing tasks or comments is disabled. */
+    get disableDialog() {
+        return this.nativeElement ? this.nativeElement.disableDialog : undefined;
+    }
+    set disableDialog(value) {
+        this.nativeElement ? this.nativeElement.disableDialog = value : undefined;
+    }
+    /** @description Sets or gets a customization function for the dialog. This function can be used to customize the dialog look or to replace it. The Kanban calls this function with 5 arguments - 'dialog', 'taskOrComment', 'editors', 'purpose' and 'type'. The dialog is the 'smart-window' instance used as a default Kanban dialog. 'taskOrComment' is object which could be Kanban task or comment. 'purpose' could be 'add' or 'edit' and 'type' could be 'task' or 'column' depending on the action. */
+    get dialogCustomizationFunction() {
+        return this.nativeElement ? this.nativeElement.dialogCustomizationFunction : undefined;
+    }
+    set dialogCustomizationFunction(value) {
+        this.nativeElement ? this.nativeElement.dialogCustomizationFunction = value : undefined;
+    }
+    /** @description Sets or gets a function called when the dialog is rendered. The Kanban calls this function with 6 arguments - 'dialog', 'editors', 'labels', 'tabs', 'layout', 'taskOrComment'. The dialog is the 'smart-window' instance used as a default Kanban dialog. 'taskOrComment' is object which could be Kanban task or comment. 'editors', 'labels', 'tabs' and 'layout' are JSON objects with key which describes the element type and value which is HTML Element. */
+    get dialogRendered() {
+        return this.nativeElement ? this.nativeElement.dialogRendered : undefined;
+    }
+    set dialogRendered(value) {
+        this.nativeElement ? this.nativeElement.dialogRendered = value : undefined;
     }
     /** @description Determines the data source to be visualized in the kanban board. */
     get dataSource() {
@@ -500,6 +569,41 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set messages(value) {
         this.nativeElement ? this.nativeElement.messages = value : undefined;
     }
+    /** @description Callback function which can be used for customizing the tasks rendering. The Kanban calls it with 2 arguments - task html element and task data. */
+    get onTaskRender() {
+        return this.nativeElement ? this.nativeElement.onTaskRender : undefined;
+    }
+    set onTaskRender(value) {
+        this.nativeElement ? this.nativeElement.onTaskRender = value : undefined;
+    }
+    /** @description Callback function which can be used for customizing the filter items. The function is called with 1 argument - Array of items which will be displayed in the filter drop down. You can modify that array to remove or update items to filter by. */
+    get onFilterPrepare() {
+        return this.nativeElement ? this.nativeElement.onFilterPrepare : undefined;
+    }
+    set onFilterPrepare(value) {
+        this.nativeElement ? this.nativeElement.onFilterPrepare = value : undefined;
+    }
+    /** @description Callback function which can be used for customizing the sort items. The function is called with 1 argument - Array of items which will be displayed in the sort drop down. You can modify that array to remove or update items to sort by. */
+    get onSortPrepare() {
+        return this.nativeElement ? this.nativeElement.onSortPrepare : undefined;
+    }
+    set onSortPrepare(value) {
+        this.nativeElement ? this.nativeElement.onSortPrepare = value : undefined;
+    }
+    /** @description Callback function which can be used for customizing the column header rendering. The Kanban calls it with 3 arguments - column header html element and column data and column data field. */
+    get onColumnHeaderRender() {
+        return this.nativeElement ? this.nativeElement.onColumnHeaderRender : undefined;
+    }
+    set onColumnHeaderRender(value) {
+        this.nativeElement ? this.nativeElement.onColumnHeaderRender = value : undefined;
+    }
+    /** @description Callback function which can be used for customizing the column footer rendering. The Kanban calls it with 3 arguments - column header html element and column data and column data field. */
+    get onColumnFooterRender() {
+        return this.nativeElement ? this.nativeElement.onColumnFooterRender : undefined;
+    }
+    set onColumnFooterRender(value) {
+        this.nativeElement ? this.nativeElement.onColumnFooterRender = value : undefined;
+    }
     /** @description Determines selection mode. */
     get selectionMode() {
         return this.nativeElement ? this.nativeElement.selectionMode : undefined;
@@ -527,6 +631,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     }
     set rightToLeft(value) {
         this.nativeElement ? this.nativeElement.rightToLeft = value : undefined;
+    }
+    /** @description Sets or gets whether the edit dialog is displayed in readonly mode. In that mode it shows only the task details, but the editing is disabled. However, if comments are enabled, you will be able to add comments in the dialog. */
+    get readonly() {
+        return this.nativeElement ? this.nativeElement.readonly : undefined;
+    }
+    set readonly(value) {
+        this.nativeElement ? this.nativeElement.readonly = value : undefined;
     }
     /** @description Describes the swimlanes in the kanban board. Sub-columns are not applicable when swimlanes are present. */
     get swimlanes() {
@@ -563,6 +674,13 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set taskActions(value) {
         this.nativeElement ? this.nativeElement.taskActions = value : undefined;
     }
+    /** @description Represents a callback function which is called when the task actions menu is created. The task actions element is passed as parameter and allows you to customize the menu. Example: (list) => { list.innerHTML = 'Custom Item'; list.onclick = () => { alert('clicked'); }} */
+    get taskActionsRendered() {
+        return this.nativeElement ? this.nativeElement.taskActionsRendered : undefined;
+    }
+    set taskActionsRendered(value) {
+        this.nativeElement ? this.nativeElement.taskActionsRendered = value : undefined;
+    }
     /** @description Toggles the visibility of the task comments icon. */
     get taskComments() {
         return this.nativeElement ? this.nativeElement.taskComments : undefined;
@@ -598,7 +716,7 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set taskProgress(value) {
         this.nativeElement ? this.nativeElement.taskProgress = value : undefined;
     }
-    /** @description Sets the task custom fields displayed in the card. Each array item should have 'dataField', 'label' 'dataType' and optionally 'visible' properties. The 'dataField' determines the value, the label is displayed as title, 'dataType' is used for formatting and 'visible' determines whether the field will be displayed. */
+    /** @description Sets the task custom fields displayed in the card. Each array item should have 'dataField', 'label' 'dataType' and optionally 'visible', 'image' and 'cover' properties. The 'dataField' determines the value, the label is displayed as title, 'dataType' is used for formatting and 'visible' determines whether the field will be displayed. If your string represents an image either URL or Base64, set image: true. If you want to display that image as a cover image, set cover:true, too. */
     get taskCustomFields() {
         return this.nativeElement ? this.nativeElement.taskCustomFields : undefined;
     }
@@ -682,9 +800,9 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
     set users(value) {
         this.nativeElement ? this.nativeElement.users = value : undefined;
     }
-    /** @description Adds filtering
-    * @param {string[]} filters. Filter information
-    * @param {string} operator?. Logical operator between the filters of different fields
+    /** @description Adds filtering. Example: const filterGroup = new Smart.FilterGroup(); const filterObject = filterGroup.createFilter('string', 'Italy', 'contains'); filterGroup.addFilter('and', filterObject); kanban.addFilter([['Country', filterGroup]]);
+    * @param {any} filters. Filter information. Example: kanban.addFilter([['Country', filterGroup]]);. Each array item is a sub array with two items - 'dataField' and 'filterGroup' object. The 'dataField' is any valid data field from the data source bound to the Kanban like 'dueDate', 'startDate' or custom fields like 'Country'. Filter conditions which you can use in the expressions: '=', 'EQUAL','&lt;&gt;', 'NOT_EQUAL', '!=', '&lt;', 'LESS_THAN','&gt;', 'GREATER_THAN', '&lt;=', 'LESS_THAN_OR_EQUAL', '&gt;=', 'GREATER_THAN_OR_EQUAL','starts with', 'STARTS_WITH','ends with', 'ENDS_WITH', '', 'EMPTY', 'CONTAINS','DOES_NOT_CONTAIN', 'NULL','NOT_NULL'
+    * @param {string} operator?. Logical operator between the filters of different fields. Possible values are: 'and', 'or'.
     */
     addFilter(filters, operator) {
         if (this.nativeElement.isRendered) {
@@ -696,9 +814,9 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
             });
         }
     }
-    /** @description Adds sorting
+    /** @description Adds sorting. Example: kanban.addSort(['Country'], 'ascending');
     * @param {[] | string} dataFields. The data field(s) to sort by
-    * @param {[] | string} orderBy. The sort direction(s) to sort the data field(s) by
+    * @param {[] | string} orderBy. The sort direction(s) to sort the data field(s) by. Possible values are: 'ascending' and 'descending'.
     */
     addSort(dataFields, orderBy) {
         if (this.nativeElement.isRendered) {
@@ -1249,6 +1367,8 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
         that.nativeElement.addEventListener('opening', that.eventHandlers['openingHandler']);
         that.eventHandlers['sortHandler'] = (event) => { that.onSort.emit(event); };
         that.nativeElement.addEventListener('sort', that.eventHandlers['sortHandler']);
+        that.eventHandlers['taskBeforeAddHandler'] = (event) => { that.onTaskBeforeAdd.emit(event); };
+        that.nativeElement.addEventListener('taskBeforeAdd', that.eventHandlers['taskBeforeAddHandler']);
         that.eventHandlers['taskAddHandler'] = (event) => { that.onTaskAdd.emit(event); };
         that.nativeElement.addEventListener('taskAdd', that.eventHandlers['taskAddHandler']);
         that.eventHandlers['taskRemoveHandler'] = (event) => { that.onTaskRemove.emit(event); };
@@ -1332,6 +1452,9 @@ let KanbanComponent = class KanbanComponent extends BaseElement {
         if (that.eventHandlers['sortHandler']) {
             that.nativeElement.removeEventListener('sort', that.eventHandlers['sortHandler']);
         }
+        if (that.eventHandlers['taskBeforeAddHandler']) {
+            that.nativeElement.removeEventListener('taskBeforeAdd', that.eventHandlers['taskBeforeAddHandler']);
+        }
         if (that.eventHandlers['taskAddHandler']) {
             that.nativeElement.removeEventListener('taskAdd', that.eventHandlers['taskAddHandler']);
         }
@@ -1375,10 +1498,16 @@ __decorate([
 ], KanbanComponent.prototype, "addNewColumn", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "addNewColumnWidth", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "allowDrag", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "allowDrop", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "applyColumnColorToTasks", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "autoLoadState", null);
@@ -1387,10 +1516,22 @@ __decorate([
 ], KanbanComponent.prototype, "autoSaveState", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "autoColumnHeight", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "collapsible", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "columnColors", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "columnWidth", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "columnColorEntireSurface", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "columnFooter", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "columns", null);
@@ -1409,6 +1550,15 @@ __decorate([
 __decorate([
     Input()
 ], KanbanComponent.prototype, "currentUser", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "disableDialog", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "dialogCustomizationFunction", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "dialogRendered", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "dataSource", null);
@@ -1441,6 +1591,21 @@ __decorate([
 ], KanbanComponent.prototype, "messages", null);
 __decorate([
     Input()
+], KanbanComponent.prototype, "onTaskRender", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "onFilterPrepare", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "onSortPrepare", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "onColumnHeaderRender", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "onColumnFooterRender", null);
+__decorate([
+    Input()
 ], KanbanComponent.prototype, "selectionMode", null);
 __decorate([
     Input()
@@ -1451,6 +1616,9 @@ __decorate([
 __decorate([
     Input()
 ], KanbanComponent.prototype, "rightToLeft", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "readonly", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "swimlanes", null);
@@ -1466,6 +1634,9 @@ __decorate([
 __decorate([
     Input()
 ], KanbanComponent.prototype, "taskActions", null);
+__decorate([
+    Input()
+], KanbanComponent.prototype, "taskActionsRendered", null);
 __decorate([
     Input()
 ], KanbanComponent.prototype, "taskComments", null);
@@ -1588,6 +1759,9 @@ __decorate([
 ], KanbanComponent.prototype, "onSort", void 0);
 __decorate([
     Output()
+], KanbanComponent.prototype, "onTaskBeforeAdd", void 0);
+__decorate([
+    Output()
 ], KanbanComponent.prototype, "onTaskAdd", void 0);
 __decorate([
     Output()
@@ -1603,7 +1777,7 @@ __decorate([
 ], KanbanComponent.prototype, "onTaskDoubleClick", void 0);
 KanbanComponent = __decorate([
     Directive({
-        selector: 'smart-kanban, [smart-kanban]'
+        exportAs: 'smart-kanban', selector: 'smart-kanban, [smart-kanban]'
     })
 ], KanbanComponent);
 
