@@ -1,7 +1,7 @@
 {
   "name": "angular-gantt-tooltips",
   "description": "Angular gantt tooltips example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://www.htmlelements.com/",
    "dependencies": {
     "@angular/animations": "~14.2.0",

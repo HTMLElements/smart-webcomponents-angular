@@ -1,7 +1,7 @@
 {
   "name": "angular-3d-chart-right-to-left",
   "description": "Angular 3D chart right-to-left example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "dependencies": {
     "@angular/animations": "^15.0.0",
     "@angular/common": "^15.0.0",
