@@ -28,11 +28,7 @@
                 "src/assets/fonts.css",
 			    "src/assets/styles.css"
             ],
-            "scripts": [
-                "./node_modules/@smart-webcomponents-angular/threedchart/scripts/three.js",
-                "./node_modules/@smart-webcomponents-angular/threedchart/scripts/html2canvas.min.js",
-                "./node_modules/@smart-webcomponents-angular/threedchart/scripts/pdfmake.min.js"
-            ]
+            "scripts": []
             },
             "configurations": {
             "production": {

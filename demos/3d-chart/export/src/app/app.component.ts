@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ThreeDChartComponent } from 'smart-webcomponents-angular/threedchart';
-import { CheckBoxComponent } from 'smart-webcomponents-angular/checkbox';
+import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
+import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 
 @Component({
   selector: 'app-root',

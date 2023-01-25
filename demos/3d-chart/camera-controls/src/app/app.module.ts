@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ThreeDChartModule } from 'smart-webcomponents-angular/threedchart';
+import { ThreeDChartModule } from '@smart-webcomponents-angular/threedchart';
 
-import { ButtonModule } from 'smart-webcomponents-angular/button';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 import { AppComponent } from './app.component';
 

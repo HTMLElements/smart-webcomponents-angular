@@ -28,9 +28,7 @@
                 "src/assets/fonts.css",
 			    "src/assets/styles.css"
             ],
-            "scripts": [
-                "./node_modules/@smart-webcomponents-angular/threedchart/scripts/three.js"
-            ]
+            "scripts": []
             },
             "configurations": {
             "production": {
