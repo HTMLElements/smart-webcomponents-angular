@@ -19,6 +19,7 @@
     "@smart-webcomponents-angular/colorpicker": "^13.7.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "core-js": "^3.27.2",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
