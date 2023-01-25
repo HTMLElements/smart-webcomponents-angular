@@ -1,7 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { generate } from 'rxjs';
-import { RadioButtonComponent } from 'smart-webcomponents-angular/radiobutton';
-import { ThreeDChartComponent } from 'smart-webcomponents-angular/threedchart';
+import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
+import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
 
 
 @Component({

@@ -1,9 +1,9 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ThreeDChartComponent } from 'smart-webcomponents-angular/threedchart';
-import { NumberInputComponent } from 'smart-webcomponents-angular/numberinput';
-import { ButtonComponent } from 'smart-webcomponents-angular/button';
-import { CheckBoxComponent } from 'smart-webcomponents-angular/checkbox';
-import { ColorPickerComponent } from 'smart-webcomponents-angular/colorpicker';
+import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
+import { NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
+import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
+import { ColorPickerComponent } from '@smart-webcomponents-angular/colorpicker';
 
 
 @Component({

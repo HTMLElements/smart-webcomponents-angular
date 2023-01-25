@@ -6,16 +6,16 @@
 } from '@angular/core';
 import {
   ThreeDChartComponent
-} from 'smart-webcomponents-angular/threedchart';
+} from '@smart-webcomponents-angular/threedchart';
 import {
   DropDownListComponent
-} from 'smart-webcomponents-angular/dropdownlist';
+} from '@smart-webcomponents-angular/dropdownlist';
 import {
   ButtonComponent
-} from 'smart-webcomponents-angular/button';
+} from '@smart-webcomponents-angular/button';
 import {
   CheckBoxComponent
-} from 'smart-webcomponents-angular/checkbox';
+} from '@smart-webcomponents-angular/checkbox';
 
 
 @Component({

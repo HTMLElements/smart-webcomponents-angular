@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ThreeDChartComponent } from 'smart-webcomponents-angular/threedchart';
-import { ButtonComponent } from 'smart-webcomponents-angular/button';
-import { NumberInputComponent } from 'smart-webcomponents-angular/numberinput';
+import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
+import { NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
 
 
 @Component({

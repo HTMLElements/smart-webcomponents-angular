@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ThreeDChartComponent } from 'smart-webcomponents-angular/threedchart';
-import { NumberInputComponent } from 'smart-webcomponents-angular/numberinput';
+import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
+import { NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
 
 @Component({
   selector: 'app-root',
