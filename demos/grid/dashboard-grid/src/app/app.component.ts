@@ -282,10 +282,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         const buttons = document.querySelectorAll('.history-holder smart-button') as NodeListOf<Button>;
 
         for (let i = 0; i < buttons.length; i++) {
-            buttons[i].onclick = function () {
+            buttons[i].onclick = function (event: any) {
                 (buttons[0].parentNode as HTMLElement).classList.remove('active');
                 (buttons[1].parentNode as HTMLElement).classList.remove('active');
-                this.parentNode.classList.add('active');
+                event.target.parentNode.classList.add('active');
             };
         }
     };
