@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ThreeDChartComponent } from '@@smart-webcomponents-angular/threedchart';
+import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
 
 
 @Component({

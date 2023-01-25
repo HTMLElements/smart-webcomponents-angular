@@ -28,8 +28,7 @@
                 "src/assets/fonts.css",
 			    "src/assets/styles.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
             },
             "configurations": {
             "production": {
