@@ -1,7 +1,7 @@
 {
   "name": "angular-grid-column-reorder",
   "description": "Angular grid column-reorder example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://www.htmlelements.com/",
    "dependencies": {
     "@angular/animations": "12 - 15",
@@ -18,7 +18,7 @@
     "@types/node": "^14.14.31",
     "core-js": "3.9.1",
     "moment": "^2.29.1",
-    "@smart-webcomponents-angular/grid": "9.2.73",
+    "@smart-webcomponents-angular/grid": "15.0.2",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
