@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: String = 'day';
 
-    views: SchedulerViews[] = ['day', 'week', 'month', 'timelineDay', 'timelineWeek', 'timelineMonth'];
+    views: SchedulerViews = ['day', 'week', 'month', 'timelineDay', 'timelineWeek', 'timelineMonth'];
 
     firstDayOfWeek: Number = 1;
 
