@@ -3,7 +3,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 import { TreeComponent, Tree, TreeItem } from '@smart-webcomponents-angular/tree';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
