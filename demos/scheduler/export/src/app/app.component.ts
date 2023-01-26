@@ -120,7 +120,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'week';
 
-    views: SchedulerViews[] = ['day', 'week', 'month', 'timelineDay', 'timelineWeek', 'timelineMonth', 'agenda'];
+    views: SchedulerViews = ['day', 'week', 'month', 'timelineDay', 'timelineWeek', 'timelineMonth', 'agenda'];
 
     hourStart: number = 7;
 

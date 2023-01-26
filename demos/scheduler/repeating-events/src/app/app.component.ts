@@ -94,7 +94,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'month';
 
-    views: SchedulerViews[] = ['week', 'month', 'agenda'];
+    views: SchedulerViews = ['week', 'month', 'agenda'];
 
     firstDayOfWeek: number = 1;
 

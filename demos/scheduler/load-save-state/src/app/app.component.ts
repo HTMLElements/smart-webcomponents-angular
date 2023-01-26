@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -292,7 +292,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'month';
 
-    views: SchedulerViews[] = [];
+    views: SchedulerViews = [];
 
     hourStart: number = 9;
 

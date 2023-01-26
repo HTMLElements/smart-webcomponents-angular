@@ -114,7 +114,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: string = 'month';
 
-    views: SchedulerViews[] = ['day', 'week', 'month'];
+    views: SchedulerViews = ['day', 'week', 'month'];
 
     timelineDayScale: SchedulerTimelineDayScale = 'halfHour';
 

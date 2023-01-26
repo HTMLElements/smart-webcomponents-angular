@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerViews, SchedulerViewType, SchedulerDataSource } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     dateCurrent: Date = new Date(2021, 0, 20);
 
-    dataSource: SchedulerDataSource[] = new window.Smart.DataAdapter({
+    dataSource: any[] = new window.Smart.DataAdapter({
         dataSource: 'https://calendar.google.com/calendar/ical/jqwidgetstest%40gmail.com/private-d980817fc2fd252df41420619aeeddbb/basic.ics',
         dataSourceType: 'ics',
         dataFields: [
@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    views: SchedulerViews[] = ['day', 'week', 'month', 'agenda'];
+    views: SchedulerViews = ['day', 'week', 'month', 'agenda'];
 
     ngOnInit(): void {
         // onInit code.

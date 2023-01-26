@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     today = new Date();
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const year = this.today.getFullYear(),
             month = this.today.getMonth(),
             date = this.today.getDate();

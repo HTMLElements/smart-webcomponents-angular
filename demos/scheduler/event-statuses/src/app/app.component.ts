@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerDataSource, SchedulerTimelineDayScale, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerTimelineDayScale, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -11,7 +11,7 @@ import { SchedulerComponent, SchedulerDataSource, SchedulerTimelineDayScale, Sch
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -122,7 +122,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'week';
 
-    views: SchedulerViews[] = ['week'];
+    views: SchedulerViews = ['week'];
 
     timelineDayScale: SchedulerTimelineDayScale = 'halfHour';
 

@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerDataSource } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent } from '@smart-webcomponents-angular/scheduler';
 import { Rating } from '@smart-webcomponents-angular/rating';
 import { ProgressBar } from '@smart-webcomponents-angular/progressbar';
 
@@ -14,7 +14,7 @@ import { ProgressBar } from '@smart-webcomponents-angular/progressbar';
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date(),
             todayDate = today.getDate(),
             currentYear = today.getFullYear(),

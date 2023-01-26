@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'month';
 
-    views: SchedulerViews[] = ['day', 'week', 'month'];
+    views: SchedulerViews = ['day', 'week', 'month'];
  
 	ngOnInit(): void {
 		// onInit code.
