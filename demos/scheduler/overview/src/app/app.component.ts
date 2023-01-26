@@ -279,7 +279,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     nonworkingDays: number[] = this.getPastThreeWeekdays(this.today.getDay());
 
-    dataSource: SchedulerDataSource[] = this.data;
+    dataSource: any[] = this.data;
 
     firstDayOfWeek: number = 1;
 
