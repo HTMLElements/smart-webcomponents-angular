@@ -127,7 +127,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     createCard(event: { dateStart: Date, dateEnd: Date, label: string, speaker: string[], image: string } ): HTMLElement {
         const token = document.createElement('div'),
             scheduler = document.querySelector('smart-scheduler') as Scheduler,
-            dateTimeObject = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+            dateTimeObject: any = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
         token.classList.add('event-token');
         token.innerHTML = `

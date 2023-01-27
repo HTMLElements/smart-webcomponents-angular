@@ -24,7 +24,7 @@
 	"@smart-webcomponents-angular/layout": "15.0.2",
 	"@smart-webcomponents-angular/gauge": "15.0.2",
 	"@smart-webcomponents-angular/multilinetextbox": "15.0.2",
-	"@smart-webcomponents-angular/progressbar": "15.0.2",
+	"@smart-webcomponents-angular/progressbar": "15.0.5",
 	"@smart-webcomponents-angular/tank": "15.0.2",
 	"@smart-webcomponents-angular/textbox": "15.0.2",
     "rxjs": "^6.6.6",

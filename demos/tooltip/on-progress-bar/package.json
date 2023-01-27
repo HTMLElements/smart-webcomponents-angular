@@ -19,7 +19,7 @@
     "core-js": "3.9.1",
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "15.0.2",
-	"@smart-webcomponents-angular/progressbar": "15.0.2",
+	"@smart-webcomponents-angular/progressbar": "15.0.5",
 	"@smart-webcomponents-angular/radiobutton": "15.0.2",
 	"@smart-webcomponents-angular/tooltip": "15.0.2",
     "rxjs": "^6.6.6",

@@ -139,7 +139,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         let cellDate: string | number = date.getDate();
 
         if (cellDate === 1) {
-            cellDate = new Intl.DateTimeFormat(that.scheduler.locale, { month: 'short', day: that.scheduler.dayFormat }).format(date);
+            cellDate = new Intl.DateTimeFormat(that.scheduler.locale, { month: 'short', day: '2-digit' }).format(date);
         }
 
         if (that.lowestPriceEvent) {
