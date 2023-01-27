@@ -98,7 +98,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     timelineDayScale: SchedulerTimelineDayScale = 'halfHour';
 
-    dataSource2: SchedulerDataSource[] = this.getData('scheduler2');
+    dataSource2: any[] = this.getData('scheduler2');
 
     ngOnInit(): void {
         // onInit code.

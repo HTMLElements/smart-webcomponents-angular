@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
     @ViewChild('demoHeader', { read: ElementRef, static: false }) demoHeader: ElementRef;
 
-    data: SchedulerDataSource[] = (() => {
+    data: any[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),

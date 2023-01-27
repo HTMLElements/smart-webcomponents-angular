@@ -16,7 +16,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    data: SchedulerDataSource[] = (() => {
+    data: any[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
