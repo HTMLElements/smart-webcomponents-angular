@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { DateTimePicker } from '@smart-webcomponents-angular';
+import { DateTimePicker } from '@smart-webcomponents-angular/datetimepicker';
 import { SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
