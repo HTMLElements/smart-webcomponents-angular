@@ -1,22 +1,38 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
 import { NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild('chart', { read: ThreeDChartComponent, static: false }) chart!: ThreeDChartComponent;
-  @ViewChild('seriesGroupIndex', { read: NumberInputComponent, static: false }) seriesGroupIndex!: NumberInputComponent;
-  @ViewChild('seriesIndex', { read: NumberInputComponent, static: false }) seriesIndex!: NumberInputComponent;
-  @ViewChild('itemIndex', { read: NumberInputComponent, static: false }) itemIndex!: NumberInputComponent;
+  @ViewChild('chart', { read: ThreeDChartComponent, static: false })
+  chart!: ThreeDChartComponent;
+  @ViewChild('seriesGroupIndex', { read: NumberInputComponent, static: false })
+  seriesGroupIndex!: NumberInputComponent;
+  @ViewChild('seriesIndex', { read: NumberInputComponent, static: false })
+  seriesIndex!: NumberInputComponent;
+  @ViewChild('itemIndex', { read: NumberInputComponent, static: false })
+  itemIndex!: NumberInputComponent;
+  @ViewChild('getItem', { read: ButtonComponent, static: false })
+  getItemBtn!: ButtonComponent;
+  @ViewChild('showItem', { read: ButtonComponent, static: false })
+  showItemBtn!: ButtonComponent;
+  @ViewChild('hideItem', { read: ButtonComponent, static: false })
+  hideItemBtn!: ButtonComponent;
+  @ViewChild('getValueAxis', { read: ButtonComponent, static: false })
+  getValueAxisBtn!: ButtonComponent;
+  @ViewChild('getXAxis', { read: ButtonComponent, static: false })
+  getXAxisBtn!: ButtonComponent;
+  @ViewChild('getZAxis', { read: ButtonComponent, static: false })
+  getZAxisBtn!: ButtonComponent;
 
   dataSource = [
     {
-      Day: "Monday",
+      Day: 'Monday',
       Keith: {
         Running: 10,
         Swimming: 20,
@@ -34,7 +50,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       },
     },
     {
-      Day: "Tuesday",
+      Day: 'Tuesday',
       Keith: {
         Running: 15,
         Swimming: 15,
@@ -52,7 +68,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       },
     },
     {
-      Day: "Wednesday",
+      Day: 'Wednesday',
       Keith: {
         Running: 55,
         Swimming: 15,
@@ -70,7 +86,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       },
     },
     {
-      Day: "Thursday",
+      Day: 'Thursday',
       Keith: {
         Running: 15,
         Swimming: 15,
@@ -88,7 +104,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       },
     },
     {
-      Day: "Friday",
+      Day: 'Friday',
       Keith: {
         Running: 15,
         Swimming: 15,
@@ -107,15 +123,15 @@ export class AppComponent implements AfterViewInit, OnInit {
     },
   ];
 
-  caption = "Fitness & exercise weekly scorecard";
+  caption = 'Fitness & exercise weekly scorecard';
 
-  description = "Time spent in vigorous exercise by 3 people";
+  description = 'Time spent in vigorous exercise by 3 people';
 
   showLegend = true;
 
   showLegendTable = true;
 
-  colorScheme = "scheme29";
+  colorScheme = 'scheme29';
 
   cameraPosition = {
     x: 30,
@@ -124,7 +140,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   };
 
   xAxis = {
-    dataField: "Day",
+    dataField: 'Day',
   };
 
   valueAxis = {
@@ -133,89 +149,109 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   seriesGroups = [
     {
-      type: "stackedcolumn",
-      dataField: "Keith",
-      displayText: "Keith",
+      type: 'stackedcolumn',
+      dataField: 'Keith',
+      displayText: 'Keith',
       series: [
         {
-          dataField: "Running",
-          displayText: "Running",
+          dataField: 'Running',
+          displayText: 'Running',
         },
         {
-          dataField: "Cycling",
-          displayText: "Cycling",
+          dataField: 'Cycling',
+          displayText: 'Cycling',
         },
         {
-          dataField: "Swimming",
-          displayText: "Swimming",
+          dataField: 'Swimming',
+          displayText: 'Swimming',
         },
       ],
     },
     {
-      type: "stackedcolumn",
-      dataField: "Erica",
-      displayText: "Erica",
+      type: 'stackedcolumn',
+      dataField: 'Erica',
+      displayText: 'Erica',
       series: [
         {
-          dataField: "Running",
-          displayText: "Running",
+          dataField: 'Running',
+          displayText: 'Running',
         },
         {
-          dataField: "Cycling",
-          displayText: "Cycling",
+          dataField: 'Cycling',
+          displayText: 'Cycling',
         },
         {
-          dataField: "Swimming",
-          displayText: "Swimming",
+          dataField: 'Swimming',
+          displayText: 'Swimming',
         },
       ],
     },
     {
-      type: "stackedcolumn",
-      dataField: "George",
-      displayText: "George",
+      type: 'stackedcolumn',
+      dataField: 'George',
+      displayText: 'George',
       series: [
         {
-          dataField: "Running",
-          displayText: "Running",
+          dataField: 'Running',
+          displayText: 'Running',
         },
         {
-          dataField: "Cycling",
-          displayText: "Cycling",
+          dataField: 'Cycling',
+          displayText: 'Cycling',
         },
         {
-          dataField: "Swimming",
-          displayText: "Swimming",
+          dataField: 'Swimming',
+          displayText: 'Swimming',
         },
       ],
     },
   ];
 
-  showItem(){
-    this.chart.showItem(this.seriesGroupIndex.value, this.seriesIndex.value, this.itemIndex.value);
+  showItem(): void {
+    this.chart.showItem(
+      parseInt(this.seriesGroupIndex.value),
+      parseInt(this.seriesIndex.value),
+      parseInt(this.itemIndex.value)
+    );
   }
 
-  hideItem(){
-    this.chart.hideItem(this.seriesGroupIndex.value, this.seriesIndex.value, this.itemIndex.value);
+  hideItem(): void {
+    this.chart.hideItem(
+      parseInt(this.seriesGroupIndex.value),
+      parseInt(this.seriesIndex.value),
+      parseInt(this.itemIndex.value)
+    );
   }
 
-  async getItem(){
-    let item = await this.chart.getItemByIndexes(this.seriesGroupIndex.value, this.seriesIndex.value, this.itemIndex.value);
-    alert(item.serieDisplayText + ' ' + item.xAxisField + ' ' + item.groupDisplayText + ': ' + item.value);
+  async getItem() {
+    let item = await this.chart.getItemByIndexes(
+      parseInt(this.seriesGroupIndex.value),
+      parseInt(this.seriesIndex.value),
+      parseInt(this.itemIndex.value)
+    );
+    alert(
+      item.serieDisplayText +
+        ' ' +
+        item.xAxisField +
+        ' ' +
+        item.groupDisplayText +
+        ': ' +
+        item.value
+    );
   }
 
-  getValueAxis(){
-    let labels = this.chart.getValueAxisLabels();
+  async getValueAxis() {
+    let labels = await this.chart.getValueAxisLabels();
     alert(labels);
   }
 
-  getXAxis(){
-    let labels = this.chart.getXAxisLabels();
+  async getXAxis() {
+    let labels = await this.chart.getXAxisLabels();
     alert(labels);
   }
 
-  getZAxis(){
-    let labels = this.chart.getZAxisLabels();
+  async getZAxis() {
+    let labels = await this.chart.getZAxisLabels();
     alert(labels);
   }
 
@@ -230,5 +266,23 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   init(): void {
     // init code.
+    this.showItemBtn.addEventListener('click', () => {
+      this.showItem();
+    });
+    this.hideItemBtn.addEventListener('click', () => {
+      this.hideItem();
+    });
+    this.getItemBtn.addEventListener('click', () => {
+      this.getItem();
+    });
+    this.getValueAxisBtn.addEventListener('click', () => {
+      this.getValueAxis();
+    });
+    this.getXAxisBtn.addEventListener('click', () => {
+      this.getXAxis();
+    });
+    this.getZAxisBtn.addEventListener('click', () => {
+      this.getZAxis();
+    });
   }
 }

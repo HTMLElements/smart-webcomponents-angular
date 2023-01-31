@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   controlsToolbarItems = ['reset-camera', 'zoom-in', 'zoom-out', 'save-image', 'camera-control',
     {
-      name: 'change-type', content: '<jqx-button>Change Type</jqx-button>',
+      name: 'change-type', content: '<smart-button>Change Type</smart-button>',
       action: () => {
         let type = this.seriesGroups[0].type
         this.seriesGroups[0].type = type === 'column' ? 'line' : 'column';
