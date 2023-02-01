@@ -20,7 +20,7 @@
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "15.0.2",
 	"@smart-webcomponents-angular/card": "15.0.2",
-	"@smart-webcomponents-angular/cardview": "15.0.2",
+	"@smart-webcomponents-angular/cardview": "15.0.10",
 	"@smart-webcomponents-angular/radiobutton": "15.0.2",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"

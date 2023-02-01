@@ -20,7 +20,7 @@
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "15.0.2",
 	"@smart-webcomponents-angular/card": "15.0.2",
-	"@smart-webcomponents-angular/cardview": "15.0.2",
+	"@smart-webcomponents-angular/cardview": "15.0.10",
 	"@smart-webcomponents-angular/checkbox": "15.0.2",
 	"@smart-webcomponents-angular/dropdownlist": "15.0.2",
 	"@smart-webcomponents-angular/radiobutton": "15.0.2",
