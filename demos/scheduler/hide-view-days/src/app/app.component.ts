@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CheckBoxComponent, CheckBox } from '@smart-webcomponents-angular/checkbox';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date(),
             todayDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -49,7 +49,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'week';
 
-    views: SchedulerViews[] = ['week', 'month'];
+    views: SchedulerViews = ['week', 'month'];
 
     nonworkingDays: number[] = [2, 4];
 

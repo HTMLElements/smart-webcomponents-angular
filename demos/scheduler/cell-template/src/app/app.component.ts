@@ -170,7 +170,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         let cellDate = date.getDate();
 
         if (cellDate === 1) {
-            cell.textContent = new Intl.DateTimeFormat(scheduler.locale, { month: 'short', day: scheduler.dayFormat }).format(date);
+              cell.textContent =
+        '' +
+        new Intl.DateTimeFormat(scheduler.locale, {
+          month: 'short',
+          day: '2-digit',
+        }).format(date);
         }
         else {
             cell.textContent = cellDate + '';

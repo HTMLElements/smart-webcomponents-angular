@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { DateTimePicker } from '@smart-webcomponents-angular';
-import { SchedulerComponent, SchedulerDataSource, SchedulerEvent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { DateTimePicker } from '@smart-webcomponents-angular/datetimepicker';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     targetEvent: SchedulerEvent | undefined;
     eventEditors: {dateStart: HTMLElement, dateEnd: HTMLElement} | undefined;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         return [
             {
                 label: 'Google AdWords Strategy',

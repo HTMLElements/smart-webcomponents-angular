@@ -3,7 +3,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
-import { SchedulerComponent, SchedulerDataSource, SchedulerResource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerResource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),

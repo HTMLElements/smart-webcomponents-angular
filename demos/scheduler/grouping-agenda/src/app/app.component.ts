@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViewType, SchedulerResource, SchedulerViews, SchedulerGroupOrientation } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType, SchedulerResource, SchedulerViews, SchedulerGroupOrientation } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date(),
             year = today.getFullYear(),
             month = today.getMonth(),
@@ -192,7 +192,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'agenda';
 
-    views: SchedulerViews[] = ['agenda'];
+    views: SchedulerViews = ['agenda'];
 
     groups: string[] = ['priorityId'];
 

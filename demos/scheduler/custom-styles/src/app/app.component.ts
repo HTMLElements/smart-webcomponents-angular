@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 import { SwitchButton, SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViews, SchedulerViewType, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViews, SchedulerViewType, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -18,7 +18,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('switchbutton3', { read: SwitchButtonComponent, static: false }) switchbutton3: SwitchButtonComponent;
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date(),
             todayDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -52,7 +52,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'week';
 
-    views: SchedulerViews[] = ['day', 'week', 'month'];
+    views: SchedulerViews = ['day', 'week', 'month'];
 
     firstDayOfWeek: number = 1;
 

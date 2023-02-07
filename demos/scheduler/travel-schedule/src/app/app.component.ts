@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
-import { SchedulerComponent, SchedulerViewType, SchedulerDataSource, SchedulerViews, SchedulerEvent } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerEvent } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -113,9 +113,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'month';
 
-    dataSource: SchedulerDataSource[] = this.data;
+    dataSource: any[] = this.data;
 
-    views: SchedulerViews[] = ['month'];
+    views: SchedulerViews = ['month'];
 
     disableWindowEditor: boolean = true;
 
@@ -139,7 +139,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         let cellDate: string | number = date.getDate();
 
         if (cellDate === 1) {
-            cellDate = new Intl.DateTimeFormat(that.scheduler.locale, { month: 'short', day: that.scheduler.dayFormat }).format(date);
+            cellDate = new Intl.DateTimeFormat(that.scheduler.locale, { month: 'short', day: 'numeric' }).format(date);
         }
 
         if (that.lowestPriceEvent) {

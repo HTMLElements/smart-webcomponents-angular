@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerDataSource, SchedulerEvent, SchedulerViews, Scheduler } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViews, Scheduler } from '@smart-webcomponents-angular/scheduler';
 import { Window } from '@smart-webcomponents-angular/window';
 
 @Component({
@@ -12,7 +12,7 @@ import { Window } from '@smart-webcomponents-angular/window';
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date();
 
         today.setHours(0, 0, 0, 0);
@@ -127,7 +127,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     createCard(event: { dateStart: Date, dateEnd: Date, label: string, speaker: string[], image: string } ): HTMLElement {
         const token = document.createElement('div'),
             scheduler = document.querySelector('smart-scheduler') as Scheduler,
-            dateTimeObject = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+            dateTimeObject: any = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
         token.classList.add('event-token');
         token.innerHTML = `

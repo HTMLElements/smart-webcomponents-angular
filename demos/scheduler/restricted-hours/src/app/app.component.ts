@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     targetEvent = null;
     eventEditors = null;
 
-    dataSource: SchedulerDataSource[] = (() => {
+    dataSource: any[] = (() => {
         const today = new Date(), currentDate = today.getDate(), currentYear = today.getFullYear(), currentMonth = today.getMonth(), data = [
             {
                 label: 'Google AdWords Strategy',

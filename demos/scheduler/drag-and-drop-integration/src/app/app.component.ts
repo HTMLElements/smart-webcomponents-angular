@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { TreeComponent } from '@smart-webcomponents-angular/tree';
-import { SchedulerComponent, SchedulerDataSource, SchedulerEvent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -128,11 +128,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     })();
 
-    dataSource: SchedulerDataSource[] = this.rooms.filter((i, index) => index < 5);
+    dataSource: any[] = this.rooms.filter((i, index) => index < 5);
 
     view: SchedulerViewType = 'month';
 
-    views: SchedulerViews[] = ['month', 'timelineMonth'];
+    views: SchedulerViews = ['month', 'timelineMonth'];
 
     treeDataSource: object[] = [
         {

@@ -3,7 +3,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 import { TreeComponent, Tree, TreeItem } from '@smart-webcomponents-angular/tree';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -279,7 +279,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     nonworkingDays: number[] = this.getPastThreeWeekdays(this.today.getDay());
 
-    dataSource: SchedulerDataSource[] = this.data;
+    dataSource: any[] = this.data;
 
     firstDayOfWeek: number = 1;
 

@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { CheckBox, CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { InputComponent, InputEditor } from '@smart-webcomponents-angular/input';
-import { SchedulerComponent, SchedulerDataSource, SchedulerViews, SchedulerViewSelectorType, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViews, SchedulerViewSelectorType, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
     @ViewChild('demoHeader', { read: ElementRef, static: false }) demoHeader: ElementRef;
 
-    data: SchedulerDataSource[] = (() => {
+    data: any[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -145,7 +145,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     viewSelectorType: SchedulerViewSelectorType = 'auto';
 
-    views: SchedulerViews[] = ['day', 'week', 'month', 'agenda'];
+    views: SchedulerViews = ['day', 'week', 'month', 'agenda'];
 
     locale: string = 'de';
 
