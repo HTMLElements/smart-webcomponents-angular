@@ -51,12 +51,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     
         let buttons = document.getElementsByClassName('open-window-button'), cancelButtons = document.getElementsByClassName('flat'), i, progressWindows = document.getElementsByTagName('smart-progress-window');
         for (i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener('click', function (event) {
+            buttons[i].addEventListener('click', function (event:any) {
                 event.target.nextElementSibling.open();
             });
         }
         for (i = 0; i < cancelButtons.length; i++) {
-            cancelButtons[i].addEventListener('click', function (event) {
+            cancelButtons[i].addEventListener('click', function (event:any) {
                 const that = event.target;
                 if (that.ownerElement && (that.textContent.toLowerCase() === 'cancel' || that.textContent.toLowerCase() === 'disagree')) {
                     that.ownerElement.close();
@@ -64,7 +64,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             });
         }
         for (i = 0; i < progressWindows.length; i++) {
-            progressWindows[i].addEventListener('click', function (event) {
+            progressWindows[i].addEventListener('click', function (event:any) {
                 const that = event.target;
                 if (!event.target.closest('.smart-complete-button') || !that.opened) {
                     return;

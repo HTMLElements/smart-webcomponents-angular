@@ -1,6 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { TreeComponent } from '@smart-webcomponents-angular/tree';
-import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox/public_api';
 
 
 @Component({

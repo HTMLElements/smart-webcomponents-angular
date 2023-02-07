@@ -33,31 +33,21 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 
   cameraPosition = {
-    y: 18,
-    z: 20,
+    x: 10,
+    y: 15,
+    z: 35,
   };
 
   seriesGroups = [
     {
-      type: 'pie',
+      type: 'pyramid',
       showLabels: true,
       series: [
         {
           dataField: 'Share',
           displayText: 'Browser',
-          initialAngle: 40,
-          radius: 15,
-          labelRadius: 17,
-          centerOffset: 0,
-          height: 2,
-          formatFunction: function (value:any) {
-            if (isNaN(value)) {
-              // Legend labels formatting
-              return value;
-            }
-
-            return parseFloat(value) + '%';
-          },
+          width: 40,
+          height: 30,
         },
       ],
     },

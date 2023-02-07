@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         textBox.addEventListener('change', function (event: any): void {
             that.log.nativeElement.innerHTML += '<br>' + '<b>' + event.type + '</b>' + ' event fired with details: ' +
-                'newValue: <b>' + event.detail.newValue + '</b>' + ', oldValue: <b>' + event.detail.oldValue + '</b>';
+                'newValue: <b>' + (event.detail.newValue || event.detail.value) + '</b>' + ', oldValue: <b>' + event.detail.oldValue + '</b>';
         });
 
         button.addEventListener('click', function ():void {
