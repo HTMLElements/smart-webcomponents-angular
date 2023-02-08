@@ -27,14 +27,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 	    
     
-        const sortable = document.getElementById('sortable');
-        document.getElementById('handle').addEventListener('change', function () {
+        const that = this;
+        document.getElementById('handle').addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value) {
-                sortable.dragMode = 'handle';
-                sortable.handleVisibility = 'visible';
+                that.sortable.dragMode = 'handle';
+                that.sortable.handleVisibility = 'visible';
             }
             else {
-                sortable.dragMode = 'item';
+                that.sortable.dragMode = 'item';
             }
         });
     

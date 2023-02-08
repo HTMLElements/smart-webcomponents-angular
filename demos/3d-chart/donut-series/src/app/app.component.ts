@@ -48,52 +48,49 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   seriesGroups = [
     {
-      type: "donut",
+      type: 'donut',
       showLabels: false,
       dataSource: this.dataSource1,
-      series: [
-        {
-          dataField: "Share",
-          displayText: "Browser",
-          initialAngle: 0,
-          radius: 8,
-          centerOffset: 0,
-          width: 3,
-          height: 2,
-          formatFunction: function (value:any) {
-            if (isNaN(value)) {
-              // Legend labels formatting
-              return value;
-            }
+      series: [{
+        dataField: 'Share',
+        displayText: 'Browser',
+        initialAngle: 0,
+        radius: 8,
+        centerOffset: 0,
+        width: 3,
+        height: 2,
+        formatFunction: function (value:any) {
+          if (isNaN(value)) {
+            // Legend labels formatting
+            return value;
+          }
 
-            return parseFloat(value).toFixed(2) + "%";
-          },
+          return parseFloat(value).toFixed(2) + '%';
         },
-      ],
+      }, ],
     },
     {
-      type: "donut",
+      type: 'donut',
       showLabels: false,
       dataSource: this.dataSource2,
-      formatSettings: { sufix: " (mobile)" },
-      series: [
-        {
-          dataField: "Sare",
-          displayText: "Browser",
-          initialAngle: 0,
-          radius: 15,
-          centerOffset: 0,
-          width: 4,
-          height: 2,
-          formatFunction: function (value:any) {
-            if (isNaN(value)) {
-              // Legend labels formatting
-              return value;
-            }
+      formatSettings: {sufix: ' (mobile)'},
+      series: [{
+        dataField: 'Share',
+        displayText: 'Browser',
+        initialAngle: 0,
+        radius: 15,
+        centerOffset: 0,
+        width: 4,
+        height: 2,
+        formatFunction: function (value:any) {
+          if (isNaN(value)) {
+            // Legend labels formatting
+            return value;
+          }
 
-            return parseFloat(value).toFixed(2) + "%";
-          },
+          return parseFloat(value).toFixed(2) + '%';
         },
+      }
       ],
     },
   ];

@@ -38,7 +38,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     static: false
   }) useCustomScheme!: CheckBoxComponent;
   @ViewChild('darkModeButton', {
-    read: CheckBoxComponent,
+    read: ButtonComponent,
     static: false
   }) darkModeButton!: CheckBoxComponent;
 
@@ -151,7 +151,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   };
 
   xAxis = {
-    dataField: "Year",
+    dataField: "Day",
   };
 
   seriesGroups = [{
@@ -249,10 +249,12 @@ export class AppComponent implements AfterViewInit, OnInit {
       if (document.body.getAttribute('theme') === 'dark') {
         document.body.removeAttribute('theme');
         that.chart.backgroundColor = 'white';
+        document.body.style.backgroundColor = 'white';
       }
       else {
         document.body.setAttribute('theme', 'dark');
         that.chart.backgroundColor = 'black';
+        document.body.style.backgroundColor = '#242424';
       }
     });
   }

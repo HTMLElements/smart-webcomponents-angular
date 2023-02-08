@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
-import { PowerButtonComponent } from '@smart-webcomponents-angular/powerbutton';
+import { PowerButtonComponent } from '@smart-webcomponents-angular/button';
 import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 
 

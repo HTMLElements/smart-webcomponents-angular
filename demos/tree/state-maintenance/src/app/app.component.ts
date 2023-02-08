@@ -32,8 +32,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         that.button.addEventListener('click', function () {
-            const state = that.tree.getState();
-            alert(JSON.stringify(state));
+            that.tree.getState().then(state=>{
+                alert(JSON.stringify(state));
+            });
         });
         that.button3.addEventListener('click', function () {
             that.tree.loadState();

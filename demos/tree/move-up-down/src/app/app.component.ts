@@ -29,12 +29,15 @@ export class AppComponent implements AfterViewInit, OnInit {
 		const that = this;
 
 		that.button.addEventListener('click', function () {
-			const selectedItem = that.tree.getItem(that.tree.selectedIndexes[0]);
-			that.tree.moveUp(selectedItem);
+			that.tree.getItem(that.tree.selectedIndexes[0]).then(selectedItem=>{
+				that.tree.moveUp(selectedItem);
+			});
+			
 		});
-		document.getElementById('moveDown').addEventListener('click', function () {
-			const selectedItem = that.tree.getItem(that.tree.selectedIndexes[0]);
-			that.tree.moveDown(selectedItem);
+		that.button2.addEventListener('click', function () {
+			that.tree.getItem(that.tree.selectedIndexes[0]).then(selectedItem=>{
+				that.tree.moveDown(selectedItem);
+			});
 		});
 
 
