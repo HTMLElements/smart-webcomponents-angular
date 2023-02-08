@@ -26,7 +26,6 @@
         </div>
         <p>A repeat button can also be used to configure a range control.</p>
     </div>
-    </section>
     <section id="repeat-button-demo">
         <div class="module">
              <h2>Demo usage</h2>
@@ -45,9 +44,9 @@
         <div class="module">
             <div class="progress-bar-container">
                 <smart-progress-bar #progressbar id="progressBar" orientation="vertical"
-                inverted show-progress-value value="5"></smart-progress-bar>
+                [inverted] show-progress-value [value]="5"></smart-progress-bar>
                 <smart-circular-progress-bar id="progressBarCircular"
-                show-progress-value value="5"></smart-circular-progress-bar>
+                show-progress-value [value]="5"></smart-circular-progress-bar>
             </div>
             <p>Progress bars : vertical and circular.</p>
         </div>
@@ -56,7 +55,7 @@
         </div>
         <div class="module">
             <div class="progress-bar-container">
-                <smart-circular-progress-bar id="progressBarCircularControl" value="25">
+                <smart-circular-progress-bar #progressBarCircularControl id="progressBarCircularControl" [value]="25">
                     <smart-repeat-button #repeatbutton9 id="incrementButton"><i class="material-icons">arrow_upward</i>
                     </smart-repeat-button>
                     <smart-repeat-button #repeatbutton10 id="decrementButton"><i class="material-icons">arrow_downward</i>

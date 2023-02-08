@@ -34,9 +34,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 	apply() {
 		this.qrcodeToStyle.backgroundColor = this.backgroundColorPicker.value;
 		this.qrcodeToStyle.lineColor = this.lineColorPicker.value;
-		this.qrcodeToStyle.squareWidth = this.sqaureWidthInput.value;
+		this.qrcodeToStyle.squareWidth = parseInt(this.sqaureWidthInput.value);
 		this.qrcodeToStyle.displayLabel = this.labelDisplayCheck.checked;
 		this.qrcodeToStyle.labelColor = this.labelColorPicker.value;
-		this.qrcodeToStyle.labelFontSize = this.labelFontSizeInput.value;
+		this.qrcodeToStyle.labelFontSize = parseInt(this.labelFontSizeInput.value);
 	}	
 }

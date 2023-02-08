@@ -19,8 +19,9 @@
     "core-js": "3.9.1",
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "15.0.2",
-	"@smart-webcomponents-angular/menu": "15.0.2",
-	"@smart-webcomponents-angular/table": "15.0.2",
+    "@smart-webcomponents-angular/menu": "15.0.2",
+    "@smart-webcomponents-angular/input": "15.0.2",
+    "@smart-webcomponents-angular/table": "15.0.2",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },

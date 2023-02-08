@@ -10,11 +10,9 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('qrCodeToRender', { read: QRcodeComponent, static: false }) qrCodeToRender: QRcodeComponent;
+	@ViewChild('qrCode', { read: QRcodeComponent, static: false }) qrCode: QRcodeComponent;
 	@ViewChild('svgOption', { read: RadioButtonComponent, static: false }) svgOption: RadioButtonComponent;
 	@ViewChild('canvasOption', { read: RadioButtonComponent, static: false }) canvasOption: RadioButtonComponent;
-	
- 	log: string;
  
 	ngOnInit(): void {
 		// onInit code.
@@ -23,16 +21,16 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	ngAfterViewInit(): void {
 		// afterViewInit code.
-  		this.log = this.qrCodeToRender.nativeElement.outerHTML;
+  		document.querySelector('#element-html').textContent = this.qrCode.nativeElement.outerHTML;
     }
 		
 	svgOptionClick(event: Event) {
-		this.qrCodeToRender.renderAs = 'svg';
-		this.log = this.qrCodeToRender.nativeElement.outerHTML;
+		this.qrCode.renderAs = 'svg';
+		document.querySelector('#element-html').textContent = this.qrCode.nativeElement.outerHTML;
 	}
 	
 	canvasOptionClick(event: Event) {
-		this.qrCodeToRender.renderAs = 'canvas';
-		this.log = this.qrCodeToRender.nativeElement.outerHTML;
+		this.qrCode.renderAs = 'canvas';
+		document.querySelector('#element-html').textContent = this.qrCode.nativeElement.outerHTML;
 	}	
 }

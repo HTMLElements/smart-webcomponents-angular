@@ -11,56 +11,100 @@ import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('chart', { read: ThreeDChartComponent, static: false }) chart!: ThreeDChartComponent;
 
+  generateData() {
+    let sampleData = [];
+    let startingDate = new Date('2020-05-21');
+    for(let i=0; i<50; i++){
+      startingDate.setDate(startingDate.getDate() + 1);
+      let fomrattedDate =  startingDate.getDate()+'/'+(startingDate.getMonth()+1);
+      let high = Math.floor(Math.random() * 100) + 500;
+      do{
+        var low = Math.floor(Math.random() * 100) + 400
+      }while(low >= high);
+      do{
+        var openPrice = Math.floor(Math.random() * 100) + 400;
+      }while(openPrice > high || openPrice < low);
+      do{
+        var closePrice = Math.floor(Math.random() * 100) + 400;
+      }while(closePrice > high || closePrice < low);
 
-  dataSource = [
-    { month: 'Jan', south: 500, west: 400, east: 1300, north: 1000 },
-    { month: 'Feb', south: 1500, west: 800, east: 1600, north: 1000 },
-    { month: 'Mar', south: 2000, west: 800, east: 1400, north: 900 },
-    { month: 'Apr', south: 2500, west: 700, east: 1600, north: 1300 },
-    { month: 'May', south: 3000, west: 900, east: 2300, north: 1400 },
-  ];
+      sampleData.push({
+        Date: fomrattedDate,
+        SPClose: closePrice,
+        SPOpen: openPrice,
+        SPHigh: high,
+        SPLow: low,
+        DOW: Math.floor(Math.random() * 200) + 100,
+      })
+    }
+    return sampleData;
+  }
 
-  caption = 'Revenue by Month and Region';
+  dataSource = this.generateData();
+
+  caption = 'Stock Prices Changes';
 
   description = '';
 
-  showLegend = true;
+  showLegend = false;
 
-  colorScheme = 'scheme01';
+  colorScheme = 'scheme29';
 
   cameraPosition = {
-    x: 30,
-    y: 30,
-    z: 70,
+    x: 0,
+    y: 10,
+    z: 55,
   };
 
   xAxis = {
-    dataField: 'month',
+    dataField: 'Date',
   };
 
   valueAxis = {
-    unitInterval: 600,
-    maxValue: 3000,
+    unitInterval: 100,
     minValue: 0,
+    maxValue: 700,
     formatSettings: {
       prefix: '$',
-    }
+    },
   };
 
   gridOptions = {
-    slotWidthZ: 8,
+    width: 80,
   };
 
   seriesGroups = [
     {
-      type: 'line',
+      type: 'column',
+      series: [
+        {
+          dataField: 'DOW',
+          displayText: 'DOW Jones',
+        }
+      ],
+      colorFunction: function (value:any) {
+        return (value < 200) ? '#E25848' : '#61D14F';
+      }
+    },
+    {
+      type: 'ohlc',
 
       series: [
-        { dataField: 'south', displayText: 'South' },
-        { dataField: 'west', displayText: 'West' },
-        { dataField: 'east', displayText: 'East' },
-        { dataField: 'north', displayText: 'North' },
+        {
+          dataFieldClose: 'SPClose',
+          displayTextClose: 'Close price',
+          dataFieldOpen: 'SPOpen',
+          displayTextOpen: 'Open price',
+          dataFieldHigh: 'SPHigh',
+          displayTextHigh: 'High price',
+          dataFieldLow: 'SPLow',
+          displayTextLow: 'Low price',
+          displayText: 'S&P 500',
+      }
       ],
+      colorFunction: function (value:any) {
+        return (value.close > value.open) ? '#E25848' : '#61D14F';
+      }
     }
   ];
 

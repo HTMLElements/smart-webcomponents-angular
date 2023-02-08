@@ -1,7 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 
 @Component({

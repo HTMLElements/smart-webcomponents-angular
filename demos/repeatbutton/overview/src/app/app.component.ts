@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
-import { RepeatButtonComponent } from '@smart-webcomponents-angular/repeatbutton';
+import { ProgressBarComponent, CircularProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
+import { RepeatButtonComponent, RepeatButton } from '@smart-webcomponents-angular/button';
 
 
 @Component({
@@ -10,7 +10,8 @@ import { RepeatButtonComponent } from '@smart-webcomponents-angular/repeatbutton
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressbar: ProgressBarComponent;
+	@ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressBar: ProgressBarComponent;
+    @ViewChild('progressBarCircularControl', { read: CircularProgressBarComponent, static: false }) circularProgressBar: CircularProgressBarComponent;
 	@ViewChild('repeatbutton', { read: RepeatButtonComponent, static: false }) repeatbutton: RepeatButtonComponent;
 	@ViewChild('repeatbutton2', { read: RepeatButtonComponent, static: false }) repeatbutton2: RepeatButtonComponent;
 	@ViewChild('repeatbutton3', { read: RepeatButtonComponent, static: false }) repeatbutton3: RepeatButtonComponent;
@@ -35,34 +36,34 @@ export class AppComponent implements AfterViewInit, OnInit {
 	init(): void {
 		// init code.
 	    
-    
-        let hoverArea = document.getElementById('hover-area'), floatingHoverButton = document.getElementById('floating-hover-action'), floatingClickButton = document.getElementById('floating-click-action'), toggleButtons = document.getElementsByClassName('exclusive-selection'), progressBar = document.getElementById('progressBar'), circularProgressBar = document.getElementById('progressBarCircular');
+        const that = this;
+
+        let toggleButtons = document.getElementsByClassName('exclusive-selection'), progressBar = document.getElementById('progressBar'), circularProgressBar = document.getElementById('progressBarCircular');
+
         for (let i = 0; i < toggleButtons.length; i++) {
-            toggleButtons[i].addEventListener('change', function (event) {
+            toggleButtons[i].addEventListener('change', function (event: CustomEvent) {
                 if (event.detail.value) {
                     for (let k = 0; k < toggleButtons.length; k++) {
                         if (toggleButtons[k] !== this) {
-                            toggleButtons[k].checked = false;
+                            (toggleButtons[k] as RepeatButton).checked = false;
                         }
                     }
                 }
             });
         }
         document.getElementById('progressUp').addEventListener('click', function () {
-            progressBar.value = Math.min(progressBar.max, progressBar.value + 1);
-            circularProgressBar.value = Math.min(circularProgressBar.max, circularProgressBar.value + 1);
+            that.progressBar.value = Math.min(that.progressBar.max, that.progressBar.value + 1);
+            that.circularProgressBar.value = Math.min(that.circularProgressBar.max, that.circularProgressBar.value + 1);
         });
         document.getElementById('progressDown').addEventListener('click', function () {
-            progressBar.value = Math.max(progressBar.min, progressBar.value - 1);
-            circularProgressBar.value = Math.max(circularProgressBar.min, circularProgressBar.value - 1);
+            that.progressBar.value = Math.max(that.progressBar.min, that.progressBar.value - 1);
+            that.circularProgressBar.value = Math.max(that.circularProgressBar.min, that.circularProgressBar.value - 1);
         });
         document.getElementById('incrementButton').addEventListener('click', function () {
-            let progressBar = document.getElementById('progressBarCircularControl');
-            progressBar.value = Math.min(progressBar.max, progressBar.value + 1);
+            that.circularProgressBar.value = Math.min(that.circularProgressBar.max, that.circularProgressBar.value + 1);
         });
         document.getElementById('decrementButton').addEventListener('click', function () {
-            let progressBar = document.getElementById('progressBarCircularControl');
-            progressBar.value = Math.max(progressBar.min, progressBar.value - 1);
+            that.circularProgressBar.value = Math.max(that.circularProgressBar.min, that.circularProgressBar.value - 1);
         });
     
 

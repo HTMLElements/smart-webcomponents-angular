@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	    
     
         const silentLabel = document.getElementById('silentLabel'), normalLabel = document.getElementById('normalLabel'), maxLabel = document.getElementById('maxLabel');
-        document.getElementById('mobileGauge').addEventListener('change', function (event) {
+        document.getElementById('mobileGauge').addEventListener('change', function (event: CustomEvent) {
             const value = event.detail.value;
             silentLabel.classList.remove('highlighted');
             normalLabel.classList.remove('highlighted');
