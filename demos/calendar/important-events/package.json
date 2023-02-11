@@ -25,6 +25,7 @@
 	"@smart-webcomponents-angular/multilinetextbox": "15.0.2",
 	"@smart-webcomponents-angular/textbox": "15.0.2",
 	"@smart-webcomponents-angular/window": "15.0.2",
+	"@smart-webcomponents-angular/tooltip": "15.0.2",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },

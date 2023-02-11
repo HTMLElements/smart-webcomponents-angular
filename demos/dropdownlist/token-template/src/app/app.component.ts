@@ -24,9 +24,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 		
 	init(): void {
 		// init code.
-    
+        const that = this;
         this.dropdownlist.addEventListener('change', function ():void {
-            const tokens = <HTMLCollection>this.dropdownlist.getElementsByClassName('smart-token')!;
+            const tokens = <HTMLCollection>that.dropdownlist.nativeElement.getElementsByClassName('smart-token')!;
 
             for (let i = 0; i < tokens.length; i++) {
                 var token = tokens[i];

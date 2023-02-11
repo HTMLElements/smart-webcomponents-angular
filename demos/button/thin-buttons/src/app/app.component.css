@@ -1,3 +1,7 @@
+/* This is the CSS used in the demo */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+
 body {
     color: black;
     width: 100%;

@@ -65,8 +65,6 @@ export class AppComponent implements AfterViewInit, OnInit {
             dropDownButton.placeholder = event.detail.value;
         });
 
-        window.onload = function () {
-            dropDownButton.placeholder = that.tank.value;
-        }
+        dropDownButton.placeholder = that.tank.value;
     }
 }

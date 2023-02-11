@@ -1,37 +1,83 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Angular Breadcrumb Overview</title>
   <base href="/">
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/smart.default.css"/>
+  <link rel="stylesheet"
+    href="https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/smart.default.css" />
   <style>
-@font-face {
-  font-family: "smart-icons";
-  src: url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.eot");
-  src: 
-	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff2")
-      format("woff2"),
-	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff")
-      format("woff"),
-    url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.ttf")
-      format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
+    @font-face {
+      font-family: 'Material Icons';
+      font-style: normal;
+      font-weight: 400;
+      src: url(https://fonts.gstatic.com/s/materialicons/v139/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+    }
+
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -moz-font-feature-settings: 'liga';
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* This is the CSS used in the demo */
+    #breadcrumb2 {
+      --smart-breadcrumb-item-height: 50px;
+      width: 800px;
+    }
+
+    #breadcrumb2 .smart-breadcrumb-item-label {
+      display: flex;
+      align-items: center;
+    }
+
+    .material-icons {
+      margin-right: 5px;
+      padding: 5px;
+      width: 34px;
+      height: 34px;
+      background-color: var(--smart-success);
+      border-radius: 100%;
+    }
+
+    #breadcrumb3 {
+      width: 100px;
+    }
   </style>
   <script>
-    console.log('****************************************************************************************************************');
-	console.log('*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
-	console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
-	console.log('****************************************************************************************************************');
-  </script>  
+    console.log(
+      '****************************************************************************************************************'
+      );
+    console.log(
+      '*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
+    console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
+    console.log(
+      '****************************************************************************************************************'
+      );
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-	<app-root>Loading...</app-root>
-	 <div style="position: fixed; bottom: 5px; right: 5px;">
-         <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/" title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png"/></a>
-	</div>
+  <app-root>Loading...</app-root>
+  <div style="position: fixed; bottom: 5px; right: 5px;">
+    <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/"
+        title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png" /></a>
+  </div>
+  <template id="breadcrumb2Template">
+    <i class="material-icons">{{value}}</i> {{label}}
+  </template>
 </body>
+
 </html>

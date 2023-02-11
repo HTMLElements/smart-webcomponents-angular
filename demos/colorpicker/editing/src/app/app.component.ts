@@ -36,10 +36,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 			frame: HTMLDivElement = that.frame.nativeElement as HTMLDivElement,
 			frameHeader: HTMLDivElement = that.frameHeader.nativeElement as HTMLDivElement,
 			frameContent: HTMLDivElement = that.frameContent.nativeElement as HTMLDivElement,
-			headerBackground: ColorPickerComponent = that.colorpicker as ColorPickerComponent,
-			headerColor: ColorPickerComponent = that.colorpicker2 as ColorPickerComponent,
-			background: ColorPickerComponent = that.colorpicker3 as ColorPickerComponent,
-			borderColor: ColorPickerComponent = that.colorpicker4 as ColorPickerComponent,
+			borderColor: ColorPickerComponent = that.colorpicker as ColorPickerComponent,
+			headerBackground: ColorPickerComponent = that.colorpicker2 as ColorPickerComponent,
+			headerColor: ColorPickerComponent = that.colorpicker3 as ColorPickerComponent,
+			background: ColorPickerComponent = that.colorpicker4 as ColorPickerComponent,
 			color: ColorPickerComponent = that.colorpicker5 as ColorPickerComponent;
 
 		headerBackground.addEventListener('change', function (event: CustomEvent): void {

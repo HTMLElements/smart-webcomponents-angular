@@ -20,6 +20,8 @@
 /* Reset */
 @import url(//codepen.io/chrisdothtml/pen/ojLzJK.css);
 
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
+
 smart-button.button-concept {
     width: auto;
     height: auto;
