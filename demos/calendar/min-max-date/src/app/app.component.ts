@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 
 
@@ -10,8 +10,8 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 
 export class AppComponent implements AfterViewInit, OnInit {	
 	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-	@ViewChild('minInput', { read: HTMLInputElement, static: false }) minInput: HTMLInputElement;
-	@ViewChild('maxInput', { read: HTMLInputElement, static: false }) maxInput: HTMLInputElement;
+	@ViewChild('minInput', { read: ElementRef<HTMLInputElement>, static: false }) minInput: ElementRef<HTMLInputElement>;
+	@ViewChild('maxInput', { read: ElementRef<HTMLInputElement>, static: false }) maxInput: ElementRef<HTMLInputElement>;
 	
  
 	ngOnInit(): void {
@@ -27,12 +27,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 		const that = this;
 
-        that.minInput.addEventListener('change', function (event: CustomEvent) {
-            that.calendar.min = that.minInput.value;
-        });
-		
-		that.maxInput.addEventListener('change', function (event: CustomEvent) {
-            that.calendar.max = that.maxInput.value;
-        });
+		that.minInput.nativeElement.addEventListener('change', function (event: CustomEvent) {
+			that.calendar.min = that.minInput.nativeElement.value;
+		});
+
+	that.maxInput.nativeElement.addEventListener('change', function (event: CustomEvent) {
+				that.calendar.max = that.maxInput.nativeElement.value;
+		});
 	}	
 }

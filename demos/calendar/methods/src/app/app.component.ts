@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 
@@ -17,8 +17,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	@ViewChild('navForward', { read: ButtonComponent, static: false }) navForward: ButtonComponent;
 	@ViewChild('selectDate', { read: ButtonComponent, static: false }) selectDate: ButtonComponent;
 	@ViewChild('disabled', { read: ButtonComponent, static: false }) disabled: ButtonComponent;
-    @ViewChild('dateInput', { read: HTMLInputElement, static: false }) dateInput: HTMLInputElement;
-    
+  @ViewChild('dateInput', { read: ElementRef<HTMLInputElement>, static: false }) dateInput: ElementRef<HTMLInputElement>;
     
  
 	ngOnInit(): void {
@@ -51,10 +50,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         });
         
         that.selectDate.addEventListener('click', function () {
-			if (that.dateInput.value) {
-				that.calendar.select(that.dateInput.value);
-			}
-		});
+					if (that.dateInput.nativeElement.value) {
+						that.calendar.select(that.dateInput.nativeElement.value);
+					}
+				});
 
         that.disabled.addEventListener('click', function () {
             that.calendar.disabled = !that.calendar.disabled;

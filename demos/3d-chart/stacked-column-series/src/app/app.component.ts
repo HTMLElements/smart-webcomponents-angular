@@ -13,74 +13,104 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   dataSource = [
     {
-      Year: '2020',
-      USA: {
-        Children: 40,
-        Elderly: 20,
+      Day: 'Monday',
+      Keith: {
+        Running: 10,
+        Swimming: 20,
+        Cycling: 30,
       },
-      Germany: {
-        Children: 30,
-        Elderly: 20,
+      Erica: {
+        Running: 13,
+        Swimming: 30,
+        Cycling: 23,
       },
-      Japan: {
-        Children: 20,
-        Elderly: 40,
-      },
-    },
-    {
-      Year: '2021',
-      USA: {
-        Children: 45,
-        Elderly: 15,
-      },
-      Germany: {
-        Children: 25,
-        Elderly: 20,
-      },
-      Japan: {
-        Children: 20,
-        Elderly: 50,
+      George: {
+        Running: 15,
+        Swimming: 70,
+        Cycling: 10,
       },
     },
     {
-      Year: '2022',
-      USA: {
-        Children: 50,
-        Elderly: 10,
+      Day: 'Tuesday',
+      Keith: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
       },
-      Germany: {
-        Children: 20,
-        Elderly: 20,
+      Erica: {
+        Running: 10,
+        Swimming: 15,
+        Cycling: 40,
       },
-      Japan: {
-        Children: 10,
-        Elderly: 60,
+      George: {
+        Running: 35,
+        Swimming: 15,
+        Cycling: 40,
       },
     },
     {
-      Year: '2023',
-      USA: {
-        Children: 55,
-        Elderly: 5,
+      Day: 'Wednesday',
+      Keith: {
+        Running: 55,
+        Swimming: 15,
+        Cycling: 10,
       },
-      Germany: {
-        Children: 15,
-        Elderly: 20,
+      Erica: {
+        Running: 15,
+        Swimming: 60,
+        Cycling: 5,
       },
-      Japan: {
-        Children: 10,
-        Elderly: 70,
+      George: {
+        Running: 50,
+        Swimming: 5,
+        Cycling: 10,
       },
-    }
+    },
+    {
+      Day: 'Thursday',
+      Keith: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      Erica: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      George: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 5,
+      },
+    },
+    {
+      Day: 'Friday',
+      Keith: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      Erica: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      George: {
+        Running: 5,
+        Swimming: 5,
+        Cycling: 40,
+      },
+    },
   ];
 
-  caption = 'Population Changes of Children and Edlerly'
+  caption = 'Fitness & exercise weekly scorecard'
 
-  description = '';
+  description = 'Time spent in vigorous exercise by 3 people';
 
-  showLegend = false;
+  showLegend = true;
 
-  colorScheme = 'scheme01';
+  colorScheme = 'scheme29';
 
   cameraPosition = {
     x: 15,
@@ -89,63 +119,72 @@ export class AppComponent implements AfterViewInit, OnInit {
   };
 
   xAxis = {
-    dataField: 'Year',
+    dataField: 'Day',
   };
 
   valueAxis = {
-    minValue: 0
-  };
-
-  gridOptions = {
-    slotWidthZ: 20,
+    minValue: 0,
+    maxValue: 100,
   };
 
   seriesGroups = [
     {
-      type: 'stackedarea',
-      dataField: 'Japan',
-      displayText: 'Japan',
+      type: 'stackedcolumn',
+      dataField: 'Keith',
+      displayText: 'Keith',
       series: [
         {
-          dataField: 'Children',
-          displayText: 'Children',
+          dataField: 'Running',
+          displayText: 'Running',
         },
         {
-          dataField: 'Elderly',
-          displayText: 'Elderly',
+          dataField: 'Cycling',
+          displayText: 'Cycling',
+        },
+        {
+          dataField: 'Swimming',
+          displayText: 'Swimming',
         },
       ],
     },
     {
-      type: 'stackedarea',
-      dataField: 'USA',
-      displayText: 'USA',
+      type: 'stackedcolumn',
+      dataField: 'Erica',
+      displayText: 'Erica',
       series: [
         {
-          dataField: 'Children',
-          displayText: 'Children',
+          dataField: 'Running',
+          displayText: 'Running',
         },
         {
-          dataField: 'Elderly',
-          displayText: 'Elderly',
+          dataField: 'Cycling',
+          displayText: 'Cycling',
+        },
+        {
+          dataField: 'Swimming',
+          displayText: 'Swimming',
         },
       ],
     },
     {
-      type: 'stackedarea',
-      dataField: 'Germany',
-      displayText: 'Germany',
+      type: 'stackedcolumn',
+      dataField: 'George',
+      displayText: 'George',
       series: [
         {
-          dataField: 'Children',
-          displayText: 'Children',
+          dataField: 'Running',
+          displayText: 'Running',
         },
         {
-          dataField: 'Elderly',
-          displayText: 'Elderly',
+          dataField: 'Cycling',
+          displayText: 'Cycling',
+        },
+        {
+          dataField: 'Swimming',
+          displayText: 'Swimming',
         },
       ],
-    },
+    }
   ];
 
   ngOnInit(): void {

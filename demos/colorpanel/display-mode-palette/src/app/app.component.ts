@@ -42,13 +42,18 @@ export class AppComponent implements AfterViewInit, OnInit {
             const input: HTMLInputElement = event.target as HTMLInputElement;
 
             //Set new Grid Item size
-            if (radioButton) {
+            if (radioButton.nodeName == 'SMART-RADIO-BUTTON') {
                 colorPanel.applyValueMode = radioButton.innerHTML as ColorApplyValueMode;
                 return;
             }
 
             if (checkBox && checkBox.id === 'inverted') {
                 colorPanel.inverted = event.detail.value;
+                return;
+            }
+
+            if (checkBox.id.indexOf('hide') === 0) {
+                colorPanel[checkBox.id] = event.detail.value;
                 return;
             }
 
