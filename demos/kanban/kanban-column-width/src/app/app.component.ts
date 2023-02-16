@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { color: '#039BE5', label: 'Testing', dataField: 'testing' },
         { color: '#DD5347', label: 'Done', dataField: 'done', addNewButton: false }
     ];
-    allowNewColumn = true;
+    addNewColumn = true;
     allowColumnRemove = true;
     addNewButton = true;
     editable = true;
