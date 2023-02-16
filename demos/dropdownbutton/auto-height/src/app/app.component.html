@@ -1,4 +1,4 @@
-<smart-drop-down-button #dropdownbutton [dropDownWidth]="'auto'">
+<smart-drop-down-button #dropdownbutton [placeholder]="'DropDown'" [dropDownWidth]="'auto'">
     <smart-tree #tree>
         <smart-tree-item>Home</smart-tree-item>
         <smart-tree-items-group>Solutions
@@ -8,7 +8,7 @@
             <smart-tree-item>Manufacturing</smart-tree-item>
             <smart-tree-item>All industries and solutions</smart-tree-item>
         </smart-tree-items-group>
-        <smart-tree-items-group expanded>Products
+        <smart-tree-items-group [expanded]="true">Products
             <smart-tree-item>PC products</smart-tree-item>
             <smart-tree-item>Mobile products</smart-tree-item>
             <smart-tree-item>All products</smart-tree-item>

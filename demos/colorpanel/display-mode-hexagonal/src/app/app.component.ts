@@ -42,7 +42,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             const checkBox: CheckBox = event.target as CheckBox;
             const input: HTMLInputElement = event.target as HTMLInputElement;
 
-            if (input) {
+            if (input.nodeName == 'INPUT') {
                 colorPanel.value = input.value;
                 return;
             }

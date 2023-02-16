@@ -78,7 +78,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 }
 
                 classes.add(className + '-' + size);
-                return;
             }
 
             //Set new Grid Item size

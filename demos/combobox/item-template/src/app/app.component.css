@@ -1,14 +1,13 @@
-
 /* Glyph Icons */
 
 @font-face {
     font-family: 'Glyphicons Halflings';
-    src: url('./../../../src/images/glyphicons-halflings-regular.eot');
-    src: url('./../../../src/images/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
-    url('./../../../src/images/glyphicons-halflings-regular.woff2') format('woff2'), 
-    url('./../../../src/images/glyphicons-halflings-regular.woff') format('woff'), 
-    url('./../../../src/images/glyphicons-halflings-regular.ttf') format('truetype'), 
-    url('./../../../src/images/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+    src: url('https://htmlelements.com/demos/images/glyphicons-halflings-regular.eot');
+    src: url('https://htmlelements.com/demos/images/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), 
+    url('https://htmlelements.com/demos/images/glyphicons-halflings-regular.woff2') format('woff2'), 
+    url('https://htmlelements.com/demos/images/glyphicons-halflings-regular.woff') format('woff'), 
+    url('https://htmlelements.com/demos/images/glyphicons-halflings-regular.ttf') format('truetype'), 
+    url('https://htmlelements.com/demos/images/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 .glyphicon {

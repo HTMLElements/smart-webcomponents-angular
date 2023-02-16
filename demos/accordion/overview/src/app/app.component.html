@@ -1,6 +1,129 @@
-﻿<smart-accordion #accordion>
-    <smart-accordion-item [label]="'First Item'">First Item Content.</smart-accordion-item>
-    <smart-accordion-item [label]="'Second Item'">Second Item Content.</smart-accordion-item>
-    <smart-accordion-item [label]="'Third Item'">Third Item Content.</smart-accordion-item>
-    <smart-accordion-item [label]="'Fourth Item'">Fourth Item Content.</smart-accordion-item>
-</smart-accordion>
+﻿<section>
+    <div>
+      <h2>
+        Smart.Accordion element represents a custom element with expandable items.
+        It is a lightweight container that may either stand alone or be connected
+        to a larger surface.
+      </h2>
+      <div>
+        <p>
+          Each accordion item contains header and content part. Click on the
+          header toggles the content part.
+        </p>
+        <p>smartAccordion may be used for a variety of tasks, such as:</p>
+        <ul>
+          <li>To edit a setting</li>
+          <li>To create a tool for ad campaigns</li>
+        </ul>
+      </div>
+      <br />
+      <div>
+        <h3>Usage</h3>
+        <p>
+          Editing<br />
+          Creating flows
+        </p>
+        <br />
+        <h3>Behavior</h3>
+        <p>
+          Expand<br />
+          Collapse<br />
+          Focus
+        </p>
+      </div>
+    </div>
+  </section>
+  <br />
+  <section>
+    <h2>Accordion Web Components Usage</h2>
+    <br />
+    <div>
+      <p><strong>Editing </strong></p>
+      <p>
+        Accordions are best used for lightweight editing of an element, such as
+        selecting a value for a setting.
+      </p>
+      <p>
+        For example, an app that contains tables may use accordion to adjust
+        settings on table elements.
+      </p>
+      <br />
+      <p><strong>Creation flows </strong></p>
+      <p>
+        Accordion items may be displayed in a sequence to form creation flows.
+      </p>
+      <p>This is an example of a tool for creating ad campaigns.</p>
+    </div>
+    <div>
+      <smart-accordion [expandMode]="'toggle'" id="accordionUsage">
+        <smart-accordion-item
+          index="0"
+          label="Trip name &lt;span class='description'>Carribean cruise&lt;/span>"
+          [expanded]="true"
+          >Carribean cruise</smart-accordion-item
+        >
+        <smart-accordion-item
+          index="1"
+          label="Location &lt;span class='description'>Barbados&lt;/span>"
+          >Barbados</smart-accordion-item
+        >
+        <smart-accordion-item
+          index="2"
+          label="Start and end dates"
+        ></smart-accordion-item>
+        <smart-accordion-item
+          index="3"
+          label="Carrier &lt;span class='description'>The best cruise line&lt;/span>"
+          >The best cruise line</smart-accordion-item
+        >
+        <smart-accordion-item
+          index="4"
+          label="Meal preferences &lt;span class='description'>Vegetarian&lt;/span>"
+          >Vegetarian</smart-accordion-item
+        >
+      </smart-accordion>
+    </div>
+    <div class="module"></div>
+  </section>
+  
+  <section>
+    <h2>Behavior</h2>
+    <div>
+      <h2>Collapsed accordion item</h2>
+      <p>
+        Displays summary information. Upon selecting the collapsed panel, it
+        expands to display the full expansion panel.
+      </p>
+      <h2>Expanded accordion item</h2>
+      <p>
+        Upon selection, a collapsed panel expands, allowing users to add or edit
+        information.
+      </p>
+      <p>Helper text may be added to the panel to assist the user.</p>
+      <h2>Focus state</h2>
+      <p>
+        An expansion panel may use a focus state (by using a grey background on
+        the list item) to provide focus to individual list items.
+      </p>
+      <p>
+        On a keyboard, users may traverse through list items by using the Tab key.
+      </p>
+    </div>
+    <div>
+      <smart-accordion [expandMode]="'toggle'" id="accordionBehavior">
+        <smart-accordion-item index="0" label="Personal data" [expanded]="true">
+          <br /><br />
+          <smart-text-box label="First name"></smart-text-box>
+          <br /><br />
+          <smart-text-box label="Age"></smart-text-box>
+          <br /><br />
+        </smart-accordion-item>
+        <smart-accordion-item
+          index="1"
+          label="&lt;span class='description'>Currently I am closed&lt;/span>"
+          >I'm visible because I am open<br /><br />
+        </smart-accordion-item>
+      </smart-accordion>
+    </div>
+  </section>
+  

@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             const checkBox: CheckBox = event.target as CheckBox;
 
             //Set new Grid Item size
-            if (radioButton) {
+            if (radioButton.nodeName == 'SMART-RADIO-BUTTON') {
                 colorPicker.applyValueMode = radioButton.innerHTML as ColorApplyValueMode;
                 return;
             }
