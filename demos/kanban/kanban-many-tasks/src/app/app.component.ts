@@ -271,7 +271,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 for (let j = 0; j < numberOfComments; j++) {
                     prevTime = prevTime + Math.floor(Math.random() * 2 + 1) * msInDay + msInDay / Math.floor(Math.random() * 5 + 1);
     
-                    task.comments.push({
+                    task.comments?.push({
                         text: comments[Math.round(Math.random() * 5)],
                         userId: Math.round(Math.random() * 4),
                         time: new Date(prevTime)
