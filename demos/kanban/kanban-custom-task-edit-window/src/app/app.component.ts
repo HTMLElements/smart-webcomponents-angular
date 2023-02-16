@@ -26,7 +26,6 @@ export class AppComponent implements AfterViewInit, OnInit {
     allowColumnReorder = true;
     taskActions = true;
     taskDue = true;
-    taskSubtasks = true;
     taskComments = true;
     currentUser = 0;
     taskProgress = true;
