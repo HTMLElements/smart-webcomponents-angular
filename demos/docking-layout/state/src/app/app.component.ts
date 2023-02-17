@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockingLayout';
+import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayout';
 import { GaugeComponent, Gauge } from '@smart-webcomponents-angular/gauge';
 import { TankComponent, Tank } from '@smart-webcomponents-angular/tank';
 import { MultilineTextBoxComponent, MultilineTextBox } from '@smart-webcomponents-angular/multilinetextbox';
