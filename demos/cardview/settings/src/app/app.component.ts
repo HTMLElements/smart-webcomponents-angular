@@ -257,10 +257,10 @@ export class AppComponent implements AfterViewInit, OnInit {
       const maxPhotos = Math.floor(Math.random() * Math.floor(3)) + 1;
       for (let i = 0; i < maxPhotos; i++) {
         row.travelPhotos.push(
-          `https://htmlelements.com/demos/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`
+          `https://htmlelements.com/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`
         );
         row.contactPhotos.push(
-          `https://htmlelements.com/demos/demos/images/phonebook/${contactImages[Math.floor(Math.random() * contactImages.length)]
+          `https://htmlelements.com/demos/images/phonebook/${contactImages[Math.floor(Math.random() * contactImages.length)]
           }`
         );
       }
