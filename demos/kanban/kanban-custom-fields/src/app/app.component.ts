@@ -194,8 +194,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
-
-
     }
 }
