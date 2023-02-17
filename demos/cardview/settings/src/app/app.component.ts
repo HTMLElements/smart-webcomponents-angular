@@ -1,11 +1,9 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from "@angular/core";
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from "@angular/core";
 import {
   CardViewComponent,
   Smart
 } from "@smart-webcomponents-angular/cardview";
-import { CheckBoxComponent } from "@smart-webcomponents-angular/checkbox";
 import { DropDownListComponent } from "@smart-webcomponents-angular/dropdownlist";
-import { RadioButtonComponent } from "@smart-webcomponents-angular/radiobutton";
 
 @Component({
   selector: "app-root",
