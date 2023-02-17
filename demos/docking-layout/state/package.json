@@ -20,7 +20,7 @@
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "15.0.2",
 	"@smart-webcomponents-angular/carousel": "15.0.2",
-	"@smart-webcomponents-angular/dockinglayout": "15.0.2",
+	"@smart-webcomponents-angular/dockingLayout": "15.0.2",
 	"@smart-webcomponents-angular/layout": "15.0.2",
 	"@smart-webcomponents-angular/gauge": "15.0.2",
 	"@smart-webcomponents-angular/multilinetextbox": "15.0.2",
