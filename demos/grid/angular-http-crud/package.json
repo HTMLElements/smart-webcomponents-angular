@@ -5,7 +5,7 @@
   "homepage": "https://www.htmlelements.com/",
   "dependencies": {
     "@angular/animations": "12 - 15",
-    "@angular/common": "^11.2.9",
+    "@angular/common": "12 - 15",
     "@angular/compiler": "12 - 15",
     "@angular/core": "12 - 15",
     "@angular/elements": "12 - 15",
