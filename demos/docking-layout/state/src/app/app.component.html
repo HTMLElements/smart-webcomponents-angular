@@ -1,20 +1,21 @@
-<smart-docking-layout #dockingLayout id="layout" [snapMode]="'simple'"></smart-docking-layout>
+<smart-docking-layout #dockingLayout id="layout" [snapMode]="'simple'"
+    (onStateChange)="handleStateChange()"></smart-docking-layout>
 <div class="options">
     <div class="caption">State Maintanance</div>
     <div class="option">
-        <smart-button #button id="createLayout" (onClick)="initializeLayout($event)">Load Layout</smart-button>
+        <smart-button #loadLayout id="createLayout" (onClick)="initializeLayout($event)">Load Layout</smart-button>
     </div>
     <div class="option">
-        <smart-button #button2 id="saveState">Save Layout State</smart-button>
+        <smart-button id="saveState" (onClick)="saveState()">Save Layout State</smart-button>
     </div>
     <div class="option">
-        <smart-button #button3 id="saveCurrentState">Save Current State</smart-button>
+        <smart-button id="saveCurrentState" (onClick)="saveCurrentState()">Save Current State</smart-button>
     </div>
     <div class="option">
-        <smart-button #button4 id="loadState">Load Layout State</smart-button>
+        <smart-button id="loadState" (onClick)="loadState()">Load Layout State</smart-button>
     </div>
     <div class="option">
-        <smart-button #button5 id="clearState">Clear State</smart-button>
+        <smart-button id="clearState" (onClick)="clearState()">Clear State</smart-button>
     </div>
     <div class="option">
         <div id="state" #log></div>
