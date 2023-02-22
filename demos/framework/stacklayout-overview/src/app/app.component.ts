@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	    
     
         const stackPanel = document.querySelector('.smart-stack-layout');
-        const app = new smartApp({
+        const app = new window.smartApp({
             data: {
                 horizontalAlignment: 'left',
                 verticalAlignment: 'top',
