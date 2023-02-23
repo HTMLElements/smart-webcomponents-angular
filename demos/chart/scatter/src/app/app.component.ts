@@ -10,9 +10,9 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('dropdownlist2', { read: DropDownListComponent, static: false }) dropdownlist2: DropDownListComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('dropdownlist2', { read: DropDownListComponent, static: false }) dropdownlist2!: DropDownListComponent;
 
     animation = "none";
     clip = false;
@@ -50,7 +50,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
         const that = this,
-            averages = [
+            averages: any = [
                 { Age: 13, Male: 156.2, Female: 156.7 },
                 { Age: 14, Male: 163.8, Female: 158.7 },
                 { Age: 15, Male: 170.1, Female: 159.7 },
@@ -62,7 +62,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             ],
             maleData = [],
             femaleData = [],
-            toolTipFormatFunction = function (value, iidx, series, group, xAxisValue, xAxis) {
+            toolTipFormatFunction = function (value?: any, iidx?: number, series?: any, group?: any, xAxisValue?: any, xAxis?: any) {
                 const months = new Number(xAxisValue % 1 * 12);
                 return `<strong>Gender:</strong> ${series.displayText.slice(0, series.displayText.length - 1)}
     <br />
@@ -72,7 +72,11 @@ export class AppComponent implements AfterViewInit, OnInit {
             };
 
         for (let i = 0; i < 200; i++) {
-            let gender = i % 2 === 0 ? 'Male' : 'Female', age = Math.min(Math.random() * 7 + 13, 20), averageHeight = averages[Math.round(age) - 13][gender], height = Math.random() * 25 + averageHeight - 12.5;
+            let gender = i % 2 === 0 ? 'Male' : 'Female'
+            let age = Math.min(Math.random() * 7 + 13, 20);
+            let averageHeight = averages[(Math.round(age) - 13)][gender];
+            let height = Math.random() * 25 + averageHeight - 12.5;
+
             if (gender === 'Male') {
                 maleData.push({ Age: age, Height: parseFloat(height.toFixed(1)) });
             }
@@ -98,13 +102,13 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         ];
 
-        that.dropdownlist.addEventListener('change', function (event: CustomEvent) {
+        that.dropdownlist.addEventListener('change', function (event: any) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[0] && that.chart.seriesGroups[0].series) {
                 that.chart.seriesGroups[0].series[0].symbolType = event.detail.value;
                 that.chart.refresh();
             }
         });
-        that.dropdownlist2.addEventListener('change', function (event: CustomEvent) {
+        that.dropdownlist2.addEventListener('change', function (event: any) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[1] && that.chart.seriesGroups[1].series) {
                 that.chart.seriesGroups[1].series[0].symbolType = event.detail.value;
             }
