@@ -1,10 +1,12 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayout';
-import { Gauge } from '@smart-webcomponents-angular/gauge';
-import { Tank } from '@smart-webcomponents-angular/tank';
-import { MultilineTextBox } from '@smart-webcomponents-angular/multilinetextbox';
-import { ProgressBar } from '@smart-webcomponents-angular/progressbar';
-import { Carousel } from '@smart-webcomponents-angular/carousel';
+import { GaugeComponent, Gauge } from '@smart-webcomponents-angular/gauge';
+import { TankComponent, Tank } from '@smart-webcomponents-angular/tank';
+import { MultilineTextBoxComponent, MultilineTextBox } from '@smart-webcomponents-angular/multilinetextbox';
+import { ProgressBarComponent, ProgressBar } from '@smart-webcomponents-angular/progressbar';
+import { CarouselComponent, Carousel } from '@smart-webcomponents-angular/carousel';
+
 
 
 @Component({
