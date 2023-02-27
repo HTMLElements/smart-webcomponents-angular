@@ -3,7 +3,12 @@
 rel="stylesheet">
 <div class="button-demo flush-button">
     <div class="demo-buttons-group">
-        <smart-button #button style="--content: 'Hover me!';" class="flush-btn">
+        <style>
+            #flush-button {
+                --content: 'Hover me!';
+            }
+        </style>
+        <smart-button #button id="flush-button" class="flush-btn">
             <div class="left"></div>Hover me!
             <div class="right"></div>
         </smart-button>
