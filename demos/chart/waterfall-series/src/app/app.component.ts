@@ -9,9 +9,9 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
-    sampleData = [
+    sampleData: any = [
         { year: 2006, population: 495.9e6 },
         { year: 2007, population: 498.3e6 },
         { year: 2008, population: 500.3e6 },
@@ -50,24 +50,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         }
     };
-    seriesGroups = [
-        {
-            type: 'waterfall',
-            series: [
-                {
-                    dataField: 'population',
-                    summary: 'summary',
-                    displayText: 'Population change',
-                    colorFunction: (value: number, itemIndex: number) => {
-                        if (itemIndex === this.sampleData.length - 1) {
-                            return '#00309A'; // total
-                        }
-                        return (value < 0) ? '#E06243' /* red */ : '#6CBC47' /*green*/;
-                    }
-                }
-            ]
-        }
-    ];
+    seriesGroups: any = [];
 
     ngOnInit(): void {
         // onInit code.
@@ -86,5 +69,25 @@ export class AppComponent implements AfterViewInit, OnInit {
         for (var i = that.sampleData.length - 2; i > 0; i--) {
             that.sampleData[i].population -= that.sampleData[i - 1].population;
         }
+
+        this.dataSource = this.sampleData;
+        this.seriesGroups = [
+            {
+                type: 'waterfall',
+                series: [
+                    {
+                        dataField: 'population',
+                        summary: 'summary',
+                        displayText: 'Population change',
+                        colorFunction: (value: number, itemIndex: number) => {
+                            if (itemIndex === this.sampleData.length - 1) {
+                                return '#00309A'; // total
+                            }
+                            return (value < 0) ? '#E06243' /* red */ : '#6CBC47' /*green*/;
+                        }
+                    }
+                ]
+            }
+        ]
     }
 }

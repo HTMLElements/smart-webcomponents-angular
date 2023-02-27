@@ -22,7 +22,7 @@
     "@smart-webcomponents-angular/dropdownlist": "15.0.2",
     "@smart-webcomponents-angular/input": "15.0.2",
     "@smart-webcomponents-angular/maskedtextbox": "15.0.2",
-    "@smart-webcomponents-angular/passwordtextbox": "9.2.75",
+    "@smart-webcomponents-angular/passwordtextbox": "15.0.2",
     "@smart-webcomponents-angular/textbox": "15.0.2",
     "@smart-webcomponents-angular/validator": "15.0.2",
     "rxjs": "^6.6.6",

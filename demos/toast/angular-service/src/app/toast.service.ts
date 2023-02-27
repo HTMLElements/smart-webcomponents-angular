@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastComponent } from 'smart-webcomponents-angular/toast';
+import { ToastComponent } from '@smart-webcomponents-angular/toast';
 
 @Injectable()
 

@@ -1,3 +1,3 @@
 ﻿<smart-docking-layout #docking [layout]="layout"></smart-docking-layout>
-<smart-slider #slider></smart-slider>
-<smart-multiline-text-box #multilinetextbox></smart-multiline-text-box>
+<smart-slider #slider (onChange)="handleSliderChange($event)"></smart-slider>
+<smart-multiline-text-box #multilinetextbox (onChange)="handleMultilineTextBoxChange($event)"></smart-multiline-text-box>

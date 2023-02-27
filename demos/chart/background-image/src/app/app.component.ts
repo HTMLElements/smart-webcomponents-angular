@@ -32,7 +32,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { Year: 2010, Population: 7.422e6 },
         { Year: 2017, Population: 7.102e6 }
     ];
-    backgroundImage = 'https://htmlelements.com/demos/images/bulgaria.png';
+    backgroundImage = 'https://www.htmlelements.com/demos/chart/background-image/bulgaria.png';
     caption = 'Top Ten Largest Cities in Bulgaria';
     description = '(source: www.nsi.bg)';
     showLegend = false;

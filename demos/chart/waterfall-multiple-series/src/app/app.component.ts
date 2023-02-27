@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     seasonData = [
         { Episode: 1, Season1: 2220000, Season6: 7940000 },
@@ -47,35 +47,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         }
     };
-    seriesGroups = [
-        {
-            type: 'waterfall',
-            series: [
-                {
-                    dataField: 'Season1',
-                    summary: 'summary',
-                    displayText: 'Season 1',
-                    colorFunction: (value: number, itemIndex: number) => {
-                        if (itemIndex === this.seasonData.length - 1) {
-                            return '#F7C71B'; // total
-                        }
-                        return (value < 0) ? '#FFBB84' : '#D8E24D';
-                    }
-                },
-                {
-                    dataField: 'Season6',
-                    summary: 'summary',
-                    displayText: 'Season 6',
-                    colorFunction: (value: number, itemIndex: number) => {
-                        if (itemIndex === this.seasonData.length - 1) {
-                            return '#5993FF'; // total
-                        }
-                        return (value < 0) ? '#AF87FF' : '#8EDBFF';
-                    }
-                }
-            ]
-        }
-    ];
+    seriesGroups: any = [];
 
     ngOnInit(): void {
         // onInit code.
@@ -95,5 +67,35 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.seasonData[i].Season1 -= that.seasonData[i - 1].Season1;
             that.seasonData[i].Season6 -= that.seasonData[i - 1].Season6;
         }
+
+        this.seriesGroups = [
+            {
+                type: 'waterfall',
+                series: [
+                    {
+                        dataField: 'Season1',
+                        summary: 'summary',
+                        displayText: 'Season 1',
+                        colorFunction: (value: number, itemIndex: number) => {
+                            if (itemIndex === this.seasonData.length - 1) {
+                                return '#F7C71B'; // total
+                            }
+                            return (value < 0) ? '#FFBB84' : '#D8E24D';
+                        }
+                    },
+                    {
+                        dataField: 'Season6',
+                        summary: 'summary',
+                        displayText: 'Season 6',
+                        colorFunction: (value: number, itemIndex: number) => {
+                            if (itemIndex === this.seasonData.length - 1) {
+                                return '#5993FF'; // total
+                            }
+                            return (value < 0) ? '#AF87FF' : '#8EDBFF';
+                        }
+                    }
+                ]
+            }
+        ]
     }
 }

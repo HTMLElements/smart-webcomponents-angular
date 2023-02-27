@@ -1,42 +1,137 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from "@angular/core";
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from "@angular/core";
 import {
   CardViewComponent,
   Smart
 } from "@smart-webcomponents-angular/cardview";
-import { CheckBoxComponent } from "@smart-webcomponents-angular/checkbox";
 import { DropDownListComponent } from "@smart-webcomponents-angular/dropdownlist";
-import { RadioButtonComponent } from "@smart-webcomponents-angular/radiobutton";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  styleUrls: ["./app.component.css"],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild("cardview", { read: CardViewComponent, static: false })
-  cardview: CardViewComponent;
-  @ViewChild("collapsible", { read: CheckBoxComponent, static: false })
-  collapsible: CheckBoxComponent;
-  @ViewChild("icons", { read: CheckBoxComponent, static: false })
-  icons: CheckBoxComponent;
-  @ViewChild("titleField", { read: DropDownListComponent, static: false })
-  titleField: DropDownListComponent;
-  @ViewChild("horizontal", { read: RadioButtonComponent, static: false })
-  horizontal: RadioButtonComponent;
-  @ViewChild("vertical", { read: RadioButtonComponent, static: false })
-  vertical: RadioButtonComponent;
-  @ViewChild("crop", { read: RadioButtonComponent, static: false })
-  crop: RadioButtonComponent;
-  @ViewChild("fit", { read: RadioButtonComponent, static: false })
-  fit: RadioButtonComponent;
+  cardview!: CardViewComponent;
+  @ViewChild("titleFieldComponent", { read: DropDownListComponent, static: false })
+  titleFieldComponent!: DropDownListComponent;
 
-  photoFormatFunction(settings) {
+  dataSource = new Smart.DataAdapter({
+    dataSource: this.sampleData,
+    dataFields: [
+      "firstName: string",
+      "lastName: string",
+      "birthday: date",
+      "petName: string",
+      "productName: string",
+      "price: number",
+      "quantity: number",
+      "timeOfPurchase: date",
+      "travelPhotos: string",
+      "contactPhotos: string"
+    ]
+  });
+
+  columns = [
+    { label: "First Name", dataField: "firstName", icon: "firstName" },
+    { label: "Last Name", dataField: "lastName", icon: "lastName" },
+    {
+      label: "Birthday",
+      dataField: "birthday",
+      icon: "birthday",
+      formatSettings: { formatString: "d" }
+    },
+    { label: "Pet Name", dataField: "petName", icon: "petName" },
+    { label: "Product Name", dataField: "productName", icon: "productName" },
+    {
+      label: "Price",
+      dataField: "price",
+      icon: "price",
+      formatSettings: { formatString: "c2" }
+    },
+    {
+      label: "Quantity",
+      dataField: "quantity",
+      icon: "quantity",
+      formatFunction: function (settings: any) {
+        const value = settings.value;
+        let className;
+        if (value < 20) {
+          className = "red";
+        } else if (value < 35) {
+          className = "yellow";
+        } else {
+          className = "green";
+        }
+        settings.template = `<div class="${className}">${value}</div>`;
+      }
+    },
+    {
+      label: "Time of Purchase",
+      dataField: "timeOfPurchase",
+      icon: "timeOfPurchase",
+      formatSettings: { formatString: "hh:mm tt" }
+    },
+    {
+      label: "Travel photos",
+      dataField: "travelPhotos",
+      icon: "photo",
+      formatFunction: this.photoFormatFunction,
+      image: true
+    },
+    {
+      label: "Contact photos",
+      dataField: "contactPhotos",
+      icon: "photo",
+      formatFunction: this.photoFormatFunction,
+      image: true
+    }
+  ];
+
+  cellOrientation = "horizontal";
+  collapsible = true;
+  coverField = "travelPhotos";
+  titleField = "firstName";
+
+  photoFormatFunction(settings: any) {
     const photoList = settings.value.split(",");
     let htmlResult = "";
-    photoList.forEach(photoUrl => {
+    photoList.forEach((photoUrl: string) => {
       htmlResult += `<img class="thumb" src="${photoUrl}" />`;
     });
     settings.template = htmlResult;
+  }
+
+  handleCollapsibleChange(event: CustomEvent) {
+    this.cardview.collapsible = event.detail.value;
+  }
+
+  handleIconsChange() {
+    this.cardview.nativeElement.classList.toggle("disabled-icons");
+  }
+
+  handleCellsOrientationChange(orientation: string) {
+    this.cardview.cellOrientation = orientation;
+  }
+
+  handleImageCoverModeChange(mode: string) {
+    this.cardview.coverMode = mode;
+  }
+
+  handleTitleChange(event: CustomEvent) {
+
+    switch (event.detail.index) {
+      case 0:
+        this.cardview.titleField = "firstName";
+        break;
+      case 1:
+        this.cardview.titleField = "lastName";
+        break;
+      case 2:
+        this.cardview.titleField = "petName";
+        break;
+    }
   }
 
   ngOnInit(): void {
@@ -165,8 +260,7 @@ export class AppComponent implements AfterViewInit, OnInit {
           `https://htmlelements.com/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`
         );
         row.contactPhotos.push(
-          `https://htmlelements.com/demos/images/phonebook/${
-            contactImages[Math.floor(Math.random() * contactImages.length)]
+          `https://htmlelements.com/demos/images/phonebook/${contactImages[Math.floor(Math.random() * contactImages.length)]
           }`
         );
       }
@@ -177,123 +271,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     return sampleData;
   }
+
   init(): void {
     // init code.
-    const that = this;
 
-    that.cardview.dataSource = new Smart.DataAdapter({
-      dataSource: that.sampleData,
-      dataFields: [
-        "firstName: string",
-        "lastName: string",
-        "birthday: date",
-        "petName: string",
-        "productName: string",
-        "price: number",
-        "quantity: number",
-        "timeOfPurchase: date",
-        "travelPhotos: string",
-        "contactPhotos: string"
-      ]
-    });
-
-    that.cardview.columns = [
-      { label: "First Name", dataField: "firstName", icon: "firstName" },
-      { label: "Last Name", dataField: "lastName", icon: "lastName" },
-      {
-        label: "Birthday",
-        dataField: "birthday",
-        icon: "birthday",
-        formatSettings: { formatString: "d" }
-      },
-      { label: "Pet Name", dataField: "petName", icon: "petName" },
-      { label: "Product Name", dataField: "productName", icon: "productName" },
-      {
-        label: "Price",
-        dataField: "price",
-        icon: "price",
-        formatSettings: { formatString: "c2" }
-      },
-      {
-        label: "Quantity",
-        dataField: "quantity",
-        icon: "quantity",
-        formatFunction: function(settings) {
-          const value = settings.value;
-          let className;
-          if (value < 20) {
-            className = "red";
-          } else if (value < 35) {
-            className = "yellow";
-          } else {
-            className = "green";
-          }
-          settings.template = `<div class="${className}">${value}</div>`;
-        }
-      },
-      {
-        label: "Time of Purchase",
-        dataField: "timeOfPurchase",
-        icon: "timeOfPurchase",
-        formatSettings: { formatString: "hh:mm tt" }
-      },
-      {
-        label: "Travel photos",
-        dataField: "travelPhotos",
-        icon: "photo",
-        formatFunction: that.photoFormatFunction,
-        image: true
-      },
-      {
-        label: "Contact photos",
-        dataField: "contactPhotos",
-        icon: "photo",
-        formatFunction: that.photoFormatFunction,
-        image: true
-      }
-    ];
-
-    that.cardview.cellOrientation = "horizontal";
-    that.cardview.collapsible = true;
-    that.cardview.coverField = "travelPhotos";
-    that.cardview.titleField = "firstName";
-
-    that.collapsible.addEventListener("change", function(event: CustomEvent) {
-      that.cardview.collapsible = event.detail.value;
-    });
-
-    that.icons.addEventListener("change", function() {
-      that.cardview.nativeElement.classList.toggle("disabled-icons");
-    });
-
-    that.horizontal.addEventListener("change", function() {
-      that.cardview.cellOrientation = "horizontal";
-    });
-
-    that.vertical.addEventListener("change", function() {
-      that.cardview.cellOrientation = "vertical";
-    });
-
-    that.crop.addEventListener("change", function() {
-      that.cardview.coverMode = "crop";
-    });
-
-    that.fit.addEventListener("change", function() {
-      that.cardview.coverMode = "fit";
-    });
-
-    that.titleField.addEventListener("change", function() {
-      switch (this.selectedIndexes[0]) {
-        case 0:
-          that.cardview.titleField = "firstName";
-          break;
-        case 1:
-          that.cardview.titleField = "lastName";
-          break;
-        case 2:
-          that.cardview.titleField = "petName";
-          break;
-      }
-    });
+    this.titleFieldComponent.addEventListener('change', this.handleTitleChange.bind(this) as EventListenerOrEventListenerObject)
   }
 }

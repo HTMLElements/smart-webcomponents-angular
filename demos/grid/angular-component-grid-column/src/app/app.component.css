@@ -1,3 +1,5 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
 smart-grid-row {
 	height: 40px;
 	font-size: 16px;
@@ -7,7 +9,7 @@ smart-grid-column {
 	font-size: 14px;
 }
 
-smart-grid-column .smart-icon {
+smart-grid-column .column-icon {
 	font-family: 'FontAwesome' !important;
 	font-size: 16px;
 }

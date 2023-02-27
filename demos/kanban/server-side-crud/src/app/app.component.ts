@@ -176,7 +176,7 @@ function DemoServer() {
         }
         // Updates a task and its comments.
         else if (request.action === 'update') {
-            const updateQuery = request.query['update'], taskid = /WHERE id=(.+)/.exec(updateQuery)[1], commentsRegex = /,\s?comments='\[.*\]'/;
+            const updateQuery = request.query['update'], taskid = /WHERE id=(.+)/.exec(updateQuery)[1], commentsRegex = /(?<=comments=')\[.*?](?=\',)/;
             let comments: any = commentsRegex.exec(updateQuery)[0];
             comments = /\[.*\]/.exec(comments)[0];
             comments = JSON.parse(comments);

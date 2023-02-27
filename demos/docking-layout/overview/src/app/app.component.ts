@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, AfterViewInit, ViewEncapsulation, Inject, ElementRef, ViewContainerRef  } from '@angular/core';
+﻿import { Component, ViewChild, AfterViewInit, ViewEncapsulation, Inject, ElementRef, ViewContainerRef } from '@angular/core';
 import { Smart, DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayout';
 import { SliderComponent } from '@smart-webcomponents-angular/slider';
 import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
@@ -9,12 +9,11 @@ import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilin
     styleUrls: ['app.component.css'],
     encapsulation: ViewEncapsulation.None
 })
-	
+
 export class AppComponent implements AfterViewInit {
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent , static: false }) multilinetextbox: MultilineTextBoxComponent;
-	@ViewChild('docking', { read: DockingLayoutComponent, static: false }) docking: DockingLayoutComponent;
-	
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox!: MultilineTextBoxComponent;
+    @ViewChild('docking', { read: DockingLayoutComponent, static: false }) docking!: DockingLayoutComponent;
 
     layout = [
         {
@@ -68,19 +67,37 @@ export class AppComponent implements AfterViewInit {
                 }]
         }];
 
-	ngAfterViewInit(): void {	
-		this.docking.update('tabPanel',
-		{
-			size: '33%', label: 'Tab1',
-			items: [{
-				index: 0, label: 'Tab1',
-				content: this.multilinetextbox.nativeElement
-			},
-			{
-				index: 1, label: 'Tab2',
-				content: this.slider.nativeElement
-			}
-			]
-		});		
-	}
+    handleMultilineTextBoxChange(event: Event) {
+        if (document.getElementById('outputTab')) {
+            const target = event.target as MultilineTextBoxComponent
+            document.getElementById('outputTab')!.innerHTML = target?.value;
+        }
+    }
+
+    handleSliderChange(event: CustomEvent) {
+        if (document.getElementById('outputTab')) {
+            document.getElementById('outputTab')!.innerHTML = event.detail.value;
+        }
+    }
+
+    ngAfterViewInit(): void {
+        this.docking.update('tabPanel',
+            {
+                type: 'LayoutPanel',
+                id: 'tabPanel',
+                label: 'Input',
+                items: [{
+                    index: 0,
+                    label: 'TextBox Tab',
+                    content: this.multilinetextbox.nativeElement
+                },
+                {
+                    index: 1,
+                    label: 'Slider Tab',
+                    content: this.slider.nativeElement
+                }],
+                size: '50%'
+            }
+        );
+    }
 }
