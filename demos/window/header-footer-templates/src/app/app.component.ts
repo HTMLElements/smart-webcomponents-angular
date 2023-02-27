@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
-import { PowerButtonComponent, PowerButton } from '@smart-webcomponents-angular/powerbutton';
+import { PowerButtonComponent, PowerButton } from '@smart-webcomponents-angular/button';
 import { WindowComponent } from '@smart-webcomponents-angular/window';
 
 

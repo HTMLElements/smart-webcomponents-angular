@@ -5,7 +5,7 @@ import { DateTimePickerComponent } from '@smart-webcomponents-angular/datetimepi
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { MaskedTextBoxComponent } from '@smart-webcomponents-angular/maskedtextbox';
 import { NumericTextBoxComponent } from '@smart-webcomponents-angular/numerictextbox';
-import { PasswordTextBoxComponent } from '@smart-webcomponents-angular/passwordtextbox';
+import { PasswordTextBoxComponent, PasswordTextBox } from '@smart-webcomponents-angular/passwordtextbox';
 import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
 
@@ -56,7 +56,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             { input: '#confirm-password-validation', message: 'Confirm Password is required!', action: 'keyup, blur', type: 'required' },
             { input: '#confirm-password-validation', message: '\'Password\' and \'Confirm Password\' do not match.', action: 'keyup, blur', type: 'compare',
                 comparisonTarget: function () {
-                    let password = document.querySelector('#password-validation');
+                    let password = (document.querySelector('#password-validation') as PasswordTextBox);
                     if (password) {
                         return password.value;
                     }

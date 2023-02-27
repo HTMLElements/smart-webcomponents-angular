@@ -33,5 +33,18 @@
 	 <div style="position: fixed; bottom: 5px; right: 5px;">
          <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/" title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png"/></a>
 	</div>
+  <template id="itemTemplate">
+    <div class="templateContainer">
+        <div class="primaryAction"><i class="material-icons"></i>{{label}}</div>
+        <div class="secondaryAction"></div>
+    </div>
+    </template>
+    
+    <template id="multiLineTemplate">
+    <div class="templateContainer">
+        <div class="firstLine">{{label}}</div>
+        <div class="secondLine"></div>
+    </div>
+    </template>
 </body>
 </html>
