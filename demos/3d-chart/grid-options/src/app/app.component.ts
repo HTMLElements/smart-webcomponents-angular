@@ -25,93 +25,33 @@ export class AppComponent implements AfterViewInit, OnInit {
   dataSource = [
     {
       Day: "Monday",
-      Keith: {
-        Running: 10,
-        Swimming: 20,
-        Cycling: 30,
-      },
-      Erica: {
-        Running: 13,
-        Swimming: 30,
-        Cycling: 23,
-      },
-      George: {
-        Running: 15,
-        Swimming: 70,
-        Cycling: 10,
-      },
+      Keith: 20,
+      Erica: 30,
+      George: 70,
     },
     {
       Day: "Tuesday",
-      Keith: {
-        Running: 15,
-        Swimming: 15,
-        Cycling: 40,
-      },
-      Erica: {
-        Running: 10,
-        Swimming: 15,
-        Cycling: 40,
-      },
-      George: {
-        Running: 35,
-        Swimming: 15,
-        Cycling: 40,
-      },
+      Keith: 15,
+      Erica: 40,
+      George: 35,
     },
     {
       Day: "Wednesday",
-      Keith: {
-        Running: 55,
-        Swimming: 15,
-        Cycling: 10,
-      },
-      Erica: {
-        Running: 15,
-        Swimming: 60,
-        Cycling: 5,
-      },
-      George: {
-        Running: 50,
-        Swimming: 5,
-        Cycling: 10,
-      },
+      Keith: 55,
+      Erica: 60,
+      George: 5
     },
     {
       Day: "Thursday",
-      Keith: {
-        Running: 15,
-        Swimming: 15,
-        Cycling: 40,
-      },
-      Erica: {
-        Running: 15,
-        Swimming: 15,
-        Cycling: 40,
-      },
-      George: {
-        Running: 15,
-        Swimming: 15,
-        Cycling: 5,
-      },
+      Keith: 15,
+      Erica: 35,
+      George: 5,
     },
     {
       Day: "Friday",
-      Keith: {
-        Running: 15,
-        Swimming: 15,
-        Cycling: 40,
-      },
-      Erica: {
-        Running: 15,
-        Swimming: 15,
-        Cycling: 40,
-      },
-      George: {
-        Running: 5,
-        Swimming: 5,
-        Cycling: 40,
-      },
+      Keith: 40,
+      Erica: 30,
+      George: 50,
     },
   ];
 
@@ -132,6 +72,11 @@ export class AppComponent implements AfterViewInit, OnInit {
   xAxis = {
     dataField: "Day",
   };
+
+  valueAxis = {
+    unitInterval: 5,
+    minValue: 0,
+  }
 
   seriesGroups = [
     {

@@ -1,7 +1,6 @@
 <smart-3d-chart #chart id="chart" [caption]="caption" [description]="description" [showLegend]="showLegend"
     [dataSource]="dataSource" [cameraPosition]="cameraPosition"
-    [xAxis]=" xAxis" [valueAxis]="valueAxis" [colorScheme]="colorScheme" [seriesGroups]="seriesGroups"
-    [gridOptions]="gridOptions"></smart-3d-chart>
+    [xAxis]=" xAxis" [valueAxis]="valueAxis" [colorScheme]="colorScheme" [seriesGroups]="seriesGroups"></smart-3d-chart>
 
 <div class="options">
     <div class="option">
@@ -14,10 +13,10 @@
         <smart-number-input [value]="90" [min]="50" [max]="120" #gridWidth></smart-number-input>
         <br /><br />
         <span>Grid Cell X-Width:</span>
-        <smart-number-input [value]="16" min="5" [max]="30" #gridCellWidthX disabled></smart-number-input>
+        <smart-number-input [value]="16" [min]="5" [max]="30" #gridCellWidthX [disabled]="true"></smart-number-input>
         <br /><br />
         <span>Grid Cell Z-Width:</span>
-        <smart-number-input [value]="16" min="5" [max]="30" #gridCellWidthZ></smart-number-input>
+        <smart-number-input [value]="16" [min]="5" [max]="30" #gridCellWidthZ></smart-number-input>
     </div>
     <div class="option">
         <br /><br />
