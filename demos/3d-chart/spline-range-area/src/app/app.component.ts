@@ -43,7 +43,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     unitInterval: 8,
     minValue: 0,
     maxValue: 40,
-    formatFunction: (value: any) => {
+    formatFunction: (value:any) => {
       return value + '°C';
     }
   };
