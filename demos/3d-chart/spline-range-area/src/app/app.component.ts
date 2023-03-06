@@ -36,7 +36,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   };
 
   xAxis = {
-    dataField: 'Month',
+    dataField: 'Day',
   };
 
   valueAxis = {
