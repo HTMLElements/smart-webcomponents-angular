@@ -24,10 +24,10 @@ export class AppComponent implements AfterViewInit, OnInit {
     apply() {
 		this.barcodeToStyle.backgroundColor = this.backgroundColorPicker.value;
 		this.barcodeToStyle.lineColor = this.lineColorPicker.value;
-		this.barcodeToStyle.lineWidth = this.lineWidthInput.value;
-		this.barcodeToStyle.lineHeight = this.lineHeightInput.value;
+		this.barcodeToStyle.lineWidth = Number(this.lineWidthInput.value);
+		this.barcodeToStyle.lineHeight = Number(this.lineHeightInput.value);
 		this.barcodeToStyle.labelColor = this.labelColorPicker.value;
-		this.barcodeToStyle.labelFontSize = this.labelFontSizeInput.value;
+		this.barcodeToStyle.labelFontSize = Number(this.labelFontSizeInput.value);
 	}
 	
 	ngOnInit(): void {

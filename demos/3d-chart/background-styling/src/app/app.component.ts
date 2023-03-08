@@ -77,21 +77,28 @@ export class AppComponent implements AfterViewInit, OnInit {
       displayText: 'X',
       minValue: -10,
       maxValue: 10,
+      formatSettings: {
+        decimalPlaces: 2
+      }
     };
-    
+  
     zAxis = {
       dataField: 'valueZ',
       displayText: 'Z',
       minValue: -10,
       maxValue: 10,
+      formatSettings: {
+        decimalPlaces: 2
+      }
     };
-
+  
     valueAxis = {
       unitInterval: 2,
       minValue: -10,
       maxValue: 10,
       formatSettings: {
-        sufix: 'ly'
+        sufix: 'ly',
+        decimalPlaces: 2
       },
       displayText: 'Y',
     };
