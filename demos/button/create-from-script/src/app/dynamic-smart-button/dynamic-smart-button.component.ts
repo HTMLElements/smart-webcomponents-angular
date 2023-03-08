@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { ButtonComponent } from 'smart-webcomponents-angular/button';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
 
 @Component({
   selector: 'dynamic-smart-button',
