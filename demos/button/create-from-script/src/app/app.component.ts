@@ -10,6 +10,8 @@ import { smartDomService } from './smart-dom.service';
 
 export class AppComponent implements AfterViewInit, OnInit {
 
+    @ViewChild('container') container!: ElementRef;
+    
     constructor(private smartDomService: smartDomService) {
 
     }
@@ -26,7 +28,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const obj = this.smartDomService.loadComponent(DynamicSmartButton, document.body);
+        const obj = this.smartDomService.loadComponent(DynamicSmartButton, this.container.nativeElement);
         const smartButton = obj.componentRef.instance as DynamicSmartButton;
 
         setTimeout(() => {
