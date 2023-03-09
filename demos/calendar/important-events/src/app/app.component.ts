@@ -290,7 +290,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             that.importantDatesData = that.importantDatesData.filter(dateObj => dateObj.description !== that.eventDetails.description);
 
-            const newDateRange = dateRangeInput.value as { from: Date, to: Date };
+            const newDateRangeString: string = dateRangeInput.value;
+
+            let newDateRange: { from: Date; to: Date } = {
+                from: new Date(newDateRangeString.split(' - ')[0]),
+                to: new Date(newDateRangeString.split(' - ')[1])
+            }
 
             if (!newDateRange) {
                 return;
