@@ -184,6 +184,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 'addImage': 'Добави',
                 'and': 'И',
                 'apply': 'Приложи',
+                'applyOnce': 'Приложи',
                 'booleanFirst': '☐',
                 'booleanLast': '☑',
                 'cancel': 'Отмени',
