@@ -16,7 +16,6 @@ export class AppComponent implements AfterViewInit, OnInit {
     description = '(source: gs.statcounter.com)';
     showLegend = true;
     showBorderLine = true;
-    legendPosition = { left: 520, top: 140, width: 100, height: 100 };
     padding = { left: 5, top: 5, right: 5, bottom: 5 };
     titlePadding = { left: 0, top: 0, right: 0, bottom: 10 };
     dataSource = this.source;
