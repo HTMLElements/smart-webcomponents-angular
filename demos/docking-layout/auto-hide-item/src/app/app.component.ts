@@ -12,12 +12,12 @@ import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayo
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropDownList: DropDownListComponent;
-    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout: DockingLayoutComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropDownList!: DropDownListComponent;
+    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
 
     layout: Array<object> = [
         {
@@ -84,21 +84,17 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            smartDockingLayout = that.dockinglayout,
-            dropDownList = that.dropDownList;
-
-        that.button.addEventListener('click', function () {
-            smartDockingLayout.autoHideTop(dropDownList.selectedValues[0]);
+        this.button.addEventListener('click', () => {
+            this.dockinglayout.autoHideTop(this.dropDownList.selectedValues[0]);
         });
-        that.button2.addEventListener('click', function () {
-            smartDockingLayout.autoHideBottom(dropDownList.selectedValues[0]);
+        this.button2.addEventListener('click', () => {
+            this.dockinglayout.autoHideBottom(this.dropDownList.selectedValues[0]);
         });
-        that.button3.addEventListener('click', function () {
-            smartDockingLayout.autoHideLeft(dropDownList.selectedValues[0]);
+        this.button3.addEventListener('click', () => {
+            this.dockinglayout.autoHideLeft(this.dropDownList.selectedValues[0]);
         });
-        that.button4.addEventListener('click', function () {
-            smartDockingLayout.autoHideRight(dropDownList.selectedValues[0]);
+        this.button4.addEventListener('click', () => {
+            this.dockinglayout.autoHideRight(this.dropDownList.selectedValues[0]);
         });
     }
 }
