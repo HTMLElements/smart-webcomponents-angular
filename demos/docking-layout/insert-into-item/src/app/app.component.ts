@@ -18,7 +18,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('buttonInsertIntoTop', { read: ButtonComponent, static: false }) buttonInsertIntoTop: ButtonComponent;
     @ViewChild('buttonInsertIntoBottom', { read: ButtonComponent, static: false }) buttonInsertIntoBottom: ButtonComponent;
     @ViewChild('dockingLayout', { read: DockingLayoutComponent, static: false }) dockingLayout: DockingLayoutComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
 
     layout: Array<object> = [
         {
