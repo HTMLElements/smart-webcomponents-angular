@@ -9,7 +9,6 @@ import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayo
 import { WindowComponent } from '@smart-webcomponents-angular/window';
 import { TreeComponent } from '@smart-webcomponents-angular/tree';
 import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
-import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 
 @Component({
@@ -19,26 +18,13 @@ import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
     encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false })
-    dockinglayout: DockingLayoutComponent;
-    @ViewChild('window', { read: WindowComponent, static: false })
-    window: WindowComponent;
-    @ViewChild('tree', { read: TreeComponent, static: false })
-    tree: TreeComponent;
-    @ViewChild('multilineTextBox', {
-        read: MultilineTextBoxComponent,
-        static: false,
-    })
-    multilineTextBox: MultilineTextBoxComponent;
-    @ViewChild('multilineTextBox2', {
-        read: MultilineTextBoxComponent,
-        static: false,
-    })
-    multilineTextBox2: MultilineTextBoxComponent;
-    @ViewChild('textBox', { read: TextBoxComponent, static: false })
-    textBox: TextBoxComponent;
-    @ViewChild('gauge', { read: GaugeComponent, static: false })
-    gauge: GaugeComponent;
+    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
+    @ViewChild('window', { read: WindowComponent, static: false }) window!: WindowComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
+    @ViewChild('multilineTextBox', { read: MultilineTextBoxComponent, static: false, }) multilineTextBox!: MultilineTextBoxComponent;
+    @ViewChild('multilineTextBox2', { read: MultilineTextBoxComponent, static: false, }) multilineTextBox2!: MultilineTextBoxComponent;
+    @ViewChild('multilineTextBox3', { read: MultilineTextBoxComponent, static: false }) multilineTextBox3!: MultilineTextBoxComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
 
     tabTree: string = `
               <smart-tree id="tree" [filterable]="true">
@@ -157,29 +143,25 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-        const that = this;
-
-        this.textBox.nativeElement.innerHTML = 'Some Text Inside the Text Box';
-
-        that.dockinglayout.update('item0', {
+        this.dockinglayout.update('item0', {
             items: [
                 {
                     index: 1,
-                    content: that.textBox.nativeElement,
+                    content: this.multilineTextBox3.nativeElement,
                 },
             ],
         });
 
-        that.dockinglayout.update('item2', {
+        this.dockinglayout.update('item2', {
             items: [
                 {
                     index: 0,
-                    content: that.tree.nativeElement,
+                    content: this.tree.nativeElement,
                 },
             ],
         });
 
-        that.dockinglayout.update('item1', {
+        this.dockinglayout.update('item1', {
             items: [
                 {
                     index: 0,
@@ -187,20 +169,20 @@ export class AppComponent implements AfterViewInit, OnInit {
                 },
                 {
                     index: 1,
-                    content: that.multilineTextBox.nativeElement,
+                    content: this.multilineTextBox.nativeElement,
                 },
                 {
                     index: 2,
-                    content: that.multilineTextBox2.nativeElement,
+                    content: this.multilineTextBox2.nativeElement,
                 },
             ],
         });
 
-        that.dockinglayout.update('item3', {
+        this.dockinglayout.update('item3', {
             items: [
                 {
                     index: 0,
-                    content: that.gauge.nativeElement,
+                    content: this.gauge.nativeElement,
                 },
             ],
         });
