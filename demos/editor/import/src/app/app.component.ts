@@ -20,14 +20,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         that.button.disabled = true;
-        that.editor.importData('./../../../src/common/demo.html');
+        that.editor.importData('../assets/demo.html');
     }
 
     handleTXTImport() {
         const that = this;
 
         that.button2.disabled = true;
-        that.editor.importData('./../../../src/common/demo.txt');
+        that.editor.importData('../assets/demo.txt');
     }
 
     ngOnInit(): void {
