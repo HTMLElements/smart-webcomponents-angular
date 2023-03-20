@@ -1,6 +1,8 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import 'smart-webcomponents-angular/source/smart.element';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
+
+import 'smart-webcomponents-angular/element';
+
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
 	selector: 'app-root',
@@ -10,7 +12,7 @@ import { App } from 'smart-webcomponents-angular/source/smart.core';
 
 export class AppComponent implements AfterViewInit, OnInit {
 
-	app = new App({
+	app = new window.Smart.App({
 		data: {
 			isChecked: true
 		}

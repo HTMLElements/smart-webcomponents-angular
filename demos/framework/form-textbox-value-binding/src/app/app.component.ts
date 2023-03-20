@@ -1,8 +1,8 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
+import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 import 'smart-webcomponents-angular/source/smart.element';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
 
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
 	selector: 'app-root',
@@ -11,9 +11,9 @@ import { App } from 'smart-webcomponents-angular/source/smart.core';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
+	@ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
 
-	app = new App({
+	app = new window.Smart.App({
 		data: {
 			message: "Hello World"
 		}

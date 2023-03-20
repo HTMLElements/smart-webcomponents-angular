@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { RadioButtonComponent } from 'smart-webcomponents-angular/radiobutton';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
+import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
 	selector: 'app-root',
@@ -10,11 +10,11 @@ import { App } from 'smart-webcomponents-angular/source/smart.core';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-	@ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
+	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+	@ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
 
-	app = new App({
+	app = new window.Smart.App({
 		data: {
 			picked: 'One'
 		}
