@@ -3,7 +3,7 @@
   "description": "Angular framework init-from-app example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
   "version": "1.0.2",
   "homepage": "https://www.htmlelements.com/",
-   "dependencies": {
+  "dependencies": {
     "@angular/animations": "12 - 15",
     "@angular/elements": "12 - 15",
     "@angular/common": "12 - 15",
@@ -18,9 +18,9 @@
     "@types/node": "^14.14.31",
     "core-js": "3.9.1",
     "moment": "^2.29.1",
-    "smart-webcomponents-angular": "9.1.68",
-"@smart-webcomponents-angular/dropdownlist": "15.0.2",
-	"@smart-webcomponents-angular/grid": "15.0.2",
+    "smart-webcomponents-angular": "15.0.0",
+    "@smart-webcomponents-angular/dropdownlist": "15.0.2",
+    "@smart-webcomponents-angular/grid": "15.0.2",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },
