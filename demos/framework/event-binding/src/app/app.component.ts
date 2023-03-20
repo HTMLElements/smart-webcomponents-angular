@@ -1,8 +1,8 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from 'smart-webcomponents-angular/button';
-import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
+import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
     selector: 'app-root',
@@ -11,10 +11,10 @@ import { App } from 'smart-webcomponents-angular/source/smart.core';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
 
-    app = new App({
+    app = new window.Smart.App({
         data: {
             message: "Hello World"
         }
@@ -29,7 +29,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
-    submit($event) {
+    submit(event: Event) {
         alert("Submitting: " + this.app.data.message);
     }
 
