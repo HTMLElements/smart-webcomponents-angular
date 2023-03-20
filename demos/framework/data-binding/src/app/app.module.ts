@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ButtonModule } from 'smart-webcomponents-angular/button';
-import { DropDownListModule } from 'smart-webcomponents-angular/dropdownlist';
-import { ListBoxModule } from 'smart-webcomponents-angular/listbox';
-import { TextBoxModule } from 'smart-webcomponents-angular/textbox';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+import { DropDownListModule } from 's@mart-webcomponents-angular/dropdownlist';
+import { ListBoxModule } from '@smart-webcomponents-angular/listbox';
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
 
 import { AppComponent } from './app.component';
 
