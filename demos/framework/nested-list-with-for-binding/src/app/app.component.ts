@@ -1,6 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import 'smart-webcomponents-angular/element';
 
+import 'smart-webcomponents-angular/element';
+import 'smart-webcomponents-angular/source/smart.element.js';
 import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
