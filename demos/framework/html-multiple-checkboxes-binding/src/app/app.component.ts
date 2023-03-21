@@ -1,6 +1,8 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+
 import 'smart-webcomponents-angular/element';
 
+import 'smart-webcomponents-angular/source/smart.element.js';
 import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
@@ -10,6 +12,7 @@ import 'smart-webcomponents-angular/source/smart.core.js';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
+
 	app = new window.Smart.App({
 		id: 'app',
 		data: {
@@ -28,5 +31,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
+		this.app = new window.Smart.App({
+			id: 'app',
+			data: {
+				checkedNames: ['Peter']
+			}
+		});
 	}
 }
