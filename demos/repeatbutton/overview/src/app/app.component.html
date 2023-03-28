@@ -6,26 +6,28 @@
     </div>
     <div class="module">
         <div class="repeat-buttons-container">
-            <smart-repeat-button #repeatbutton><i class="material-icons">keyboard_arrow_left</i>
+            <smart-repeat-button><i class="material-icons">keyboard_arrow_left</i>
             </smart-repeat-button>
-            <smart-repeat-button #repeatbutton2><i class="material-icons">keyboard_arrow_right</i>
+            <smart-repeat-button><i class="material-icons">keyboard_arrow_right</i>
             </smart-repeat-button>
-            <smart-repeat-button #repeatbutton3><i class="material-icons">keyboard_arrow_up</i>
+            <smart-repeat-button><i class="material-icons">keyboard_arrow_up</i>
             </smart-repeat-button>
-            <smart-repeat-button #repeatbutton4><i class="material-icons">keyboard_arrow_down</i>
+            <smart-repeat-button><i class="material-icons">keyboard_arrow_down</i>
             </smart-repeat-button>
         </div>
         <p>Repeat buttons can be used for navigation.</p>
     </div>
+    <section>
     <div class="module">
         <div class="repeat-buttons-container">
-            <smart-repeat-button #repeatbutton5><i class="material-icons">replay_10</i>
+            <smart-repeat-button><i class="material-icons">replay_10</i>
             </smart-repeat-button>
-            <smart-repeat-button #repeatbutton6><i class="material-icons">forward_10</i>
+            <smart-repeat-button><i class="material-icons">forward_10</i>
             </smart-repeat-button>
         </div>
         <p>A repeat button can also be used to configure a range control.</p>
     </div>
+    </section>
     <section id="repeat-button-demo">
         <div class="module">
              <h2>Demo usage</h2>
@@ -34,9 +36,9 @@
         </div>
         <div class="module">
             <div class="repeat-buttons-container">
-                <smart-repeat-button #repeatbutton7 id="progressUp"><i class="material-icons">arrow_upward</i>
+                <smart-repeat-button id="progressUp"><i class="material-icons">arrow_upward</i>
                 </smart-repeat-button>
-                <smart-repeat-button #repeatbutton8 id="progressDown"><i class="material-icons">arrow_downward</i>
+                <smart-repeat-button id="progressDown"><i class="material-icons">arrow_downward</i>
                 </smart-repeat-button>
             </div>
             <p>Repeat buttons that control the fill of the progress bar.</p>
@@ -44,8 +46,8 @@
         <div class="module">
             <div class="progress-bar-container">
                 <smart-progress-bar #progressbar id="progressBar" orientation="vertical"
-                [inverted] show-progress-value [value]="5"></smart-progress-bar>
-                <smart-circular-progress-bar id="progressBarCircular"
+                [inverted]="true" show-progress-value [value]="5"></smart-progress-bar>
+                <smart-circular-progress-bar #progressBarCircular id="progressBarCircular"
                 show-progress-value [value]="5"></smart-circular-progress-bar>
             </div>
             <p>Progress bars : vertical and circular.</p>
@@ -56,9 +58,9 @@
         <div class="module">
             <div class="progress-bar-container">
                 <smart-circular-progress-bar #progressBarCircularControl id="progressBarCircularControl" [value]="25">
-                    <smart-repeat-button #repeatbutton9 id="incrementButton"><i class="material-icons">arrow_upward</i>
+                    <smart-repeat-button id="incrementButton"><i class="material-icons">arrow_upward</i>
                     </smart-repeat-button>
-                    <smart-repeat-button #repeatbutton10 id="decrementButton"><i class="material-icons">arrow_downward</i>
+                    <smart-repeat-button id="decrementButton"><i class="material-icons">arrow_downward</i>
                     </smart-repeat-button>
                 </smart-circular-progress-bar>
             </div>
