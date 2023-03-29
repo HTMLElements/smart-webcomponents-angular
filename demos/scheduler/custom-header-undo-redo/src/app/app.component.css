@@ -10,6 +10,10 @@ body {
     height: 100%;
 }
 
+.smart-scheduler .smart-scheduler-header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
 @media (max-width: 750px) {
     .smart-scheduler {
         width: 100%;
