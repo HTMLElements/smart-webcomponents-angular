@@ -105,10 +105,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     restrictedHours: (number[] | number)[] = [[0, 6], 12, [20, 23]];
 
-    notifyForRestrictions(event: CustomEvent) {
+    async notifyForRestrictions(event: CustomEvent) {
         const scheduler = this.scheduler;
 
-        if (scheduler.isEventRestricted(event.detail.itemDateRange)) {
+        if (await scheduler.isEventRestricted(event.detail.itemDateRange)) {
             window.alert('Event cannot last during restricted hours !');
         }
     }
