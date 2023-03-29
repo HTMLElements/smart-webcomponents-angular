@@ -125,7 +125,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.targetEvent = undefined;
     }
 
-    checkEventEdit() {
+    async checkEventEdit() {
         const that = this,
             targetEvent = that.targetEvent,
             eventEditors = that.eventEditors,
@@ -138,7 +138,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const dateStart = eventEditors.dateStart.querySelector('[event-editor]').value.toDate(),
             dateEnd = eventEditors.dateEnd.querySelector('[event-editor]').value.toDate();
 
-        if (scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
+        if (await scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
             window.alert('Event cannot start/end on restricted Hours !');
         }
     }
