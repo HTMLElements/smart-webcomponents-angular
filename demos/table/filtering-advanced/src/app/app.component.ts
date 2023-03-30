@@ -263,6 +263,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         this.filterowscontainer.nativeElement.appendChild(row);
         this.filterRows[columnLabel] = row;
+        window.Smart.Render()
     }
 
     handleClearFilters(event: Event) {
