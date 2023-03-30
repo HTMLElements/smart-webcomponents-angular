@@ -70,7 +70,7 @@ export class AppComponent implements AfterViewInit {
 	ngAfterViewInit(): void {
 		// afterViewInit code.
 		const filterGroup = new Utilities.FilterGroup();
-        const filterObject = filterGroup.createFilter('numericFilter', 3, 'GREATER_THAN');
+        const filterObject = filterGroup.createFilter('numericFilter', '3', 'GREATER_THAN');
 		
         filterGroup.addFilter('and', filterObject);
         this.table.addFilter('quantity', filterGroup);		
