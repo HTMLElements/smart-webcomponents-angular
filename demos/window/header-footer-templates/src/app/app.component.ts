@@ -17,8 +17,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent;
 
 	onReady(event: any) {
+
+		const that = this;
+		
 		this.smartWindow.nativeElement.querySelector('#power').addEventListener('click', function (): void {
-			this.gauge.disabled = !(<PowerButton>this).checked;
+			that.gauge.disabled = !(<PowerButton>this).checked;
 		});
 	}
 
