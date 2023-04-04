@@ -390,12 +390,16 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.alertWindow.open();
     }
 
-    notifyForRestrictions(event: CustomEvent) {
+    async notifyForRestrictions(event: CustomEvent) {
         const scheduler = this.scheduler;
 
-        if (scheduler.isEventRestricted(event.detail.itemDateRange)) {
-            this.openNotification();
-        }
+        try {
+            const isEventRestricted = await scheduler.isEventRestricted(event.detail.itemDateRange);
+            if (isEventRestricted) {
+                this.openNotification();
+            }
+        } catch (error) { }
+
     }
 
     setEventEditDetails(event: CustomEvent) {
@@ -409,7 +413,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.targetEvent = undefined;
     }
 
-    checkEventEdit() {
+    async checkEventEdit() {
         const that = this;
 
         if (!that.targetEvent || !that.eventEditors) {
@@ -419,9 +423,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         const dateStart = that.eventEditors.dateStart.querySelector('[event-editor]').value.toDate(),
             dateEnd = that.eventEditors.dateEnd.querySelector('[event-editor]').value.toDate();
 
-        if (that.scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
-            that.openNotification();
-        }
+        try {
+            const isEventRestricted = await that.scheduler
+                .isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })
+
+            if (isEventRestricted) {
+                that.openNotification();
+            }
+        } catch (error) { }
     }
 
     ngOnInit(): void {
