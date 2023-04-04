@@ -10,11 +10,11 @@ import { ComboBoxComponent } from '@smart-webcomponents-angular/combobox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('buttonDefault', { read: ButtonComponent, static: false }) buttonDefault: ButtonComponent;
-    @ViewChild('buttonAuto', { read: ButtonComponent, static: false }) buttonAuto: ButtonComponent;
-    @ViewChild('buttonDropDownButton', { read: ButtonComponent, static: false }) buttonDropDownButton: ButtonComponent;
-    @ViewChild('buttonNone', { read: ButtonComponent, static: false }) buttonNone: ButtonComponent;
-    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox: ComboBoxComponent;
+    @ViewChild('buttonDefault', { read: ButtonComponent, static: false }) buttonDefault!: ButtonComponent;
+    @ViewChild('buttonAuto', { read: ButtonComponent, static: false }) buttonAuto!: ButtonComponent;
+    @ViewChild('buttonDropDownButton', { read: ButtonComponent, static: false }) buttonDropDownButton!: ButtonComponent;
+    @ViewChild('buttonNone', { read: ButtonComponent, static: false }) buttonNone!: ButtonComponent;
+    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox!: ComboBoxComponent;
 
     ngOnInit(): void {
         // onInit code.
@@ -73,35 +73,37 @@ export class AppComponent implements AfterViewInit, OnInit {
                 value: 8,
                 group: "C"
             }];
-        buttons[0].addEventListener('click', function (): void {
+
+        buttons[0].addEventListener('click', function (e: Event): void {
             comboBox.dropDownOpenMode = 'default';
 
+            const currentButton = e.currentTarget as ButtonComponent;
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
 
-        buttons[1].addEventListener('click', function (): void {
+        buttons[1].addEventListener('click', function (e: Event): void {
             comboBox.dropDownOpenMode = 'auto';
 
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
 
-        buttons[2].addEventListener('click', function (): void {
+        buttons[2].addEventListener('click', function (e: Event): void {
             comboBox.dropDownOpenMode = 'dropDownButton';
 
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
 
-        buttons[3].addEventListener('click', function (): void {
+        buttons[3].addEventListener('click', function (e: Event): void {
             comboBox.dropDownOpenMode = 'none';
 
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
     }

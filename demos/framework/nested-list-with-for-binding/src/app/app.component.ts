@@ -1,7 +1,8 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
-import 'smart-webcomponents-angular/source/smart.element';
 
+import 'smart-webcomponents-angular/element';
+import 'smart-webcomponents-angular/source/smart.element.js';
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
     selector: 'app-root',
@@ -10,10 +11,10 @@ import 'smart-webcomponents-angular/source/smart.element';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    app = new App({
+    app = new window.Smart.App({
         data: {
-            itemClick: function (event) {
-                alert(event.target.innerHTML);
+            itemClick: function (event: Event) {
+                alert((event.target as any)?.innerHTML);
             },
             items: [
                 {

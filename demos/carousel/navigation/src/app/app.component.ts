@@ -1,7 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CarouselComponent } from '@smart-webcomponents-angular/carousel';
-import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
 
@@ -12,20 +10,57 @@ import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-    @ViewChild('button5', { read: ButtonComponent, static: false }) button5: ButtonComponent;
-    @ViewChild('carousel', { read: CarouselComponent, static: false }) carousel: CarouselComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-    @ViewChild('checkbox4', { read: CheckBoxComponent, static: false }) checkbox4: CheckBoxComponent;
-    @ViewChild('checkbox5', { read: CheckBoxComponent, static: false }) checkbox5: CheckBoxComponent;
-    @ViewChild('checkbox6', { read: CheckBoxComponent, static: false }) checkbox6: CheckBoxComponent;
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
+    @ViewChild('carousel', { read: CarouselComponent, static: false }) carousel!: CarouselComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
 
+    handleCheckBoxChange(event: CustomEvent, property: string) {
+        switch (property) {
+            case 'hideArrows':
+                this.carousel.hideArrows = !event.detail.value
+                break;
+            case 'hideIndicators':
+                this.carousel.hideIndicators = !event.detail.value
+                break;
+            case 'wheel':
+                this.carousel.wheel = event.detail.value
+                break;
+            case 'swipe':
+                this.carousel.swipe = event.detail.value
+                break;
+            case 'slideShow':
+                this.carousel.slideShow = event.detail.value
+                break;
+            case 'loop':
+                this.carousel.loop = event.detail.value
+                break;
+            default:
+                break;
+        }
+    }
+
+    handleButtonClick(event: Event) {
+        const buttonId = ((event.currentTarget) as HTMLButtonElement).id;
+
+        switch (buttonId) {
+            case 'playButton':
+                this.carousel.play()
+                break;
+            case 'pauseButton':
+                this.carousel.pause()
+                break;
+            case 'prevButton':
+                this.carousel.prev()
+                break;
+            case 'nextButton':
+                this.carousel.next()
+                break;
+            case 'slideToButton':
+                this.carousel.slideTo(parseInt('' + this.textbox.value) || 0)
+                break
+            default:
+                break;
+        }
+    }
 
     ngOnInit(): void {
         // onInit code.
@@ -38,10 +73,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-        const that = this,
-            basePath = 'https://htmlelements.com/demos/images/';
+        const basePath = 'https://htmlelements.com/demos/images/';
 
-        that.carousel.dataSource = generateDataSource(6);
+        this.carousel.dataSource = generateDataSource(6);
 
         function generateDataSource(items: number) {
             const dataSource = Array(items).fill({});
@@ -51,21 +85,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 content: 'Content ' + index
             });
             return dataSource;
-        }
-
-        that.checkbox.addEventListener('change', () => that.carousel.hideArrows = !that.checkbox.checked);
-        that.checkbox2.addEventListener('change', () => that.carousel.hideIndicators = !that.checkbox2.checked);
-        that.checkbox3.addEventListener('change', () => that.carousel.wheel = that.checkbox3.checked);
-        that.checkbox4.addEventListener('change', () => that.carousel.swipe = that.checkbox4.checked);
-        that.checkbox5.addEventListener('change', () => that.carousel.slideShow = that.checkbox5.checked);
-        that.checkbox6.addEventListener('change', () => that.carousel.loop = that.checkbox6.checked);
-        that.button.addEventListener('click', () => that.carousel.play());
-        that.button2.addEventListener('click', () => that.carousel.pause());
-        that.button3.addEventListener('click', () => that.carousel.prev());
-        that.button4.addEventListener('click', () => that.carousel.next());
-        if (that.textbox) {
-            const value = parseInt('' + that.textbox.value) || 0;
-            that.button5.addEventListener('click', () => that.carousel.slideTo(value));
         }
     }
 }

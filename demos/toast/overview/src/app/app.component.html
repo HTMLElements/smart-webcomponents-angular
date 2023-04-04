@@ -1,8 +1,8 @@
 <div class="smart-demo-container">
     <section>
-         <h2>smartToast</h2>
+        <h2>smartToast</h2>
         <div>
-             <h2>smartToast is used for system messaging.</h2>
+            <h2>smartToast is used for system messaging.</h2>
             <div class="module">
                 <p>smartToast represents an element which displays an unobtrusive notification
                     to the user. Multiple instances of the same toast can be shown at the same
@@ -18,7 +18,7 @@
                 </ul>
             </div>
             <div class="module">
-                 <h3>Toast components</h3>
+                <h3>Toast components</h3>
                 <p>Header area
                     <br>Content area
                     <br>Icon
@@ -26,12 +26,13 @@
                 </p>
                 <h3>Behavior</h3>
                 <p>Open
-                    <br>Close</p>
+                    <br>Close
+                </p>
             </div>
         </div>
     </section>
     <nav>
-         <h2>Contents</h2>
+        <h2>Contents</h2>
         <ul>
             <li><a href="#toast-usage">Usage</a>
             </li>
@@ -42,7 +43,7 @@
         </ul>
     </nav>
     <section id="toast-usage">
-         <h2>Usage</h2>
+        <h2>Usage</h2>
         <p><strong>As a snackbar</strong>
         </p>
         <p>Snackbars appear above most elements on screen, and they are equal in
@@ -74,15 +75,11 @@
                 the actions is a dismiss action. If the action described in the snackbar
                 is important enough to block the use of the screen, it should be a dialog.</p>
         </div>
-        <br/>
+        <br />
         <div class="module">
             <div id="toastContainer3" class="toast-container"></div>
             <smart-toast #toast2 append-to="toastContainer3" auto-open item-template="toastTemplate3"
-            class="snackbar">Message sent</smart-toast>
-            <template id="toastTemplate3"> <span class="message smart-toast-item-content">{{message}}</span> 
-                <smart-button
-                #button class="primary flat">UNDO</smart-button>
-            </template>
+                class="snackbar">Message sent</smart-toast>
         </div>
     </section>
     <section id="toast-usage4">
@@ -98,30 +95,24 @@
             <div class="module">
                 <div class="light-theme" id="mobileDemo1">
                     <div id="toastContainer4" class="toast-container">
-                        <smart-button #button2 id="toastButton4" class="primary floating"><i class="material-icons">&#xE145;</i>
+                        <smart-button #button2 id="toastButton4" class="primary floating"><i
+                                class="material-icons">&#xE145;</i>
                         </smart-button>
                     </div>
                     <smart-toast #toast3 id="mobileToast1" append-to="toastContainer4" item-template="toastTemplate4"
-                    class="snackbar">Archived</smart-toast>
-                    <template id="toastTemplate4"> <span class="message smart-toast-item-content">{{message}}</span>
-                        <smart-button
-                        #button3 class="success flat">UNDO</smart-button>
-                    </template>
+                        class="snackbar">Archived</smart-toast>
                 </div>
                 <p>A mobile snackbar</p>
             </div>
             <div class="module">
                 <div class="light-theme" id="mobileDemo2">
                     <div id="toastContainer5" class="toast-container">
-                        <smart-button #button4 id="toastButton5" class="primary floating"><i class="material-icons">&#xE145;</i>
+                        <smart-button #button4 id="toastButton5" class="primary floating"><i
+                                class="material-icons">&#xE145;</i>
                         </smart-button>
                     </div>
                     <smart-toast #toast4 id="mobileToast2" append-to="toastContainer5" item-template="toastTemplate5"
-                    class="snackbar">Archived</smart-toast>
-                    <template id="toastTemplate5"> <span class="message smart-toast-item-content">{{message}}</span>
-                        <smart-button
-                        #button5 class="success raised">UNDO</smart-button>
-                    </template>
+                        class="snackbar">Archived</smart-toast>
                 </div>
                 <p>A mobile snackbar with updated content</p>
             </div>
@@ -137,13 +128,8 @@
         <div>
             <div class="light-theme" id="desktopDemo">
                 <div id="toastContainer6" class="toast-container"></div>
-                <smart-toast #toast5 id="desktopToast" append-to="toastContainer6"
-                item-template="toastTemplate5" class="snackbar">Connection timed out. Showing limited messages.</smart-toast>
-                <template
-                id="toastTemplate6"> <span class="message smart-toast-item-content">{{message}}</span>
-                    <smart-button
-                    #button6 class="raised primary">RETRY</smart-button>
-                        </template>
+                <smart-toast #toast5 id="desktopToast" append-to="toastContainer6" item-template="toastTemplate5"
+                    class="snackbar">Connection timed out. Showing limited messages.</smart-toast>
             </div>
         </div>
     </section>
@@ -177,28 +163,12 @@
             <p><strong>Actions</strong>
             </p>
             <p>Expandable notifications are revealed by tapping an indicator icon. Actions
-                are displayed with text labels on a separate background color and location.</p>
+                are displayed with text slabels on a separate background color and location.</p>
         </div>
         <div class="module module-large">
             <div id="notificationMessagingContainer" class="toast-container"></div>
             <smart-toast #toast6 id="notificationMessaging" append-to="notificationMessagingContainer"
-            item-template="notificationMessagingTemplate"></smart-toast>
-            <template id="notificationMessagingTemplate">
-                <div class="message-template">
-                    <div class="message-header"> <i class="material-icons icon">&#xE0B7;</i>  <span class="message"> Messages </span> 
-                        <i
-                        class="material-icons dot">&#xE061;</i> <span><i class="material-icons arrow">&#xE313;</i></span>
-                    </div>
-                    <div class="message-content">
-                         <h3>Justin Rhyss</h3> <span class="smart-toast-item-content">{{message}}</span>
-                    </div>
-                    <img src="../../../images/notifications-icon2.png" class="profile-picture">
-                    <div class="message-footer smart-hidden">
-                        <smart-button>REPLY</smart-button>
-                        <smart-button>ARCHIVE</smart-button>
-                    </div>
-                </div>
-            </template>
+                item-template="notificationMessagingTemplate"></smart-toast>
         </div>
     </section>
 </div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { TextBoxModule } from 'smart-webcomponents-angular/textbox';
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
 
 import { AppComponent } from './app.component';
 

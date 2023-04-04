@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerViewType, SchedulerHeaderViewPosition } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewType, SchedulerHeaderViewPosition } from '@smart-webcomponents-angular/scheduler';
 import { Button } from '@smart-webcomponents-angular/button';
 
 
@@ -11,9 +11,9 @@ import { Button } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             todayDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         controlsContainer.innerHTML = '<label>Quick Settings:</label>' +
             '<smart-button disabled class="undo" title="Undo"><span class="icon"></span></smart-button>' +
             '<smart-button disabled class="redo" title="Redo"><span class="icon"></span></smart-button>';
-        controlsContainer.addEventListener('click', that.buttonHandler.bind(that));
+        controlsContainer.addEventListener('click', that.buttonHandler.bind(that) as EventListener);
 
         header.appendChild(controlsContainer);
     }

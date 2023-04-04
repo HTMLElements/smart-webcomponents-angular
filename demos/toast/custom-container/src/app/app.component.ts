@@ -15,6 +15,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	buttonClickHandler(event: PointerEvent) {
 		this.toast.open();
+		window.Smart.Render()
 	}
 
 	ngOnInit(): void {

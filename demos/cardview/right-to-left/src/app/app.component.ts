@@ -152,6 +152,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             'pickAnother': 'בחר שדה אחר למיון לפי',
             'previousRecord': 'הרשומה הקודמת',
             'removeImage': 'הסר',
+            'reset': 'אִתחוּל',
             'sort': 'סוג',
             'sortedByMultiple': 'ממוין לפי שדות {{n}}',
             'sortedByOne': 'ממוין לפי שדה 1',
