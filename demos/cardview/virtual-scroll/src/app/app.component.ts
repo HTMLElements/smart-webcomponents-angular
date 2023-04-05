@@ -15,7 +15,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         virtualDataSourceLength: 1000,
         virtualDataSourceCache: true,
         virtualDataSource: function (resultCallbackFunction, details) {
-            fetch('https://randomuser.me/api/?results=' + (details.last - details.first + 1), { method: 'GET',  credentials: 'include' })
+            fetch('https://randomuser.me/api/?results=' + (details.last - details.first + 1), { method: 'GET' })
                 .then(function (response) {
                 return response.json();
             })
