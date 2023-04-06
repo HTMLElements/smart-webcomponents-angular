@@ -113,6 +113,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 			
 			addBtn.disabled = true;
 			removeBtn.disabled = false;
+
+			Smart.Render();
 		});
 		
 		insertBtn.addEventListener('click', () => {
@@ -127,6 +129,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 			);
 			
 			insertBtn.disabled = true;
+
+			Smart.Render();
 		});
 		
 		removeBtn.addEventListener('click', () => {
