@@ -31,6 +31,7 @@
 				"./node_modules/@smart-webcomponents-angular/numerictextbox/styles/smart.numerictextbox.css",
 				"./node_modules/@smart-webcomponents-angular/radiobutton/styles/smart.radiobutton.css",
 				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
+                "./node_modules/@smart-webcomponents-angular/passwordtextbox/styles/smart.passwordtextbox.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/timepicker/styles/smart.timepicker.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
