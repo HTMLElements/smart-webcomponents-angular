@@ -34,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         that.radiobutton.addEventListener('change', function () {
-            if (that.radiobutton[0].checked) {
+            if (that.radiobutton.checked) {
                 that.tank.labelsVisibility = 'all';
                 that.tank2.labelsVisibility = 'all';
             }
