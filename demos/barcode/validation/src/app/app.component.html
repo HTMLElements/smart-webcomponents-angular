@@ -7,7 +7,7 @@
 			<li>an array of the illegal characters</li>
 		</ul>
 	In addition, the <b>isValid</b> method returns a boolean indicating the validity of the barcode.
-	<smart-barcode (invalid)="invalid($event)" #barcodeToValidate [value]="'A5600B'" [labelPosition]="'bottom'" [labelFontSize]="30"></smart-barcode>
+	<smart-barcode (onInvalid)="invalid($event)" #barcodeToValidate [value]="'A5600B'" [labelPosition]="'bottom'" [labelFontSize]="30"></smart-barcode>
 	<br />
 	<h3>Event detail:</h3>
 	<ul>
@@ -19,7 +19,7 @@
 	<div class="options">
 		<div class="caption">Validity</div>
 		<div class="option">		
-			<smart-button (click)="validate($event)" #btn1>Set to invalid value</smart-button>
+			<smart-button (onClick)="validate($event)" #btn1>Set to invalid value</smart-button>
 			<br/><br/>
 		</div>
 	</div>

@@ -20,8 +20,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 	@ViewChild('tank9', { read: TankComponent, static: false }) tank9: TankComponent;
 	@ViewChild('tank10', { read: TankComponent, static: false }) tank10: TankComponent;
 	@ViewChild('tank11', { read: TankComponent, static: false }) tank11: TankComponent;
-	@ViewChild('tank12', { read: TankComponent, static: false }) tank12: TankComponent;
-	@ViewChild('tank13', { read: TankComponent, static: false }) tank13: TankComponent;
+	@ViewChild('tank12', { read: TankComponent, static: false }) cpuTank: TankComponent;
+	@ViewChild('tank13', { read: TankComponent, static: false }) batteryTank: TankComponent;
 	
  
 	ngOnInit(): void {
@@ -37,7 +37,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 	    
     
-        let cpuTank = document.getElementById('cpuTank'), batteryTank = document.getElementById('powerSaverTank');
         function setTemperature(event) {
             const tank = event.target;
             let color = '#0C9F59';
@@ -53,12 +52,12 @@ export class AppComponent implements AfterViewInit, OnInit {
             tank.style.setProperty('--smart-primary', color);
             document.getElementById('powerSaver').innerHTML = tank.value;
         }
-        cpuTank.labelFormatFunction = ((label) => { return label + '%'; });
-        batteryTank.addEventListener('change', setTemperature);
+        this.cpuTank.labelFormatFunction = ((label) => { return label + '%'; });
+        this.batteryTank.addEventListener('change', setTemperature);
         let cpu = document.getElementById('cpu');
         setInterval(function () {
-            cpuTank.value = Math.random() * 100;
-            cpu.textContent = cpuTank.value;
+            this.cpuTank.value = Math.random() * 100;
+            cpu.textContent = this.cpuTank.value;
         }, 1500);
     
 

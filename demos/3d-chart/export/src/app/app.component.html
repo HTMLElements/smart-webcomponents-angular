@@ -5,13 +5,13 @@
 <div class="options">
     <div class="caption">Chart Export</div>
     <div class="option">
-        <smart-check-box #includeLegend checked>Include Legend</smart-check-box>
+        <smart-check-box #includeLegend [checked]="true">Include Legend</smart-check-box>
         <br /><br />
-        <smart-check-box #includeCaption checked>Include Caption</smart-check-box>
+        <smart-check-box #includeCaption [checked]="true">Include Caption</smart-check-box>
         <br /><br />
     </div>
     <div class="option">
-        <smart-button id="btn1" (click)="ExportPdf()">Export as PDF</smart-button>
+        <smart-button id="btn1" (click)="ExportPDF()">Export as PDF</smart-button>
         <br /><br />
         <smart-button id="btn2" (click)="ExportPNG()">Export as PNG</smart-button>
         <br /><br />

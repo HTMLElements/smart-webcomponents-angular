@@ -5,7 +5,7 @@ smart-check-box {
 }
 
 smart-check-box.heart .smart-input {
-    background-image: url(./../../../src/images/check-mark-heart-empty.svg);
+    background-image: url('https://www.htmlelements.com/demos/images/check-mark-heart-empty.svg');
     background-repeat: no-repeat;
 	border-color: transparent;
 	background-color: transparent;	
@@ -20,12 +20,12 @@ smart-check-box.heart .smart-overlay {
 } 
 
 smart-check-box.heart[checked] .smart-input {
-    background-image: url(./../../../src/images/check-mark-heart.svg);
+    background-image: url('https://www.htmlelements.com/demos/images/check-mark-heart.svg');
     background-repeat: no-repeat;
 	color: var(--smart-error);
 }
 
 smart-check-box.heart[checked="null"] .smart-input {
-    background-image: url(./../../../src/images/check-mark-heart-indetermined.svg);
+    background-image: url('https://www.htmlelements.com/demos/images/check-mark-heart-indetermined.svg');
     background-repeat: no-repeat;
 }

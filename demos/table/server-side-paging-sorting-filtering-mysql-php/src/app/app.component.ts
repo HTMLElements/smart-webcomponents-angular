@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             const sqlQuery = details.query;
             window.query.innerHTML = 'SELECT CompanyName, ContactName, ContactTitle, Country, Address, City FROM Customers' + sqlQuery['where'] + sqlQuery['groupBy'] + sqlQuery['orderBy'] + sqlQuery['limit'];
             new window.Smart.Ajax({
-                url: 'grid_data.php',
+                url: 'https://www.htmlelements.com/demos/table/server-side-paging-sorting-filtering-mysql-php/grid_data.php',
                 dataSourceType: 'json',
                 data: details.query
             }, (response: any) => {

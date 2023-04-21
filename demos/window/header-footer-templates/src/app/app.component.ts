@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
-import { PowerButtonComponent, PowerButton } from '@smart-webcomponents-angular/powerbutton';
+import { PowerButtonComponent, PowerButton } from '@smart-webcomponents-angular/button';
 import { WindowComponent } from '@smart-webcomponents-angular/window';
 
 
@@ -17,8 +17,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent;
 
 	onReady(event: any) {
+
+		const that = this;
+		
 		this.smartWindow.nativeElement.querySelector('#power').addEventListener('click', function (): void {
-			this.gauge.disabled = !(<PowerButton>this).checked;
+			that.gauge.disabled = !(<PowerButton>this).checked;
 		});
 	}
 

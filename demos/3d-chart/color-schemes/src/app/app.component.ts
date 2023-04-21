@@ -2,7 +2,8 @@
   Component,
   ViewChild,
   OnInit,
-  AfterViewInit
+  AfterViewInit,
+  ViewEncapsulation
 } from '@angular/core';
 import {
   ThreeDChartComponent
@@ -21,7 +22,8 @@ import {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -38,100 +40,101 @@ export class AppComponent implements AfterViewInit, OnInit {
     static: false
   }) useCustomScheme!: CheckBoxComponent;
   @ViewChild('darkModeButton', {
-    read: CheckBoxComponent,
+    read: ButtonComponent,
     static: false
   }) darkModeButton!: CheckBoxComponent;
 
-  dataSource = [{
-    Day: "Monday",
-    Keith: {
-      Running: 10,
-      Swimming: 20,
-      Cycling: 30,
+  dataSource = [
+    {
+      Day: "Monday",
+      Keith: {
+        Running: 10,
+        Swimming: 20,
+        Cycling: 30,
+      },
+      Erica: {
+        Running: 13,
+        Swimming: 30,
+        Cycling: 23,
+      },
+      George: {
+        Running: 15,
+        Swimming: 70,
+        Cycling: 10,
+      },
     },
-    Erica: {
-      Running: 13,
-      Swimming: 30,
-      Cycling: 23,
+    {
+      Day: "Tuesday",
+      Keith: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      Erica: {
+        Running: 10,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      George: {
+        Running: 35,
+        Swimming: 15,
+        Cycling: 40,
+      },
     },
-    George: {
-      Running: 15,
-      Swimming: 70,
-      Cycling: 10,
+    {
+      Day: "Wednesday",
+      Keith: {
+        Running: 55,
+        Swimming: 15,
+        Cycling: 10,
+      },
+      Erica: {
+        Running: 15,
+        Swimming: 60,
+        Cycling: 5,
+      },
+      George: {
+        Running: 50,
+        Swimming: 5,
+        Cycling: 10,
+      },
     },
-  },
-  {
-    Day: "Tuesday",
-    Keith: {
-      Running: 15,
-      Swimming: 15,
-      Cycling: 40,
+    {
+      Day: "Thursday",
+      Keith: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      Erica: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      George: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 5,
+      },
     },
-    Erica: {
-      Running: 10,
-      Swimming: 15,
-      Cycling: 40,
+    {
+      Day: "Friday",
+      Keith: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      Erica: {
+        Running: 15,
+        Swimming: 15,
+        Cycling: 40,
+      },
+      George: {
+        Running: 5,
+        Swimming: 5,
+        Cycling: 40,
+      },
     },
-    George: {
-      Running: 35,
-      Swimming: 15,
-      Cycling: 40,
-    },
-  },
-  {
-    Day: "Wednesday",
-    Keith: {
-      Running: 55,
-      Swimming: 15,
-      Cycling: 10,
-    },
-    Erica: {
-      Running: 15,
-      Swimming: 60,
-      Cycling: 5,
-    },
-    George: {
-      Running: 50,
-      Swimming: 5,
-      Cycling: 10,
-    },
-  },
-  {
-    Day: "Thursday",
-    Keith: {
-      Running: 15,
-      Swimming: 15,
-      Cycling: 40,
-    },
-    Erica: {
-      Running: 15,
-      Swimming: 15,
-      Cycling: 40,
-    },
-    George: {
-      Running: 15,
-      Swimming: 15,
-      Cycling: 5,
-    },
-  },
-  {
-    Day: "Friday",
-    Keith: {
-      Running: 15,
-      Swimming: 15,
-      Cycling: 40,
-    },
-    Erica: {
-      Running: 15,
-      Swimming: 15,
-      Cycling: 40,
-    },
-    George: {
-      Running: 5,
-      Swimming: 5,
-      Cycling: 40,
-    },
-  },
   ];
 
   caption = "Fitness & exercise weekly scorecard";
@@ -151,7 +154,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   };
 
   xAxis = {
-    dataField: "Year",
+    dataField: "Day",
   };
 
   seriesGroups = [{
@@ -226,33 +229,42 @@ export class AppComponent implements AfterViewInit, OnInit {
     const customColors = ['#1A6642', '#46C26F', '#F9B956', '#F38443', '#DE513D'];
     let defaultScheme: string;
 
-    that.chart.addColorScheme('custom', customColors);
+    setTimeout(() => {
+      that.chart.addColorScheme('custom', customColors);
+    }, 100)
+
     customColors.forEach(function (color, index) {
       document.getElementById('customScheme' + (index + 1))!.style.backgroundColor = color;
     });
-    that.colorSchemes.addEventListener('change', function (event:any) {
+
+    that.colorSchemes.addEventListener('change', function (event: any) {
       defaultScheme = event.detail.value;
       that.colorSchemes.placeholder = event.detail.label;
       if (!that.useCustomScheme.checked) {
         that.colorScheme = defaultScheme;
       }
     });
+
     that.colorSchemes.placeholder = '<div class="circle" style="background-color: #307DD7;"></div><div class="circle" style="background-color: #AA4643;"></div><div class="circle" style="background-color: #89A54E;"></div><div class="circle" style="background-color: #71588F;"></div><div class="circle" style="background-color: #4198AF;"></div>';
-    that.useCustomScheme.addEventListener('change', function (event:any) {
+   
+    that.useCustomScheme.addEventListener('change', function (event: any) {
       if (event.detail.value) {
         that.colorScheme = 'custom';
       } else {
         that.colorScheme = defaultScheme;
       }
     });
-    that.darkModeButton.addEventListener('click', function (event:any) {
+
+    that.darkModeButton.addEventListener('click', function (event: any) {
       if (document.body.getAttribute('theme') === 'dark') {
         document.body.removeAttribute('theme');
         that.chart.backgroundColor = 'white';
+        document.body.style.backgroundColor = 'white';
       }
       else {
         document.body.setAttribute('theme', 'dark');
         that.chart.backgroundColor = 'black';
+        document.body.style.backgroundColor = '#242424';
       }
     });
   }

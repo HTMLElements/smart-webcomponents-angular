@@ -123,8 +123,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         new Date(this.currentYear, this.currentMonth, this.currentDate + 10)
     ];
 
-    notifyForRestrictions(event: CustomEvent) {
-        if (this.scheduler.isEventRestricted(event.detail.itemDateRange)) {
+    async notifyForRestrictions(event: CustomEvent) {
+        if (await this.scheduler.isEventRestricted(event.detail.itemDateRange)) {
             this.openNotification();
         }
     }

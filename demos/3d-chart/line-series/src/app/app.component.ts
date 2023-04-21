@@ -12,40 +12,41 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('chart', { read: ThreeDChartComponent, static: false }) chart!: ThreeDChartComponent;
 
   dataSource = [
-    { Month: 'Jan', Computers: 140, Laptops: 180},
-    { Month: 'Feb', Computers: 120, Laptops: 160},
-    { Month: 'Mar', Computers: 100, Laptops: 140},
-    { Month: 'Apr', Computers: 180, Laptops: 200},
-    { Month: 'May', Computers: 220, Laptops: 240},
-    { Month: 'Jun', Computers: 200, Laptops: 220},
-    { Month: 'Jul', Computers: 175, Laptops: 230},
-    { Month: 'Aug', Computers: 160, Laptops: 210},
-    { Month: 'Sep', Computers: 200, Laptops: 190},
-    { Month: 'Oct', Computers: 180, Laptops: 170},
-    { Month: 'Nov', Computers: 160, Laptops: 210},
-    { Month: 'Dec', Computers: 165, Laptops: 140},
+    { Month: 0, y2019: 140, y2020: 150, y2021: 200 },
+    { Month: 1, y2019: 120, y2020: 160, y2021: 180 },
+    { Month: 2, y2019: 100, y2020: 120, y2021: 195 },
+    { Month: 3, y2019: 180, y2020: 200, y2021: 220 },
+    { Month: 4, y2019: 220, y2020: 220, y2021: 260 },
+    { Month: 5, y2019: 200, y2020: 220, y2021: 240 },
+    { Month: 6, y2019: 175, y2020: 200, y2021: 250 },
+    { Month: 7, y2019: 160, y2020: 185, y2021: 230 },
+    { Month: 8, y2019: 200, y2020: 150, y2021: 210 },
+    { Month: 9, y2019: 180, y2020: 150, y2021: 190 },
+    { Month: 10, y2019: 160, y2020: 190, y2021: 230 },
+    { Month: 11, y2019: 165, y2020: 120, y2021: 160 },
   ];
 
-  caption = 'Projected Sales of Electronic Store'
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  description = 'Chart is updated every 100ms';
+  caption = 'Store Sales'
 
-  showLegend = false;
+  description = 'Comparison for the last 3 years';
+
+  showLegend = true;
 
   colorScheme = 'scheme01';
 
-  controlsSettings = {
-    enableRotate: false,
-  }
-
   cameraPosition = {
-    x: 0,
-    y: 15,
-    z: 50,
+    x: 30,
+    y: 30,
+    z: 70,
   };
 
   xAxis = {
     dataField: 'Month',
+    formatFunction: (value:any) => {
+      return this.months[value];
+    }
   };
 
   gridOptions = {
@@ -61,12 +62,12 @@ export class AppComponent implements AfterViewInit, OnInit {
       type: 'line',
 
       series: [
-        { dataField: 'Computers', displayText: 'Computers' },
-        { dataField: 'Laptops', displayText: 'Laptops' },
+        { dataField: 'y2019', displayText: '2019' },
+        { dataField: 'y2020', displayText: '2020' },
+        { dataField: 'y2021', displayText: '2021' },
       ],
     },
   ];
-
   ngOnInit(): void {
     // onInit code.
   }

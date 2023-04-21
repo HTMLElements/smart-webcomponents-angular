@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { TabsComponent } from '@smart-webcomponents-angular/tabs';
-import { Button, RadioButton } from '@smart-webcomponents-angular';
+import { Button } from '@smart-webcomponents-angular/button';
 
 
 @Component({

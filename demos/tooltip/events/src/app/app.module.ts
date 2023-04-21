@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { ButtonModule } from '@smart-webcomponents-angular/powerbutton';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 import { TooltipModule } from '@smart-webcomponents-angular/tooltip';
 
 import { AppComponent } from './app.component';

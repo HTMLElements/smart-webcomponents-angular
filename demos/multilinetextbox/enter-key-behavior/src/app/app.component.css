@@ -11,9 +11,6 @@ app-root {
 }
 
 #messageContainer {
-    position: fixed;
-    bottom: 50px;
-    left: 10px;
     width: 400px;
     height: 700px;
     max-height: 90vh;

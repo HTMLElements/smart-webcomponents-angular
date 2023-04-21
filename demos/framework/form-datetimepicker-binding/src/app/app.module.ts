@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { DateTimePickerModule } from 'smart-webcomponents-angular/datetimepicker';
+import { DateTimePickerModule } from '@smart-webcomponents-angular/datetimepicker';
 
 import { AppComponent } from './app.component';
 

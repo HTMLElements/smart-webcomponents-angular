@@ -148,7 +148,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.linqValue.nativeElement.innerHTML = that.querybuilder.getLinq();
 
         that.querybuilder.addEventListener('change', function (event: any) {
-            if (event.target === that.querybuilder) {
+            if (event.target === that.querybuilder.nativeElement) {
                 that.linqValue.nativeElement.innerHTML = event.detail.linq;
             }
         });

@@ -36,24 +36,24 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         that.button.addEventListener('click', function () {
-            that.slider.nativeElement.style.setProperty('--smart-tick-color', 'red');
-            that.tank.nativeElement.style.setProperty('--smart-tick-color', 'red');
-            that.gauge.nativeElement.style.setProperty('--smart-tick-color', 'red');
+            that.slider.nativeElement.style.setProperty('--smart-border', 'red');
+            that.tank.nativeElement.style.setProperty('--smart-border', 'red');
+            that.gauge.nativeElement.style.setProperty('--smart-border', 'red');
         });
         that.button2.addEventListener('click', function () {
-            that.slider.nativeElement.style.setProperty('--smart-tick-color', 'blue');
-            that.tank.nativeElement.style.setProperty('--smart-tick-color', 'blue');
-            that.gauge.nativeElement.style.setProperty('--smart-tick-color', 'blue');
+            that.slider.nativeElement.style.setProperty('--smart-border', 'blue');
+            that.tank.nativeElement.style.setProperty('--smart-border', 'blue');
+            that.gauge.nativeElement.style.setProperty('--smart-border', 'blue');
         });
         that.button3.addEventListener('click', function () {
-            that.slider.nativeElement.style.setProperty('--smart-tick-label-color', 'red');
-            that.tank.nativeElement.style.setProperty('--smart-tick-label-color', 'red');
-            that.gauge.nativeElement.style.setProperty('--smart-tick-label-color', 'red');
+            that.slider.nativeElement.style.setProperty('--smart-background-color', 'red');
+            that.tank.nativeElement.style.setProperty('--smart-background-color', 'red');
+            that.gauge.nativeElement.style.setProperty('--smart-background-color', 'red');
         });
         that.button4.addEventListener('click', function () {
-            that.slider.nativeElement.style.setProperty('--smart-tick-label-color', 'blue');
-            that.tank.nativeElement.style.setProperty('--smart-tick-label-color', 'blue');
-            that.gauge.nativeElement.style.setProperty('--smart-tick-label-color', 'blue');
+            that.slider.nativeElement.style.setProperty('--smart-background-color', 'blue');
+            that.tank.nativeElement.style.setProperty('--smart-background-color', 'blue');
+            that.gauge.nativeElement.style.setProperty('--smart-background-color', 'blue');
         });
         that.button5.addEventListener('click', function () {
             that.slider.nativeElement.style.width = '500px';

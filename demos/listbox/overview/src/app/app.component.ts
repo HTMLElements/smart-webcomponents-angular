@@ -1,12 +1,13 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
+import { ListBoxComponent, ListBox } from '@smart-webcomponents-angular/listbox';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	styleUrls: ['./app.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
@@ -38,7 +39,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         function configureListBoxes() {
             function configureGestureListBox() {
                 let gestureListbox = document.getElementById('gestureListBox');
-                gestureListbox.itemTemplate = 'multiLineTemplate';
+                (gestureListbox as ListBox).itemTemplate = 'multiLineTemplate';
                 let actionButtons = gestureListbox.getElementsByClassName('secondLine'), button;
                 for (let i = 0; i < actionButtons.length; i++) {
                     button = document.createElement('smart-button');
@@ -85,7 +86,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 gestureListbox.addEventListener('swiperight', handleSwipe);
             }
             function configureDemoListBoxes() {
-                let switchWifi = document.createElement('smart-switch-button'), switchBluetooth = document.createElement('smart-switch-button'), settingsMenu = document.getElementById('settingsMenu'), phoneBook = document.getElementById('phoneBook'), twoLineList = document.getElementById('twoLineList'), twoLineCheckList = document.getElementById('twoLineCheckList'), deleteButton = document.getElementById('deleteButton'), people = phoneBook.items, button, iconLabels = [
+                let switchWifi = document.createElement('smart-switch-button'), switchBluetooth = document.createElement('smart-switch-button'), settingsMenu = document.getElementById('settingsMenu'), phoneBook = document.getElementById('phoneBook'), twoLineList = document.getElementById('twoLineList'), twoLineCheckList = document.getElementById('twoLineCheckList'), deleteButton = document.getElementById('deleteButton'), people = (phoneBook as ListBox).items, button, iconLabels = [
                     'network_wifi',
                     'bluetooth',
                     'data_usage',
@@ -114,20 +115,20 @@ export class AppComponent implements AfterViewInit, OnInit {
                 switchWifi.classList.add('material');
                 switchBluetooth.classList.add('material');
                 switchWifi.checked = true;
-                settingsMenu.itemTemplate = 'itemTemplate';
+                (settingsMenu as ListBox).itemTemplate = 'itemTemplate';
                 const icons = document.getElementsByClassName('primaryAction');
             
                 for (let i = 0; i < icons.length; i++) {
                     icons[i].children[0].textContent = iconLabels[i];
                 }
-                phoneBook.itemTemplate = 'itemTemplate';
+                (phoneBook as ListBox).itemTemplate = 'itemTemplate';
                 for (let i = 0; i < people.length; i++) {
                     button = document.createElement('smart-button');
                     button.classList.add('material', 'flat');
                     button.innerHTML = '<i class="material-icons">&#xE0C9;</i>';
                 }
-                twoLineList.itemTemplate = 'multiLineTemplate';
-                let twoLineListItems = twoLineList.items, secondLineContent = [
+                (twoLineList as ListBox).itemTemplate = 'multiLineTemplate';
+                let twoLineListItems = (twoLineList as ListBox).items, secondLineContent = [
                     'General Manager',
                     'Developer',
                     'Musician',
@@ -147,7 +148,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     'Software Developer',
                 ];
                 for (let i = 0; i < twoLineListItems.length; i++) {
-                    const item = twoLineListItems[i].getElementsByClassName('secondLine')[0];
+                    const item = (twoLineListItems[i] as HTMLElement).getElementsByClassName('secondLine')[0];
                     
                     if (!item) {
                       continue;
@@ -155,8 +156,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                     item.textContent = secondLineContent[i];
                 }
-                twoLineCheckList.itemTemplate = 'multiLineTemplate';
-                let twoLineCheckListItems = twoLineCheckList.items;
+                (twoLineCheckList as ListBox).itemTemplate = 'multiLineTemplate';
+                let twoLineCheckListItems = (twoLineCheckList as ListBox).items;
                 secondLineContent = [
                     '650KB',
                     '105MB',
@@ -177,23 +178,23 @@ export class AppComponent implements AfterViewInit, OnInit {
                     '1.7MB'
                 ];
                 for (let i = 0; i < twoLineCheckListItems.length; i++) {
-                    const item =  twoLineCheckListItems[i].getElementsByClassName('secondLine')[0];
+                    const item =  (twoLineCheckListItems[i] as HTMLElement).getElementsByClassName('secondLine')[0];
 
                     if (item) {
                       item.textContent = secondLineContent[i];
                     }
                 }
                 twoLineCheckList.addEventListener('change', function () {
-                    if (twoLineCheckList.selectedIndexes.length > 0) {
-                        deleteButton.$.removeClass('smart-visibility-hidden');
+                    if ((twoLineCheckList as ListBox).selectedIndexes.length > 0) {
+                        deleteButton.classList.remove('smart-visibility-hidden');
                     }
                     else {
-                        deleteButton.$.addClass('smart-visibility-hidden');
+                        deleteButton.classList.add('smart-visibility-hidden');
                     }
                 });
                 deleteButton.addEventListener('click', function () {
-                    for (let index = twoLineCheckList.selectedIndexes.length - 1; index > -1; index--) {
-                        twoLineCheckList.removeAt(twoLineCheckList.selectedIndexes[index]);
+                    for (let index = (twoLineCheckList as ListBox).selectedIndexes.length - 1; index > -1; index--) {
+                        (twoLineCheckList as ListBox).removeAt((twoLineCheckList as ListBox).selectedIndexes[index]);
                     }
                 });
             }
@@ -210,11 +211,11 @@ export class AppComponent implements AfterViewInit, OnInit {
                 [ringSlider, mediaSlider, alarmSlider].map(function (element) {
                     element.scalePosition = 'none';
                 });
-                mediaSlider.value = mediaSlider.max / 2;
-                ringSlider.value = ringSlider.max / 1.5;
+                mediaSlider.value = (mediaSlider.max as number) / 2;
+                ringSlider.value = (ringSlider.max as number) / 1.5;
                 alarmSlider.value = alarmSlider.max;
                 switchVibration.checked = switchNotificationLight.checked = switchNotificationLightDark.checked = true;
-                listBoxLight.itemTemplate = 'multiLineTemplate';
+                (listBoxLight as ListBox).itemTemplate = 'multiLineTemplate';
                 // Light themed list box
                 if (listBoxLightSecondaryAction[2]) {
                   listBoxLightSecondaryAction[2].innerHTML = '<i class="material-icons">&#xE050;</i>';

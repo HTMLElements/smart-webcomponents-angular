@@ -27,12 +27,12 @@
       </tr>
       <tr>
         <td>
-          <smart-scroll-bar #scrollbar2 max="100" value="50"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar2 [max]="100" [value]="50"></smart-scroll-bar>
         </td>
       </tr>
       <tr>
         <td>
-          <smart-scroll-bar #scrollbar3 max="100" value="100"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar3 [max]="100" [value]="100"></smart-scroll-bar>
         </td>
       </tr>
       <tr>
@@ -42,17 +42,17 @@
       </tr>
       <tr>
         <td>
-          <smart-scroll-bar #scrollbar4 [disabled]="true" max="100"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar4 [disabled]="true" [max]="100"></smart-scroll-bar>
         </td>
       </tr>
       <tr>
         <td>
-          <smart-scroll-bar #scrollbar5 [disabled]="true" max="100" value="50"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar5 [disabled]="true" [max]="100" [value]="50"></smart-scroll-bar>
         </td>
       </tr>
       <tr>
         <td>
-          <smart-scroll-bar #scrollbar6 [disabled]="true" max="100" value="100"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar6 [disabled]="true" [max]="100" [value]="100"></smart-scroll-bar>
         </td>
       </tr>
     </table>
@@ -66,10 +66,10 @@
   </div>
   <div class="module">
     <div>
-      <smart-scroll-bar #scrollbar7 max="100" value="50"></smart-scroll-bar>
+      <smart-scroll-bar #scrollbar7 [max]="100" [value]="50"></smart-scroll-bar>
       <br/>
       <br/>
-      <smart-scroll-bar #scrollbar8 orientation="vertical" max="100" value="75"></smart-scroll-bar>
+      <smart-scroll-bar #scrollbar8 orientation="vertical" [max]="100" [value]="75"></smart-scroll-bar>
     </div>
     <br/>
     <p>Vertical scrollbars</p>
@@ -86,19 +86,19 @@
       <div>
         <h3>Media volume</h3>
         <div id="mediaControl" class="controls"> <i class="material-icons">&#xE04D;</i>
-          <smart-scroll-bar #scrollbar9 id="mediaSlider" max="100" value="25"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar9 id="mediaSlider" [max]="100" [value]="25"></smart-scroll-bar>
         </div>
       </div>
       <div>
         <h3>Alarm volume</h3>
         <div id="alarmControl" class="controls"> <i class="material-icons">&#xE855;</i>
-          <smart-scroll-bar #scrollbar10 id="alarmSlider" max="100" value="50"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar10 id="alarmSlider" [max]="100" [value]="50"></smart-scroll-bar>
         </div>
       </div>
       <div>
         <h3>Ring volume</h3>
         <div id="ringControl" class="controls"> <i class="material-icons">&#xE7F4;</i>
-          <smart-scroll-bar #scrollbar11 id="volumeSlider" max="100" value="75"></smart-scroll-bar>
+          <smart-scroll-bar #scrollbar11 id="volumeSlider" [max]="100" [value]="75"></smart-scroll-bar>
         </div>
       </div>
     </div>
@@ -109,14 +109,14 @@
       <div>
         <h3>Low battery alert on <b id="lowBatteryAlert">15</b> %</h3>
         <div id="mediaControl" class="controls"> <i class="material-icons">&#xE8B2;</i>
-          <smart-scroll-bar #scrollbar12 id="lowBatterySlider" max="100" value="15" scale-type="integer">
+          <smart-scroll-bar #scrollbar12 id="lowBatterySlider" [max]="100" [value]="15" scale-type="integer">
           </smart-scroll-bar>
         </div>
       </div>
       <div>
         <h3>Power saver mode active on <b id="powerSaver">50</b>%</h3>
         <div id="alarmControl" class="controls"> <i class="material-icons">&#xE19C;</i>
-          <smart-scroll-bar #scrollbar13 id="powerSaverSlider" max="100" value="50" scale-type="integer">
+          <smart-scroll-bar #scrollbar13 id="powerSaverSlider" [max]="100" [value]="50" scale-type="integer">
           </smart-scroll-bar>
         </div>
       </div>

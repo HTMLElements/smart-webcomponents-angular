@@ -12,72 +12,129 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('chart', { read: ThreeDChartComponent, static: false }) chart!: ThreeDChartComponent;
 
   generateData() {
-    let sampleData = [];
-    let startingDate = new Date('2022-01-01');
-    for (let i = 0; i < 20; i++) {
-      startingDate.setDate(startingDate.getDate() + 1);
-      let fomrattedDate = startingDate.getDate() + '/' + (startingDate.getMonth() + 1);
-      let obj = {
-        Day: fomrattedDate,
-        AMZN: Math.floor(Math.random() * 15) + 40,
-        GOOG: Math.floor(Math.random() * 20) + 40,
-        AAPL: Math.floor(Math.random() * 10) + 40,
-      }
-      sampleData.push(obj);
+    const seasonData: any = [{
+      Episode: 1,
+      Season1: 2220000,
+      Season6: 7940000
+    },
+    {
+      Episode: 2,
+      Season1: 2200000,
+      Season6: 7290000
+    },
+    {
+      Episode: 3,
+      Season1: 2440000,
+      Season6: 7280000
+    },
+    {
+      Episode: 4,
+      Season1: 2450000,
+      Season6: 7820000
+    },
+    {
+      Episode: 5,
+      Season1: 2580000,
+      Season6: 7890000
+    },
+    {
+      Episode: 6,
+      Season1: 2440000,
+      Season6: 6710000
+    },
+    {
+      Episode: 7,
+      Season1: 2400000,
+      Season6: 7800000
+    },
+    {
+      Episode: 8,
+      Season1: 2720000,
+      Season6: 7600000
+    },
+    {
+      Episode: 9,
+      Season1: 2660000,
+      Season6: 7660000
+    },
+    {
+      Episode: 10,
+      Season1: 3040000,
+      Season6: 8890000
+    },
+    {
+      Episode: 'Total',
+      summary: true
     }
-    return sampleData;
+    ];
+
+    // convert raw data to differences
+    for (let i = seasonData.length - 2; i > 0; i--) {
+      seasonData[i].Season1 -= seasonData[i - 1].Season1;
+      seasonData[i].Season6 -= seasonData[i - 1].Season6;
+    }
+
+    return seasonData;
   }
 
   dataSource = this.generateData();
 
-  caption = 'Stock Changes in January 2022'
+  caption = '\'Game of Thrones\' Viewership'
 
-  description = 'Generate with random data';
+  description = 'Season 1 vs Season 6';
 
-  showLegend = true;
-
-  colorScheme = 'scheme01';
+  showLegend = false;
 
   cameraPosition = {
-    x: 25,
-    y: 40,
+    x: 15,
+    y: 30,
     z: 70,
   };
 
   xAxis = {
-    dataField: 'Day',
-    gridLines: {
-      visible: true,
-    },
+    dataField: 'Episode'
   };
 
   valueAxis = {
-    unitInterval: 15,
-    minValue: 0,
-    maxValue: 100,
-    formatFunction: (value:any) => {
-      return parseFloat(value).toFixed(2) + '$';
+    unitInterval: 1000000,
+    formatFunction: (value: number) => {
+      return (value / 1000000).toFixed(2) + 'M'
     }
   };
 
   gridOptions = {
-    slotWidthZ: 10,
-    width: 120,
-    height: 40
+    height: 35
   };
 
-  seriesGroups = [
-    {
-      type: 'stepline',
+  seriesGroups = [{
+    type: 'waterfall',
+    series: [{
+      dataField: 'Season1',
+      summary: 'summary',
+      displayText: 'Season 1',
+      colorFunction: (value: any, itemIndex: number) => {
 
-      series: [
-        { dataField: 'GOOG', displayText: 'GOOG' },
-        { dataField: 'AMZN', displayText: 'AMZN' },
-        { dataField: 'AAPL', displayText: 'AAPL' },
-      ],
+        if (itemIndex === this.dataSource.length - 1) {
+          return '#FFA500'; // total
+        }
 
+        return (value < 0) ? '#E25848' : '#61D14F';
+      }
     },
-  ];
+    {
+      dataField: 'Season6',
+      summary: 'summary',
+      displayText: 'Season 6',
+      colorFunction: (value: any, itemIndex: number) => {
+        if (itemIndex === this.dataSource.length - 1) {
+          return '#5993FF'; // total
+        }
+
+        return (value < 0) ? '#AF87FF' : '#8EDBFF';
+      }
+    }
+    ]
+  },]
 
   ngOnInit(): void {
     // onInit code.

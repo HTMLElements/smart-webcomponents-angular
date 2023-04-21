@@ -1,37 +1,69 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Angular Listbox Custom-elements</title>
   <base href="/">
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/smart.default.css"/>
+  <link rel="stylesheet"
+    href="https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/smart.default.css" />
   <style>
-@font-face {
-  font-family: "smart-icons";
-  src: url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.eot");
-  src: 
-	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff2")
-      format("woff2"),
-	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff")
-      format("woff"),
-    url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.ttf")
-      format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
+    @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: url('https://fonts.gstatic.com/s/materialicons/v31/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2') format('woff2');
+        }
+
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: inherit;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
   </style>
   <script>
-    console.log('****************************************************************************************************************');
-	console.log('*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
-	console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
-	console.log('****************************************************************************************************************');
-  </script>  
+    console.log(
+      '****************************************************************************************************************'
+      );
+    console.log(
+      '*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
+    console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
+    console.log(
+      '****************************************************************************************************************'
+      );
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
-	<app-root>Loading...</app-root>
-	 <div style="position: fixed; bottom: 5px; right: 5px;">
-         <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/" title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png"/></a>
-	</div>
+  <app-root>Loading...</app-root>
+  <div style="position: fixed; bottom: 5px; right: 5px;">
+    <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/"
+        title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png" /></a>
+  </div>
+  <template id="itemTemplate">
+    <div class="templateContainer">
+      <div class="primaryAction"><i class="material-icons"></i>{{label}}</div>
+      <div class="secondaryAction"></div>
+    </div>
+  </template>
+
+  <template id="multiLineTemplate">
+    <div class="templateContainer">
+      <div class="firstLine">{{label}}</div>
+      <div class="secondLine"></div>
+    </div>
+  </template>
 </body>
+
 </html>

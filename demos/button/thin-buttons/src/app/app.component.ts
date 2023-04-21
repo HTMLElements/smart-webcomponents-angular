@@ -1,11 +1,12 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	styleUrls: ['./app.component.css'],
+	encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	

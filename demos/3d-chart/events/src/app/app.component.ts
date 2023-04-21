@@ -3,35 +3,43 @@ import { ThreeDChartComponent } from '@smart-webcomponents-angular/threedchart';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild('chart', { read: ThreeDChartComponent, static: false }) chart!: ThreeDChartComponent;
-  @ViewChild('itemIndex', { read: NumberInputComponent, static: false }) itemIndex!: NumberInputComponent;
+  @ViewChild('chart', { read: ThreeDChartComponent, static: false })
+  chart!: ThreeDChartComponent;
+  @ViewChild('itemIndex', { read: NumberInputComponent, static: false })
+  itemIndex!: NumberInputComponent;
+  @ViewChild('showItem', { read: ButtonComponent, static: false })
+  showItemBtn!: ButtonComponent;
+  @ViewChild('hideItem', { read: ButtonComponent, static: false })
+  hideItemBtn!: ButtonComponent;
+  @ViewChild('selectItem', { read: ButtonComponent, static: false })
+  selectItemBtn!: ButtonComponent;
+  @ViewChild('unselectItem', { read: ButtonComponent, static: false })
+  unselectItemBtn!: ButtonComponent;
 
   dataSource = [
-    { Type: "Completed", Count: 22 },
-    { Type: "In Progress", Count: 19 },
-    { Type: "Cancelled", Count: 13 },
-    { Type: "Remaining", Count: 34 },
+    { Type: 'Completed', Count: 22 },
+    { Type: 'In Progress', Count: 19 },
+    { Type: 'Cancelled', Count: 13 },
+    { Type: 'Remaining', Count: 34 },
   ];
 
-  caption = "Website Project";
+  caption = 'Website Project';
 
-  description = "Progress of the tasks";
+  description = 'Progress of the tasks';
 
   showLegend = true;
 
   legendLayout = {
-    flow: "vertical",
+    flow: 'vertical',
   };
 
-  colorScheme = "scheme01";
+  colorScheme = 'scheme01';
 
   cameraPosition = {
     y: 18,
@@ -40,13 +48,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   seriesGroups = [
     {
-      type: "pie",
+      type: 'pie',
       showLabels: true,
       dataSource: this.dataSource,
       series: [
         {
-          dataField: "Count",
-          displayText: "Type",
+          dataField: 'Count',
+          displayText: 'Type',
           initialAngle: 0,
           radius: 15,
           labelRadius: 17,
@@ -57,20 +65,21 @@ export class AppComponent implements AfterViewInit, OnInit {
     },
   ];
 
-  showItem($event: any) {
-    this.chart.showItem(this.itemIndex.value, 0, 0);
+  showItem(): void {
+    this.chart.showItem(0, 0, parseInt(this.itemIndex.value));
   }
 
-  hideItem($event: any) {
-    this.chart.hideItem(this.itemIndex.value, 0, 0);
+  hideItem(): void {
+    this.chart.hideItem(0, 0, parseInt(this.itemIndex.value));
   }
 
-  selectItem($event: any) {
-    this.chart.selectItem(this.itemIndex.value, 0, 0);
+  selectItem(): void {
+    this.chart.selectItem(0, 0, parseInt(this.itemIndex.value));
   }
 
-  unselectItem($event: any) {
-    this.chart.unselectItem(this.itemIndex.value, 0, 0);
+  unselectItem(): void {
+    this.chart.unselectItem(0, 0, parseInt(this.itemIndex.value));
+    
   }
 
   ngOnInit(): void {
@@ -85,9 +94,25 @@ export class AppComponent implements AfterViewInit, OnInit {
   init(): void {
     // init code.
     let events = ['itemClick', 'hide', 'show', 'unselect', 'select'];
-    events.forEach(ev => this.chart.addEventListener(ev, function (e: any) {
-      document.getElementById('box')!.innerHTML +=
-        `${ev}, itemIndex:${e.detail.itemIndex}<br/>`
-    }))
+    events.forEach((ev) =>
+      this.chart.addEventListener(ev, function (e: any) {
+        document.getElementById(
+          'box'
+        )!.innerHTML += `${ev}, itemIndex:${e.detail.itemIndex}<br/>`;
+      })
+    );
+
+    this.showItemBtn.addEventListener('click', () => {
+      this.showItem();
+    });
+    this.hideItemBtn.addEventListener('click', () => {
+      this.hideItem();
+    });
+    this.selectItemBtn.addEventListener('click', () => {
+      this.selectItem();
+    });
+    this.unselectItemBtn.addEventListener('click', () => {
+      this.unselectItem();
+    });
   }
 }

@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { MenuComponent } from '@smart-webcomponents-angular/menu';
 
@@ -6,7 +6,8 @@ import { MenuComponent } from '@smart-webcomponents-angular/menu';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	styleUrls: ['./app.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
@@ -38,32 +39,33 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 	    
     
-        const menu1Container = document.getElementById('menu1Container'), menu3Container = document.getElementById('menu3Container'), listMenu2Container = document.getElementById('listMenu2Container'), menuTokens = document.getElementsByClassName('menu-token'), menu1 = document.getElementById('menu1'), menu3 = document.getElementById('menu3');
+        const that = this;
+        const menu1Container = document.getElementById('menu1Container'), menu3Container = document.getElementById('menu3Container'),menuTokens = document.getElementsByClassName('menu-token'), menu1 = document.getElementById('menu1'), menu3 = document.getElementById('menu3');
         menu1.classList.remove('animation');
-        menu1.open(202, 35);
+        that.menu.open(202, 35);
         menu1.classList.add('animation');
         window.scrollTo(0, 0);
-        document.body.addEventListener('contextmenu', function (event) {
+        document.body.addEventListener('contextmenu', function (event:any) {
             let target = event.target;
             if (menu1Container.contains(target) || menu3Container.contains(target)) {
                 event.preventDefault();
             }
         });
-        document.addEventListener('mousedown', function (event) {
-            if (!menu1.contains(event.target)) {
-                menu1.close();
+        document.addEventListener('mousedown', function (event:any) {
+            if (!menu1.contains((event.target))) {
+                that.menu.close();
             }
             if (!menu3.contains(event.target)) {
-                menu3.close();
+                that.menu3.close();
             }
         });
         menuTokens[0].addEventListener('mouseup', function (event) {
-            menu1.open(202, 35);
+            that.menu.open(202, 35);
         });
-        menu3Container.addEventListener('mouseup', function (event) {
+        menu3Container.addEventListener('mouseup', function (event:any) {
             let token = event.target.closest('.menu-token');
             if (token) {
-                menu3.open(194, token.offsetTop);
+                that.menu3.open(194, token.offsetTop);
             }
         });
     

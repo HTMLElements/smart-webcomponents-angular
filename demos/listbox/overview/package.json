@@ -3,7 +3,7 @@
   "description": "Angular listbox overview example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
   "version": "1.0.2",
   "homepage": "https://www.htmlelements.com/",
-   "dependencies": {
+  "dependencies": {
     "@angular/animations": "12 - 15",
     "@angular/elements": "12 - 15",
     "@angular/common": "12 - 15",
@@ -19,7 +19,9 @@
     "core-js": "3.9.1",
     "moment": "^2.29.1",
     "@smart-webcomponents-angular/button": "15.0.2",
-	"@smart-webcomponents-angular/listbox": "15.0.2",
+    "@smart-webcomponents-angular/listbox": "15.0.2",
+    "@smart-webcomponents-angular/slider": "15.0.2",
+    "@smart-webcomponents-angular/switchbutton": "15.0.2",
     "rxjs": "^6.6.6",
     "zone.js": "^0.11.4"
   },

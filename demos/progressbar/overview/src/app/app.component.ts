@@ -29,7 +29,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	init(): void {
 		// init code.
 	    
-    
+        const that = this;
         const progressBars = document.getElementsByClassName('determinate');
         let hoverArea = document.getElementById('hover-area'), linearProgressBar1 = progressBars[0], linearProgressBar2 = progressBars[1], linearProgressBar3 = progressBars[2], circularProgressBar1 = progressBars[3], circularProgressBar2 = progressBars[2], mouseHoverArea = document.getElementsByClassName('page-refresh-progress')[0], uploadButton = document.getElementById('toggleUploadButton'), value, isPaused;
         mouseHoverArea.addEventListener('mouseenter', function () {
@@ -38,34 +38,33 @@ export class AppComponent implements AfterViewInit, OnInit {
         mouseHoverArea.addEventListener('mouseleave', function () {
             document.getElementById('refreshing').classList.add('smart-visibility-hidden');
         });
-        uploadButton.addEventListener('change', function (event) {
-            let circularProgressBar1 = document.getElementsByClassName('uploading')[0];
-            if (uploadButton.disabled || (circularProgressBar1.value > 0 && circularProgressBar1.value < circularProgressBar1.max)) {
+        uploadButton.addEventListener('change', function (event:CustomEvent) {
+            if (that.togglebutton.disabled || (that.progressbar4.value > 0 && that.progressbar4.value < that.progressbar4.max)) {
                 return;
             }
             if (event.detail.value) {
-                circularProgressBar1.readonly = true;
-                circularProgressBar1.$.addClass('start');
+                that.progressbar4.nativeElement.readonly = true;
+                that.progressbar4.nativeElement.classList.add('start');
                 let uploading = setInterval(function () {
-                    circularProgressBar1.value += 25;
-                    circularProgressBar2.value += 25;
-                    if (circularProgressBar1.value > circularProgressBar1.max) {
+                    that.progressbar4.value += 25;
+                    that.progressbar4.value += 25;
+                    if (that.progressbar4.value > that.progressbar4.max) {
                         clearInterval(uploading);
-                        circularProgressBar1.$.addClass('finish');
-                        circularProgressBar1.$.removeClass('start');
+                        that.progressbar4.nativeElement.classList.add('finish');
+                        that.progressbar4.nativeElement.classList.remove('start');
                         setTimeout(function () {
-                            uploadButton.$.button.style.backgroundColor = '#F47B12';
-                            uploadButton.$.button.innerHTML = '<i class="material-icons">done</i>';
-                            circularProgressBar1.readonly = false;
-                            circularProgressBar1.$.removeClass('finish');
+                            that.togglebutton.nativeElement.style.backgroundColor = '#F47B12';
+                            that.togglebutton.nativeElement.innerHTML = '<i class="material-icons">done</i>';
+                            that.progressbar4.nativeElement.readonly = false;
+                            that.progressbar4.nativeElement.classList.remove('finish')
                         }, 250);
                     }
                 }, 750);
             }
             else {
-                circularProgressBar1.value = circularProgressBar1.min;
-                uploadButton.$.button.style.backgroundColor = '';
-                uploadButton.$.button.innerHTML = '<i class="material-icons">cloud_upload</i>';
+                that.progressbar4.value = that.progressbar4.min;
+                that.togglebutton.nativeElement.style.backgroundColor = '';
+                that.togglebutton.nativeElement.innerHTML = '<i class="material-icons">cloud_upload</i>';
             }
         });
         setInterval(function () {
@@ -73,22 +72,22 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return;
             }
             value = Math.random() * 15;
-            linearProgressBar1.value += value;
-            linearProgressBar2.value += value;
-            circularProgressBar1.value += value;
-            circularProgressBar2.value += value;
-            if (linearProgressBar1.value >= linearProgressBar1.max) {
+            that.progressbar.value += value;
+            that.progressbar2.value += value;
+            that.progressbar3.value += value;
+            that.progressbar4.value += value;
+            if (that.progressbar.value >= that.progressbar.max) {
                 isPaused = true;
-                linearProgressBar1.classList.add('finished');
-                linearProgressBar2.classList.add('finished');
-                circularProgressBar1.classList.add('finished');
+                that.progressbar.nativeElement.classList.add('finished');
+                that.progressbar2.nativeElement.classList.add('finished');
+                that.progressbar3.nativeElement.classList.add('finished');
                 setTimeout(function () {
-                    linearProgressBar1.value = linearProgressBar1.min;
-                    linearProgressBar2.value = linearProgressBar2.min;
-                    circularProgressBar1.value = circularProgressBar1.min;
-                    linearProgressBar1.classList.remove('finished');
-                    linearProgressBar2.classList.remove('finished');
-                    circularProgressBar1.classList.remove('finished');
+                    that.progressbar.value = that.progressbar.min;
+                    that.progressbar2.value = that.progressbar2.min;
+                    that.progressbar3.value = that.progressbar3.min;
+                    that.progressbar.nativeElement.classList.remove('finished');
+                    that.progressbar2.nativeElement.classList.remove('finished');
+                    that.progressbar3.nativeElement.classList.remove('finished');
                     isPaused = false;
                 }, 1500);
             }

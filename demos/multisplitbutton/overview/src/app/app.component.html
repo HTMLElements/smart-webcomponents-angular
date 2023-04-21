@@ -15,7 +15,7 @@
                 </div>
                 <div style="height: 5px;" class="module">
                     <figure style="visibility: hidden;">
-                        <img alt="" src="../../../images/components-buttons.png">
+                        <img alt="" src="https://www.htmlelements.com/demos/images/components-buttons-mobile.png">
                     </figure>
                 </div>
                 <div class="module"></div>
@@ -46,12 +46,12 @@
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
                             </smart-multi-split-button>
-                        </div> <span>Ringtone</span> <span>Add note</span>
+                        </div> <span>Ringtone</span>
+ <span>Add note</span>
                     </div>
                 </div>
                 <div class="module"></div>
             </div>
-        </section>
         <div class="module">
              <h2>Generic overflow MultiSplitButton</h2>
             <p>The generic overflow MultiSplitButton displays an arrow by default. When
@@ -61,7 +61,7 @@
             <smart-multi-split-button #multisplitbutton4 buttons-data-source="['Apply Font']"
             drop-down-position="bottom">
                 <smart-list-item>Arial</smart-list-item>
-                <smart-list-item selected>Calibri</smart-list-item>
+                <smart-list-item [selected]>Calibri</smart-list-item>
                 <smart-list-item>Courier</smart-list-item>
                 <smart-list-item>Verdana</smart-list-item>
             </smart-multi-split-button>
@@ -78,7 +78,7 @@
                         <td>
                             <smart-multi-split-button #multisplitbutton5 buttons-data-source="['Get', 'Set']"
                             drop-down-position="bottom">
-                                <smart-list-item selected>Home</smart-list-item>
+                                <smart-list-item [selected]>Home</smart-list-item>
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
                                 <smart-list-item>Business</smart-list-item>
@@ -97,7 +97,7 @@
                                 <smart-list-item>Mobile</smart-list-item>
                                 <smart-list-item>Work</smart-list-item>
                                 <smart-list-item>Business</smart-list-item>
-                                <smart-list-item selected>Personal</smart-list-item>
+                                <smart-list-item [selected]>Personal</smart-list-item>
                             </smart-multi-split-button>
                         </td>
                     </tr>
@@ -119,7 +119,7 @@
                                 <smart-multi-split-button #multisplitbutton7 buttons-data-source="['Set Country']"
                                 drop-down-position="bottom">
                                     <smart-list-item>Africa</smart-list-item>
-                                    <smart-list-item selected>America</smart-list-item>
+                                    <smart-list-item [selected]>America</smart-list-item>
                                     <smart-list-item>Asia</smart-list-item>
                                     <smart-list-item>Europe</smart-list-item>
                                 </smart-multi-split-button>
@@ -131,7 +131,7 @@
                                 <smart-multi-split-button #multisplitbutton8 buttons-data-source="['Set Food']"
                                 drop-down-position="overlay-center">
                                     <smart-list-item>Yogurt</smart-list-item>
-                                    <smart-list-item selected>Honey</smart-list-item>
+                                    <smart-list-item [selected]>Honey</smart-list-item>
                                     <smart-list-item>Strawberries</smart-list-item>
                                 </smart-multi-split-button>
                             </td>
@@ -142,7 +142,7 @@
                                 <smart-multi-split-button #multisplitbutton9 buttons-data-source="['Set Nuts']"
                                 drop-down-position="top">
                                     <smart-list-item>Peanuts</smart-list-item>
-                                    <smart-list-item selected>Hazelnuts</smart-list-item>
+                                    <smart-list-item [selected]>Hazelnuts</smart-list-item>
                                     <smart-list-item>Almonds</smart-list-item>
                                 </smart-multi-split-button>
                             </td>
@@ -161,7 +161,7 @@
             <br/>
             <smart-multi-split-button #multisplitbutton10 buttons-data-source="['Set State']"
             drop-down-position="bottom">
-                <smart-list-item selected>State 1</smart-list-item>
+                <smart-list-item [selected]>State 1</smart-list-item>
                 <smart-list-item>State 2</smart-list-item>
                 <smart-list-item>State 3</smart-list-item>
             </smart-multi-split-button>
@@ -171,7 +171,7 @@
             <smart-multi-split-button #multisplitbutton11 buttons-data-source="['Submit']"
             drop-down-position="bottom" selection-mode="oneOrManyExtended">
                 <smart-list-item>State 1</smart-list-item>
-                <smart-list-item selected>State 2</smart-list-item>
+                <smart-list-item [selected]>State 2</smart-list-item>
                 <smart-list-item>State 3</smart-list-item>
             </smart-multi-split-button>
             <br/>
@@ -180,7 +180,7 @@
             <smart-multi-split-button #multisplitbutton12 buttons-data-source="['Submit Selection']"
             drop-down-position="bottom" selection-mode="checkBox">
                 <smart-list-item>Item 1</smart-list-item>
-                <smart-list-item selected>Item 2</smart-list-item>
+                <smart-list-item [selected]>Item 2</smart-list-item>
                 <smart-list-item>Item 3</smart-list-item>
             </smart-multi-split-button>
             <br/>
@@ -189,7 +189,7 @@
             <smart-multi-split-button #multisplitbutton13 buttons-data-source="['Submit Selection']"
             drop-down-position="bottom" selection-mode="radioButton">
                 <smart-list-item>Item 1</smart-list-item>
-                <smart-list-item selected>Item 2</smart-list-item>
+                <smart-list-item [selected]>Item 2</smart-list-item>
                 <smart-list-item>Item 3</smart-list-item>
             </smart-multi-split-button>
             <br/>
@@ -206,10 +206,12 @@
                 <div>
                      <h2>Edit shipping info</h2>
                     <div>
-                        <div class="name"> <i class="material-icons">&#xE7FD;</i> <span>John Williams</span>
+                        <div class="name"> <i class="material-icons">&#xE7FD;</i>
+ <span>John Williams</span>
                         </div>
                         <div class="address">
-                            <div> <i class="material-icons">&#xE55F;</i> <span>2000 Main Street</span> 
+                            <div> <i class="material-icons">&#xE55F;</i>
+ <span>2000 Main Street</span> 
                                 <br
                                 />
                             </div>
@@ -217,7 +219,7 @@
                                 <smart-multi-split-button #multisplitbutton14 buttons-data-source="['Submit State']"
                                 drop-down-position="overlay-center">
                                     <smart-list-item>NJ</smart-list-item>
-                                    <smart-list-item selected>DE</smart-list-item>
+                                    <smart-list-item [selected]>DE</smart-list-item>
                                     <smart-list-item>FL</smart-list-item>
                                     <smart-list-item>NH</smart-list-item>
                                     <smart-list-item>GA</smart-list-item>
@@ -239,7 +241,8 @@
                                 </smart-multi-split-button> <span>94122</span>
                             </div>
                         </div>
-                        <div class="email"> <i class="material-icons">&#xE0BE;</i> <span>Email</span>
+                        <div class="email"> <i class="material-icons">&#xE0BE;</i>
+ <span>Email</span>
                         </div>
                         <div class="buttons">
                             <smart-button #button2 class="material flat">Cancel</smart-button>

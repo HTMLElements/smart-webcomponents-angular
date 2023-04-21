@@ -85,48 +85,47 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-        const that = this;
-
-        that.button.addEventListener('click', function () {
-            const series = parseFloat(that.numerictextbox.value),
-                count = that.chart.getItemsCount(0, series);
+        this.button.addEventListener('click', async () => {
+            const series = parseFloat(this.numerictextbox.value);
+            const count = await this.chart.getItemsCount(0, series);
             alert(`Series ${series} has ${count} items.`);
         });
-        that.button2.addEventListener('click', function () {
-            const series = parseFloat(that.numerictextbox.value),
-                item = parseFloat(that.numerictextbox2.value),
-                coords = that.chart.getItemCoord(0, series, item);
+        this.button2.addEventListener('click', async () => {
+            const series = parseFloat(this.numerictextbox.value);
+            const item = parseFloat(this.numerictextbox2.value);
+            const coords = await this.chart.getItemCoord(0, series, item);
             alert(`The coordinates of item ${item} from series ${series} are (${coords.x}, ${coords.y}).`);
         });
-        that.button3.addEventListener('click', function () {
-            const series = parseFloat(that.numerictextbox.value);
-            that.chart.showSerie(0, series);
+        this.button3.addEventListener('click', () => {
+            const series = parseFloat(this.numerictextbox.value);
+            this.chart.showSerie(0, series);
         });
-        that.button4.addEventListener('click', function () {
-            const series = parseFloat(that.numerictextbox.value);
-            that.chart.hideSerie(0, series);
+        this.button4.addEventListener('click', () => {
+            const series = parseFloat(this.numerictextbox.value);
+            this.chart.hideSerie(0, series);
         });
-        that.button5.addEventListener('click', function () {
-            const series = parseFloat(that.numerictextbox.value), item = parseFloat(that.numerictextbox2.value);
-            that.chart.showToolTip(0, series, item);
+        this.button5.addEventListener('click', () => {
+            const series = parseFloat(this.numerictextbox.value)
+            const item = parseFloat(this.numerictextbox2.value);
+            this.chart.showToolTip(0, series, item);
         });
-        that.button6.addEventListener('click', function () {
-            that.chart.hideToolTip();
+        this.button6.addEventListener('click', () => {
+            this.chart.hideToolTip();
         });
-        that.button7.addEventListener('click', function () {
-            const rect = that.chart.getXAxisRect(0);
+        this.button7.addEventListener('click', async () => {
+            const rect = await this.chart.getXAxisRect(0);
             alert(`The xAxis rect starts at (${rect.x}, ${rect.y}) and has width ${rect.width}px and height ${rect.height}px.`);
         });
-        that.button8.addEventListener('click', function () {
-            const labels = that.chart.getXAxisLabels(0);
+        this.button8.addEventListener('click', async () => {
+            const labels = await this.chart.getXAxisLabels(0);
             alert(`The xAxis labels are ${labels.map(label => label.value).join(', ')}.`);
         });
-        that.button9.addEventListener('click', function () {
-            const rect = that.chart.getValueAxisRect(0);
+        this.button9.addEventListener('click', async () => {
+            const rect = await this.chart.getValueAxisRect(0);
             alert(`The valueAxis rect starts at (${rect.x}, ${rect.y}) and has width ${rect.width}px and height ${rect.height}px.`);
         });
-        that.button10.addEventListener('click', function () {
-            const labels = that.chart.getValueAxisLabels(0);
+        this.button10.addEventListener('click', async () => {
+            const labels = await this.chart.getValueAxisLabels(0);
             alert(`The valueAxis labels are ${labels.map(label => label.value).join(', ')}.`);
         });
     }

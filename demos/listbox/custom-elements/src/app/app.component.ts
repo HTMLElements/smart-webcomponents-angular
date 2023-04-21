@@ -43,8 +43,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         };
 
-        mediaSlider.value = mediaSlider.max / 2;
-        ringSlider.value = ringSlider.max / 1.5;
+        mediaSlider.value = (mediaSlider.max as number) / 2;
+        ringSlider.value = (mediaSlider.max as number) / 1.5;
         alarmSlider.value = alarmSlider.max;
         switchVibration.checked = switchNotificationLight.checked = switchNotificationLightDark.checked = true;
 
