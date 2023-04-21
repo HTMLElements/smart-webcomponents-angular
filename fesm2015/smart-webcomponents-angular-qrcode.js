@@ -160,6 +160,13 @@ let QRcodeComponent = class QRcodeComponent extends BaseElement {
     set errorLevel(value) {
         this.nativeElement ? this.nativeElement.errorLevel = value : undefined;
     }
+    /** @description Sets color to the transparent parts of the embedded image. Background remains transparent if set to empty string. */
+    get imageBackgroundColor() {
+        return this.nativeElement ? this.nativeElement.imageBackgroundColor : undefined;
+    }
+    set imageBackgroundColor(value) {
+        this.nativeElement ? this.nativeElement.imageBackgroundColor = value : undefined;
+    }
     /** @description Sets the height of the embedded image. */
     get imageHeight() {
         return this.nativeElement ? this.nativeElement.imageHeight : undefined;
@@ -243,6 +250,20 @@ let QRcodeComponent = class QRcodeComponent extends BaseElement {
     }
     set value(value) {
         this.nativeElement ? this.nativeElement.value = value : undefined;
+    }
+    /** @description Sets or gets the width of the QR Code. If the width is set to 0, the width of the QR Code is calculated automatically. */
+    get width() {
+        return this.nativeElement ? this.nativeElement.width : undefined;
+    }
+    set width(value) {
+        this.nativeElement ? this.nativeElement.width = value : undefined;
+    }
+    /** @description Sets or gets the height of the QR Code. If the height is set to 0, the height of the QR Code is calculated automatically. */
+    get height() {
+        return this.nativeElement ? this.nativeElement.height : undefined;
+    }
+    set height(value) {
+        this.nativeElement ? this.nativeElement.height = value : undefined;
     }
     /** @description Exports the QR Code.
     * @param {string} format. The format of the exported file - svg, png, jpg
@@ -367,6 +388,9 @@ __decorate([
 ], QRcodeComponent.prototype, "errorLevel", null);
 __decorate([
     Input()
+], QRcodeComponent.prototype, "imageBackgroundColor", null);
+__decorate([
+    Input()
 ], QRcodeComponent.prototype, "imageHeight", null);
 __decorate([
     Input()
@@ -401,6 +425,12 @@ __decorate([
 __decorate([
     Input()
 ], QRcodeComponent.prototype, "value", null);
+__decorate([
+    Input()
+], QRcodeComponent.prototype, "width", null);
+__decorate([
+    Input()
+], QRcodeComponent.prototype, "height", null);
 __decorate([
     Output()
 ], QRcodeComponent.prototype, "onInvalid", void 0);

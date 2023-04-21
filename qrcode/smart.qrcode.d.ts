@@ -21,6 +21,8 @@ export declare class QRcodeComponent extends BaseElement implements OnInit, Afte
     embedImage: string;
     /** @description Sets the error correction level. */
     errorLevel: string;
+    /** @description Sets color to the transparent parts of the embedded image. Background remains transparent if set to empty string. */
+    imageBackgroundColor: string;
     /** @description Sets the height of the embedded image. */
     imageHeight: number;
     /** @description Sets the width of the embedded image. */
@@ -45,6 +47,10 @@ export declare class QRcodeComponent extends BaseElement implements OnInit, Afte
     renderAs: QRcodeRenderAs | string;
     /** @description Sets or gets the value of the QR Code. */
     value: string;
+    /** @description Sets or gets the width of the QR Code. If the width is set to 0, the width of the QR Code is calculated automatically. */
+    width: number;
+    /** @description Sets or gets the height of the QR Code. If the height is set to 0, the height of the QR Code is calculated automatically. */
+    height: number;
     /** @description This event is triggered when the value of the QR Code is invalid.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	invalidCharacters, 	lengthValidity, 	patternValidity, 	value)
     *   invalidCharacters - An array indicating the invalid characters.

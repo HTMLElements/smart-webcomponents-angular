@@ -629,6 +629,17 @@ window.rrule = { RRule:  pkg.default };
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(SchedulerComponent.prototype, "available", {
+            /** @description Defines an array of objects with start and end fields, where start and end are Date objects. For example: [{  'start': '2022-10-25T12:00.000Z', 'end': '2022-10-25T13:00.000Z' }].  */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.available : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.available = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(SchedulerComponent.prototype, "colorScheme", {
             /** @description Determines the color scheme for the event background selector in the event window editor.  */
             get: function () {
@@ -1212,6 +1223,28 @@ window.rrule = { RRule:  pkg.default };
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(SchedulerComponent.prototype, "legendLayout", {
+            /** @description Determines the layout of the legend items. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.legendLayout : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.legendLayout = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SchedulerComponent.prototype, "legendLayoutMenuBreakpoint", {
+            /** @description Determines the number of items when the legend switches automatically from horizontal list to menu. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.legendLayoutMenuBreakpoint : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.legendLayoutMenuBreakpoint = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(SchedulerComponent.prototype, "mouseWheelStep", {
             /** @description Determines the mouse wheel step. When this property is set to a positive number, the scroll step with mouse wheel or trackpad will depend on the property value. */
             get: function () {
@@ -1395,6 +1428,17 @@ window.rrule = { RRule:  pkg.default };
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.restrictedHours = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(SchedulerComponent.prototype, "restricted", {
+            /** @description Defines an array of dates and hours that are not allowed to have events on. Events that overlap restricted Hours or start/end on them will not be displayed. Each array item is an Object and requires 2 fields - date and hours. For example: { date: new Date(2022, 10, 1), hours: [[0, 6], 12, [20, 23]] }. The hours define a range of restricted hours similartly to the restricted hours property, the date defines a date where the restricted hours will be applied. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.restricted : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.restricted = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -2851,6 +2895,9 @@ window.rrule = { RRule:  pkg.default };
         ], SchedulerComponent.prototype, "autoHeightAllDayCells", null);
         __decorate([
             core.Input()
+        ], SchedulerComponent.prototype, "available", null);
+        __decorate([
+            core.Input()
         ], SchedulerComponent.prototype, "colorScheme", null);
         __decorate([
             core.Input()
@@ -3010,6 +3057,12 @@ window.rrule = { RRule:  pkg.default };
         ], SchedulerComponent.prototype, "legendPosition", null);
         __decorate([
             core.Input()
+        ], SchedulerComponent.prototype, "legendLayout", null);
+        __decorate([
+            core.Input()
+        ], SchedulerComponent.prototype, "legendLayoutMenuBreakpoint", null);
+        __decorate([
+            core.Input()
         ], SchedulerComponent.prototype, "mouseWheelStep", null);
         __decorate([
             core.Input()
@@ -3059,6 +3112,9 @@ window.rrule = { RRule:  pkg.default };
         __decorate([
             core.Input()
         ], SchedulerComponent.prototype, "restrictedHours", null);
+        __decorate([
+            core.Input()
+        ], SchedulerComponent.prototype, "restricted", null);
         __decorate([
             core.Input()
         ], SchedulerComponent.prototype, "rightToLeft", null);

@@ -41,6 +41,10 @@ export declare class BarcodeComponent extends BaseElement implements OnInit, Aft
     type: BarcodeType | string;
     /** @description Sets or gets the value of the barcode. */
     value: string;
+    /** @description Sets or gets the width of the barcode. If the width is set to 0, the width of the barcode is calculated automatically. */
+    width: number;
+    /** @description Sets or gets the height of the barcode. If the height is set to 0, the height of the barcode is calculated automatically. */
+    height: number;
     /** @description This event is triggered when the value of the barcode is invalid.
     *  @param event. The custom event. 	Custom event was created with: event.detail(	invalidCharacters, 	lengthValidity, 	patternValidity, 	value)
     *   invalidCharacters - An array indicating the invalid characters.

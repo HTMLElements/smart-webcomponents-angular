@@ -336,6 +336,13 @@ let FileUploadComponent = class FileUploadComponent extends BaseElement {
     set unfocusable(value) {
         this.nativeElement ? this.nativeElement.unfocusable = value : undefined;
     }
+    /** @description Sets or gets the remove URL. This property corresponds to the form's action attribute. For example, the removeUrl property can point to a PHP file, which handles the remove operation on the server-side. */
+    get removeUrl() {
+        return this.nativeElement ? this.nativeElement.removeUrl : undefined;
+    }
+    set removeUrl(value) {
+        this.nativeElement ? this.nativeElement.removeUrl = value : undefined;
+    }
     /** @description Gets the file upload value. */
     get value() {
         return this.nativeElement ? this.nativeElement.value : undefined;
@@ -575,6 +582,9 @@ __decorate([
 __decorate([
     Input()
 ], FileUploadComponent.prototype, "unfocusable", null);
+__decorate([
+    Input()
+], FileUploadComponent.prototype, "removeUrl", null);
 __decorate([
     Input()
 ], FileUploadComponent.prototype, "value", null);

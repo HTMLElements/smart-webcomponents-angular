@@ -708,7 +708,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onChartInit", {
-        /** @description Sets the grid's image upload settings for the image columns. */
+        /** @description Sets the grid's image and filter upload settings for the image and attachment columns. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onChartInit : undefined;
         },
@@ -785,7 +785,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowHistory", {
-        /** @description Describes the settings for the group header. */
+        /** @description Sets the grid's state settings. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowHistory : undefined;
         },
@@ -796,7 +796,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowStyle", {
-        /** @description Describes the header settings of the grid. */
+        /** @description Describes the settings for the group header. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowStyle : undefined;
         },
@@ -807,7 +807,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowInserted", {
-        /** @description Describes the footer settings of the grid. */
+        /** @description Describes the header settings of the grid. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowInserted : undefined;
         },
@@ -818,7 +818,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowRemoved", {
-        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+        /** @description Describes the footer settings of the grid. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowRemoved : undefined;
         },
@@ -829,7 +829,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowUpdate", {
-        /** @description The rows property is used to describe all rows displayed in the grid. */
+        /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowUpdate : undefined;
         },
@@ -840,7 +840,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowUpdated", {
-        /** @description Describes the selection settings. */
+        /** @description The rows property is used to describe all rows displayed in the grid. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowUpdated : undefined;
         },
@@ -851,7 +851,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onRowClass", {
-        /** @description Describes sorting settings. */
+        /** @description Describes the selection settings. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onRowClass : undefined;
         },
@@ -862,7 +862,7 @@ var GridComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(GridComponent.prototype, "onCellClass", {
-        /** @description undefined */
+        /** @description Describes sorting settings. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onCellClass : undefined;
         },
@@ -1044,6 +1044,17 @@ var GridComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.summaryRow = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GridComponent.prototype, "stateSettings", {
+        /** @description undefined */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.stateSettings : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.stateSettings = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -2228,7 +2239,7 @@ var GridComponent = /** @class */ (function (_super) {
             });
         });
     };
-    /** @description Gets a JSON object with the following fields: 'sort', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'.
+    /** @description Gets a JSON object with the following fields: 'sort', 'columns', 'expandedRows', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'. The 'sort' represents an object which contains the sorted columns. Each key in that json object is the column's dataField item which has sortOrder: string and sortIndex: int properties. The sortOrder could be either 'asc' or 'desc'. Similarly, the filter object contains the filtered columns. Each key in that object is a column data field and each value has 'filters' array property with the applied filters to the column. The 'columns' property contains an array of columns with saved properties such as visible, width and freeze. The 'expandedRows' property contains the indexes of the expanded rows. The 'groups' property contains the grouped column data fields and the selectedCells and selectedRows include information about the cells or rows selection. These depend on the selection mode used in the Grid. The 'paging' object includes the sub-properties 'count', 'index' and 'size' which determine the count of pages, the current page's index and the page size.
     * @returns {any}
   */
     GridComponent.prototype.getState = function () {
@@ -2253,6 +2264,73 @@ var GridComponent = /** @class */ (function (_super) {
                 }
             });
         });
+    };
+    /** @description Saves the Grid state and returns a JSON object with the following fields: 'sort', 'columns', 'expandedRows', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'. The 'sort' represents an object which contains the sorted columns. Each key in that json object is the column's dataField item which has sortOrder: string and sortIndex: int properties. The sortOrder could be either 'asc' or 'desc'. Similarly, the filter object contains the filtered columns. Each key in that object is a column data field and each value has 'filters' array property with the applied filters to the column. The 'columns' property contains an array of columns with saved properties such as visible, width and freeze. The 'expandedRows' property contains the indexes of the expanded rows. The 'groups' property contains the grouped column data fields and the selectedCells and selectedRows include information about the cells or rows selection. These depend on the selection mode used in the Grid. The 'paging' object includes the sub-properties 'count', 'index' and 'size' which determine the count of pages, the current page's index and the page size.
+    * @param {string} name?. state name
+    * @returns {any}
+  */
+    GridComponent.prototype.saveState = function (name) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.saveState(name);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Loads a previously saved Grid state. You can pass a state name when there is a state which was previously saved with the saveState(stateName) method call or a state object returned by the saveState or getState method calls. The state object is required to be a JSON object with the following fields: 'sort', 'columns', 'expandedRows', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'. The 'sort' represents an object which contains the sorted columns. Each key in that json object is the column's dataField item which has sortOrder: string and sortIndex: int properties. The sortOrder could be either 'asc' or 'desc'. Similarly, the filter object contains the filtered columns. Each key in that object is a column data field and each value has 'filters' array property with the applied filters to the column. The 'columns' property contains an array of columns with saved properties such as visible, width and freeze. The 'expandedRows' property contains the indexes of the expanded rows. The 'groups' property contains the grouped column data fields and the selectedCells and selectedRows include information about the cells or rows selection. These depend on the selection mode used in the Grid. The 'paging' object includes the sub-properties 'count', 'index' and 'size' which determine the count of pages, the current page's index and the page size.
+    * @param {any} state. state name or state object
+    * @returns {any}
+  */
+    GridComponent.prototype.loadState = function (state) {
+        return __awaiter(this, void 0, void 0, function () {
+            var getResultOnRender, result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        getResultOnRender = function () {
+                            return new Promise(function (resolve) {
+                                _this.nativeElement.whenRendered(function () {
+                                    var result = _this.nativeElement.loadState(state);
+                                    resolve(result);
+                                });
+                            });
+                        };
+                        return [4 /*yield*/, getResultOnRender()];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    /** @description Resets the Grid state.
+    */
+    GridComponent.prototype.resetState = function () {
+        var _this = this;
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.resetState();
+        }
+        else {
+            this.nativeElement.whenRendered(function () {
+                _this.nativeElement.resetState();
+            });
+        }
     };
     /** @description Gets the changes from the batch edit.
     * @returns {{ upDated: [{ id: string, dataField: string, oldValue: Object, newValue: Object }], deleted: [{id: string, data: Object}], added: [{id: string, data: Object}] }}
@@ -3560,6 +3638,9 @@ var GridComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], GridComponent.prototype, "summaryRow", null);
+    __decorate([
+        Input()
+    ], GridComponent.prototype, "stateSettings", null);
     __decorate([
         Input()
     ], GridComponent.prototype, "groupHeader", null);
