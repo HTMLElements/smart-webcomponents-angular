@@ -13,7 +13,6 @@ import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinete
     declarations: [AppComponent],
     imports: [BrowserModule, FormsModule, DockingLayoutModule, TabsModule, TextBoxModule, SliderModule, MultilineTextBoxModule],
     schemas: [],
-	entryComponents: [],
     providers: [],
     bootstrap: [AppComponent]
 })

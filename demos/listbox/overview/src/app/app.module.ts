@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
     declarations: [ AppComponent ],
     imports: [ BrowserModule, ButtonModule, ListBoxModule, SliderModule, SwitchButtonModule ],
     bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+	
 })
 
 export class AppModule { }

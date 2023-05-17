@@ -9,8 +9,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [ AppComponent ],
     imports: [ BrowserModule, RadioButtonModule, EditorModule ],
-    bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

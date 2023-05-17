@@ -11,8 +11,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [ AppComponent ],
     imports: [ BrowserModule, ButtonModule, DockingLayoutModule, DropDownListModule, WindowModule ],
-    bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

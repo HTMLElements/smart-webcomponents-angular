@@ -11,7 +11,6 @@ import { smartDomService } from './smart-dom.service';
   declarations: [AppComponent, DynamicSmartButton],
   imports: [BrowserModule, ButtonModule],
   bootstrap: [AppComponent],
-  providers: [smartDomService],
-  entryComponents: [AppComponent],
+  providers: [smartDomService]
 })
 export class AppModule {}

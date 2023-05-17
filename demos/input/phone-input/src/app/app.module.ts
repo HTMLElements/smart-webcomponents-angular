@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
     declarations: [ AppComponent ],
     imports: [ BrowserModule, PhoneInputModule, RadioButtonModule ],
     bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+	
 })
 
 export class AppModule { }

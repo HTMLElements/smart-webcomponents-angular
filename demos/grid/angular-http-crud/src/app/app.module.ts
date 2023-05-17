@@ -41,8 +41,7 @@ import { InMemoryDataService } from './in-memory-data.service';
         HttpErrorHandler,
         MessageService
     ],
-    bootstrap: [AppComponent],
-    entryComponents: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

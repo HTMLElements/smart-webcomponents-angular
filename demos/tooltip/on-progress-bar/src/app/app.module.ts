@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
     declarations: [ AppComponent ],
     imports: [ BrowserModule, ProgressBarModule, RadioButtonModule, TooltipModule ],
     bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+	
 })
 
 export class AppModule { }

@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
     declarations: [ AppComponent ],
     imports: [ BrowserModule, LayoutModule, ButtonModule, CalendarModule, ChartModule, DateTimePickerModule, GridModule, ListBoxModule, RadioButtonModule, TextBoxModule ],
     bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+	
 })
 
 export class AppModule { }

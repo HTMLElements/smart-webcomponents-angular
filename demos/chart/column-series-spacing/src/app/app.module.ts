@@ -10,8 +10,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [AppComponent],
     imports: [BrowserModule, ChartModule, CheckBoxModule, SliderModule],
-    bootstrap: [AppComponent],
-    entryComponents: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

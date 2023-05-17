@@ -13,8 +13,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [AppComponent],
     imports: [BrowserModule, DockingLayoutModule, WindowModule, TreeModule, MultilineTextBoxModule, TextBoxModule, GaugeModule],
-    bootstrap: [AppComponent],
-    entryComponents: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

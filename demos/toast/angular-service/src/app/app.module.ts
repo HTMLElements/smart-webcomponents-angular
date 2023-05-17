@@ -12,7 +12,6 @@ import { ToastService } from './toast.service';
     declarations: [AppComponent],
     imports: [BrowserModule, ButtonModule, ToastModule],
     bootstrap: [AppComponent],
-    entryComponents: [AppComponent],
     providers: [ToastService]
 })
 
