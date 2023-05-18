@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
 body {
     margin: 0px;
     padding: 0px;
@@ -41,9 +64,7 @@ smart-button#expandBtn {
     font-weight: bold;
 }
 
-#rightPanel {
-   
-}
+#rightPanel {}
 
 #rightPanel .dashboard-header {
     display: flex;
@@ -61,8 +82,9 @@ smart-button#expandBtn {
 #dashboard #leftPanel .dashboard-header {
     box-shadow: 3px 1px 9px #6e6464;
 }
+
 smart-button.smart-dark, smart-button.smart-dark[focus], smart-button.smart-dark[hover], smart-button.smart-dark[active] {
-	color: #fff;
+    color: #fff;
 }
 
 .dashboard-menu-container {
@@ -72,7 +94,7 @@ smart-button.smart-dark, smart-button.smart-dark[focus], smart-button.smart-dark
     padding-top: 5px;
 }
 
-.dashboard-menu-container > smart-button.flat.menu-btn:nth-child(1) {
+.dashboard-menu-container>smart-button.flat.menu-btn:nth-child(1) {
     border-bottom: 1px solid #inherit;
 }
 
@@ -246,6 +268,7 @@ i.filter {
 .dashboard-header i {
     color: white;
 }
+
 .dashboard-header span.icon-holder i {
     color: white;
 }
@@ -382,8 +405,10 @@ smart-grid-cell .fa-spinner {
 
 smart-grid-cell .fa-thumb-tack.rotate45deg:before {
     display: inline-block;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -webkit-transform: rotate(45deg); /* Safari 3-8 */
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Safari 3-8 */
     transform: rotate(45deg);
 }
 
@@ -418,8 +443,10 @@ smart-grid-column:nth-child(3) {
 smart-grid-column:nth-child(3) div:nth-child(1) {
     order: 2;
     margin-right: 10px;
-    -ms-transform: rotate(45deg); /* IE 9 */
-    -webkit-transform: rotate(45deg); /* Safari 3-8 */
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -webkit-transform: rotate(45deg);
+    /* Safari 3-8 */
     transform: rotate(45deg);
 }
 
@@ -507,7 +534,7 @@ h4.subtitles.active {
     margin-right: 2px;
 }
 
-.header-right-buttons  {
+.header-right-buttons {
     margin-right: 15px;
 }
 
