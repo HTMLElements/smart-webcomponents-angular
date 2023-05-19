@@ -145,7 +145,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.targetEvent = undefined;
     }
 
-    checkEventEdit() {
+    async checkEventEdit() {
         if (!this.targetEvent || !this.eventEditors) {
             return;
         }
@@ -153,7 +153,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const dateStart = (<DateTimePicker>this.eventEditors.dateStart.querySelector('[event-editor]')).value.toDate(),
             dateEnd = (<DateTimePicker>this.eventEditors.dateEnd.querySelector('[event-editor]')).value.toDate();
 
-        if (this.scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
+        if (await this.scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
             this.openNotification();
         }
     }
