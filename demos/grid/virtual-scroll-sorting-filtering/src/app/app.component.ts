@@ -26,6 +26,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         enabled: true
     }
 
+	scrolling = 'virtual';
+	
     dataSource = new Smart.DataAdapter({
         virtualDataSourceLength: 100000,
         virtualDataSource: (resultCallbackFunction, details) => {
