@@ -1,0 +1,59 @@
+<div class="smart-drawer-card">
+    <form #form id="member-form">
+        <div class="member-form-row smart-form-row">
+            <div class="member-form-image">
+                <img src="assets/images/phonebook/toni.png" alt="user">
+            </div>
+            <smart-file-upload #fileupload id="member-image-upload" [hideFooter]="true" [dropZone]="true"
+                [accept]="'.png'"></smart-file-upload>
+        </div>
+        <div class="member-form-row smart-form-row">
+            <label for="firstName" [textContent]="formLabels.firstName"></label>
+            <smart-input form-control-name="firstName" placeholder="First Name" label="First Name"
+                class="outlined"></smart-input>
+        </div>
+        <div class="member-form-row smart-form-row">
+            <label for="lastName" [textContent]="formLabels.lastName"></label>
+            <smart-input form-control-name="lastName" placeholder="Last Name" label="Last Name"
+                class="outlined"></smart-input>
+        </div>
+        <div class="member-form-row smart-form-row">
+            <label for="email" [textContent]="formLabels.emailAddress"></label>
+            <smart-input form-control-name="email" placeholder="Email Address" label="Email Address"
+                class="outlined"></smart-input>
+        </div>
+        <div class="member-form-row smart-form-row">
+            <label for="phoneNumber" [textContent]="formLabels.phoneNumber"></label>
+            <smart-masked-text-box form-control-name="phoneNumber" placeholder="Phone Number" label="Phone Number"
+                class="outlined" mask="(+2) ####-###-##-##"></smart-masked-text-box>
+        </div>
+        <div class="member-form-row smart-form-row">
+            <label for="country" [textContent]="formLabels.country"></label>
+            <smart-drop-down-list form-control-name="country" class="outlined" [dataSource]="countries">
+            </smart-drop-down-list>
+        </div>
+        <div class="member-form-row smart-form-row">
+            <label for="biography" [textContent]="formLabels.biography"></label>
+            <smart-editor form-control-name="biography" class="member-form-editor"
+                [toolbarItems]="toolbarItems"></smart-editor>
+        </div>
+        <div class="member-form-row smart-form-row">
+            <label for="team" [textContent]="formLabels.team"></label>
+            <div form-control-name="team" name="team">
+                <smart-radio-button [groupName]="'team'" value="fireTeam">Fire Team</smart-radio-button>
+                <smart-radio-button [groupName]="'team'" value="waterTeam">Water Team</smart-radio-button>
+                <smart-radio-button [groupName]="'team'" value="airTeam">Air Team</smart-radio-button>
+                <smart-radio-button [groupName]="'team'" value="spaceTeam">Space Team</smart-radio-button>
+            </div>
+        </div>
+        <hr style="opacity: 0.4; margin: 15px 0;">
+        <div class="smart-form-row member-form-buttons-row">
+            <smart-button [content]="formLabels.cancel"></smart-button>
+            <smart-button class="primary" [disabled]="!formValid" [content]="formLabels.saveChanges"
+                (onClick)="submitForm($event)"></smart-button>
+        </div>
+    </form>
+    <smart-toast #successToast itemClass="member-form-success-toast" [appendTo]="'member-form-success-toast-container'"
+        [type]="'success'">Profile changes have been saved.</smart-toast>
+    <div id="member-form-success-toast-container"></div>
+</div>

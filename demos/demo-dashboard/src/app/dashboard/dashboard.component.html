@@ -1,0 +1,8 @@
+<div class="smart-drawer-card">
+    <div class="smart-drawer-card-header">
+        <h3>{{teamEfficiencyString}}</h3>
+        <smart-button-group [dataSource]="chartModes" (onChange)="handleChartModeChange($event)"></smart-button-group>
+        <smart-date-range-input #daterangeinput id="chart-date-range" [locale]="locale" [months]="2" [valueType]="'object'" [value]="dateRangeValue"  [dropDownButtonPosition]="'left'" (onChange)="handleChartDateRangeChange($event)"></smart-date-range-input>
+    </div>
+    <smart-chart #chart id="team-chart" caption="" description="" [locale]="locale" [dataSource]="teamsEfficiency" [showBorderLine]="false" [showLegend]="true" [seriesGroups]="chartSettings.seriesGroups" [xAxis]="chartSettings.xAxis" [padding]="chartSettings.padding" [colorScheme]="chartSettings.colorScheme" [valueAxis]="chartSettings.valueAxis"></smart-chart>
+</div>

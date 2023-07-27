@@ -1,0 +1,37 @@
+.smart-drawer-content {
+    background-color: #d4d6e4;
+    width: calc(100% - var(--drawer-navigation-expanded-width));
+    position: relative;
+    z-index: 1;
+}
+
+.smart-drawer-navigation-collapsed-indicator .smart-drawer-content{
+    width: calc(100% - var(--drawer-navigation-collapsed-width));
+}
+
+.smart-drawer-card {
+    margin: 25px;
+    padding: 30px;
+    box-shadow: 0 0 10px #0003;
+    background-color: #fff;
+    border-radius: var(--smart-border-radius);
+}
+
+.bs-styles-applied .smart-drawer-card {
+    padding: 25px;
+}
+
+.smart-drawer-card-header {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 910px) {
+    .smart-drawer-content {
+        width: 100% !important;
+    }
+}

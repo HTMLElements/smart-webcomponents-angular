@@ -1,0 +1,29 @@
+<div class="smart-drawer-card">
+    <div class="smart-drawer-card-header">
+        <h3>{{teamMembersString}}</h3>
+        <smart-button-group [dataSource]="gridModes" (onChange)="handleGridModeChange($event)"></smart-button-group>
+    </div>
+    <smart-grid #grid id="team-grid" [dataSource]="gridSettings.dataSource"
+        [dataSourceSettings]="gridSettings.dataSourceSettings" [columns]="gridSettings.columns"
+        [columnGroups]="gridSettings.columnGroups" [behavior]="gridSettings.behavior"
+        [appearance]="gridSettings.appearance" [paging]="gridSettings.paging" [pager]="gridSettings.pager"
+        [sorting]="gridSettings.sorting" [selection]="gridSettings.selection" [layout]="gridSettings.layout"
+        [grouping]="gridSettings.grouping" [header]="gridSettings.header" [filtering]="gridSettings.filtering"
+        [messages]="gridSettings.messages" [locale]="gridSettings.locale"></smart-grid>
+    <div #gridHeader style="display: none;">
+        <smart-input [placeholder]="searchInColumnsString" [value]="this.gridSearchQuery"
+            class="smart-team-grid-search-input" (onChanging)="this.handleSearchInColumns($event)"></smart-input>
+        <div class="smart-team-grid-export-buttons">
+            <smart-button class="smart-team-grid-export-btn" id="smart-team-grid-export-excel" value="xlsx"
+                (onClick)="this.handleGridExport($event)">
+                <span class="smart-export-icon smart-excel-icon"></span>
+                <span class="smart-grid-export-btn-text" [textContent]="exportToExcelString"></span>
+            </smart-button>
+            <smart-button class="smart-team-grid-export-btn" id="smart-team-grid-export-pdf" value="pdf"
+                (onClick)="this.handleGridExport($event)">
+                <span class="smart-export-icon smart-pdf-icon"></span>
+                <span class="smart-grid-export-btn-text" [textContent]="exportToPDFString"></span>
+            </smart-button>
+        </div>
+    </div>
+</div>
