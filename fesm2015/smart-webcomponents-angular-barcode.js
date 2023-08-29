@@ -230,6 +230,20 @@ let BarcodeComponent = class BarcodeComponent extends BaseElement {
     set value(value) {
         this.nativeElement ? this.nativeElement.value = value : undefined;
     }
+    /** @description Sets or gets the width of the barcode. If the width is set to 0, the width of the barcode is calculated automatically. */
+    get width() {
+        return this.nativeElement ? this.nativeElement.width : undefined;
+    }
+    set width(value) {
+        this.nativeElement ? this.nativeElement.width = value : undefined;
+    }
+    /** @description Sets or gets the height of the barcode. If the height is set to 0, the height of the barcode is calculated automatically. */
+    get height() {
+        return this.nativeElement ? this.nativeElement.height : undefined;
+    }
+    set height(value) {
+        this.nativeElement ? this.nativeElement.height = value : undefined;
+    }
     /** @description Exports the barcode.
     * @param {string} format. The format of the exported file - svg, png, jpg
     * @param {string} fileName?. The name of the exported file
@@ -381,6 +395,12 @@ __decorate([
 __decorate([
     Input()
 ], BarcodeComponent.prototype, "value", null);
+__decorate([
+    Input()
+], BarcodeComponent.prototype, "width", null);
+__decorate([
+    Input()
+], BarcodeComponent.prototype, "height", null);
 __decorate([
     Output()
 ], BarcodeComponent.prototype, "onInvalid", void 0);

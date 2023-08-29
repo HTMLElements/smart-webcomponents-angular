@@ -534,6 +534,28 @@ import './../source/modules/smart.barcode';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(BarcodeComponent.prototype, "width", {
+            /** @description Sets or gets the width of the barcode. If the width is set to 0, the width of the barcode is calculated automatically. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.width : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.width = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(BarcodeComponent.prototype, "height", {
+            /** @description Sets or gets the height of the barcode. If the height is set to 0, the height of the barcode is calculated automatically. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.height : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.height = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         /** @description Exports the barcode.
         * @param {string} format. The format of the exported file - svg, png, jpg
         * @param {string} fileName?. The name of the exported file
@@ -716,6 +738,12 @@ import './../source/modules/smart.barcode';
         __decorate([
             core.Input()
         ], BarcodeComponent.prototype, "value", null);
+        __decorate([
+            core.Input()
+        ], BarcodeComponent.prototype, "width", null);
+        __decorate([
+            core.Input()
+        ], BarcodeComponent.prototype, "height", null);
         __decorate([
             core.Output()
         ], BarcodeComponent.prototype, "onInvalid", void 0);

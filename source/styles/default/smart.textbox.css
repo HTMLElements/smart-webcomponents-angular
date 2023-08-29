@@ -30,7 +30,16 @@ input.smart-input:disabled {
   border-color: var(--smart-disabled);
   outline: none;
 }
+input.smart-input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
+}
 input.smart-input::selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
+}
+
+textarea.smart-input::-moz-selection {
   background: var(--smart-editor-selection);
   color: var(--smart-editor-selection-color);
 }
@@ -69,6 +78,9 @@ textarea.smart-input::selection {
   --smart-input-drop-down-menu-height: 200px;
   /*min-width: 150px;*/
   min-height: 0;
+}
+.smart-input-drop-down-menu[top] {
+  transform-origin: bottom;
 }
 .smart-input-drop-down-menu:not([animation=none]) {
   transition: opacity 0.2s, transform 0.2s ease-out;
@@ -186,6 +198,10 @@ smart-text-box {
   overflow: visible;
   background: var(--smart-background);
 }
+smart-text-box input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
+}
 smart-text-box input::selection {
   background: var(--smart-editor-selection);
   color: var(--smart-editor-selection-color);
@@ -254,7 +270,10 @@ smart-text-box input:hover {
   display: flex;
   width: initial;
   height: initial;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   pointer-events: none;
   min-height: initial;
   max-height: initial;
@@ -410,6 +429,10 @@ smart-input > .smart-container {
 }
 smart-input.smart-element {
   background: var(--smart-background);
+}
+smart-input input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
 }
 smart-input input::selection {
   background: var(--smart-editor-selection);
@@ -771,6 +794,10 @@ smart-multi-input > .smart-container {
 smart-multi-input.smart-element {
   background: var(--smart-background);
 }
+smart-multi-input input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
+}
 smart-multi-input input::selection {
   background: var(--smart-editor-selection);
   color: var(--smart-editor-selection-color);
@@ -847,6 +874,10 @@ smart-multi-combo-input > .smart-container {
 smart-multi-combo-input.smart-element {
   background: var(--smart-background);
 }
+smart-multi-combo-input input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
+}
 smart-multi-combo-input input::selection {
   background: var(--smart-editor-selection);
   color: var(--smart-editor-selection-color);
@@ -891,14 +922,17 @@ smart-multi-combo-input[focus] {
   white-space: nowrap;
   text-overflow: ellipsis;
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   display: flex;
   align-items: center;
   padding: 1px 6px 1px 6px;
   border-radius: 20px;
   background-color: var(--smart-primary);
   color: var(--smart-primary-color);
-  margin: var(--smart-editor-label-padding) 0 0 var(--smart-editor-label-padding);
+  margin: 0;
   height: 22px;
 }
 .smart-multi-combo-input .smart-token .smart-drop-down-list-selection-label {
@@ -925,10 +959,14 @@ smart-multi-combo-input[focus] {
   flex-wrap: wrap;
   overflow: hidden;
   position: relative;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   border-top-left-radius: var(--smart-border-top-left-radius);
   border-bottom-left-radius: var(--smart-border-bottom-left-radius);
   min-height: var(--smart-editor-height);
+  align-items: center;
 }
 .smart-multi-combo-input .smart-drop-down-list-unselect-button {
   position: relative;
@@ -968,6 +1006,15 @@ smart-multi-combo-input[focus] {
 }
 .smart-multi-combo-input[readonly] .smart-input {
   visibility: hidden;
+}
+.smart-multi-combo-input[readonly] .smart-action-button {
+  background: var(--smart-surface);
+  color: var(--smart-surface-color);
+}
+.smart-multi-combo-input[readonly][open] .smart-action-button,
+.smart-multi-combo-input[readonly][open] .smart-drop-down-button {
+  background: var(--smart-ui-state-hover) !important;
+  color: var(--smart-ui-state-color-hover) !important;
 }
 .smart-multi-combo-input[readonly]:hover .smart-action-button {
   background: var(--smart-ui-state-hover);
@@ -1139,6 +1186,10 @@ smart-check-input > .smart-container {
 smart-check-input.smart-element {
   background: var(--smart-background);
 }
+smart-check-input input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
+}
 smart-check-input input::selection {
   background: var(--smart-editor-selection);
   color: var(--smart-editor-selection-color);
@@ -1207,6 +1258,9 @@ smart-check-input[drop-down-button-position=left] .smart-input, smart-check-inpu
   background: var(--smart-primary);
   border-color: var(--smart-primary);
   color: var(--smart-primary-color);
+}
+.smart-check-input-drop-down-menu ul li.selected.color:after {
+  content: "";
 }
 .smart-check-input-drop-down-menu ul li.active.selected:before {
   position: absolute;
@@ -1320,6 +1374,11 @@ smart-date-input[drop-down-button-position=right] .smart-input,
 smart-date-range-input[drop-down-button-position=left] .smart-input,
 smart-date-range-input[drop-down-button-position=right] .smart-input {
   width: calc(100% - var(--smart-editor-addon-width));
+}
+
+smart-date-range-input input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
 }
 
 smart-date-range-input input::selection {
@@ -1582,6 +1641,10 @@ smart-country-input > .smart-container {
 smart-phone-input.smart-element,
 smart-country-input.smart-element {
   background: var(--smart-background);
+}
+smart-phone-input input::-moz-selection, smart-country-input input::-moz-selection {
+  background: var(--smart-editor-selection);
+  color: var(--smart-editor-selection-color);
 }
 smart-phone-input input::selection,
 smart-country-input input::selection {
@@ -2826,6 +2889,14 @@ smart-time-input.underlined {
 .underlined.smart-input[focus] .smart-hint:after {
   transform: scale(1);
 }
+.underlined.smart-input .smart-input:not(:focus):-moz-placeholder-shown + .smart-hint {
+  font-size: inherit;
+  margin-top: 0px;
+}
+.underlined.smart-input .smart-input:not(:focus):-ms-input-placeholder + .smart-hint {
+  font-size: inherit;
+  margin-top: 0px;
+}
 .underlined.smart-input .smart-input:not(:focus):placeholder-shown + .smart-hint {
   font-size: inherit;
   margin-top: 0px;
@@ -2924,14 +2995,24 @@ smart-multi-input.outlined,
 smart-multi-combo-input.outlined,
 smart-check-input.outlined,
 smart-masked-text-box.outlined,
+smart-phone-input.outlined,
 smart-password-text-box.outlined {
   background-color: transparent;
 }
 
 smart-date-range-input.outlined,
 smart-date-input.outlined,
+smart-phone-input.outlined,
 smart-time-input.outlined {
   overflow: visible;
+}
+
+smart-phone-input.outlined .smart-drop-down-button {
+  margin-right: 0px;
+}
+smart-phone-input.outlined .smart-container::after {
+  margin-left: -18px;
+  z-index: 9;
 }
 
 .outlined.smart-input {
@@ -3112,6 +3193,12 @@ smart-time-input.outlined {
 .outlined.smart-input[hover][hint] .smart-hint:before {
   border-top-color: var(--smart-border);
 }
+.outlined.smart-input[hover][hint] > input:not(:focus):-moz-placeholder-shown, .outlined.smart-input[hover][hint] > textarea:not(:focus):-moz-placeholder-shown {
+  border-color: var(--smart-border);
+}
+.outlined.smart-input[hover][hint] > input:not(:focus):-ms-input-placeholder, .outlined.smart-input[hover][hint] > textarea:not(:focus):-ms-input-placeholder {
+  border-color: var(--smart-border);
+}
 .outlined.smart-input[hover][hint] > input:not(:focus):placeholder-shown,
 .outlined.smart-input[hover][hint] > textarea:not(:focus):placeholder-shown {
   border-color: var(--smart-border);
@@ -3121,9 +3208,25 @@ smart-time-input.outlined {
   color: var(--smart-background-color) !important;
   opacity: 0.75;
 }
+.outlined.smart-input:not([focus]) .smart-input:not(:focus):-moz-placeholder-shown {
+  border-top: 1px solid var(--smart-border);
+  z-index: 5;
+}
+.outlined.smart-input:not([focus]) .smart-input:not(:focus):-ms-input-placeholder {
+  border-top: 1px solid var(--smart-border);
+  z-index: 5;
+}
 .outlined.smart-input:not([focus]) .smart-input:not(:focus):placeholder-shown,
 .outlined.smart-input:not([focus]) .smart-input {
   border-top: 1px solid var(--smart-border);
+  z-index: 5;
+}
+.outlined.smart-input:not([focus]).smart-invalid .smart-input:not(:focus):-moz-placeholder-shown {
+  border-top: 1px solid rgba(var(--smart-error-rgb), 0.5);
+  z-index: 5;
+}
+.outlined.smart-input:not([focus]).smart-invalid .smart-input:not(:focus):-ms-input-placeholder {
+  border-top: 1px solid rgba(var(--smart-error-rgb), 0.5);
   z-index: 5;
 }
 .outlined.smart-input:not([focus]).smart-invalid .smart-input:not(:focus):placeholder-shown,
@@ -3131,11 +3234,30 @@ smart-time-input.outlined {
   border-top: 1px solid rgba(var(--smart-error-rgb), 0.5);
   z-index: 5;
 }
+.outlined.smart-input[hint] .smart-input:not(:focus):-moz-placeholder-shown + .smart-hint {
+  font-size: var(--smart-font-size);
+  line-height: 60px;
+  z-index: 2;
+  -moz-user-select: none;
+       user-select: none;
+  pointer-events: none;
+}
+.outlined.smart-input[hint] .smart-input:not(:focus):-ms-input-placeholder + .smart-hint {
+  font-size: var(--smart-font-size);
+  line-height: 60px;
+  z-index: 2;
+  -ms-user-select: none;
+      user-select: none;
+  pointer-events: none;
+}
 .outlined.smart-input:not([focus]):not([value]).smart-multi-combo-input[hint] .smart-hint, .outlined.smart-input[hint] .smart-input:not(:focus):placeholder-shown + .smart-hint, .outlined.smart-input[hint]:not([focus]) .smart-hint {
   font-size: var(--smart-font-size);
   line-height: 60px;
   z-index: 2;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   pointer-events: none;
 }
 .outlined.smart-input.smart-invalid[focus] {
@@ -3155,6 +3277,18 @@ smart-time-input.outlined {
 }
 .outlined.smart-input.smart-valid[focus][hint] .smart-hint:before, .outlined.smart-input.smart-valid[focus][hint] .smart-hint:after {
   border-top-color: var(--smart-primary) !important;
+}
+.outlined.smart-text-area[hint] .smart-input:not(:focus):-moz-placeholder-shown + .smart-hint {
+  font-size: var(--smart-font-size);
+  line-height: var(--smart-editor-height);
+  opacity: 0;
+  z-index: 2;
+}
+.outlined.smart-text-area[hint] .smart-input:not(:focus):-ms-input-placeholder + .smart-hint {
+  font-size: var(--smart-font-size);
+  line-height: var(--smart-editor-height);
+  opacity: 0;
+  z-index: 2;
 }
 .outlined.smart-text-area[hint] .smart-input:not(:focus):placeholder-shown + .smart-hint, .outlined.smart-text-area[hint]:not([focus]) .smart-hint {
   font-size: var(--smart-font-size);
@@ -3218,7 +3352,7 @@ smart-time-input.outlined {
 }
 
 /* Faster transition in Safari for less noticable fractional font-size issue */
-@media not all and (min-resolution: 0.001dpcm) {
+@media not all and (-webkit-min-device-pixel-ratio: 0), not all and (min-resolution: 0.001dpcm) {
   @supports (-webkit-appearance: none) {
     .smart-input .smart-input,
 .smart-input .smart-hint,
@@ -3227,5 +3361,3 @@ smart-time-input.outlined {
     }
   }
 }
-
-/*# sourceMappingURL=smart.textbox.css.map */

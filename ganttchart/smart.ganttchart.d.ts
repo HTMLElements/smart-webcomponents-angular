@@ -1,8 +1,8 @@
 import { GanttChart } from './../index';
-import { GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDateMarker, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskColumn, GanttChartTooltip } from './../index';
+import { GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, MonthScale, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDateMarker, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskColumn, GanttChartTooltip } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { GanttChartDataExportItemType, GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, GanttChartTaskType, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDateMarker, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskIndicator, GanttChartTaskPlanned, GanttChartTaskSegment, GanttChartTaskColumn, GanttChartTooltip, ElementRenderMode } from './../index';
+export { GanttChartDataExportItemType, GanttDayFormat, Duration, HorizontalScrollBarVisibility, HourFormat, MonthFormat, MonthScale, GanttChartResourceTimelineMode, GanttChartResourceTimelineView, GanttChartSortMode, GanttChartTaskType, VerticalScrollBarVisibility, GanttChartView, YearFormat, WeekFormat, GanttChartDataExport, GanttChartDateMarker, GanttChartResource, GanttChartResourceColumn, GanttChartTask, GanttChartTaskIndicator, GanttChartTaskPlanned, GanttChartTaskSegment, GanttChartTaskColumn, GanttChartTooltip, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { GanttChart } from './../index';
 export declare class GanttChartComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -65,14 +65,20 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     durationUnit: Duration | string;
     /** @description Determines whether a dedicated filter row is used for Table filtering instead of the default filter input. This property has no effect if filtering is not enabled. */
     filterRow: boolean;
+    /** @description Determines the view start day. Sunday is 0, Monday is 1, Saturday is 6. By default it's Sunday. */
+    firstDayOfWeek: number;
     /** @description Groups the tasks inside the Task timeline according to the resources they are assigned to. Unassigned tasks are placed in a default group labeled 'Unassigned'. */
     groupByResources: boolean;
     /** @description Allows to create a custom header content for the Task Panel. The attribute accepts an HTMLTemplate element, it's id or a function. */
     headerTemplate: any;
     /** @description Determines whether the dateMarkers are visible or not. */
     hideDateMarkers: boolean;
-    /** @description By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ). */
+    /** @description By default the Timeline has a three level header - timeline details, timeline second details and timeline header. This property hides the header container( the bottom container ). */
+    hideTimelineHeader: boolean;
+    /** @description By default the Timeline has a three level header - timeline details, timeline second details and timeline header. This property hides the header details container( the top container ). */
     hideTimelineHeaderDetails: boolean;
+    /** @description By default the Timeline has a three level header - timeline details and timeline header. This property hides the second header details container( the middle container ). */
+    hideTimelineSecondHeaderDetails: boolean;
     /** @description Shows the selection column of the Task/Resource Table. When applied a checkbox column is displayed that allows to select tasks/resources. */
     showSelectionColumn: boolean;
     /** @description Hides the Resource panel regardless of the resources availability By default the Resource panel is visible if resources are added to the GanttChart. This property allows to hide the Resource panel permanently. */
@@ -99,6 +105,8 @@ export declare class GanttChartComponent extends BaseElement implements OnInit, 
     messages: any;
     /** @description Determines the format of the dates the timeline header when they represent months. */
     monthFormat: MonthFormat | string;
+    /** @description Determines the scale in Month view. */
+    monthScale: MonthScale | string;
     /** @description Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be displayed with colored cells inside the timeline and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */
     nonworkingDays: number[];
     /** @description Determines the nonworking hours of a day. Hours are represented as numbers inside an array (e.g. [1,2,3] - means 1,2 and 3 AM) or number ranges represented as nested arrays(e.g. [[0,6]] - means from 0 to 6 AM). In the timline the cells that represent nonworking days are colored differently from the rest and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */

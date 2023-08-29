@@ -224,11 +224,17 @@
     /* Code of align justify icon */
     --smart-icon-reload: '\e809';
     /* Code of reload icon */
+    --smart-icon-cloud: '\e84d';
+    /* Code of cloud icon */
     --smart-icon-cancel: '\e80d';
     /* Code of cancel icon */
     --smart-icon-close: '\e80d';
     /* Code of close icon */
     --smart-icon-cancel-circled: '\e80e';
+    /* Code of Close icon Alt */
+    --smart-icon-cancel-alt: '\E849';
+    /* Code of Close icon Alt */
+    --smart-icon-arrow-alt: '\F105';
     /* Code of circled cancel icon */
     --smart-icon-plus-circled: '\e810';
     /* Code of circled plus icon */
@@ -388,6 +394,20 @@
     /* Code of window pin icon */
     --smart-icon-docs: '\f0c5';
     /* Code of docs icon */
+    --smart-icon-pdf: '\f1c1';
+    /* Code of pdf icon */
+    --smart-icon-excel: '\f1C3';
+    /* Code of excel icon */
+    --smart-icon-word: '\f1C2';
+     /* Code of word icon */
+     --smart-icon-archive: '\f1C6';
+      /* Code of zip icon */
+     --smart-icon-file: '\e845';
+      /* Code of file icon */
+     --smart-icon-powerpoint: '\f1c4';
+     /* Code of powerpoint icon */
+     --smart-icon-text: '\f0f6';
+    /* Code of text icon */
     --smart-icon-math: '\f01a';
     /* Code of math icon */
     --smart-icon-spin: '\e80b';
@@ -509,7 +529,6 @@
     --smart-icon-move: '\F047';
     /* Code of Move icon */
     --smart-icon-home: '\E843';
-    /* Code of Home icon */
     /* Accordion */
     --smart-accordion-animation-duration: 225ms;
     /* smartAccordion animation duration */
@@ -1118,6 +1137,8 @@
     --smart-grid-cell-color-filter: var(--smart-surface-color);
     /* Sets text color of cells, when column is filtered. */
     --smart-grid-cell-background-filter: #E8F2DB;
+    /* Sets the view bar background colors */
+    --smart-grid-view-bar-background: #FCFCFC;
     /* Sets background color of cells, when column is filtered. */
     --smart-grid-group-row-vertical-offset: 5;
     /* Sets grouped rows vertical offset. */

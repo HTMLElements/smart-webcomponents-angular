@@ -1668,7 +1668,7 @@ var WindowComponent = /** @class */ (function (_super) {
     ], WindowComponent.prototype, "onRestore", void 0);
     WindowComponent = __decorate([
         Directive({
-            exportAs: 'smart-window', selector: 'smart-window, [smart-window], smart-tabs-window, smart-prompt-window, smart-multilineprompt-window, smart-dialog-window,  smart-alert-window, smart-progress-window, smart-wait-window'
+            exportAs: 'smart-window', selector: 'smart-window, [smart-window], smart-tabs-window, smart-prompt-window, smart-multiline-prompt-window, smart-dialog-window,  smart-alert-window, smart-progress-window, smart-wait-window'
         })
     ], WindowComponent);
     return WindowComponent;

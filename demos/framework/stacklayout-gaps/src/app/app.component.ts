@@ -1,7 +1,11 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from 'smart-webcomponents-angular/button';
-import { RadioButtonComponent } from 'smart-webcomponents-angular/radiobutton';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
+import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 
+import 'smart-webcomponents-angular/source/smart.core.js';
+declare global {
+    interface Window { smartApp: any; }
+}
 
 @Component({
     selector: 'app-root',
@@ -35,7 +39,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	    
     
         const stackPanel = document.querySelector('.smart-stack-layout');
-        const app = new smartApp({
+        const app = new window.smartApp({
             data: {
                 spacing: 'space-between',
                 orientation: 'horizontal'

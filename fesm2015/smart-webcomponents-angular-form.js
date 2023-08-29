@@ -138,63 +138,63 @@ let FormComponent = class FormComponent extends BaseElement {
     set controls(value) {
         this.nativeElement ? this.nativeElement.controls = value : undefined;
     }
-    /** @description Callback function for handling status changes */
+    /** @description Sets or Gets the labels position. */
     get onStatusChanges() {
         return this.nativeElement ? this.nativeElement.onStatusChanges : undefined;
     }
     set onStatusChanges(value) {
         this.nativeElement ? this.nativeElement.onStatusChanges = value : undefined;
     }
-    /** @description Callback function for handling value changes */
+    /** @description Makes the form readonly. */
     get onValueChanges() {
         return this.nativeElement ? this.nativeElement.onValueChanges : undefined;
     }
     set onValueChanges(value) {
         this.nativeElement ? this.nativeElement.onValueChanges = value : undefined;
     }
-    /** @description Sets or Gets the labels position. */
+    /** @description Shows / hides the colon after the labels. */
     get labelPosition() {
         return this.nativeElement ? this.nativeElement.labelPosition : undefined;
     }
     set labelPosition(value) {
         this.nativeElement ? this.nativeElement.labelPosition = value : undefined;
     }
-    /** @description Makes the form readonly. */
+    /** @description Shows / hides validation summary. */
     get readonly() {
         return this.nativeElement ? this.nativeElement.readonly : undefined;
     }
     set readonly(value) {
         this.nativeElement ? this.nativeElement.readonly = value : undefined;
     }
-    /** @description Shows / hides the colon after the labels. */
+    /** @description Gets the Form's state. Each member in the state has { dirty, untouched, disabled } properties. */
     get showColonAfterLabel() {
         return this.nativeElement ? this.nativeElement.showColonAfterLabel : undefined;
     }
     set showColonAfterLabel(value) {
         this.nativeElement ? this.nativeElement.showColonAfterLabel = value : undefined;
     }
-    /** @description Shows / hides validation summary. */
+    /** @description Gets or Sets the Form value. */
     get showSummary() {
         return this.nativeElement ? this.nativeElement.showSummary : undefined;
     }
     set showSummary(value) {
         this.nativeElement ? this.nativeElement.showSummary = value : undefined;
     }
-    /** @description Gets the Form's state. Each member in the state has { dirty, untouched, disabled } properties. */
+    /** @description Automatically validates the form when it is created. */
     get state() {
         return this.nativeElement ? this.nativeElement.state : undefined;
     }
     set state(value) {
         this.nativeElement ? this.nativeElement.state = value : undefined;
     }
-    /** @description Gets or Sets the Form value. */
+    /** @description undefined */
     get value() {
         return this.nativeElement ? this.nativeElement.value : undefined;
     }
     set value(value) {
         this.nativeElement ? this.nativeElement.value = value : undefined;
     }
-    /** @description Automatically validates the form when it is created. */
+    /** @description undefined */
     get validateOnLoad() {
         return this.nativeElement ? this.nativeElement.validateOnLoad : undefined;
     }
@@ -743,6 +743,20 @@ let FormGroupComponent = class FormGroupComponent extends BaseElement {
     set columns(value) {
         this.nativeElement ? this.nativeElement.columns = value : undefined;
     }
+    /** @description Sets the Form control data field. The control's inner input's name is set to the dataField value and in the FormGroup it is accessible through the dataField value. */
+    get dataField() {
+        return this.nativeElement ? this.nativeElement.dataField : undefined;
+    }
+    set dataField(value) {
+        this.nativeElement ? this.nativeElement.dataField = value : undefined;
+    }
+    /** @description Gets or Sets the Form control's label. */
+    get label() {
+        return this.nativeElement ? this.nativeElement.label : undefined;
+    }
+    set label(value) {
+        this.nativeElement ? this.nativeElement.label = value : undefined;
+    }
     /** @description  */
     get controls() {
         return this.nativeElement ? this.nativeElement.controls : undefined;
@@ -750,49 +764,49 @@ let FormGroupComponent = class FormGroupComponent extends BaseElement {
     set controls(value) {
         this.nativeElement ? this.nativeElement.controls = value : undefined;
     }
-    /** @description Callback function for handling status changes */
+    /** @description Sets or Gets the labels position. */
     get onStatusChanges() {
         return this.nativeElement ? this.nativeElement.onStatusChanges : undefined;
     }
     set onStatusChanges(value) {
         this.nativeElement ? this.nativeElement.onStatusChanges = value : undefined;
     }
-    /** @description Callback function for handling value changes */
+    /** @description Makes the form readonly. */
     get onValueChanges() {
         return this.nativeElement ? this.nativeElement.onValueChanges : undefined;
     }
     set onValueChanges(value) {
         this.nativeElement ? this.nativeElement.onValueChanges = value : undefined;
     }
-    /** @description Sets or Gets the labels position. */
+    /** @description Shows / hides the colon after the labels. */
     get labelPosition() {
         return this.nativeElement ? this.nativeElement.labelPosition : undefined;
     }
     set labelPosition(value) {
         this.nativeElement ? this.nativeElement.labelPosition = value : undefined;
     }
-    /** @description Makes the form readonly. */
+    /** @description Shows / hides validation summary. */
     get readonly() {
         return this.nativeElement ? this.nativeElement.readonly : undefined;
     }
     set readonly(value) {
         this.nativeElement ? this.nativeElement.readonly = value : undefined;
     }
-    /** @description Shows / hides the colon after the labels. */
+    /** @description Gets or Sets the Form value. */
     get showColonAfterLabel() {
         return this.nativeElement ? this.nativeElement.showColonAfterLabel : undefined;
     }
     set showColonAfterLabel(value) {
         this.nativeElement ? this.nativeElement.showColonAfterLabel = value : undefined;
     }
-    /** @description Shows / hides validation summary. */
+    /** @description undefined */
     get showSummary() {
         return this.nativeElement ? this.nativeElement.showSummary : undefined;
     }
     set showSummary(value) {
         this.nativeElement ? this.nativeElement.showSummary = value : undefined;
     }
-    /** @description Gets or Sets the Form value. */
+    /** @description undefined */
     get value() {
         return this.nativeElement ? this.nativeElement.value : undefined;
     }
@@ -896,6 +910,12 @@ FormGroupComponent.ctorParameters = () => [
 __decorate([
     Input()
 ], FormGroupComponent.prototype, "columns", null);
+__decorate([
+    Input()
+], FormGroupComponent.prototype, "dataField", null);
+__decorate([
+    Input()
+], FormGroupComponent.prototype, "label", null);
 __decorate([
     Input()
 ], FormGroupComponent.prototype, "controls", null);

@@ -497,6 +497,13 @@ let GanttChartComponent = class GanttChartComponent extends BaseElement {
     set filterRow(value) {
         this.nativeElement ? this.nativeElement.filterRow = value : undefined;
     }
+    /** @description Determines the view start day. Sunday is 0, Monday is 1, Saturday is 6. By default it's Sunday. */
+    get firstDayOfWeek() {
+        return this.nativeElement ? this.nativeElement.firstDayOfWeek : undefined;
+    }
+    set firstDayOfWeek(value) {
+        this.nativeElement ? this.nativeElement.firstDayOfWeek = value : undefined;
+    }
     /** @description Groups the tasks inside the Task timeline according to the resources they are assigned to. Unassigned tasks are placed in a default group labeled 'Unassigned'. */
     get groupByResources() {
         return this.nativeElement ? this.nativeElement.groupByResources : undefined;
@@ -518,12 +525,26 @@ let GanttChartComponent = class GanttChartComponent extends BaseElement {
     set hideDateMarkers(value) {
         this.nativeElement ? this.nativeElement.hideDateMarkers = value : undefined;
     }
-    /** @description By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ). */
+    /** @description By default the Timeline has a three level header - timeline details, timeline second details and timeline header. This property hides the header container( the bottom container ). */
+    get hideTimelineHeader() {
+        return this.nativeElement ? this.nativeElement.hideTimelineHeader : undefined;
+    }
+    set hideTimelineHeader(value) {
+        this.nativeElement ? this.nativeElement.hideTimelineHeader = value : undefined;
+    }
+    /** @description By default the Timeline has a three level header - timeline details, timeline second details and timeline header. This property hides the header details container( the top container ). */
     get hideTimelineHeaderDetails() {
         return this.nativeElement ? this.nativeElement.hideTimelineHeaderDetails : undefined;
     }
     set hideTimelineHeaderDetails(value) {
         this.nativeElement ? this.nativeElement.hideTimelineHeaderDetails = value : undefined;
+    }
+    /** @description By default the Timeline has a three level header - timeline details and timeline header. This property hides the second header details container( the middle container ). */
+    get hideTimelineSecondHeaderDetails() {
+        return this.nativeElement ? this.nativeElement.hideTimelineSecondHeaderDetails : undefined;
+    }
+    set hideTimelineSecondHeaderDetails(value) {
+        this.nativeElement ? this.nativeElement.hideTimelineSecondHeaderDetails = value : undefined;
     }
     /** @description Shows the selection column of the Task/Resource Table. When applied a checkbox column is displayed that allows to select tasks/resources. */
     get showSelectionColumn() {
@@ -615,6 +636,13 @@ let GanttChartComponent = class GanttChartComponent extends BaseElement {
     }
     set monthFormat(value) {
         this.nativeElement ? this.nativeElement.monthFormat = value : undefined;
+    }
+    /** @description Determines the scale in Month view. */
+    get monthScale() {
+        return this.nativeElement ? this.nativeElement.monthScale : undefined;
+    }
+    set monthScale(value) {
+        this.nativeElement ? this.nativeElement.monthScale = value : undefined;
     }
     /** @description Determines the nonworking days of the week from 0 to 6, where 0 is the first day of the week and 6 is the last day. Nonworking days will be displayed with colored cells inside the timeline and will not affect the dateEnd of the tasks unless the adjustToNonworkingTime property is enabled. */
     get nonworkingDays() {
@@ -1982,6 +2010,9 @@ __decorate([
 ], GanttChartComponent.prototype, "filterRow", null);
 __decorate([
     Input()
+], GanttChartComponent.prototype, "firstDayOfWeek", null);
+__decorate([
+    Input()
 ], GanttChartComponent.prototype, "groupByResources", null);
 __decorate([
     Input()
@@ -1991,7 +2022,13 @@ __decorate([
 ], GanttChartComponent.prototype, "hideDateMarkers", null);
 __decorate([
     Input()
+], GanttChartComponent.prototype, "hideTimelineHeader", null);
+__decorate([
+    Input()
 ], GanttChartComponent.prototype, "hideTimelineHeaderDetails", null);
+__decorate([
+    Input()
+], GanttChartComponent.prototype, "hideTimelineSecondHeaderDetails", null);
 __decorate([
     Input()
 ], GanttChartComponent.prototype, "showSelectionColumn", null);
@@ -2031,6 +2068,9 @@ __decorate([
 __decorate([
     Input()
 ], GanttChartComponent.prototype, "monthFormat", null);
+__decorate([
+    Input()
+], GanttChartComponent.prototype, "monthScale", null);
 __decorate([
     Input()
 ], GanttChartComponent.prototype, "nonworkingDays", null);

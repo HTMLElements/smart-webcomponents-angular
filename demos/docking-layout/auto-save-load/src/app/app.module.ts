@@ -14,8 +14,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [AppComponent],
     imports: [BrowserModule, DockingLayoutModule, ButtonModule, GaugeModule, CarouselModule, MultilineTextBoxModule, ProgressBarModule, TankModule],
-    bootstrap: [AppComponent],
-    entryComponents: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

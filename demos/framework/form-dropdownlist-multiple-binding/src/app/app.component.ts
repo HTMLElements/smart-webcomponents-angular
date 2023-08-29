@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { DropDownListComponent } from 'smart-webcomponents-angular/dropdownlist';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
+import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
 	selector: 'app-root',
@@ -10,9 +10,9 @@ import { App } from 'smart-webcomponents-angular/source/smart.core';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 
-	app = new App({
+	app = new window.Smart.App({
 		data: {
 			selected: ['A']
 		}
@@ -29,6 +29,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
-
+		this.app = new window.Smart.App({
+			data: {
+				selected: ['A']
+			}
+		});
 	}
 }

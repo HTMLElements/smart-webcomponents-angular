@@ -424,6 +424,17 @@ import './../source/modules/smart.qrcode';
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(QRcodeComponent.prototype, "imageBackgroundColor", {
+            /** @description Sets color to the transparent parts of the embedded image. Background remains transparent if set to empty string. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.imageBackgroundColor : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.imageBackgroundColor = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(QRcodeComponent.prototype, "imageHeight", {
             /** @description Sets the height of the embedded image. */
             get: function () {
@@ -552,6 +563,28 @@ import './../source/modules/smart.qrcode';
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.value = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(QRcodeComponent.prototype, "width", {
+            /** @description Sets or gets the width of the QR Code. If the width is set to 0, the width of the QR Code is calculated automatically. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.width : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.width = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(QRcodeComponent.prototype, "height", {
+            /** @description Sets or gets the height of the QR Code. If the height is set to 0, the height of the QR Code is calculated automatically. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.height : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.height = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -710,6 +743,9 @@ import './../source/modules/smart.qrcode';
         ], QRcodeComponent.prototype, "errorLevel", null);
         __decorate([
             core.Input()
+        ], QRcodeComponent.prototype, "imageBackgroundColor", null);
+        __decorate([
+            core.Input()
         ], QRcodeComponent.prototype, "imageHeight", null);
         __decorate([
             core.Input()
@@ -744,6 +780,12 @@ import './../source/modules/smart.qrcode';
         __decorate([
             core.Input()
         ], QRcodeComponent.prototype, "value", null);
+        __decorate([
+            core.Input()
+        ], QRcodeComponent.prototype, "width", null);
+        __decorate([
+            core.Input()
+        ], QRcodeComponent.prototype, "height", null);
         __decorate([
             core.Output()
         ], QRcodeComponent.prototype, "onInvalid", void 0);

@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	ngAfterViewInit(): void {
-		this.form = new Smart.Form('#profileForm',
+		const form = new Smart.Form('#profileForm',
 			{controls: [
 				 {
 						dataField: 'textBoxValue',
@@ -85,7 +85,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			}
 		);
 
-		this.form.onValueChanges = function(value) {
+		form.onValueChanges = function(value) {
 		  document.getElementById('log').innerHTML = `<br/><br/>
 		  <table>
 			<tr><td>textBoxValue</td><td>${value['textBoxValue']}</td></tr>
@@ -99,7 +99,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		  </table>`;
 		}
 
-		this.form.onStatusChanges = function(value) {
+		form.onStatusChanges = function(value) {
 		  document.getElementById('statusLog').innerHTML = `<br/><br/>
 		  <table>
 			<tr><td>Form Control</td><td>State</td><td>Dirty</td><td>Untouched</td><td>Disabled</td></tr>
@@ -126,7 +126,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		};
 
 		setTimeout(()=> {
-			this.form.value = sampleValue;
+			form.value = sampleValue;
 		});
     }
 }

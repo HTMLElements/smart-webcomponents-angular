@@ -373,6 +373,13 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     set autoHeightAllDayCells(value) {
         this.nativeElement ? this.nativeElement.autoHeightAllDayCells = value : undefined;
     }
+    /** @description Defines an array of objects with start and end fields, where start and end are Date objects. For example: [{  'start': '2022-10-25T12:00.000Z', 'end': '2022-10-25T13:00.000Z' }].  */
+    get available() {
+        return this.nativeElement ? this.nativeElement.available : undefined;
+    }
+    set available(value) {
+        this.nativeElement ? this.nativeElement.available = value : undefined;
+    }
     /** @description Determines the color scheme for the event background selector in the event window editor.  */
     get colorScheme() {
         return this.nativeElement ? this.nativeElement.colorScheme : undefined;
@@ -744,6 +751,20 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     set legendPosition(value) {
         this.nativeElement ? this.nativeElement.legendPosition = value : undefined;
     }
+    /** @description Determines the layout of the legend items. */
+    get legendLayout() {
+        return this.nativeElement ? this.nativeElement.legendLayout : undefined;
+    }
+    set legendLayout(value) {
+        this.nativeElement ? this.nativeElement.legendLayout = value : undefined;
+    }
+    /** @description Determines the number of items when the legend switches automatically from horizontal list to menu. */
+    get legendLayoutMenuBreakpoint() {
+        return this.nativeElement ? this.nativeElement.legendLayoutMenuBreakpoint : undefined;
+    }
+    set legendLayoutMenuBreakpoint(value) {
+        this.nativeElement ? this.nativeElement.legendLayoutMenuBreakpoint = value : undefined;
+    }
     /** @description Determines the mouse wheel step. When this property is set to a positive number, the scroll step with mouse wheel or trackpad will depend on the property value. */
     get mouseWheelStep() {
         return this.nativeElement ? this.nativeElement.mouseWheelStep : undefined;
@@ -862,6 +883,13 @@ let SchedulerComponent = class SchedulerComponent extends BaseElement {
     }
     set restrictedHours(value) {
         this.nativeElement ? this.nativeElement.restrictedHours = value : undefined;
+    }
+    /** @description Defines an array of dates and hours that are not allowed to have events on. Events that overlap restricted Hours or start/end on them will not be displayed. Each array item is an Object and requires 2 fields - date and hours. For example: { date: new Date(2022, 10, 1), hours: [[0, 6], 12, [20, 23]] }. The hours define a range of restricted hours similartly to the restricted hours property, the date defines a date where the restricted hours will be applied. */
+    get restricted() {
+        return this.nativeElement ? this.nativeElement.restricted : undefined;
+    }
+    set restricted(value) {
+        this.nativeElement ? this.nativeElement.restricted = value : undefined;
     }
     /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get rightToLeft() {
@@ -2012,6 +2040,9 @@ __decorate([
 ], SchedulerComponent.prototype, "autoHeightAllDayCells", null);
 __decorate([
     Input()
+], SchedulerComponent.prototype, "available", null);
+__decorate([
+    Input()
 ], SchedulerComponent.prototype, "colorScheme", null);
 __decorate([
     Input()
@@ -2171,6 +2202,12 @@ __decorate([
 ], SchedulerComponent.prototype, "legendPosition", null);
 __decorate([
     Input()
+], SchedulerComponent.prototype, "legendLayout", null);
+__decorate([
+    Input()
+], SchedulerComponent.prototype, "legendLayoutMenuBreakpoint", null);
+__decorate([
+    Input()
 ], SchedulerComponent.prototype, "mouseWheelStep", null);
 __decorate([
     Input()
@@ -2220,6 +2257,9 @@ __decorate([
 __decorate([
     Input()
 ], SchedulerComponent.prototype, "restrictedHours", null);
+__decorate([
+    Input()
+], SchedulerComponent.prototype, "restricted", null);
 __decorate([
     Input()
 ], SchedulerComponent.prototype, "rightToLeft", null);

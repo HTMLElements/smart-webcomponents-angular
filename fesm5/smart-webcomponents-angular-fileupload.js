@@ -450,6 +450,17 @@ var FileUploadComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(FileUploadComponent.prototype, "removeUrl", {
+        /** @description Sets or gets the remove URL. This property corresponds to the form's action attribute. For example, the removeUrl property can point to a PHP file, which handles the remove operation on the server-side. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.removeUrl : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.removeUrl = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(FileUploadComponent.prototype, "value", {
         /** @description Gets the file upload value. */
         get: function () {
@@ -707,6 +718,9 @@ var FileUploadComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], FileUploadComponent.prototype, "unfocusable", null);
+    __decorate([
+        Input()
+    ], FileUploadComponent.prototype, "removeUrl", null);
     __decorate([
         Input()
     ], FileUploadComponent.prototype, "value", null);

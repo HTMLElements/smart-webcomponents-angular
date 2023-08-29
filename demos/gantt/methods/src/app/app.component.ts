@@ -2,21 +2,26 @@
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
-    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
-    @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('updateButton', { read: ButtonComponent, static: false })
+    updateButton!: ButtonComponent;
+    @ViewChild('insertButton', { read: ButtonComponent, static: false })
+    insertButton!: ButtonComponent;
+    @ViewChild('insertAtButton', { read: ButtonComponent, static: false })
+    insertAtButton!: ButtonComponent;
+    @ViewChild('insertIntoButton', { read: ButtonComponent, static: false })
+    insertIntoButton!: ButtonComponent;
+    @ViewChild('insertIntoAtButton', { read: ButtonComponent, static: false })
+    insertIntoAtButton!: ButtonComponent;
+    @ViewChild('removeButton', { read: ButtonComponent, static: false })
+    removeButton!: ButtonComponent;
+    @ViewChild('ganttChart', { read: GanttChartComponent, static: false })
+    ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
@@ -28,8 +33,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             connections: [
                 {
                     target: 1,
-                    type: 0
-                }
+                    type: 0,
+                },
             ],
             tasks: [
                 {
@@ -40,13 +45,13 @@ export class AppComponent implements AfterViewInit, OnInit {
                     connections: [
                         {
                             target: 2,
-                            type: 1
+                            type: 1,
                         },
                         {
                             target: 4,
-                            type: 1
-                        }
-                    ]
+                            type: 1,
+                        },
+                    ],
                 },
                 {
                     label: 'Task 1.2',
@@ -56,9 +61,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                     connections: [
                         {
                             target: 3,
-                            type: 1
-                        }
-                    ]
+                            type: 1,
+                        },
+                    ],
                 },
                 {
                     label: 'Project 1.1',
@@ -69,8 +74,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                     connections: [
                         {
                             target: 1,
-                            type: 0
-                        }
+                            type: 0,
+                        },
                     ],
                     tasks: [
                         {
@@ -81,13 +86,13 @@ export class AppComponent implements AfterViewInit, OnInit {
                             connections: [
                                 {
                                     target: 2,
-                                    type: 1
+                                    type: 1,
                                 },
                                 {
                                     target: 4,
-                                    type: 1
-                                }
-                            ]
+                                    type: 1,
+                                },
+                            ],
                         },
                         {
                             label: 'Task 1.1.2',
@@ -97,19 +102,19 @@ export class AppComponent implements AfterViewInit, OnInit {
                             connections: [
                                 {
                                     target: 3,
-                                    type: 1
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
+                                    type: 1,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
         },
         {
             label: 'Task 2',
             dateStart: '2020-03-10T15:30:00',
             dateEnd: '2021-08-10',
-            type: 'task'
+            type: 'task',
         },
         {
             label: 'Milestone 1',
@@ -118,22 +123,22 @@ export class AppComponent implements AfterViewInit, OnInit {
             connections: [
                 {
                     target: 5,
-                    type: 1
-                }
-            ]
+                    type: 1,
+                },
+            ],
         },
         {
             label: 'Task 3',
             dateStart: '2021-02-05',
             dateEnd: '2021-07-08',
             progress: 50,
-            type: 'task'
+            type: 'task',
         },
         {
             label: 'Task 4',
             dateStart: '2020-03-10T15:30:00',
             dateEnd: '2021-08-10',
-        }
+        },
     ];
 
     treeSize = '45%';
@@ -142,20 +147,128 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Tasks',
             value: 'label',
-            size: '40%'
+            size: '40%',
         },
         {
             label: 'Date Start',
             value: 'dateStart',
             //Custom format function
-            formatFunction: (date: Date) => new Date(date).toLocaleDateString('en', { year: 'numeric', month: 'short', day: 'numeric' })
+            formatFunction: (date: Date) =>
+                new Date(date).toLocaleDateString('en', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                }),
         },
         {
             label: 'Date End',
             value: 'dateEnd',
-            size: '30%'
-        }
+            size: '30%',
+        },
     ];
+
+    handleUpdateButtonClick(e: Event) {
+        const taskDetails = {
+            label: 'Task Updated Successfully',
+            dateEnd: '2020-1-1',
+        };
+
+        const targetTask = this.ganttChart.tasks[0];
+
+        if (!targetTask) {
+            return;
+        }
+
+        this.ganttChart.updateTask(0, taskDetails);
+
+        const button = e.currentTarget as HTMLButtonElement;
+        button.disabled = true;
+    }
+
+    handleInsertButtonClick(e: Event) {
+        this.ganttChart.insertTask(this.getNewTask('Inserted Task'));
+
+        const button = e.currentTarget as HTMLButtonElement;
+        button.disabled = true;
+
+        this.updateButtons();
+    }
+
+    handleInsertAtPosition2ButtonClick(e: Event) {
+        this.ganttChart.insertTask(
+            this.getNewTask('Inserted Task At Position'),
+            null,
+            2
+        );
+
+        const button = e.currentTarget as HTMLButtonElement;
+        button.disabled = true;
+
+        this.updateButtons();
+    }
+
+    handleInsertIntoProject11ButtonClick(e: Event) {
+        this.ganttChart.insertTask(
+            this.getNewTask('Inserted Task Into Project'),
+            '0.2'
+        );
+
+        const button = e.currentTarget as HTMLButtonElement;
+        button.disabled = true;
+
+        this.updateButtons();
+    }
+
+    handleInsertIntoProject1AtLastPositionButtonClick(e: Event) {
+        this.ganttChart.insertTask(
+            this.getNewTask('Inserted Task Into Project At position'),
+            0,
+            3
+        );
+
+        const button = e.currentTarget as HTMLButtonElement;
+        button.disabled = true;
+
+        this.updateButtons();
+    }
+
+    handleRemoveButtonClick() {
+        this.ganttChart.removeTask(0);
+        this.updateButtons();
+    }
+
+    updateButtons() {
+        const currentTasks = this.ganttChart.tasks!;
+
+        if (currentTasks.length) {
+            this.removeButton.disabled = false;
+            this.updateButton.disabled = false;
+        } else {
+            this.removeButton.disabled = true;
+            this.updateButton.disabled = true;
+        }
+    }
+
+    getNewTask(label: string) {
+        return {
+            label: `${label} 1`,
+            dateStart: '2020-08-10',
+            dateEnd: '2020-12-23',
+            expanded: true,
+            tasks: [
+                {
+                    label: `${label} 1.1`,
+                    dateStart: '2020-09-01',
+                    dateEnd: '2020-10-30',
+                },
+                {
+                    label: `${label} 1.2`,
+                    dateStart: '2020-11-01',
+                    dateEnd: '2020-12-23',
+                },
+            ],
+        };
+    }
 
     ngOnInit(): void {
         // onInit code.
@@ -166,87 +279,5 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
-    init(): void {
-        // init code.
-        const that = this,
-            ganttChart = that.ganttChart,
-            getNewTask = function (label: string) {
-                return {
-                    label: `${label} 1`,
-                    dateStart: '2020-08-10',
-                    dateEnd: '2020-12-23',
-                    expanded: true,
-                    tasks: [
-                        {
-                            label: `${label} 1.1`,
-                            dateStart: '2020-09-01',
-                            dateEnd: '2020-10-30',
-                        },
-                        {
-                            label: `${label} 1.2`,
-                            dateStart: '2020-11-01',
-                            dateEnd: '2020-12-23',
-                        }
-                    ]
-                };
-            },
-            updateButtons = function () {
-                const currentTasks = ganttChart.tasks!;
-
-                if (currentTasks.length) {
-                    that.button6.disabled = false;
-                    that.button.disabled = false;
-                }
-                else {
-                    that.button6.disabled = true;
-                    that.button.disabled = true;
-                }
-            };
-
-        that.button.addEventListener('click', function (): void {
-            const taskDetails = {
-                label: 'Task Updated Successfully',
-                dateEnd: '2020-1-1'
-            };
-
-            const targetTask = ganttChart.tasks[0];
-
-            if (!targetTask) {
-                return;
-            }
-
-            ganttChart.updateTask(0, taskDetails);
-
-            this.disabled = true;
-        });
-
-        that.button2.addEventListener('click', function (): void {
-            ganttChart.insertTask(getNewTask('Inserted Task'));
-            this.disabled = true;
-            updateButtons();
-        });
-
-        that.button3.addEventListener('click', function (): void {
-            ganttChart.insertTask(getNewTask('Inserted Task At Position'), null, 2);
-            this.disabled = true;
-            updateButtons();
-        });
-
-        that.button4.addEventListener('click', function (): void {
-            ganttChart.insertTask(getNewTask('Inserted Task Into Project'), '0.2');
-            this.disabled = true;
-            updateButtons();
-        });
-
-        that.button5.addEventListener('click', function (): void {
-            ganttChart.insertTask(getNewTask('Inserted Task Into Project At position'), 0, 3);
-            this.disabled = true;
-            updateButtons();
-        });
-
-        that.button6.addEventListener('click', function (): void {
-            ganttChart.removeTask(0);
-            updateButtons();
-        });
-    }
+    init(): void { }
 }

@@ -3,7 +3,7 @@
   "description": "Angular kanban kanban-custom-styling example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
   "version": "1.0.2",
   "homepage": "https://www.htmlelements.com/",
-   "dependencies": {
+  "dependencies": {
     "@angular/animations": "~13.3.0",
     "@angular/common": "~13.3.0",
     "@angular/compiler": "~13.3.0",
@@ -13,9 +13,9 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
-    "@smart-webcomponents-angular/button": "13.1.70",
-	"@smart-webcomponents-angular/kanban": "13.1.70",
-	"@smart-webcomponents-angular/radiobutton": "13.1.70",
+    "@smart-webcomponents-angular/button": "15.0.2",
+    "@smart-webcomponents-angular/kanban": "15.0.2",
+    "@smart-webcomponents-angular/radiobutton": "15.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

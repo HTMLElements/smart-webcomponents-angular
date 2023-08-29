@@ -161,7 +161,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
     ];
 
-    dateCurrent: Date = new Date(2021, 11, 1);
+    dateCurrent: Date = this.today;
 
     view: SchedulerViewType = 'month';
    

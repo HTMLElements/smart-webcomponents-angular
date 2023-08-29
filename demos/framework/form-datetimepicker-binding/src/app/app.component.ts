@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { DateTimePickerComponent } from 'smart-webcomponents-angular/datetimepicker';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
+import { DateTimePickerComponent } from '@smart-webcomponents-angular/datetimepicker';
 
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
     selector: 'app-root',
@@ -10,9 +10,9 @@ import { App } from 'smart-webcomponents-angular/source/smart.core';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker: DateTimePickerComponent;
+    @ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker!: DateTimePickerComponent;
 
-    app = new App({
+    app = new window.Smart.App({
         id: "app1",
         template: {
             "#dateTimePicker": {
@@ -38,7 +38,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        this.app.notify(function (changes) {
+        this.app.notify(function (changes: any) {
             console.log('data is updated');
         });
     }

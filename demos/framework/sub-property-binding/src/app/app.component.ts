@@ -1,9 +1,8 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { MultilineTextBoxComponent } from 'smart-webcomponents-angular/multilinetextbox';
-import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
+import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
+import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
-
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
 	selector: 'app-root',
@@ -12,10 +11,10 @@ import { App } from 'smart-webcomponents-angular/source/smart.core';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox: MultilineTextBoxComponent;
-	@ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
+	@ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox!: MultilineTextBoxComponent;
+	@ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
 
-	app = new App({
+	app = new window.Smart.App({
 		data: {
 			details: {
 				subject: "About Transaction",
@@ -35,5 +34,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
+		this.app = new window.Smart.App({
+			data: {
+				details: {
+					subject: "About Transaction",
+					message: "Hey, Peter. Take a look at the items, I sent you earlier."
+				}
+			}
+		});
 	}
 }

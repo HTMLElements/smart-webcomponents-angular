@@ -28,18 +28,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-
   caption = 'Store Sales'
 
   description = 'Comparison for the last 3 years';
 
-  showLegend = false;
+  showLegend = true;
 
   colorScheme = 'scheme01';
-
-  controlsSettings = {
-    enableRotate: false,
-  }
 
   cameraPosition = {
     x: 30,

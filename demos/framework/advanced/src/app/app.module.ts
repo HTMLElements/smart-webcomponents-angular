@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
     declarations: [ AppComponent ],
     imports: [ BrowserModule,  ],
     bootstrap: [ AppComponent ],
-	schemas: [CUSTOM_ELEMENTS_SCHEMA],
-	entryComponents: [ AppComponent ]
+	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class AppModule { }

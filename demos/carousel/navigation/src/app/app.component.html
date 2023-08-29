@@ -1,28 +1,32 @@
 <smart-carousel #carousel id="carousel"></smart-carousel>
 <div id="navigationBox">
-    <smart-check-box #checkbox id="arrows" [checked]="true">Show Arrows</smart-check-box>
+    <smart-check-box id="arrows" [checked]="true" (onChange)="handleCheckBoxChange($event, 'hideArrows')">Show
+        Arrows</smart-check-box>
     <br />
-    <smart-check-box #checkbox2 id="indicators" [checked]="true">Show Indicators</smart-check-box>
+    <smart-check-box id="indicators" [checked]="true" (onChange)="handleCheckBoxChange($event, 'hideIndicators')">Show
+        Indicators</smart-check-box>
     <br />
-    <smart-check-box #checkbox3 id="wheel">Navigate via Mouse Wheel</smart-check-box>
+    <smart-check-box id="wheel" (onChange)="handleCheckBoxChange($event, 'wheel')">Navigate via Mouse
+        Wheel</smart-check-box>
     <br />
-    <smart-check-box #checkbox4 id="swipe">Navigate via Swipe Left / Swipe Right
+    <smart-check-box id="swipe" (onChange)="handleCheckBoxChange($event, 'swipe')">Navigate via Swipe
+        Left / Swipe Right
     </smart-check-box>
     <br />
-    <smart-check-box #checkbox5 id="slideShow">SlideShow</smart-check-box>
+    <smart-check-box id="slideShow" (onChange)="handleCheckBoxChange($event, 'slideShow')">SlideShow</smart-check-box>
     <br />
-    <smart-check-box #checkbox6 id="loop">Loop</smart-check-box>
+    <smart-check-box id="loop" (onChange)="handleCheckBoxChange($event, 'loop')">Loop</smart-check-box>
     <br />
     <hr />
-    <smart-button #button id="playButton">Play</smart-button>
-    <smart-button #button2 id="pauseButton">Pause</smart-button>
+    <smart-button id="playButton" (click)="handleButtonClick($event)">Play</smart-button>
+    <smart-button id="pauseButton" (click)="handleButtonClick($event)">Pause</smart-button>
     <br />
     <br />
-    <smart-button #button3 id="prevButton">Prev</smart-button>
-    <smart-button #button4 id="nextButton">Next</smart-button>
+    <smart-button id="prevButton" (click)="handleButtonClick($event)">Prev</smart-button>
+    <smart-button id="nextButton" (click)="handleButtonClick($event)">Next</smart-button>
     <br />
     <br />
-    <smart-button #button5 id="slideToButton">Slide To</smart-button>
+    <smart-button id="slideToButton" (click)="handleButtonClick($event)">Slide To</smart-button>
     <br />
     <smart-text-box #textbox id="slideToValue" [placeholder]="'Value'"></smart-text-box>
 </div>

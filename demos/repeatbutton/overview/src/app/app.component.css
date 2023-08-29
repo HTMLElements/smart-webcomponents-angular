@@ -1,7 +1,35 @@
+/* ------------ Google fonts ------------ */
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v31/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------ */
 smart-circular-progress-bar smart-repeat-button {
   width: 100%;
   height: 50%;
 }
+
 section h1 {
   font-weight: 400;
   font-size: 24px;
@@ -147,7 +175,7 @@ nav h1 {
   width: calc(100% / 2 + 45px);
 }
 
-section > h2:first-of-type {
+section>h2:first-of-type {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   font-weight: 400;
   font-size: 24px;
@@ -229,9 +257,9 @@ section > h2:first-of-type {
   padding: 50px;
 }
 
-#button-flat .button-dark > div,
-#button-raised .button-dark > div,
-#button-floating .button-dark > div {
+#button-flat .button-dark>div,
+#button-raised .button-dark>div,
+#button-floating .button-dark>div {
   background-color: #333333;
   color: #fff;
   text-align: center;
@@ -399,9 +427,7 @@ section > h2:first-of-type {
   left: calc(50% - 20px);
 }
 
-#button-floating-demo
-  .floating-action-area
-  .floating-click-sub-action:nth-of-type(2) {
+#button-floating-demo .floating-action-area .floating-click-sub-action:nth-of-type(2) {
   top: 60%;
   transition: top 0.2s ease-in;
   width: 45px;
@@ -409,9 +435,7 @@ section > h2:first-of-type {
   left: calc(100% - 65px);
 }
 
-#button-floating-demo
-  .floating-action-area
-  .floating-click-sub-action:nth-of-type(3) {
+#button-floating-demo .floating-action-area .floating-click-sub-action:nth-of-type(3) {
   top: 50%;
   transition: top 0.2s ease-in;
   width: 45px;
@@ -419,25 +443,17 @@ section > h2:first-of-type {
   left: calc(100% - 65px);
 }
 
-#button-floating-demo
-  .floating-action-area
-  .floating-click-sub-action.smart-visibility-hidden:nth-of-type(2),
-#button-floating-demo
-  .floating-action-area
-  .floating-click-sub-action.smart-visibility-hidden:nth-of-type(3) {
+#button-floating-demo .floating-action-area .floating-click-sub-action.smart-visibility-hidden:nth-of-type(2),
+#button-floating-demo .floating-action-area .floating-click-sub-action.smart-visibility-hidden:nth-of-type(3) {
   top: 70%;
   transition: animation, visibility 0.2s ease-out;
 }
 
-#button-floating-demo
-  .floating-action-area
-  .floating-click-sub-action.smart-visibility-hidden:nth-of-type(2) {
+#button-floating-demo .floating-action-area .floating-click-sub-action.smart-visibility-hidden:nth-of-type(2) {
   animation: material-sub-button-top-hide 0.2s ease-out;
 }
 
-#button-floating-demo
-  .floating-action-area
-  .floating-click-sub-action.smart-visibility-hidden:nth-of-type(3) {
+#button-floating-demo .floating-action-area .floating-click-sub-action.smart-visibility-hidden:nth-of-type(3) {
   animation: material-sub-button-middle-hide 0.2s ease-out;
 }
 
@@ -615,9 +631,7 @@ section > h2:first-of-type {
   border-right: 1px solid rgba(0, 0, 0, 0.45);
 }
 
-#toggle-button
-  .toggle-button-container
-  smart-toggle-button[checked]:last-of-type {
+#toggle-button .toggle-button-container smart-toggle-button[checked]:last-of-type {
   border-right: initial;
 }
 
@@ -937,10 +951,7 @@ section > h2:first-of-type {
   height: 100%;
 }
 
-#progressBarAnimated
-  .smart-label-container
-  smart-power-button
-  .smart-input::after {
+#progressBarAnimated .smart-label-container smart-power-button .smart-input::after {
   font-size: 30px;
 }
 
@@ -962,13 +973,13 @@ section > h2:first-of-type {
   font-size: 35px;
 }
 
-#repeat-buttons-specs-behavior .module > div,
-#power-button .power-button-light > div,
-#power-button .power-button-dark > div,
-#power-button .power-button-flat-light > div,
-#power-button .power-button-flat-dark > div,
-#led-button .led-button-light > div,
-#led-button .led-button-dark > div {
+#repeat-buttons-specs-behavior .module>div,
+#power-button .power-button-light>div,
+#power-button .power-button-dark>div,
+#power-button .power-button-flat-light>div,
+#power-button .power-button-flat-dark>div,
+#led-button .led-button-light>div,
+#led-button .led-button-dark>div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -978,16 +989,16 @@ section > h2:first-of-type {
   background-color: #eeeeee;
 }
 
-#power-button .power-button-dark > div,
-#led-button .led-button-dark > div,
-#power-button .power-button-flat-dark > div {
+#power-button .power-button-dark>div,
+#led-button .led-button-dark>div,
+#power-button .power-button-flat-dark>div {
   background-color: #333333;
   color: #fff;
   text-align: center;
   padding: 50px;
 }
 
-#repeat-buttons-specs-behavior .module:last-of-type > div {
+#repeat-buttons-specs-behavior .module:last-of-type>div {
   background-color: #000;
 }
 
@@ -1002,6 +1013,7 @@ section > h2:first-of-type {
 
 /* Firefox Specific CSS */
 @-moz-document url-prefix() {
+
   #power-button .power-button-light smart-power-button,
   #power-button .power-button-flat-light smart-power-button,
   #power-button .power-button-flat-dark smart-power-button,
@@ -1010,26 +1022,10 @@ section > h2:first-of-type {
   }
 }
 
-#power-button
-  .power-button-light
-  > div
-  smart-power-button:nth-child(3)
-  .smart-input,
-#power-button
-  .power-button-dark
-  > div
-  smart-power-button:nth-child(3)
-  .smart-input,
-#power-button
-  .power-button-flat-light
-  > div
-  smart-power-button:nth-child(3)
-  .smart-input,
-#power-button
-  .power-button-flat-dark
-  > div
-  smart-power-button:nth-child(3)
-  .smart-input {
+#power-button .power-button-light>div smart-power-button:nth-child(3) .smart-input,
+#power-button .power-button-dark>div smart-power-button:nth-child(3) .smart-input,
+#power-button .power-button-flat-light>div smart-power-button:nth-child(3) .smart-input,
+#power-button .power-button-flat-dark>div smart-power-button:nth-child(3) .smart-input {
   background-color: var(--smart-material-focused-background-color);
 }
 

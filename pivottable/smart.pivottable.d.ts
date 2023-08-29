@@ -1,8 +1,8 @@
 import { PivotTable } from './../index';
-import { Animation, PivotTableColumnTotalsPosition, PivotTableDesignerPosition, PivotTableDrillDownDataExport, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting } from './../index';
+import { Animation, PivotTableColumnTotalsPosition, PivotTableDesignerPosition, PivotTableDrillDownDataExport, PivotTableGroupLayout, PivotTablePageSize, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting } from './../index';
 import { AfterViewInit, ElementRef, OnInit, OnChanges, OnDestroy, SimpleChanges, EventEmitter } from '@angular/core';
 import { BaseElement } from './smart.element';
-export { Animation, PivotTableColumnAlign, PivotTableColumnDataType, PivotTableColumnSummary, PivotTableColumnTotalsPosition, PivotTableConditionalFormattingCondition, PivotTableConditionalFormattingFontFamily, PivotTableConditionalFormattingFontSize, PivotTableDesignerPosition, PivotTableDrillDownDataExport, PivotTableGroupLayout, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting, ElementRenderMode } from './../index';
+export { Animation, PivotTableColumnAlign, PivotTableColumnDataType, PivotTableColumnSummary, PivotTableColumnTotalsPosition, PivotTableConditionalFormattingCondition, PivotTableConditionalFormattingFontFamily, PivotTableConditionalFormattingFontSize, PivotTableDesignerPosition, PivotTableDrillDownDataExport, PivotTableGroupLayout, PivotTablePageSize, PivotTableRowTotalsPosition, PivotTableSelectionMode, PivotTableSortMode, PivotTableColumn, PivotTableConditionalFormatting, ElementRenderMode } from './../index';
 export { Smart } from './smart.element';
 export { PivotTable } from './../index';
 export declare class PivotTableComponent extends BaseElement implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -67,17 +67,17 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
     hideEmptyRows: boolean;
     /** @description Sets or gets what value is shown in cells that do not have aggregated data to display. By default (null), such cells are empty. */
     keyboardNavigation: boolean;
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Sets or gets the page size (when paging is enabled). */
     locale: string;
-    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
+    /** @description Sets or gets the current (zero-based) page index (when paging is enabled). */
     messages: any;
-    /** @description Sets or gets whether row summaries are displayed in the row headers. Example: Peterson(40) vs Peterson, when rowSummary is set to false. */
+    /** @description Sets or gets whether paging is enabled. */
     nullDefaultValue: number;
-    /** @description Sets or gets whether to show row total columns for each summary column. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     onCellRender: {
         (data: any, dynamicColumn: any, value: any, cell: HTMLTableCellElement): void;
     };
-    /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
+    /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
     onColumnRender: {
         (settings: {
             text: string;
@@ -86,10 +86,16 @@ export declare class PivotTableComponent extends BaseElement implements OnInit, 
             fullDefinition: any;
         }): void;
     };
-    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+    /** @description Sets or gets whether row summaries are displayed in the row headers. Example: Peterson(40) vs Peterson, when rowSummary is set to false. */
     onInit: {
         (): void;
     };
+    /** @description Sets or gets whether to show row total columns for each summary column. */
+    pageSize: PivotTablePageSize | string;
+    /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
+    pageIndex: number;
+    /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+    paging: boolean;
     /** @description Sets or gets the selection mode. Only applicable when selection is enabled. */
     rightToLeft: boolean;
     /** @description Determines the sorting mode of the PivotTable. */

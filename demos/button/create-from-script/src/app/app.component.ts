@@ -1,36 +1,42 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-
+import { DynamicSmartButton } from './dynamic-smart-button/dynamic-smart-button.component';
+import { smartDomService } from './smart-dom.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+export class AppComponent implements AfterViewInit, OnInit {
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+    @ViewChild('container') container!: ElementRef;
+    
+    constructor(private smartDomService: smartDomService) {
+
     }
-		
-	init(): void {
-		// init code.
-	    
-    
-        const button = document.createElement("smart-button");
-        button.id = "button";
-        button.innerHTML = "Click Me";
-        document.body.appendChild(button);
-        button.addEventListener("click", function () {
-            button.innerHTML = "Clicked";
-        });
-    
 
-	}	
+    ngOnInit(): void {
+        // onInit code.
+    }
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
+        const obj = this.smartDomService.loadComponent(DynamicSmartButton, this.container.nativeElement);
+        const smartButton = obj.componentRef.instance as DynamicSmartButton;
+
+        setTimeout(() => {
+            smartButton.button.nativeElement.id = "button";
+            smartButton.button.innerHTML = "Click Me";
+            smartButton.button.addEventListener("click", function () {
+                smartButton.button.innerHTML = "Clicked";
+            });
+        });
+    }
 }

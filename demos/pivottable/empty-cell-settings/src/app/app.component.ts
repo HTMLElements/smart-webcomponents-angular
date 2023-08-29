@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableComponent, PivotTableColumn } from '@smart-webcomponents-angular/pivottable';
 import { GetData } from '../assets/data';
 
 @Component({
@@ -10,9 +10,9 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
-    @ViewChild('toggleButtonLabel', { read: ElementRef, static: false }) toggleButtonLabel: ElementRef;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
+    @ViewChild('toggleButtonLabel', { read: ElementRef, static: false }) toggleButtonLabel!: ElementRef;
 
     dataSource = new window.Smart.DataAdapter({
         dataSource: GetData(50),
@@ -28,12 +28,21 @@ export class AppComponent implements AfterViewInit, OnInit {
     freezeHeader = true;
     keyboardNavigation = true;
     nullDefaultValue = 0;
-    columns = [
+    columns: PivotTableColumn[] = [
         { label: 'First Name', dataField: 'firstName', dataType: 'string' },
         { label: 'Last Name', dataField: 'lastName', dataType: 'string', allowRowGroup: true, rowGroup: true },
         { label: 'Product Name', dataField: 'productName', dataType: 'string', allowPivot: true, pivot: true },
         { label: 'Quantity', dataField: 'quantity', dataType: 'number', summary: 'sum' },
-        { label: 'Price', dataField: 'price', dataType: 'number', summary: 'sum', summarySettings: { prefix: '$', decimalPlaces: 2 } },
+        {
+            label: 'Price', dataField: 'price', dataType: 'number', summary: 'sum', summarySettings: {
+                align: 'left',
+                prefix: '$',
+                decimalPlaces: 2,
+                thousandsSeparator: '',
+                decimalSeparator: '.',
+                negativesInBrackets: true
+            }
+        },
         { label: 'Date Purchased', dataField: 'date', dataType: 'date' } // column is not rendered, because it is neither "pivot", "rowGroup", nor it has "summary"
     ];
 
@@ -41,7 +50,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         if (event.detail.value) {
-            that.pivottable.nullDefaultValue = null;
+            that.pivottable.nullDefaultValue = null as any;
             that.toggleButtonLabel.nativeElement.innerHTML = '0';
         }
         else {

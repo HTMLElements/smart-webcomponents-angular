@@ -173,7 +173,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "onStatusChanges", {
-        /** @description Callback function for handling status changes */
+        /** @description Sets or Gets the labels position. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onStatusChanges : undefined;
         },
@@ -184,7 +184,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "onValueChanges", {
-        /** @description Callback function for handling value changes */
+        /** @description Makes the form readonly. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onValueChanges : undefined;
         },
@@ -195,7 +195,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "labelPosition", {
-        /** @description Sets or Gets the labels position. */
+        /** @description Shows / hides the colon after the labels. */
         get: function () {
             return this.nativeElement ? this.nativeElement.labelPosition : undefined;
         },
@@ -206,7 +206,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "readonly", {
-        /** @description Makes the form readonly. */
+        /** @description Shows / hides validation summary. */
         get: function () {
             return this.nativeElement ? this.nativeElement.readonly : undefined;
         },
@@ -217,7 +217,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "showColonAfterLabel", {
-        /** @description Shows / hides the colon after the labels. */
+        /** @description Gets the Form's state. Each member in the state has { dirty, untouched, disabled } properties. */
         get: function () {
             return this.nativeElement ? this.nativeElement.showColonAfterLabel : undefined;
         },
@@ -228,7 +228,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "showSummary", {
-        /** @description Shows / hides validation summary. */
+        /** @description Gets or Sets the Form value. */
         get: function () {
             return this.nativeElement ? this.nativeElement.showSummary : undefined;
         },
@@ -239,7 +239,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "state", {
-        /** @description Gets the Form's state. Each member in the state has { dirty, untouched, disabled } properties. */
+        /** @description Automatically validates the form when it is created. */
         get: function () {
             return this.nativeElement ? this.nativeElement.state : undefined;
         },
@@ -250,7 +250,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "value", {
-        /** @description Gets or Sets the Form value. */
+        /** @description undefined */
         get: function () {
             return this.nativeElement ? this.nativeElement.value : undefined;
         },
@@ -261,7 +261,7 @@ var FormComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormComponent.prototype, "validateOnLoad", {
-        /** @description Automatically validates the form when it is created. */
+        /** @description undefined */
         get: function () {
             return this.nativeElement ? this.nativeElement.validateOnLoad : undefined;
         },
@@ -964,6 +964,28 @@ var FormGroupComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(FormGroupComponent.prototype, "dataField", {
+        /** @description Sets the Form control data field. The control's inner input's name is set to the dataField value and in the FormGroup it is accessible through the dataField value. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.dataField : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.dataField = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FormGroupComponent.prototype, "label", {
+        /** @description Gets or Sets the Form control's label. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.label : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.label = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(FormGroupComponent.prototype, "controls", {
         /** @description  */
         get: function () {
@@ -976,7 +998,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormGroupComponent.prototype, "onStatusChanges", {
-        /** @description Callback function for handling status changes */
+        /** @description Sets or Gets the labels position. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onStatusChanges : undefined;
         },
@@ -987,7 +1009,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormGroupComponent.prototype, "onValueChanges", {
-        /** @description Callback function for handling value changes */
+        /** @description Makes the form readonly. */
         get: function () {
             return this.nativeElement ? this.nativeElement.onValueChanges : undefined;
         },
@@ -998,7 +1020,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormGroupComponent.prototype, "labelPosition", {
-        /** @description Sets or Gets the labels position. */
+        /** @description Shows / hides the colon after the labels. */
         get: function () {
             return this.nativeElement ? this.nativeElement.labelPosition : undefined;
         },
@@ -1009,7 +1031,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormGroupComponent.prototype, "readonly", {
-        /** @description Makes the form readonly. */
+        /** @description Shows / hides validation summary. */
         get: function () {
             return this.nativeElement ? this.nativeElement.readonly : undefined;
         },
@@ -1020,7 +1042,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormGroupComponent.prototype, "showColonAfterLabel", {
-        /** @description Shows / hides the colon after the labels. */
+        /** @description Gets or Sets the Form value. */
         get: function () {
             return this.nativeElement ? this.nativeElement.showColonAfterLabel : undefined;
         },
@@ -1031,7 +1053,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormGroupComponent.prototype, "showSummary", {
-        /** @description Shows / hides validation summary. */
+        /** @description undefined */
         get: function () {
             return this.nativeElement ? this.nativeElement.showSummary : undefined;
         },
@@ -1042,7 +1064,7 @@ var FormGroupComponent = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(FormGroupComponent.prototype, "value", {
-        /** @description Gets or Sets the Form value. */
+        /** @description undefined */
         get: function () {
             return this.nativeElement ? this.nativeElement.value : undefined;
         },
@@ -1164,6 +1186,12 @@ var FormGroupComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], FormGroupComponent.prototype, "columns", null);
+    __decorate([
+        Input()
+    ], FormGroupComponent.prototype, "dataField", null);
+    __decorate([
+        Input()
+    ], FormGroupComponent.prototype, "label", null);
     __decorate([
         Input()
     ], FormGroupComponent.prototype, "controls", null);

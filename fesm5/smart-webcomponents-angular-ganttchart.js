@@ -627,6 +627,17 @@ var GanttChartComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(GanttChartComponent.prototype, "firstDayOfWeek", {
+        /** @description Determines the view start day. Sunday is 0, Monday is 1, Saturday is 6. By default it's Sunday. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.firstDayOfWeek : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.firstDayOfWeek = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(GanttChartComponent.prototype, "groupByResources", {
         /** @description Groups the tasks inside the Task timeline according to the resources they are assigned to. Unassigned tasks are placed in a default group labeled 'Unassigned'. */
         get: function () {
@@ -660,13 +671,35 @@ var GanttChartComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(GanttChartComponent.prototype, "hideTimelineHeader", {
+        /** @description By default the Timeline has a three level header - timeline details, timeline second details and timeline header. This property hides the header container( the bottom container ). */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.hideTimelineHeader : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.hideTimelineHeader = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(GanttChartComponent.prototype, "hideTimelineHeaderDetails", {
-        /** @description By default the Timeline has a two level header - timeline details and timeline header. This property hides the header details container( the top container ). */
+        /** @description By default the Timeline has a three level header - timeline details, timeline second details and timeline header. This property hides the header details container( the top container ). */
         get: function () {
             return this.nativeElement ? this.nativeElement.hideTimelineHeaderDetails : undefined;
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.hideTimelineHeaderDetails = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GanttChartComponent.prototype, "hideTimelineSecondHeaderDetails", {
+        /** @description By default the Timeline has a three level header - timeline details and timeline header. This property hides the second header details container( the middle container ). */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.hideTimelineSecondHeaderDetails : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.hideTimelineSecondHeaderDetails = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -810,6 +843,17 @@ var GanttChartComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.monthFormat = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(GanttChartComponent.prototype, "monthScale", {
+        /** @description Determines the scale in Month view. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.monthScale : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.monthScale = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -2563,6 +2607,9 @@ var GanttChartComponent = /** @class */ (function (_super) {
     ], GanttChartComponent.prototype, "filterRow", null);
     __decorate([
         Input()
+    ], GanttChartComponent.prototype, "firstDayOfWeek", null);
+    __decorate([
+        Input()
     ], GanttChartComponent.prototype, "groupByResources", null);
     __decorate([
         Input()
@@ -2572,7 +2619,13 @@ var GanttChartComponent = /** @class */ (function (_super) {
     ], GanttChartComponent.prototype, "hideDateMarkers", null);
     __decorate([
         Input()
+    ], GanttChartComponent.prototype, "hideTimelineHeader", null);
+    __decorate([
+        Input()
     ], GanttChartComponent.prototype, "hideTimelineHeaderDetails", null);
+    __decorate([
+        Input()
+    ], GanttChartComponent.prototype, "hideTimelineSecondHeaderDetails", null);
     __decorate([
         Input()
     ], GanttChartComponent.prototype, "showSelectionColumn", null);
@@ -2612,6 +2665,9 @@ var GanttChartComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], GanttChartComponent.prototype, "monthFormat", null);
+    __decorate([
+        Input()
+    ], GanttChartComponent.prototype, "monthScale", null);
     __decorate([
         Input()
     ], GanttChartComponent.prototype, "nonworkingDays", null);

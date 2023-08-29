@@ -133,14 +133,66 @@ export class AppComponent implements AfterViewInit, OnInit {
     dataField: "Day",
   };
 
+  valueAxis = {
+    minValue: 0,
+  }
+
   seriesGroups = [
     {
-      type: "column",
-
+      type: "stackedcolumn",
+      dataField: "Keith",
+      displayText: "Keith",
       series: [
-        { dataField: "Keith", displayText: "Keith" },
-        { dataField: "Erica", displayText: "Erica" },
-        { dataField: "George", displayText: "George" },
+        {
+          dataField: "Running",
+          displayText: "Running",
+        },
+        {
+          dataField: "Cycling",
+          displayText: "Cycling",
+        },
+        {
+          dataField: "Swimming",
+          displayText: "Swimming",
+        },
+      ],
+    },
+    {
+      type: "stackedcolumn",
+      dataField: "Erica",
+      displayText: "Erica",
+      series: [
+        {
+          dataField: "Running",
+          displayText: "Running",
+        },
+        {
+          dataField: "Cycling",
+          displayText: "Cycling",
+        },
+        {
+          dataField: "Swimming",
+          displayText: "Swimming",
+        },
+      ],
+    },
+    {
+      type: "stackedcolumn",
+      dataField: "George",
+      displayText: "George",
+      series: [
+        {
+          dataField: "Running",
+          displayText: "Running",
+        },
+        {
+          dataField: "Cycling",
+          displayText: "Cycling",
+        },
+        {
+          dataField: "Swimming",
+          displayText: "Swimming",
+        },
       ],
     },
   ];

@@ -13,8 +13,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [AppComponent],
     imports: [BrowserModule, FormsModule, DropDownListModule, ButtonModule, ListBoxModule, DateTimePickerModule, InputModule],
-    bootstrap: [AppComponent],
-    entryComponents: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }
