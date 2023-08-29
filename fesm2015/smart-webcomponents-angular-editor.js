@@ -327,6 +327,13 @@ let EditorComponent = class EditorComponent extends BaseElement {
     set charCountFormatFunction(value) {
         this.nativeElement ? this.nativeElement.charCountFormatFunction = value : undefined;
     }
+    /** @description Sets or gets whether files will be automatically uploaded after selection. */
+    get autoUpload() {
+        return this.nativeElement ? this.nativeElement.autoUpload : undefined;
+    }
+    set autoUpload(value) {
+        this.nativeElement ? this.nativeElement.autoUpload = value : undefined;
+    }
     /** @description Determines the content filtering settings. */
     get contentFiltering() {
         return this.nativeElement ? this.nativeElement.contentFiltering : undefined;
@@ -536,6 +543,20 @@ let EditorComponent = class EditorComponent extends BaseElement {
     }
     set splitModeRefreshTimeout(value) {
         this.nativeElement ? this.nativeElement.splitModeRefreshTimeout = value : undefined;
+    }
+    /** @description Sets or gets the upload URL. This property corresponds to the upload form's action attribute. For example, the uploadUrl property can point to a PHP file, which handles the upload operation on the server-side. */
+    get uploadUrl() {
+        return this.nativeElement ? this.nativeElement.uploadUrl : undefined;
+    }
+    set uploadUrl(value) {
+        this.nativeElement ? this.nativeElement.uploadUrl = value : undefined;
+    }
+    /** @description Sets or gets the remove URL. This property corresponds to the form's action attribute. For example, the removeUrl property can point to a PHP file, which handles the remove operation on the server-side. */
+    get removeUrl() {
+        return this.nativeElement ? this.nativeElement.removeUrl : undefined;
+    }
+    set removeUrl(value) {
+        this.nativeElement ? this.nativeElement.removeUrl = value : undefined;
     }
     /** @description Determines the theme. Theme defines the look of the element */
     get theme() {
@@ -1171,6 +1192,9 @@ __decorate([
 ], EditorComponent.prototype, "charCountFormatFunction", null);
 __decorate([
     Input()
+], EditorComponent.prototype, "autoUpload", null);
+__decorate([
+    Input()
 ], EditorComponent.prototype, "contentFiltering", null);
 __decorate([
     Input()
@@ -1259,6 +1283,12 @@ __decorate([
 __decorate([
     Input()
 ], EditorComponent.prototype, "splitModeRefreshTimeout", null);
+__decorate([
+    Input()
+], EditorComponent.prototype, "uploadUrl", null);
+__decorate([
+    Input()
+], EditorComponent.prototype, "removeUrl", null);
 __decorate([
     Input()
 ], EditorComponent.prototype, "theme", null);

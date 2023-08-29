@@ -71,10 +71,6 @@ export class AppComponent implements AfterViewInit, OnInit {
     maxValue: 10,
   }
 
-  toolTipFormatSettings = {
-    decimalPlaces: 2,
-  };
-
   gridOptions = {
     width: 50,
   };

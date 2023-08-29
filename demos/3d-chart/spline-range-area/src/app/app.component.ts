@@ -12,23 +12,18 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('chart', { read: ThreeDChartComponent, static: false }) chart!: ThreeDChartComponent;
 
   dataSource = [
-    { Month: 'Jan', y2021: 140, y2022: 180, y2020: 100 },
-    { Month: 'Feb', y2021: 120, y2022: 160, y2020: 80 },
-    { Month: 'Mar', y2021: 100, y2022: 140, y2020: 60 },
-    { Month: 'Apr', y2021: 180, y2022: 200, y2020: 140 },
-    { Month: 'May', y2021: 220, y2022: 240, y2020: 180 },
-    { Month: 'Jun', y2021: 200, y2022: 220, y2020: 160 },
-    { Month: 'Jul', y2021: 175, y2022: 230, y2020: 135 },
-    { Month: 'Aug', y2021: 160, y2022: 210, y2020: 120 },
-    { Month: 'Sep', y2021: 200, y2022: 190, y2020: 160 },
-    { Month: 'Oct', y2021: 180, y2022: 170, y2020: 140 },
-    { Month: 'Nov', y2021: 160, y2022: 210, y2020: 120 },
-    { Month: 'Dec', y2021: 165, y2022: 140, y2020: 125 },
+    { Day: 'Monday', LondonLow: 10, LondonHigh: 18, NewYorkLow: 8, NewYorkHigh: 15, BerlinLow: 5, BerlinHigh: 20 },
+    { Day: 'Tuesday', LondonLow: 13, LondonHigh: 18, NewYorkLow: 6, NewYorkHigh: 15, BerlinLow: 9, BerlinHigh: 24 },
+    { Day: 'Wednesday', LondonLow: 11, LondonHigh: 20, NewYorkLow: 8, NewYorkHigh: 15, BerlinLow: 12, BerlinHigh: 22 },
+    { Day: 'Thursday', LondonLow: 12, LondonHigh: 18, NewYorkLow: 13, NewYorkHigh: 20, BerlinLow: 7, BerlinHigh: 20 },
+    { Day: 'Friday', LondonLow: 18, LondonHigh: 21, NewYorkLow: 14, NewYorkHigh: 19, BerlinLow: 4, BerlinHigh: 20 },
+    { Day: 'Saturday', LondonLow: 24, LondonHigh: 29, NewYorkLow: 10, NewYorkHigh: 15, BerlinLow: 10, BerlinHigh: 19 },
+    { Day: 'Sunday', LondonLow: 11, LondonHigh: 20, NewYorkLow: 8, NewYorkHigh: 15, BerlinLow: 16, BerlinHigh: 28 }
   ];
 
-  caption = 'Store Sales Per Month for 2020-2022'
+  caption = 'Weather Forecast for Upcoming Week'
 
-  description = '';
+  description = 'Berlin, London, New York';
 
   showLegend = true;
 
@@ -36,25 +31,37 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   cameraPosition = {
     x: 30,
-    y: 30,
+    y: 80,
     z: 70,
   };
 
   xAxis = {
-    dataField: 'Month',
+    dataField: 'Day',
   };
 
   valueAxis = {
-    unitInterval: 20,
+    unitInterval: 8,
+    minValue: 0,
+    maxValue: 40,
+    formatFunction: (value:any) => {
+      return value + '°C';
+    }
+  };
+
+  gridOptions = {
+    slotWidthZ: 17,
+    width: 120,
+    height: 60
   };
 
   seriesGroups = [
     {
-      type: 'spline',
+      type: 'splinerangearea',
+
       series: [
-        { dataField: 'y2020', displayText: '2020' },
-        { dataField: 'y2021', displayText: '2021' },
-        { dataField: 'y2022', displayText: '2022' },
+        { dataFieldFrom: 'BerlinLow', displayTextFrom: 'Low', dataFieldTo: 'BerlinHigh', displayTextTo: 'High', displayText: 'Berlin' },
+        { dataFieldFrom: 'LondonLow', displayTextFrom: 'Low', dataFieldTo: 'LondonHigh', displayTextTo: 'High', displayText: 'London' },
+        { dataFieldFrom: 'NewYorkLow', displayTextFrom: 'Low', dataFieldTo: 'NewYorkHigh', displayTextTo: 'High', displayText: 'New York' },
       ],
     },
   ];

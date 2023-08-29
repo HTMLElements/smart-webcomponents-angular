@@ -23,10 +23,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		
 	init(): void {
 		// init code.
-	    
-    
-        const splitter = document.querySelector('smart-splitter');
-        splitter.dataSource = [
+	    this.splitter.dataSource = [
             {
                 id: 'item0',
                 size: '50%',
@@ -46,7 +43,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 content: 'Item 5'
             }
         ];
-    
 
 	}	
 }

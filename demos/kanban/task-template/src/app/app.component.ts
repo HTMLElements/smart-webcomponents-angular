@@ -14,7 +14,17 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
 
     collapsible = true;
-    dataSource = GetKanbanData();
+    dataSource = [...GetKanbanData(), {
+        id: 16,
+        text: 'Improve performance',
+        status: 'inProgress',
+        checklist: [
+            { text: 'https://htmlelements.com/demos/images/card-demo-chart-1.png', completed: true },
+            { text: 'https://htmlelements.com/demos/images/card-demo-chart-2.png', completed: false },
+            { text: 'https://htmlelements.com/demos/images/card-demo-chart-3.png', completed: true },
+            { text: 'https://htmlelements.com/demos/images/card-demo-chart-4.png', completed: true }
+        ]
+    }];
     editable = true;
     columns = [
         { label: 'To do', dataField: 'toDo' },
@@ -79,16 +89,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-        this.dataSource.push({
-            id: 16,
-            text: 'Improve performance',
-            status: 'inProgress',
-            checklist: [
-                { text: 'https://htmlelements.com/demos/images/card-demo-chart-1.png', completed: true },
-                { text: 'https://htmlelements.com/demos/images/card-demo-chart-2.png', completed: false },
-                { text: 'https://htmlelements.com/demos/images/card-demo-chart-3.png', completed: true },
-                { text: 'https://htmlelements.com/demos/images/card-demo-chart-4.png', completed: true }
-            ]
-        });
     }
 }

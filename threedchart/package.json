@@ -1,0 +1,13 @@
+{
+  "main": "../bundles/smart-webcomponents-angular-threedchart.umd.js",
+  "module": "../fesm5/smart-webcomponents-angular-threedchart.js",
+  "es2015": "../fesm2015/smart-webcomponents-angular-threedchart.js",
+  "esm5": "../esm5/threedchart/smart-webcomponents-angular-threedchart.js",
+  "esm2015": "../esm2015/threedchart/smart-webcomponents-angular-threedchart.js",
+  "fesm5": "../fesm5/smart-webcomponents-angular-threedchart.js",
+  "fesm2015": "../fesm2015/smart-webcomponents-angular-threedchart.js",
+  "typings": "smart-webcomponents-angular-threedchart.d.ts",
+  "metadata": "smart-webcomponents-angular-threedchart.metadata.json",
+  "sideEffects": false,
+  "name": "smart-webcomponents-angular/threedchart"
+}

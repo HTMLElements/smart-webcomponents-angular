@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		this.chars = detail.invalidCharacters.join(', ');
 	}
 	
-	validate(event: Event) {
+	validate(event: CustomEvent) {
 		this.barcodeToValidate.value = "ABCDEFFГФЩЪ";
 	}
 }

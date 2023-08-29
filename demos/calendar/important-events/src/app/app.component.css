@@ -99,6 +99,7 @@ smart-calendar[months="12"] .smart-calendar-month {
     grid-template-columns: 23% 23% 23% 23%;
     grid-column-gap: 2%;
     grid-template-areas: "buttonDelete . buttonCancel buttonSave";
+    width: 100%;
     height: 100%;
 }
 

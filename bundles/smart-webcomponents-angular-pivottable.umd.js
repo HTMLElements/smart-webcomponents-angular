@@ -685,7 +685,7 @@ import './../source/modules/smart.pivottable';
             configurable: true
         });
         Object.defineProperty(PivotTableComponent.prototype, "locale", {
-            /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+            /** @description Sets or gets the page size (when paging is enabled). */
             get: function () {
                 return this.nativeElement ? this.nativeElement.locale : undefined;
             },
@@ -696,7 +696,7 @@ import './../source/modules/smart.pivottable';
             configurable: true
         });
         Object.defineProperty(PivotTableComponent.prototype, "messages", {
-            /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
+            /** @description Sets or gets the current (zero-based) page index (when paging is enabled). */
             get: function () {
                 return this.nativeElement ? this.nativeElement.messages : undefined;
             },
@@ -707,7 +707,7 @@ import './../source/modules/smart.pivottable';
             configurable: true
         });
         Object.defineProperty(PivotTableComponent.prototype, "nullDefaultValue", {
-            /** @description Sets or gets whether row summaries are displayed in the row headers. Example: Peterson(40) vs Peterson, when rowSummary is set to false. */
+            /** @description Sets or gets whether paging is enabled. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.nullDefaultValue : undefined;
             },
@@ -718,7 +718,7 @@ import './../source/modules/smart.pivottable';
             configurable: true
         });
         Object.defineProperty(PivotTableComponent.prototype, "onCellRender", {
-            /** @description Sets or gets whether to show row total columns for each summary column. */
+            /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onCellRender : undefined;
             },
@@ -729,7 +729,7 @@ import './../source/modules/smart.pivottable';
             configurable: true
         });
         Object.defineProperty(PivotTableComponent.prototype, "onColumnRender", {
-            /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
+            /** @description Sets or gets whether sorting by row (when a row group cell is clicked) is enabled. When columnTotals is also enabled, sorting is applied per "column group"; otherwise - for all columns. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onColumnRender : undefined;
             },
@@ -740,12 +740,45 @@ import './../source/modules/smart.pivottable';
             configurable: true
         });
         Object.defineProperty(PivotTableComponent.prototype, "onInit", {
-            /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+            /** @description Sets or gets whether row summaries are displayed in the row headers. Example: Peterson(40) vs Peterson, when rowSummary is set to false. */
             get: function () {
                 return this.nativeElement ? this.nativeElement.onInit : undefined;
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.onInit = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PivotTableComponent.prototype, "pageSize", {
+            /** @description Sets or gets whether to show row total columns for each summary column. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.pageSize : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.pageSize = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PivotTableComponent.prototype, "pageIndex", {
+            /** @description Sets or gets the position of row total columns (shown when rowTotals is enabled). */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.pageIndex : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.pageIndex = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PivotTableComponent.prototype, "paging", {
+            /** @description Sets or gets whether row selection (via checkboxes) is enabled. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.paging : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.paging = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1307,6 +1340,15 @@ import './../source/modules/smart.pivottable';
         __decorate([
             core.Input()
         ], PivotTableComponent.prototype, "onInit", null);
+        __decorate([
+            core.Input()
+        ], PivotTableComponent.prototype, "pageSize", null);
+        __decorate([
+            core.Input()
+        ], PivotTableComponent.prototype, "pageIndex", null);
+        __decorate([
+            core.Input()
+        ], PivotTableComponent.prototype, "paging", null);
         __decorate([
             core.Input()
         ], PivotTableComponent.prototype, "rightToLeft", null);

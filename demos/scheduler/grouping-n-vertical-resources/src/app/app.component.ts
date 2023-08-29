@@ -157,7 +157,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'timelineMonth';
 
-    dateCurrent: string = '2020-11-1';
+    dateCurrent = new Date();
 
     views: SchedulerViews = ['timelineDay', 'timelineWeek', 'timelineMonth'];
 

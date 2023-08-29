@@ -18,7 +18,6 @@ import { AppComponent } from "./app.component";
     SwitchButtonModule,
     DropDownButtonModule
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [AppComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

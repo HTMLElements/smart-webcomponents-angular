@@ -373,6 +373,17 @@ var EditorComponent = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(EditorComponent.prototype, "autoUpload", {
+        /** @description Sets or gets whether files will be automatically uploaded after selection. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.autoUpload : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.autoUpload = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(EditorComponent.prototype, "contentFiltering", {
         /** @description Determines the content filtering settings. */
         get: function () {
@@ -699,6 +710,28 @@ var EditorComponent = /** @class */ (function (_super) {
         },
         set: function (value) {
             this.nativeElement ? this.nativeElement.splitModeRefreshTimeout = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditorComponent.prototype, "uploadUrl", {
+        /** @description Sets or gets the upload URL. This property corresponds to the upload form's action attribute. For example, the uploadUrl property can point to a PHP file, which handles the upload operation on the server-side. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.uploadUrl : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.uploadUrl = value : undefined;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditorComponent.prototype, "removeUrl", {
+        /** @description Sets or gets the remove URL. This property corresponds to the form's action attribute. For example, the removeUrl property can point to a PHP file, which handles the remove operation on the server-side. */
+        get: function () {
+            return this.nativeElement ? this.nativeElement.removeUrl : undefined;
+        },
+        set: function (value) {
+            this.nativeElement ? this.nativeElement.removeUrl = value : undefined;
         },
         enumerable: true,
         configurable: true
@@ -1459,6 +1492,9 @@ var EditorComponent = /** @class */ (function (_super) {
     ], EditorComponent.prototype, "charCountFormatFunction", null);
     __decorate([
         Input()
+    ], EditorComponent.prototype, "autoUpload", null);
+    __decorate([
+        Input()
     ], EditorComponent.prototype, "contentFiltering", null);
     __decorate([
         Input()
@@ -1547,6 +1583,12 @@ var EditorComponent = /** @class */ (function (_super) {
     __decorate([
         Input()
     ], EditorComponent.prototype, "splitModeRefreshTimeout", null);
+    __decorate([
+        Input()
+    ], EditorComponent.prototype, "uploadUrl", null);
+    __decorate([
+        Input()
+    ], EditorComponent.prototype, "removeUrl", null);
     __decorate([
         Input()
     ], EditorComponent.prototype, "theme", null);

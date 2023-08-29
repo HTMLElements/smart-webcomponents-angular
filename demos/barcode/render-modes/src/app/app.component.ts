@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	@ViewChild('svgOption', { read: RadioButtonComponent, static: false }) svgOption!: RadioButtonComponent;
 	@ViewChild('canvasOption', { read: RadioButtonComponent, static: false }) canvasOption!: RadioButtonComponent;
 	
-	log: string;
+	log?: string;
  
 	ngOnInit(): void {
 		// onInit code.

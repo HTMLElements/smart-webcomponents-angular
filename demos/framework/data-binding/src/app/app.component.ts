@@ -1,11 +1,10 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent, Smart } from 'smart-webcomponents-angular/button';
-import { DropDownListComponent } from 'smart-webcomponents-angular/dropdownlist';
-import { ListBoxComponent } from 'smart-webcomponents-angular/listbox';
-import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
-import { smartGrid } from 'smart-webcomponents-angular/source/modules/smart.grid';
-import { smartDropDownList } from 'smart-webcomponents-angular/source/modules/smart.dropDownList';
+import { ButtonComponent, Smart } from '@smart-webcomponents-angular/button';
+import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
+import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
+import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
+
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
     selector: 'app-root',
@@ -14,11 +13,11 @@ import { smartDropDownList } from 'smart-webcomponents-angular/source/modules/sm
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
-    @ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2: TextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
+    @ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2!: TextBoxComponent;
 
 
     ngOnInit(): void {
@@ -32,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-        const app = new App({
+        const app = new window.Smart.App({
             id: "app1",
             template: {
                 "#textBox1": {
@@ -101,7 +100,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     this.items.push(this.firstName + " " + this.lastName);
                     this.firstName = this.lastName = "";
                 },
-                selectItem: function (event) {
+                selectItem: function (event: CustomEvent) {
                     if (event.detail.selected) {
                         const selectedItem = this.items[this.selectedIndexes[0]];
                         const names = selectedItem.split(" ");
@@ -112,7 +111,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 buttonText: "Add Item",
             }
         });
-        app.notify(function (changes) {
+        app.notify(function (changes: any) {
             console.log('data is updated');
         });
 

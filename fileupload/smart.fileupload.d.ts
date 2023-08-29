@@ -57,6 +57,8 @@ export declare class FileUploadComponent extends BaseElement implements OnInit, 
     uploadUrl: string;
     /** @description If is set to true, the element cannot be focused. */
     unfocusable: boolean;
+    /** @description Sets or gets the remove URL. This property corresponds to the form's action attribute. For example, the removeUrl property can point to a PHP file, which handles the remove operation on the server-side. */
+    removeUrl: string;
     /** @description Gets the file upload value. */
     value: any;
     /** @description Callback used to validate the files immediatelly after their selection. Retuns a boolean value. If the returned value is false, the file is removed from list and a 'validationError is fired. */

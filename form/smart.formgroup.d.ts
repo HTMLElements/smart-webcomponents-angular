@@ -15,21 +15,29 @@ export declare class FormGroupComponent extends BaseElement implements OnInit, A
     createComponent(properties?: {}): any;
     /** @description Sets or gets the form columns. */
     columns: number;
+    /** @description Sets the Form control data field. The control's inner input's name is set to the dataField value and in the FormGroup it is accessible through the dataField value. */
+    dataField: string;
+    /** @description Gets or Sets the Form control's label. */
+    label: string;
     /** @description  */
     controls: Control[];
-    /** @description Callback function for handling status changes */
-    onStatusChanges: any;
-    /** @description Callback function for handling value changes */
-    onValueChanges: any;
     /** @description Sets or Gets the labels position. */
-    labelPosition: FormGroupLabelPosition | string;
+    onStatusChanges: {
+        (value: string): void;
+    };
     /** @description Makes the form readonly. */
-    readonly: boolean;
+    onValueChanges: {
+        (value: any): void;
+    };
     /** @description Shows / hides the colon after the labels. */
-    showColonAfterLabel: boolean;
+    labelPosition: FormGroupLabelPosition | string;
     /** @description Shows / hides validation summary. */
-    showSummary: boolean;
+    readonly: boolean;
     /** @description Gets or Sets the Form value. */
+    showColonAfterLabel: boolean;
+    /** @description undefined */
+    showSummary: boolean;
+    /** @description undefined */
     value: any;
     /** @description Adds a control to the Form.
     * @param {any} controlOptions. Control options. The control options description is available in the <em>controls</em> property.

@@ -581,7 +581,7 @@ let GridComponent = class GridComponent extends BaseElement {
     set onAfterInit(value) {
         this.nativeElement ? this.nativeElement.onAfterInit = value : undefined;
     }
-    /** @description Sets the grid's image upload settings for the image columns. */
+    /** @description Sets the grid's image and filter upload settings for the image and attachment columns. */
     get onChartInit() {
         return this.nativeElement ? this.nativeElement.onChartInit : undefined;
     }
@@ -630,56 +630,56 @@ let GridComponent = class GridComponent extends BaseElement {
     set onRowDetailUpdated(value) {
         this.nativeElement ? this.nativeElement.onRowDetailUpdated = value : undefined;
     }
-    /** @description Describes the settings for the group header. */
+    /** @description Sets the grid's state settings. */
     get onRowHistory() {
         return this.nativeElement ? this.nativeElement.onRowHistory : undefined;
     }
     set onRowHistory(value) {
         this.nativeElement ? this.nativeElement.onRowHistory = value : undefined;
     }
-    /** @description Describes the header settings of the grid. */
+    /** @description Describes the settings for the group header. */
     get onRowStyle() {
         return this.nativeElement ? this.nativeElement.onRowStyle : undefined;
     }
     set onRowStyle(value) {
         this.nativeElement ? this.nativeElement.onRowStyle = value : undefined;
     }
-    /** @description Describes the footer settings of the grid. */
+    /** @description Describes the header settings of the grid. */
     get onRowInserted() {
         return this.nativeElement ? this.nativeElement.onRowInserted : undefined;
     }
     set onRowInserted(value) {
         this.nativeElement ? this.nativeElement.onRowInserted = value : undefined;
     }
-    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
+    /** @description Describes the footer settings of the grid. */
     get onRowRemoved() {
         return this.nativeElement ? this.nativeElement.onRowRemoved : undefined;
     }
     set onRowRemoved(value) {
         this.nativeElement ? this.nativeElement.onRowRemoved = value : undefined;
     }
-    /** @description The rows property is used to describe all rows displayed in the grid. */
+    /** @description Sets or gets the value indicating whether the element is aligned to support locales using right-to-left fonts. */
     get onRowUpdate() {
         return this.nativeElement ? this.nativeElement.onRowUpdate : undefined;
     }
     set onRowUpdate(value) {
         this.nativeElement ? this.nativeElement.onRowUpdate = value : undefined;
     }
-    /** @description Describes the selection settings. */
+    /** @description The rows property is used to describe all rows displayed in the grid. */
     get onRowUpdated() {
         return this.nativeElement ? this.nativeElement.onRowUpdated : undefined;
     }
     set onRowUpdated(value) {
         this.nativeElement ? this.nativeElement.onRowUpdated = value : undefined;
     }
-    /** @description Describes sorting settings. */
+    /** @description Describes the selection settings. */
     get onRowClass() {
         return this.nativeElement ? this.nativeElement.onRowClass : undefined;
     }
     set onRowClass(value) {
         this.nativeElement ? this.nativeElement.onRowClass = value : undefined;
     }
-    /** @description undefined */
+    /** @description Describes sorting settings. */
     get onCellClass() {
         return this.nativeElement ? this.nativeElement.onCellClass : undefined;
     }
@@ -797,6 +797,13 @@ let GridComponent = class GridComponent extends BaseElement {
     }
     set summaryRow(value) {
         this.nativeElement ? this.nativeElement.summaryRow = value : undefined;
+    }
+    /** @description undefined */
+    get stateSettings() {
+        return this.nativeElement ? this.nativeElement.stateSettings : undefined;
+    }
+    set stateSettings(value) {
+        this.nativeElement ? this.nativeElement.stateSettings = value : undefined;
     }
     /** @description undefined */
     get groupHeader() {
@@ -1707,7 +1714,7 @@ let GridComponent = class GridComponent extends BaseElement {
             return result;
         });
     }
-    /** @description Gets a JSON object with the following fields: 'sort', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'.
+    /** @description Gets a JSON object with the following fields: 'sort', 'columns', 'expandedRows', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'. The 'sort' represents an object which contains the sorted columns. Each key in that json object is the column's dataField item which has sortOrder: string and sortIndex: int properties. The sortOrder could be either 'asc' or 'desc'. Similarly, the filter object contains the filtered columns. Each key in that object is a column data field and each value has 'filters' array property with the applied filters to the column. The 'columns' property contains an array of columns with saved properties such as visible, width and freeze. The 'expandedRows' property contains the indexes of the expanded rows. The 'groups' property contains the grouped column data fields and the selectedCells and selectedRows include information about the cells or rows selection. These depend on the selection mode used in the Grid. The 'paging' object includes the sub-properties 'count', 'index' and 'size' which determine the count of pages, the current page's index and the page size.
     * @returns {any}
   */
     getState() {
@@ -1723,6 +1730,54 @@ let GridComponent = class GridComponent extends BaseElement {
             const result = yield getResultOnRender();
             return result;
         });
+    }
+    /** @description Saves the Grid state and returns a JSON object with the following fields: 'sort', 'columns', 'expandedRows', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'. The 'sort' represents an object which contains the sorted columns. Each key in that json object is the column's dataField item which has sortOrder: string and sortIndex: int properties. The sortOrder could be either 'asc' or 'desc'. Similarly, the filter object contains the filtered columns. Each key in that object is a column data field and each value has 'filters' array property with the applied filters to the column. The 'columns' property contains an array of columns with saved properties such as visible, width and freeze. The 'expandedRows' property contains the indexes of the expanded rows. The 'groups' property contains the grouped column data fields and the selectedCells and selectedRows include information about the cells or rows selection. These depend on the selection mode used in the Grid. The 'paging' object includes the sub-properties 'count', 'index' and 'size' which determine the count of pages, the current page's index and the page size.
+    * @param {string} name?. state name
+    * @returns {any}
+  */
+    saveState(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.saveState(name);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Loads a previously saved Grid state. You can pass a state name when there is a state which was previously saved with the saveState(stateName) method call or a state object returned by the saveState or getState method calls. The state object is required to be a JSON object with the following fields: 'sort', 'columns', 'expandedRows', 'filter', 'groups', 'paging', 'selectedCells', 'selectedrows'. The 'sort' represents an object which contains the sorted columns. Each key in that json object is the column's dataField item which has sortOrder: string and sortIndex: int properties. The sortOrder could be either 'asc' or 'desc'. Similarly, the filter object contains the filtered columns. Each key in that object is a column data field and each value has 'filters' array property with the applied filters to the column. The 'columns' property contains an array of columns with saved properties such as visible, width and freeze. The 'expandedRows' property contains the indexes of the expanded rows. The 'groups' property contains the grouped column data fields and the selectedCells and selectedRows include information about the cells or rows selection. These depend on the selection mode used in the Grid. The 'paging' object includes the sub-properties 'count', 'index' and 'size' which determine the count of pages, the current page's index and the page size.
+    * @param {any} state. state name or state object
+    * @returns {any}
+  */
+    loadState(state) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const getResultOnRender = () => {
+                return new Promise(resolve => {
+                    this.nativeElement.whenRendered(() => {
+                        const result = this.nativeElement.loadState(state);
+                        resolve(result);
+                    });
+                });
+            };
+            const result = yield getResultOnRender();
+            return result;
+        });
+    }
+    /** @description Resets the Grid state.
+    */
+    resetState() {
+        if (this.nativeElement.isRendered) {
+            this.nativeElement.resetState();
+        }
+        else {
+            this.nativeElement.whenRendered(() => {
+                this.nativeElement.resetState();
+            });
+        }
     }
     /** @description Gets the changes from the batch edit.
     * @returns {{ upDated: [{ id: string, dataField: string, oldValue: Object, newValue: Object }], deleted: [{id: string, data: Object}], added: [{id: string, data: Object}] }}
@@ -2886,6 +2941,9 @@ __decorate([
 __decorate([
     Input()
 ], GridComponent.prototype, "summaryRow", null);
+__decorate([
+    Input()
+], GridComponent.prototype, "stateSettings", null);
 __decorate([
     Input()
 ], GridComponent.prototype, "groupHeader", null);

@@ -62,22 +62,5 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
-    init(): void {
-        // init code.
-        const that = this;
-
-        that.checkbox.addEventListener('change', function (event: CustomEvent) {
-            if (!that.chart.xAxis) {
-                return;
-            }
-            if (that.chart.xAxis.rangeSelector) {
-                if (event.detail.value) {
-                    that.chart.xAxis.rangeSelector.renderTo = that.selectorContainer.nativeElement;
-                }
-                else {
-                    that.chart.xAxis.rangeSelector.renderTo = null;
-                }
-            }
-        });
-    }
+    init(): void {}
 }

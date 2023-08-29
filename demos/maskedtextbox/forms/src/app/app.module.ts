@@ -50,8 +50,7 @@ export class CheckPasswordDirective implements Validator {
 @NgModule({
     declarations: [AppComponent, CheckPasswordDirective],
     imports: [BrowserModule, FormsModule, DropDownListModule, ButtonModule, PasswordTextBoxModule, MaskedTextBoxModule, InputModule],
-    bootstrap: [AppComponent],
-    entryComponents: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

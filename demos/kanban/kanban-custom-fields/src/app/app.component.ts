@@ -179,10 +179,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         { id: 4, name: 'Laura', image: 'https://htmlelements.com/demos/images/people/laura.png' }
     ];
     columns = [
-        { color: '#33B679', label: 'To do', dataField: 'toDo', allowHide: false },
-        { color: '#8E24AA', label: 'In progress', dataField: 'inProgress' },
-        { color: '#039BE5', label: 'Testing', dataField: 'testing' },
-        { color: '#DD5347', label: 'Done', dataField: 'done', addNewButton: false }
+        { color: '#33B679', label: 'Europe', dataField: 'Europe', allowHide: false },
+        { color: '#8E24AA', label: 'Asia', dataField: 'Asia', allowHide: false }
     ];
 
     ngOnInit(): void {
@@ -196,8 +194,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
-
-
     }
 }

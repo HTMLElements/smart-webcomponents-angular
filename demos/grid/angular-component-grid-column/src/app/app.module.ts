@@ -11,7 +11,6 @@ import { smartDomService } from './smart-dom.service';
     declarations: [AppComponent, GridCellComponent],
     imports: [BrowserModule, GridModule],
     bootstrap: [AppComponent],
-    entryComponents: [AppComponent, GridCellComponent],
     providers: [smartDomService]
 })
 

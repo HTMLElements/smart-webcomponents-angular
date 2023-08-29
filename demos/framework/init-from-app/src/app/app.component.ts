@@ -1,11 +1,9 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from 'smart-webcomponents-angular/grid';
-import { DropDownListComponent } from 'smart-webcomponents-angular/dropdownlist';
+import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { GetData } from '../assets/data';
-import { App } from 'smart-webcomponents-angular/source/smart.core';
-import { smartGrid } from 'smart-webcomponents-angular/source/modules/smart.grid';
-import { smartDropDownList } from 'smart-webcomponents-angular/source/modules/smart.dropDownList';
 
+import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
     selector: 'app-root',
@@ -28,9 +26,9 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const app = new App({
+        const app = new window.Smart.App({
             selector: "#app",
-            components: [smartGrid, smartDropDownList],
+            components: [GridComponent, DropDownListComponent],
             template: {
                 "#grid": {
                     properties: {
@@ -47,7 +45,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     },
                     bind: {
                         dataSource: 'data',
-                        computed: function (propertyObject) {
+                        computed: function (propertyObject: any) {
                             const item = propertyObject.item;
                             const value = propertyObject.value;
                             if (propertyObject.name === 'data') {
@@ -85,13 +83,13 @@ export class AppComponent implements AfterViewInit, OnInit {
             },
             render: function () {
                 return `
-    	       <smartGrid id="grid"></smartGrid>
+    	       <smart-grid id="grid"></smart-grid>
     		    <br/><br/>
     	        <span>
     			    {{message}}
     	        </span>
     	       <br/><br/>
-    	       <smartDropDownList id="dropDownList"></smartDropDownList>
+    	       <smart-drop-down-list id="dropDownList"></smart-drop-down-list>
              `
             }
         });

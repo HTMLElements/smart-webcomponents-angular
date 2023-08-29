@@ -35,45 +35,45 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
+    handleButtonClick(event: Event) {
+        const target = event.target as HTMLElement;
+        const button = target.closest('smart-button');
+
+        const disableToolbarItemButton = this.button5;
+        const enableToolbarItemButton = this.button6;
+
+        if (!button) {
+            return;
+        }
+        const methodName = target.closest('smart-button').id;
+        let value: string;
+
+        if (methodName === 'disableToolbarItem') {
+            value = 'formats';
+            disableToolbarItemButton.disabled = true;
+            enableToolbarItemButton.disabled = false;
+        }
+        else if (methodName === 'enableToolbarItem') {
+            value = 'formats';
+            disableToolbarItemButton.disabled = false;
+            enableToolbarItemButton.disabled = true;
+        }
+
+        const output = this.editor[methodName](value ? value : undefined);
+
+        if (output instanceof Promise) {
+            output.then(o => {
+                if (o) {
+                    window.alert(o);
+                }
+            })
+        }
+        else if (output) {
+            window.alert(output);
+        }
+    }
+
     init(): void {
         // init code.
-        const editor = this.editor,
-            disableToolbarItemButton = this.button5,
-            enableToolbarItemButton = this.button6;
-
-        document.querySelector('.options').addEventListener('click', function (event: Event) {
-            const target = event.target as HTMLElement;
-            const button = target.closest('smart-button');
-
-            if (!button) {
-                return;
-            }
-            const methodName = target.closest('smart-button').id;
-            let value: string;
-
-            if (methodName === 'disableToolbarItem') {
-                value = 'formats';
-                disableToolbarItemButton.disabled = true;
-                enableToolbarItemButton.disabled = false;
-            }
-            else if (methodName === 'enableToolbarItem') {
-                value = 'formats';
-                disableToolbarItemButton.disabled = false;
-                enableToolbarItemButton.disabled = true;
-            }
-
-            const output = editor[methodName](value ? value : undefined);
-
-            if (output instanceof Promise) {
-                output.then(o => {
-                    if (o) {
-                        window.alert(o);
-                    }
-                })
-            }
-            else if (output) {
-                window.alert(output);
-            }
-        });
     };
 }

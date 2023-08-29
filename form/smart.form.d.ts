@@ -17,23 +17,27 @@ export declare class FormComponent extends BaseElement implements OnInit, AfterV
     columns: number;
     /** @description Sets or gets the form controls. */
     controls: Control[];
-    /** @description Callback function for handling status changes */
-    onStatusChanges: any;
-    /** @description Callback function for handling value changes */
-    onValueChanges: any;
     /** @description Sets or Gets the labels position. */
-    labelPosition: FormLabelPosition | string;
+    onStatusChanges: {
+        (value: string): void;
+    };
     /** @description Makes the form readonly. */
-    readonly: boolean;
+    onValueChanges: {
+        (value: any): void;
+    };
     /** @description Shows / hides the colon after the labels. */
-    showColonAfterLabel: boolean;
+    labelPosition: FormLabelPosition | string;
     /** @description Shows / hides validation summary. */
-    showSummary: boolean;
+    readonly: boolean;
     /** @description Gets the Form's state. Each member in the state has { dirty, untouched, disabled } properties. */
-    state: any;
+    showColonAfterLabel: boolean;
     /** @description Gets or Sets the Form value. */
-    value: any;
+    showSummary: boolean;
     /** @description Automatically validates the form when it is created. */
+    state: any;
+    /** @description undefined */
+    value: any;
+    /** @description undefined */
     validateOnLoad: boolean;
     /** @description Adds a control to the Form.
     * @param {any} controlOptions. Control options. The control options description is available in the <em>controls</em> property.

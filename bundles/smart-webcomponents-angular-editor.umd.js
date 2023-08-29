@@ -595,6 +595,17 @@ window.marked = pkg.default;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(EditorComponent.prototype, "autoUpload", {
+            /** @description Sets or gets whether files will be automatically uploaded after selection. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.autoUpload : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.autoUpload = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(EditorComponent.prototype, "contentFiltering", {
             /** @description Determines the content filtering settings. */
             get: function () {
@@ -921,6 +932,28 @@ window.marked = pkg.default;
             },
             set: function (value) {
                 this.nativeElement ? this.nativeElement.splitModeRefreshTimeout = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(EditorComponent.prototype, "uploadUrl", {
+            /** @description Sets or gets the upload URL. This property corresponds to the upload form's action attribute. For example, the uploadUrl property can point to a PHP file, which handles the upload operation on the server-side. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.uploadUrl : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.uploadUrl = value : undefined;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(EditorComponent.prototype, "removeUrl", {
+            /** @description Sets or gets the remove URL. This property corresponds to the form's action attribute. For example, the removeUrl property can point to a PHP file, which handles the remove operation on the server-side. */
+            get: function () {
+                return this.nativeElement ? this.nativeElement.removeUrl : undefined;
+            },
+            set: function (value) {
+                this.nativeElement ? this.nativeElement.removeUrl = value : undefined;
             },
             enumerable: true,
             configurable: true
@@ -1681,6 +1714,9 @@ window.marked = pkg.default;
         ], EditorComponent.prototype, "charCountFormatFunction", null);
         __decorate([
             core.Input()
+        ], EditorComponent.prototype, "autoUpload", null);
+        __decorate([
+            core.Input()
         ], EditorComponent.prototype, "contentFiltering", null);
         __decorate([
             core.Input()
@@ -1769,6 +1805,12 @@ window.marked = pkg.default;
         __decorate([
             core.Input()
         ], EditorComponent.prototype, "splitModeRefreshTimeout", null);
+        __decorate([
+            core.Input()
+        ], EditorComponent.prototype, "uploadUrl", null);
+        __decorate([
+            core.Input()
+        ], EditorComponent.prototype, "removeUrl", null);
         __decorate([
             core.Input()
         ], EditorComponent.prototype, "theme", null);

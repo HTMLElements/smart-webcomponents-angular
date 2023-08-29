@@ -2,6 +2,7 @@
 <div class="options">
     <div class="caption">Number of months(1-12)</div>
     <div class="option">
-        <input class="text-input" #monthsCountSelector id="monthsCountSelector" value="12" />
+        <input class="text-input" #monthsCountSelector id="monthsCountSelector" value="12"
+            (change)="handleMonthsCountChange($event)" />
     </div>
 </div>

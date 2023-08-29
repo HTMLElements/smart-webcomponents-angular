@@ -10,7 +10,7 @@ import '@angular/compiler';
     declarations: [ AppComponent ],
     imports: [ BrowserModule, TableModule ],
     bootstrap: [ AppComponent ],
-	entryComponents: [ AppComponent ]
+	
 })
 
 export class AppModule { }

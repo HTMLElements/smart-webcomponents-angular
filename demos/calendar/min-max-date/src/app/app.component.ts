@@ -3,17 +3,24 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
+	selector: 'app-root',
+	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
+export class AppComponent implements AfterViewInit, OnInit {
 	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
 	@ViewChild('minInput', { read: ElementRef<HTMLInputElement>, static: false }) minInput: ElementRef<HTMLInputElement>;
 	@ViewChild('maxInput', { read: ElementRef<HTMLInputElement>, static: false }) maxInput: ElementRef<HTMLInputElement>;
-	
- 
+
+	minYear = (new Date()).getFullYear() - 1;
+	min = `${this.minYear}, 7, 1`
+
+	selectedDates = [`${this.minYear}, 7, 2`, '2029-7-17']
+
+	maxYear = (new Date()).getFullYear();
+	max = `${this.maxYear}, 7, 31`
+
 	ngOnInit(): void {
 		// onInit code.
 	}
@@ -21,8 +28,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 	ngAfterViewInit(): void {
 		// afterViewInit code.
 		this.init();
-    }
-		
+	}
+
 	init(): void {
 		// init code.
 		const that = this;
@@ -31,8 +38,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 			that.calendar.min = that.minInput.nativeElement.value;
 		});
 
-	that.maxInput.nativeElement.addEventListener('change', function (event: CustomEvent) {
-				that.calendar.max = that.maxInput.nativeElement.value;
+		that.maxInput.nativeElement.addEventListener('change', function (event: CustomEvent) {
+			that.calendar.max = that.maxInput.nativeElement.value;
 		});
-	}	
+	}
 }

@@ -12,8 +12,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [AppComponent, CheckNumericValueDirective],
     imports: [BrowserModule, FormsModule, ButtonModule, InputModule, NumericTextBoxModule],
-    bootstrap: [AppComponent],
-    entryComponents: [AppComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }
