@@ -16,6 +16,7 @@
     "@smart-webcomponents-angular/dropdownlist": "16.0.2",
     "@smart-webcomponents-angular/colorpicker": "16.0.2",
     "@smart-webcomponents-angular/input": "16.0.2",
+    "@smart-webcomponents-angular/button": "16.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "core-js": "^3.27.2",
