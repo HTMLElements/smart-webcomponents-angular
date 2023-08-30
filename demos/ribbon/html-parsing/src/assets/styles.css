@@ -10,3 +10,224 @@ app-root {
 	width: 100%;
 	height: 100%;
 }
+#ribbon{
+  width: 100%;
+  --smart-ribbon-collapsed-tab-height: 60px;
+}
+
+
+smart-ribbon-item  smart-color-picker{
+  width: fit-content;
+}
+
+smart-ribbon-item.font-family-input{
+  width: 140px;
+  margin-right: 5px;
+}
+
+smart-ribbon-item.font-size-input{
+  width: 60px;
+}
+
+.document-container{
+  background-color: #f4f4f4;
+  width: 90%;
+  min-height: 800px;
+  margin: auto;
+}
+
+.document {
+  width: 80%;
+  height: 600px;
+  margin: auto;
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 50px;
+}
+
+.content_paste:after{
+  content: 'content_paste';
+}
+
+.content_cut:after{
+  content: 'content_cut';
+}
+
+.content_copy:after{
+  content: 'content_copy';
+}
+
+.format_bold:after{
+  content: 'format_bold';
+}
+
+.format_italic:after{
+  content: 'format_italic';
+}
+
+.format_underlined:after{
+  content: 'format_underlined';
+}
+
+.format_align_left:after{
+  content: 'format_align_left';
+}
+
+.format_align_center:after{
+  content: 'format_align_center';
+}
+
+.format_align_right:after{
+  content: 'format_align_right';
+}
+
+.format_align_justify:after{
+  content: 'format_align_justify';
+}
+
+.format_indent_increase:after{
+  content: 'format_indent_increase';
+}
+
+.format_indent_decrease:after{
+  content: 'format_indent_decrease';
+}
+
+.format_list_bulleted:after{
+  content: 'format_list_bulleted';
+}
+
+.format_list_numbered:after{
+  content: 'format_list_numbered';
+}
+
+.wrap_text:after{
+  content: 'wrap_text';
+}
+
+.search:after{
+  content: 'search';
+}
+
+.find_replace:after{
+  content: 'find_replace';
+}
+
+.select_all:after{
+  content: 'select_all';
+}
+
+.table_chart:after{
+  content: 'table_chart';
+}
+
+.insert_chart:after{
+  content: 'insert_chart';
+}
+
+.keyboard_arrow_up:after{
+  content: 'keyboard_arrow_up';
+}
+
+.keyboard_arrow_down:after{
+  content: 'keyboard_arrow_down';
+}
+
+.keyboard_arrow_left:after{
+  content: 'keyboard_arrow_left';
+}
+
+.keyboard_arrow_right:after{
+  content: 'keyboard_arrow_right';
+}
+
+.delete_sweep:after{
+  content: 'delete_sweep';
+}
+
+.insert_photo:after{
+  content: 'insert_photo';
+}
+
+.cloud_upload:after{
+  content: 'cloud_upload';
+}
+
+.bubble_chart:after{
+  content: 'bubble_chart';
+}
+
+.insert_emoticon:after{
+  content: 'insert_emoticon';
+}
+
+.aspect_ratio:after{
+  content: 'aspect_ratio';
+}
+
+.grid_on:after{
+  content: 'grid_on';
+}
+
+.view_headline:after{
+  content: 'view_headline';
+}
+
+.pageview:after{
+  content: 'pageview';
+}
+
+.zoom_out_map:after{
+  content: 'zoom_out_map';
+}
+
+.help_outline:after{
+  content: 'help_outline';
+}
+
+.info_outline:after{
+  content: 'info_outline';
+}
+
+.sort_by_alpha:after{
+  content: 'sort_by_alpha';
+}
+
+.edit:after{
+  content: 'edit';
+}
+
+.visibility:after{
+  content: 'visibility';
+}
+
+
+
+/* fallback */
+@font-face {
+	font-family: 'Material Icons';
+	font-style: normal;
+	font-weight: 400;
+	src: url(https://fonts.gstatic.com/s/materialicons/v31/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
+.material-icons {
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: inherit;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+}
+
+.material-icons::after{
+  font-size: 20px;
+}
+
