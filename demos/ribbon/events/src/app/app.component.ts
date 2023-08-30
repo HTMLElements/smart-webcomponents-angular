@@ -533,7 +533,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 		this.ribbon.addEventListener('click', function (event:any) {
 			//check if button was clicked
-			const button = event.target.closest('smart-button.smart-ribbon-item');
+			const button = event.target.closest('.smart-ribbon-item smart-button');
 			if (button) {
 				eventLog!.innerHTML += '<li>Event: Button Click, Label: ' + button.parentNode.label + '</li>';
 			}

@@ -594,7 +594,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			type: 'button',
 		};
 
-		const firstGroup = document.querySelector('smart-ribbon-tab[selected] smart-ribbon-group');
+		const firstGroup:HTMLElement = document.querySelector('smart-ribbon-tab[selected] smart-ribbon-group');
 		this.ribbon.addItem(currentTab, firstGroup, newItem);
 	}
 

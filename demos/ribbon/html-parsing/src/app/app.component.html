@@ -1,5 +1,5 @@
 <div class="document-container">
-    <smart-ribbon id="ribbon" #ribbon>
+    <smart-ribbon id="ribbon" [fileMenu]="fileMenu" #ribbon>
       <smart-ribbon-tab [label]="'Home'" selected>
           <smart-ribbon-group [label]="'Clipboard'" [icon]="'content_paste material-icons'">
               <smart-ribbon-item [type]="buttonType" [label]="'Paste'" [icon]="'content_paste material-icons'" [size]="normalSize"

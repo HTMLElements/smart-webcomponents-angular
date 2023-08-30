@@ -1,5 +1,6 @@
 #ribbon{
   width: 100%;
+  --smart-ribbon-collapsed-tab-height: 60px;
 }
 
 #events{
