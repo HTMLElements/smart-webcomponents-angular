@@ -1,0 +1,169 @@
+<div class="document-container">
+    <smart-ribbon id="ribbon" [fileMenu]="fileMenu" #ribbon>
+      <smart-ribbon-tab [label]="'Home'" selected>
+          <smart-ribbon-group [label]="'Clipboard'" [icon]="'content_paste material-icons'">
+              <smart-ribbon-item [type]="buttonType" [label]="'Paste'" [icon]="'content_paste material-icons'" [size]="normalSize"
+              [cssClass]="flatClass" [allowedSizes]="['normal']"></smart-ribbon-item>
+              <smart-ribbon-group [direction]="verticalDirection">
+                  <smart-ribbon-item [type]="buttonType" [label]="'Cut'" [icon]="'content_cut material-icons'" [size]="verySmallSize"
+                      [cssClass]="flatClass"></smart-ribbon-item>
+                  <smart-ribbon-item [type]="buttonType" [label]="'Copy'" [icon]="'content_copy material-icons'" [size]="verySmallSize"
+                      [cssClass]="flatClass"></smart-ribbon-item>
+              </smart-ribbon-group>
+          </smart-ribbon-group>
+          <smart-ribbon-group [label]="'Font'" [icon]="'format_bold material-icons'">
+              <smart-ribbon-group [direction]="verticalDirection">
+                  <smart-ribbon-group [direction]="horizontalDirection">
+                      <smart-ribbon-item [label]="'Font'" class="font-family-input">
+                          <smart-input
+                          [dataSource]='["Arial","Arial Black","Calibri"]' [selectedValue]="'Arial'" [dropDownButtonPosition]="'right'"
+                          drop-down-append-to="body">
+                          </smart-input>
+                      </smart-ribbon-item>
+                      <smart-ribbon-item [label]="'Font size'" class="font-size-input">
+                          <smart-input
+                          [dataSource]='[8,9,10,11,12,14,16,18,20,22,24,28,36,48,72]'[selectedValue]="'11'" [dropDownButtonPosition]="'right'"
+                              drop-down-append-to="body">
+                          </smart-input>
+                      </smart-ribbon-item>
+                  </smart-ribbon-group>
+                  <smart-ribbon-group [direction]="horizontalDirection">
+                      <smart-ribbon-item [type]="buttonType" [label]="'Bold'" [icon]="'format_bold material-icons'"
+                          [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Italic'" [icon]="'format_italic material-icons'"
+                          [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Underline'" [icon]="'format_underlined material-icons'"
+                          [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="'separator'"></smart-ribbon-item>
+                      <smart-ribbon-item tooltip="Font color" [size]="iconOnlySize">
+                          <smart-color-picker
+                              [value]="'#000000'" [valueDisplayMode]="'colorBox'" [dropDownAppendTo]="'body'">
+                          </smart-color-picker>
+                      </smart-ribbon-item>
+                  </smart-ribbon-group>
+              </smart-ribbon-group>
+          </smart-ribbon-group>
+          <smart-ribbon-group [label]="'Paragraph'" [icon]="'format_align_left material-icons'" [direction]="horizontalDirection">
+              <smart-ribbon-group [direction]="verticalDirection">
+                  <smart-ribbon-group [direction]="horizontalDirection">
+                      <smart-ribbon-item [type]="buttonType" [label]="'Align left'" [icon]="'format_align_left material-icons'"
+                          [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Align center'"
+                          [icon]="'format_align_center material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Align right'"
+                          [icon]="'format_align_right material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="'separator'"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Justify'" [icon]="'format_align_justify material-icons'"
+                          [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                  </smart-ribbon-group>
+                  <smart-ribbon-group [direction]="horizontalDirection">
+                      <smart-ribbon-item [type]="buttonType" [label]="'Numbered list'"
+                          [icon]="'format_list_numbered material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Bulleted list'"
+                          [icon]="'format_list_bulleted material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="'separator'"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Decrease indent'"
+                          [icon]="'format_indent_decrease material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Increase indent'"
+                          [icon]="'format_indent_increase material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                  </smart-ribbon-group>
+              </smart-ribbon-group>
+              <smart-ribbon-item [type]="'separator'"></smart-ribbon-item>
+              <smart-ribbon-group [direction]="verticalDirection">
+                  <smart-ribbon-item [type]="buttonType" [label]="'Wrap text'" [icon]="'wrap_text material-icons'"
+                      [size]="verySmallSize" [cssClass]="flatClass"></smart-ribbon-item>
+                  <smart-ribbon-item [type]="buttonType" [label]="'Sort Selection'" [icon]="'sort_by_alpha material-icons'"
+                      [size]="verySmallSize" [cssClass]="flatClass"></smart-ribbon-item>
+              </smart-ribbon-group>
+          </smart-ribbon-group>
+          <smart-ribbon-group [label]="'Editing'" [icon]="'edit material-icons'">
+              <smart-ribbon-group [wrapSize]="verySmallSize">
+                  <smart-ribbon-item [type]="buttonType" [label]="'Find'" [icon]="'search material-icons'" [size]="normalSize"
+                      [cssClass]="'flatClass'" [allowedSizes]="['verySmall', 'normal']"></smart-ribbon-item>
+                  <smart-ribbon-group [wrapSize]="smallSize">
+                      <smart-ribbon-item [type]="buttonType" [label]="'Replace'" [icon]="'find_replace material-icons'"
+                          [size]="normalSize" [cssClass]="flatClass" [allowedSizes]="['verySmall', 'small', 'normal']"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Select all'" [icon]="'select_all material-icons'"
+                          [size]="normalSize" [cssClass]="flatClass" [allowedSizes]="['verySmall', 'small', 'normal']"></smart-ribbon-item>
+                  </smart-ribbon-group>
+              </smart-ribbon-group>
+          </smart-ribbon-group>
+      </smart-ribbon-tab>
+      <smart-ribbon-tab [label]="'Insert'">
+          <smart-ribbon-group [label]="'Tables'" [icon]="'table_chart material-icons'">
+              <smart-ribbon-group [direction]="verticalDirection">
+                  <smart-ribbon-group [direction]="horizontalDirection">
+                      <smart-ribbon-item [type]="buttonType" [label]="'Insert table'" [icon]="'table_chart material-icons'"
+                          [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Insert row above'"
+                          [icon]="'keyboard_arrow_up material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Insert row below'"
+                          [icon]="'keyboard_arrow_down material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Insert column left'"
+                          [icon]="'keyboard_arrow_left material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Insert column right'"
+                          [icon]="'keyboard_arrow_right material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="'separator'"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Delete row'" [icon]="'delete_sweep material-icons'"
+                          [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Delete column'"
+                          [icon]="'delete_sweep material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                      <smart-ribbon-item [type]="buttonType" [label]="'Delete table'"
+                          [icon]="'delete_sweep material-icons'" [size]="iconOnlySize" [cssClass]="flatClass"></smart-ribbon-item>
+                  </smart-ribbon-group>
+                  <smart-ribbon-item [label]="'Table styles'"
+                      class="table-styles-drop-down">
+                      <smart-drop-down-list data-source='["Table style 1","Table style 2","Table style 3","Table style 4","Table style 5"]'
+                          selected-values='["Table style 1"]' drop-down-append-to="body">
+                      </smart-drop-down-list>
+                  </smart-ribbon-item>
+              </smart-ribbon-group>
+          </smart-ribbon-group>
+          <smart-ribbon-group [label]="'Illustrations'" [icon]="'insert_photo material-icons'">
+              <smart-ribbon-group [direction]="verticalDirection">
+                  <smart-ribbon-item [type]="buttonType" [label]="'Pictures'" [icon]="'insert_photo material-icons'"
+                      [size]="verySmallSize" [cssClass]="flatClass" [allowedSizes]="['verySmall']"></smart-ribbon-item>
+                  <smart-ribbon-item [type]="buttonType" [label]="'Online pictures'" [icon]="'cloud_upload material-icons'"
+                      [size]="verySmallSize" [cssClass]="flatClass" [allowedSizes]="['verySmall']"></smart-ribbon-item>
+                  <smart-ribbon-item [type]="buttonType" [label]="'Shapes'" [icon]="'bubble_chart material-icons'"
+                      [size]="verySmallSize" [cssClass]="flatClass" [allowedSizes]="['verySmall']"></smart-ribbon-item>
+              </smart-ribbon-group>
+              <smart-ribbon-item [type]="'separator'"></smart-ribbon-item>
+              <smart-ribbon-group [wrapSize]="smallSize">
+                  <smart-ribbon-item [type]="buttonType" [label]="'Icons'" [icon]="'insert_emoticon material-icons'"
+                      [size]="normalSize" [cssClass]="flatClass" [allowedSizes]="['small', 'normal']"></smart-ribbon-item>
+                  <smart-ribbon-item [type]="buttonType" [label]="'3D models'" [icon]="'aspect_ratio material-icons'"
+                      [size]="normalSize" [cssClass]="flatClass" [allowedSizes]="['small', 'normal']"></smart-ribbon-item>
+              </smart-ribbon-group>
+          </smart-ribbon-group>
+      </smart-ribbon-tab>
+      <smart-ribbon-tab [label]="'View'">
+          <smart-ribbon-group [label]="'Show'" [wrapSize]="smallSize" [icon]="'visibility material-icons'">
+              <smart-ribbon-item [type]="buttonType" [label]="'Gridlines'" [icon]="'grid_on material-icons'" [size]="normalSize"
+                  [cssClass]="flatClass" [allowedSizes]="['small', 'normal']"></smart-ribbon-item>
+              <smart-ribbon-item [type]="buttonType" [label]="'Headings'" [icon]="'view_headline material-icons'" [size]="normalSize"
+                  [cssClass]="flatClass" [allowedSizes]="['small', 'normal']"></smart-ribbon-item>
+          </smart-ribbon-group>
+          <smart-ribbon-group [label]="'Zoom'" [wrapSize]="smallSize" [icon]="'zoom_out_map material-icons'">
+              <smart-ribbon-item [type]="buttonType" [label]="'Zoom to page'" [icon]="'pageview material-icons'" [size]="normalSize"
+                  [cssClass]="flatClass" [allowedSizes]="['small', 'normal']"></smart-ribbon-item>
+              <smart-ribbon-item [type]="buttonType" [label]="'Zoom to selection'" [icon]="'zoom_out_map material-icons'"
+                  [size]="normalSize" [cssClass]="flatClass" [allowedSizes]="['small', 'normal']"></smart-ribbon-item>
+          </smart-ribbon-group>
+      </smart-ribbon-tab>
+      <smart-ribbon-tab [label]="'Help'">
+          <smart-ribbon-group [label]="'Help Options'" [wrapSize]="smallSize" [icon]="'help_outline material-icons'">
+              <smart-ribbon-item [type]="buttonType" [label]="'Help'" [icon]="'help_outline material-icons'" [size]="normalSize"
+                  [cssClass]="flatClass" [allowedSizes]="['verySmall', 'small', 'normal']"></smart-ribbon-item>
+              <smart-ribbon-item [type]="buttonType" [label]="'About'" [icon]="'info_outline material-icons'" [size]="normalSize"
+                  [cssClass]="flatClass" [allowedSizes]="['verySmall', 'small', 'normal']"></smart-ribbon-item>
+          </smart-ribbon-group>
+      </smart-ribbon-tab>
+    </smart-ribbon>
+    <div class="document">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquet lorem est, vel venenatis eros venenatis eu. Nulla facilisi. Phasellus ac orci ullamcorper diam cursus malesuada. Phasellus non interdum massa. Suspendisse varius sapien id facilisis consectetur. Fusce blandit, neque et suscipit tempus, neque lorem congue sem, et sodales lacus sem non ante. Pellentesque id urna vitae nibh pulvinar condimentum. Maecenas finibus egestas hendrerit.
+        <br/><br/>
+        Quisque id imperdiet sapien. Fusce molestie dignissim sollicitudin. Sed dictum velit non volutpat ultricies. Proin lobortis ultricies scelerisque. Aenean consectetur nunc sit amet mauris sollicitudin vehicula. Integer vehicula posuere nisl. Vivamus molestie scelerisque nibh, nec facilisis orci suscipit nec. Suspendisse eget leo fermentum, consequat nunc at, tempus mauris.
+        <br/><br/> 
+        Duis efficitur a urna non vulputate. Morbi hendrerit sem non sapien elementum bibendum. Nulla convallis neque nec velit facilisis, in blandit sem eleifend. Vestibulum quis elit eu arcu mollis mollis. Vestibulum est orci, accumsan nec libero quis, mollis placerat erat. Praesent non risus fringilla, mattis leo et, pulvinar leo. Donec blandit maximus feugiat. Donec ut velit eu diam efficitur hendrerit. </div>
+  </div>
