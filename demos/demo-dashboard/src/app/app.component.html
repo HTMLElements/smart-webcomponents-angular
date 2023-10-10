@@ -1,0 +1,8 @@
+<div id="team-dashboard" [class.demo-loading]="demoLoading">
+  <smart-window #startDemoWindow id="start-demo-window" [opened]="true" [modal]="true" [headerPosition]="'none'">
+    <smart-button class="primary" (onClick)="handleCloseDemo()">Start demo</smart-button>
+  </smart-window>
+  <app-header [currentDrawerItem]="currentDrawerItem" [navigationToggled]="navigationToggled"
+    (navigationToggleStateChange)="handleNavigationToggleStateChange($event)"></app-header>
+  <app-drawer [currentDrawerItem]="currentDrawerItem" [navigationToggled]="navigationToggled"></app-drawer>
+</div>

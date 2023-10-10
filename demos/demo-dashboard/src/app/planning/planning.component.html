@@ -1,0 +1,28 @@
+<div class="smart-drawer-card">
+    <div class="smart-drawer-card-header">
+        <h3>{{teamCalendarString}}</h3>
+    </div>
+    <div class="smart-planning-resources">
+        <div class="smart-planning-resource-card" *ngFor="let e of this.schedulerSettings.resources[0].dataSource"
+            (click)="handleCardClick(e)">
+            <div class="smart-planning-resource-card-avatar">
+                <img src="assets/images/phonebook/{{e.image}}.png" alt="">
+            </div>
+            <div>
+                <p class="smart-planning-resource-card-name">{{e.label}}</p>
+                <p class="smart-planning-resource-card-title">{{e.title}}</p>
+            </div>
+        </div>
+    </div>
+    <smart-scheduler #scheduler id="team-scheduler" [dataSource]="events" [hourStart]="schedulerSettings.hourStart"
+        [hourEnd]="schedulerSettings.hourEnd" [nonworkingHours]="schedulerSettings.nonworkingHours"
+        [nonworkingDays]="schedulerSettings.nonworkingDays" [footerTemplate]="schedulerSettings.footerTemplate"
+        [headerNavigationStyle]="'raised'" [viewSelectorType]="'tabs'" [views]="schedulerSettings.views"
+        [filterable]="schedulerSettings.filterable" [resources]="schedulerSettings.resources"
+        [view]="schedulerSettings.view" [dateCurrent]="schedulerSettings.dateCurrent" [locale]="schedulerSettings.locale" [messages]="schedulerSettings.messages"
+        (onViewChange)="handleViewChange($event)"></smart-scheduler>
+    <div #schedulerFooterTemplate id="scheduler-footer-template" style="display: none;">
+        <smart-button #nonworkingHoursButton (onClick)="handleShowHideNonworkingHours()"><span
+                class="smart-icon-clock"></span><span>{{showWorkingHoursString}}</span></smart-button>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+.header {
+    background-color: var(--smart-primary);
+    color: #fff;
+    height: var(--header-height);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+.header-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.header-drawer-toggler {
+    flex: 0 0 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.header-drawer-toggler svg {
+    transform: rotate(180deg);
+    width: 28px;
+    height: 28px;
+}
+
+.header-drawer-toggler svg path {
+    fill: #fff;
+}
+
+.header-title {
+    margin-left: 25px;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+}
+
+.header-title h2 {
+    font-weight: 400;
+}
+
+.header-settings {
+    display: none;
+}
+
+.header-settings-container {
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+}
+
+.header-settings h4 {
+    user-select: none;
+    font-weight: 400;
+}
+
+.header-language-drop-down {
+    margin: 5px;
+    max-width: 30%;
+    min-width: 30%;
+}
+
+.header-theme-drop-down {
+    max-width: 18%;
+    min-width: 18%;
+}
+
+.header-theme-drop-down .smart-token::after {
+    content: var(--smart-icon-styles);
+    font-size: 17px;
+}
+
+.header-theme-drop-down .smart-token {
+    font-family: var(--smart-font-family-icon);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.header-theme-selection {
+    padding: 0 10px;
+    background-color: #fff;
+    border-radius: var(--smart-border-radius);
+    color: var(--smart-secondary);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.header-avatar {
+    display: block;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    margin: 0 25px;
+    box-shadow: 0 0 0 1px #fff;
+    border-radius: 9999px;
+}
+
+.header-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    object-fit: cover;
+    vertical-align: top;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.drawer-navigation-overlay {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: black;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+}
+
+@media (min-width: 840px) {
+    .header-settings {
+        flex-basis: auto;
+        overflow: hidden;
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-title {
+        margin-left: 5px;
+    }
+}
+
+@media (max-width: 910px) {
+    .drawer-navigation-overlay {
+        display: block;
+    }
+}

@@ -1,0 +1,65 @@
+#team-grid {
+    width: 100%;
+    height: 600px;
+}
+
+.smart-team-grid-search-input {
+    margin: 0 7px;
+    padding: 0 3px;
+    width: 12rem;
+}
+
+#team-grid div[role="toolbar"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bs-styles-applied .smart-team-grid-search-input {
+    margin: 1px 7px;
+}
+
+.bs-styles-applied .smart-grid-group-header smart-breadcrumb {
+    margin-bottom: 0;
+}
+
+.smart-export-icon {
+    font-family: var(--smart-font-family-icon);
+    font-style: normal;
+    font-weight: 400;
+}
+
+.smart-excel-icon::after {
+    content: var(--smart-icon-excel);
+}
+
+.smart-pdf-icon::after {
+    content: var(--smart-icon-pdf);
+}
+
+.smart-grid-export-btn-text {
+    margin-left: 5px;
+}
+
+.smart-team-grid-export-btn {
+    letter-spacing: normal;
+    text-transform: none;
+    margin-right: 10px;
+}
+
+.smart-team-grid-image {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background-size: 32px 35px;
+    background-position: center center;
+    vertical-align: middle;
+    line-height: 32px;
+    box-shadow: inset 0 0 1px #999, inset 0 0 10px #0003;
+}
+
+.smart-team-grid-flag {
+    width: 30px;
+}

@@ -1,0 +1,24 @@
+<div class="smart-drawer" [class.smart-drawer-navigation-collapsed-indicator]="navigationToggled">
+        <smart-list-box #drawerNavigation [selectedValues]="[currentDrawerItem]" [selectionMode]="'zeroOrOne'" class="smart-drawer-navigation"
+                [class.smart-drawer-navigation-collapsed]="navigationToggled" (onChange)="handleNavigation($event)">
+                <smart-list-item [value]="'team'">
+                        <span class="smart-icon smart-drawer-item-team"></span>
+                        <span class="smart-drawer-item-text">Team</span>
+                </smart-list-item>
+                <smart-list-item [value]="'dashboard'">
+                        <span class="smart-icon smart-drawer-item-dashboard"></span>
+                        <span class="smart-drawer-item-text">Dashboard</span>
+                </smart-list-item>
+                <smart-list-item [value]="'planning'">
+                        <span class="smart-icon smart-drawer-item-planning"></span>
+                        <span class="smart-drawer-item-text">Planning</span>
+                </smart-list-item>
+                <smart-list-item [value]="'profile'">
+                        <span class="smart-icon smart-drawer-item-profile"></span>
+                        <span class="smart-drawer-item-text">Profile</span>
+                </smart-list-item>
+        </smart-list-box>
+        <div class="smart-drawer-content">
+                <router-outlet></router-outlet>
+        </div>
+</div>

@@ -1,0 +1,123 @@
+#member-form {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#member-form label {
+    text-wrap: wrap;
+}
+
+.member-form-image {
+    display: block;
+    width: 80px;
+    height: 80px;
+    flex: 0 0 80px;
+    margin: 0 25px;
+    box-shadow: 0 0 0 1px #fff;
+    border-radius: 9999px;
+}
+
+.member-form-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 9999px;
+    object-fit: cover;
+    vertical-align: top;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.member-form-image-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#member-image-upload {
+    position: relative;
+    width: 100%;
+}
+
+#member-image-upload div[role="presentation"] {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+}
+
+#member-image-upload .smart-browse-button {
+    width: 140px;
+    height: 38px;
+    z-index: 5;
+}
+
+.bs-styles-applied #member-image-upload .smart-browse-button {
+    margin-left: 6px;
+}
+
+#member-image-upload .smart-file-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#member-image-upload .smart-drop-zone {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#member-image-upload .smart-drop-zone:after {
+    justify-content: start;
+    font-family: var(--smart-font-family);
+}
+
+.smart-error-holder {
+    font-family: var(--smart-font-family);
+}
+
+#member-form .member-form-row {
+    display: grid;
+    grid-template-columns: 130px auto;
+}
+
+#member-form .smart-form-control {
+    display: flex;
+    align-items: center;
+}
+
+.member-form-editor {
+    height: 200px;
+}
+
+.member-form-buttons-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#member-form-success-toast-container {
+    position: fixed;
+    width: 400px;
+    bottom: 70px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1024px) {
+    #member-form {
+        width: 85%;
+    }
+}
+
+@media (min-width: 1324px) {
+    #member-form {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1624px) {
+    #member-form {
+        width: 55%;
+    }
+}
