@@ -1,0 +1,8 @@
+smart-grid {
+  width: 100%;
+  height: auto;
+}
+
+.delivered .jqx-label {
+	background: #33C0ED !important;
+}
