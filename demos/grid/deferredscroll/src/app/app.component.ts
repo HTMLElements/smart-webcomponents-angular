@@ -10,9 +10,9 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
-    scrolling: 'deferred'
+    scrolling = 'deferred'
 
     dataSource = new Smart.DataAdapter({
         dataSource: GetData(),
@@ -28,10 +28,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     })
 
     columns = [
-        'id',
-        {
-            label: 'First Name', dataField: 'firstName'
-        },
+        { label: 'id', dataField: 'id' },
+        { label: 'First Name', dataField: 'firstName' },
         { label: 'Last Name', dataField: 'lastName' },
         { label: 'Product', dataField: 'productName' },
         { label: 'Quantity', dataField: 'quantity' },

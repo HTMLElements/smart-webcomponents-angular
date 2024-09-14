@@ -12,13 +12,13 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dblclickCheckBox', { read: CheckBoxComponent, static: false }) dblclickCheckBox: CheckBoxComponent;
-    @ViewChild('headerSelectionCheckBox', { read: CheckBoxComponent, static: false }) headerSelectionCheckBox: CheckBoxComponent;
-    @ViewChild('colheaderSelectionCheckBox', { read: CheckBoxComponent, static: false }) colheaderSelectionCheckBox: CheckBoxComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('singleRadioButton', { read: RadioButtonComponent, static: false }) singleRadioButton: RadioButtonComponent;
-    @ViewChild('multipleRadioButton', { read: RadioButtonComponent, static: false }) multipleRadioButton: RadioButtonComponent;
-    @ViewChild('extendedRadioButton', { read: RadioButtonComponent, static: false }) extendedRadioButton: RadioButtonComponent;
+    @ViewChild('dblclickCheckBox', { read: CheckBoxComponent, static: false }) dblclickCheckBox!: CheckBoxComponent;
+    @ViewChild('headerSelectionCheckBox', { read: CheckBoxComponent, static: false }) headerSelectionCheckBox!: CheckBoxComponent;
+    @ViewChild('colheaderSelectionCheckBox', { read: CheckBoxComponent, static: false }) colheaderSelectionCheckBox!: CheckBoxComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('singleRadioButton', { read: RadioButtonComponent, static: false }) singleRadioButton!: RadioButtonComponent;
+    @ViewChild('multipleRadioButton', { read: RadioButtonComponent, static: false }) multipleRadioButton!: RadioButtonComponent;
+    @ViewChild('extendedRadioButton', { read: RadioButtonComponent, static: false }) extendedRadioButton!: RadioButtonComponent;
 
     appearance = {
         showRowHeader: true

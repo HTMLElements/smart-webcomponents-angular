@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
 
     columnLabels = {
         'en': {
@@ -38,8 +38,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     sorting = {
         enabled: true
     }
-    locale: 'de'
-    messages: {
+    locale = 'de'
+    messages = {
         'en': {
             'columnMenuItemSortAsc': 'Sort {{mode}}',
             'columnMenuItemSortDesc': 'Sort {{mode}}',
@@ -116,7 +116,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const radioButtons = document.querySelectorAll('smart-radio-button.language');
         // Defines the number format.
-        const setFormat = function (column, locale) {
+        const setFormat = function (column: GridColumn, locale: string) {
             if (column.dataField === 'total' || column.dataField === 'price') {
                 column.formatSettings = {
                     Intl: {
@@ -151,13 +151,14 @@ export class AppComponent implements AfterViewInit, OnInit {
                     that.grid.locale = locale;
                     for (let i = 0; i < columns.length; i++) {
                         const column = columns[i];
+                        //@ts-ignore
                         column.label = that.columnLabels[locale][column.dataField];
                         setFormat(column, radioButton.id);
                     }
                     // end update and refresh.
                     that.grid.endUpdate(false);
                 }
-            });
+            } as EventListener);
         }
     }
 }

@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
-    setCellBackgroundColor(settings, columnStart, columnEnd) {
-        function bkgColor(v) {
+    setCellBackgroundColor(settings: any, columnStart: any, columnEnd: any) {
+        function bkgColor(v: number) {
             let cellColor;
             if (v < 50) {
                 cellColor = '#FCE1E5';
@@ -558,7 +558,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     columns = [
         {
             label: 'File', dataField: 'File',
-            template: function (formatObject) {
+            template: function (formatObject: any) {
                 if (!formatObject.template) {
                     formatObject.template = '<div class="filename"><span>' + formatObject.value + '</span></div>';
                 }
@@ -569,7 +569,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         },
         {
             label: '', dataField: 'Statements_number',
-            template: (formatObject) => {
+            template: (formatObject: any) => {
                 let progressBarColor;
                 if (formatObject.value < 50) {
                     progressBarColor = 'bkg-red';
@@ -602,28 +602,28 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         },
         {
-            label: 'Statements', dataField: 'Statements_percentage', cellsAlign: 'right', formatFunction: (settings) => {
+            label: 'Statements', dataField: 'Statements_percentage', cellsAlign: 'right', formatFunction: (settings: any) => {
                 this.setCellBackgroundColor(settings, 0, 4);
             },
         },
         { label: '', dataField: 'Statements', cellsAlign: 'right' },
         {
             label: 'Branches', dataField: 'Branches_percentage', cellsAlign: 'right',
-            formatFunction: (settings) => {
+            formatFunction: (settings: any) => {
                 this.setCellBackgroundColor(settings, 5, 6);
             }
         },
         { label: '', dataField: 'Branches', cellsAlign: 'right' },
         {
             label: 'Functions', dataField: 'Functions_percentage', cellsAlign: 'right',
-            formatFunction: (settings) => {
+            formatFunction: (settings: any) => {
                 this.setCellBackgroundColor(settings, 7, 8);
             },
         },
         { label: '', dataField: 'Functions', cellsAlign: 'right' },
         {
             label: 'Lines', dataField: 'Lines_percentage', cellsAlign: 'right',
-            formatFunction: (settings) => {
+            formatFunction: (settings: any) => {
                 this.setCellBackgroundColor(settings, 9, 10);
             },
         },

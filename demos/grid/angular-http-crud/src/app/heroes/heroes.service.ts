@@ -55,7 +55,7 @@ export class HeroesService {
     const url = `${this.heroesUrl}/${id}`; // DELETE api/heroes/42
     return this.http.delete(url)
       .pipe(
-        catchError(this.handleError('deleteHero'))
+        catchError(this.handleError<{}>('deleteHero', {}))
       );
   }
 

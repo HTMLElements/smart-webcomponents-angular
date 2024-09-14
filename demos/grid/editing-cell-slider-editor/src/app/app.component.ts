@@ -1,16 +1,14 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { GridComponent } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
-
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    templateUrl: './app.component.html'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new window.Smart.DataAdapter({
         dataSource: GetData(100),
@@ -44,7 +42,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Last Name', dataField: 'lastName' },
         { label: 'Product', dataField: 'productName' },
         {
-            label: 'Time', dataType: 'date', dataField: 'time', cellsFormat: 'hh:mm tt', editor: 'timeInput', formatFunction(settings) {
+            label: 'Time', dataType: 'date', dataField: 'time', cellsFormat: 'hh:mm tt', editor: 'timeInput', formatFunction(settings: any) {
                 if (!settings.value) {
                     settings.value = '12:00 AM';
                 }

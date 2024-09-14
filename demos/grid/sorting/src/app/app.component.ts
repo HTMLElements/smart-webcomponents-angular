@@ -10,7 +10,7 @@ import { GetCountriesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     sorting = {
         enabled: true
@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         'Population_Rural',
         'Population_Total',
         'GDP_Total'
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

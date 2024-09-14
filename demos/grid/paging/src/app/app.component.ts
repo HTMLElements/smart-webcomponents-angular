@@ -43,7 +43,7 @@ export class AppComponent implements AfterViewInit {
 		{ label: 'Quantity', dataField: 'quantity' },
 		{ label: 'Unit Price', dataField: 'price', cellsFormat: 'c2' },
 		{ label: 'Total', dataField: 'total', cellsFormat: 'c2' }
-	]
+	] as GridColumn[]
 
 
 	ngOnInit(): void {

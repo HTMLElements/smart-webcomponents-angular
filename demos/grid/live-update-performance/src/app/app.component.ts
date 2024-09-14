@@ -10,7 +10,7 @@ import { GetStockData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
         dataSource: GetStockData(),
@@ -48,7 +48,10 @@ export class AppComponent implements AfterViewInit, OnInit {
             for (let i = 0; i < rows.length; i++) {
                 let value = Math.random();
 
-                const cell = rows[i].cells[3];
+                const cell = rows[i].cells ? rows[i].cells![3] : null;
+
+                if (!cell) { return }
+                
                 if (value < 0.2) {
                     cell.background = "#FC3752";
                     cell.color = "#fff";

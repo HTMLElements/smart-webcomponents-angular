@@ -11,11 +11,11 @@ import { GetCountriesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) addRow: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) removeLastRow: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) removeFirstRow: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) updateFirstRow: ButtonComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) addRow!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) removeLastRow!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) removeFirstRow!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) updateFirstRow!: ButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
         dataSource: GetCountriesData(),

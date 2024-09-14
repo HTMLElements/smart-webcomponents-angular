@@ -11,7 +11,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     appearance = {
         alternationCount: 2,
@@ -73,10 +73,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
-    onClick($event) {
+    onClick(event: MouseEvent) {
         const that = this;
 
-        switch ($event.srcElement.id) {
+        switch ((event.srcElement as Element)?.id) {
             case 'column': {
                 that.grid.createChart('column');
                 break;

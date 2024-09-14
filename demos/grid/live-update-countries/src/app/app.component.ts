@@ -10,8 +10,7 @@ import { GetCountriesCurrencyData, GetCountriesCodesData } from '../assets/data'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     ngOnInit(): void {
         // onInit code.
@@ -25,11 +24,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
         const that = this;
-        const countryByCurrencyMap = [];
+        const countryByCurrencyMap: any = [];
         const currenciesData = GetCountriesCurrencyData();
         const codesData = GetCountriesCodesData();
         for (let i = 0; i < currenciesData.length; i++) {
-            const data = currenciesData[i];
+            const data = currenciesData[i] as any
             if (!codesData[i]) {
                 continue;
             }
@@ -194,26 +193,27 @@ export class AppComponent implements AfterViewInit, OnInit {
                 "ZAR": 15.681917
             }
         });
+        
         that.grid.columns = [
             {
-                label: 'Currency', dataField: 'currency', template: function (formatObject) {
+                label: 'Currency', dataField: 'currency', template: function (formatObject: any) {
                     const value = formatObject.value;
                     const countryCode = countryByCurrencyMap[value];
-                    const flag = '<img class="flag" style="width:36px; height:24px;" src="flags/' + countryCode + '.svg">';
+                    const flag = '<img class="flag" style="width:36px; height:24px;" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/1x1/' + countryCode + '.svg">';
                     if (!formatObject.template) {
                         // render the template.
                         formatObject.template = '<div class="template">' + flag + '<span>' + value + '</span></div>';
                     }
                     else {
                         // update the template.
-                        formatObject.template.firstChild.src = 'flags/' + countryCode + '.svg';
+                        formatObject.template.firstChild.src = 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/1x1/' + countryCode + '.svg';
                         formatObject.template.lastChild.innerHTML = value;
                     }
                 }
             },
             {
                 label: 'Rate', dataField: 'value',
-                template: function (formatObject) {
+                template: function (formatObject: any) {
                     const value = new Number(formatObject.value.toString()).toFixed(2);
                     if (!formatObject.template) {
                         // render the template.
@@ -238,18 +238,25 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
 
         // generate random number.
-        const random = function (minValue, maxValue, precision) {
+        const random = function (minValue: number, maxValue: number, precision: number) {
             if (typeof (precision) == 'undefined') {
                 precision = 4;
             }
             return parseFloat(Math.min(minValue + (Math.random() * (maxValue - minValue)), maxValue).toFixed(precision));
         };
-        const rows = that.grid.rows;
+
         // update Grid's data.
         const updateValues = function () {
             that.grid.beginUpdate();
+
+            const rows = that.grid.rows;
+
             for (let i = 0; i < rows.length; i++) {
-                const cell = rows[i].cells[1];
+
+                const cell = rows[i].cells ? rows[i].cells![1] : null;
+
+                if (!cell) { return }
+
                 let value;
                 const randomNum = Math.random();
                 const index = randomNum * 10;

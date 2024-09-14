@@ -10,8 +10,8 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-	@ViewChild('grid2', { read: GridComponent, static: false }) grid2: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+	@ViewChild('grid2', { read: GridComponent, static: false }) grid2!: GridComponent;
 
 
 	ngOnInit(): void {
@@ -26,7 +26,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			event.detail.data.data();
 			event.detail.data.feedbackLine.style.display = 'none';
 			event.detail.data.feedback.innerHTML = event.detail.column.label;
-		});
+		} as EventListener);
 
 		grid.addEventListener('columnDragEnd', function (event: CustomEvent) {
 			const column = event.detail.column;
@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 					(grid2.columns as GridColumn[]).push({ label: column.label, dataField: column.dataField });
 				}
 			}
-		});
+		} as EventListener);
 	}
 
 	behavior = { allowColumnReorder: true }

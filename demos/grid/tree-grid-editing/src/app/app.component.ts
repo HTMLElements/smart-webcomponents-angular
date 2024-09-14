@@ -9,7 +9,7 @@ import { GridComponent } from '@smart-webcomponents-angular/grid';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     appearance = {
         alternationCount: 2, alternationStart: -1,
@@ -62,7 +62,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         enabled: true
     };
     behavior = { columnResizeMode: 'growAndShrink' };
-    columns: [
+    columns = [
         { label: 'First Name', dataField: 'FirstName', width: 200 },
         { label: 'Last Name', dataField: 'LastName', width: 200 },
         { label: 'Title', dataField: 'Title', width: 160 },

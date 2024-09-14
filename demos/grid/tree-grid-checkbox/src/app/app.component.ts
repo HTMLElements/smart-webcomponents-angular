@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { GridComponent, GridColumn, DataAdapter, Smart, GridRow } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
 
 
@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('check', { read: CheckBoxComponent, static: false }) check: CheckBoxComponent;
-    @ViewChild('tristateCheck', { read: CheckBoxComponent, static: false }) tristateCheck: CheckBoxComponent;
-    @ViewChild('showHideCheck', { read: CheckBoxComponent, static: false }) showHideCheck: CheckBoxComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('check', { read: CheckBoxComponent, static: false }) check!: CheckBoxComponent;
+    @ViewChild('tristateCheck', { read: CheckBoxComponent, static: false }) tristateCheck!: CheckBoxComponent;
+    @ViewChild('showHideCheck', { read: CheckBoxComponent, static: false }) showHideCheck!: CheckBoxComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
         dataSource: [
@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         hasThreeStates: true
     }
     behavior = { columnResizeMode: 'growAndShrink' }
-    onRowInit = (index, row) => {
+    onRowInit = (index: number, row: GridRow) => {
         if (row.id === 2) {
             row.expanded = true;
         }
@@ -81,19 +81,19 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
-    showCheckBoxes($event): void {
+    showCheckBoxes(): void {
         const that = this;
 
         that.grid.checkBoxes.visible = that.check.checked;
     }
 
-    triStateCheckBoxes($event): void {
+    triStateCheckBoxes(): void {
         const that = this;
 
         that.grid.checkBoxes.hasThreeStates = that.tristateCheck.checked;
     }
 
-    showHideCheckBoxes($event): void {
+    showHideCheckBoxes(): void {
         const that = this;
 
         for (let i = 0; i < that.grid.rows.length; i++) {

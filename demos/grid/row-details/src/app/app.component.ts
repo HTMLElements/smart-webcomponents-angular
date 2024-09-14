@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { GridComponent, GridColumn, DataAdapter, Smart, GridRow } from '@smart-webcomponents-angular/grid';
 import { GetCountriesData } from '../assets/data';
 
 
@@ -11,14 +11,14 @@ import { GetCountriesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 	appearance = {
 		showRowHeaderNumber: true,
 		allowRowDetailToggleAnimation: true
 	}
 
-	onRowInit = (index, row) => {
+	onRowInit = (index: number, row: GridRow) => {
 		if (index === 0) {
 			row.showDetail = true;
 		}

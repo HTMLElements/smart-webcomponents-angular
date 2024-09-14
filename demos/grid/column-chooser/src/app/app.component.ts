@@ -5,31 +5,31 @@ import { GetData } from '../assets/data';
 
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+	selector: 'app-root',
+	templateUrl: './app.component.html'
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-	@ViewChild('menu', { read: MenuComponent, static: false }) menu: MenuComponent;
-	
- 
+export class AppComponent implements AfterViewInit, OnInit {
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+	@ViewChild('menu', { read: MenuComponent, static: false }) menu2!: MenuComponent;
+
+
 	ngOnInit(): void {
 		// onInit code.
 	}
 
 	ngAfterViewInit(): void {
-    }
-		
-    appearance = {
+	}
+
+	appearance = {
 		showColumnLines: false,
 		showColumnHeaderLines: false
 	}
-	
+
 	selection = {
 		enabled: true,
 	}
-	
+
 	grouping = {
 		enabled: true,
 		groupIndent: 0,
@@ -37,22 +37,27 @@ export class AppComponent implements AfterViewInit, OnInit {
 			visible: false
 		}
 	}
-	
-	onCommand = function (args) {
+
+	onCommand = function (args: any) {
 		if (args.name === 'commandColumnRowMenuCommand') {
 			const row = args.details;
 			const menu = document.getElementById('menu') as Menu;
 			args.event.preventDefault();
 			menu.setAttribute('data-row-id', row.id);
-			menu.addEventListener('itemClick', (event: CustomEvent) => {
+			menu?.addEventListener('itemClick', function (event: CustomEvent) {
 				const detail = event.detail;
-				document.querySelector("#log").innerHTML = detail.label + ' is clicked';
-			});
+				const log = document.querySelector("#log")
+
+				if (log) {
+					log.innerHTML = detail.label + ' is clicked';
+				}
+
+			} as EventListener);
 			menu.open(args.event.pageX - 150, args.event.pageY + 20);
 			args.handled = true;
 		}
 	}
-	
+
 	editing = {
 		enabled: true,
 		action: 'none',
@@ -74,9 +79,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 			}
 		}
 	}
-	
+
 	dataSource = new window.Smart.DataAdapter({
-		dataSource:  [
+		dataSource: [
 			{ Name: 'Task 1', Status: 'Done', Column3: 'Item 1.3', Column4: 'Item 1.4', Column5: 'Item 1.5', Notification: false },
 			{ Name: 'Task 2', Status: 'In Progress', Column3: 'Item 2.3', Column4: 'Item 2.4', Column5: 'Item 2.5', Notification: false },
 			{ Name: 'Task 3', Status: 'Done', Column3: 'Item 3.3', Column4: 'Item 3.4', Column5: 'Item 3.5', Notification: true },
@@ -93,7 +98,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			'Notification: bool'
 		]
 	})
-	
+
 	columns = [
 		{ label: 'Name', dataField: 'Name', allowHide: false },
 		{ label: 'Status', dataField: 'Status' },

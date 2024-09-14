@@ -16,7 +16,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	ngOnInit(): void {
@@ -41,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new window.Smart.DataAdapter({
-		virtualDataSourceOnExpand: function (resultCallbackFunction, details) {
+		virtualDataSourceOnExpand: function (resultCallbackFunction:any, details: any) {
 			const result = window.demoServer.getData(details);
 			// when you set the 'leaf' property to true, the row's toggle button is not displayed.
 			for (let i = 0; i < result.data.length; i++) {
@@ -54,7 +54,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				virtualDataSourceLength: result.length
 			});
 		},
-		virtualDataSource: function (resultCallbackFunction, details) {
+		virtualDataSource: function (resultCallbackFunction: any, details: any) {
 			if (details.action === 'dataBind') {
 				window.demoServer = DemoServer();
 				const result = window.demoServer.getData(details);
@@ -143,7 +143,7 @@ export function DemoServer() {
 	const data = [];
 	return {
 		executeQuery: executeQuery,
-		getData: function (request) {
+		getData: function (request: any) {
 			const queryResult = executeSql(request);
 			return {
 				data: queryResult.data,
@@ -164,10 +164,10 @@ export function DemoServer() {
 		executeQuery('INSERT INTO Employees (LastName,FirstName,BirthDate,Photo,Notes, ReportsTo) VALUES ("Dodsworth","Anne","1969-07-02","EmpID9.pic","Anne has a BA degree in English from St. Lawrence College. She is fluent in French and German.", 5)');
 		executeQuery('INSERT INTO Employees (LastName,FirstName,BirthDate,Photo,Notes, ReportsTo) VALUES ("West","Adam","1928-09-19","EmpID10.pic","An old chum.", 2)');
 	}
-	function executeQuery(query) {
+	function executeQuery(query: any) {
 		return window.alasql(query);
 	}
-	function executeSql(request) {
+	function executeSql(request: any) {
 		const sql = 'SELECT * FROM Employees' + request.query['where'] + request.query['groupBy'] + request.query['orderBy'] + request.query['limit'];
 		;
 		const sqlCount = request.grouping.length === 0 ? 'SELECT COUNT(*) as length from Employees ' + request.query['where'] : 'SELECT COUNT(DISTINCT ' + request.grouping[0] + ') as length from Customers ' + request.query['where'];

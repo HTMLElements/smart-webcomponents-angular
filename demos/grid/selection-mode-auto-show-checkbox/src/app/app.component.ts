@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     selection = {
         enabled: true,
@@ -60,7 +60,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     columns = [
         {
             label: 'First Name', dataField: 'FirstName', width: '25%',
-            formatFunction(formatSettings) {
+            formatFunction(formatSettings: any) {
                 const firstName = formatSettings.value.split(' ')[0].toLowerCase();
                 formatSettings.template = '<div style="display: flex; align-items: center;"><img style="width: 24px; height: 24px; margin-right: 6px; border-radius: 50%;" class="logo" src="https://htmlelements.com/demos/images/phonebook/' + firstName + '.png"/>' + formatSettings.value + '</div>';
             }

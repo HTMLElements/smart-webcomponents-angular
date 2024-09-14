@@ -10,7 +10,7 @@ import { GridComponent } from '@smart-webcomponents-angular/grid';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     onRowDetailInit = function (index: number, row: any, detail: HTMLElement) {
         const main = document.createElement('div');
@@ -179,7 +179,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             height: 'auto',
             top: 100
         }
-    };
+    } as any;
     selection = {
         enabled: true,
         mode: 'extended',
@@ -235,7 +235,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Done', width: 80, dataField: 'completed', template: 'checkBox', align: 'center', allowResize: true },
         {
             label: 'Client', width: 200, dataField: 'client', allowResize: true,
-            template: function (formatObject) {
+            template: function (formatObject: any) {
                 formatObject.template = `<span style="margin-right: 7px; margin-left: 10px; padding: 4px 18px; border-radius: 10px 5px; background: #E9EEF9";>${formatObject.value}</span>`;
             }
         },

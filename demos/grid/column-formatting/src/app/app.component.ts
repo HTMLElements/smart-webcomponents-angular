@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
     dataSource = new Smart.DataAdapter({
         dataSource: [{ "Num1": 38, "Num2": 272, "Num3": 411403131, "Num4": 585940046, "Date1": "9/17/2020", "Date2": "2019-04-14T09:44:10Z" },

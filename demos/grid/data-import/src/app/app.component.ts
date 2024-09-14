@@ -2,7 +2,6 @@
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
 
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -10,10 +9,11 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
-        dataSource: "https://raw.githubusercontent.com/HTMLElements/smart-webcomponents/master/common/data.xlsx", 
+        dataSource: '../../assets/data.xlsx',
+        async: false,
         dataFields: [
             'id: number',
             'firstName: string',
@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quantity', dataField: 'quantity', align: 'right', cellsAlign: 'right', },
         { label: 'Unit Price', dataField: 'price', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' },
         { label: 'Total', dataField: 'total', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' }
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('none', { read: RadioButtonComponent, static: false }) none: RadioButtonComponent;
-    @ViewChild('split', { read: RadioButtonComponent, static: false }) split: RadioButtonComponent;
-    @ViewChild('growAndShrink', { read: RadioButtonComponent, static: false }) growAndShrink: RadioButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('none', { read: RadioButtonComponent, static: false }) none!: RadioButtonComponent;
+    @ViewChild('split', { read: RadioButtonComponent, static: false }) split!: RadioButtonComponent;
+    @ViewChild('growAndShrink', { read: RadioButtonComponent, static: false }) growAndShrink!: RadioButtonComponent;
 
     behavior = { rowResizeMode: 'growAndShrink' }
 
@@ -54,7 +54,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quantity', dataField: 'quantity' },
         { label: 'Unit Price', dataField: 'price', cellsFormat: 'c2' },
         { label: 'Total', dataField: 'total', cellsFormat: 'c2' }
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

@@ -11,18 +11,18 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('pngBtn', { read: ButtonComponent, static: false }) pngBtn: ButtonComponent;
-    @ViewChild('jpegBtn', { read: ButtonComponent, static: false }) jpegBtn: ButtonComponent;
-    @ViewChild('exportAllBtn', { read: ButtonComponent, static: false }) exportAllBtn: ButtonComponent;
-    @ViewChild('exportRestrictBtn', { read: ButtonComponent, static: false }) exportRestrictBtn: ButtonComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('pngBtn', { read: ButtonComponent, static: false }) pngBtn!: ButtonComponent;
+    @ViewChild('jpegBtn', { read: ButtonComponent, static: false }) jpegBtn!: ButtonComponent;
+    @ViewChild('exportAllBtn', { read: ButtonComponent, static: false }) exportAllBtn!: ButtonComponent;
+    @ViewChild('exportRestrictBtn', { read: ButtonComponent, static: false }) exportRestrictBtn!: ButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     appearance = {
         alternationStart: 0,
         alternationCount: 2,
     }
 
-    dataExport: {
+    dataExport = {
         view: true,
         viewStart: 0,
         viewEnd: 50
@@ -42,16 +42,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     })
 
     columns = [
-        'id',
-        {
-            label: 'First Name', dataField: 'firstName'
-        },
+        { label: 'id', dataField: 'id' },
+        { label: 'First Name', dataField: 'firstName' },
         { label: 'Last Name', dataField: 'lastName' },
         { label: 'Product', dataField: 'productName' },
         { label: 'Quantity', dataField: 'quantity', align: 'right', cellsAlign: 'right', },
         { label: 'Unit Price', dataField: 'price', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' },
         {
-            label: 'Total', dataField: 'total', align: 'right', cellsAlign: 'right', formatFunction(formatObject) {
+            label: 'Total', dataField: 'total', align: 'right', cellsAlign: 'right', formatFunction(formatObject: any) {
                 formatObject.value = new Number(formatObject.cell.value).toFixed(2);
                 formatObject.cell.background = '#007ACC';
                 formatObject.cell.color = '#fff';

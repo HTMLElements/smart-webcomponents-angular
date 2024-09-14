@@ -14,10 +14,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-	@ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-	@ViewChild('menu', { read: MenuComponent, static: false }) menu: MenuComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+	@ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+	@ViewChild('menu', { read: MenuComponent, static: false }) menu!: MenuComponent;
 
 
 	ngOnInit(): void {
@@ -32,22 +32,29 @@ export class AppComponent implements AfterViewInit, OnInit {
 		const filterInput = this.input;
 		const menu = this.menu;
 
+		if (!items || !itemTemplate) { return }
+
 		// renders the header.
 		const renderHeader = () => {
 			items.innerHTML = '';
 			const data = grid.dataSource.toArray();
 			const itemsData = [
 				{ label: 'Total', value: data.length },
-				{ label: 'Done', value: data.filter((item) => item.Status === 'Done').length },
-				{ label: 'In Progress', value: data.filter((item) => item.Status === 'In Progress').length },
-				{ label: 'Notifications', value: data.filter((item) => item.Notification === true).length }
+				{ label: 'Done', value: data.filter((item: any) => item.Status === 'Done').length },
+				{ label: 'In Progress', value: data.filter((item: any) => item.Status === 'In Progress').length },
+				{ label: 'Notifications', value: data.filter((item: any) => item.Notification === true).length }
 			];
-			filterInput.dataSource = ['All tasks'].concat(data.map((item) => { return item.Name; }));
+			filterInput.dataSource = ['All tasks'].concat(data.map((item: any) => { return item.Name; }));
 			for (let i = 0; i < itemsData.length; i++) {
 				const item = itemsData[i];
 				const element = document.importNode(itemTemplate.content, true);
 				const content = element.firstElementChild;
-				content.innerHTML = content.innerHTML.replace(/{{count}}/, item.value.toString()).replace(/{{label}}/, item.label);
+
+				if (content) {
+					content.innerHTML = content.innerHTML
+						.replace(/{{count}}/, item.value.toString()).replace(/{{label}}/, item.label);
+				}
+
 				items.appendChild(element);
 			}
 		};
@@ -82,7 +89,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				}
 				renderHeader();
 			}
-		});
+		} as EventListener);
 
 		grid.getVisibleRows().then((result) => {
 			result[0].expand();
@@ -109,12 +116,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 	}
 
-	onCommand = (args) => {
+	onCommand = (args: any) => {
 		if (args.name === 'commandColumnRowMenuCommand') {
 			const row = args.details;
 			const menu = this.menu;
 			args.event.preventDefault();
-			
+
 			menu.open(args.event.pageX - 150, args.event.pageY + 20);
 			args.handled = true;
 		}
@@ -166,7 +173,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		{
 			label: 'Status', dataField: 'Status', allowHide: false,
 			// Custom Cells Value Formatting.
-			formatFunction(settings) {
+			formatFunction(settings: any) {
 				if (settings.value === 'Done') {
 					settings.template = '<div class="status"><span class="icon fa-circle-o far"></span><span>Done</span></div>';
 				}
@@ -181,7 +188,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		{
 			label: '', dataField: 'Notification', allowHide: false, allowGroup: false, width: 40,
 			// Custom Cells Value Formatting.
-			formatFunction(settings) {
+			formatFunction(settings: any) {
 				if (settings.value) {
 					settings.template = '<span class="icon fa-bell"></span>';
 				}

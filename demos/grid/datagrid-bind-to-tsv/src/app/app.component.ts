@@ -8,7 +8,7 @@ import { GridComponent, GridColumn, Smart } from '@smart-webcomponents-angular/g
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
 	appearance = {
 		alternationStart: 0,

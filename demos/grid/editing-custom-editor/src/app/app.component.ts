@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 
     ngOnInit(): void {
@@ -46,9 +46,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Mood', dataField: '', editor: {
                 template: '#moodEditorTemplate',
-                onInit(index, dataField, editor) {
-                    editor.addEventListener('click', function (event) {
-                        editor.firstElementChild.value = event.target.innerHTML;
+                onInit(index: number, dataField: string, editor: any) {
+                    editor.addEventListener('click', function (event: Event) {
+                        editor.firstElementChild.value = (event.target as Element)?.innerHTML;
                     });
                 }
             }, width: 70, align: 'left', template: '#moodTemplate',

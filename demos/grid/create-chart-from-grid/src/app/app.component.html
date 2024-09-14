@@ -11,3 +11,13 @@
     <smart-grid (click)="onClick($event)" [dataSource]="dataSource" [columns]="columns" [header]="header"
         [selection]="selection" [appearance]="appearance" [sorting]="sorting" #grid id="grid"></smart-grid>
 </div>
+<template id="toolbarTemplate">
+    <div id="toolbar">
+        <div id="column">Column</div>
+        <div id="line">Line</div>
+        <div id="pie">Pie</div>
+        <div id="bar">Bar</div>
+        <div id="area">Area</div>
+        <div id="scatter">Scatter</div>
+    </div>
+</template>

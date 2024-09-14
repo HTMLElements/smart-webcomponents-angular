@@ -11,9 +11,9 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-	@ViewChild('addRecord', { read: ButtonComponent, static: false }) addRecord: ButtonComponent;
-	@ViewChild('removeRecord', { read: ButtonComponent, static: false }) removeRecord: ButtonComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+	@ViewChild('addRecord', { read: ButtonComponent, static: false }) addRecord!: ButtonComponent;
+	@ViewChild('removeRecord', { read: ButtonComponent, static: false }) removeRecord!: ButtonComponent;
 
 	dataSource = new Smart.DataAdapter({
 		dataSource: GetData(100),

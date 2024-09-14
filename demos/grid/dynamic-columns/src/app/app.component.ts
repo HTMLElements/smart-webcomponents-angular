@@ -11,11 +11,11 @@ import { GetCountriesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) addColumn: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) removeLastColumn: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) removeFirstColumn: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) updateFirstColumn: ButtonComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) addColumn!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) removeLastColumn!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) removeFirstColumn!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) updateFirstColumn!: ButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
         dataSource: GetCountriesData(),
@@ -71,7 +71,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.addColumn.disabled = (that.grid.columns as GridColumn[]).length === columnsList.length;
             that.removeLastColumn.disabled = (that.grid.columns as GridColumn[]).length === 0;
             that.removeFirstColumn.disabled = (that.grid.columns as GridColumn[]).length === 0;
-            that.updateFirstColumn.disabled = (that.grid.columns as GridColumn[]).length === 0 || ((that.grid.columns as GridColumn[]).length > 0 && that.grid.columns[0].label.indexOf('New') !== -1);
+            that.updateFirstColumn.disabled = (that.grid.columns as GridColumn[]).length === 0 || ((that.grid.columns as GridColumn[]).length > 0 && (that.grid.columns as any)[0].label.indexOf('New') !== -1);
         };
 
         that.addColumn.addEventListener('click', function (event) {
@@ -106,7 +106,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         that.updateFirstColumn.addEventListener('click', function (event) {
             if ((that.grid.columns as GridColumn[]).length > 0) {
-                (that.grid.columns as GridColumn[])[0].label = "New " + that.grid.columns[0].label;
+                (that.grid.columns as GridColumn[])[0].label = "New " + (that.grid.columns as any)[0].label;
             }
 
             that.updateFirstColumn.disabled = true;

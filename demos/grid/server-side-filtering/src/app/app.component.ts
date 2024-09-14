@@ -16,7 +16,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 
 	ngOnInit(): void {
@@ -41,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	dataSource = new window.Smart.DataAdapter({
-		virtualDataSource: function (resultCallbackFunction, details) {
+		virtualDataSource: function (resultCallbackFunction: any, details: any) {
 			if (details.action === 'dataBind') {
 				window.demoServer = DemoServer();
 				const result = window.demoServer.getData(details);
@@ -87,7 +87,7 @@ export function DemoServer() {
 	createTable();
 	const data = [];
 	return {
-		getData: function (request) {
+		getData: function (request: any) {
 			const queryResult = executeSql(request);
 			return {
 				data: queryResult.data,
@@ -189,10 +189,10 @@ export function DemoServer() {
 		executeQuery('INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ("Wilman Kala","Matti Karttunen","Keskuskatu 45","Helsinki","21240","Finland")');
 		executeQuery('INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ("Wolski","Zbyszek","ul. Filtrowa 68","Walla","01-012","Poland")');
 	}
-	function executeQuery(query) {
+	function executeQuery(query: any) {
 		window.alasql(query);
 	}
-	function executeSql(request) {
+	function executeSql(request: any) {
 		const sql = 'SELECT * FROM Customers' + request.query['where'] + request.query['groupBy'] + request.query['orderBy'];
 		const sqlCount = request.grouping.length === 0 ? 'SELECT COUNT(*) as length from Customers ' + request.query['where'] : 'SELECT COUNT(DISTINCT ' + request.grouping[0] + ') as length from Customers ' + request.query['where'];
 		const result = window.alasql(sql);

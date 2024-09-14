@@ -4,7 +4,6 @@ import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcompone
 import { SplitterComponent } from '@smart-webcomponents-angular/splitter';
 import { GetData } from '../assets/data';
 
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -13,27 +12,27 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('collapseBtn', { read: ButtonComponent, static: false }) collapseBtn: ButtonComponent;
-    @ViewChild('expandBtn', { read: ButtonComponent, static: false }) expandBtn: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-    @ViewChild('button5', { read: ButtonComponent, static: false }) button5: ButtonComponent;
-    @ViewChild('button6', { read: ButtonComponent, static: false }) button6: ButtonComponent;
-    @ViewChild('button7', { read: ButtonComponent, static: false }) button7: ButtonComponent;
-    @ViewChild('button8', { read: ButtonComponent, static: false }) button8: ButtonComponent;
-    @ViewChild('button9', { read: ButtonComponent, static: false }) button9: ButtonComponent;
-    @ViewChild('button10', { read: ButtonComponent, static: false }) button10: ButtonComponent;
-    @ViewChild('button11', { read: ButtonComponent, static: false }) button11: ButtonComponent;
-    @ViewChild('button12', { read: ButtonComponent, static: false }) button12: ButtonComponent;
-    @ViewChild('button13', { read: ButtonComponent, static: false }) button13: ButtonComponent;
-    @ViewChild('button14', { read: ButtonComponent, static: false }) button14: ButtonComponent;
-    @ViewChild('button15', { read: ButtonComponent, static: false }) button15: ButtonComponent;
-    @ViewChild('button16', { read: ButtonComponent, static: false }) button16: ButtonComponent;
-    @ViewChild('button17', { read: ButtonComponent, static: false }) button17: ButtonComponent;
-    @ViewChild('button18', { read: ButtonComponent, static: false }) button18: ButtonComponent;
-    @ViewChild('button19', { read: ButtonComponent, static: false }) button19: ButtonComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('dashboard', { read: SplitterComponent, static: false }) dashboard: SplitterComponent;
+    @ViewChild('collapseBtn', { read: ButtonComponent, static: false }) collapseBtn!: ButtonComponent;
+    @ViewChild('expandBtn', { read: ButtonComponent, static: false }) expandBtn!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
+    @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
+    @ViewChild('button7', { read: ButtonComponent, static: false }) button7!: ButtonComponent;
+    @ViewChild('button8', { read: ButtonComponent, static: false }) button8!: ButtonComponent;
+    @ViewChild('button9', { read: ButtonComponent, static: false }) button9!: ButtonComponent;
+    @ViewChild('button10', { read: ButtonComponent, static: false }) button10!: ButtonComponent;
+    @ViewChild('button11', { read: ButtonComponent, static: false }) button11!: ButtonComponent;
+    @ViewChild('button12', { read: ButtonComponent, static: false }) button12!: ButtonComponent;
+    @ViewChild('button13', { read: ButtonComponent, static: false }) button13!: ButtonComponent;
+    @ViewChild('button14', { read: ButtonComponent, static: false }) button14!: ButtonComponent;
+    @ViewChild('button15', { read: ButtonComponent, static: false }) button15!: ButtonComponent;
+    @ViewChild('button16', { read: ButtonComponent, static: false }) button16!: ButtonComponent;
+    @ViewChild('button17', { read: ButtonComponent, static: false }) button17!: ButtonComponent;
+    @ViewChild('button18', { read: ButtonComponent, static: false }) button18!: ButtonComponent;
+    @ViewChild('button19', { read: ButtonComponent, static: false }) button19!: ButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('dashboard', { read: SplitterComponent, static: false }) dashboard!: SplitterComponent;
 
     layout = {
         rowHeight: 60
@@ -174,24 +173,24 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     columns = [
         {
-            label: 'Commit', dataField: 'Photo', width: '5%', cellsVerticalAlign: 'middle', verticalAlign: 'middle', align: 'center', cellsAlign: 'center', allowHide: false, formatFunction(settings) {
+            label: 'Commit', dataField: 'Photo', width: '5%', cellsVerticalAlign: 'middle', verticalAlign: 'middle', align: 'center', cellsAlign: 'center', allowHide: false, formatFunction(settings: any) {
                 if (settings.row.grid.isInitialized && settings.row.data && settings.row.data.author) {
                     settings.template = '<img style="width: 32px" class="logo" src="https://htmlelements.com/demos/images/phonebook/' + settings.row.data.author + '.png"/>';
                 }
             }
         },
         {
-            label: '', dataField: 'author', width: '45%', formatFunction(settings) {
+            label: '', dataField: 'author', width: '45%', formatFunction(settings: any) {
                 settings.template = '<span class="commit-title">' + settings.row.data.title + '</span><span class="author-name">' + settings.row.data.author + '</span>';
             }
         },
         {
-            label: '', icon: 'fa-thumb-tack', width: '5%', showIcon: true, cellsAlign: 'right', align: 'right', formatFunction(settings) {
+            label: '', icon: 'fa-thumb-tack', width: '5%', showIcon: true, cellsAlign: 'right', align: 'right', formatFunction(settings: any) {
                 settings.template = '<span class="custom-icon fa-thumb-tack rotate45deg"></span>';
             }
         },
         {
-            label: 'Build #', dataField: 'buildNum', width: '10%', formatFunction(settings) {
+            label: 'Build #', dataField: 'buildNum', width: '10%', formatFunction(settings: any) {
                 if (settings.row.data.status === 'in-progress') {
                     settings.template = '<div class="normal-circle"></div>' + settings.row.data.buildNum;
                 }
@@ -214,14 +213,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         },
         { label: 'Branch', width: '20%', cellsAlign: 'center', align: 'center', dataField: 'branch' },
         {
-            label: 'Date/Time', dataField: 'date', width: '15%', align: 'right', cellsAlign: 'right', formatFunction(settings) {
-                const isToday = (someDate) => {
+            label: 'Date/Time', dataField: 'date', width: '15%', align: 'right', cellsAlign: 'right', formatFunction(settings: any) {
+                const isToday = (someDate: Date) => {
                     const today = new Date();
                     return someDate.getDate() === today.getDate() &&
                         someDate.getMonth() === today.getMonth() &&
                         someDate.getFullYear() === today.getFullYear();
                 };
-                const calculateDaysDifference = (someDate) => {
+                const calculateDaysDifference = (someDate: Date) => {
                     const date = new Date();
                     return (date.getDate() - someDate.getDate());
                 };
@@ -282,11 +281,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         const buttons = document.querySelectorAll('.history-holder smart-button') as NodeListOf<Button>;
 
         for (let i = 0; i < buttons.length; i++) {
-            buttons[i].onclick = function (event: any) {
+            buttons[i].addEventListener('click', function (this: Element) {
                 (buttons[0].parentNode as HTMLElement).classList.remove('active');
                 (buttons[1].parentNode as HTMLElement).classList.remove('active');
-                event.target.parentNode.classList.add('active');
-            };
+
+                this.parentElement?.classList.add('active');
+            })
         }
     };
 

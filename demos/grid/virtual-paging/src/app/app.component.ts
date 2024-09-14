@@ -11,7 +11,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     paging = {
         enabled: true,
@@ -27,7 +27,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     dataSource = new Smart.DataAdapter({
         virtualDataSourceLength: 10000,
         virtualDataSourceCache: false,
-        virtualDataSource: function (resultCallbackFunction, details) {
+        virtualDataSource: function (resultCallbackFunction: any, details: any) {
             setTimeout(function () {
                 resultCallbackFunction({
                     dataSource: GetData(details.first, details.last)
@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quantity', dataField: 'quantity' },
         { label: 'Unit Price', dataField: 'price', cellsFormat: 'c2' },
         { label: 'Total', dataField: 'total', cellsFormat: 'c2' }
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

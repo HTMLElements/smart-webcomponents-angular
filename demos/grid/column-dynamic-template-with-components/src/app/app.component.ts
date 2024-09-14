@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	getOrdersData() {
@@ -322,7 +322,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 		for (let i = 1; i < rows.length; i++) {
 			const row = rows[i].split(',');
-			const dataRow = {};
+			const dataRow: any = {};
 			for (let j = 0; j < columns.length; j++) {
 				const dataField = columns[j].dataField;
 				dataRow[dataField] = row[j].trim();
@@ -389,7 +389,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		{ label: 'City', dataField: 'City', showIcon: true, icon: 'fa-university' },
 		{ label: 'Product', dataField: 'ProductName', icon: 'fa-product-hunt', showIcon: true },
 		{ label: 'Payment Method', dataField: 'PaymentMethod', icon: 'fa-money', showIcon: true,
-			template: (formatObject) => {
+			template: (formatObject: any) => {
 				if (!formatObject.template) {
 					if (formatObject.value === 'Mastercard') {
 						formatObject.template = '<div style="font-family: FontAwesome;"><span style="margin-left: 7px;" class="far fa-cc-mastercard"></span><span style="margin-left: 5px;">' + formatObject.value + '</span></div>';
@@ -410,7 +410,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			}
 		},
 		{ label: 'Quantity', dataField: 'Quantity', showIcon: true, align: 'center', icon: 'fa-plus-circle', cellsAlign: 'center', width: 120,
-			template: (formatObject) => {
+			template: (formatObject: any) => {
 				if (!formatObject.template) {
 					const data = document.createElement('span');
 					const plus = document.createElement('smart-button');
@@ -421,14 +421,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 					minus.innerHTML = '<span class="fa-minus"></span>';
 					data.innerHTML = formatObject.value;
 					data.style.marginLeft = '7px';
-					plus.row = formatObject.row;
-					minus.row = formatObject.row;
+					plus['row'] = formatObject.row;
+					minus['row'] = formatObject.row;
 					plus.addEventListener('click', () => {
-						const row = plus.row;
+						const row = plus['row'];
 						row.getCell('Quantity').value += 5;
 					});
 					minus.addEventListener('click', () => {
-						const row = minus.row;
+						const row = minus['row'];
 						row.getCell('Quantity').value -= 5;
 					});
 					const template = document.createElement('div');

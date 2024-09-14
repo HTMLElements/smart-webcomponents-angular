@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { GridComponent, GridColumn, DataAdapter, Smart, GridRow } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
 
 
@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) xlsxBtn: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) pdfBtn: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) htmlBtn: ButtonComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) xlsxBtn!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) pdfBtn!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) htmlBtn!: ButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
         dataSource: [
@@ -45,7 +45,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     })
 
-    onRowInit = function (index, row) {
+    onRowInit = function (index: number, row: GridRow) {
         if (row.id === 2) {
             row.expanded = true;
         }

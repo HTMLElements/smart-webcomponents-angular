@@ -9,7 +9,7 @@ import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 	data = [{ "Country": "Belgium", "City": "Brussels" }, { "Country": "France", "City": "Paris" }, { "Country": "USA", "City": "Washington" }, { "Country": "Lebanon", "City": "Beirut" }];
 	cities: Record<string, string[]> = {
@@ -105,6 +105,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 			}
 
 			that.change = false;
-		});
+		} as EventListener);
 	}
 }

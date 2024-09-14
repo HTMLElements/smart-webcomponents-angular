@@ -16,7 +16,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	ngOnInit(): void {
@@ -53,7 +53,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new window.Smart.DataAdapter({
-		virtualDataSource: function (resultCallbackFunction, details) {
+		virtualDataSource: function (resultCallbackFunction: any, details: any) {
 			if (details.action === 'dataBind') {
 				// inits the demo server.
 				window.demoServer = DemoServer();
@@ -102,7 +102,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	]
 }
 
-function LogData(data) {
+function LogData(data: any) {
 	const log = document.getElementById('dataLog');
 	let content = '<table>';
 	for (let i = 0; i < data.length; i++) {
@@ -122,14 +122,15 @@ function LogData(data) {
 		content += row;
 	}
 	content += '</table>';
-	log.innerHTML = content;
+	if (log) { log.innerHTML = content; }
+
 }
 // In this sample, we use http://alasql.org/ to show how to use SQL queries with Smart.Grid
 function DemoServer() {
 	window.alasql.options.cache = false;
 	createTable();
 	return {
-		getData: function (request) {
+		getData: function (request: any) {
 			const queryResult = executeSql(request);
 			return {
 				data: queryResult.data,
@@ -146,10 +147,10 @@ function DemoServer() {
 		executeQuery('INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ("Around the Horn","Thomas Hardy","120 Hanover Sq.","London","WA1 1DP","UK")');
 		executeQuery('INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ("Berglunds snabbköp","Christina Berglund","Berguvsvägen 8","Luleå","S-958 22","Sweden")');
 	}
-	function executeQuery(query) {
+	function executeQuery(query: any) {
 		return window.alasql(query);
 	}
-	function executeSql(request) {
+	function executeSql(request: any) {
 		let lastId;
 		window.query.innerHTML = '';
 		// Deletes a Row.

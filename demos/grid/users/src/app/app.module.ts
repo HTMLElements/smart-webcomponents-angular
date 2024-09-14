@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [ AppComponent ],
-    imports: [ BrowserModule,MultiComboInputModule, GridModule ],
+    imports: [ BrowserModule, GridModule, MultiComboInputModule ],
     bootstrap: [ AppComponent ]
 })
 

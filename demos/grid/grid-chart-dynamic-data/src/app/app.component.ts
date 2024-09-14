@@ -11,8 +11,8 @@ import { GridComponent, GridCell } from '@smart-webcomponents-angular/grid';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     today: Date = new Date();
     tradingData = [

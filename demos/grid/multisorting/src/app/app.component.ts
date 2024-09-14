@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     sorting = {
         enabled: true,
@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quantity', dataField: 'quantity', align: 'right', cellsAlign: 'right', },
         { label: 'Unit Price', dataField: 'price', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' },
         { label: 'Total', dataField: 'total', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' }
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

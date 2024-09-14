@@ -10,11 +10,11 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
         dataSource: GetData(30),
-        virtualDataSource: function (resultCallbackFunction) {
+        virtualDataSource: function (resultCallbackFunction: any) {
             setTimeout(function () {
                 resultCallbackFunction({
                     dataSource: GetData(30)

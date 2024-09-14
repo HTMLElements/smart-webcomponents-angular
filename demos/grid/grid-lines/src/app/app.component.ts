@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) headerLines: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) columnLines: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) rowLines: CheckBoxComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) headerLines!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) columnLines!: CheckBoxComponent;
+    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) rowLines!: CheckBoxComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     behavior = { columnResizeMode: 'growAndShrink' }
 
@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quantity', dataField: 'quantity' },
         { label: 'Unit Price', dataField: 'price', cellsFormat: 'c2' },
         { label: 'Total', dataField: 'total', cellsFormat: 'c2' }
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

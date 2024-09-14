@@ -10,10 +10,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-	@ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-	@ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+	@ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+	@ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3!: CheckBoxComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	ngOnInit(): void {
@@ -86,7 +86,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         that.grid.appearance.alternationCount = 2;
                     }
                 }
-            });
+            } as EventListener);
         }
 	}	
 }

@@ -16,7 +16,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	ngOnInit(): void {
@@ -53,14 +53,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 	
 	dataSource = new window.Smart.DataAdapter({
 		groupBy: ['Country'],
-		virtualDataSourceOnExpand: function (resultCallbackFunction, details) {
+		virtualDataSourceOnExpand: function (resultCallbackFunction: any, details: any) {
 			const result = window.demoServer.getData(details);
 			resultCallbackFunction({
 				dataSource: result.data,
 				virtualDataSourceLength: result.length
 			});
 		},
-		virtualDataSource: function (resultCallbackFunction, details) {
+		virtualDataSource: function (resultCallbackFunction: any, details: any) {
 			const that = this;
 			if (details.action === 'dataBind') {
 				fetch('https://raw.githubusercontent.com/HTMLElements/smart-webcomponents/master/sampledata/customers.json').then(response => response.json())
@@ -107,10 +107,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 }
 
 // In this sample, we use http://alasql.org/ to show how to use SQL queries with Smart.Grid
-export function DemoServer(allData) {
+export function DemoServer(allData: any) {
 	window.alasql.options.cache = false;
 	return {
-		getData: function (request) {
+		getData: function (request: any) {
 			const queryResult = executeSql(request);
 			return {
 				data: queryResult.data,
@@ -118,7 +118,7 @@ export function DemoServer(allData) {
 			};
 		},
 	};
-	function executeSql(request) {
+	function executeSql(request: any) {
 		const sql = 'SELECT * FROM ?' + request.query['where'] + request.query['groupBy'] + request.query['orderBy'] + request.query['limit'];
 		const sqlCount = request.grouping.length === 0 ? 'SELECT COUNT(*) as length from ? ' + request.query['where'] : 'SELECT COUNT(DISTINCT ' + request.grouping[0] + ') as length from ? ' + request.query['where'];
 		const result = window.alasql(sql, [allData]);

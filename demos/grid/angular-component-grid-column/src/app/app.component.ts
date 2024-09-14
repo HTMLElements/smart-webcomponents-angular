@@ -11,9 +11,9 @@ import { GridCellComponent } from './grid-cell.component';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
-	constructor(@Inject(smartDomService) service) {
+	constructor(@Inject(smartDomService) service: smartDomService) {
 		this.service = service;
 	}
 
@@ -328,7 +328,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 		for (let i = 1; i < rows.length; i++) {
 			const row = rows[i].split(',');
-			const dataRow = {};
+			const dataRow: {
+				[key: string]: any
+			} = {};
 			for (let j = 0; j < columns.length; j++) {
 				const dataField = columns[j].dataField;
 				dataRow[dataField] = row[j].trim();
@@ -360,7 +362,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		{ label: 'Payment Method', dataField: 'PaymentMethod', icon: 'fa-money', showIcon: true },
 		{
 			label: 'Quantity', dataField: 'Quantity', showIcon: true, align: 'center', icon: 'fa-plus-circle', cellsAlign: 'center', width: 120,
-			template: (formatObject) => {
+			template: (formatObject: any) => {
 				const container = document.createElement('div');
 
 				let component = this.service.loadComponent(GridCellComponent, container);

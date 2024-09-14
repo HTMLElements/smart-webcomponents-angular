@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { GridComponent, GridColumn, DataAdapter, Smart, GridCell } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
 
 
@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 
     ngOnInit(): void {
@@ -41,9 +41,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         mode: 'cell'
     }
 
-    onCellUpdate(cell, oldValue, value, confirm) {
-        if (cell.column.dataField === 'quantity' && value) {
-            if (value > 10) {
+    onCellUpdate(cells: GridCell[], oldValues: any[], values: any[], confirm: (commit: boolean) => void)  {
+        if (cells[0].column.dataField === 'quantity' && values[0]) {
+            if (values[0] > 10) {
                 setTimeout(() => {
                     confirm(true);
                 }, 500);

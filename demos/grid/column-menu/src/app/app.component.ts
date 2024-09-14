@@ -10,7 +10,7 @@ import { GridComponent } from '@smart-webcomponents-angular/grid';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     onRowDetailInit = function (index: number, row: any, detail: HTMLElement) {
         const main = document.createElement('div');
@@ -215,7 +215,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             height: 'auto',
             top: 100
         }
-    };
+    } as any;
     columns = [
         { label: 'Name', showDescriptionButton: true, description: 'Project Name', dataField: 'name', freeze: false, allowResize: true },
         {

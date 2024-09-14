@@ -1,23 +1,23 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from "@angular/core";
 import { Smart, GridComponent } from "@smart-webcomponents-angular/grid";
-import { GetData } from "../assets/data";
+import { GetData } from '../assets/data';
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html"
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild("grid", { read: GridComponent, static: false })
-  grid: GridComponent;
-  log: string;
+  @ViewChild("grid", { read: GridComponent, static: false }) grid!: GridComponent;
+
+  log: string = '';
 
   ngOnInit(): void {
     // onInit code.
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
-  onColumnDragStart = function(event) {
+  onColumnDragStart(event: CustomEvent) {
     this.log =
       "columnDragStart: " +
       event.detail.column.label +
@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       event.detail.index;
   };
 
-  onColumnDragEnd = function(event) {
+  onColumnDragEnd(event: CustomEvent) {
     this.log =
       "columnDragEnd: " +
       event.detail.column.label +
@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       event.detail.newIndex;
   };
 
-  onColumnDragCancel = function(event) {
+  onColumnDragCancel(event: any) {
     this.log = "columnDragCancel: " + event.detail.column.label;
   };
 

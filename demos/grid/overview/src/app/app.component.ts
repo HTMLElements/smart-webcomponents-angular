@@ -10,7 +10,7 @@ import { GetData } from '../assets/data'
 })
 
 export class AppComponent implements AfterViewInit {	
-	@ViewChild("grid", { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild("grid", { read: GridComponent, static: false }) grid!: GridComponent;
 
     ngAfterViewInit(): void {
 		this.grid.dataSource = new Smart.DataAdapter (

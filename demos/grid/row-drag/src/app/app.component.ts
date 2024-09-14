@@ -10,8 +10,8 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-	@ViewChild('grid2', { read: GridComponent, static: false }) grid2: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+	@ViewChild('grid2', { read: GridComponent, static: false }) grid2!: GridComponent;
 
 
 	ngOnInit(): void {
@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		grid.addEventListener('rowDragging', function (event: CustomEvent) {
 			event.detail.data.data();
 			event.detail.data.feedbackLine.style.display = 'none';
-		});
+		} as EventListener);
 
 		grid.addEventListener('rowDragEnd', function (event: CustomEvent) {
 			const row = event.detail.row;
@@ -36,7 +36,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 					grid2.rows.push(row.data);
 				}
 			}
-		});
+		} as EventListener);
 	}
 
 	behavior = {

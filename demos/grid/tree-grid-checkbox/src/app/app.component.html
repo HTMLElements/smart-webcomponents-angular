@@ -8,16 +8,16 @@
 <div class="options">
     <div class="caption">Settings</div>
     <div class="option">
-        <smart-check-box #check (onChange)="showCheckBoxes($event)" [checked]="true" id="check">Show Checkboxes
+        <smart-check-box #check (onChange)="showCheckBoxes()" [checked]="true" id="check">Show Checkboxes
         </smart-check-box>
     </div>
     <div class="option">
-        <smart-check-box (onChange)="triStateCheckBoxes($event)" #tristateCheck [checked]="true" id="tristateCheck">Has
+        <smart-check-box (onChange)="triStateCheckBoxes()" #tristateCheck [checked]="true" id="tristateCheck">Has
             Three
             States</smart-check-box>
     </div>
     <div class="option">
-        <smart-check-box (onChange)="showHideCheckBoxes($event)" #showHideCheck [checked]="true" id="showHideCheck">
+        <smart-check-box (onChange)="showHideCheckBoxes()" #showHideCheck [checked]="true" id="showHideCheck">
             Show/Hide
             Root Checkboxes</smart-check-box>
     </div>

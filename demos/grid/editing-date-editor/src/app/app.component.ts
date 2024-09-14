@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 
     ngOnInit(): void {
@@ -54,7 +54,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Order Date', width: 250, dataField: 'date', editor: {
                 template: 'dateTimePicker',
                 formatString: 'd',
-                onInit(index, dataField, editor) {
+                onInit(index: number, dataField: string, editor: any) {
                 }
             }
         },

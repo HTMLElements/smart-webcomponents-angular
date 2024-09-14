@@ -11,11 +11,11 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('enableCheckBox', { read: CheckBoxComponent, static: false }) enableCheckBox: CheckBoxComponent;
-    @ViewChild('selectAllCheckBox', { read: CheckBoxComponent, static: false }) selectAllCheckBox: CheckBoxComponent;
-    @ViewChild('positionCheckBox', { read: CheckBoxComponent, static: false }) positionCheckBox: CheckBoxComponent;
-    @ViewChild('clickCheckBox', { read: CheckBoxComponent, static: false }) clickCheckBox: CheckBoxComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('enableCheckBox', { read: CheckBoxComponent, static: false }) enableCheckBox!: CheckBoxComponent;
+    @ViewChild('selectAllCheckBox', { read: CheckBoxComponent, static: false }) selectAllCheckBox!: CheckBoxComponent;
+    @ViewChild('positionCheckBox', { read: CheckBoxComponent, static: false }) positionCheckBox!: CheckBoxComponent;
+    @ViewChild('clickCheckBox', { read: CheckBoxComponent, static: false }) clickCheckBox!: CheckBoxComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     selection = {
         enabled: true,
@@ -27,11 +27,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
     }
 
-    paging: {
+    paging = {
         enabled: true
     }
 
-    pager: {
+    pager = {
         visible: true
     }
 
@@ -72,14 +72,17 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
         const that = this;
         that.selectAllCheckBox.addEventListener('change', function (event) {
+            if (!that.grid.selection.checkBoxes) { return }
             that.grid.selection.checkBoxes.selectAllMode = that.selectAllCheckBox.checked ? 'page' : 'none';
         });
 
         that.enableCheckBox.addEventListener('change', function (event) {
+            if (!that.grid.selection.checkBoxes) { return }
             that.grid.selection.checkBoxes.enabled = that.enableCheckBox.checked;
         });
 
         that.positionCheckBox.addEventListener('change', function (event) {
+            if (!that.grid.selection.checkBoxes) { return }
             that.positionCheckBox.checked ? that.grid.selection.checkBoxes.position = 'far' : that.grid.selection.checkBoxes.position = 'near';
         });
 

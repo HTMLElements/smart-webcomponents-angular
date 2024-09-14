@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
+import { GridComponent, GridColumn, DataAdapter, Smart, GridRow } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
 
 
@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     getData() {
         const data = new Array();
@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
         };
         for (let i = 0; i < 100; i++) {
-            const row = {};
+            const row: any = {};
             const tasks = ["Shopping", "Housewares", "Kitchen supplies", "Groceries", "Cleaning supplies", "Office supplies", "Remodeling", "Paint bedroom", "Paint wall", "Fitness", "Decorate living room",
                 "Fix lights", "Fix front door", "Clean kitchen"];
             const firstNames = [
@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     dataSource = new Smart.DataAdapter({
         virtualDataSourceLength: 7,
         virtualDataSourceCache: true,
-        virtualDataSourceOnExpand: (resultCallbackFunction, details) => {
+        virtualDataSourceOnExpand: (resultCallbackFunction: any, details: any) => {
             const that = this;
 
             setTimeout(function () {
@@ -66,7 +66,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 }
             }, 300);
         },
-        virtualDataSource: (resultCallbackFunction, details) => {
+        virtualDataSource: (resultCallbackFunction: any, details: any) => {
             const that = this;
 
             setTimeout(function () {
@@ -99,7 +99,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Task', dataField: "task", align: 'center', width: 300 },
         { label: 'Person Name', dataField: "name", cellsAlign: 'center', align: 'center', width: 300 },
         {
-            label: 'Duration', dataField: "duration", cellsAlign: 'center', align: 'center', formatFunction: function (row, column, value) {
+            label: 'Duration', dataField: "duration", cellsAlign: 'center', align: 'center', formatFunction: function (row: GridRow, column: GridColumn, value: number) {
                 const hour = value > 1 ? " hours" : " hour";
                 return value + hour;
             }

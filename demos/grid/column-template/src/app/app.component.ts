@@ -11,7 +11,7 @@ import { GetEmployees } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     layout = {
         rowHeight: 50
@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     columns = [
         {
-            label: 'Photo', dataField: 'Photo', width: 50, cellsVerticalAlign: 'middle', verticalAlign: 'middle', align: 'center', cellsAlign: 'center', formatFunction(settings) {
+            label: 'Photo', dataField: 'Photo', width: 50, cellsVerticalAlign: 'middle', verticalAlign: 'middle', align: 'center', cellsAlign: 'center', formatFunction(settings: any) {
                 settings.template = '<img width="32" src="' + 'https://htmlelements.com/demos/images/phonebook/' + settings.row.data.firstName.toLowerCase() + '.png"/>';
             }
         },

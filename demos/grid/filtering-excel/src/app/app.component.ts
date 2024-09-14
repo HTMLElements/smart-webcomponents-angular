@@ -4,14 +4,14 @@ import { GetData } from '../assets/data';
 
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+	selector: 'app-root',
+	templateUrl: './app.component.html'
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-	
- 
+export class AppComponent implements AfterViewInit, OnInit {
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+
+
 	ngOnInit(): void {
 		// onInit code.
 	}
@@ -19,24 +19,24 @@ export class AppComponent implements AfterViewInit, OnInit {
 	ngAfterViewInit(): void {
 		// afterViewInit code.
 	}
-		
-   appearance: {
+
+	appearance = {
 		autoShowColumnFilterButton: false
 	}
-	
+
 	sorting = {
 		enabled: true,
 		mode: 'one'
 	}
-	
+
 	filtering = {
 		enabled: true,
 		filterMenu: {
 			mode: 'excel'
 		}
 	}
-	
-	dataSource =  new Smart.DataAdapter({
+
+	dataSource = new Smart.DataAdapter({
 		dataSource: GetData(1000),
 		dataFields: [
 			'id: number',
@@ -48,8 +48,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 			'date: date',
 			'total: number'
 		]
-   })
-   
+	})
+
 	columns = [
 		{
 			label: 'First Name', dataField: 'firstName'

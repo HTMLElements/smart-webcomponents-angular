@@ -12,8 +12,8 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('menu', { read: MenuComponent, static: false }) menu: MenuComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('menu', { read: MenuComponent, static: false }) menu!: MenuComponent;
 
     appearance = {
         showRowHeaderNumber: true
@@ -65,27 +65,27 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
 
         const that = this;
-        let rowId = null;
+        let rowId: any = null;
 
-        that.grid.addEventListener('contextmenu', function (event: MouseEvent) {
+        that.grid.addEventListener('contextmenu', function (event: MouseEvent): boolean {
             event.stopPropagation();
             event.preventDefault();
             that.menu.open(event.pageX, event.pageY);
 
             return false;
-        });
+        } as any);
 
         that.menu.addEventListener('itemClick', function (event: CustomEvent) {
             if (rowId === undefined) {
                 return;
             }
             if (event.detail.item.getAttribute('data-id') === 'Edit') {
-                that.grid.beginEdit(rowId, null);
+                that.grid.beginEdit(rowId, undefined);
             }
             else {
                 that.grid.deleteRow(rowId);
             }
-        });
+        } as EventListenerOrEventListenerObject);
 
         that.grid.addEventListener('rowClick', function (event: CustomEvent) {
             if (event.detail.originalEvent.which === 3) {
@@ -93,7 +93,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 rowId = row.id;
                 event.detail.originalEvent.stopPropagation();
             }
-        });
+        } as EventListenerOrEventListenerObject);
 
 
     }

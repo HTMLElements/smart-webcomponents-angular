@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     log = '';
 
@@ -65,6 +65,6 @@ export class AppComponent implements AfterViewInit, OnInit {
             const detail = event.detail;
 
             that.log = 'change - started: ' + detail.started + ', finished: ' + detail.finished;
-        });
+        } as EventListener);
     }
 }

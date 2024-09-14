@@ -17,7 +17,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	ngOnInit(): void {
@@ -50,14 +50,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new window.Smart.DataAdapter({
-		virtualDataSource: function (resultCallbackFunction, details) {
+		virtualDataSource: function (resultCallbackFunction: any, details: any) {
 			const sqlQuery = details.query;
 			window.query.innerHTML = 'SELECT CompanyName, ContactName, ContactTitle, Country, Address, City FROM Customers' + sqlQuery['where'] + sqlQuery['groupBy'] + sqlQuery['orderBy'] + sqlQuery['limit'];
 			new window.Smart.Ajax({
 				url: 'grid_data.php',
 				dataSourceType: 'json',
 				data: details.query
-			}, (response) => {
+			}, (response: any) => {
 				resultCallbackFunction({
 					dataSource: JSON.parse(response.data),
 					virtualDataSourceLength: parseInt(response.length)

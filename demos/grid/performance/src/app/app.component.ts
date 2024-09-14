@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 
     ngOnInit(): void {
@@ -49,10 +49,16 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.grid.beginUpdate();
                 for (let i = 0; i < rows.length; i++) {
                     const row = rows[i];
+                    if (!row.cells) { break }
                     for (let j = 0; j < row.cells.length; j++) {
                         const randomNum = Math.random();
                         const value = randomNum;
-                        const cell = rows[i].cells[j];
+                        if (!rows[i] || !rows[i].cells) { break }
+
+                        const cell = rows[i].cells ? rows[i].cells![j] : null;
+
+                        if (!cell) { break };
+                        
                         cell.value = value;
                         if (value < 0.2) {
                             cell.background = "#27A2FC";

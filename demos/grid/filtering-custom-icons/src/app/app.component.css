@@ -1,3 +1,5 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
 smart-grid-column .smart-filter-button.smart-grid-icon {
 	font-family: 'FontAwesome';
   color: var(--smart-primary);

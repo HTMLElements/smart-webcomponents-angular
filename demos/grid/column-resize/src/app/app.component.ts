@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('none', { read: RadioButtonComponent, static: false }) none: RadioButtonComponent;
-    @ViewChild('split', { read: RadioButtonComponent, static: false }) split: RadioButtonComponent;
-    @ViewChild('growAndShrink', { read: RadioButtonComponent, static: false }) growAndShrink: RadioButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('none', { read: RadioButtonComponent, static: false }) none!: RadioButtonComponent;
+    @ViewChild('split', { read: RadioButtonComponent, static: false }) split!: RadioButtonComponent;
+    @ViewChild('growAndShrink', { read: RadioButtonComponent, static: false }) growAndShrink!: RadioButtonComponent;
 
     behavior = { columnResizeMode: 'growAndShrink' }
 
@@ -59,19 +59,19 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (event.detail.value) {
                 that.grid.behavior.columnResizeMode = 'none';
             }
-        });
+        } as EventListener);
 
         that.split.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value) {
                 that.grid.behavior.columnResizeMode = 'split';
             }
-        });
+        } as EventListener);
 
         that.growAndShrink.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value) {
                 that.grid.behavior.columnResizeMode = 'growAndShrink';
             }
-        });
+        } as EventListener);
 
     }
 }

@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, ViewEncapsulation } from '
 import { Hero } from './hero';
 import { HeroesService } from './heroes.service';
 
-import { GridComponent, Smart, DataAdapter } from '@smart-webcomponents-angular/grid';
+import { GridComponent, Smart, DataAdapter } from 'smart-webcomponents-angular/grid';
 
 @Component({
   selector: 'app-heroes',
@@ -13,11 +13,11 @@ import { GridComponent, Smart, DataAdapter } from '@smart-webcomponents-angular/
   encapsulation: ViewEncapsulation.None
 })
 export class HeroesComponent implements AfterViewInit {
-  heroes: Hero[];
+  heroes: Hero[] = [];
 
   constructor(private heroesService: HeroesService) { }
 
-  @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+  @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
   layout: object = {
     rowHeight: 35
@@ -40,7 +40,7 @@ export class HeroesComponent implements AfterViewInit {
     addDialog: {
       enabled: true
     }
-  }
+  } as any
 
   columns = [
     {
@@ -173,7 +173,7 @@ export class HeroesComponent implements AfterViewInit {
 			that.delete(that.heroes[heroIndex]);
 		}, 100);
       }
-    });
+    } as EventListener);
 
     //Update the hero
     grid.addEventListener('endEdit', function (event: CustomEvent): void {
@@ -187,6 +187,6 @@ export class HeroesComponent implements AfterViewInit {
       hero.name = event.detail.cell.value;
 
       that.update(hero);
-    });
+    } as EventListener);
   }
 }

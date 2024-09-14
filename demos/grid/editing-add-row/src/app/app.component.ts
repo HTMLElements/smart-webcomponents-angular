@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('top', { read: RadioButtonComponent, static: false }) top: RadioButtonComponent;
-    @ViewChild('both', { read: RadioButtonComponent, static: false }) both: RadioButtonComponent;
-    @ViewChild('bottom', { read: RadioButtonComponent, static: false }) bottom: RadioButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('top', { read: RadioButtonComponent, static: false }) top!: RadioButtonComponent;
+    @ViewChild('both', { read: RadioButtonComponent, static: false }) both!: RadioButtonComponent;
+    @ViewChild('bottom', { read: RadioButtonComponent, static: false }) bottom!: RadioButtonComponent;
 
     appearance = {
         showRowHeaderNumber: true
@@ -44,7 +44,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             visible: true,
             position: 'both'
         }
-    }
+    } as any
 
     columns = [
         {
@@ -73,19 +73,19 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         that.top.addEventListener('change', function () {
-            if (that.top.checked) {
+            if (that.top.checked && that.grid.editing.addNewRow) {
                 that.grid.editing.addNewRow.position = 'near';
             }
         });
 
         that.both.addEventListener('change', function () {
-            if (that.both.checked) {
+            if (that.both.checked && that.grid.editing.addNewRow) {
                 that.grid.editing.addNewRow.position = 'both';
             }
         });
 
         that.bottom.addEventListener('change', function () {
-            if (that.bottom.checked) {
+            if (that.bottom.checked && that.grid.editing.addNewRow) {
                 that.grid.editing.addNewRow.position = 'far';
             }
         });

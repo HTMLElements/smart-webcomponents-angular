@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
 
     selection = {
@@ -8869,6 +8869,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             const headerRow = rows[0];
 
             that.grid.beginUpdate();
+
+            if (!headerRow.cells) { return }
 
             for (let i = 0; i < headerRow.cells.length; i++) {
                 const cell = headerRow.cells[i];

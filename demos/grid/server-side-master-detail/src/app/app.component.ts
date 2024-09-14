@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { GridComponent } from '@smart-webcomponents-angular/grid';
+import { GridComponent, GridRow, GridRowDetail } from '@smart-webcomponents-angular/grid';
 
 declare global {
    interface Window {
@@ -17,7 +17,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	ngOnInit(): void {
@@ -41,20 +41,20 @@ export class AppComponent implements AfterViewInit, OnInit {
 		enabled: true
 	}
 	
-	onRowInit = (index, row) => {
+	onRowInit = (index: number, row: GridRow) => {
 		if (index === 0) {
 			row.showDetail = true;
 		}
 	}
 	
-	onRowDetailInit = (index, row, detail) => {
+	onRowDetailInit = (index: number, row: GridRow, detail: any) => {
 		const grid = document.createElement('div');
 		detail.appendChild(grid);
 		const gridInstance = new window.smartGrid(grid, {
 			selection: { enabled: true },
 			sorting: { enabled: true },
 			dataSource: new window.Smart.DataAdapter({
-				virtualDataSource: function (resultCallbackFunction, details) {
+				virtualDataSource: function (resultCallbackFunction: any, details: any) {
 					const that = this;
 					details.query['table'] = 'Products';
 					details.query['where'] = 'WHERE CategoryID = ' + row.data.CategoryID;
@@ -97,10 +97,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 			height: 500,
 			enabled: true
 		}
-	}
+	} as GridRowDetail
 	
 	dataSource = new window.Smart.DataAdapter({
-		virtualDataSource: function (resultCallbackFunction, details) {
+		virtualDataSource: function (resultCallbackFunction: any, details: any) {
 			const that = this;
 			details.query['table'] = 'Categories';
 			if (details.action === 'dataBind') {
@@ -141,7 +141,7 @@ export function DemoServer() {
 	window.alasql.options.cache = false;
 	createTable();
 	return {
-		getData: function (request) {
+		getData: function (request: any) {
 			const queryResult = executeSql(request);
 			return {
 				data: queryResult.data,
@@ -238,10 +238,10 @@ export function DemoServer() {
 		executeQuery('INSERT INTO Categories (CategoryName,Description) VALUES ("Produce","Dried fruit and bean curd")');
 		executeQuery('INSERT INTO Categories (CategoryName,Description) VALUES ("Seafood","Seaweed and fish")');
 	}
-	function executeQuery(query) {
+	function executeQuery(query: any) {
 		window.alasql(query);
 	}
-	function executeSql(request) {
+	function executeSql(request: any) {
 		const table = request.query['table'];
 		const sql = 'SELECT * FROM ' + table + ' ' + request.query['where'] + request.query['groupBy'] + request.query['orderBy'] + request.query['limit'];
 		const sqlCount = request.grouping.length === 0 ? 'SELECT COUNT(*) as length from ' + table + ' ' + request.query['where'] : 'SELECT COUNT(DISTINCT ' + request.grouping[0] + ') as length from ' + table + ' ' + request.query['where'];

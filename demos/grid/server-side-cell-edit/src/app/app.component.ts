@@ -2,44 +2,44 @@
 import { GridComponent } from '@smart-webcomponents-angular/grid';
 
 declare global {
-   interface Window {
-	   demoServer: any;
-	   query: HTMLElement;
-	   data: any;
-	   alasql: any;
-   }
+	interface Window {
+		demoServer: any;
+		query: HTMLElement;
+		data: any;
+		alasql: any;
+	}
 }
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+	selector: 'app-root',
+	templateUrl: './app.component.html'
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-	
-    editing= {
+export class AppComponent implements AfterViewInit, OnInit {
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+
+	editing = {
 		enabled: true,
 		mode: 'cell'
 	}
-	
-	sorting= {
+
+	sorting = {
 		enabled: true
 	}
-	
-	selection= {
+
+	selection = {
 		enabled: true,
 		mode: 'extended',
 		allowCellSelection: true
 	}
-	
-	appearance= {
+
+	appearance = {
 		alternationStart: 0,
 		alternationCount: 2
 	}
-	
+
 	dataSource = new window.Smart.DataAdapter({
-		virtualDataSource: function (resultCallbackFunction, details) {
+		virtualDataSource: function (resultCallbackFunction: any, details: any) {
 			if (details.action === 'dataBind') {
 				// inits the demo server.
 				window.demoServer = DemoServer();
@@ -74,7 +74,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			'Country: string'
 		]
 	})
-	
+
 	columns = [
 		{ label: 'Customer Name', dataField: 'CustomerName' },
 		{ label: 'Contact Name', dataField: 'ContactName' },
@@ -83,16 +83,16 @@ export class AppComponent implements AfterViewInit, OnInit {
 		{ label: 'City', dataField: 'City' },
 		{ label: 'Country', dataField: 'Country' }
 	]
- 
+
 	ngOnInit(): void {
 		// onInit code.
 	}
 
 	ngAfterViewInit(): void {
-    }
+	}
 }
 
-function LogData(data) {
+function LogData(data: any) {
 	const log = document.getElementById('dataLog');
 	let content = '<table>';
 	for (let i = 0; i < data.length; i++) {
@@ -112,14 +112,14 @@ function LogData(data) {
 		content += row;
 	}
 	content += '</table>';
-	log.innerHTML = content;
+	if (log) { log.innerHTML = content; }
 }
 // In this sample, we use http://alasql.org/ to show how to use SQL queries with Smart.Grid
 export function DemoServer() {
 	window.alasql.options.cache = false;
 	createTable();
 	return {
-		getData: function (request) {
+		getData: function (request: any) {
 			const queryResult = executeSql(request);
 			return {
 				data: queryResult.data,
@@ -161,10 +161,10 @@ export function DemoServer() {
 		executeQuery('INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ("Galería del gastrónomo","Eduardo Saavedra","Rambla de Cataluña, 23","Barcelona","08022","Spain")');
 		executeQuery('INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ("Godos Cocina Típica","José Pedro Freyre","C/ Romero, 33","Sevilla","41101","Spain")');
 	}
-	function executeQuery(query) {
+	function executeQuery(query: any) {
 		return window.alasql(query);
 	}
-	function executeSql(request) {
+	function executeSql(request: any) {
 		let lastId;
 		window.query.innerHTML = '';
 		// Deletes a Row.

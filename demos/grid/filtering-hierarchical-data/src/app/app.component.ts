@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
+import { Smart, GridComponent, GridRow } from '@smart-webcomponents-angular/grid';
 
 
 @Component({
@@ -8,7 +8,7 @@ import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 	
  
 	ngOnInit(): void {
@@ -61,7 +61,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	
 	behavior = { columnResizeMode: 'growAndShrink' }
 	
-	onRowInit = function (index, row) {
+	onRowInit = function (index: number, row: GridRow) {
 		if (row.id === 2) {
 			row.expanded = true;
 		}

@@ -11,9 +11,9 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('printBtn', { read: ButtonComponent, static: false }) printBtn: ButtonComponent;
-    @ViewChild('printRestrictBtn', { read: ButtonComponent, static: false }) printRestrictBtn: ButtonComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('printBtn', { read: ButtonComponent, static: false }) printBtn!: ButtonComponent;
+    @ViewChild('printRestrictBtn', { read: ButtonComponent, static: false }) printRestrictBtn!: ButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     appearance = {
         alternationStart: 0,
@@ -49,13 +49,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quantity', dataField: 'quantity', align: 'right', cellsAlign: 'right', },
         { label: 'Unit Price', dataField: 'price', align: 'right', cellsAlign: 'right', cellsFormat: 'c2' },
         {
-            label: 'Total', dataField: 'total', align: 'right', cellsAlign: 'right', formatFunction(settings) {
+            label: 'Total', dataField: 'total', align: 'right', cellsAlign: 'right', formatFunction(settings: any) {
                 settings.value = new Number(settings.cell.value).toFixed(2);
                 settings.cell.background = '#007ACC';
                 settings.cell.color = '#fff';
             }
         }
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

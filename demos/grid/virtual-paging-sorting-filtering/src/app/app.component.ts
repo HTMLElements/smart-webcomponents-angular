@@ -11,12 +11,12 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     data = GetData(100000);
-    timer = null;
-    sortedData = [];
-    filteredData = [];
+    timer: any = null;
+    sortedData: any = [];
+    filteredData: any = [];
 
     sorting = {
         enabled: true
@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     dataSource = new Smart.DataAdapter({
         virtualDataSourceLength: 100000,
         virtualDataSourceCache: true,
-        virtualDataSource: (resultCallbackFunction, details) => {
+        virtualDataSource: (resultCallbackFunction: any, details: any) => {
             const that = this;
             if (that.timer) {
                 clearTimeout(that.timer);
@@ -117,7 +117,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quantity', dataField: 'quantity' },
         { label: 'Unit Price', dataField: 'price', cellsFormat: 'c2' },
         { label: 'Total', dataField: 'total', cellsFormat: 'c2' }
-    ]
+    ] as GridColumn[]
 
     ngOnInit(): void {
         // onInit code.

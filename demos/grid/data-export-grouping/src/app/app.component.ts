@@ -11,10 +11,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) xlsxBtn: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) pdfBtn: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) htmlBtn: ButtonComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) xlsxBtn!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) pdfBtn!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) htmlBtn!: ButtonComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
     dataSource = new Smart.DataAdapter({
         dataSource: GetData(100),
