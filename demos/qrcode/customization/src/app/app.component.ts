@@ -13,14 +13,14 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('qrcodeToStyle', { read: QRcodeComponent, static: false }) qrcodeToStyle: QRcodeComponent;
-	@ViewChild('backgroundColorPicker', { read: ColorPickerComponent, static: false }) backgroundColorPicker: ColorPickerComponent;
-	@ViewChild('lineColorPicker', { read: ColorPickerComponent, static: false }) lineColorPicker: ColorPickerComponent;
-	@ViewChild('lineWidthInput', { read: NumberInputComponent, static: false }) lineWidthInput: NumberInputComponent;
-	@ViewChild('labelDisplayCheck', { read: CheckBoxComponent, static: false }) labelDisplayCheck: CheckBoxComponent;
-	@ViewChild('labelColorPicker', { read: ColorPickerComponent, static: false }) labelColorPicker: ColorPickerComponent;
-	@ViewChild('labelFontSizeInput', { read: NumberInputComponent, static: false }) labelFontSizeInput: NumberInputComponent;
-	@ViewChild('applyBtn', { read: ButtonComponent, static: false }) applyBtn: ButtonComponent;
+	@ViewChild('qrcodeToStyle', { read: QRcodeComponent, static: false }) qrcodeToStyle!: QRcodeComponent;
+	@ViewChild('backgroundColorPicker', { read: ColorPickerComponent, static: false }) backgroundColorPicker!: ColorPickerComponent;
+	@ViewChild('lineColorPicker', { read: ColorPickerComponent, static: false }) lineColorPicker!: ColorPickerComponent;
+	@ViewChild('lineWidthInput', { read: NumberInputComponent, static: false }) lineWidthInput!: NumberInputComponent;
+	@ViewChild('labelDisplayCheck', { read: CheckBoxComponent, static: false }) labelDisplayCheck!: CheckBoxComponent;
+	@ViewChild('labelColorPicker', { read: ColorPickerComponent, static: false }) labelColorPicker!: ColorPickerComponent;
+	@ViewChild('labelFontSizeInput', { read: NumberInputComponent, static: false }) labelFontSizeInput!: NumberInputComponent;
+	@ViewChild('applyBtn', { read: ButtonComponent, static: false }) applyBtn!: ButtonComponent;
 	
  
 	ngOnInit(): void {

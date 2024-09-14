@@ -10,10 +10,10 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('qrcodeToExport', { read: QRcodeComponent, static: false }) qrcodeToExport: QRcodeComponent;
-	@ViewChild('btnSVG', { read: ButtonComponent, static: false }) btnSVG: ButtonComponent;
-	@ViewChild('btnPNG', { read: ButtonComponent, static: false }) btnPNG: ButtonComponent;
-	@ViewChild('btnJPG', { read: ButtonComponent, static: false }) btnJPG: ButtonComponent;
+	@ViewChild('qrcodeToExport', { read: QRcodeComponent, static: false }) qrcodeToExport!: QRcodeComponent;
+	@ViewChild('btnSVG', { read: ButtonComponent, static: false }) btnSVG!: ButtonComponent;
+	@ViewChild('btnPNG', { read: ButtonComponent, static: false }) btnPNG!: ButtonComponent;
+	@ViewChild('btnJPG', { read: ButtonComponent, static: false }) btnJPG!: ButtonComponent;
 	
  
 	ngOnInit(): void {

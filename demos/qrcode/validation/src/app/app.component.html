@@ -7,7 +7,7 @@ The event contains information such as
     <li>an array of the illegal characters</li>
 </ul>
 <p>In addition, the <b>isValid</b> method returns a boolean indicating the validity of the barcode.</p>
-<smart-qrcode #qrCodeToValidate (invalid)="invalid($event)" [value]="'ABCDEF'" [labelPosition]="'bottom'" [labelFontSize]="30"></smart-qrcode>
+<smart-qrcode #qrCodeToValidate (onInvalid)="invalid($event)" [value]="'ABCDEF'" [labelPosition]="'bottom'" [labelFontSize]="30"></smart-qrcode>
 <br />
 <h3>Event detail:</h3>
 <ul>

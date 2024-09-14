@@ -9,7 +9,7 @@ import { QRcodeComponent } from '@smart-webcomponents-angular/qrcode';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('qrcode', { read: QRcodeComponent, static: false }) qrcode: QRcodeComponent;
+	@ViewChild('qrcode', { read: QRcodeComponent, static: false }) qrcode!: QRcodeComponent;
 	
  
 	ngOnInit(): void {

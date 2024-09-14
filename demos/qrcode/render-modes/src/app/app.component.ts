@@ -4,16 +4,16 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
+	selector: 'app-root',
+	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('qrCode', { read: QRcodeComponent, static: false }) qrCode: QRcodeComponent;
-	@ViewChild('svgOption', { read: RadioButtonComponent, static: false }) svgOption: RadioButtonComponent;
-	@ViewChild('canvasOption', { read: RadioButtonComponent, static: false }) canvasOption: RadioButtonComponent;
- 
+export class AppComponent implements AfterViewInit, OnInit {
+	@ViewChild('qrCode', { read: QRcodeComponent, static: false }) qrCode!: QRcodeComponent;
+	@ViewChild('svgOption', { read: RadioButtonComponent, static: false }) svgOption!: RadioButtonComponent;
+	@ViewChild('canvasOption', { read: RadioButtonComponent, static: false }) canvasOption!: RadioButtonComponent;
+
 	ngOnInit(): void {
 		// onInit code.
 	}
@@ -21,16 +21,22 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	ngAfterViewInit(): void {
 		// afterViewInit code.
-  		document.querySelector('#element-html').textContent = this.qrCode.nativeElement.outerHTML;
-    }
-		
+		if (document.querySelector('#element-html')) {
+			document.querySelector('#element-html')!.textContent = this.qrCode.nativeElement.outerHTML;
+		}
+	}
+
 	svgOptionClick(event: Event) {
 		this.qrCode.renderAs = 'svg';
-		document.querySelector('#element-html').textContent = this.qrCode.nativeElement.outerHTML;
+		if (document.querySelector('#element-html')) {
+			document.querySelector('#element-html')!.textContent = this.qrCode.nativeElement.outerHTML;
+		}
 	}
-	
+
 	canvasOptionClick(event: Event) {
 		this.qrCode.renderAs = 'canvas';
-		document.querySelector('#element-html').textContent = this.qrCode.nativeElement.outerHTML;
-	}	
+		if (document.querySelector('#element-html')) {
+			document.querySelector('#element-html')!.textContent = this.qrCode.nativeElement.outerHTML;
+		}
+	}
 }

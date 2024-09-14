@@ -10,9 +10,9 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('qrcode', { read: QRcodeComponent, static: false }) qrcode: QRcodeComponent;
-	@ViewChild('lowOption', { read: RadioButtonComponent, static: false }) lowOption: RadioButtonComponent;
-	@ViewChild('highOption', { read: RadioButtonComponent, static: false }) highOption: RadioButtonComponent;
+	@ViewChild('qrcode', { read: QRcodeComponent, static: false }) qrcode!: QRcodeComponent;
+	@ViewChild('lowOption', { read: RadioButtonComponent, static: false }) lowOption!: RadioButtonComponent;
+	@ViewChild('highOption', { read: RadioButtonComponent, static: false }) highOption!: RadioButtonComponent;
 	
  
 	ngOnInit(): void {
