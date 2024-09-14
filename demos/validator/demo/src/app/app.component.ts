@@ -17,20 +17,20 @@ import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker: DateTimePickerComponent;
-    @ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox: MaskedTextBoxComponent;
-    @ViewChild('maskedtextbox2', { read: MaskedTextBoxComponent, static: false }) maskedtextbox2: MaskedTextBoxComponent;
-    @ViewChild('maskedtextbox3', { read: MaskedTextBoxComponent, static: false }) maskedtextbox3: MaskedTextBoxComponent;
-    @ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox: PasswordTextBoxComponent;
-    @ViewChild('passwordtextbox2', { read: PasswordTextBoxComponent, static: false }) passwordtextbox2: PasswordTextBoxComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
-    @ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2: TextBoxComponent;
-    @ViewChild('textbox3', { read: TextBoxComponent, static: false }) textbox3: TextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker!: DateTimePickerComponent;
+    @ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox!: MaskedTextBoxComponent;
+    @ViewChild('maskedtextbox2', { read: MaskedTextBoxComponent, static: false }) maskedtextbox2!: MaskedTextBoxComponent;
+    @ViewChild('maskedtextbox3', { read: MaskedTextBoxComponent, static: false }) maskedtextbox3!: MaskedTextBoxComponent;
+    @ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox!: PasswordTextBoxComponent;
+    @ViewChild('passwordtextbox2', { read: PasswordTextBoxComponent, static: false }) passwordtextbox2!: PasswordTextBoxComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
+    @ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2!: TextBoxComponent;
+    @ViewChild('textbox3', { read: TextBoxComponent, static: false }) textbox3!: TextBoxComponent;
 
     rules = [
         { input: '#userInput', message: 'Username is required!', action: 'keyup, blur', type: 'required' },

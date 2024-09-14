@@ -10,9 +10,9 @@ import { Smart } from '@smart-webcomponents-angular/validator';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('maleRadio', { read: ElementRef, static: false }) maleRadio: ElementRef;
-    @ViewChild('femaleRadio', { read: ElementRef, static: false }) femaleRadio: ElementRef;
-    @ViewChild('alienRadio', { read: ElementRef, static: false }) alienRadio: ElementRef;
+    @ViewChild('maleRadio', { read: ElementRef, static: false }) maleRadio!: ElementRef;
+    @ViewChild('femaleRadio', { read: ElementRef, static: false }) femaleRadio!: ElementRef;
+    @ViewChild('alienRadio', { read: ElementRef, static: false }) alienRadio!: ElementRef;
 
     rules = [
         { input: '#userInput', message: 'Username is required!', action: 'keyup, blur', type: 'required' },

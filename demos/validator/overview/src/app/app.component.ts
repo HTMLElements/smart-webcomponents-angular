@@ -1,4 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Smart } from '@smart-webcomponents-angular/validator';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { DateTimePickerComponent } from '@smart-webcomponents-angular/datetimepicker';
@@ -12,37 +13,37 @@ import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-	@ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker: DateTimePickerComponent;
-	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-	@ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox: MaskedTextBoxComponent;
-	@ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
-	@ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox: PasswordTextBoxComponent;
-	@ViewChild('passwordtextbox2', { read: PasswordTextBoxComponent, static: false }) passwordtextbox2: PasswordTextBoxComponent;
-	@ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
-	@ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2: TextBoxComponent;
-	@ViewChild('textbox3', { read: TextBoxComponent, static: false }) textbox3: TextBoxComponent;
-	@ViewChild('textbox4', { read: TextBoxComponent, static: false }) textbox4: TextBoxComponent;
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker!: DateTimePickerComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox!: MaskedTextBoxComponent;
+    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
+    @ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox!: PasswordTextBoxComponent;
+    @ViewChild('passwordtextbox2', { read: PasswordTextBoxComponent, static: false }) passwordtextbox2!: PasswordTextBoxComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
+    @ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2!: TextBoxComponent;
+    @ViewChild('textbox3', { read: TextBoxComponent, static: false }) textbox3!: TextBoxComponent;
+    @ViewChild('textbox4', { read: TextBoxComponent, static: false }) textbox4!: TextBoxComponent;
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
-	    
-    
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
+
         'use strict';
         let maxDate = new Date();
         maxDate.setFullYear(2025);
@@ -54,9 +55,10 @@ export class AppComponent implements AfterViewInit, OnInit {
             { input: '#password-validation', message: 'Password is required!', action: 'keyup, blur', type: 'required' },
             //Confirm password
             { input: '#confirm-password-validation', message: 'Confirm Password is required!', action: 'keyup, blur', type: 'required' },
-            { input: '#confirm-password-validation', message: '\'Password\' and \'Confirm Password\' do not match.', action: 'keyup, blur', type: 'compare',
+            {
+                input: '#confirm-password-validation', message: '\'Password\' and \'Confirm Password\' do not match.', action: 'keyup, blur', type: 'compare',
                 comparisonTarget: function () {
-                    let password = (document.querySelector('#password-validation') as PasswordTextBox);
+                    let password = document.querySelector('#password-validation') as any;
                     if (password) {
                         return password.value;
                     }
@@ -86,11 +88,11 @@ export class AppComponent implements AfterViewInit, OnInit {
             { input: '#termsInput', message: 'You must agree to the Terms and Conditions', action: 'change', type: 'required', },
         ];
         //SmartValidator
-        const validator = new window.Smart.Utilities.Validator(rules, '#validationsummary');
-        document.querySelector('#register').addEventListener('click', () => {
+        const validator = new Smart.Utilities.Validator(rules, '#validationsummary');
+        document.querySelector('#register')?.addEventListener('click', () => {
             validator.validate();
         });
-    
 
-	}	
+
+    }
 }
