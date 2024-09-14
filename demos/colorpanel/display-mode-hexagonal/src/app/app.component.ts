@@ -11,15 +11,15 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel: ColorPanelComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
-    @ViewChild('rgbaInput', { read: ElementRef, static: false }) rgbaInput: ElementRef;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel!: ColorPanelComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
+    @ViewChild('rgbaInput', { read: ElementRef, static: false }) rgbaInput!: ElementRef;
 
 
     ngOnInit(): void {
@@ -47,11 +47,11 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return;
             }
             if (checkBox && checkBox.id === 'inverted') {
-                colorPanel.inverted = checkBox.checked;
+                colorPanel.inverted = checkBox.checked || false;
                 return;
             }
             if (checkBox && checkBox.id === 'enableCustomColors') {
-                colorPanel.enableCustomColors = checkBox.checked;
+                colorPanel.enableCustomColors = checkBox.checked || false;
                 return;
             }
 
@@ -64,6 +64,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         that.colorpanel.addEventListener('change', function (event: CustomEvent): void {
             that.rgbaInput.nativeElement.value = event.detail.value;
-        });
+        } as EventListener);
     }
 }

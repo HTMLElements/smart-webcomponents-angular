@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     sampleData = [
         { Hour: '9 PM', Bangkok: 13, Sofia: 5, Honolulu: 24, 'Rio Gallegos': 14 },

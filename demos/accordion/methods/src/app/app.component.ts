@@ -11,14 +11,14 @@ import { InputComponent } from '@smart-webcomponents-angular/input';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion: AccordionComponent;
-	@ViewChild('expand', { read: ButtonComponent, static: false }) expand: ButtonComponent;
-	@ViewChild('collapse', { read: ButtonComponent, static: false }) collapse: ButtonComponent;
-	@ViewChild('insert', { read: ButtonComponent, static: false }) insert: ButtonComponent;
-	@ViewChild('update', { read: ButtonComponent, static: false }) update: ButtonComponent;
-	@ViewChild('remove', { read: ButtonComponent, static: false }) remove: ButtonComponent;
-	@ViewChild('expandCollapseIndex', { read: InputComponent, static: false }) expandCollapseIndex: InputComponent;
-	@ViewChild('crudIndex', { read: InputComponent, static: false }) crudIndex: InputComponent;
+	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion!: AccordionComponent;
+	@ViewChild('expand', { read: ButtonComponent, static: false }) expand!: ButtonComponent;
+	@ViewChild('collapse', { read: ButtonComponent, static: false }) collapse!: ButtonComponent;
+	@ViewChild('insert', { read: ButtonComponent, static: false }) insert!: ButtonComponent;
+	@ViewChild('update', { read: ButtonComponent, static: false }) update!: ButtonComponent;
+	@ViewChild('remove', { read: ButtonComponent, static: false }) remove!: ButtonComponent;
+	@ViewChild('expandCollapseIndex', { read: InputComponent, static: false }) expandCollapseIndex!: InputComponent;
+	@ViewChild('crudIndex', { read: InputComponent, static: false }) crudIndex!: InputComponent;
 	
  
 	ngAfterViewInit(): void {

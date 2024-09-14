@@ -1,5 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from "@angular/core";
 import {
+  CardViewColumn,
   CardViewComponent,
   Smart
 } from "@smart-webcomponents-angular/cardview";
@@ -33,7 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     ]
   });
 
-  columns = [
+  columns: CardViewColumn[] = [
     { label: "First Name", dataField: "firstName", icon: "firstName" },
     { label: "Last Name", dataField: "lastName", icon: "lastName" },
     {
@@ -54,7 +55,7 @@ export class AppComponent implements AfterViewInit, OnInit {
       label: "Quantity",
       dataField: "quantity",
       icon: "quantity",
-      formatFunction: function (settings: any) {
+      formatFunction: function (settings) {
         const value = settings.value;
         let className;
         if (value < 20) {
@@ -257,10 +258,10 @@ export class AppComponent implements AfterViewInit, OnInit {
       const maxPhotos = Math.floor(Math.random() * Math.floor(3)) + 1;
       for (let i = 0; i < maxPhotos; i++) {
         row.travelPhotos.push(
-          `https://htmlelements.com/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`
+          `../../../../demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`
         );
         row.contactPhotos.push(
-          `https://htmlelements.com/demos/images/phonebook/${contactImages[Math.floor(Math.random() * contactImages.length)]
+          `../../../../demos/images/phonebook/${contactImages[Math.floor(Math.random() * contactImages.length)]
           }`
         );
       }

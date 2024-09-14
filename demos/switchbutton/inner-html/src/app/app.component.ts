@@ -10,7 +10,7 @@ import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
+	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
 	
  
 	ngOnInit(): void {

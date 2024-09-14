@@ -6,29 +6,29 @@ import { SortableComponent } from '@smart-webcomponents-angular/sortable';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-	@ViewChild('sortable', { read: SortableComponent, static: false }) sortable: SortableComponent;
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('sortable', { read: SortableComponent, static: false }) sortable!: SortableComponent;
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
-	    
-    
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
+
         const that = this;
-        document.getElementById('handle').addEventListener('change', function (event: CustomEvent) {
+        document.getElementById('handle')?.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value) {
                 that.sortable.dragMode = 'handle';
                 that.sortable.handleVisibility = 'visible';
@@ -36,8 +36,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             else {
                 that.sortable.dragMode = 'item';
             }
-        });
-    
+        } as EventListener);
 
-	}	
+
+    }
 }

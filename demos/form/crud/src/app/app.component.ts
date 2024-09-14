@@ -8,11 +8,11 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	 
-	@ViewChild('addBtn', { read: ButtonComponent, static: false }) addBtn: ButtonComponent;
-	@ViewChild('removeBtn', { read: ButtonComponent, static: false }) removeBtn: ButtonComponent;
-	@ViewChild('insertBtn', { read: ButtonComponent, static: false }) insertBtn: ButtonComponent;
-	@ViewChild('hideBtn', { read: ButtonComponent, static: false }) hideBtn: ButtonComponent;
-	@ViewChild('showBtn', { read: ButtonComponent, static: false }) showBtn: ButtonComponent;
+	@ViewChild('addBtn', { read: ButtonComponent, static: false }) addBtn!: ButtonComponent;
+	@ViewChild('removeBtn', { read: ButtonComponent, static: false }) removeBtn!: ButtonComponent;
+	@ViewChild('insertBtn', { read: ButtonComponent, static: false }) insertBtn!: ButtonComponent;
+	@ViewChild('hideBtn', { read: ButtonComponent, static: false }) hideBtn!: ButtonComponent;
+	@ViewChild('showBtn', { read: ButtonComponent, static: false }) showBtn!: ButtonComponent;
 
 	ngOnInit(): void {
 		// onInit code.

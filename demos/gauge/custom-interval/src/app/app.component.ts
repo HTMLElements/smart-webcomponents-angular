@@ -10,12 +10,12 @@ import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2: GaugeComponent;
-    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3: GaugeComponent;
-    @ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4: GaugeComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2!: GaugeComponent;
+    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3!: GaugeComponent;
+    @ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4!: GaugeComponent;
 
     ngOnInit(): void {
         // onInit code.
@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.gauge2.customInterval = checked;
             that.gauge3.customInterval = checked;
             that.gauge4.customInterval = checked;
-        });
+        } as EventListener);
 
         that.checkbox2.addEventListener('change', function (event: CustomEvent) {
             const checked = event.detail.value;
@@ -46,10 +46,10 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.gauge2.coerce = checked;
             that.gauge3.coerce = checked;
             that.gauge4.coerce = checked;
-        });
+        } as EventListener);
     }
 
-    gauge4LabelFormatFunction(value): string {
+    gauge4LabelFormatFunction(value: string): string {
         return String.fromCharCode(64 + parseFloat(value));
     }
 }

@@ -11,7 +11,7 @@ import { SplitterComponent } from '@smart-webcomponents-angular/splitter';
   animations: [slideInAnimation]
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter: SplitterComponent;
+  @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter!: SplitterComponent;
 
   constructor(private router: Router) { }
 

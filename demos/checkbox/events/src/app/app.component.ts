@@ -8,8 +8,8 @@ import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-	@ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+	@ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
 	ngOnInit(): void {
 		// onInit code.
@@ -29,6 +29,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 		that.checkbox.addEventListener('change', function (event: CustomEvent) {
 			const checkStatus = event.detail.value;
 			that.log.nativeElement.textContent = "Change event. Status: " + checkStatus;
-		});
+		} as EventListenerOrEventListenerObject);
 	}
 }

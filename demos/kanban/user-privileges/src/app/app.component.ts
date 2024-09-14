@@ -15,14 +15,14 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
-    @ViewChild('window', { read: WindowComponent, static: false }) window: WindowComponent;
-    @ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-    @ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox: PasswordTextBoxComponent;
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('loginInfo', { read: ElementRef, static: false }) loginInfo: ElementRef;
-    @ViewChild('loginAgain', { read: ElementRef, static: false }) loginAgain: ElementRef;
-    @ViewChild('pic', { read: ElementRef, static: false }) pic: ElementRef;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
+    @ViewChild('window', { read: WindowComponent, static: false }) window!: WindowComponent;
+    @ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+    @ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox!: PasswordTextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('loginInfo', { read: ElementRef, static: false }) loginInfo!: ElementRef;
+    @ViewChild('loginAgain', { read: ElementRef, static: false }) loginAgain!: ElementRef;
+    @ViewChild('pic', { read: ElementRef, static: false }) pic!: ElementRef;
 
     addNewButton = true;
     collapsible = true;
@@ -76,8 +76,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             that.input.value = '';
             that.passwordtextbox.value = '';
-            promptFooter.classList.add('blink');
-            setTimeout(() => promptFooter.classList.remove('blink'), 2000);
+            promptFooter?.classList.add('blink');
+            setTimeout(() => promptFooter?.classList.remove('blink'), 2000);
         }
     }
 

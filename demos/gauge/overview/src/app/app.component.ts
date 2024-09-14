@@ -9,15 +9,15 @@ import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-	@ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2: GaugeComponent;
-	@ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3: GaugeComponent;
-	@ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4: GaugeComponent;
-	@ViewChild('gauge5', { read: GaugeComponent, static: false }) gauge5: GaugeComponent;
-	@ViewChild('gauge6', { read: GaugeComponent, static: false }) gauge6: GaugeComponent;
-	@ViewChild('gauge7', { read: GaugeComponent, static: false }) gauge7: GaugeComponent;
-	@ViewChild('gauge8', { read: GaugeComponent, static: false }) gauge8: GaugeComponent;
-	@ViewChild('gauge9', { read: GaugeComponent, static: false }) gauge9: GaugeComponent;
+	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+	@ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2!: GaugeComponent;
+	@ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3!: GaugeComponent;
+	@ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4!: GaugeComponent;
+	@ViewChild('gauge5', { read: GaugeComponent, static: false }) gauge5!: GaugeComponent;
+	@ViewChild('gauge6', { read: GaugeComponent, static: false }) gauge6!: GaugeComponent;
+	@ViewChild('gauge7', { read: GaugeComponent, static: false }) gauge7!: GaugeComponent;
+	@ViewChild('gauge8', { read: GaugeComponent, static: false }) gauge8!: GaugeComponent;
+	@ViewChild('gauge9', { read: GaugeComponent, static: false }) gauge9!: GaugeComponent;
 	
  
 	ngOnInit(): void {
@@ -33,8 +33,15 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 	    
     
-        const silentLabel = document.getElementById('silentLabel'), normalLabel = document.getElementById('normalLabel'), maxLabel = document.getElementById('maxLabel');
-        document.getElementById('mobileGauge').addEventListener('change', function (event: CustomEvent) {
+        const silentLabel = document.getElementById('silentLabel')
+        const normalLabel = document.getElementById('normalLabel')
+        const maxLabel = document.getElementById('maxLabel');
+
+        if(!silentLabel || !normalLabel || !maxLabel) {
+            return 
+        }
+
+        document.getElementById('mobileGauge')?.addEventListener('change', function (event: CustomEvent) {
             const value = event.detail.value;
             silentLabel.classList.remove('highlighted');
             normalLabel.classList.remove('highlighted');
@@ -48,8 +55,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             else {
                 silentLabel.classList.add('highlighted');
             }
-        });
-    
+        } as EventListener);
 
 	}	
 }

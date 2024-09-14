@@ -9,8 +9,8 @@ import { NumericTextBoxComponent } from '@smart-webcomponents-angular/numerictex
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -30,6 +30,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 oldValue = event.detail.oldValue;
 
             that.log.nativeElement.innerHTML = 'New: ' + newValue + '; old: ' + oldValue;
-        });
+        } as EventListener);
     }
 }

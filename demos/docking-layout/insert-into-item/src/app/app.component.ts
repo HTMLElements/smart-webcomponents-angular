@@ -13,12 +13,12 @@ import { WindowComponent, Window } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('buttonInsertIntoLeft', { read: ButtonComponent, static: false }) buttonInsertIntoLeft: ButtonComponent;
-    @ViewChild('buttonInsertIntoRight', { read: ButtonComponent, static: false }) buttonInsertIntoRight: ButtonComponent;
-    @ViewChild('buttonInsertIntoTop', { read: ButtonComponent, static: false }) buttonInsertIntoTop: ButtonComponent;
-    @ViewChild('buttonInsertIntoBottom', { read: ButtonComponent, static: false }) buttonInsertIntoBottom: ButtonComponent;
-    @ViewChild('dockingLayout', { read: DockingLayoutComponent, static: false }) dockingLayout: DockingLayoutComponent;
-    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+    @ViewChild('buttonInsertIntoLeft', { read: ButtonComponent, static: false }) buttonInsertIntoLeft!: ButtonComponent;
+    @ViewChild('buttonInsertIntoRight', { read: ButtonComponent, static: false }) buttonInsertIntoRight!: ButtonComponent;
+    @ViewChild('buttonInsertIntoTop', { read: ButtonComponent, static: false }) buttonInsertIntoTop!: ButtonComponent;
+    @ViewChild('buttonInsertIntoBottom', { read: ButtonComponent, static: false }) buttonInsertIntoBottom!: ButtonComponent;
+    @ViewChild('dockingLayout', { read: DockingLayoutComponent, static: false }) dockingLayout!: DockingLayoutComponent;
+    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 
     layout: Array<object> = [
         {

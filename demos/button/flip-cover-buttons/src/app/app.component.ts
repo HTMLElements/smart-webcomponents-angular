@@ -1,15 +1,17 @@
 ﻿import {
 	Component,
 	OnInit,
-	AfterViewInit
+	AfterViewInit,
+	ViewEncapsulation
 } from '@angular/core';
-import { DynamicSmartButton } from '../dynamic-smart-button/dynamic-smart-button.component';
+import { DynamicSmartButton } from './dynamic-smart-button/dynamic-smart-button.component';
 import { smartDomService } from './smart-dom.service';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css'],
+	encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewInit, OnInit {
 	constructor(private smartDomService: smartDomService) { }
@@ -23,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		this.init();
 	}
 
-	flipCover(css, options): void {
+	flipCover(css: any, options: any): void {
 
 		options = options || {};
 

@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 import { GeneratePivotData } from '../assets/data';
 
 @Component({
@@ -10,7 +10,7 @@ import { GeneratePivotData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
 
     columnTotals = true;
     columnTotalsPosition = 'far';
@@ -29,7 +29,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Month', dataField: 'month', dataType: 'string', allowPivot: true, pivot: true },
         {
             label: 'Revenue', dataField: 'revenue', dataType: 'number', summary: 'sum',
-            formatFunction(settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template?: any }) {
+            formatFunction(settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template: any }) {
                 settings.cell.classList.remove('small', 'medium', 'large');
 
                 if (settings.value < 100000 / 3) {
@@ -47,7 +47,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 }
             }
         }
-    ];
+    ] as PivotTableColumn[];
 
     ngOnInit(): void {
         // onInit code.

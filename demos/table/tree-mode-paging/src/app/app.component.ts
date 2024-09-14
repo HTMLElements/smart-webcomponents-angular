@@ -9,8 +9,7 @@ import { GetOrdersData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-	@ViewChild('table2', { read: TableComponent, static: false }) table2: TableComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
     
     dataSource = new window.Smart.DataAdapter({
 		dataSource: GetOrdersData(50),
@@ -26,9 +25,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	keyboardNavigation: Boolean = true;
+	keyboardNavigation: boolean = true;
 
-	paging: Boolean = true;
+	paging: boolean = true;
 
 	columns: TableColumn[] = [{
 			label: 'Order Name',

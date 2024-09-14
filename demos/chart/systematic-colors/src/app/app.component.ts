@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
-import { ChartComponent } from '@smart-webcomponents-angular/chart';
+import { ChartComponent, ChartSeriesGroup } from '@smart-webcomponents-angular/chart';
 
 
 @Component({
@@ -10,8 +10,8 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('colorsContainer', { read: ElementRef, static: false }) colorsContainer: ElementRef;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('colorsContainer', { read: ElementRef, static: false }) colorsContainer!: ElementRef;
 
     colors = ['#C8F08F', '#B4E051', '#8CD211', '#5AA700', '#4C8400', '#2D660A', '#144D14', '#0A3C02', '#0C2808', '#020301'];
     sampleData = [
@@ -43,7 +43,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         title: { text: 'Saturation' },
         valuesOnTicks: true,
         labels: {
-            formatFunction(value) {
+            formatFunction(value: any) {
                 if (value !== 0) {
                     return ' ';
                 }
@@ -58,7 +58,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         title: { text: 'Brightness' },
         labels: {
             horizontalAlignment: 'right',
-            formatFunction(value) {
+            formatFunction(value: any) {
                 if (value % 100 !== 0) {
                     return ' ';
                 }
@@ -66,7 +66,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         }
     };
-    seriesGroups = [
+    seriesGroups: ChartSeriesGroup[] = [
         {
             type: 'scatter',
             series: [
@@ -77,17 +77,18 @@ export class AppComponent implements AfterViewInit, OnInit {
                     symbolSize: 25,
                     lineWidth: 1,
                     useGradientColors: false,
-                    colorFunction: (value, itemIndex, serie, group) => {
+                    colorFunction: (value: any, itemIndex: number, serie: any, group: any) => {
                         return this.colors[itemIndex];
                     },
-                    toolTipFormatFunction: (value, itemIndex) => {
-                        return this.colors[itemIndex];
+                    toolTipFormatFunction: (value?: any, index?: number | undefined, series?: any) => {
+                        const color = this.colors.find((v: string, i: number) => i === index) || ''
+                        return color;
                     },
                     labels: {
                         visible: true,
                         offset: { x: -27 },
-                        formatFunction: function (value, itemIndex) {
-                            return '' + (itemIndex + 1) * 10;
+                        formatFunction: function (value?: any, index?: number | undefined, series?: any) {
+                            return '' + ((index || -1) + 1) * 10;
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ChartComponent } from '@smart-webcomponents-angular/chart';
+import { ChartComponent, ChartSeriesGroup } from '@smart-webcomponents-angular/chart';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     sampleData = [
         { Country: 'Luxembourg', GDP: 104103, Debt: 23827 },
@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         gridLines: { visible: true }
     };
     colorScheme = 'scheme32';
-    seriesGroups = [
+    seriesGroups: ChartSeriesGroup[] = [
         {
             type: 'column',
             columnsGapPercent: 50,
@@ -49,7 +49,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         verticalAlignment: 'top',
                         offset: { x: 0, y: -20 }
                     },
-                    formatFunction: function (value: number) {
+                    formatFunction: function (value) {
                         if (value < 2000) {
                             return value;
                         }
@@ -64,7 +64,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         verticalAlignment: 'top',
                         offset: { x: 0, y: -20 }
                     },
-                    formatFunction: function (value: number) {
+                    formatFunction: function (value) {
                         if (value < 2000) {
                             return value;
                         }

@@ -11,15 +11,15 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-    @ViewChild('checkbox4', { read: CheckBoxComponent, static: false }) checkbox4: CheckBoxComponent;
-    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel: ColorPanelComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
-    @ViewChild('rgbInput', { read: ElementRef, static: false }) rgbInput: ElementRef;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3!: CheckBoxComponent;
+    @ViewChild('checkbox4', { read: CheckBoxComponent, static: false }) checkbox4!: CheckBoxComponent;
+    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel!: ColorPanelComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
+    @ViewChild('rgbInput', { read: ElementRef, static: false }) rgbInput!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -53,7 +53,10 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
 
             if (checkBox.id.indexOf('hide') === 0) {
+                
+                // @ts-ignore
                 colorPanel[checkBox.id] = event.detail.value;
+
                 return;
             }
 
@@ -65,6 +68,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         colorPanel.addEventListener('change', function (event: CustomEvent): void {
             that.rgbInput.nativeElement.value = event.detail.value;
-        });
+        } as EventListener);
     }
 }

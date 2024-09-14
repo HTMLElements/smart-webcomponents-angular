@@ -10,13 +10,13 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
     encapsulation: ViewEncapsulation.None
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-	@ViewChild('checkinput', { read: CheckInputComponent, static: false }) checkinput: CheckInputComponent;
-	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-	@ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-	
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkinput', { read: CheckInputComponent, static: false }) checkinput!: CheckInputComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+
     dataSource = [
         { value: "Austria", label: "Austria" },
         { value: "Belarus", label: "Belarus" },
@@ -62,42 +62,43 @@ export class AppComponent implements AfterViewInit, OnInit {
         { value: "United Kingdom", label: "United Kingdom" }
     ];
 
-	ngOnInit(): void {
-		// onInit code.
-	}
-
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
         let input = this.checkinput;
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent): void {
-            const target = event.target as HTMLElement;
-            const targetClassList = target.classList;
+        document.querySelector('.options')
+            ?.addEventListener('change', function (event: CustomEvent): void {
+                const target = event.target as HTMLElement;
+                const targetClassList = target.classList;
 
-            if (targetClassList.contains('readonly')) {
-                input.readonly = event.detail.value;
-                return;
-            }
-
-            const inputClassList = input.nativeElement.classList;
-
-            if (targetClassList.contains('render-mode')) {
-                inputClassList.remove('underlined', 'outlined');
-
-                const textContent = target.textContent.toLowerCase();
-
-                if (textContent.indexOf('underlined') > -1) {
-                    inputClassList.add('underlined');
+                if (targetClassList.contains('readonly')) {
+                    input.readonly = event.detail.value;
+                    return;
                 }
-                else if (textContent.indexOf('outlined') > -1) {
-                    inputClassList.add('outlined');
+
+                const inputClassList = input.nativeElement.classList;
+
+                if (targetClassList.contains('render-mode')) {
+                    inputClassList.remove('underlined', 'outlined');
+
+                    const textContent = target.textContent?.toLowerCase() || '';
+
+                    if (textContent.indexOf('underlined') > -1) {
+                        inputClassList.add('underlined');
+                    }
+                    else if (textContent.indexOf('outlined') > -1) {
+                        inputClassList.add('outlined');
+                    }
                 }
-            }
-        });
-	}	
+            } as EventListener);
+    }
 }

@@ -9,8 +9,8 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('eventText', { read: ElementRef, static: false }) eventText: ElementRef;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('eventText', { read: ElementRef, static: false }) eventText!: ElementRef;
 
     sampleData = [
         { Day: 'Monday', Keith: 30, Erica: 15, George: 25 },
@@ -76,15 +76,15 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         that.chart.addEventListener('mouseout', function (event: PointerEvent) {
             myEventHandler(event);
-        });
+        } as EventListenerOrEventListenerObject);
         that.chart.addEventListener('mouseover', function (event: PointerEvent) {
             myEventHandler(event);
-        });
+        } as EventListenerOrEventListenerObject);
         that.chart.addEventListener('click', function (event: PointerEvent) {
             myEventHandler(event);
-        });
+        } as EventListenerOrEventListenerObject);
         that.chart.addEventListener('toggle', function (event: CustomEvent) {
             myEventHandler(event);
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

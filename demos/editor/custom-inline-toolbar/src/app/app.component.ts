@@ -14,11 +14,11 @@ interface CustomElement extends HTMLElement {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     //Properties
     // toolbarItems: string[] | ToolbarItem[] = ['fontColor', 'BackgroundColor', 'FontSize',
-    toolbarItems = ['fontColor', 'BackgroundColor', 'FontSize',
+    toolbarItems: any = ['fontColor', 'BackgroundColor', 'FontSize',
         {
             name: 'image',
             inlineToolbarItems: [{

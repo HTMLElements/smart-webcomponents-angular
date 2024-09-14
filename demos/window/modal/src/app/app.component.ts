@@ -11,11 +11,11 @@ import { WindowComponent, Window } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('modalWindow', { read: WindowComponent, static: false }) modalWindow: WindowComponent;
-    @ViewChild('formWindow', { read: WindowComponent, static: false }) formWindow: WindowComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('modalWindow', { read: WindowComponent, static: false }) modalWindow!: WindowComponent;
+    @ViewChild('formWindow', { read: WindowComponent, static: false }) formWindow!: WindowComponent;
 
     onButtonClick(event: any): void {
         this.formWindow.opened ? this.formWindow.close() : this.formWindow.open();
@@ -62,12 +62,23 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         }
 
-        document.getElementsByClassName('cancel')[0].addEventListener('click', cancelHandler);
-        document.getElementsByClassName('cancel')[1].addEventListener('click', cancelHandler);
-        document.getElementsByClassName('agree')[0].addEventListener('click', agreeHandler);
-        document.getElementsByClassName('agree')[1].addEventListener('click', agreeHandler);
+        const cancel1 = document.getElementsByClassName('cancel') ? document.getElementsByClassName('cancel')[0] : null;
+        cancel1?.addEventListener('click', cancelHandler as EventListener);
 
-        modal.nativeElement.querySelector('.cancel').innerHTML = 'No';
-        modal.nativeElement.querySelector('.agree').innerHTML = 'Yes';
+        const cancel2 = document.getElementsByClassName('cancel') ? document.getElementsByClassName('cancel')[1] : null;
+        cancel2?.addEventListener('click', cancelHandler as EventListener);
+
+        const agree1 = document.getElementsByClassName('agree') ? document.getElementsByClassName('agree')[0] : null;
+        agree1?.addEventListener('click', agreeHandler as EventListener);
+
+        const agree2 = document.getElementsByClassName('agree') ? document.getElementsByClassName('agree')[1] : null;
+        agree2?.addEventListener('click', agreeHandler as EventListener);
+
+        if(modal.nativeElement.querySelector('.cancel')) {
+            modal.nativeElement.querySelector('.cancel')!.innerHTML = 'No';
+        }
+        if(modal.nativeElement.querySelector('.agree')) {
+            modal.nativeElement.querySelector('.agree')!.innerHTML = 'Yes';
+        }
     }
 }

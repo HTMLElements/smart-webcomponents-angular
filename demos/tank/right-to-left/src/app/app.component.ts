@@ -9,8 +9,8 @@ import { TankComponent } from '@smart-webcomponents-angular/tank';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
-	@ViewChild('tank2', { read: TankComponent, static: false }) tank2: TankComponent;
+	@ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
+	@ViewChild('tank2', { read: TankComponent, static: false }) tank2!: TankComponent;
 	
  
 	ngOnInit(): void {

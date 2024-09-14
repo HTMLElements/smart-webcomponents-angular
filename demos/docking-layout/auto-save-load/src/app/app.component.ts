@@ -16,8 +16,8 @@ import { CarouselComponent, Carousel } from '@smart-webcomponents-angular/carous
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout: DockingLayoutComponent;
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
+    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
 
     layout: Array<object> = [
         {
@@ -127,8 +127,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     initializeLayout(event: any) {
-        const that = this,
-            dockinglayout = that.dockinglayout, data = [],
+        const data = [],
             urlString = 'https://picsum.photos/1000/500/?image=',
             gauge1: Gauge = document.createElement('smart-gauge'),
             carousel: Carousel = document.createElement('smart-carousel'),
@@ -155,19 +154,19 @@ export class AppComponent implements AfterViewInit, OnInit {
         tank.value = 25;
         progressBar1.showProgressValue = true;
 
-        if (dockinglayout.items.length > 0) {
-            dockinglayout.nativeElement.querySelector('#tabItem10').appendChild(progressBar1);
-            dockinglayout.nativeElement.querySelector('#tabItem7').appendChild(gauge1);
-            dockinglayout.nativeElement.querySelector('#tabItem6').appendChild(carousel);
-            dockinglayout.nativeElement.querySelector('#tabItem2').appendChild(multiLineTextBox);
-            dockinglayout.nativeElement.querySelector('#tabItem1').appendChild(tank);
+        if (this.dockinglayout.items.length > 0) {
+            this.dockinglayout.nativeElement.querySelector('#tabItem10')?.appendChild(progressBar1);
+            this.dockinglayout.nativeElement.querySelector('#tabItem7')?.appendChild(gauge1);
+            this.dockinglayout.nativeElement.querySelector('#tabItem6')?.appendChild(carousel);
+            this.dockinglayout.nativeElement.querySelector('#tabItem2')?.appendChild(multiLineTextBox);
+            this.dockinglayout.nativeElement.querySelector('#tabItem1')?.appendChild(tank);
 
             gauge1.addEventListener('change', function (event: CustomEvent): void {
                 progressBar1.value = event.detail.value;
-            });
+            } as EventListener);
         }
 
-        that.button.disabled = true;
+        this.button.disabled = true;
     }
 
     clearState(event: any): void {

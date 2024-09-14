@@ -12,19 +12,19 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2: SliderComponent;
-    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3: SliderComponent;
-    @ViewChild('slider4', { read: SliderComponent, static: false }) slider4: SliderComponent;
-    @ViewChild('slider5', { read: SliderComponent, static: false }) slider5: SliderComponent;
-    @ViewChild('slider6', { read: SliderComponent, static: false }) slider6: SliderComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2!: SliderComponent;
+    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3!: SliderComponent;
+    @ViewChild('slider4', { read: SliderComponent, static: false }) slider4!: SliderComponent;
+    @ViewChild('slider5', { read: SliderComponent, static: false }) slider5!: SliderComponent;
+    @ViewChild('slider6', { read: SliderComponent, static: false }) slider6!: SliderComponent;
 
     data = [
         { year: 2004, price: 0.1437 },
@@ -112,61 +112,61 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (that.chart.valueAxis && that.chart.valueAxis.padding) {
                 that.chart.valueAxis.padding.left = parseFloat(event.detail.value);
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider2.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.valueAxis && that.chart.valueAxis.padding) {
                 that.chart.valueAxis.padding.right = parseFloat(event.detail.value);
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider3.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.valueAxis && that.chart.valueAxis.labels) {
                 that.chart.valueAxis.labels.angle = parseFloat(event.detail.value);
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider4.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.xAxis && that.chart.xAxis.padding) {
                 that.chart.xAxis.padding.top = parseFloat(event.detail.value);
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider5.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.xAxis && that.chart.xAxis.padding) {
                 that.chart.xAxis.padding.bottom = parseFloat(event.detail.value);
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider6.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.xAxis && that.chart.xAxis.labels) {
                 that.chart.xAxis.labels.angle = parseFloat(event.detail.value);
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.radiobutton.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value && that.chart.valueAxis) {
                 that.chart.valueAxis.position = 'left';
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.radiobutton2.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value && that.chart.valueAxis) {
                 that.chart.valueAxis.position = 'right';
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.radiobutton3.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value && that.chart.xAxis) {
                 that.chart.xAxis.position = 'top';
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.radiobutton4.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value && that.chart.xAxis) {
                 that.chart.xAxis.position = 'bottom';
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.checkbox.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.valueAxis) {
                 that.chart.valueAxis.flip = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.checkbox2.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.xAxis) {
                 that.chart.xAxis.flip = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

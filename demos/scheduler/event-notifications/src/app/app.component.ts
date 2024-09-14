@@ -9,7 +9,7 @@ import { SchedulerComponent, SchedulerTimelineDayScale, SchedulerViews } from '@
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
     dataSource = (() => {
         const today = new Date(),

@@ -79,7 +79,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             //Column size
             min: '30%',
             //Custom format function
-            formatFunction: function (label) {
+            formatFunction: function (label: string) {
                 if (label === 'Learn') {
                     return ' <i class="material-icons">&#xE80C;</i>' + label;
                 }
@@ -107,8 +107,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Date Start',
             value: 'dateStart',
             //Custom format function
-            formatFunction: function (date: Date) {
-                return new Date(date).toLocaleDateString(this.locale, { hour: '2-digit', minute: '2-digit' })
+            formatFunction: (date: Date) => {
+                return new Date(date).toLocaleDateString(this.ganttChart.locale, { hour: '2-digit', minute: '2-digit' })
             },
             min: 100
         },

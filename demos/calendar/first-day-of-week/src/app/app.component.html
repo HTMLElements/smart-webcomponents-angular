@@ -4,9 +4,9 @@
   <div class="option">
     <smart-drop-down-list
       [dataSource]="dataSource"
-      (change)="onChange($event)"
+      (onChange)="onChange($event)"
       #dropdownlist
-      selected-indexes="[0]"
+      [selectedIndexes]="[0]"
       id="dayOfWeekSelector"
     ></smart-drop-down-list>
   </div>

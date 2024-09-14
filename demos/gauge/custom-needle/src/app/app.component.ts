@@ -9,7 +9,7 @@ import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
     ngOnInit(): void {
         // onInit code.
     }
@@ -23,13 +23,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
     }
 
-    customDrawNeedleFunction(element, renderer, radius, angle, distance): any[] {
-        const computeArrowHeadPoints = function (radius, distance, angle, base, height): string {
+    customDrawNeedleFunction(element: Element, renderer: any, radius: any, angle: any, distance: any): any[] {
+        const computeArrowHeadPoints = function (radius: any, distance: any, angle: any, base: any, height: any): string {
             const sin = Math.sin(angle), cos = Math.cos(angle), hPointX = radius + (distance - height) * sin, hPointY = radius + (distance - height) * cos, startPointX1 = hPointX + base * cos, startPointY1 = hPointY - base * sin, startPointX2 = hPointX - base * cos, startPointY2 = hPointY + base * sin, endPointX = radius + distance * sin, endPointY = radius + distance * cos, points = 'M ' + startPointX1 + ',' + startPointY1 + ' L ' + startPointX2 + ',' + startPointY2 + ' L ' + endPointX + ',' + endPointY + ' Z';
             return points;
         };
 
-        const computeArrowBodyPoints = function (radius, angle, width, length): string {
+        const computeArrowBodyPoints = function (radius: any, angle: any, width: any, length: any): string {
             const sin = Math.sin(angle), cos = Math.cos(angle), endX1 = radius - width * cos + length * sin, endY1 = radius + width * sin + length * cos, endX2 = radius + width * cos + length * sin, endY2 = radius - width * sin + length * cos, startX1 = radius + width * cos, startY1 = radius - width * sin, startX2 = radius - width * cos, startY2 = radius + width * sin, points = 'M ' + startX1 + ',' + startY1 + ' L ' + startX2 + ',' + startY2 + ' L ' + endX1 + ',' + endY1 + ' ' + endX2 + ',' + endY2;
             return points;
         };

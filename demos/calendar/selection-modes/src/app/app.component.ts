@@ -10,8 +10,8 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('modeSelector', { read: DropDownListComponent, static: false }) modeSelector: DropDownListComponent;
-    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
+    @ViewChild('modeSelector', { read: DropDownListComponent, static: false }) modeSelector!: DropDownListComponent;
+    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
 
 
     ngOnInit(): void {
@@ -23,8 +23,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
-    setDescription(mode): void {
+    setDescription(mode: string): void {
         let description = document.getElementById('modeDescription');
+
+        if (!description) { return }
+
         switch (mode) {
             case 'default':
                 description.textContent = 'Allows single date selection via keyboard/mouse and multiple date selection when \'Control\' keyboard key is pressed.';
@@ -70,6 +73,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.modeSelector.addEventListener('change', function (event: CustomEvent) {
             that.calendar.selectionMode = event.detail.label;
             that.setDescription(event.detail.label);
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

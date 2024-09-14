@@ -10,7 +10,7 @@ import { ListMenuComponent } from '@smart-webcomponents-angular/listmenu';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('listmenu', { read: ListMenuComponent, static: false }) listmenu: ListMenuComponent;
+    @ViewChild('listmenu', { read: ListMenuComponent, static: false }) listmenu!: ListMenuComponent;
 
 
     ngOnInit(): void {

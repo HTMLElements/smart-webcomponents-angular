@@ -9,7 +9,7 @@ import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
+    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
 
 
     ngOnInit(): void {

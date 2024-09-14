@@ -10,7 +10,7 @@ import { KanbanColumn, KanbanComponent, KanbanSwimlane, KanbanUser } from '@smar
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     data = [{
         'ID': 0,
@@ -154,7 +154,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         tags: 'tags',
         text: 'info',
         userId: 'assignee'
-    };
+    } as any;
     editable = true;
     swimlanes: KanbanSwimlane[] = [
         { label: 'Q1', dataField: 'q1' },

@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { RadioButton, RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
-import { SchedulerComponent, SchedulerResource, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerResource, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -11,11 +11,11 @@ import { SchedulerComponent, SchedulerResource, SchedulerTimelineDayScale } from
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -114,7 +114,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: string = 'workWeek';
 
-    views: object | string[] = [
+    views: any = [
         {
             label: 'Work Week',
             value: 'workWeek',
@@ -185,23 +185,24 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         scheduler.scrollToDate(new Date());
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent) {
-            const schedulerResources = scheduler.resources,
-                firstResource = (<RadioButton>event.target).value;
-            let reorderedResources = [];
+        document.querySelector('.options')
+            ?.addEventListener('change', function (event: CustomEvent) {
+                const schedulerResources = scheduler.resources,
+                    firstResource = (<RadioButton>event.target).value;
+                let reorderedResources = [];
 
-            //reorder the resources
-            for (let i = 0; i < schedulerResources.length; i++) {
-                const resource = schedulerResources[i];
+                //reorder the resources
+                for (let i = 0; i < schedulerResources.length; i++) {
+                    const resource = schedulerResources[i];
 
-                if (resource.value === firstResource) {
-                    reorderedResources.splice(0, 0, resource);
+                    if (resource.value === firstResource) {
+                        reorderedResources.splice(0, 0, resource);
+                    }
+                    else {
+                        reorderedResources.push(resource);
+                    }
                 }
-                else {
-                    reorderedResources.push(resource);
-                }
-            }
-            scheduler.resources = reorderedResources;
-        });
+                scheduler.resources = reorderedResources;
+            } as EventListener);
     };
 }

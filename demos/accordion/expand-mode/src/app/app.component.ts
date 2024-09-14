@@ -10,9 +10,10 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion: AccordionComponent;
-	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion!: AccordionComponent;
+	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 
+	expandMode = 'singleFitHeight';
 
 	ngAfterViewInit(): void {
 		// afterViewInit code.
@@ -23,11 +24,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// onInit code.
 	}
 
-	onChange($event) {
+	onChange($event: CustomEvent) {
 		this.accordion.expandMode = $event.detail.value;
 	}
 
-	onExpand($event) {
+	onExpand($event: CustomEvent) {
 		console.log('expand');
 	}
 

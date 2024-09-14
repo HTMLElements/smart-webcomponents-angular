@@ -11,10 +11,10 @@ import { ToastComponent } from '@smart-webcomponents-angular/toast';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('toast', { read: ToastComponent, static: false }) toast: ToastComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('toast', { read: ToastComponent, static: false }) toast!: ToastComponent;
 
-	buttonClickHandler(event: PointerEvent) {
+	buttonClickHandler() {
 		this.toast.open();
 	}
 

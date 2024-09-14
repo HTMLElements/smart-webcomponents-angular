@@ -9,8 +9,8 @@ import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
-    @ViewChild('kanban2', { read: KanbanComponent, static: false }) kanban2: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
+    @ViewChild('kanban2', { read: KanbanComponent, static: false }) kanban2!: KanbanComponent;
 
     selectionMode = 'zeroOrManyExtended';
     addNewButton = true;

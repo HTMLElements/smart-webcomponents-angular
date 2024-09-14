@@ -9,7 +9,7 @@ import { ColorPanelComponent } from '@smart-webcomponents-angular/colorpanel';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel: ColorPanelComponent;
+    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel!: ColorPanelComponent;
 
 
     ngOnInit(): void {

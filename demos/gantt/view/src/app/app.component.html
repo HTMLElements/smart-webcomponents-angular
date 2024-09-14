@@ -3,8 +3,8 @@
 <smart-gantt-chart #ganttChart [dataSource]="dataSource"></smart-gantt-chart>
 <div class="options">
     <div class="option">
-         <h3>Select view:</h3>
-        <smart-drop-down-list #dropDownList>
+        <h3>Select view:</h3>
+        <smart-drop-down-list #dropDownList (onChange)="dropDownChangeHandler($event)">
             <smart-list-item [selected]="true">year</smart-list-item>
             <smart-list-item>month</smart-list-item>
             <smart-list-item>week</smart-list-item>

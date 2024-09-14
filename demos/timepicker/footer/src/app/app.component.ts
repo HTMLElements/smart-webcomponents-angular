@@ -10,9 +10,9 @@ import { TimePickerComponent } from '@smart-webcomponents-angular/timepicker';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-	@ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker: TimePickerComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+	@ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker!: TimePickerComponent;
 	
  
 	ngOnInit(): void {

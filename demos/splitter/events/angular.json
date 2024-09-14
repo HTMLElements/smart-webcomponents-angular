@@ -1,127 +1,67 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "version": 1,
-    "newProjectRoot": "projects",
-    "projects": {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "1e1de97b-a744-405a-8b5a-0397bb3d01ce"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
     "demo": {
-        "root": "",
-        "sourceRoot": "src",
-        "projectType": "application",
-        "prefix": "app",
-        "schematics": {},
-        "architect": {
+      "architect": {
         "build": {
-            "builder": "@angular-devkit/build-angular:browser",
-            "options": {
-            "outputPath": "dist/demo",
+          "builder": "@angular-devkit/build-angular:application",
+          "configurations": {
+            "development": {
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true
+            },
+            "production": {
+              "aot": true,
+              "extractLicenses": true,
+              "namedChunks": false,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false
+            }
+          },
+          "options": {
+            "assets": [],
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
-            "assets": [
-                "src/assets"
-            ],
+            "browser": "src/main.ts",
+            "outputPath": "dist/demo",
+            "polyfills": ["zone.js"],
+            "scripts": [],
             "styles": [
-               	"./node_modules/@smart-webcomponents-angular/dropdownlist/styles/smart.base.css",
+              	"./node_modules/@smart-webcomponents-angular/dropdownlist/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/dropdownlist/styles/smart.dropdownlist.css",
 				"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.splitter.css",
 				"./node_modules/@smart-webcomponents-angular/dropdownlist/styles/smart.common.css",
-                "src/assets/fonts.css",
-			    "src/assets/styles.css"
+              "src/assets/fonts.css",
+              "src/assets/styles.css"
             ],
-            "scripts": []
-            },
-            "configurations": {
-            "production": {
-                "fileReplacements": [
-                {
-                    "replace": "src/environments/environment.ts",
-                    "with": "src/environments/environment.prod.ts"
-                }
-                ],
-                "optimization": false,
-                "outputHashing": "all",
-                "sourceMap": false,
-                "extractCss": true,
-                "namedChunks": false,
-                "aot": true,
-                "extractLicenses": true,
-                "vendorChunk": false,
-                "buildOptimizer": false
-            }
-            }
+            "tsConfig": "src/tsconfig.app.json"
+          }
         },
         "serve": {
-            "builder": "@angular-devkit/build-angular:dev-server",
-            "options": {
-            "browserTarget": "demo:build"
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "development": {
+              "buildTarget": "demo:build:development"
             },
-            "configurations": {
             "production": {
-                "browserTarget": "demo:build:production"
+              "buildTarget": "demo:build:production"
             }
-            }
-        },
-        "extract-i18n": {
-            "builder": "@angular-devkit/build-angular:extract-i18n",
-            "options": {
-            "browserTarget": "demo:build"
-            }
-        },
-        "test": {
-            "builder": "@angular-devkit/build-angular:karma",
-            "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [
-                "styles.css"
-            ],
-            "scripts": [],
-            "assets": [
-                "src/favicon.ico",
-                "src/assets"
-            ]
-            }
-        },
-        "lint": {
-            "builder": "@angular-devkit/build-angular:tslint",
-            "options": {
-            "tsConfig": [
-                "src/tsconfig.app.json",
-                "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-                "**/node_modules/**"
-            ]
-            }
+          },
+          "defaultConfiguration": "development"
         }
-        }
-    },
-    "demo-e2e": {
-        "root": "e2e/",
-        "projectType": "application",
-        "architect": {
-        "e2e": {
-            "builder": "@angular-devkit/build-angular:protractor",
-            "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "demo:serve"
-            }
-        },
-        "lint": {
-            "builder": "@angular-devkit/build-angular:tslint",
-            "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-                "**/node_modules/**"
-            ]
-            }
-        }
-        }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {},
+      "sourceRoot": "src"
     }
-    },
-    "defaultProject": "demo"
+  },
+  "version": 1
 }
-            

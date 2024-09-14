@@ -11,39 +11,16 @@ import { GetKanbanData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
-    allowColumnRemove = true;
     collapsible = true;
-    addNewButton = true;
-    editable = true;
-    columnActions = true;
-    columnEditMode = 'menu';
-    columnFooter = true;
-    columnSummary = true;
-    columnColors = true;
-    columnColorEntireSurface = true;
     dataSource = GetKanbanData();
-    allowColumnEdit = true;
-    allowColumnReorder = true;
-    taskActions = true;
-    taskDue = true;
-    taskComments = true;
-    currentUser = 0;
-    taskProgress = true;
-    users = [
-        { id: 0, name: 'Andrew', image: 'https://htmlelements.com/demos/images/people/andrew.png' },
-        { id: 1, name: 'Anne', image: 'https://htmlelements.com/demos/images/people/anne.png' },
-        { id: 2, name: 'Janet', image: 'https://htmlelements.com/demos/images/people/janet.png' },
-        { id: 3, name: 'John', image: 'https://htmlelements.com/demos/images/people/john.png' },
-        { id: 4, name: 'Laura', image: 'https://htmlelements.com/demos/images/people/laura.png' }
-    ];
     columns = [
-        { color: '#33B679', label: 'To do', width: 300, dataField: 'toDo', allowHide: false },
-        { color: '#8E24AA', label: 'In progress', width: 400, dataField: 'inProgress' },
-        { color: '#039BE5', label: 'Testing', width: 300, dataField: 'testing' },
-        { color: '#DD5347', label: 'Done', width: 200, dataField: 'done', addNewButton: false }
-    ]
+	    { color: '#33B679', label: 'To do', width: 300, dataField: 'toDo', allowHide: false },
+		{ color: '#8E24AA', label: 'In progress', width: 400, dataField: 'inProgress' },
+		{ color: '#039BE5', label: 'Testing', width: 300, dataField: 'testing' },
+		{ color: '#DD5347', label: 'Done', width: 200, dataField: 'done', addNewButton: false }
+    ];
 
     ngOnInit(): void {
         // onInit code.

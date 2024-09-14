@@ -10,11 +10,10 @@ import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
-	@ViewChild('switchbutton2', { read: SwitchButtonComponent, static: false }) switchbutton2: SwitchButtonComponent;
-	@ViewChild('switchbutton3', { read: SwitchButtonComponent, static: false }) switchbutton3: SwitchButtonComponent;
+	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
+	@ViewChild('switchbutton2', { read: SwitchButtonComponent, static: false }) switchbutton2!: SwitchButtonComponent;
+	@ViewChild('switchbutton3', { read: SwitchButtonComponent, static: false }) switchbutton3!: SwitchButtonComponent;
 	
- 
 	ngOnInit(): void {
 		// onInit code.
 	}

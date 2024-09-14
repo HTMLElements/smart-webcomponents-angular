@@ -11,12 +11,12 @@ import { TankComponent } from '@smart-webcomponents-angular/tank';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
-    @ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
-    @ViewChild('tank2', { read: TankComponent, static: false }) tank2: TankComponent;
-    @ViewChild('tank3', { read: TankComponent, static: false }) tank3: TankComponent;
-    @ViewChild('tank4', { read: TankComponent, static: false }) tank4: TankComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
+    @ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
+    @ViewChild('tank2', { read: TankComponent, static: false }) tank2!: TankComponent;
+    @ViewChild('tank3', { read: TankComponent, static: false }) tank3!: TankComponent;
+    @ViewChild('tank4', { read: TankComponent, static: false }) tank4!: TankComponent;
 
     ngOnInit(): void {
         // onInit code.
@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                 tank.value = value;
             }
-        });
+        } as EventListener);
         that.checkbox.addEventListener('change', function () {
             for (let i = 0; i < tanks.length; i++) {
                 const tank = tanks[i];

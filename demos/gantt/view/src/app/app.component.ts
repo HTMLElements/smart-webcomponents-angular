@@ -86,13 +86,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
+    }
 
-        const that = this,
-            gantt = that.ganttChart,
-            dropDown = that.dropDownList;
-
-        dropDown.addEventListener('change', function (event: CustomEvent): void {
-            gantt.view = event.detail.label;
-        });
+    dropDownChangeHandler(event: CustomEvent): void {
+        this.ganttChart.view = event.detail.label;
     }
 }

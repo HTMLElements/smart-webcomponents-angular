@@ -70,7 +70,7 @@ smart-button.promtion-btn {
     height: auto;
     background: transparent;
     border: none;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 32px;
     font-weight: 700;
     padding: 0;
@@ -299,8 +299,7 @@ smart-button.share-btn a.to-reddit:hover {
 }
 
 @keyframes circle-anim {
-    0% {
-    }
+    0% {}
 
     90% {
         padding: 0.35em;
@@ -318,11 +317,11 @@ smart-button.share-btn a.to-reddit:hover {
     background: transparent;
 }
 
-    .box button.cta a {
-        color: #fff;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
+.box button.cta a {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
 /* let's shape */
 .box button.cta span.shape {

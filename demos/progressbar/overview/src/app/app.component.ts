@@ -6,39 +6,44 @@ import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressbar: ProgressBarComponent;
-	@ViewChild('progressbar2', { read: ProgressBarComponent, static: false }) progressbar2: ProgressBarComponent;
-	@ViewChild('progressbar3', { read: ProgressBarComponent, static: false }) progressbar3: ProgressBarComponent;
-	@ViewChild('progressbar4', { read: ProgressBarComponent, static: false }) progressbar4: ProgressBarComponent;
-	@ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressbar!: ProgressBarComponent;
+    @ViewChild('progressbar2', { read: ProgressBarComponent, static: false }) progressbar2!: ProgressBarComponent;
+    @ViewChild('progressbar3', { read: ProgressBarComponent, static: false }) progressbar3!: ProgressBarComponent;
+    @ViewChild('progressbar4', { read: ProgressBarComponent, static: false }) progressbar4!: ProgressBarComponent;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
-	    
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
         const that = this;
         const progressBars = document.getElementsByClassName('determinate');
-        let hoverArea = document.getElementById('hover-area'), linearProgressBar1 = progressBars[0], linearProgressBar2 = progressBars[1], linearProgressBar3 = progressBars[2], circularProgressBar1 = progressBars[3], circularProgressBar2 = progressBars[2], mouseHoverArea = document.getElementsByClassName('page-refresh-progress')[0], uploadButton = document.getElementById('toggleUploadButton'), value, isPaused;
+        
+        const mouseHoverArea = document.getElementsByClassName('page-refresh-progress')[0]
+        const uploadButton = document.getElementById('toggleUploadButton')
+        let value;
+        let isPaused: boolean = false;
+
         mouseHoverArea.addEventListener('mouseenter', function () {
-            document.getElementById('refreshing').classList.remove('smart-visibility-hidden');
+            document.getElementById('refreshing')?.classList.remove('smart-visibility-hidden');
         });
         mouseHoverArea.addEventListener('mouseleave', function () {
-            document.getElementById('refreshing').classList.add('smart-visibility-hidden');
+            document.getElementById('refreshing')?.classList.add('smart-visibility-hidden');
         });
-        uploadButton.addEventListener('change', function (event:CustomEvent) {
+        uploadButton?.addEventListener('change', function (event: CustomEvent) {
             if (that.togglebutton.disabled || (that.progressbar4.value > 0 && that.progressbar4.value < that.progressbar4.max)) {
                 return;
             }
@@ -66,7 +71,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.togglebutton.nativeElement.style.backgroundColor = '';
                 that.togglebutton.nativeElement.innerHTML = '<i class="material-icons">cloud_upload</i>';
             }
-        });
+        } as EventListener);
+
         setInterval(function () {
             if (isPaused) {
                 return;
@@ -92,7 +98,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 }, 1500);
             }
         }, 500);
-    
 
-	}	
+
+    }
 }

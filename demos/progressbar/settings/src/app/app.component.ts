@@ -11,17 +11,17 @@ import { ProgressBarComponent, CircularProgressBarComponent } from '@smart-webco
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-    @ViewChild('button5', { read: ButtonComponent, static: false }) button5: ButtonComponent;
-    @ViewChild('button6', { read: ButtonComponent, static: false }) button6: ButtonComponent;
-    @ViewChild('button7', { read: ButtonComponent, static: false }) button7: ButtonComponent;
-    @ViewChild('input', { read: ElementRef, static: false }) input: ElementRef;
-    @ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressbar: ProgressBarComponent;
-    @ViewChild('progressbar2', { read: ProgressBarComponent, static: false }) progressbar2: ProgressBarComponent;
-    @ViewChild('circularProgressBar', { read: CircularProgressBarComponent, static: false }) circularProgressBar: CircularProgressBarComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
+    @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
+    @ViewChild('button7', { read: ButtonComponent, static: false }) button7!: ButtonComponent;
+    @ViewChild('input', { read: ElementRef, static: false }) input!: ElementRef;
+    @ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressbar!: ProgressBarComponent;
+    @ViewChild('progressbar2', { read: ProgressBarComponent, static: false }) progressbar2!: ProgressBarComponent;
+    @ViewChild('circularProgressBar', { read: CircularProgressBarComponent, static: false }) circularProgressBar!: CircularProgressBarComponent;
 
     setValue(event: any): void {
         const that = this,
@@ -73,6 +73,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 progressBar3.min = 50;
                 minButtons[0].disabled = false;
                 minButtons[1].disabled = true;
+                break;
             case 100:
                 progressBar1.max = 100;
                 progressBar2.max = 100;

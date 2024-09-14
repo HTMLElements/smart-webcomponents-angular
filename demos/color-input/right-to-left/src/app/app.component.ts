@@ -9,7 +9,7 @@ import { ColorInputComponent } from '@smart-webcomponents-angular/colorinput';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('colorInput', { read: ColorInputComponent, static: false }) colorInput: ColorInputComponent;
+    @ViewChild('colorInput', { read: ColorInputComponent, static: false }) colorInput!: ColorInputComponent;
 
     ngOnInit(): void {
         // onInit code.

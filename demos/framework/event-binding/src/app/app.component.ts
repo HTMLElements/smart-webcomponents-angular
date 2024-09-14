@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
+import { ButtonComponent } from 'smart-webcomponents-angular/button';
+import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
 
 import 'smart-webcomponents-angular/source/smart.core.js';
 
@@ -35,11 +35,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
-        this.app = new window.Smart.App({
-            data: {
-                message: "Hello World"
-            }
-        });
     }
 }

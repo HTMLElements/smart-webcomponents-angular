@@ -77,7 +77,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         buttons[0].addEventListener('click', function (e: Event): void {
             comboBox.dropDownOpenMode = 'default';
 
-            const currentButton = e.currentTarget as ButtonComponent;
             for (let b = 0; b < buttons.length; b++) {
                 buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }

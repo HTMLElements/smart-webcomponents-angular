@@ -25,10 +25,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     hideTimelineHeaderDetails: boolean = true;
 
     timelineHeaderFormatFunction: Function = (date: Date, type: string, isHeaderDetailsContainer: boolean, dateValue: string): string => {
+
         if (!isHeaderDetailsContainer && type === 'day') {
-            return date.toLocaleDateString((<any>this).locale, { day: 'numeric', month: 'short' });
+            return date.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: 'short' });
         }
-        
+
         return dateValue;
     };
 
@@ -40,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'From',
             value: 'dateStart',
-            formatFunction: (value, item) => {
+            formatFunction: (value: string, item: any) => {
                 return item.dateStart.toLocaleDateString('en', { hour: '2-digit', minute: '2-digit' });
             }
         }
@@ -55,7 +56,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Workload',
             value: 'workload',
-            formatFunction: (data) => data + 'h'
+            formatFunction: (data: string) => data + 'h'
         }
     ];
 

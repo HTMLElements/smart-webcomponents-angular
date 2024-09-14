@@ -9,7 +9,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
     
     dataSource = new window.Smart.DataAdapter({
 		dataSource: GetData(50),
@@ -22,13 +22,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	filtering: Boolean = true;
+	filtering: boolean = true;
 
-	filterRow: Boolean = true;
+	filterRow: boolean = true;
 
-	keyboardNavigation: Boolean = true;
+	keyboardNavigation: boolean = true;
 
-    locale: String = 'he';
+    locale: string = 'he';
     
 	messages: Object = {
 		'en': {
@@ -95,11 +95,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 	};
 
-	paging: Boolean = true;
+	paging: boolean = true;
 
-	rightToLeft: Boolean = true;
+	rightToLeft: boolean = true;
 
-	sortMode: String = 'one';
+	sortMode: string = 'one';
 	columns: TableColumn[] = [{
 		label: 'תעודת זהות',
 		dataField: 'id',

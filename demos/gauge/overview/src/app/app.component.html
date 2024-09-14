@@ -30,7 +30,7 @@
                 <div class="light-background">
                     <smart-gauge #gauge analog-display-type="fill" labels-visibility="none"
                     ticks-visibility="none" digital-display start-angle="-30" end-angle="210"
-                    min="0" max="100" value="50" precision-digits="2"></smart-gauge>
+                    [min]="0" [max]="100" value="50" precision-digits="2"></smart-gauge>
                 </div>
                 <br />
             </div>
@@ -49,8 +49,8 @@
                 <div class="light-background">
                     <smart-gauge #gauge2 analog-display-type="fill" labels-visibility="none"
                     ticks-visibility="major" ticks-position="track" digital-display start-angle="-30"
-                    end-angle="210" min="0" max="100" value="10" precision-digits="0" [coerce]="true"
-                    interval="10"></smart-gauge>
+                    end-angle="210" [min]="0" [max]="100" value="10" precision-digits="0" [coerce]="true"
+                    [interval]="10"></smart-gauge>
                 </div>
             </div>
             <div class="module"></div>
@@ -65,7 +65,7 @@
                 <div class="light-background">
                     <smart-gauge #gauge3 analog-display-type="fill" labels-visibility="all"
                     ticks-visibility="minor" ticks-position="scale" scale-position="inside"
-                    digital-display start-angle="-30" end-angle="210" min="0" max="100" value="10"
+                    digital-display start-angle="-30" end-angle="210" [min]="0" [max]="100" value="10"
                     precision-digits="0"></smart-gauge>
                 </div>
                 <p>Continuous gauge with scale positioned inside</p>
@@ -74,7 +74,7 @@
                 <div class="light-background">
                     <smart-gauge #gauge4 analog-display-type="fill" labels-visibility="all"
                     ticks-visibility="minor" ticks-position="scale" scale-position="outside"
-                    digital-display start-angle="-30" end-angle="210" min="0" max="100" value="20"
+                    digital-display start-angle="-30" end-angle="210" [min]="0" [max]="100" value="20"
                     precision-digits="0"></smart-gauge>
                 </div>
                 <p>Continuous gauge with scale positioned outside</p>
@@ -83,7 +83,7 @@
                 <div class="light-background">
                     <smart-gauge #gauge5 analog-display-type="fill" labels-visibility="all"
                     ticks-visibility="minor" ticks-position="track" scale-position="outside"
-                    digital-display start-angle="-30" end-angle="210" min="0" max="100" value="30"
+                    digital-display start-angle="-30" end-angle="210" [min]="0" [max]="100" value="30"
                     precision-digits="0"></smart-gauge>
                 </div>
                 <p>Continuous gauge with label positioned outside and ticks on track</p>
@@ -98,7 +98,7 @@
                 <div class="light-background">
                     <smart-gauge #gauge6 analog-display-type="fill" labels-visibility="none"
                     ticks-visibility="none" digital-display digital-display-position="center"
-                    start-angle="0" end-angle="180" min="0" max="100" value="45" precision-digits="2"></smart-gauge>
+                    start-angle="0" end-angle="180" [min]="0" [max]="100" value="45" precision-digits="2"></smart-gauge>
                 </div>
                 <p>Semi-circular gauge</p>
             </div>
@@ -106,7 +106,7 @@
                 <div class="light-background">
                     <smart-gauge #gauge7 analog-display-type="fill" labels-visibility="none"
                     ticks-visibility="none" digital-display digital-display-position="center"
-                    start-angle="0" end-angle="360" min="0" max="100" value="45" precision-digits="2"></smart-gauge>
+                    start-angle="0" end-angle="360" [min]="0" [max]="100" value="45" precision-digits="2"></smart-gauge>
                 </div>
                 <p>Circular gauge</p>
             </div>
@@ -114,7 +114,7 @@
                 <div class="light-background">
                     <smart-gauge #gauge8 analog-display-type="fill" labels-visibility="none"
                     ticks-visibility="none" digital-display digital-display-position="center"
-                    start-angle="80" end-angle="280" min="0" max="100" value="45" precision-digits="2"></smart-gauge>
+                    start-angle="80" end-angle="280" [min]="0" [max]="100" value="45" precision-digits="2"></smart-gauge>
                 </div>
                 <p>Gauge with custom angles</p>
             </div>
@@ -125,7 +125,7 @@
                 <div id="mobileDemo">
                     <smart-gauge #gauge9 id="mobileGauge" analog-display-type="fill" labels-visibility="none"
                     ticks-visibility="none" digital-display start-angle="-30" end-angle="210"
-                    min="0" max="100" value="50" precision-digits="0"></smart-gauge>
+                    [min]="0" [max]="100" value="50" precision-digits="0"></smart-gauge>
                 </div>
             </div>
         </section>

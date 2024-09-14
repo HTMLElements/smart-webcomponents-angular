@@ -13,17 +13,17 @@ import { CircularProgressBarComponent } from '@smart-webcomponents-angular/progr
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
-    @ViewChild('progressBar', { read: CircularProgressBarComponent, static: false }) progressBar: CircularProgressBarComponent;
-    @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter: SplitterComponent;
-    @ViewChild('splitter2', { read: SplitterComponent, static: false }) splitter2: SplitterComponent;
-    @ViewChild('splitter3', { read: SplitterComponent, static: false }) splitter3: SplitterComponent;
-    @ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
-    @ViewChild('contentHolder', { read: SplitterItemComponent, static: false }) contentHolder: SplitterItemComponent;
-    @ViewChild('tabsContentHolder', { read: SplitterItemComponent, static: false }) tabsContentHolder: SplitterItemComponent;
-    @ViewChild('waterText', { read: ElementRef, static: false }) waterText: ElementRef;
-    @ViewChild('soilText', { read: ElementRef, static: false }) soilText: ElementRef;
-    @ViewChild('airText', { read: ElementRef, static: false }) airText: ElementRef;
+    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
+    @ViewChild('progressBar', { read: CircularProgressBarComponent, static: false }) progressBar!: CircularProgressBarComponent;
+    @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter!: SplitterComponent;
+    @ViewChild('splitter2', { read: SplitterComponent, static: false }) splitter2!: SplitterComponent;
+    @ViewChild('splitter3', { read: SplitterComponent, static: false }) splitter3!: SplitterComponent;
+    @ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
+    @ViewChild('contentHolder', { read: SplitterItemComponent, static: false }) contentHolder!: SplitterItemComponent;
+    @ViewChild('tabsContentHolder', { read: SplitterItemComponent, static: false }) tabsContentHolder!: SplitterItemComponent;
+    @ViewChild('waterText', { read: ElementRef, static: false }) waterText!: ElementRef;
+    @ViewChild('soilText', { read: ElementRef, static: false }) soilText!: ElementRef;
+    @ViewChild('airText', { read: ElementRef, static: false }) airText!: ElementRef;
 
 
     ngOnInit(): void {
@@ -57,7 +57,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             else {
                 contentHolder.innerHTML = '<div id="map-canvas-2"></div>'; //Bali
             }
-        });
+        } as EventListener);
 
         contentHolder.innerHTML = that.waterText.nativeElement.innerHTML;
 
@@ -74,6 +74,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 contentHolder.innerHTML = that.airText.nativeElement.innerHTML;
                 progressHolder.value = 100;
             }
-        });
+        } as EventListener);
     }
 }

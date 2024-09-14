@@ -11,9 +11,9 @@ import { WindowComponent } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent;
-	@ViewChild('window2', { read: WindowComponent, static: false }) smartWindow2: WindowComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow!: WindowComponent;
+	@ViewChild('window2', { read: WindowComponent, static: false }) smartWindow2!: WindowComponent;
 
 	onButtonClick(event: any): void {
 		const smartWindows = [this.smartWindow, this.smartWindow2];

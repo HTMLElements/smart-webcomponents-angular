@@ -10,7 +10,7 @@ import { SplitterComponent } from '@smart-webcomponents-angular/splitter';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('splitter', { read: SplitterComponent, static: false }) splitter: SplitterComponent;
+	@ViewChild('splitter', { read: SplitterComponent, static: false }) splitter!: SplitterComponent;
     
     dataSource: Array<object> = [
         {

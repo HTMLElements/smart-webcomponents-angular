@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
-import { PivotTableComponent, PivotTableColumn } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 import { GetData } from '../assets/data';
 
 @Component({

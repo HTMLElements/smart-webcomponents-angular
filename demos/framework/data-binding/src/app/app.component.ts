@@ -1,8 +1,8 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent, Smart } from '@smart-webcomponents-angular/button';
-import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
-import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
-import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
+import { ButtonComponent, Smart } from 'smart-webcomponents-angular/button';
+import { DropDownListComponent } from 'smart-webcomponents-angular/dropdownlist';
+import { ListBoxComponent } from 'smart-webcomponents-angular/listbox';
+import { TextBoxComponent } from 'smart-webcomponents-angular/textbox';
 
 import 'smart-webcomponents-angular/source/smart.core.js';
 

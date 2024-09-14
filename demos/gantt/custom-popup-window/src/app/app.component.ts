@@ -32,22 +32,24 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     dateStart: string = '2021-04-01';
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string, isHeaderDetailsContainer: boolean): string {
+    timelineHeaderFormatFunction(date: Date, type: string, isHeaderDetailsContainer: boolean): string {
+        
         if (isHeaderDetailsContainer) {
             let startDate = new Date(date),
                 endDate = new Date(date),
-                formatDate = (date: Date) => date.toLocaleDateString(this.locale, { day: '2-digit', month: 'short' }).toUpperCase();
+                formatDate = (date: Date) => date.toLocaleDateString(this.ganttChart.locale, { day: '2-digit', month: 'short' }).toUpperCase();
 
             //the view is set to 'week' so add 6 days to the first to get the last
             endDate.setDate(endDate.getDate() + 6);
 
             //Validate the endDate according to timeline end
-            endDate = new Date(Math.min(this.dateEnd.getTime(), endDate.getTime()));
+            const ganttDateEnd = new Date(this.ganttChart.dateEnd);
+            endDate = new Date(Math.min(ganttDateEnd.getTime(), endDate.getTime()));
 
             return formatDate(startDate) + ' - ' + formatDate(endDate);
         }
         else {
-            return new Date(date).toLocaleDateString(this.locale, { weekday: 'short' }).toUpperCase();
+            return new Date(date).toLocaleDateString(this.ganttChart.locale, { weekday: 'short' }).toUpperCase();
         }
     };
 
@@ -337,9 +339,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
 
+        const gantt = this.ganttChart;
 
-        const gantt = document.querySelector('smart-gantt-chart');
         let task: GanttChartTask | undefined,
             taskLabel: HTMLLabelElement,
             description: MultilineTextBox,
@@ -360,17 +363,17 @@ export class AppComponent implements AfterViewInit, OnInit {
                 gantt.closeWindow();
                 task = undefined;
             }
-    
+
             function cancelTask() {
                 gantt.closeWindow();
             }
-    
+
             function saveTask() {
                 let dateStart = new Date(parseInt(yearPicker.value),
                     parseInt(monthPicker.value),
                     parseInt(dayPicker.value)),
-                    duration = parseInt(dayInput.value);
-                    
+                    duration = parseInt(dayInput.value!);
+
                 gantt.updateTask(task, { label: description.value, dateStart: dateStart, duration: duration });
                 gantt.closeWindow();
                 task = targetTask;
@@ -378,7 +381,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             function updateTotalDate() {
                 let newDateEnd = new Date(parseInt(yearPicker.value), parseInt(monthPicker.value), parseInt(dayPicker.value));
-                newDateEnd.setDate(newDateEnd.getDate() + parseInt(dayInput.value));
+                newDateEnd.setDate(newDateEnd.getDate() + parseInt(dayInput.value!));
                 if (isNaN(newDateEnd.getTime())) {
                     totalDate.innerHTML = '';
                     return;
@@ -387,7 +390,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
 
             if (type === 'task' && targetTask) {
-                let addListeners: boolean;
+                let addListeners: boolean = false;
 
                 //Hide the header
                 target.headerPosition = 'none' as TabPosition;
@@ -410,7 +413,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 yearPicker = document.getElementById('yearPicker') as HTMLSelectElement;
                 dayIncrementBtn = document.getElementById('dayIncrementBtn') as RepeatButton;
                 dayDecrementBtn = document.getElementById('dayDecrementBtn') as RepeatButton;
-                dayInput = document.getElementById('dayInput') as TextBox;
+                dayInput = document.getElementById('dayInput')! as TextBox;
                 totalDate = document.getElementById('totalDate') as HTMLLabelElement;
                 deleteBtn = document.getElementById('deleteBtn') as Button;
                 cancelBtn = document.getElementById('cancelBtn') as Button;
@@ -429,23 +432,24 @@ export class AppComponent implements AfterViewInit, OnInit {
                     taskLabel.innerHTML = dateStart.toLocaleDateString(gantt.locale) + ' - ' +
                         dateEnd.toLocaleDateString(gantt.locale);
                 }
-                description.value = targetTask.label;
+
+                description.value = targetTask.label!;
                 dayPicker.value = dateStart.getDate().toString();
                 monthPicker.value = dateStart.getMonth().toString();
                 yearPicker.value = dateStart.getFullYear().toString();
-                dayInput.value = targetTask.duration.toString();
+                dayInput.value = targetTask.duration?.toString();
                 totalDate.innerHTML = (<Date>targetTask.dateEnd).toDateString();
 
                 task = targetTask;
 
                 if (addListeners) {
                     dayIncrementBtn.addEventListener('click', function () {
-                        dayInput.value = (Math.min(31, (parseInt(dayInput.value) || 0) + 1)).toString();
+                        dayInput.value = (Math.min(31, (parseInt(dayInput.value!) || 0) + 1)).toString();
                         updateTotalDate();
                     });
 
                     dayDecrementBtn.addEventListener('click', function () {
-                        dayInput.value = Math.max(1, (parseInt(dayInput.value) || 0) - 1).toString();
+                        dayInput.value = Math.max(1, (parseInt(dayInput.value!) || 0) - 1).toString();
                         updateTotalDate();
                     });
 

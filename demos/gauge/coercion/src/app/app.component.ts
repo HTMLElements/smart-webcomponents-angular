@@ -11,9 +11,9 @@ import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
 
 
     ngOnInit(): void {
@@ -31,7 +31,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         that.togglebutton.addEventListener('change', function (event: CustomEvent) {
             that.gauge.coerce = event.detail.value;
-        });
+        } as EventListener);
+        
         that.button.addEventListener('click', function () {
             that.gauge.interval = 2;
         });

@@ -9,7 +9,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
 	
  
 	ngOnInit(): void {
@@ -24,14 +24,16 @@ export class AppComponent implements AfterViewInit, OnInit {
 	init(): void {
 		// init code.
 	    
-    
         'use strict';
+
         let button = document.querySelector('.button');
+
         let removeSuccess = () => {
-            button.classList.remove('success');
+            button?.classList.remove('success');
         };
-        button.addEventListener('click', function () {
-            button.classList.add('success');
+        
+        button?.addEventListener('click', function () {
+            button?.classList.add('success');
             setTimeout(function () {
                 removeSuccess();
             }, 3000);

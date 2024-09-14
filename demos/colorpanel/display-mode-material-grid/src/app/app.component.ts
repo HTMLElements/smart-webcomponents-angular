@@ -10,17 +10,17 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel: ColorPanelComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6: RadioButtonComponent;
-    @ViewChild('radiobutton7', { read: RadioButtonComponent, static: false }) radiobutton7: RadioButtonComponent;
-    @ViewChild('radiobutton8', { read: RadioButtonComponent, static: false }) radiobutton8: RadioButtonComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
-    @ViewChild('rgbInput', { read: ElementRef, static: false }) rgbInput: ElementRef;
+    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel!: ColorPanelComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6!: RadioButtonComponent;
+    @ViewChild('radiobutton7', { read: RadioButtonComponent, static: false }) radiobutton7!: RadioButtonComponent;
+    @ViewChild('radiobutton8', { read: RadioButtonComponent, static: false }) radiobutton8!: RadioButtonComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
+    @ViewChild('rgbInput', { read: ElementRef, static: false }) rgbInput!: ElementRef;
 
 
     ngOnInit(): void {
@@ -45,8 +45,9 @@ export class AppComponent implements AfterViewInit, OnInit {
             //Set new Grid Item size
             if (radioButton) {
                 if (radioButton.groupName === 'columnSize' || radioButton.groupName === 'columnGap') {
-                    let size: string,
-                        className = radioButton.groupName === 'columnSize' ? 'item-size' : 'column-gap';
+
+                    let size: string;
+                    let className = radioButton.groupName === 'columnSize' ? 'item-size' : 'column-gap';
 
                     switch (radioButton.innerHTML) {
                         case '1':
@@ -61,6 +62,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                         case '60':
                             size = 'large';
                             break;
+                        default:
+                            size = ''
+                            break;
                     }
 
                     //Remove the oldClass
@@ -68,7 +72,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                     for (let i = 0; i < classes.length; i++) {
                         if (classes[i].indexOf(className) > -1) {
-                            classes.remove(classes.item(i));
+                            classes.remove(classes.item(i) || '');
                         }
                     }
                     classes.add(className + '-' + size);
@@ -89,6 +93,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         colorPanel.addEventListener('change', function (event: CustomEvent): void {
             that.rgbInput.nativeElement.value = event.detail.value;
-        });
+        } as EventListener);
     }
 }

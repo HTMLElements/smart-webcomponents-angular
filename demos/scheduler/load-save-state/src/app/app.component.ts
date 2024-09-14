@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
-import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -11,12 +11,12 @@ import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-we
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    data: any[] = (() => {
+    data: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -292,7 +292,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'month';
 
-    views: SchedulerViews = [];
+    views: SchedulerViews[] = [];
 
     hourStart: number = 9;
 

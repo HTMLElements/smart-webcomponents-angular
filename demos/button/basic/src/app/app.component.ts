@@ -1,6 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
-
+﻿import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
     selector: 'app-root',
@@ -8,33 +6,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 	styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-	@ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-	@ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-	@ViewChild('button5', { read: ButtonComponent, static: false }) button5: ButtonComponent;
-	@ViewChild('button6', { read: ButtonComponent, static: false }) button6: ButtonComponent;
-	@ViewChild('button7', { read: ButtonComponent, static: false }) button7: ButtonComponent;
-	@ViewChild('button8', { read: ButtonComponent, static: false }) button8: ButtonComponent;
-	@ViewChild('button9', { read: ButtonComponent, static: false }) button9: ButtonComponent;
-	@ViewChild('button10', { read: ButtonComponent, static: false }) button10: ButtonComponent;
-	@ViewChild('button11', { read: ButtonComponent, static: false }) button11: ButtonComponent;
-	@ViewChild('button12', { read: ButtonComponent, static: false }) button12: ButtonComponent;
-	@ViewChild('button13', { read: ButtonComponent, static: false }) button13: ButtonComponent;
-	@ViewChild('button14', { read: ButtonComponent, static: false }) button14: ButtonComponent;
-	@ViewChild('button15', { read: ButtonComponent, static: false }) button15: ButtonComponent;
-	@ViewChild('button16', { read: ButtonComponent, static: false }) button16: ButtonComponent;
-	@ViewChild('button17', { read: ButtonComponent, static: false }) button17: ButtonComponent;
-	@ViewChild('button18', { read: ButtonComponent, static: false }) button18: ButtonComponent;
-	@ViewChild('button19', { read: ButtonComponent, static: false }) button19: ButtonComponent;
-	@ViewChild('button20', { read: ButtonComponent, static: false }) button20: ButtonComponent;
-	@ViewChild('button21', { read: ButtonComponent, static: false }) button21: ButtonComponent;
-	@ViewChild('button22', { read: ButtonComponent, static: false }) button22: ButtonComponent;
-	@ViewChild('button23', { read: ButtonComponent, static: false }) button23: ButtonComponent;
-	@ViewChild('button24', { read: ButtonComponent, static: false }) button24: ButtonComponent;
-	
- 
+export class AppComponent implements AfterViewInit, OnInit {	 
 	ngOnInit(): void {
 		// onInit code.
 	}

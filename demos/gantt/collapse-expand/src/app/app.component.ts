@@ -179,12 +179,18 @@ export class AppComponent implements AfterViewInit, OnInit {
             ganttChart.expand(indexSelector.selectedValues[0]);
         });
 
-        ganttChart.addEventListener('collapse', function (event: CustomEvent): void {
-            ganttChart.getTaskIndex(event.detail.item).then(index => log.innerHTML += '<br />' + event.type + 'Task # ' + index);
-        });
+        const ganttCollapseHandler = function (event: CustomEvent): void {
+            ganttChart.getTaskIndex(event.detail.item)
+                .then(index => log.innerHTML += '<br />' + event.type + 'Task # ' + index);
+        }
 
-        ganttChart.addEventListener('expand', function (event: CustomEvent): void {
-            ganttChart.getTaskIndex(event.detail.item).then(index => log.innerHTML += '<br />' + event.type + 'Task # ' + index);
-        });
+        ganttChart.addEventListener('collapse', ganttCollapseHandler as EventListener);
+
+        const ganttExpandHandler = function (event: CustomEvent): void {
+            ganttChart.getTaskIndex(event.detail.item)
+                .then(index => log.innerHTML += '<br />' + event.type + 'Task # ' + index);
+        }
+
+        ganttChart.addEventListener('expand', ganttExpandHandler as EventListener);
     }
 }

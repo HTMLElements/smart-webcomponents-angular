@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 import { GetData } from '../assets/data';
 
 @Component({
@@ -9,7 +9,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
 
     messages = {
         'en': {
@@ -231,14 +231,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     locale = 'he';
     toolbar = true;
     rightToLeft = true;
-    columns = [
+    columns: PivotTableColumn[] = [
         { label: 'שם פרטי', dataField: 'firstName', dataType: 'string', allowRowGroup: true, rowGroup: true },
         { label: 'שם משפחה', dataField: 'lastName', dataType: 'string', allowPivot: true, allowRowGroup: true, rowGroup: true },
         { label: 'שם מוצר', dataField: 'productName', dataType: 'string', allowPivot: true, pivot: true },
         { label: 'כַּמוּת', dataField: 'quantity', dataType: 'number', summary: 'sum' },
         { label: 'מחיר', dataField: 'price', dataType: 'number', summary: 'sum', summarySettings: { prefix: '$', decimalPlaces: 2 } },
         { label: 'תאריך רכישה', dataField: 'date', dataType: 'date' } // column is not rendered, because it is neither "pivot", "rowGroup", nor it has "summary"
-    ];
+    ] as PivotTableColumn[];
 
     ngOnInit(): void {
         // onInit code.

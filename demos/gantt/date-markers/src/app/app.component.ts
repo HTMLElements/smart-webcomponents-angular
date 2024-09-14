@@ -148,10 +148,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const ganttChart = this.ganttchart;
-
-        document.getElementById('hideMarkers').addEventListener('change', function (event: CustomEvent) {
-            ganttChart.hideDateMarkers = event.detail.value;
-        });
+        const hideMarkersChangeHandler = (event: CustomEvent) => {
+            this.ganttchart.hideDateMarkers = event.detail.value;
+        }
+        
+        document.getElementById('hideMarkers')
+            ?.addEventListener('change', hideMarkersChangeHandler as EventListener);
     };
 }

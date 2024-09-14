@@ -9,7 +9,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
 	
  
 	ngOnInit(): void {
@@ -27,6 +27,9 @@ export class AppComponent implements AfterViewInit, OnInit {
     
         const button = document.querySelector('smart-button');
         const eventLog = document.querySelector('#log');
+
+        if(!button || !eventLog) return 
+        
         button.addEventListener('click', function (event) {
             eventLog.innerHTML = 'Click';
         });

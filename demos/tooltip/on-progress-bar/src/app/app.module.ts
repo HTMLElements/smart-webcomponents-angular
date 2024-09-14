@@ -10,8 +10,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [ AppComponent ],
     imports: [ BrowserModule, ProgressBarModule, RadioButtonModule, TooltipModule ],
-    bootstrap: [ AppComponent ],
-	
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

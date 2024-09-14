@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
     
     data = GetData(15);
 
@@ -25,7 +25,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
     });
     
-    footerRow: String = 'customFooterRow';
+    footerRow: string = 'customFooterRow';
 
 	columns: TableColumn[] = [{
 		label: 'id',
@@ -59,7 +59,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         this.data.forEach((dataPoint: any) => totalQuantity += dataPoint.quantity);
         
-        document.getElementById('totalQuantity').innerHTML = totalQuantity.toString();
+		if(document.getElementById('totalQuantity'))
+		{
+			document.getElementById('totalQuantity')!.innerHTML = totalQuantity.toString();
+		}
     }
 
 	ngOnInit(): void {

@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
-import { SchedulerComponent, SchedulerHeaderNavigationStyle, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerHeaderNavigationStyle, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -12,20 +12,20 @@ import { SchedulerComponent, SchedulerHeaderNavigationStyle, SchedulerViewType }
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-    @ViewChild('checkbox4', { read: CheckBoxComponent, static: false }) checkbox4: CheckBoxComponent;
-    @ViewChild('checkbox5', { read: CheckBoxComponent, static: false }) checkbox5: CheckBoxComponent;
-    @ViewChild('checkbox6', { read: CheckBoxComponent, static: false }) checkbox6: CheckBoxComponent;
-    @ViewChild('checkbox7', { read: CheckBoxComponent, static: false }) checkbox7: CheckBoxComponent;
-    @ViewChild('checkbox8', { read: CheckBoxComponent, static: false }) checkbox8: CheckBoxComponent;
-    @ViewChild('checkbox9', { read: CheckBoxComponent, static: false }) checkbox9: CheckBoxComponent;
-    @ViewChild('checkbox10', { read: CheckBoxComponent, static: false }) checkbox10: CheckBoxComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3!: CheckBoxComponent;
+    @ViewChild('checkbox4', { read: CheckBoxComponent, static: false }) checkbox4!: CheckBoxComponent;
+    @ViewChild('checkbox5', { read: CheckBoxComponent, static: false }) checkbox5!: CheckBoxComponent;
+    @ViewChild('checkbox6', { read: CheckBoxComponent, static: false }) checkbox6!: CheckBoxComponent;
+    @ViewChild('checkbox7', { read: CheckBoxComponent, static: false }) checkbox7!: CheckBoxComponent;
+    @ViewChild('checkbox8', { read: CheckBoxComponent, static: false }) checkbox8!: CheckBoxComponent;
+    @ViewChild('checkbox9', { read: CheckBoxComponent, static: false }) checkbox9!: CheckBoxComponent;
+    @ViewChild('checkbox10', { read: CheckBoxComponent, static: false }) checkbox10!: CheckBoxComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -132,15 +132,17 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const scheduler = this.scheduler;
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent) {
-            const target = event.target as HTMLElement;
+        document.querySelector('.options')
+            ?.addEventListener('change', function (event: CustomEvent) {
+                const target = event.target as HTMLElement;
 
-            if (target instanceof window.Smart.RadioButton) {
-                scheduler.headerNavigationStyle = target.textContent.trim() as SchedulerHeaderNavigationStyle;
-            }
-            else if (target instanceof window.Smart.CheckBox) {
-                scheduler[target.id] = event.detail.value;
-            }
-        });
+                if (target instanceof window.Smart.RadioButton) {
+                    scheduler.headerNavigationStyle = target?.textContent?.trim() as SchedulerHeaderNavigationStyle;
+                }
+                else if (target instanceof window.Smart.CheckBox) {
+                    //@ts-ignore
+                    scheduler[target.id] = event.detail.value;
+                }
+            } as EventListener);
     };
 }

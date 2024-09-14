@@ -10,12 +10,12 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2: GaugeComponent;
-    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3: GaugeComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2!: GaugeComponent;
+    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3!: GaugeComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
 
     ngOnInit(): void {
         // onInit code.

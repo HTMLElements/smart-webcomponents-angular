@@ -10,8 +10,8 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker: ColorPickerComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker!: ColorPickerComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 
 
     ngOnInit(): void {
@@ -52,6 +52,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                         case '60':
                             size = 'large';
                             break;
+                        default:
+                            size = '';
+                            break;
                     }
 
                     //Remove the oldClass
@@ -59,7 +62,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                     for (let i = 0; i < classes.length; i++) {
                         if (classes[i].indexOf(className) > -1) {
-                            classes.remove(classes.item(i));
+                            classes.remove(classes.item(i) || '');
                         }
                     }
                     classes.add(className + '-' + size);

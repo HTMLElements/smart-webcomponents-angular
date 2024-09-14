@@ -10,10 +10,10 @@ import { EditorComponent, EditorContextMenu, ToolbarItem } from '@smart-webcompo
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     //Properties
-    toolbarItems: string[] = ['findAndReplace'];
+    toolbarItems: any = ['findAndReplace'];
     contextMenu: EditorContextMenu = 'browser';
 
     ngOnInit(): void {

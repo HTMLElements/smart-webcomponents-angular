@@ -10,11 +10,11 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox: ComboBoxComponent;
-    @ViewChild('radioButtonNone', { read: RadioButtonComponent, static: false }) radioButtonNone: RadioButtonComponent;
-    @ViewChild('radioButtonAuto', { read: RadioButtonComponent, static: false }) radioButtonAuto: RadioButtonComponent;
-    @ViewChild('radioButtonInline', { read: RadioButtonComponent, static: false }) radioButtonInline: RadioButtonComponent;
-    @ViewChild('radioButtonManual', { read: RadioButtonComponent, static: false }) radioButtonManual: RadioButtonComponent;
+	@ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox!: ComboBoxComponent;
+    @ViewChild('radioButtonNone', { read: RadioButtonComponent, static: false }) radioButtonNone!: RadioButtonComponent;
+    @ViewChild('radioButtonAuto', { read: RadioButtonComponent, static: false }) radioButtonAuto!: RadioButtonComponent;
+    @ViewChild('radioButtonInline', { read: RadioButtonComponent, static: false }) radioButtonInline!: RadioButtonComponent;
+    @ViewChild('radioButtonManual', { read: RadioButtonComponent, static: false }) radioButtonManual!: RadioButtonComponent;
 	
  
 	ngOnInit(): void {

@@ -10,11 +10,11 @@ import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion: AccordionComponent;
-	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
-	@ViewChild('tabs2', { read: TabsComponent, static: false }) tabs2: TabsComponent;
-	@ViewChild('tabs3', { read: TabsComponent, static: false }) tabs3: TabsComponent;
-	@ViewChild('tabs4', { read: TabsComponent, static: false }) tabs4: TabsComponent;
+	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion!: AccordionComponent;
+	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
+	@ViewChild('tabs2', { read: TabsComponent, static: false }) tabs2!: TabsComponent;
+	@ViewChild('tabs3', { read: TabsComponent, static: false }) tabs3!: TabsComponent;
+	@ViewChild('tabs4', { read: TabsComponent, static: false }) tabs4!: TabsComponent;
 	
  
 	ngAfterViewInit(): void {

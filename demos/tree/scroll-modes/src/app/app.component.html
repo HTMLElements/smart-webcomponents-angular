@@ -1,4 +1,4 @@
-<smart-tree #tree id="tree1" [filterable] [filterMode]="'containsIgnoreCase'" [scrollMode]="'scrollbar'">
+<smart-tree #tree id="tree1" [filterable]="true" [filterMode]="'containsIgnoreCase'" [scrollMode]="'scrollbar'">
     <smart-tree-item>Home</smart-tree-item>
     <smart-tree-items-group [expanded]="true">Solutions
         <smart-tree-item>Education</smart-tree-item>
@@ -58,7 +58,7 @@
     </smart-tree-items-group>
 </smart-tree>
 <br />
-<smart-tree #tree2 id="tree2" class="animation" [filterable] [filterMode]="'containsIgnoreCase'"
+<smart-tree #tree2 id="tree2" class="animation" [filterable]="true" [filterMode]="'containsIgnoreCase'"
     [scrollMode]="'scrollButtons'">
     <smart-tree-item>Home</smart-tree-item>
     <smart-tree-items-group [expanded]="true">Solutions

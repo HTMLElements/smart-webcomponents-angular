@@ -8,7 +8,7 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['app.component.css'],
-	encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -225,7 +225,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Assigned',
             value: 'resources',
-            formatFunction: function (data, taskIndex) {
+            formatFunction: function (data: string) {
                 return `<span>${data.length > 0 ? '&#10003' : '&#10007'}</span>`;
             }
         }
@@ -253,16 +253,17 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view = 'month';
 
-    timelineHeaderFormatFunction = function (date, type: string, isHeaderDetails: boolean) {
-        const that = document.querySelector('smart-gantt-chart'),
-            monthFormat = that.monthFormat as "narrow" | "long" | "short" | "2-digit" | "numeric" | undefined,
-            weekStartDate = new Date(date);
+    timelineHeaderFormatFunction(date: Date, type: string, isHeaderDetails: boolean) {
+
+        const monthFormat = this.ganttChart.monthFormat as "narrow" | "long" | "short" | "2-digit" | "numeric" | undefined;
+        const yearFormat = this.ganttChart.yearFormat as "2-digit" | "numeric" | undefined;
+        const weekStartDate = new Date(date);
 
         if (isHeaderDetails) {
-            return weekStartDate.toLocaleDateString(that.locale, { month: monthFormat, year: that.yearFormat });
+            return weekStartDate.toLocaleDateString(this.ganttChart.locale, { month: monthFormat, year: yearFormat });
         }
         else {
-            return weekStartDate.toLocaleDateString(that.locale, { day: 'numeric', month: monthFormat });
+            return weekStartDate.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat });
         }
     }
 
@@ -276,22 +277,23 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     onReady() {
-        document.querySelector('.custom-resource-panel-header').addEventListener('change', function (event: CustomEvent) {
-            const ganttChart = document.querySelector('smart-gantt-chart'),
-                target = (event.target);
+
+        const customResourcePanelHeaderChangeHandler = (event: CustomEvent) => {
+
+            const target = event.target;
 
             if (target instanceof window.Smart.DropDownList) {
-                const filter = event.detail.value, resources = ganttChart.resources;
+                const filter = event.detail.value, resources = this.ganttChart.resources;
 
                 //Important Note: Begins a batch update
-                ganttChart.beginUpdate();
+                this.ganttChart.beginUpdate();
 
                 if (filter === 'all') {
                     for (let i = 0; i < resources.length; i++) {
                         const resource = resources[i];
 
                         if (resource.hidden) {
-                            ganttChart.updateResource(resource, { hidden: false });
+                            this.ganttChart.updateResource(resource, { hidden: false });
                         }
                     }
                 }
@@ -300,26 +302,32 @@ export class AppComponent implements AfterViewInit, OnInit {
                         const resource = resources[i];
 
                         if (resource.type !== filter) {
-                            ganttChart.updateResource(resource, { hidden: true });
+                            this.ganttChart.updateResource(resource, { hidden: true });
                         }
                         else {
-                            ganttChart.updateResource(resource, { hidden: false });
+                            this.ganttChart.updateResource(resource, { hidden: false });
                         }
                     }
                 }
 
                 //Important Note: Ends the batch update
-                ganttChart.endUpdate();
+                this.ganttChart.endUpdate();
 
                 return;
             }
             if (target instanceof window.Smart.RadioButton && event.detail.value) {
-                ganttChart.resourceTimelineView = (<RadioButton>target).value as GanttChartResourceTimelineView;
+                this.ganttChart.resourceTimelineView = (<RadioButton>target).value as GanttChartResourceTimelineView;
             }
-        });
+        };
+
+        document.querySelector('.custom-resource-panel-header')
+            ?.addEventListener('change', customResourcePanelHeaderChangeHandler as EventListener);
     }
 
     init(): void {
         // init code.
+
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
+
     }
 }

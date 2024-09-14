@@ -11,11 +11,12 @@ import { EditorComponent } from '@smart-webcomponents-angular/editor';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
-    toolbarItems: string[] = ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+    toolbarItems: any = ['Bold', 'Italic', 'Underline', 'StrikeThrough',
         'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
         'LowerCase', 'UpperCase', '|',
         'Formats', 'Alignment', 'OrderedList', 'UnorderedList',
@@ -31,8 +32,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         // afterViewInit code.
     }
 
-    handleExport() {
-        this.editor.exportData('html');
+    handleExport(type: string) {
+        this.editor.exportData(type);
     }
 
     handlePrint() {

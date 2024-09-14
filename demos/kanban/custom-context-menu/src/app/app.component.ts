@@ -12,10 +12,10 @@ import { MenuComponent, MenuItemComponent } from '@smart-webcomponents-angular/m
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
-    @ViewChild('menu', { read: MenuComponent, static: false }) menu: MenuComponent;
-    @ViewChild('done', { read: MenuItemComponent, static: false }) done: MenuItemComponent;
-    @ViewChild('removeAll', { read: MenuItemComponent, static: false }) removeAll: MenuItemComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
+    @ViewChild('menu', { read: MenuComponent, static: false }) menu!: MenuComponent;
+    @ViewChild('done', { read: MenuItemComponent, static: false }) done!: MenuItemComponent;
+    @ViewChild('removeAll', { read: MenuItemComponent, static: false }) removeAll!: MenuItemComponent;
 
     collapsible = true;
     dataSource = GetKanbanData();
@@ -104,7 +104,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
         this.kanban.addEventListener('contextmenu', this.handleContextmenu);
-        this.kanban.addEventListener('mouseup', this.handleMouseup.bind(this));
+        this.kanban.addEventListener('mouseup', this.handleMouseup.bind(this) as EventListener);
         this.menu.addEventListener('itemClick', this.handleItemClick.bind(this));
     }
 }

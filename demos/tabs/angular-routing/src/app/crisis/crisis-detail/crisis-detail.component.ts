@@ -11,23 +11,25 @@ import { CrisisService } from '../crisis.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CrisisDetailComponent implements OnInit {
-  crisis: Crisis;
-  editName: string;
+  crisis?: Crisis;
+  editName?: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: CrisisService
-  ) { }
-
-  ngOnInit() {
+  ) {
     const that = this;
 
     this.route.data
-      .subscribe((data: { crisis: Crisis }) => {
+      .subscribe((data: any) => {
         this.editName = data.crisis.name;
         this.crisis = data.crisis;
       });
+  }
+
+  ngOnInit() {
+
   }
 
   cancel() {
@@ -35,8 +37,10 @@ export class CrisisDetailComponent implements OnInit {
   }
 
   save() {
-    this.crisis.name = this.editName;
-    this.gotoCrises();
+    if (this.crisis) {
+      this.crisis.name = this.editName;
+      this.gotoCrises();
+    }
   }
 
   gotoCrises() {

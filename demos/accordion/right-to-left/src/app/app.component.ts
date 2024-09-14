@@ -9,7 +9,7 @@ import { AccordionComponent } from '@smart-webcomponents-angular/accordion';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion: AccordionComponent;
+	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion!: AccordionComponent;
 	
  
 	ngAfterViewInit(): void {

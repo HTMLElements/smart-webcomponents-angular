@@ -11,13 +11,13 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2: SliderComponent;
-    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3: SliderComponent;
-    @ViewChild('slider4', { read: SliderComponent, static: false }) slider4: SliderComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2!: SliderComponent;
+    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3!: SliderComponent;
+    @ViewChild('slider4', { read: SliderComponent, static: false }) slider4!: SliderComponent;
 
     sampleData = [
         { City: 'London', SalesCountJan: 210, SalesRevenueJan: 123 },
@@ -76,12 +76,12 @@ export class AppComponent implements AfterViewInit, OnInit {
             const value = parseFloat(event.detail.value);
             that.chart.seriesGroups[0].startAngle = value;
             that.chart.update();
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider2.addEventListener('change', function (event: CustomEvent) {
             const value = parseFloat(event.detail.value);
             that.chart.seriesGroups[0].endAngle = value;
             that.chart.update();
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider3.addEventListener('change', function (event: CustomEvent) {
             const value = parseFloat(event.detail.value);
             if (!that.chart.seriesGroups && !that.chart.seriesGroups[0]) {
@@ -101,12 +101,12 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.chart.seriesGroups[0].endAngle = value + diff;
                 that.chart.update();
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider4.addEventListener('change', function (event: CustomEvent) {
             const value = parseFloat(event.detail.value);
             that.chart.seriesGroups[0].radius = value;
             that.chart.update();
-        });
+        } as EventListenerOrEventListenerObject);
         that.checkbox.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.xAxis && that.chart.xAxis.labels) {
                 that.chart.xAxis.labels.autoRotate = event.detail.value;
@@ -114,11 +114,11 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (that.chart.valueAxis && that.chart.valueAxis.labels) {
                 that.chart.valueAxis.labels.autoRotate = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.checkbox2.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.xAxis) {
                 that.chart.xAxis.valuesOnTicks = !event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
-import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -9,10 +9,10 @@ import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angu
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),

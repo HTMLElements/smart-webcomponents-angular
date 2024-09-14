@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
-import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerEvent } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType, SchedulerEvent, SchedulerViews } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -10,10 +10,10 @@ import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerEvent }
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3!: CheckBoxComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
     data = function () {
         const data = [], airways = [
@@ -64,7 +64,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         return data;
     }();
 
-    lowestPriceEvent = null;
+    lowestPriceEvent: any = null;
 
     getLowestPriceEvent(airways?: string[]) {
         const events = this.scheduler.events;
@@ -113,7 +113,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'month';
 
-    dataSource: any[] = this.data;
+    dataSource: SchedulerEvent[] = this.data;
 
     views: SchedulerViews = ['month'];
 
@@ -139,7 +139,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         let cellDate: string | number = date.getDate();
 
         if (cellDate === 1) {
-            cellDate = new Intl.DateTimeFormat(that.scheduler.locale, { month: 'short', day: 'numeric' }).format(date);
+            cellDate = new Intl.DateTimeFormat(that.scheduler.locale, { month: 'short', day: that.scheduler.dayFormat as any }).format(date);
         }
 
         if (that.lowestPriceEvent) {
@@ -174,15 +174,19 @@ export class AppComponent implements AfterViewInit, OnInit {
         const options = document.querySelector('.options');
         const that = this;
 
-        options.addEventListener('change', function (event) {
+        options?.addEventListener('change', function (event) {
             const target = event.target,
-                airways = Array.from(options.querySelectorAll('smart-check-box[checked]')).map((checkBox) => checkBox.textContent.trim());
+                airways = Array.from(
+                    options
+                        .querySelectorAll('smart-check-box[checked]')
+                )
+                    .map((checkBox) => checkBox?.textContent?.trim() || '');
 
             if (target instanceof window.Smart.CheckBox) {
                 that.lowestPriceEvent = that.getLowestPriceEvent(airways);
 
                 that.scheduler.filter = (eventObj: SchedulerEvent) => {
-                    if (!airways.includes(eventObj.label)) {
+                    if (!airways.includes(eventObj.label || '')) {
                         return false;
                     }
                     else {

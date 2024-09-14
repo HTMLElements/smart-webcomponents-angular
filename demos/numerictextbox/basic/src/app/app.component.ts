@@ -9,7 +9,7 @@ import { NumericTextBoxComponent } from '@smart-webcomponents-angular/numerictex
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
+	@ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
 	
  
 	ngOnInit(): void {

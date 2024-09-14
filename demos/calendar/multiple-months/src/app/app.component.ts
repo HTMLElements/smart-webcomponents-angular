@@ -9,7 +9,7 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
+	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
 
 	handleMonthsCountChange(event: Event) {
 		this.calendar.months = Number((event.target as HTMLInputElement).value);

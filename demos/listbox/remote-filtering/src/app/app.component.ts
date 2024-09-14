@@ -5,30 +5,33 @@ import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
-	    
-    
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
+
         const listBox = document.querySelector('smart-list-box');
-        listBox.remoteFilteringDetails = {
-            url: '../misc/customers.txt',
-            success: function (filterQuery, items) {
+
+        if (!listBox) { return }
+        
+        listBox['remoteFilteringDetails'] = {
+            url: '../../../src/common/customers.txt',
+            success: function (filterQuery: any, items: any) {
                 setTimeout(function () {
                     console.log(items);
                     if (!filterQuery) {
@@ -41,18 +44,18 @@ export class AppComponent implements AfterViewInit, OnInit {
                             items[i] = undefined;
                         }
                     }
-                    items = items.filter((item) => item !== undefined);
+                    items = items.filter((item: any) => item !== undefined);
                     listBox.displayMember = 'CompanyName';
                     listBox.valueMember = 'CustomerID';
                     listBox.displayLoadingIndicator = false;
                     listBox.dataSource = items;
                 }, 500);
             },
-            error: function (error) {
+            error: function () {
                 console.log('Error');
             }
         };
-    
 
-	}	
+
+    }
 }

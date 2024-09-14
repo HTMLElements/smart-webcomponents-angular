@@ -12,13 +12,13 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-    @ViewChild('multicomboinput', { read: MultiComboInputComponent, static: false }) multicomboinput: MultiComboInputComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3!: CheckBoxComponent;
+    @ViewChild('multicomboinput', { read: MultiComboInputComponent, static: false }) multicomboinput!: MultiComboInputComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
 
     dataSource = [
         { value: "Austria", label: "Austria" },
@@ -78,39 +78,40 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
         let input = this.multicomboinput;
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent): void {
-            const target = event.target as HTMLElement;
-            const targetClassList = target.classList;
+        document.querySelector('.options')
+            ?.addEventListener('change', function (event: CustomEvent): void {
+                const target = event.target as HTMLElement;
+                const targetClassList = target.classList;
 
-            if (targetClassList.contains('readonly')) {
-                input.readonly = event.detail.value;
-                return;
-            }
-
-            if (targetClassList.contains('select-all')) {
-                input.selectAll = event.detail.value;
-                return;
-            }
-
-            if (targetClassList.contains('hide-drop-down-button')) {
-                input.dropDownButtonPosition = event.detail.value ? 'none' : 'right';
-                return;
-            }
-
-            const inputClassList = input.nativeElement.classList;
-
-            if (targetClassList.contains('render-mode')) {
-                inputClassList.remove('underlined', 'outlined');
-
-                const textContent = target.textContent.toLowerCase();
-
-                if (textContent.indexOf('underlined') > -1) {
-                    inputClassList.add('underlined');
+                if (targetClassList.contains('readonly')) {
+                    input.readonly = event.detail.value;
+                    return;
                 }
-                else if (textContent.indexOf('outlined') > -1) {
-                    inputClassList.add('outlined');
+
+                if (targetClassList.contains('select-all')) {
+                    input.selectAll = event.detail.value;
+                    return;
                 }
-            }
-        });
+
+                if (targetClassList.contains('hide-drop-down-button')) {
+                    input.dropDownButtonPosition = event.detail.value ? 'none' : 'right';
+                    return;
+                }
+
+                const inputClassList = input.nativeElement.classList;
+
+                if (targetClassList.contains('render-mode')) {
+                    inputClassList.remove('underlined', 'outlined');
+
+                    const textContent = target.textContent?.toLowerCase() || '';
+
+                    if (textContent.indexOf('underlined') > -1) {
+                        inputClassList.add('underlined');
+                    }
+                    else if (textContent.indexOf('outlined') > -1) {
+                        inputClassList.add('outlined');
+                    }
+                }
+            } as EventListener);
     }
 }

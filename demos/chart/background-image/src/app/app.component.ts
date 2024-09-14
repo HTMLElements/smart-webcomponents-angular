@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     topTenCities = [
         { x: 18, y: 49, Population: 1238438, City: 'Sofia' },
@@ -32,14 +32,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         { Year: 2010, Population: 7.422e6 },
         { Year: 2017, Population: 7.102e6 }
     ];
-    backgroundImage = 'https://www.htmlelements.com/demos/chart/background-image/bulgaria.png';
+    backgroundImage = 'https://htmlelements.com/demos/images/bulgaria.png';
     caption = 'Top Ten Largest Cities in Bulgaria';
     description = '(source: www.nsi.bg)';
     showLegend = false;
     padding = { left: 5, top: 5, right: 5, bottom: 5 };
     titlePadding = { left: 90, top: 0, right: 0, bottom: 10 };
     colorScheme = 'scheme32';
-    seriesGroups = [
+    seriesGroups: any = [
         {
             xAxis: {
                 type: 'linear',

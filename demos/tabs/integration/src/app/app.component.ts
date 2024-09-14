@@ -13,11 +13,11 @@ import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
-	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
-	@ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
-	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
+	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
+	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
+	@ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
+	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
 
 
 	ngOnInit(): void {

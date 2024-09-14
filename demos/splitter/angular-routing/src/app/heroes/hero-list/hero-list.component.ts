@@ -4,7 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { HeroService }  from '../hero.service';
+import { HeroService } from '../hero.service';
 import { Hero } from '../hero';
 
 @Component({
@@ -15,23 +15,25 @@ import { Hero } from '../hero';
 })
 export class HeroListComponent implements OnInit {
   heroes$: Observable<Hero[]>;
-  selectedId: number;
+  selectedId: number = 0;
 
   constructor(
     private service: HeroService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
-    this.router.navigate(['/', { outlets: { primary: 'superheroes', crisis: 'crisis' }} ], { relativeTo: this.route });
+  ) {
+    this.router.navigate(['/', { outlets: { primary: 'superheroes', crisis: 'crisis' } }], { relativeTo: this.route });
 
     this.heroes$ = this.route.paramMap.pipe(
       switchMap(params => {
         // (+) before `params.get()` turns the string into a number
-        this.selectedId = +params.get('id');
+        this.selectedId = + (params?.get('id') || 0);
         return this.service.getHeroes();
       })
     );
+  }
+
+  ngOnInit() {
+
   }
 }

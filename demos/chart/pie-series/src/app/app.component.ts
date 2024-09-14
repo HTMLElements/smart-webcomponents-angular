@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     source = [{ Browser: 'Chrome', Share: 68.95 }, { Browser: 'Firefox', Share: 10.67 }, { Browser: 'Internet Explorer', Share: 6.42 }, { Browser: 'Safari', Share: 5.35 }, { Browser: 'Edge', Share: 4.2 }, { Browser: 'Other', Share: 4.67 }];
     caption = 'Desktop browsers share';
@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     initialAngle: 15,
                     radius: 170,
                     centerOffset: 0,
-                    formatFunction: function (value) {
+                    formatFunction: function (value: any) {
                         if (isNaN(value)) {
                             // Legend labels formatting
                             return value;

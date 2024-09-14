@@ -22,8 +22,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
-
-
 		const smartSwitchButton = document.createElement("smart-switch-button");
 
 		document.body.appendChild(smartSwitchButton);

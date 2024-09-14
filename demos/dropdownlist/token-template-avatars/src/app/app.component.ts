@@ -5,12 +5,12 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None,
     styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 
 
     ngOnInit(): void {
@@ -25,63 +25,68 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        this.dropdownlist.addEventListener('change', function (): void {
-            const tokens = <HTMLCollection>this.dropdownlist.getElementsByClassName('smart-token');
+        this.dropdownlist.addEventListener('change', (): void => {
+            const tokens = <HTMLCollection>this.dropdownlist.nativeElement
+                .getElementsByClassName('smart-token');
 
             for (let i = 0; i < tokens.length; i++) {
                 const token = tokens[i];
                 const img = <HTMLImageElement>token.querySelector('.avatar');
 
+                if (!token?.textContent || !img) {
+                    return
+                }
+
                 if (token.textContent.indexOf('Anne Kean') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/anne.png';
+                    img.src = '../../../src/images/phonebook/anne.png';
                 }
                 else if (token.textContent.indexOf('Andrew Watson') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/andrew.png';
+                    img.src = '../../../src/images/phonebook/andrew.png';
                 }
                 else if (token.textContent.indexOf('Avril Janin') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/avril.jpeg';
+                    img.src = '../../../src/images/phonebook/avril.jpeg';
                 }
                 else if (token.textContent.indexOf('Janet Pattenson') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/janet.png';
+                    img.src = '../../../src/images/phonebook/janet.png';
                 }
                 else if (token.textContent.indexOf('Johanna Svensson') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/johanna.jpeg';
+                    img.src = '../../../src/images/phonebook/johanna.jpeg';
                 }
                 else if (token.textContent.indexOf('Johnny Abana') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/johnny.jpeg';
+                    img.src = '../../../src/images/phonebook/johnny.jpeg';
                 }
                 else if (token.textContent.indexOf('Laura Thene') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/laura.png';
+                    img.src = '../../../src/images/phonebook/laura.png';
                 }
                 else if (token.textContent.indexOf('Margaret Vetton') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/margaret.png';
+                    img.src = '../../../src/images/phonebook/margaret.png';
                 }
                 else if (token.textContent.indexOf('Maria Sevrano') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/Maria.jpeg';
+                    img.src = '../../../src/images/phonebook/Maria.jpeg';
                 }
                 else if (token.textContent.indexOf('Mark Yemen') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/mark.jpeg';
+                    img.src = '../../../src/images/phonebook/mark.jpeg';
                 }
                 else if (token.textContent.indexOf('Maya Verdara') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/maya.jpeg';
+                    img.src = '../../../src/images/phonebook/maya.jpeg';
                 }
                 else if (token.textContent.indexOf('Michael Barton') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/michael.png';
+                    img.src = '../../../src/images/phonebook/michael.png';
                 }
                 else if (token.textContent.indexOf('Monica Oghini') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/monica.jpeg';
+                    img.src = '../../../src/images/phonebook/monica.jpeg';
                 }
                 else if (token.textContent.indexOf('Nancy Queens') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/nancy.png';
+                    img.src = '../../../src/images/phonebook/nancy.png';
                 }
                 else if (token.textContent.indexOf('Robert Drawny') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/robert.png';
+                    img.src = '../../../src/images/phonebook/robert.png';
                 }
                 else if (token.textContent.indexOf('Steven Fedrichy') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/steven.jpeg';
+                    img.src = '../../../src/images/phonebook/steven.jpeg';
                 }
                 else if (token.textContent.indexOf('Toni Versachi') > -1) {
-                    img.src = 'https://htmlelements.com/demos/images/phonebook/toni.jpeg';
+                    img.src = '../../../src/images/phonebook/toni.jpeg';
                 }
             }
         });

@@ -31,8 +31,8 @@ export class User {
 
 export class AppComponent implements AfterViewInit, OnInit {
 	genderType = ['Female', 'Male'];
-	password1;
-	password2;
+	password1: any;
+	password2: any;
 	model = new User(18, '', this.genderType[0], '', '', '123 Fake Street. Seattle, WA 98112');
 
 	submitted = false;

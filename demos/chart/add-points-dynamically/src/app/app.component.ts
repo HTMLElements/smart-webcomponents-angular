@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     sampleData = [
         { x: 15, y: 30 },
@@ -87,6 +87,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 }
             }
             that.chart.update();
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

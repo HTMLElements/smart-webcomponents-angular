@@ -4,7 +4,7 @@
 <p>Tank with integer scale:</p>
 <smart-tank #tank2 id="tank2" [orientation]="'horizontal'"
             [scaleType]="'integer'" [wordLength]="'int64'" [min]="'-9223372036854775808'" [max]="'9223372036854775807'"
-            [value]="1000" [coerce]="true" [customInterval] [customTicks]='[-9e18, 0, 1e18, 5e18]'></smart-tank>
+            [value]="1000" [coerce]="true" [customInterval]="true" [customTicks]='[-9e18, 0, 1e18, 5e18]'></smart-tank>
 <p>Tank with logarithmic scale:</p>
 <smart-tank #tank3 id="tank3" [orientation]="'horizontal'"
             [min]="100" [max]="10000" [logarithmicScale]="true" [value]="1000" [coerce]="true" [customInterval]="true"

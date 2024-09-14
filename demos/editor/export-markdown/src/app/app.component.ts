@@ -10,13 +10,14 @@ import { EditMode, EditorComponent, ToolbarItem } from '@smart-webcomponents-ang
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     editMode: EditMode = 'markdown';
 
-    toolbarItems: string[] = ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
+    toolbarItems: any = ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
         'Formats', 'OrderedList', 'UnorderedList', '|',
         'hyperlink', 'Image', '|', 'Print',
         'sourcecode', 'FullScreen', '|', 'Undo', 'Redo'];
@@ -52,8 +53,8 @@ Supported Browsers: Chrome, Firefox, Safari, Edge, Opera`;
         // afterViewInit code.
     }
 
-    handleExport() {
-        this.editor.exportData('md');
+    handleExport(type: string) {
+        this.editor.exportData(type);
     }
 
     handlePrint() {

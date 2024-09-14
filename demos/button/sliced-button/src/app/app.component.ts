@@ -10,7 +10,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
 	
  
 	ngOnInit(): void {

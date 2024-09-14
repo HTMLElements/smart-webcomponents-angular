@@ -26,7 +26,7 @@
     </div>
     <div class="option">
         <smart-drop-down-list #dropDownList>
-            <smart-list-item [value]="'remove-sign'">Error</smart-list-item>
+            <smart-list-item [selected]="true" [value]="'remove-sign'">Error</smart-list-item>
             <smart-list-item [value]="'info-sign'">Information</smart-list-item>
             <smart-list-item [value]="'question-sign'">Question</smart-list-item>
             <smart-list-item [value]="'exclamation-sign'">Warning</smart-list-item>
@@ -54,6 +54,6 @@
 <smart-wait-window #waitWindow [label]="'Wait Window'" class="material"></smart-wait-window>
 <smart-prompt-window #promptWindow [label]="'Prompt Window'" [promptLabel]="'Enter your name:'" class="material">
 </smart-prompt-window>
-<smart-multiline-prompt-window #multilinePromptWindow [label]="'Prompt Window'" [promptLabel]="'Enter your address:'"
+<!-- <smart-multiline-prompt-window #multilinePromptWindow [label]="'Prompt Window'" [promptLabel]="'Enter your address:'"
     class="material">
-</smart-multiline-prompt-window>
+</smart-multiline-prompt-window> -->

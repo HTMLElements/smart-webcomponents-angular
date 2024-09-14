@@ -10,8 +10,8 @@ import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
 
 	ngOnInit(): void {
 		// onInit code.
@@ -26,7 +26,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 
 		const that = this;
-		let array = [];
+		let array: any = [];
 
 		for (let i = 0; i < 1000000; i++) {
 			array.push("Item" + i);

@@ -10,11 +10,11 @@ import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayo
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout: DockingLayoutComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
 
     layout: Array<object> = [
         {

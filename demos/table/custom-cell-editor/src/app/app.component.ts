@@ -10,7 +10,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
         dataSource: GetData(10),
@@ -23,9 +23,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    editing: Boolean = true;
+    editing: boolean = true;
 
-    editMode: String = 'cell';
+    editMode: string = 'cell';
 
     columns: TableColumn[]  = [{
         label: 'id',
@@ -38,15 +38,15 @@ export class AppComponent implements AfterViewInit, OnInit {
         dataType: 'string',
         editor: {
             template: '<smart-drop-down-list></smart-drop-down-list>',
-            onInit(row, column, editor: DropDownList, value) {
+            onInit(row: any, column: TableColumn, editor: DropDownList, value: any) {
                 editor.dataSource = ["Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Caramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"];
                 editor.dropDownAppendTo = 'body';
             },
-            onRender(row, column, editor: DropDownList, value) {
+            onRender(row: any, column: TableColumn, editor: DropDownList, value: any) {
                 editor.selectedValues = [value];
             },
             getValue(editor: DropDownList) {
-                return editor.selectedValues[0];
+                return editor.selectedValues ? editor.selectedValues[0] : 0;
             }
         }
     },

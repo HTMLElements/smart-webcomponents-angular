@@ -10,9 +10,9 @@ import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2: GaugeComponent;
-    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3: GaugeComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2!: GaugeComponent;
+    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3!: GaugeComponent;
 
 
     ngOnInit(): void {
@@ -34,15 +34,18 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
 
         that.gauge3.ranges = ranges;
+
+        this.gauge.ranges = [{ "startValue": "0", "endValue": "10", "className": "borderRange" }] as any
+        this.gauge2.ranges = [{ "startValue": "0", "endValue": "10", "className": "borderRange" }] as any
     }
 
-    customDrawNeedleFunction1(element, renderer, radius, angle, distance): string[] {
+    customDrawNeedleFunction1(element: Element, renderer: any, radius: any, angle: any, distance: any): string[] {
         const sin = Math.sin(angle), cos = Math.cos(angle), x = radius + 101 * sin, y = radius + 101 * cos, circle = renderer.circle(x, y, 8, { 'class': 'value-circle' });
         // return an array of all custom SVG elements
         return [circle];
     }
 
-    customDrawNeedleFunction2(element, renderer, radius, angle, distance): string[] {
+    customDrawNeedleFunction2(element: Element, renderer: any, radius: any, angle: any, distance: any): string[] {
         const width = 1, length = radius - distance - 19, sin = Math.sin(angle), cos = Math.cos(angle), endX1 = radius - width * cos + length * sin, endY1 = radius + width * sin + length * cos, endX2 = radius + width * cos + length * sin, endY2 = radius - width * sin + length * cos, startX1 = radius + width * cos, startY1 = radius - width * sin, startX2 = radius - width * cos, startY2 = radius + width * sin, points = 'M ' + startX1 + ',' + startY1 + ' L ' + startX2 + ',' + startY2 + ' L ' + endX1 + ',' + endY1 + ' ' + endX2 + ',' + endY2, needle = renderer.path(points, { 'class': 'value-needle' });
         // return an array of all custom SVG elements
         return [needle];

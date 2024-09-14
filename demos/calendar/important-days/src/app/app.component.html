@@ -1,5 +1,5 @@
 <smart-calendar #calendar class="special-days" [importantDatesTemplate]="'importantDatesTemplate'"
-[importantDates]="importantDates" [tooltip]="true">
+[importantDates]="importantDates" [tooltip]="true" (onOpen)="handleCalendarOpen($event)">
 </smart-calendar>
 
 <div class="options">

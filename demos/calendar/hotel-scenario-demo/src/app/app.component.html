@@ -13,8 +13,8 @@
     </div>
     <div>
          <h4>Reservation dates:</h4>
-        <smart-calendar #datePicker id="datePicker" min="new Date()" months="2"
-        selection-mode="many" view-sections='["header", "footer"]'></smart-calendar>
+        <smart-calendar #datePicker id="datePicker" [min]="today" [months]="2"
+        [selectionMode]="'many'" [viewSections]='["header", "footer"]'></smart-calendar>
     </div>
     <br/>
     <div id="summary" class="smart-visibility-hidden"></div>

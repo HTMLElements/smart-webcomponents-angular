@@ -13,12 +13,12 @@ import { Button } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('menu', { read: MenuComponent, static: false }) menu: MenuComponent;
-    @ViewChild('menu2', { read: MenuComponent, static: false }) menu2: MenuComponent;
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-    @ViewChild('filterowscontainer', { read: ElementRef, static: false }) filterowscontainer: ElementRef;
-    @ViewChild('numberofappliedfilters', { read: ElementRef, static: false }) numberofappliedfilters: ElementRef;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('menu', { read: MenuComponent, static: false }) menu!: MenuComponent;
+    @ViewChild('menu2', { read: MenuComponent, static: false }) menu2!: MenuComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+    @ViewChild('filterowscontainer', { read: ElementRef, static: false }) filterowscontainer!: ElementRef;
+    @ViewChild('numberofappliedfilters', { read: ElementRef, static: false }) numberofappliedfilters!: ElementRef;
 
     emails: Object[] = [{
         name: 'Walter Stewart',
@@ -171,9 +171,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    paging: Boolean = true;
+    paging: boolean = true;
 
-    sortMode: String = 'one';
+    sortMode: string = 'one';
 
     columns: TableColumn[] = [{
         label: 'Name',
@@ -253,7 +253,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         confirmButton.innerHTML = 'Done';
         confirmButton.classList.add('primary');
         confirmButton.classList.add('confirm');
-        confirmButton.dataField = columnLabel;
+        confirmButton['dataField'] = columnLabel;
 
         row.className = 'filter-row filter-row-' + columnLabel;
 
@@ -262,7 +262,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         row.appendChild(confirmButton);
 
         this.filterowscontainer.nativeElement.appendChild(row);
+
+        //@ts-ignore
         this.filterRows[columnLabel] = row;
+
         window.Smart.Render()
     }
 
@@ -298,7 +301,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         if (removeButton) {
             const rect = removeButton.getBoundingClientRect();
 
-            this.rowToRemove = table.nativeElement.rowById[removeButton.getAttribute('row-id')];
+            if(removeButton.getAttribute('row-id')) {
+                this.rowToRemove = table.nativeElement['rowById'][removeButton.getAttribute('row-id')!];
+            }
 
             if (this.rowToRemove.data.permission === 'Restricted') {
                 removeMenu.items[0].label = 'Allow access';
@@ -314,6 +319,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     handleItemCheckChange(event: CustomEvent) {
+        //@ts-ignore
         const filterRow = this.filterRows[event.detail.value],
             filterRowsContainer = this.filterowscontainer.nativeElement;
 
@@ -338,14 +344,15 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         if (confirmButton) {
             const filterRow = confirmButton.parentElement,
-                conditionInput = filterRow.firstElementChild as InputEditor,
-                valueInput = filterRow.children[1] as InputEditor,
-                dataField = confirmButton.dataField,
-                condition = conditionInput.$.input.dataValue,
+                conditionInput = filterRow?.firstElementChild as InputEditor,
+                valueInput = filterRow?.children[1] as InputEditor,
+                dataField = confirmButton['dataField'],
+                condition = conditionInput['$'].input.dataValue,
                 value = valueInput.value,
                 menuItem = filterMenu.nativeElement.querySelector(`smart-menu-item[value="${dataField}"]`) as MenuItem;
 
             if (!condition || !value) {
+                //@ts-ignore
                 delete this.appliedFilters[dataField];
                 table.removeFilter(dataField);
                 menuItem.classList.remove('filtered');
@@ -356,6 +363,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                 filterGroup.addFilter('or', filterObject);
                 table.addFilter(dataField, filterGroup);
+                //@ts-ignore
                 this.appliedFilters[dataField] = filterGroup;
                 menuItem.classList.add('filtered');
             }
@@ -365,7 +373,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             numberOfAppliedFilters.classList.toggle('smart-visibility-hidden', numberOfFilters === 0);
             numberOfAppliedFilters.innerHTML = numberOfFilters.toString();
             menuItem.checked = false;
-            filterRow.remove();
+            filterRow?.remove();
         }
     }
 

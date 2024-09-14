@@ -11,9 +11,9 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-	@ViewChild('radiobuttonleft', { read: RadioButtonComponent, static: false }) radiobuttonleft: RadioButtonComponent;
-	@ViewChild('radiobuttonright', { read: RadioButtonComponent, static: false }) radiobuttonright: RadioButtonComponent;
+	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+	@ViewChild('radiobuttonleft', { read: RadioButtonComponent, static: false }) radiobuttonleft!: RadioButtonComponent;
+	@ViewChild('radiobuttonright', { read: RadioButtonComponent, static: false }) radiobuttonright!: RadioButtonComponent;
 	
  
 	ngOnInit(): void {

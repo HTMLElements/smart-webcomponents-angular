@@ -13,7 +13,7 @@ import { Hero } from '../hero';
   encapsulation: ViewEncapsulation.None
 })
 export class HeroDetailComponent implements OnInit {
-  hero$: Observable<Hero>;
+  hero$?: Observable<Hero | undefined>;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit() {
     this.hero$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.service.getHero(params.get('id')))
+        this.service.getHero(params.get('id') || 0))
     );
   }
 

@@ -9,7 +9,7 @@ import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
 	chemicalElementsData: Object[] = [{
 		number: 1,
@@ -105,9 +105,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	keyboardNavigation: Boolean = true;
+	keyboardNavigation: boolean = true;
 
-	rowDetailTemplate: String = `<div class="element-cell">
+	rowDetailTemplate: string = `<div class="element-cell">
 		<div class="element-no">{{number}}</div>
 		<div class="element-symbol">{{symbol}}</div>
 		<div class="element-name">{{name}}</div>

@@ -20,14 +20,14 @@ interface InputDataSource {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-    @ViewChild('input2', { read: InputComponent, static: false }) input2: InputComponent;
-    @ViewChild('input3', { read: InputComponent, static: false }) input3: InputComponent;
-    @ViewChild('multicomboinput', { read: MultiComboInputComponent, static: false }) multicomboinput: MultiComboInputComponent;
-    @ViewChild('multicomboinput2', { read: MultiComboInputComponent, static: false }) multicomboinput2: MultiComboInputComponent;
-    @ViewChild('multicomboinput3', { read: MultiComboInputComponent, static: false }) multicomboinput3: MultiComboInputComponent;
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+    @ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+    @ViewChild('input2', { read: InputComponent, static: false }) input2!: InputComponent;
+    @ViewChild('input3', { read: InputComponent, static: false }) input3!: InputComponent;
+    @ViewChild('multicomboinput', { read: MultiComboInputComponent, static: false }) multicomboinput!: MultiComboInputComponent;
+    @ViewChild('multicomboinput2', { read: MultiComboInputComponent, static: false }) multicomboinput2!: MultiComboInputComponent;
+    @ViewChild('multicomboinput3', { read: MultiComboInputComponent, static: false }) multicomboinput3!: MultiComboInputComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 
     tags: string[] = ['a', 'div', 'img', 'li', 'p', 'ul', 'span', 'table', 'tbody', 'td', 'tr', 'h4'];
 
@@ -168,11 +168,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.options.nativeElement.addEventListener('change', function () {
             editor.contentFiltering = {
                 tags: tags.value.split(','),
-                tagFilterMode: that.inputProps.dataSource.find(i => i.label === tagFilterMode.value).value as EditorContentFilteringTagFilterMode,
+                tagFilterMode: that.inputProps?.dataSource?.find(i => i.label === tagFilterMode.value)?.value as EditorContentFilteringTagFilterMode,
                 attributes: attributes.value.split(','),
-                attributeFilterMode: that.inputProps.dataSource.find(i => i.label === attributeFilterMode.value).value as EditorContentFilteringTagFilterMode,
+                attributeFilterMode: that.inputProps?.dataSource?.find(i => i.label === attributeFilterMode.value)?.value as EditorContentFilteringTagFilterMode,
                 styleAttributes: styleAttributes.value.split(','),
-                styleAttributeFilterMode: that.inputProps.dataSource.find(i => i.label === styleAttributeFilterMode.value).value as EditorContentFilteringTagFilterMode
+                styleAttributeFilterMode: that.inputProps?.dataSource?.find(i => i.label === styleAttributeFilterMode.value)?.value as EditorContentFilteringTagFilterMode
             };
 
             editor.value = that.initialValue;

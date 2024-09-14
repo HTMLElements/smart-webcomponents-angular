@@ -9,14 +9,14 @@ import { TankComponent } from '@smart-webcomponents-angular/tank';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
-    @ViewChild('tank2', { read: TankComponent, static: false }) tank2: TankComponent;
-    @ViewChild('tank3', { read: TankComponent, static: false }) tank3: TankComponent;
-    @ViewChild('tank4', { read: TankComponent, static: false }) tank4: TankComponent;
-    @ViewChild('horizontalTankValue', { read: ElementRef, static: false }) horizontalTankValue: ElementRef;
-    @ViewChild('verticalTankValue', { read: ElementRef, static: false }) verticalTankValue: ElementRef;
-    @ViewChild('invertedHorizontalTankValue', { read: ElementRef, static: false }) invertedHorizontalTankValue: ElementRef;
-    @ViewChild('invertedVerticalTankValue', { read: ElementRef, static: false }) invertedVerticalTankValue: ElementRef;
+    @ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
+    @ViewChild('tank2', { read: TankComponent, static: false }) tank2!: TankComponent;
+    @ViewChild('tank3', { read: TankComponent, static: false }) tank3!: TankComponent;
+    @ViewChild('tank4', { read: TankComponent, static: false }) tank4!: TankComponent;
+    @ViewChild('horizontalTankValue', { read: ElementRef, static: false }) horizontalTankValue!: ElementRef;
+    @ViewChild('verticalTankValue', { read: ElementRef, static: false }) verticalTankValue!: ElementRef;
+    @ViewChild('invertedHorizontalTankValue', { read: ElementRef, static: false }) invertedHorizontalTankValue!: ElementRef;
+    @ViewChild('invertedVerticalTankValue', { read: ElementRef, static: false }) invertedVerticalTankValue!: ElementRef;
 
 
     ngOnInit(): void {
@@ -35,18 +35,18 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.tank.addEventListener('change', function (event: CustomEvent) {
             const value = event.detail.value;
             that.horizontalTankValue.nativeElement.innerHTML = parseFloat(value).toFixed(2);
-        });
+        } as EventListener);
         that.tank3.addEventListener('change', function (event: CustomEvent) {
             const value = event.detail.value;
             that.verticalTankValue.nativeElement.innerHTML = parseFloat(value).toFixed(2);
-        });
+        } as EventListener);
         that.tank2.addEventListener('change', function (event: CustomEvent) {
             const value = event.detail.value;
             that.invertedHorizontalTankValue.nativeElement.innerHTML = parseFloat(value).toFixed(2);
-        });
+        } as EventListener);
         that.tank4.addEventListener('change', function (event: CustomEvent) {
             const value = event.detail.value;
             that.invertedVerticalTankValue.nativeElement.innerHTML = parseFloat(value).toFixed(2);
-        });
+        } as EventListener);
     }
 }

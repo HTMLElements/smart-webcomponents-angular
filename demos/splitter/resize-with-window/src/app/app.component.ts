@@ -1,15 +1,16 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { WindowComponent } from '@smart-webcomponents-angular/window';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	styleUrls: ['./app.component.css'],
+	encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('window', { read: WindowComponent, static: false }) dialogWindow: WindowComponent;
+	@ViewChild('window', { read: WindowComponent, static: false }) dialogWindow!: WindowComponent;
 	
  
 	ngOnInit(): void {

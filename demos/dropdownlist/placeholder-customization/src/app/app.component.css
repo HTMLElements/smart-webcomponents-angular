@@ -1,5 +1,5 @@
 smart-drop-down-list .smart-action-button {
-    background: url("./../../../src/images/magnifier.png") no-repeat 98% 50%;
+    /* background: url("../../../src/images/magnifier.png") no-repeat 98% 50%; */
     background-size: 5%;
     padding-right: 8%;
 }

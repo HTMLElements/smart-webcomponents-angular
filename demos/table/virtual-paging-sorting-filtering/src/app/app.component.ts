@@ -9,7 +9,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
         virtualDataSourceLength: 100000,
@@ -88,17 +88,17 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    filtering: Boolean = true;
+    filtering: boolean = true;
 
-    filterRow: Boolean = true;
+    filterRow: boolean = true;
 
-    paging: Boolean = true;
+    paging: boolean = true;
 
-    pageIndex: Number = 0;
+    pageIndex: number = 0;
 
-    pageSize: Number = 10;
+    pageSize: string = '10';
 
-    sortMode: String = 'many';
+    sortMode: string = 'many';
 
     columns: TableColumn[] = [{
         label: 'id',

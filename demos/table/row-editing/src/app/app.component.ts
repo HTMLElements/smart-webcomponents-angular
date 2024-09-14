@@ -9,7 +9,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
     
     dataSource = new window.Smart.DataAdapter({
 		dataSource: GetData(10),
@@ -22,11 +22,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	editing: Boolean = true;
+	editing: boolean = true;
 
-	editMode: String = 'row';
+	editMode: string = 'row';
 
-	keyboardNavigation: Boolean = true;
+	keyboardNavigation: boolean = true;
 
 	columns: TableColumn[] = [{
 		label: 'id',

@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
+import { KanbanColumn, KanbanComponent } from '@smart-webcomponents-angular/kanban';
 import { GetKanbanHierarchicalData } from '../assets/data';
 
 
@@ -11,7 +11,7 @@ import { GetKanbanHierarchicalData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     collapsible = true;
     dataSource = GetKanbanHierarchicalData();
@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             ]
         },
         { label: 'Done', dataField: 'done' }
-    ];
+    ] as KanbanColumn[];
 
     ngOnInit(): void {
         // onInit code.

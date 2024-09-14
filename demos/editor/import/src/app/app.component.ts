@@ -10,9 +10,9 @@ import { EditorComponent } from '@smart-webcomponents-angular/editor';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     placeholder: string = 'The Editor is empty. Click on the buttons in the Options area to import data.'
 
@@ -20,14 +20,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         that.button.disabled = true;
-        that.editor.importData('../assets/demo.html');
+        that.editor.importData('./../../../src/common/demo.html');
     }
 
     handleTXTImport() {
         const that = this;
 
         that.button2.disabled = true;
-        that.editor.importData('../assets/demo.txt');
+        that.editor.importData('./../../../src/common/demo.txt');
     }
 
     ngOnInit(): void {

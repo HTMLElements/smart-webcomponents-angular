@@ -9,13 +9,13 @@ import { DropDownButtonComponent } from '@smart-webcomponents-angular/dropdownbu
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('buttonOpen', { read: ButtonComponent, static: false }) buttonOpen: ButtonComponent;
-    @ViewChild('buttonClose', { read: ButtonComponent, static: false }) buttonClose: ButtonComponent;
-    @ViewChild('buttonAppendChild', { read: ButtonComponent, static: false }) buttonAppendChild: ButtonComponent;
-    @ViewChild('buttonRemoveChild', { read: ButtonComponent, static: false }) buttonRemoveChild: ButtonComponent;
-    @ViewChild('buttonClear', { read: ButtonComponent, static: false }) buttonClear: ButtonComponent;
-    @ViewChild('buttonDisable', { read: ButtonComponent, static: false }) buttonDisable: ButtonComponent;
-    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton: DropDownButtonComponent;
+    @ViewChild('buttonOpen', { read: ButtonComponent, static: false }) buttonOpen!: ButtonComponent;
+    @ViewChild('buttonClose', { read: ButtonComponent, static: false }) buttonClose!: ButtonComponent;
+    @ViewChild('buttonAppendChild', { read: ButtonComponent, static: false }) buttonAppendChild!: ButtonComponent;
+    @ViewChild('buttonRemoveChild', { read: ButtonComponent, static: false }) buttonRemoveChild!: ButtonComponent;
+    @ViewChild('buttonClear', { read: ButtonComponent, static: false }) buttonClear!: ButtonComponent;
+    @ViewChild('buttonDisable', { read: ButtonComponent, static: false }) buttonDisable!: ButtonComponent;
+    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton!: DropDownButtonComponent;
 
     constructor(private renderer: Renderer2) {
 

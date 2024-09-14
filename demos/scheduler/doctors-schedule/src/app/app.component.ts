@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, SchedulerTimelineDayScale, SchedulerResource } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewType, SchedulerViews, SchedulerViewSelectorType, SchedulerTimelineDayScale, SchedulerResource } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerViewSel
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentYear = today.getFullYear(),
             currentMonth = today.getMonth(),
@@ -181,16 +181,16 @@ export class AppComponent implements AfterViewInit, OnInit {
         return data
     })();
 
-    view: String = 'workWeek';
+    view: string = 'workWeek';
 
-    views: object | string[] = [{
+    views: SchedulerViews = [{
         label: 'Work Week',
         value: 'workWeek',
         type: 'week',
         shortcutKey: 'W'
-    }, 'month'];
+    }, 'month'] as SchedulerViews;
 
-    hideAllDay: Boolean = true;
+    hideAllDay: boolean = true;
 
     hourStart: number = 3;
 
@@ -200,19 +200,19 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     nonworkingHours: number[][] = [[0, 5], [14, 18]];
 
-    hideNonworkingWeekdays: Boolean = true;
+    hideNonworkingWeekdays: boolean = true;
 
     firstDayOfWeek: number = 1;
 
     viewSelectorType: SchedulerViewSelectorType = 'auto';
 
-    groups: String[] = ['doctorId'];
+    groups: string[] = ['doctorId'];
 
-    groupTemplate: String = 'groupTemplate';
+    groupTemplate: string = 'groupTemplate';
 
     timelineDayScale: SchedulerTimelineDayScale = 'halfHour';
 
-    timelineHeaderFormatFunction: Function = (date: Date, orientation: string, isHeaderDetails: Boolean, dateValue: string) => {
+    timelineHeaderFormatFunction: Function = (date: Date, orientation: string, isHeaderDetails: boolean, dateValue: string) => {
         if (orientation === 'horizontal') {
             const segments = dateValue.split(' ');
 

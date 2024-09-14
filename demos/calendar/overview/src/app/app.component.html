@@ -1,15 +1,15 @@
 <div class="smart-demo-container">
-    
     <div id="materialPicker">
         <section>
-             <h2>Smart.Calendar</h2>
+            <h2>Smart.Calendar</h2>
             <div>
-                 <h2>Allow users to enter dates easily and visually. You can customize date formats, language, layout, animations, selection modes and much more with the smartCalendar.</h2>
+                <h2>Allow users to enter dates easily and visually. You can customize date formats, language, layout,
+                    animations, selection modes and much more with the smartCalendar.</h2>
                 <div class="module"></div>
             </div>
         </section>
         <section id="datePickers">
-             <h2>Date pickers</h2>
+            <h2>Date pickers</h2>
             <div class="module">
                 <p>The selected day is indicated by a filled circle. The current day is indicated
                     by a different color and type weight.</p>
@@ -19,19 +19,19 @@
             <div class="module">
                 <div>
                     <smart-calendar #calendar selection-mode="one" view="portrait" hide-other-month-days
-                    view-sections='["title", "header", "footer"]' display-mode-view="list"
-                    footer-template="templateWithButtons"></smart-calendar>
+                        [viewSections]='["title", "header", "footer"]' displayModeView="list"
+                        footerTemplate="templateWithButtons"></smart-calendar>
                 </div>
-                <br/>
+                <br />
                 <p>Date and year picker: portrait, month display mode</p>
             </div>
             <div class="module">
                 <div>
                     <smart-calendar #calendar2 selection-mode="one" view="portrait" hide-other-month-days
-                    view-sections='["title", "header", "footer"]' display-mode-view="list"
-                    display-mode="decade" footer-template="templateWithButtons"></smart-calendar>
+                        [viewSections]='["title", "header", "footer"]' displayModeView="list" displayMode="decade"
+                        footerTemplate="templateWithButtons"></smart-calendar>
                 </div>
-                <br/>
+                <br />
                 <p>Date and year picker:portrait, decade display mode.</p>
             </div>
             <div class="module">
@@ -40,16 +40,16 @@
             </div>
             <div class="module">
                 <smart-calendar #calendar3 selection-mode="one" view="landscape" hide-other-month-days
-                view-sections='["title", "header", "footer"]' display-mode-view="list"
-                footer-template="templateWithButtons"></smart-calendar>
-                <br/>
+                    [viewSections]='["title", "header", "footer"]' displayModeView="list"
+                    footerTemplate="templateWithButtons"></smart-calendar>
+                <br />
                 <p>Date picker: landscape, month display mode</p>
             </div>
             <div class="module">
                 <smart-calendar #calendar4 selection-mode="one" view="landscape" hide-other-month-days
-                view-sections='["title", "header", "footer"]' display-mode-view="list"
-                display-mode="decade" footer-template="templateWithButtons"></smart-calendar>
-                <br/>
+                    [viewSections]='["title", "header", "footer"]' displayModeView="list" displayMode="decade"
+                    footerTemplate="templateWithButtons"></smart-calendar>
+                <br />
                 <p>Date picker: landscape, decade display mode.</p>
             </div>
         </section>

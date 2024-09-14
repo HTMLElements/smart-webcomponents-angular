@@ -14,13 +14,13 @@ import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angu
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-    @ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-    @ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
-    @ViewChild('primaryContainer', { read: ElementRef, static: false }) primaryContainer: ElementRef;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+    @ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
+    @ViewChild('primaryContainer', { read: ElementRef, static: false }) primaryContainer!: ElementRef;
 
     today = new Date();
 
@@ -319,9 +319,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     handleTreeChange(event: CustomEvent) {
         const tree = event.target as Tree,
-            types = tree.selectedIndexes.map((i) => (<TreeItem>tree.getItem(i)).value);
+            types = tree.selectedIndexes?.map((i) => (<TreeItem>tree.getItem(i)).value);
 
-        this.scheduler.dataSource = this.data.filter(d => types.indexOf(d.class) > -1);
+        this.scheduler.dataSource = this.data.filter(d => (types || []).indexOf(d.class) > -1);
     }
 
     handleCalendarChange(event: CustomEvent) {

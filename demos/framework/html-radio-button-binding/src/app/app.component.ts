@@ -29,10 +29,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
-		this.app = new window.Smart.App({
-			data: {
-				picked: 'One'
-			}
-		});
 	}
 }

@@ -11,7 +11,7 @@ import { TabsComponent, TabItem } from '@smart-webcomponents-angular/tabs';
   animations: [slideInAnimation]
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
+  @ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
 
   constructor(private router: Router) { }
 
@@ -47,6 +47,6 @@ export class AppComponent implements AfterViewInit, OnInit {
       else {
         that.router.navigate([{ outlets: { crisis: ['crisis'] } }]);
       }
-    })
+    } as EventListener)
   }
 }

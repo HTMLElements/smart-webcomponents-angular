@@ -25,7 +25,7 @@
                 [nullable]="true" [placeholder]="'Specify'" [showUnit]="true" [unit]="'kg'"></smart-numeric-text-box>
         </div>
 
-        <div *ngIf="numerictextboxQuantity.errors?.numericValueCheck && (numerictextboxQuantity.dirty || numerictextboxQuantity.touched)"
+        <div *ngIf="(numerictextboxQuantity.errors ? numerictextboxQuantity.errors!['numericValueCheck'] : false) && (numerictextboxQuantity.dirty || numerictextboxQuantity.touched)"
             class="alert alert-danger">
             Please choose a quantity between 11 and 100 kg.
         </div>

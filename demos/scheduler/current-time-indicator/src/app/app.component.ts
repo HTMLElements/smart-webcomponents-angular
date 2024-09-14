@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { NumberInput, NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
 import { SwitchButton, SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
-import { SchedulerComponent, SchedulerViews } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViews } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -11,22 +11,22 @@ import { SchedulerComponent, SchedulerViews } from '@smart-webcomponents-angular
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('numberinput', { read: NumberInputComponent, static: false }) numberinput: NumberInputComponent;
-    @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
-    @ViewChild('switchbutton2', { read: SwitchButtonComponent, static: false }) switchbutton2: SwitchButtonComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('numberinput', { read: NumberInputComponent, static: false }) numberinput!: NumberInputComponent;
+    @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
+    @ViewChild('switchbutton2', { read: SwitchButtonComponent, static: false }) switchbutton2!: SwitchButtonComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = this.getData();
+    dataSource: SchedulerEvent[] = this.getData();
 
-    currentTimeIndicator: Boolean = true;
+    currentTimeIndicator: boolean = true;
 
-    shadeUntilCurrentTime: Boolean = true;
+    shadeUntilCurrentTime: boolean = true;
 
-    view: String = 'day';
+    view: string = 'day';
 
     views: SchedulerViews = ['day', 'week', 'month', 'timelineDay', 'timelineWeek', 'timelineMonth'];
 
-    firstDayOfWeek: Number = 1;
+    firstDayOfWeek: number = 1;
 
     ngOnInit(): void {
         // onInit code.
@@ -75,22 +75,23 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         scheduler.scrollToDate(new Date());
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent): void {
+        document.querySelector('.options')?.addEventListener('change', function (event: CustomEvent): void {
             const target = event.target as HTMLElement;
 
             if (target.id === 'currentTimeIndicator') {
-                scheduler.currentTimeIndicator = (<SwitchButton>event.target).checked;
+                scheduler.currentTimeIndicator = (<SwitchButton>event.target).checked || false;
                 return
             }
     
             if (target.id === 'shadeUntilCurrentTime') {
-                scheduler.shadeUntilCurrentTime = (<SwitchButton>event.target).checked;
+                scheduler.shadeUntilCurrentTime = (<SwitchButton>event.target).checked || false;
                 return
             }
             
             if (target instanceof window.Smart.NumberInput) {
+                //@ts-ignore
                 scheduler[target.id] = parseInt((<NumberInput>event.target).value);
             }
-        });
+        } as EventListener);
     };
 }

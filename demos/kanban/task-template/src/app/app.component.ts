@@ -11,20 +11,10 @@ import { GetKanbanData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     collapsible = true;
-    dataSource = [...GetKanbanData(), {
-        id: 16,
-        text: 'Improve performance',
-        status: 'inProgress',
-        checklist: [
-            { text: 'https://htmlelements.com/demos/images/card-demo-chart-1.png', completed: true },
-            { text: 'https://htmlelements.com/demos/images/card-demo-chart-2.png', completed: false },
-            { text: 'https://htmlelements.com/demos/images/card-demo-chart-3.png', completed: true },
-            { text: 'https://htmlelements.com/demos/images/card-demo-chart-4.png', completed: true }
-        ]
-    }];
+    dataSource = GetKanbanData();
     editable = true;
     columns = [
         { label: 'To do', dataField: 'toDo' },
@@ -32,12 +22,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Testing', dataField: 'testing' },
         { label: 'Done', dataField: 'done' }
     ];
-    createImageThumbs(settings: { data: any, task: HTMLDivElement, text: string, template?: string }) {
+    createImageThumbs = (settings: { data: any, task: HTMLDivElement, text: string, template: string }) => {
+
         if (!settings.data.checklist) {
             return settings.text;
         }
+
         let toInclude = '';
-        settings.data.checklist.forEach((subtask) => {
+        settings.data.checklist.forEach((subtask: any) => {
             if (subtask.completed) {
                 toInclude += `<div class="thumb" style="background-image: url('${subtask.text}');"></div>`;
             }
@@ -46,11 +38,12 @@ export class AppComponent implements AfterViewInit, OnInit {
             toInclude = `<div class="gallery">${toInclude}</div>`;
         }
         settings.text = `<span>${settings.text}</span>${toInclude}`;
+
+        return
     }
-    textTemplate = (settings: { data: any, task: HTMLDivElement, text: string, template?: string }) => {
-        const data = settings.data,
-            task = settings.task,
-            text = settings.text;
+    textTemplate = (settings: { data: any, task: HTMLDivElement, text: string, template: string }) => {
+        const data = settings.data;
+        const text = settings.text;
 
         if (data.id === 16) {
             this.createImageThumbs(settings);
@@ -89,5 +82,16 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
+        this.dataSource.push({
+            id: 16,
+            text: 'Improve performance',
+            status: 'inProgress',
+            checklist: [
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-1.png', completed: true },
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-2.png', completed: false },
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-3.png', completed: true },
+                { text: 'https://htmlelements.com/demos/images/card-demo-chart-4.png', completed: true }
+            ]
+        });
     }
 }

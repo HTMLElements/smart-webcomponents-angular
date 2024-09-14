@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ButtonComponent } from '@smart-webcomponents-angular/button';
+import { ButtonComponent } from 'smart-webcomponents-angular/button';
 
 import 'smart-webcomponents-angular/source/smart.core.js';
 

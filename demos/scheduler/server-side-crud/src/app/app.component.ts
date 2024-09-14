@@ -19,8 +19,8 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
     view: SchedulerViewType = 'month';
 
@@ -103,12 +103,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         alasql('INSERT INTO Events (Label,DateStart,DateEnd,Description,AllDay) VALUES ("Preview Customer Feedback","2021-01-04T22:00:00.000Z","2021-01-07T22:00:00.000Z","Preview the feedback from the customers.","false")');
         alasql('INSERT INTO Events (Label,DateStart,DateEnd,Description,AllDay) VALUES ("Meeting With A Major Client","2021-01-05T22:00:00.000Z","2021-01-06T22:00:00.000Z","Have a meeting with a big client from the states.","false")');
         return {
-            getData: function (request) {
+            getData: function (request: any) {
                 return executeSql(request);
             },
         };
 
-        function executeSql(request) {
+        function executeSql(request: any) {
             const table = that.table,
                 scheduler = that.scheduler;
             let lastId;
@@ -162,10 +162,12 @@ export class AppComponent implements AfterViewInit, OnInit {
             item = detail.item,
             newDates = detail.itemDateRange;
 
-        item.dateStart = newDates.dateStart;
-        item.dateEnd = newDates.dateEnd;
+        if (newDates.dateStart && newDates.dateEnd) {
+            item.dateStart = newDates.dateStart;
+            item.dateEnd = newDates.dateEnd;
 
-        this.refreshData('update', item);
+            this.refreshData('update', item);
+        }
     }
 
     handleResizeEnd(event: CustomEvent) {

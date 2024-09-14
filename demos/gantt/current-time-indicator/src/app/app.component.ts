@@ -14,7 +14,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
     @ViewChild('numberinput', { read: NumberInputComponent, static: false }) numberinput!: NumberInputComponent;
     @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
-    @ViewChild('switchbutton2', { read: SwitchButtonComponent, static: false }) switchbutton2: SwitchButtonComponent;
+    @ViewChild('switchbutton2', { read: SwitchButtonComponent, static: false }) switchbutton2!: SwitchButtonComponent;
 
     today: Date = new Date();
     year: number = this.today.getFullYear();
@@ -127,9 +127,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const ganttChart = this.ganttchart;
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent) {
+        const optionsChangeHandler = function (event: CustomEvent) {
             const target = event.target as SwitchButton | NumberInput;
-            
+
             if (target.id === 'currentTimeIndicator') {
                 ganttChart.currentTimeIndicator = target.checked;
                 return;
@@ -141,8 +141,10 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
 
             if (target instanceof window.Smart.NumberInput) {
-                ganttChart[target.id] = parseInt(target.value);
+                ganttChart.currentTimeIndicatorInterval = parseInt(target.value);
             }
-        });
+        }
+        document.querySelector('.options')!
+            .addEventListener('change', optionsChangeHandler as EventListener);
     };
 }

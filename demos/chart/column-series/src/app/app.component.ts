@@ -10,8 +10,8 @@ import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
 
     sampleData = [
         { Day: 'Monday', Keith: 30, Erica: 15, George: 25 },
@@ -73,6 +73,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.chart.seriesGroups[0].useGradientColors = event.detail.value;
                 that.chart.update();
             }
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

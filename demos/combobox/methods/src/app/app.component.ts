@@ -10,20 +10,20 @@ import { ComboBoxComponent } from '@smart-webcomponents-angular/combobox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('buttonUnsort', { read: ButtonComponent, static: false }) buttonUnsort: ButtonComponent;
-    @ViewChild('buttonSort', { read: ButtonComponent, static: false }) buttonSort: ButtonComponent;
-    @ViewChild('buttonUngroup', { read: ButtonComponent, static: false }) buttonUngroup: ButtonComponent;
-    @ViewChild('buttonGroup', { read: ButtonComponent, static: false }) buttonGroup: ButtonComponent;
-    @ViewChild('buttonOpen', { read: ButtonComponent, static: false }) buttonOpen: ButtonComponent;
-    @ViewChild('buttonClose', { read: ButtonComponent, static: false }) buttonClose: ButtonComponent;
-    @ViewChild('buttonDefault', { read: ButtonComponent, static: false }) buttonDefault: ButtonComponent;
-    @ViewChild('buttonCheck', { read: ButtonComponent, static: false }) buttonCheck: ButtonComponent;
-    @ViewChild('buttonRadio', { read: ButtonComponent, static: false }) buttonRadio: ButtonComponent;
-    @ViewChild('buttonInsert', { read: ButtonComponent, static: false }) buttonInsert: ButtonComponent;
-    @ViewChild('buttonUpdate', { read: ButtonComponent, static: false }) buttonUpdate: ButtonComponent;
-    @ViewChild('buttonRemove', { read: ButtonComponent, static: false }) buttonRemove: ButtonComponent;
-    @ViewChild('buttonDisable', { read: ButtonComponent, static: false }) buttonDisable: ButtonComponent;
-    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox: ComboBoxComponent;
+    @ViewChild('buttonUnsort', { read: ButtonComponent, static: false }) buttonUnsort!: ButtonComponent;
+    @ViewChild('buttonSort', { read: ButtonComponent, static: false }) buttonSort!: ButtonComponent;
+    @ViewChild('buttonUngroup', { read: ButtonComponent, static: false }) buttonUngroup!: ButtonComponent;
+    @ViewChild('buttonGroup', { read: ButtonComponent, static: false }) buttonGroup!: ButtonComponent;
+    @ViewChild('buttonOpen', { read: ButtonComponent, static: false }) buttonOpen!: ButtonComponent;
+    @ViewChild('buttonClose', { read: ButtonComponent, static: false }) buttonClose!: ButtonComponent;
+    @ViewChild('buttonDefault', { read: ButtonComponent, static: false }) buttonDefault!: ButtonComponent;
+    @ViewChild('buttonCheck', { read: ButtonComponent, static: false }) buttonCheck!: ButtonComponent;
+    @ViewChild('buttonRadio', { read: ButtonComponent, static: false }) buttonRadio!: ButtonComponent;
+    @ViewChild('buttonInsert', { read: ButtonComponent, static: false }) buttonInsert!: ButtonComponent;
+    @ViewChild('buttonUpdate', { read: ButtonComponent, static: false }) buttonUpdate!: ButtonComponent;
+    @ViewChild('buttonRemove', { read: ButtonComponent, static: false }) buttonRemove!: ButtonComponent;
+    @ViewChild('buttonDisable', { read: ButtonComponent, static: false }) buttonDisable!: ButtonComponent;
+    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox!: ComboBoxComponent;
 
 
     ngOnInit(): void {

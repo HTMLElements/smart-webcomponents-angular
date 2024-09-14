@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
+import { CheckBoxComponent } from 'smart-webcomponents-angular/checkbox';
 
 import 'smart-webcomponents-angular/source/smart.core.js';
 
@@ -29,11 +29,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
-
-		this.app = new window.Smart.App({
-			data: {
-				isChecked: true
-			}
-		});
 	}
 }

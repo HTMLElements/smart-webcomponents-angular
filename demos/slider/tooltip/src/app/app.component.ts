@@ -10,10 +10,10 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2: SliderComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2!: SliderComponent;
 
 
     ngOnInit(): void {

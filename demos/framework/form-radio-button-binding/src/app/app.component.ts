@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
+import { RadioButtonComponent } from 'smart-webcomponents-angular/radiobutton';
 
 import 'smart-webcomponents-angular/source/smart.core.js';
 
@@ -31,10 +31,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
-		this.app = new window.Smart.App({
-			data: {
-				picked: 'One'
-			}
-		});
+
+
+
+
 	}
 }

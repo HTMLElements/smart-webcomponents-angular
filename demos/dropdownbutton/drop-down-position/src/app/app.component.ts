@@ -9,15 +9,15 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton: DropDownButtonComponent;
-    @ViewChild('radiobuttonAuto', { read: RadioButtonComponent, static: false }) radiobuttonAuto: RadioButtonComponent;
-    @ViewChild('radiobuttonBottom', { read: RadioButtonComponent, static: false }) radiobuttonBottom: RadioButtonComponent;
-    @ViewChild('radiobuttonOverlayBottom', { read: RadioButtonComponent, static: false }) radiobuttonOverlayBottom: RadioButtonComponent;
-    @ViewChild('radiobuttonOverlayCenter', { read: RadioButtonComponent, static: false }) radiobuttonOverlayCenter: RadioButtonComponent;
-    @ViewChild('radiobuttonOverlayTop', { read: RadioButtonComponent, static: false }) radiobuttonOverlayTop: RadioButtonComponent;
-    @ViewChild('radiobuttonTop', { read: RadioButtonComponent, static: false }) radiobuttonTop: RadioButtonComponent;
-    @ViewChild('radiobuttonCenterBottom', { read: RadioButtonComponent, static: false }) radiobuttonCenterBottom: RadioButtonComponent;
-    @ViewChild('radiobuttonCenterTop', { read: RadioButtonComponent, static: false }) radiobuttonCenterTop: RadioButtonComponent;
+    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton!: DropDownButtonComponent;
+    @ViewChild('radiobuttonAuto', { read: RadioButtonComponent, static: false }) radiobuttonAuto!: RadioButtonComponent;
+    @ViewChild('radiobuttonBottom', { read: RadioButtonComponent, static: false }) radiobuttonBottom!: RadioButtonComponent;
+    @ViewChild('radiobuttonOverlayBottom', { read: RadioButtonComponent, static: false }) radiobuttonOverlayBottom!: RadioButtonComponent;
+    @ViewChild('radiobuttonOverlayCenter', { read: RadioButtonComponent, static: false }) radiobuttonOverlayCenter!: RadioButtonComponent;
+    @ViewChild('radiobuttonOverlayTop', { read: RadioButtonComponent, static: false }) radiobuttonOverlayTop!: RadioButtonComponent;
+    @ViewChild('radiobuttonTop', { read: RadioButtonComponent, static: false }) radiobuttonTop!: RadioButtonComponent;
+    @ViewChild('radiobuttonCenterBottom', { read: RadioButtonComponent, static: false }) radiobuttonCenterBottom!: RadioButtonComponent;
+    @ViewChild('radiobuttonCenterTop', { read: RadioButtonComponent, static: false }) radiobuttonCenterTop!: RadioButtonComponent;
 
     ngOnInit(): void {
         // onInit code.

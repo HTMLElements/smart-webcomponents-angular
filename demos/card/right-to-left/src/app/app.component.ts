@@ -10,7 +10,7 @@ import { CardComponent } from '@smart-webcomponents-angular/card';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('card', { read: CardComponent, static: false }) card: CardComponent;
+	@ViewChild('card', { read: CardComponent, static: false }) card!: CardComponent;
 	
  
 	ngOnInit(): void {

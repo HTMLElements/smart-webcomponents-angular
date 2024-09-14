@@ -11,13 +11,13 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox: ComboBoxComponent;
-    @ViewChild('radioButtonNone', { read: RadioButtonComponent, static: false }) radioButtonNone: RadioButtonComponent;
-    @ViewChild('radioButtonHorizontal', { read: RadioButtonComponent, static: false }) radioButtonHorizontal: RadioButtonComponent;
-    @ViewChild('radioButtonBoth', { read: RadioButtonComponent, static: false }) radioButtonBoth: RadioButtonComponent;
-    @ViewChild('radioButtonVertical', { read: RadioButtonComponent, static: false }) radioButtonVertical: RadioButtonComponent;
-    @ViewChild('radioButtonBottom', { read: RadioButtonComponent, static: false }) radioButtonBottom: RadioButtonComponent;
-    @ViewChild('radioButtonTop', { read: RadioButtonComponent, static: false }) radioButtonTop: RadioButtonComponent;
+    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox!: ComboBoxComponent;
+    @ViewChild('radioButtonNone', { read: RadioButtonComponent, static: false }) radioButtonNone!: RadioButtonComponent;
+    @ViewChild('radioButtonHorizontal', { read: RadioButtonComponent, static: false }) radioButtonHorizontal!: RadioButtonComponent;
+    @ViewChild('radioButtonBoth', { read: RadioButtonComponent, static: false }) radioButtonBoth!: RadioButtonComponent;
+    @ViewChild('radioButtonVertical', { read: RadioButtonComponent, static: false }) radioButtonVertical!: RadioButtonComponent;
+    @ViewChild('radioButtonBottom', { read: RadioButtonComponent, static: false }) radioButtonBottom!: RadioButtonComponent;
+    @ViewChild('radioButtonTop', { read: RadioButtonComponent, static: false }) radioButtonTop!: RadioButtonComponent;
 
     ngOnInit(): void {
         // onInit code.

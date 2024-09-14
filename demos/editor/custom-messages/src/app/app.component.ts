@@ -12,14 +12,14 @@ import { EditorComponent } from '@smart-webcomponents-angular/editor';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 
     required: boolean = true;
 
@@ -67,7 +67,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this,
             editor = that.editor;
 
-        that.options.nativeElement.addEventListener('change', function (event) {
+        that.options.nativeElement.addEventListener('change', function (event: Event) {
             that.messageSettings.iconType = (<HTMLElement>event.target).id;
         });
 

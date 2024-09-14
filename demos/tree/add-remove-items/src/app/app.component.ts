@@ -11,14 +11,14 @@ import { TreeComponent, TreeItem, TreeItemsGroup } from '@smart-webcomponents-an
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-    @ViewChild('button5', { read: ButtonComponent, static: false }) button5: ButtonComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
 
 
     ngOnInit(): void {

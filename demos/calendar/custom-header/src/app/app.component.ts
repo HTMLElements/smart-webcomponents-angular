@@ -9,7 +9,7 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
+	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
 	
 	public date = new Date(2020, 10, 20);
 	public showTemplate = true;

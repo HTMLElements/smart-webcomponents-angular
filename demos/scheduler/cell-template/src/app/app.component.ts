@@ -9,105 +9,105 @@ import { SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-we
     encapsulation: ViewEncapsulation.None
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
-	
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
+
     today: Date = new Date();
 
     currentYear: number = this.today.getFullYear();
 
-    specialDates: object[] = [{
-            date: new Date(this.currentYear, 11, 24),
-            label: 'Christmas Eve',
-            icon: 'christmas-eve'
-        },
-        {
-            date: new Date(this.currentYear, 11, 25),
-            label: 'Christmas Day',
-            icon: 'santa'
-        },
-        {
-            date: new Date(this.currentYear, 11, 26),
-            label: 'Day After Christmas',
-            icon: 'christmas'
-        },
-        {
-            date: new Date(this.currentYear, 11, 8),
-            label: 'Happy Birthday',
-            icon: 'birthday'
-        },
-        {
-            date: new Date(this.currentYear, 11, 14),
-            label: 'Christmas Party',
-            icon: 'celebration2'
-        },
-        {
-            date: new Date(this.currentYear, 11, 31),
-            label: 'New Year\'s Eve',
-            icon: 'celebration'
-        },
-        {
-            date: new Date(this.currentYear, 0, 1),
-            label: 'First Day of the Year',
-            icon: 'first-day'
-        },
-        {
-            date: new Date(this.currentYear, 2, 3),
-            label: 'Liberation Day',
-            icon: 'liberty'
-        },
-        {
-            date: new Date(this.currentYear, 4, 1),
-            label: 'Labour Day',
-            icon: 'labour'
-        },
-        {
-            date: new Date(this.currentYear, 2, 8),
-            label: 'Women\'s Day',
-            icon: 'flowers'
-        },
-        {
-            date: new Date(this.currentYear, 1, 14),
-            label: 'Valentine\'s Day',
-            icon: 'love'
-        },
-        {
-            date: new Date(this.currentYear, 1, 14),
-            label: 'Party Time',
-            icon: 'party'
-        },
-        {
-            date: new Date(this.currentYear, 0, 21),
-            label: 'Happy Birthday',
-            icon: 'celebration3'
-        },
-        {
-            date: new Date(this.currentYear, 3, 12),
-            label: 'Happy Birthday',
-            icon: 'party2'
-        },
-        {
-            date: new Date(this.currentYear, 5, 7),
-            label: 'Happy Birthday',
-            icon: 'party3'
-        },
-        {
-            date: new Date(this.currentYear, 6, 15),
-            label: 'Happy Birthday',
-            icon: 'party4'
-        },
-        {
-            date: new Date(this.currentYear, 7, 24),
-            label: 'Happy Birthday',
-            icon: 'party'
-        },
-        {
-            date: new Date(this.currentYear, 8, 4),
-            label: 'Happy Birthday',
-            icon: 'party2'
-        }
+    specialDates: { date: Date, label: string, icon: string }[] = [{
+        date: new Date(this.currentYear, 11, 24),
+        label: 'Christmas Eve',
+        icon: 'christmas-eve'
+    },
+    {
+        date: new Date(this.currentYear, 11, 25),
+        label: 'Christmas Day',
+        icon: 'santa'
+    },
+    {
+        date: new Date(this.currentYear, 11, 26),
+        label: 'Day After Christmas',
+        icon: 'christmas'
+    },
+    {
+        date: new Date(this.currentYear, 11, 8),
+        label: 'Happy Birthday',
+        icon: 'birthday'
+    },
+    {
+        date: new Date(this.currentYear, 11, 14),
+        label: 'Christmas Party',
+        icon: 'celebration2'
+    },
+    {
+        date: new Date(this.currentYear, 11, 31),
+        label: 'New Year\'s Eve',
+        icon: 'celebration'
+    },
+    {
+        date: new Date(this.currentYear, 0, 1),
+        label: 'First Day of the Year',
+        icon: 'first-day'
+    },
+    {
+        date: new Date(this.currentYear, 2, 3),
+        label: 'Liberation Day',
+        icon: 'liberty'
+    },
+    {
+        date: new Date(this.currentYear, 4, 1),
+        label: 'Labour Day',
+        icon: 'labour'
+    },
+    {
+        date: new Date(this.currentYear, 2, 8),
+        label: 'Women\'s Day',
+        icon: 'flowers'
+    },
+    {
+        date: new Date(this.currentYear, 1, 14),
+        label: 'Valentine\'s Day',
+        icon: 'love'
+    },
+    {
+        date: new Date(this.currentYear, 1, 14),
+        label: 'Party Time',
+        icon: 'party'
+    },
+    {
+        date: new Date(this.currentYear, 0, 21),
+        label: 'Happy Birthday',
+        icon: 'celebration3'
+    },
+    {
+        date: new Date(this.currentYear, 3, 12),
+        label: 'Happy Birthday',
+        icon: 'party2'
+    },
+    {
+        date: new Date(this.currentYear, 5, 7),
+        label: 'Happy Birthday',
+        icon: 'party3'
+    },
+    {
+        date: new Date(this.currentYear, 6, 15),
+        label: 'Happy Birthday',
+        icon: 'party4'
+    },
+    {
+        date: new Date(this.currentYear, 7, 24),
+        label: 'Happy Birthday',
+        icon: 'party'
+    },
+    {
+        date: new Date(this.currentYear, 8, 4),
+        label: 'Happy Birthday',
+        icon: 'party2'
+    }
     ];
-    
+
     dataSource: SchedulerEvent[] = [
         {
             label: 'Google AdWords Strategy',
@@ -164,24 +164,20 @@ export class AppComponent implements AfterViewInit, OnInit {
     dateCurrent: Date = this.today;
 
     view: SchedulerViewType = 'month';
-   
+
     cellTemplate: Function = (cell: HTMLElement, date: Date) => {
         const scheduler = this.scheduler;
         let cellDate = date.getDate();
 
         if (cellDate === 1) {
-              cell.textContent =
-        '' +
-        new Intl.DateTimeFormat(scheduler.locale, {
-          month: 'short',
-          day: '2-digit',
-        }).format(date);
+            cell.textContent = new Intl.DateTimeFormat(scheduler.locale, { month: 'short', day: 'numeric' }).format(date);
         }
         else {
             cell.textContent = cellDate + '';
         }
         const year = date.getFullYear(), month = date.getMonth(), dayNumber = date.getDate();
-        const holiday = this.specialDates.find((d: { date: Date}) => {
+
+        const holiday = this.specialDates.find((d: { date: Date, label: string, icon: string }) => {
             const date = d.date;
             return date.getFullYear() === year && date.getMonth() === month && date.getDate() === dayNumber;
         }) as { label: 'string', icon: 'string' };
@@ -197,17 +193,17 @@ export class AppComponent implements AfterViewInit, OnInit {
             cell.style.removeProperty('--cell-icon');
         }
     }
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
     }
 }

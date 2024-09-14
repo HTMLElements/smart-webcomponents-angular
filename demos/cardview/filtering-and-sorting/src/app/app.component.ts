@@ -1,21 +1,21 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview';
+import { CardViewColumn, CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('cardview', { read: CardViewComponent, static: false }) cardview: CardViewComponent;
-    
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('cardview', { read: CardViewComponent, static: false }) cardview!: CardViewComponent;
+
     generateData(length: number): any[] {
         const sampleData = [], firstNames = ['Andrew', 'Nancy', 'Shelley', 'Regina', 'Yoshi', 'Antoni', 'Mayumi', 'Ian', 'Peter', 'Lars', 'Petra', 'Martin', 'Sven', 'Elio', 'Beate', 'Cheryl', 'Michael', 'Guylene'], lastNames = ['Fuller', 'Davolio', 'Burke', 'Murphy', 'Nagase', 'Saavedra', 'Ohno', 'Devling', 'Wilson', 'Peterson', 'Winkler', 'Bein', 'Petersen', 'Rossi', 'Vileid', 'Saylor', 'Bjorn', 'Nodier'], petNames = ['Sam', 'Bob', 'Lucky', 'Tommy', 'Charlie', 'Olliver', 'Mixie', 'Fluffy', 'Acorn', 'Beak'], countries = ['Bulgaria', 'USA', 'UK', 'Singapore', 'Thailand', 'Russia', 'China', 'Belize'], productNames = ['Black Tea', 'Green Tea', 'Caffe Espresso', 'Doubleshot Espresso', 'Caffe Latte', 'White Chocolate Mocha', 'Cramel Latte', 'Caffe Americano', 'Cappuccino', 'Espresso Truffle', 'Espresso con Panna', 'Peppermint Mocha Twist'];
         for (let i = 0; i < length; i++) {
             const row: any = {};
-       
+
             row.firstName = (i + 1) + '. ' + firstNames[Math.floor(Math.random() * firstNames.length)];
             row.lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
             row.birthday = new Date(Math.round(Math.random() * (2018 - 1918) + 1918), Math.round(Math.random() * 11), Math.round(Math.random() * (31 - 1) + 1));
@@ -29,12 +29,12 @@ export class AppComponent implements AfterViewInit, OnInit {
             row.attachments = [];
             const maxAttachments = Math.floor(Math.random() * Math.floor(3)) + 1;
             for (let i = 0; i < maxAttachments; i++) {
-                row.attachments.push(`https://htmlelements.com/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
+                row.attachments.push(`../../../src/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
             }
             row.attachments = row.attachments.join(',');
             sampleData[i] = row;
         }
-        
+
         return sampleData;
     }
 
@@ -56,7 +56,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    columns = [
+    columns: CardViewColumn[] = [
         { label: 'First Name', dataField: 'firstName', icon: 'firstName' },
         { label: 'Last Name', dataField: 'lastName', icon: 'lastName' },
         { label: 'Birthday', dataField: 'birthday', icon: 'birthday', formatSettings: { formatString: 'd' } },
@@ -91,19 +91,19 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     coverField: string = 'attachments';
     titleField: string = 'firstName'
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
-	
 
-	}	
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
+
+    }
 }

@@ -7,7 +7,7 @@ export class Hero {
 		public id: number,
 		public name: string,
 		public power: string,
-		public alterEgo?: string
+		public alterEgo: string
 	) { }
 
 }
@@ -65,16 +65,16 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	newHero() {
-		this.name.setValue('');
-		this.alterEgo.setValue('');
-		this.power.setValue('');
+		this.name?.setValue('');
+		this.alterEgo?.setValue('');
+		this.power?.setValue('');
 	}
 
 	get diagnostic() {
 		return JSON.stringify({
-			name: this.name.value,
-			alterEgo: this.alterEgo.value,
-			power: this.power.value
+			name: this.name?.value,
+			alterEgo: this.alterEgo?.value,
+			power: this.power?.value
 		});
 	}
 }

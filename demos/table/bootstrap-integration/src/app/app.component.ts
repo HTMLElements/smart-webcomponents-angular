@@ -10,7 +10,7 @@ declare let $: any;
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     chemicalElementsData: Object[] = [{
         number: 1,

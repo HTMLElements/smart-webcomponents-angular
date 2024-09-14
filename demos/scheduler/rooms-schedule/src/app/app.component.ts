@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerGroupOrientation, SchedulerResource } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewType, SchedulerViews, SchedulerGroupOrientation, SchedulerResource } from '@smart-webcomponents-angular/scheduler';
 import { WindowComponent } from '@smart-webcomponents-angular/window';
 
 
@@ -11,13 +11,13 @@ import { WindowComponent } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
-    @ViewChild('alertWindow', { read: WindowComponent, static: false }) alertWindow: WindowComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
+    @ViewChild('alertWindow', { read: WindowComponent, static: false }) alertWindow!: WindowComponent;
 
-    targetEvent = null;
-    eventEditors = null;
+    targetEvent: any = null;
+    eventEditors: any = null;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(), year = today.getFullYear(), month = today.getMonth(), date = today.getDate();
         const dataWithGroups = [
             {
@@ -390,10 +390,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.alertWindow.open();
     }
 
-    notifyForRestrictions(event: CustomEvent) {
+    async notifyForRestrictions(event: CustomEvent) {
         const scheduler = this.scheduler;
 
-        if (scheduler.isEventRestricted(event.detail.itemDateRange)) {
+        if (await scheduler.isEventRestricted(event.detail.itemDateRange)) {
             this.openNotification();
         }
     }
@@ -406,10 +406,10 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     clearEventEdit() {
-        this.targetEvent = undefined;
+        this.targetEvent = null;
     }
 
-    checkEventEdit() {
+    async checkEventEdit() {
         const that = this;
 
         if (!that.targetEvent || !that.eventEditors) {
@@ -419,7 +419,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const dateStart = that.eventEditors.dateStart.querySelector('[event-editor]').value.toDate(),
             dateEnd = that.eventEditors.dateEnd.querySelector('[event-editor]').value.toDate();
 
-        if (that.scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
+        if (await that.scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
             that.openNotification();
         }
     }

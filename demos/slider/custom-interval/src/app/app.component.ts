@@ -10,11 +10,11 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2: SliderComponent;
-    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3: SliderComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2!: SliderComponent;
+    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3!: SliderComponent;
 
 
     ngOnInit(): void {
@@ -35,12 +35,12 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.slider.customInterval = checked;
             that.slider2.customInterval = checked;
             that.slider3.customInterval = checked;
-        });
+        } as EventListener);
         that.checkbox2.addEventListener('change', function (event: CustomEvent) {
             const checked = event.detail.value;
             that.slider.coerce = checked;
             that.slider2.coerce = checked;
             that.slider3.coerce = checked;
-        });
+        } as EventListener);
     }
 }

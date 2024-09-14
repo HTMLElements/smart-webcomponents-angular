@@ -10,9 +10,9 @@ import { TreeComponent } from '@smart-webcomponents-angular/tree';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-	@ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
+	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+	@ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
 
 
 	ngOnInit(): void {

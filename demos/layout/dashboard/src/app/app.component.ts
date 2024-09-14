@@ -18,18 +18,18 @@ import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker: DateTimePickerComponent;
-    @ViewChild('grid', { read: GridComponent, static: false }) grid: GridComponent;
-    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
-    @ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2: TextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker!: DateTimePickerComponent;
+    @ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
+    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
+    @ViewChild('textbox2', { read: TextBoxComponent, static: false }) textbox2!: TextBoxComponent;
 
     sampleData: Array<Object> = [
         { type: 'Circulatory', inpatients: 55, outpatients: 80 },
@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { type: 'Respiratory', inpatients: 75, outpatients: 55 }
     ];
 
-    data: Array<{ id: number, name: string, image: string, date: Date, email: string, inpatient: Boolean, diagnosis: string, symptoms: string }> = [
+    data: Array<{ id: number, name: string, image: string, date: Date, email: string, inpatient: boolean, diagnosis: string, symptoms: string }> = [
         { id: 0, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'Nancy Davolio', image: 'nancy', email: 'ndavolio@msn.com', diagnosis: 'Aerophobia', symptoms: 'Fear of flying', inpatient: false },
         { id: 1, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'Andrew Fuller', image: 'andrew', email: 'afuller@msn.com', diagnosis: 'Pyrophobia', symptoms: 'Fear of fire', inpatient: true },
         { id: 2, date: new Date(new Date().setDate(new Date().getDate() - 1)), name: 'John Levering', image: 'john', email: 'jlevering@msn.com', diagnosis: 'Scolionophobia', symptoms: 'Fear of school', inpatient: true },
@@ -53,13 +53,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         { id: 9, date: new Date(), name: 'Janet Peterson', image: 'janet', email: 'jpeterson@msn.com', diagnosis: 'Zoophobia', symptoms: 'Fear of animals', inpatient: false }
     ];
 
-    caption: String = 'Total visits';
+    caption: string = 'Total visits';
 
-    description: String = '';
+    description: string = '';
 
-    showLegend: Boolean = true;
+    showLegend: boolean = true;
 
-    showBorderLine: Boolean = false;
+    showBorderLine: boolean = false;
 
     padding: Object = { left: 5, top: 5, right: 5, bottom: 5 };
 
@@ -73,7 +73,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             visible: false
         };
 
-    colorScheme: String = 'scheme05';
+    colorScheme: string = 'scheme05';
 
     seriesGroups: Array<Object> = [
         {
@@ -151,19 +151,24 @@ export class AppComponent implements AfterViewInit, OnInit {
             return { id: x.id, name: x.name, image: x.image }
         });
 
-        const items = listbox.items as Array<ListItem>;
+        setTimeout(() => {
+            const items = listbox.items as Array<ListItem>;
 
-        for (let i = 0; i < listbox.dataSource.length; i++) {
-            items[i].querySelector('img').src = `https://htmlelements.com/demos/images/people/${listbox.dataSource[i].image}.jpg`
-        }
+            for (let i = 0; i < listbox.dataSource.length; i++) {
+
+                if (items[i].querySelector('img')) {
+                    items[i].querySelector('img')!.src = `../../../src/images/people/${listbox.dataSource[i].image}.jpg`
+                }
+            }
+        }, 20)
     }
 
     attachEvents() {
         const that = this;
 
-        that.listbox.addEventListener('change', (e: CustomEvent) => {
+        that.listbox.addEventListener('change', ((e: CustomEvent) => {
             that.changeSelectedPerson(e.detail.value, true);
-        });
+        }) as EventListener);
 
         that.grid.addEventListener('change', e => {
             if (!e.target || (e.target && !(e.target as any).getSelection)) {
@@ -175,7 +180,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (selection && selection.rows && selection.rows.length > 0) {
                 const id = selection.rows[0].id;
 
-                that.changeSelectedPerson(id);
+                that.changeSelectedPerson(id, true);
             }
         });
 
@@ -187,36 +192,40 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.resetForm();
         });
 
-        that.calendar.addEventListener('change', (e: CustomEvent) => {
+        that.calendar.addEventListener('change', ((e: CustomEvent) => {
             if (e.detail.value.length) {
                 that.grid.addFilter('date', '= ' + e.detail.value[0].toLocaleDateString());
             }
             else {
                 that.grid.clearFilter();
             }
-        });
+        }) as EventListener);
     }
 
     onCalendarReady(e: CustomEvent) {
         const that = this;
 
-        document.querySelector('.smart-calendar-footer smart-button').addEventListener('click', () => {
+        document.querySelector('.smart-calendar-footer smart-button')?.addEventListener('click', () => {
             that.calendar.clearSelection();
         });
     }
 
-    changeSelectedPerson(id: number, updateGrid?: boolean) {
+    changeSelectedPerson(id: number, updateGrid: boolean) {
         const that = this;
 
         if (that.selectedPersonId === id) return;
 
         that.selectedPersonId = id;
 
-        const personData = that.data[id] as { id: number, name: string, image: string, date: Date, email: string, inpatient: Boolean };
+        const personData = that.data[id] as { id: number, name: string, image: string, date: Date, email: string, inpatient: boolean };
 
-        document.querySelector('.dashboard-header .header-name').innerHTML = personData.name;
+        const headerName = document.querySelector('.dashboard-header .header-name');
 
-        const imgSrc = `https://htmlelements.com/demos/images/people/${personData.image}.jpg`;
+        if (headerName) {
+            headerName.innerHTML = personData.name;
+        }
+
+        const imgSrc = `../../../src/images/people/${personData.image}.jpg`;
 
         (document.querySelector('.icon-holder .header-logo') as HTMLImageElement).src = imgSrc;
 
@@ -226,7 +235,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.datetimepicker.value = personData.date;
         that.textbox2.value = personData.email;
 
-        personInfo.querySelector('img').src = imgSrc;
+        const personImage = personInfo?.querySelector('img');
+
+        if (personImage) {
+            personImage.src = imgSrc;
+        }
 
         if (personData.inpatient) {
             that.radiobutton.checked = true;
@@ -244,7 +257,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     updatePersonData() {
         const that = this;
-        const selectedPerson = that.data[that.selectedPersonId] as { id: number, name: string, image: string, date: Date, email: string, inpatient: Boolean };
+        const selectedPerson = that.data[that.selectedPersonId] as { id: number, name: string, image: string, date: Date, email: string, inpatient: boolean };
 
         selectedPerson.name = that.textbox.value;
         selectedPerson.date = that.datetimepicker.value;
@@ -269,7 +282,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const items = listbox.items;
 
-        (items[that.selectedPersonId] as ListItem).querySelector('img').src = `https://htmlelements.com/demos/images/people/${that.data[that.selectedPersonId].image}.jpg`;
+        if ((items[that.selectedPersonId] as ListItem)
+            .querySelector('img')
+        ) {
+            (items[that.selectedPersonId] as ListItem)
+                .querySelector('img')!.src = `../../../src/images/people/${that.data[that.selectedPersonId].image}.jpg`;
+        }
+
     }
 
     resetForm() {
@@ -279,7 +298,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.textbox.value = selectedPerson.name;
         that.datetimepicker.value = selectedPerson.date;
         that.textbox.value = selectedPerson.email;
-        (document.querySelector('#personInfo img') as HTMLImageElement).src = `https://htmlelements.com/demos/images/people/${selectedPerson.image}.jpg`;
+        (document.querySelector('#personInfo img') as HTMLImageElement).src = `../../../src/images/people/${selectedPerson.image}.jpg`;
 
         if (selectedPerson.inpatient) {
             that.radiobutton.checked = true;

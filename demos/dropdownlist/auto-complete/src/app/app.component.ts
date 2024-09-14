@@ -10,7 +10,7 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+	@ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 	
  
 	ngOnInit(): void {

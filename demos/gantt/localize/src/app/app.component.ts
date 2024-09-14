@@ -25,40 +25,43 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'duration',
             value: 'duration',
-            formatFunction: (date) => parseInt(date)
+            formatFunction: (date: string) => parseInt(date)
         }
     ];
 
-    yearFormat: string = '2-digit';
+    yearFormat: '2-digit' = '2-digit';
 
-    monthFormat: string = 'short';
+    monthFormat: 'short' = 'short';
 
-    dayFormat: string = '2-digit';
+    dayFormat: '2-digit' = '2-digit';
 
-    treeSize: string = '35%';
+    treeSize = '35%';
 
     //Custom Format Function
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string): string {
+    timelineHeaderFormatFunction(date: Date, type: string) {
+
         if (type === 'month') {
-            return date.toLocaleDateString(this.locale, { month: 'long', year: 'numeric' });
+            return date.toLocaleDateString(this.ganttchart.locale, { month: 'long', year: 'numeric' });
         }
         if (type === 'year') {
-            return date.toLocaleDateString(this.locale, { year: 'numeric' });
+            return date.toLocaleDateString(this.ganttchart.locale, { year: 'numeric' });
         }
         if (type === 'week') {
             const startDayOfWeek = new Date(date), endDateOfWeek = new Date(date);
 
             endDateOfWeek.setDate(date.getDate() + 6);
 
-            return startDayOfWeek.toLocaleDateString(this.locale, { day: this.dayFormat, month: this.monthFormat, year: this.yearFormat }) + ' - ' +
-                endDateOfWeek.toLocaleDateString(this.locale, { day: this.dayFormat, month: this.monthFormat, year: this.yearFormat });
+            return startDayOfWeek.toLocaleDateString(this.ganttchart.locale, { day: this.dayFormat, month: this.monthFormat, year: this.yearFormat }) + ' - ' +
+                endDateOfWeek.toLocaleDateString(this.ganttchart.locale, { day: this.dayFormat, month: this.monthFormat, year: this.yearFormat });
         }
         if (type === 'day') {
-            return date.toLocaleDateString(this.locale, { day: this.dayFormat });
+            return date.toLocaleDateString(this.ganttchart.locale, { day: this.dayFormat });
         }
         if (type === 'hour') {
-            return date.toLocaleDateString(this.locale, { hour: 'numeric' });
+            return date.toLocaleDateString(this.ganttchart.locale, { hour: 'numeric' });
         }
+
+        return
     };
 
     dataSource: Array<object> = [
@@ -193,14 +196,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            gantt: GanttChartComponent = that.ganttchart,
-            dropDown: DropDownListComponent = that.dropdownlist;
+        this.ganttchart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this)
 
-        dropDown.addEventListener('change', function (event: CustomEvent): void {
-            gantt.locale = event.detail.label;
-        });
+        const dropDownChangeHandler = (event: CustomEvent): void => {
+            this.ganttchart.locale = event.detail.label;
+        }
 
-
+        this.dropdownlist.addEventListener('change', dropDownChangeHandler as EventListener);
     }
 }

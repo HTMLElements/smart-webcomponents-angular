@@ -3,15 +3,15 @@ import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table'
 import { GetCountriesData } from '../assets/data';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+export class AppComponent implements AfterViewInit, OnInit {
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
-    dataSource = new window.Smart.DataAdapter({
+	dataSource = new window.Smart.DataAdapter({
 		dataSource: GetCountriesData(),
 		dataFields: [
 			'ID: number',
@@ -27,14 +27,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	columns = [
+	columns: any = [
 		'Country',
 		'Area',
 		'Population_Rural',
 		'Population_Total',
 		'GDP_Total'
 	];
- 
+
 	ngOnInit(): void {
 		// onInit code.
 	}
@@ -42,9 +42,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 	ngAfterViewInit(): void {
 		// afterViewInit code.
 		this.init();
-    }
-		
+	}
+
 	init(): void {
 		// init code.
-	}	
+	}
 }

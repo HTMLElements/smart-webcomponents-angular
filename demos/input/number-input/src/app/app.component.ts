@@ -9,15 +9,15 @@ import { NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('numberinput', { read: NumberInputComponent, static: false }) numberinput: NumberInputComponent;
-	@ViewChild('numberinput2', { read: NumberInputComponent, static: false }) numberinput2: NumberInputComponent;
-	@ViewChild('numberinput3', { read: NumberInputComponent, static: false }) numberinput3: NumberInputComponent;
-	@ViewChild('numberinput4', { read: NumberInputComponent, static: false }) numericInput: NumberInputComponent;
-	@ViewChild('numberinput5', { read: NumberInputComponent, static: false }) currencyInput: NumberInputComponent;
-	@ViewChild('numberinput6', { read: NumberInputComponent, static: false }) accountingInput: NumberInputComponent;
-	@ViewChild('numberinput7', { read: NumberInputComponent, static: false }) currencyInputLocalized: NumberInputComponent;
-	@ViewChild('numberinput8', { read: NumberInputComponent, static: false }) percentInput: NumberInputComponent;
-	@ViewChild('numberinput9', { read: NumberInputComponent, static: false }) customInput: NumberInputComponent;
+	@ViewChild('numberinput', { read: NumberInputComponent, static: false }) numberinput!: NumberInputComponent;
+	@ViewChild('numberinput2', { read: NumberInputComponent, static: false }) numberinput2!: NumberInputComponent;
+	@ViewChild('numberinput3', { read: NumberInputComponent, static: false }) numberinput3!: NumberInputComponent;
+	@ViewChild('numberinput4', { read: NumberInputComponent, static: false }) numericInput!: NumberInputComponent;
+	@ViewChild('numberinput5', { read: NumberInputComponent, static: false }) currencyInput!: NumberInputComponent;
+	@ViewChild('numberinput6', { read: NumberInputComponent, static: false }) accountingInput!: NumberInputComponent;
+	@ViewChild('numberinput7', { read: NumberInputComponent, static: false }) currencyInputLocalized!: NumberInputComponent;
+	@ViewChild('numberinput8', { read: NumberInputComponent, static: false }) percentInput!: NumberInputComponent;
+	@ViewChild('numberinput9', { read: NumberInputComponent, static: false }) customInput!: NumberInputComponent;
 	
  
 	ngOnInit(): void {

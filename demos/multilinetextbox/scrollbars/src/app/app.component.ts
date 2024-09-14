@@ -9,10 +9,10 @@ import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilin
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox: MultilineTextBoxComponent;
-	@ViewChild('multilinetextbox2', { read: MultilineTextBoxComponent, static: false }) multilinetextbox2: MultilineTextBoxComponent;
-	@ViewChild('multilinetextbox3', { read: MultilineTextBoxComponent, static: false }) multilinetextbox3: MultilineTextBoxComponent;
-	@ViewChild('multilinetextbox4', { read: MultilineTextBoxComponent, static: false }) multilinetextbox4: MultilineTextBoxComponent;
+	@ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox!: MultilineTextBoxComponent;
+	@ViewChild('multilinetextbox2', { read: MultilineTextBoxComponent, static: false }) multilinetextbox2!: MultilineTextBoxComponent;
+	@ViewChild('multilinetextbox3', { read: MultilineTextBoxComponent, static: false }) multilinetextbox3!: MultilineTextBoxComponent;
+	@ViewChild('multilinetextbox4', { read: MultilineTextBoxComponent, static: false }) multilinetextbox4!: MultilineTextBoxComponent;
 	
  
 	ngOnInit(): void {

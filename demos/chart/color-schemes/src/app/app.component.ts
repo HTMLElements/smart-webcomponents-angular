@@ -13,12 +13,12 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('chart2', { read: ChartComponent, static: false }) chart2: ChartComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('chart2', { read: ChartComponent, static: false }) chart2!: ChartComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
 
     sampleData = [
         { Day: 'Monday', Keith: 30, Erica: 15, George: 25, Monica: 20, Maria: 15, Average: 20 },
@@ -119,7 +119,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.chart.addColorScheme('custom', customColors);
         that.chart2.addColorScheme('custom', customColors);
         customColors.forEach(function (color, index) {
-            document.getElementById('customScheme' + (index + 1)).style.backgroundColor = color;
+            const customScheme = document.getElementById('customScheme' + (index + 1))
+            if (customScheme) {
+                customScheme.style.backgroundColor = color;
+            }
+
         });
         that.dropdownlist.addEventListener('change', function (event: CustomEvent) {
             defaultScheme = event.detail.value;
@@ -128,7 +132,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.colorScheme = defaultScheme;
                 that.colorSchemePie = defaultScheme;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.dropdownlist.placeholder = '<div class="circle" style="background-color: #307DD7;"></div><div class="circle" style="background-color: #AA4643;"></div><div class="circle" style="background-color: #89A54E;"></div><div class="circle" style="background-color: #71588F;"></div><div class="circle" style="background-color: #4198AF;"></div>';
         that.checkbox.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value) {
@@ -139,20 +143,20 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.colorScheme = defaultScheme;
                 that.colorSchemePie = defaultScheme;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.radiobutton.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value) {
                 that.chart.theme = 'light';
                 that.chart2.theme = 'light';
                 document.body.style.backgroundColor = "";
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.radiobutton2.addEventListener('change', function (event: CustomEvent) {
             if (event.detail.value) {
                 that.chart.theme = 'dark';
                 that.chart2.theme = 'dark';
                 document.body.style.backgroundColor = '#2E2E2E';
             }
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

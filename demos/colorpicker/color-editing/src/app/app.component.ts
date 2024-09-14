@@ -10,7 +10,7 @@ import { ColorPickerComponent } from '@smart-webcomponents-angular/colorpicker';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker: ColorPickerComponent;
+	@ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker!: ColorPickerComponent;
 	
  
 	ngOnInit(): void {

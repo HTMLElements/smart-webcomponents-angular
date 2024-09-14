@@ -9,7 +9,7 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
+	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
 	restrictedDates: string[] = ["2020-7-25", "2020-7-15","2021-1-1"];
  
 	ngOnInit(): void {

@@ -10,8 +10,8 @@ import { ChartComponent, Chart, Smart, ChartXAxisType, ChartType } from '@smart-
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('tbody', { read: ElementRef, static: false }) tbody: ElementRef;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('tbody', { read: ElementRef, static: false }) tbody!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -73,7 +73,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         series: [
                             {
                                 linesUnselectMode: 'click',
-                                colorFunction: function (value: number, itemIndex, serie, group) {
+                                colorFunction: function (value: number) {
                                     return (value < 10) ? negativeColor : positiveColor;
                                 }
                             }
@@ -82,7 +82,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 ]
             };
             for (let setting in settings) {
-                element[setting] = settings[setting];
+                element[setting] = settings[setting as keyof typeof settings];
             }
         }
 
@@ -91,7 +91,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             for (let field in dataPoint) {
                 const td = document.createElement('td');
                 if (field !== 'dailyTrend') {
-                    td.innerHTML = dataPoint[field];
+                    td.innerHTML = `${dataPoint[field as keyof typeof dataPoint]}`;
                 }
                 else {
                     const sparkLine = document.createElement('smart-chart');

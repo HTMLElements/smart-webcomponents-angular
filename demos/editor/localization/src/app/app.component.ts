@@ -10,10 +10,10 @@ import { EditorComponent } from '@smart-webcomponents-angular/editor';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
-    toolbarItems: string[] = ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+    toolbarItems: any = ['Bold', 'Italic', 'Underline', 'StrikeThrough',
         'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
         'LowerCase', 'UpperCase', '|',
         'Formats', 'Alignment', 'OrderedList', 'UnorderedList',
@@ -441,7 +441,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         editor.value = that.getEditorValue(editor.locale);
 
-        document.querySelector('.options').addEventListener('change', function (event) {
+        document.querySelector('.options')?.addEventListener('change', function (event) {
             editor.value = that.getEditorValue(editor.locale = (event.target as HTMLElement).innerHTML.trim().toLowerCase());
         });
     };

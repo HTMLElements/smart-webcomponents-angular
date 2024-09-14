@@ -10,7 +10,7 @@ import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-we
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
     dataSource: object[] = (() => {
         const today = new Date(),

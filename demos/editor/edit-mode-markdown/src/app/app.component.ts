@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { EditorComponent, EditMode } from '@smart-webcomponents-angular/editor';
+import { EditorComponent, EditMode, ToolbarItem } from '@smart-webcomponents-angular/editor';
 
 
 @Component({
@@ -10,15 +10,15 @@ import { EditorComponent, EditMode } from '@smart-webcomponents-angular/editor';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     editMode: EditMode = 'markdown';
 
-    toolbarItems: string[] = [
+    toolbarItems: ToolbarItem[] = [
         'bold', 'italic', 'Underline', 'StrikeThrough', 'hyperlink', 'removeLink',
         'copy', 'cut', 'paste', 'alignment', 'table', 'image', 'sourcecode', 'formats',
         'splitmode', 'undo', 'redo', 'OrderedList', 'UnorderedList'
-    ];
+    ] as ToolbarItem[];
     
     value: string = `
 # H1

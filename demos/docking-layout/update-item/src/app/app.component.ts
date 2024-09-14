@@ -11,9 +11,9 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropDownList: DropDownListComponent;
-    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout: DockingLayoutComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropDownList!: DropDownListComponent;
+    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
 
     layout: Array<object> = [
         {
@@ -47,12 +47,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     ];
 
     update(event: CustomEvent): void {
-        const that = this,
-            smartDockingLayout: DockingLayoutComponent = that.dockinglayout,
-            dropDownList: DropDownListComponent = that.dropDownList,
-            targetItem: HTMLElement = smartDockingLayout.nativeElement.querySelector('#' + dropDownList.selectedValues[0]) as HTMLElement;
+        const targetItem: HTMLElement = this.dockinglayout
+            .nativeElement
+            .querySelector('#' + this.dropDownList.selectedValues[0]) as HTMLElement;
 
-        smartDockingLayout.update(targetItem, {
+        this.dockinglayout.update(targetItem, {
             size: '33%',
             label: 'Updated',
             items: [{

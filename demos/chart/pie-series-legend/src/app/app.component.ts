@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     sourceMobile = [{ Browser: 'Chrome', Share: 54.84 }, { Browser: 'Safari', Share: 19.16 }, { Browser: 'UC Browser', Share: 11.33 }, { Browser: 'Samsung Internet', Share: 5.71 }, { Browser: 'Opera', Share: 4.53 }, { Browser: 'Android', Share: 1.87 }, { Browser: 'Other', Share: 2.56 }];
     caption = 'Mobile browsers share';

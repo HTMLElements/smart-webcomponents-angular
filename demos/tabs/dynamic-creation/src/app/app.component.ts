@@ -8,8 +8,8 @@ import { TabsComponent, Tabs, Smart } from '@smart-webcomponents-angular/tabs';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('tabsContainer', { read: ElementRef, static: false }) tabsContainer: ElementRef;
-    //   @ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
+    @ViewChild('tabsContainer', { read: ElementRef, static: false }) tabsContainer!: ElementRef;
+    //   @ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
 
     constructor(private renderer: Renderer2) {
 

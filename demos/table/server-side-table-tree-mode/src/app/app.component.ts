@@ -17,10 +17,10 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
-        virtualDataSourceOnExpand: function (resultCallbackFunction, details) {
+        virtualDataSourceOnExpand: function (resultCallbackFunction: any, details: any) {
             const result = window.demoServer.getData(details);
             // when you set the 'leaf' property to true, the row's toggle button is not displayed.
             for (let i = 0; i < result.data.length; i++) {
@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 virtualDataSourceLength: result.length
             });
         },
-        virtualDataSource: function (resultCallbackFunction, details) {
+        virtualDataSource: function (resultCallbackFunction: any, details: any) {
             if (details.action === 'dataBind') {
                 window.demoServer = DemoServer();
                 const result = window.demoServer.getData(details);

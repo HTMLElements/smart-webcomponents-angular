@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerResource, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { Scheduler, SchedulerComponent, SchedulerEvent, SchedulerResource, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { SchedulerComponent, SchedulerResource, SchedulerViews, SchedulerViewTyp
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentYear = today.getFullYear(),
             currentMonth = today.getMonth();
@@ -167,7 +167,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     groupTemplate: string = 'groupTemplate';
 
-    cellTemplate: Function = function (cell: HTMLElement, date: Date) {
+    cellTemplate: Function = function (this: Scheduler, cell: HTMLElement, date: Date) {
         if (cell.classList.contains('all-day')) {
             return;
         }

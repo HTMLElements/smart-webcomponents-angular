@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { DateTimePickerComponent } from '@smart-webcomponents-angular/datetimepicker';
+import { DateTimePickerComponent } from 'smart-webcomponents-angular/datetimepicker';
 
 import 'smart-webcomponents-angular/source/smart.core.js';
 

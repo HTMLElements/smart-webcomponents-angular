@@ -14,7 +14,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
         virtualDataSource: function (resultCallbackFunction: any, details: any) {

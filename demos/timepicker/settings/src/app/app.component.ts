@@ -11,16 +11,16 @@ import { TimePickerComponent } from '@smart-webcomponents-angular/timepicker';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker: TimePickerComponent;
-    @ViewChild('valueLog', { read: ElementRef, static: false }) valueLog: ElementRef;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker!: TimePickerComponent;
+    @ViewChild('valueLog', { read: ElementRef, static: false }) valueLog!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.

@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CheckBoxComponent, CheckBox } from '@smart-webcomponents-angular/checkbox';
-import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -11,12 +11,12 @@ import { SchedulerComponent, SchedulerViews, SchedulerViewType } from '@smart-we
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3!: CheckBoxComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             todayDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -73,14 +73,16 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const scheduler = this.scheduler;
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent) {
-            if (!(event.target instanceof window.Smart.CheckBox)) {
-                return;
-            }
+        document.querySelector('.options')
+            ?.addEventListener('change', function (event: CustomEvent) {
+                if (!(event.target instanceof window.Smart.CheckBox)) {
+                    return;
+                }
 
-            const target = event.target as CheckBox;
+                const target = event.target as CheckBox;
 
-            scheduler[target.id] = target.checked;
-        });
+                //@ts-ignore
+                scheduler[target.id] = target.checked;
+            } as EventListener);
     };
 }

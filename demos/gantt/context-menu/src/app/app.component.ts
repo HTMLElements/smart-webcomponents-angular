@@ -14,14 +14,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: GanttChartView = 'week';
 
-    treeSize: Number = 350;
+    treeSize: number = 350;
 
-    hideTimelineHeaderDetails: Boolean = true;
+    hideTimelineHeaderDetails: boolean = true;
 
-    snapToNearest: Boolean = true;
+    snapToNearest: boolean = true;
 
-    timelineHeaderFormatFunction: any = function (date: Date, type: String, isHeaderDetails: Boolean, value: String) {
-        const ganttChart = document.querySelector('smart-gantt-chart');
+    timelineHeaderFormatFunction: any = function (date: Date, type: string, isHeaderDetails: boolean, value: string) {
+        const ganttChart = document.querySelector('smart-gantt-chart')!;
 
         if (type === 'day') {
             return date.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: 'short' });
@@ -265,7 +265,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             menu = this.menu;
         let preventDefaultContextMenu = false;
 
-        ganttChart.addEventListener('itemClick', function (event: CustomEvent) {
+        const ganttItemClickHanlder = function (event: CustomEvent) {
             if (event.target !== ganttChart.nativeElement) {
                 return;
             }
@@ -278,7 +278,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                 //Prevent Browser context menu from opening
                 preventDefaultContextMenu = true;
             }
-        });
+        }
+
+        ganttChart.addEventListener('itemClick', ganttItemClickHanlder as EventListener);
 
         document.addEventListener('contextmenu', function (event) {
             if (preventDefaultContextMenu) {

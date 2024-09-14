@@ -20,7 +20,7 @@ export class AppComponent {
 			{
 				label: 'Duration (hours)',
 				value: 'duration',
-				formatFunction: (date) => parseInt(date)
+				formatFunction: (date: string) => parseInt(date)
 			}
 		]
 	dataSource = [

@@ -9,7 +9,7 @@ import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
+	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
 	
  
 	ngOnInit(): void {

@@ -5,9 +5,12 @@
     date) to the Calendar.</div>
 <smart-calendar #calendar id="calendar" [months]="months" [firstDayOfWeek]="firstDayOfWeek"
     [importantDates]="importantDates" [scrollButtonsPosition]="scrollButtonsPosition" [selectedDates]="selectedDates"
-    [headerTemplate]="headerTemplate" [tooltipTemplate]="tooltipTemplate" [tooltip]="tooltip"></smart-calendar>
+    [headerTemplate]="headerTemplate" [tooltipTemplate]="tooltipTemplate" [tooltip]="tooltip"
+    (onOpen)="handleCalendarOpen($event)" (click)="handleCalendarClick($event)"
+    (onDisplayModeChange)="handleCalendarDisplayModeChange()"></smart-calendar>
 
-<smart-window #window id="eventWindow" [modal]="true" [footerTemplate]="'windowFooterTemplate'" (onReady)="handleReady($event)">
+<smart-window #window id="eventWindow" [modal]="true" [footerTemplate]="'windowFooterTemplate'"
+    (onReady)="handleReady($event)">
     <div class="window-content">
         <div>
             <label>Description</label>

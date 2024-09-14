@@ -6,3 +6,7 @@ body {
     margin-bottom: 15px;
     width: 800px;
 }
+
+textarea {
+    resize: vertical;
+}

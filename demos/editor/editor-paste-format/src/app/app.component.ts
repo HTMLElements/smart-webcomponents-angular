@@ -9,7 +9,7 @@ import { EditorComponent, PasteFormat, ToolbarItem } from '@smart-webcomponents-
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+	@ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     pasteFormat: PasteFormat = 'prompt';
 

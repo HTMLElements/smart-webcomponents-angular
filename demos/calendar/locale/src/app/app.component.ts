@@ -8,11 +8,11 @@ import { DropDownListComponent } from "@smart-webcomponents-angular/dropdownlist
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild("calendar", { read: CalendarComponent, static: false })
-  calendar: CalendarComponent;
-  @ViewChild("localePicker", { read: DropDownListComponent, static: false })
-  localePicker: DropDownListComponent;
+  @ViewChild("calendar", { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+  @ViewChild("localePicker", { read: DropDownListComponent, static: false }) localePicker!: DropDownListComponent;
+
   log: string = "";
+
   dataSource = [
     "en",
     "tr",

@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     hideTimelineHeaderDetails = true;
 
-    timelineHeaderFormatFunction = function (date, type, isHeaderDetailsContainer) {
+    timelineHeaderFormatFunction(date: Date, type: string, isHeaderDetailsContainer: boolean) {
         const ganttChart = this.ganttchart;
 
         if (isHeaderDetailsContainer || !ganttChart) {
@@ -66,9 +66,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return container;
             },
             getCustomEditorValue: function (editor: HTMLElement) {
-                return (editor.querySelector('smart-drop-down-list') as DropDownList).selectedIndexes[0];
+                return (editor.querySelector('smart-drop-down-list') as DropDownList)?.selectedIndexes![0];
             },
-            formatFunction: (value: string) => ['Low', 'Medium', 'High'][value]
+            formatFunction: (value: string) => ['Low', 'Medium', 'High'][value as keyof []]
         }
     ];
     dataSource = [
@@ -210,6 +210,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
 
         const ganttChart = this.ganttchart;
+
+        ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
 
         ganttChart.addEventListener('change', function (event) {
             const target = event.target as HTMLElement;

@@ -9,7 +9,7 @@ import { ChipComponent } from '@smart-webcomponents-angular/chip';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('chip', { read: ChipComponent, static: false }) chip: ChipComponent;
+	@ViewChild('chip', { read: ChipComponent, static: false }) chip!: ChipComponent;
 	
  
 	ngOnInit(): void {

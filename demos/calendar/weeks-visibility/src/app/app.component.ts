@@ -13,8 +13,7 @@ import { CalendarComponent } from "@smart-webcomponents-angular/calendar";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild("calendar", { read: CalendarComponent, static: false })
-  calendar: CalendarComponent;
+  @ViewChild("calendar", { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
 
   ngOnInit(): void {
     // onInit code.
@@ -24,7 +23,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     // afterViewInit code.
   }
 
-  onChange(value) {
+  onChange(value: string) {
     const that = this;
     if (that.calendar.weeks) {
       that.calendar.weeks = parseInt(value);

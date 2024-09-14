@@ -9,8 +9,8 @@ import { QueryBuilderComponent } from '@smart-webcomponents-angular/querybuilder
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder: QueryBuilderComponent;
-    @ViewChild('filterQueryValue', { read: ElementRef, static: false }) filterQueryValue: ElementRef;
+    @ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder!: QueryBuilderComponent;
+    @ViewChild('filterQueryValue', { read: ElementRef, static: false }) filterQueryValue!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -54,7 +54,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 ['purchased', '>=', new Date(2019, 4, 23, 15, 33)]
             ]
         ];
-        that.querybuilder.getDynamicField = function (field) {
+        that.querybuilder.getDynamicField = function (field: string) {
             if (field === 'customField') {
                 return { label: 'Custom Field', dataField: field, dataType: 'number', filterOperations: ['<', '>'] };
             }

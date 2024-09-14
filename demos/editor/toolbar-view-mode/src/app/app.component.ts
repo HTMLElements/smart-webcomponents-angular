@@ -10,14 +10,14 @@ import { EditorComponent } from '@smart-webcomponents-angular/editor';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     placeholder: string = 'Please Enter content...';
 
-    toolbarItems: string[] = ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+    toolbarItems: any = ['Bold', 'Italic', 'Underline', 'StrikeThrough',
         'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
         'LowerCase', 'UpperCase', '|',
         'Formats', 'Alignment', 'OrderedList', 'UnorderedList',
@@ -38,7 +38,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
         const editor = this.editor;
 
-        document.querySelector('.options').addEventListener('change', function (event) {
+        document.querySelector('.options')?.addEventListener('change', function (event) {
             const target = event.target as HTMLElement,
                 innerHTML = target.innerHTML;
 

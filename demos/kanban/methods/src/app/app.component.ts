@@ -14,26 +14,26 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
-    @ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-    @ViewChild('button5', { read: ButtonComponent, static: false }) button5: ButtonComponent;
-    @ViewChild('button6', { read: ButtonComponent, static: false }) button6: ButtonComponent;
-    @ViewChild('button7', { read: ButtonComponent, static: false }) button7: ButtonComponent;
-    @ViewChild('button8', { read: ButtonComponent, static: false }) button8: ButtonComponent;
-    @ViewChild('button9', { read: ButtonComponent, static: false }) button9: ButtonComponent;
-    @ViewChild('button10', { read: ButtonComponent, static: false }) button10: ButtonComponent;
-    @ViewChild('button11', { read: ButtonComponent, static: false }) button11: ButtonComponent;
-    @ViewChild('button12', { read: ButtonComponent, static: false }) button12: ButtonComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
+    @ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
+    @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
+    @ViewChild('button7', { read: ButtonComponent, static: false }) button7!: ButtonComponent;
+    @ViewChild('button8', { read: ButtonComponent, static: false }) button8!: ButtonComponent;
+    @ViewChild('button9', { read: ButtonComponent, static: false }) button9!: ButtonComponent;
+    @ViewChild('button10', { read: ButtonComponent, static: false }) button10!: ButtonComponent;
+    @ViewChild('button11', { read: ButtonComponent, static: false }) button11!: ButtonComponent;
+    @ViewChild('button12', { read: ButtonComponent, static: false }) button12!: ButtonComponent;
 
     collapsible = true;
     dataSource = GetKanbanData();
     editable = true;
-    textTemplate = function (settings: { data: any, task: HTMLDivElement, text: string, template?: string }) {
+    textTemplate = function (settings: { data: any, task: HTMLDivElement, text: string, template: string }) {
         settings.template = `<span class="smart-badge smart-badge-dark">${settings.data.id}</span>${settings.text}`;
     };
     columns = [

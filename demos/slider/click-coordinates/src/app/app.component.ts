@@ -9,9 +9,9 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('x', { read: ElementRef, static: false }) x: ElementRef;
-    @ViewChild('y', { read: ElementRef, static: false }) y: ElementRef;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('x', { read: ElementRef, static: false }) x!: ElementRef;
+    @ViewChild('y', { read: ElementRef, static: false }) y!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -29,6 +29,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.slider.addEventListener('click', function (event: PointerEvent) {
             that.x.nativeElement.innerHTML = '' + event.pageX;
             that.y.nativeElement.innerHTML = '' + event.pageY;
-        });
+        } as EventListener);
     }
 }

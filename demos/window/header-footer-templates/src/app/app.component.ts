@@ -12,16 +12,15 @@ import { WindowComponent } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-	@ViewChild('powerbutton', { read: PowerButtonComponent, static: false }) powerbutton: PowerButtonComponent;
-	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent;
+	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+	@ViewChild('powerbutton', { read: PowerButtonComponent, static: false }) powerbutton!: PowerButtonComponent;
+	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow!: WindowComponent;
 
 	onReady(event: any) {
-
 		const that = this;
-		
-		this.smartWindow.nativeElement.querySelector('#power').addEventListener('click', function (): void {
-			that.gauge.disabled = !(<PowerButton>this).checked;
+
+		this.smartWindow.nativeElement.querySelector('#power')?.addEventListener('click', function (this: PowerButton): void {
+			that['gauge'].disabled = !(<PowerButton>this).checked;
 		});
 	}
 
@@ -42,7 +41,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 			gauge = that.gauge;
 
 		gauge.addEventListener('change', function (event: CustomEvent): void {
-			smartWindow.nativeElement.querySelector('#value').textContent = event.detail.value;
-		});
+			if (smartWindow.nativeElement.querySelector('#value')) {
+				smartWindow.nativeElement.querySelector('#value')!.textContent = event.detail.value;
+			}
+		} as EventListener);
 	}
 }

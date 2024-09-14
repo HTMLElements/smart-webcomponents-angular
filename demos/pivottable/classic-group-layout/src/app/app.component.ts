@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 
 
 @Component({
@@ -10,8 +10,8 @@ import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
 
     generateData(rowscount: number) {
         const data = new Array();
@@ -28,7 +28,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             '2.25', '1.5', '3.0', '3.3', '4.5', '3.6', '3.8', '2.5', '5.0', '1.75', '3.25', '4.0'
         ];
         for (let i = 0; i < rowscount; i++) {
-            const row = {};
+            const row: any = {};
             const productindex = Math.floor(Math.random() * productNames.length);
             const price = parseFloat(priceValues[productindex]);
             const quantity = 1 + Math.round(Math.random() * 10);
@@ -69,7 +69,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     freezeHeader = true;
     groupLayout = 'classic';
     keyboardNavigation = true;
-    onInit = function () {
+    onInit = function (this: any) {
         this.rows[0].expanded = true;
         this.rows[1].expanded = true;
     };
@@ -81,7 +81,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Price', dataField: 'price', dataType: 'number', summary: 'sum', summarySettings: { prefix: '$', decimalPlaces: 2 } },
         { label: 'Available', dataField: 'available', dataType: 'boolean', allowRowGroup: true, rowGroup: true },
         { label: 'Date Purchased', dataField: 'date', dataType: 'date' } // column is not rendered, because it is neither "pivot", "rowGroup", nor it has "summary"
-    ];
+    ] as PivotTableColumn[];
 
     handleChange = (event: CustomEvent) => {
         if (event.detail.value) {

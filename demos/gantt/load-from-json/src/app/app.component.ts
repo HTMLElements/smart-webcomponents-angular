@@ -13,7 +13,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: GanttChartView = 'week';
 
-    treeSize: Number = 350;
+    treeSize: number = 350;
 
     durationUnit: Duration = 'day';
 
@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         // init code.
         const gantt = this.ganttchart;
 
-        fetch('./assets/data.json', {
+        fetch('../assets/data.json', {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json'

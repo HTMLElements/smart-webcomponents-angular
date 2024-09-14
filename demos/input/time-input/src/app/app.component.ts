@@ -9,9 +9,9 @@ import { TimeInputComponent } from '@smart-webcomponents-angular/timeinput';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('timeinput', { read: TimeInputComponent, static: false }) timeinput: TimeInputComponent;
-	@ViewChild('timeinput2', { read: TimeInputComponent, static: false }) timeinput2: TimeInputComponent;
-	@ViewChild('timeinput3', { read: TimeInputComponent, static: false }) timeinput3: TimeInputComponent;
+	@ViewChild('timeinput', { read: TimeInputComponent, static: false }) timeinput!: TimeInputComponent;
+	@ViewChild('timeinput2', { read: TimeInputComponent, static: false }) timeinput2!: TimeInputComponent;
+	@ViewChild('timeinput3', { read: TimeInputComponent, static: false }) timeinput3!: TimeInputComponent;
 	
  
 	ngOnInit(): void {

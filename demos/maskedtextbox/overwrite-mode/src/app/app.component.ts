@@ -10,8 +10,8 @@ import { MaskedTextBoxComponent } from '@smart-webcomponents-angular/maskedtextb
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-	@ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox: MaskedTextBoxComponent;
+	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+	@ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox!: MaskedTextBoxComponent;
 
 
 	ngOnInit(): void {

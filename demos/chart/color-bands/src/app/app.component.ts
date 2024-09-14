@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ChartComponent } from '@smart-webcomponents-angular/chart';
+import { ChartComponent, ChartSeriesGroup } from '@smart-webcomponents-angular/chart';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     data = [
         { Person: 'Planning', M1_From: 2, M1_To: 5, M2_From: 5, M2_To: 10 },
@@ -17,7 +17,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { Person: 'Dev 2', M1_From: 5, M1_To: 12, M2_From: 14, M2_To: 22 },
         { Person: 'QA 1', M1_From: 7, M1_To: 14, M2_From: 14, M2_To: 25 }
     ];
-    toolTipCustomFormatFn = function (value: { from: number, to: number }, itemIndex: number, serie, group, xAxisValue, xAxis): string {
+    toolTipCustomFormatFn = (value: { from: number, to: number }, itemIndex: number, serie: any, group: any, xAxisValue: string, xAxis: any): string => {
         return `<div style="text-align: left;">
                     <strong>Team: ${xAxisValue}</strong>
                     <br />Start day: ${value.from}
@@ -40,12 +40,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
     };
     colorScheme = 'scheme32';
-    seriesGroups = [
+    seriesGroups: ChartSeriesGroup[] = [
         {
             orientation: 'horizontal',
             type: 'rangecolumn',
             columnsGapPercent: 100,
-            toolTipFormatFunction: this.toolTipCustomFormatFn,
+            toolTipFormatFunction: this.toolTipCustomFormatFn as any,
             valueAxis: {
                 flip: true,
                 minValue: 1,

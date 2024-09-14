@@ -11,7 +11,7 @@ smart-carousel {
     height: 100%;
     margin-left: auto;
     margin-right: auto;
-    background-image: url('./../../../src/images/carousel-background-1.jpg');
+    background-image: url('https://htmlelements.com/demos/images/carousel-background-1.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
     border-width: 0px;

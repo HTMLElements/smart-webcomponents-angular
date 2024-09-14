@@ -13,11 +13,11 @@ import { WindowComponent } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
-	@ViewChild('listbox2', { read: ListBoxComponent, static: false }) listbox2: ListBoxComponent;
-	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
-	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
+	@ViewChild('listbox2', { read: ListBoxComponent, static: false }) listbox2!: ListBoxComponent;
+	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
+	@ViewChild('window', { read: WindowComponent, static: false }) smartWindow!: WindowComponent;
 
 	onButtonClick(event: any): void {
 		const smartWindow = this.smartWindow;

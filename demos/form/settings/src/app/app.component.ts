@@ -10,11 +10,11 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	 
-	@ViewChild('topLabelLocation', { read: RadioButtonComponent, static: false }) topLabelLocation: RadioButtonComponent;
-	@ViewChild('leftLabelLocation', { read: RadioButtonComponent, static: false }) leftLabelLocation: RadioButtonComponent;
-	@ViewChild('columnsList', { read: DropDownListComponent, static: false }) columnsList: DropDownListComponent;
-	@ViewChild('readonly', { read: CheckBoxComponent, static: false }) readonly: CheckBoxComponent;
-	@ViewChild('showColonAfterLabel', { read: CheckBoxComponent, static: false }) showColonAfterLabel: CheckBoxComponent;
+	@ViewChild('topLabelLocation', { read: RadioButtonComponent, static: false }) topLabelLocation!: RadioButtonComponent;
+	@ViewChild('leftLabelLocation', { read: RadioButtonComponent, static: false }) leftLabelLocation!: RadioButtonComponent;
+	@ViewChild('columnsList', { read: DropDownListComponent, static: false }) columnsList!: DropDownListComponent;
+	@ViewChild('readonly', { read: CheckBoxComponent, static: false }) readonly!: CheckBoxComponent;
+	@ViewChild('showColonAfterLabel', { read: CheckBoxComponent, static: false }) showColonAfterLabel!: CheckBoxComponent;
 	
 	ngOnInit(): void {
 		// onInit code.
@@ -27,7 +27,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 						controlType: 'group',
 						label: 'Photo',
 						controls: [{
-							template: '<div style=" overflow: hidden;"><img width="90" src="https://htmlelements.com/demos/images/people/john.png"/></div>',
+							template: '<div style=" overflow: hidden;"><img width="90" src="../../../src/images/people/john.png"/></div>',
 							controlType: 'template'
 						}]
 					},

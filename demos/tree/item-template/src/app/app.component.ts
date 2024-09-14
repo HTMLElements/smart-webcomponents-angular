@@ -11,8 +11,8 @@ import { TreeComponent } from '@smart-webcomponents-angular/tree';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
 
 
     ngOnInit(): void {

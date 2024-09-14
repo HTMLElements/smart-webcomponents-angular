@@ -9,7 +9,7 @@ import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
         dataSource: [{
@@ -138,16 +138,16 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    keyboardNavigation: Boolean = true;
+    keyboardNavigation: boolean = true;
 
     handleInit: Function = (event: Event) => {
-        const firstRowData = this.table.nativeElement.rows[0].data;
+        const firstRowData = this.table.nativeElement['rows'][0].data;
 
         firstRowData.expanded = true;
         firstRowData.children[3].expanded = true;
     }
 
-    selection: Boolean = true;
+    selection: boolean = true;
 
     columns: TableColumn[] = [{
         label: 'First Name',

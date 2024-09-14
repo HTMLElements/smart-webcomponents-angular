@@ -102,6 +102,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     					{
     						dataField: 'WorkPhone',
     						label: 'Work Phone',
+							controlType: 'input',
     						required: true,
     						placeholder: 'Work Phone',
     						cssClass: 'outlined'
@@ -109,12 +110,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     					{
     						dataField: 'MobilePhone',
     						required: true,
+							controlType: 'input',
     						label: 'Mobile Phone',
     						placeholder: 'Mobile Phone',
     						cssClass: 'outlined'
     					},
     					{
     						dataField: 'Email',
+							controlType: 'input',
     						label: 'Email',
     						validationRules: [
     							{type: 'email', message: 'Please enter a valid email'}

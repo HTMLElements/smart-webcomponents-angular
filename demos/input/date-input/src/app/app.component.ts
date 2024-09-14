@@ -9,9 +9,9 @@ import { DateInputComponent } from '@smart-webcomponents-angular/dateinput';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('dateinput', { read: DateInputComponent, static: false }) dateinput: DateInputComponent;
-	@ViewChild('dateinput2', { read: DateInputComponent, static: false }) dateinput2: DateInputComponent;
-	@ViewChild('dateinput3', { read: DateInputComponent, static: false }) dateinput3: DateInputComponent;
+	@ViewChild('dateinput', { read: DateInputComponent, static: false }) dateinput!: DateInputComponent;
+	@ViewChild('dateinput2', { read: DateInputComponent, static: false }) dateinput2!: DateInputComponent;
+	@ViewChild('dateinput3', { read: DateInputComponent, static: false }) dateinput3!: DateInputComponent;
 	
  
 	ngOnInit(): void {

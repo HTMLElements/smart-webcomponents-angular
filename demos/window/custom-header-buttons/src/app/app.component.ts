@@ -11,8 +11,8 @@ import { WindowComponent } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('window', { read: WindowComponent, static: false }) smartWindow!: WindowComponent;
 
     onButtonClick(event: any): void {
         const smartWindow = this.smartWindow;
@@ -59,6 +59,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 console.log('Pin');
                 alert('Close button pressed');
             }
-        })
+        } as EventListener)
     }
 }

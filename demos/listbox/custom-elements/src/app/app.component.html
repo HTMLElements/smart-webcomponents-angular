@@ -2,7 +2,8 @@
     <div id="materialListBoxContainer">
         <section id="appearance">
             <div class="module">
-                <smart-list-box #listbox [selectionMode]="'none'" id="listBoxLight" [itemTemplate]="'multiLineTemplate'" [itemTemplate]="itemTemplate" (onReady)="onReady($event)">
+                <smart-list-box #listbox [selectionMode]="'none'" id="listBoxLight"
+                    [itemTemplate]="itemTemplate" (onReady)="onReady($event)">
                     <smart-list-items-group [label]="'Sound'">
                         <smart-list-item>Audio settings</smart-list-item>
                         <smart-list-item>Accessory settings</smart-list-item>

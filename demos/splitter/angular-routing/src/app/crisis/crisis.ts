@@ -1,4 +1,4 @@
 export class Crisis {
-  id: number;
-  name: string;
+  id?: number;
+  name?: string;
 }

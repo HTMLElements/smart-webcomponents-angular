@@ -10,10 +10,10 @@ import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewType }
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    rooms: { label: string, value: number, dateStart?: Date, dateEnd?: Date, backgroundColor: string, color: string }[] = (() => {
+    rooms: { label: string, value: number, dateStart?: Date, dateEnd?: Date, backgroundColor?: string, color: string }[] = (() => {
         const today = new Date(),
             todayDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -128,7 +128,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     })();
 
-    dataSource: any[] = this.rooms.filter((i, index) => index < 5);
+    dataSource: SchedulerEvent[] = this.rooms.filter((i, index) => index < 5);
 
     view: SchedulerViewType = 'month';
 
@@ -173,8 +173,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                     value: item.value,
                     dateStart: cellDateRange.dateStart,
                     dateEnd: cellDateRange.dateEnd,
-                    backgroundColor: colorData.backgroundColor,
-                    color: colorData.color
+                    backgroundColor: colorData?.backgroundColor,
+                    color: colorData?.color
                 } as SchedulerEvent);
 
                 this.tree.removeItem(item);

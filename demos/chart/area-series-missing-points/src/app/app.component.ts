@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ChartComponent } from '@smart-webcomponents-angular/chart';
+import { ChartComponent, ChartSeriesGroup } from '@smart-webcomponents-angular/chart';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 
 
@@ -10,8 +10,8 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 
     sampleData = [
         { a: 25, b: 21 },
@@ -34,10 +34,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         valuesOnTicks: true
     };
     colorScheme = 'scheme30';
-    seriesGroups = [
+    seriesGroups: ChartSeriesGroup[] = [
         {
             type: 'area',
-            toolTipFormatFunction: function (value: number, itemIndex: number) {
+            toolTipFormatFunction: function (value, itemIndex) {
                 return '<div style="text-align:left"><b>Index:</b> ' +
                     itemIndex + '<br /><b>Value:</b> ' +
                     value + '<br /></div>';
@@ -70,6 +70,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.chart.seriesGroups[0].series[1].emptyPointsDisplay = event.detail.value;
                 that.chart.update();
             }
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

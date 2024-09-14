@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview';
+import { CardViewColumn, CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview';
 
 
 @Component({
@@ -9,16 +9,16 @@ import { CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('cardview', { read: CardViewComponent, static: false }) cardview: CardViewComponent;
+	@ViewChild('cardview', { read: CardViewComponent, static: false }) cardview!: CardViewComponent;
 	
     dataSource = new Smart.DataAdapter({
-        virtualDataSource: function (resultCallbackFunction) {
+        virtualDataSource: function (resultCallbackFunction: any) {
             fetch('https://randomuser.me/api/?results=20', { method: 'GET' })
                 .then(function (response) {
                 return response.json();
             })
                 .then(function (data) {
-                const results = data.results.map(result => {
+                const results = data.results.map((result: any) => {
                     return {
                         picture: result.picture.large,
                         name: result.name.first + ' ' + result.name.last,
@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     cellOrientation = 'horizontal';
     coverField = 'picture';
     coverMode = 'fit';
-    columns = [
+    columns: CardViewColumn[] = [
         { label: 'Name', dataField: 'name' },
         {
             label: 'Nationality', dataField: 'nationality', icon: 'nationality',

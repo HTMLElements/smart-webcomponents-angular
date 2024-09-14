@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ChartComponent } from '@smart-webcomponents-angular/chart';
+import { ChartComponent, ChartSeriesGroup } from '@smart-webcomponents-angular/chart';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     sampleData = [
         { Continent: 'Asia', 0: 1426.279708, 1: 1338.558742, 2: 263.564697, Countries: ['China', 'India', 'Indonesia'] },
@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
     };
     colorScheme = 'scheme32';
-    seriesGroups = [
+    seriesGroups: ChartSeriesGroup[] = [
         {
             type: 'column',
             orientation: 'horizontal',
@@ -46,7 +46,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                 description: 'Population (in millions)',
                 axisSize: 'auto'
             },
-            toolTipFormatFunction: (value: number, itemIndex: number, series: { dataField: string, displayText: string }) => {
+            toolTipFormatFunction: (value, itemIndex, series) => {
+                if (!itemIndex) { return  ''}
+
                 return `#${parseFloat(series.dataField) + 1} in ${this.sampleData[itemIndex].Continent}: ${this.sampleData[itemIndex].Countries[series.dataField]}
 <br />Population: ${Math.round(value * 10e6)}`;
             },

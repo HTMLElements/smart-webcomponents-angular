@@ -10,7 +10,7 @@ import { EditorComponent, ToolbarItem } from '@smart-webcomponents-angular/edito
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 
     toolbarItems: any = [{
         name: 'bold',

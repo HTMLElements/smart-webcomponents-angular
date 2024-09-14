@@ -29,14 +29,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
     ];
 
-    timelineHeaderFormatFunction: Function = function (date, type, isHeaderDetailsContainer) {
-        const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart;
-
+    timelineHeaderFormatFunction(date: Date, type: string, isHeaderDetailsContainer: boolean) {
+        
         if (isHeaderDetailsContainer) {
             return 'Project Timeline';
         }
         else {
-            return date.toLocaleTimeString(ganttChart.locale, { hour: 'numeric', minute: 'numeric', hour12: true });
+            return date.toLocaleTimeString(this.ganttChart.locale, { hour: 'numeric', minute: 'numeric', hour12: true });
         }
     };
 
@@ -239,6 +238,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     init(): void {
-        // init code.
+        
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
     }
 }

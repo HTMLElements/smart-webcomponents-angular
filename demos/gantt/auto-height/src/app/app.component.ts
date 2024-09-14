@@ -88,13 +88,15 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
     ];
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string, isHeaderDetailsContainer: boolean) {
+    timelineHeaderFormatFunction(date: Date, type: string, isHeaderDetailsContainer: boolean) {
+
         if (isHeaderDetailsContainer) {
             return 'Time';
         }
         else {
-            return date.toLocaleTimeString(this.locale, { hour: 'numeric', minute: 'numeric', hour12: true });
+            return date.toLocaleTimeString(this.ganttchart.locale, { hour: 'numeric', minute: 'numeric', hour12: true });
         }
+
     };
 
     ngOnInit(): void {
@@ -107,6 +109,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     init(): void {
-        // init code.
+
+        this.ganttchart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
+
     }
 }

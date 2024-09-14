@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { CheckBox, CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { InputComponent, InputEditor } from '@smart-webcomponents-angular/input';
-import { SchedulerComponent, SchedulerViews, SchedulerViewSelectorType, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewSelectorType, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -12,15 +12,15 @@ import { SchedulerComponent, SchedulerViews, SchedulerViewSelectorType, Schedule
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3: CheckBoxComponent;
-    @ViewChild('checkbox4', { read: CheckBoxComponent, static: false }) checkbox4: CheckBoxComponent;
-    @ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
-    @ViewChild('demoHeader', { read: ElementRef, static: false }) demoHeader: ElementRef;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('checkbox3', { read: CheckBoxComponent, static: false }) checkbox3!: CheckBoxComponent;
+    @ViewChild('checkbox4', { read: CheckBoxComponent, static: false }) checkbox4!: CheckBoxComponent;
+    @ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
+    @ViewChild('demoHeader', { read: ElementRef, static: false }) demoHeader!: ElementRef;
 
-    data: any[] = (() => {
+    data: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -498,7 +498,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         for (let i = 0; i < events.length; i++) {
             const event = events[i];
 
-            event.label = event[locale + 'Label'];
+            event.label = event[(locale + 'Label') as keyof SchedulerEvent] as string;
         }
 
         scheduler.dataSource = events;
@@ -508,7 +508,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const locale = (<InputEditor>event.target).value,
             checkBox = this.checkbox4;
 
-        this.scheduler.locale = locale;
+        this.scheduler.locale = locale || 'en';
 
         this.loadEvents();
 
@@ -559,9 +559,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.loadEvents(true);
 
         demoHeader.addEventListener('change', function () {
-            const eventIds = Array.from(demoHeader.querySelectorAll('.smart-check-box[checked]')).map((i: HTMLElement) => i.id);
+            const eventIds = Array.from(
+                demoHeader.querySelectorAll('.smart-check-box[checked]')
+            )
+                .map((value: unknown) => (value as HTMLElement).id);
 
-            scheduler.dataSource = that.data.filter(d => eventIds.indexOf(d.class) > -1);
+            scheduler.dataSource = that.data.filter(
+                (d: any) => eventIds.indexOf(d.class) > -1
+            );
             that.loadEvents();
         });
     };

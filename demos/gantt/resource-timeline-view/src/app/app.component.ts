@@ -182,7 +182,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Completion',
             value: 'progress',
-            formatFunction: (data) => data + '%',
+            formatFunction: (data: string) => data + '%',
         }
     ];
 
@@ -227,11 +227,12 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            ganttChart = that.ganttChart;
+        const optionsChangeHandler = (event: CustomEvent): void => {
 
-        that.options.nativeElement.addEventListener('change', function (event: CustomEvent): void {
-            ganttChart.resourceTimelineView = (<HTMLElement>event.target).textContent.trim() as GanttChartResourceTimelineView;
-        });
+            this.ganttChart.resourceTimelineView =
+                (<HTMLElement>event.target)?.textContent?.trim() as GanttChartResourceTimelineView;
+                
+        }
+        this.options.nativeElement.addEventListener('change', optionsChangeHandler as EventListener);
     }
 }

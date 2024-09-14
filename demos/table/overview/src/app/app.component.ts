@@ -9,7 +9,7 @@ import { GetCountriesCodesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     getOrderData() {
         const orderData = [],
@@ -72,11 +72,16 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    editing: Boolean = true;
+	dataSourceSettings = {
+		sanitizeHTML: 'all',
+		sanitizeHTMLRender: 'html'
+	}
 
-    keyboardNavigation: Boolean = true;
+    editing: boolean = true;
 
-    sortMode: String = 'one';
+    keyboardNavigation: boolean = true;
+
+    sortMode: string = 'one';
 
     columns: TableColumn[] = [{
         label: 'id',
@@ -154,6 +159,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     init(): void {
-        // init code.
+        // init code. 
+		this.table.setValue(0, 'productName', '<b>Test</b>');
     }
 }

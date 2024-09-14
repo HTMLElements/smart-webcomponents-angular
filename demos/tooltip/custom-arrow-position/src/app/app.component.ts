@@ -11,8 +11,8 @@ import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('tooltip', { read: TooltipComponent, static: false }) tooltip: TooltipComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('tooltip', { read: TooltipComponent, static: false }) tooltip!: TooltipComponent;
 	
  
 	ngOnInit(): void {

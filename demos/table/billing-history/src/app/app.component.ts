@@ -11,10 +11,10 @@ import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-    @ViewChild('toast', { read: ToastComponent, static: false }) toast: ToastComponent;
-    @ViewChild('tooltip', { read: TooltipComponent, static: false }) tooltip: TooltipComponent;
-    @ViewChild('tooltip2', { read: TooltipComponent, static: false }) tooltip2: TooltipComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+    @ViewChild('toast', { read: ToastComponent, static: false }) toast!: ToastComponent;
+    @ViewChild('tooltip', { read: TooltipComponent, static: false }) tooltip!: TooltipComponent;
+    @ViewChild('tooltip2', { read: TooltipComponent, static: false }) tooltip2!: TooltipComponent;
 
     billingData = (() => {
         let data = [];
@@ -42,9 +42,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    freezeHeader: Boolean = true;
+    freezeHeader: boolean = true;
 
-    selection: Boolean = true;
+    selection: boolean = true;
 
     columns: TableColumn[] = [{
         label: 'Date',
@@ -117,7 +117,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             errorTooltip = this.tooltip2,
             actionIcons = Array.from(document.querySelectorAll('td[data-field="actions"] .material-icons'));
 
-        table.nativeElement.rows[0].allowSelect = false;
+        table.nativeElement['rows'][0].allowSelect = false;
         amountTooltip.selector = 'amountInfo';
         errorTooltip.selector = 'errorInfo';
         actionIcons.forEach(icon => {

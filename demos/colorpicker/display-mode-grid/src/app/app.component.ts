@@ -11,20 +11,20 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker: ColorPickerComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6: RadioButtonComponent;
-    @ViewChild('radiobutton7', { read: RadioButtonComponent, static: false }) radiobutton7: RadioButtonComponent;
-    @ViewChild('radiobutton8', { read: RadioButtonComponent, static: false }) radiobutton8: RadioButtonComponent;
-    @ViewChild('radiobutton9', { read: RadioButtonComponent, static: false }) radiobutton9: RadioButtonComponent;
-    @ViewChild('radiobutton10', { read: RadioButtonComponent, static: false }) radiobutton10: RadioButtonComponent;
-    @ViewChild('radiobutton11', { read: RadioButtonComponent, static: false }) radiobutton11: RadioButtonComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker!: ColorPickerComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6!: RadioButtonComponent;
+    @ViewChild('radiobutton7', { read: RadioButtonComponent, static: false }) radiobutton7!: RadioButtonComponent;
+    @ViewChild('radiobutton8', { read: RadioButtonComponent, static: false }) radiobutton8!: RadioButtonComponent;
+    @ViewChild('radiobutton9', { read: RadioButtonComponent, static: false }) radiobutton9!: RadioButtonComponent;
+    @ViewChild('radiobutton10', { read: RadioButtonComponent, static: false }) radiobutton10!: RadioButtonComponent;
+    @ViewChild('radiobutton11', { read: RadioButtonComponent, static: false }) radiobutton11!: RadioButtonComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 
 
     ngOnInit(): void {
@@ -73,7 +73,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                 for (let i = 0; i < classes.length; i++) {
                     if (classes[i].indexOf(className) > -1) {
-                        classes.remove(classes.item(i));
+                        classes.remove(classes.item(i) || '');
                     }
                 }
 
@@ -95,9 +95,9 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return;
             }
             if (checkBox && checkBox.id === 'enableCustomColors') {
-                colorPicker.enableCustomColors = checkBox.checked;
+                colorPicker.enableCustomColors = checkBox.checked || false;
                 return;
             }
-        });
+        } as EventListener);
     }
 }

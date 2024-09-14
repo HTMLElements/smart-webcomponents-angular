@@ -11,11 +11,11 @@ import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
-    @ViewChild('tabs2', { read: TabsComponent, static: false }) tabs2: TabsComponent;
-    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
+    @ViewChild('tabs2', { read: TabsComponent, static: false }) tabs2!: TabsComponent;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
 
 
     ngOnInit(): void {
@@ -53,6 +53,6 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (!close) {
                 event.preventDefault();
             }
-        });
+        } as EventListener);
     }
 }

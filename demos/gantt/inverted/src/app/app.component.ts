@@ -129,11 +129,10 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            ganttChart = that.ganttchart;
+        const checkboxChangeHandler = (event: CustomEvent): void => {
+            this.ganttchart.inverted = event.detail.value;
+        }
 
-        that.checkbox.addEventListener('change', function (event: CustomEvent): void {
-            ganttChart.inverted = event.detail.value;
-        });
+        this.checkbox.addEventListener('change', checkboxChangeHandler as EventListener);
     }
 }

@@ -11,20 +11,20 @@ import { WindowComponent } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6: RadioButtonComponent;
-    @ViewChild('radiobutton7', { read: RadioButtonComponent, static: false }) radiobutton7: RadioButtonComponent;
-    @ViewChild('radiobutton8', { read: RadioButtonComponent, static: false }) radiobutton8: RadioButtonComponent;
-    @ViewChild('radiobutton9', { read: RadioButtonComponent, static: false }) radiobutton9: RadioButtonComponent;
-    @ViewChild('radiobutton10', { read: RadioButtonComponent, static: false }) radiobutton10: RadioButtonComponent;
-    @ViewChild('radiobutton11', { read: RadioButtonComponent, static: false }) radiobutton11: RadioButtonComponent;
-    @ViewChild('radiobutton12', { read: RadioButtonComponent, static: false }) radiobutton12: RadioButtonComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6!: RadioButtonComponent;
+    @ViewChild('radiobutton7', { read: RadioButtonComponent, static: false }) radiobutton7!: RadioButtonComponent;
+    @ViewChild('radiobutton8', { read: RadioButtonComponent, static: false }) radiobutton8!: RadioButtonComponent;
+    @ViewChild('radiobutton9', { read: RadioButtonComponent, static: false }) radiobutton9!: RadioButtonComponent;
+    @ViewChild('radiobutton10', { read: RadioButtonComponent, static: false }) radiobutton10!: RadioButtonComponent;
+    @ViewChild('radiobutton11', { read: RadioButtonComponent, static: false }) radiobutton11!: RadioButtonComponent;
+    @ViewChild('radiobutton12', { read: RadioButtonComponent, static: false }) radiobutton12!: RadioButtonComponent;
 
-    @ViewChild('window', { read: WindowComponent, static: false }) smartWindow: WindowComponent;
+    @ViewChild('window', { read: WindowComponent, static: false }) smartWindow!: WindowComponent;
 
 
     ngOnInit(): void {

@@ -10,14 +10,14 @@ import { TankComponent } from '@smart-webcomponents-angular/tank';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6: RadioButtonComponent;
-    @ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
-    @ViewChild('tank2', { read: TankComponent, static: false }) tank2: TankComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6!: RadioButtonComponent;
+    @ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
+    @ViewChild('tank2', { read: TankComponent, static: false }) tank2!: TankComponent;
 
 
     ngOnInit(): void {
@@ -34,7 +34,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this;
 
         that.radiobutton.addEventListener('change', function () {
-            if (that.radiobutton[0].checked) {
+            //@ts-ignore
+            if (that.radiobutton.checked) {
                 that.tank.labelsVisibility = 'all';
                 that.tank2.labelsVisibility = 'all';
             }

@@ -10,14 +10,15 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-	@ViewChild('clearSelection', { read: ButtonComponent, static: false }) clearSelection: ButtonComponent;
-	@ViewChild('today', { read: ButtonComponent, static: false }) today: ButtonComponent;
-	@ViewChild('navBackward', { read: ButtonComponent, static: false }) navBackward: ButtonComponent;
-	@ViewChild('navForward', { read: ButtonComponent, static: false }) navForward: ButtonComponent;
-	@ViewChild('selectDate', { read: ButtonComponent, static: false }) selectDate: ButtonComponent;
-	@ViewChild('disabled', { read: ButtonComponent, static: false }) disabled: ButtonComponent;
-  @ViewChild('dateInput', { read: ElementRef<HTMLInputElement>, static: false }) dateInput: ElementRef<HTMLInputElement>;
+	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+	@ViewChild('clearSelection', { read: ButtonComponent, static: false }) clearSelection!: ButtonComponent;
+	@ViewChild('today', { read: ButtonComponent, static: false }) today!: ButtonComponent;
+	@ViewChild('navBackward', { read: ButtonComponent, static: false }) navBackward!: ButtonComponent;
+	@ViewChild('navForward', { read: ButtonComponent, static: false }) navForward!: ButtonComponent;
+	@ViewChild('selectDate', { read: ButtonComponent, static: false }) selectDate!: ButtonComponent;
+	@ViewChild('disabled', { read: ButtonComponent, static: false }) disabled!: ButtonComponent;
+  @ViewChild('dateInput', { read: ElementRef<HTMLInputElement>, static: false }) dateInput!: ElementRef<HTMLInputElement>;
+    
     
  
 	ngOnInit(): void {

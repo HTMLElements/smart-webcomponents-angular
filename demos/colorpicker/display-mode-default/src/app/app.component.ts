@@ -11,9 +11,9 @@ import { ColorPickerComponent } from '@smart-webcomponents-angular/colorpicker';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('colorPicker', { read: ColorPickerComponent, static: false }) colorPicker: ColorPickerComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('colorPicker', { read: ColorPickerComponent, static: false }) colorPicker!: ColorPickerComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
  
 	ngOnInit(): void {
 		// onInit code.
@@ -70,7 +70,7 @@ export class AppComponent implements AfterViewInit, OnInit {
               for (let i = 0; i < classes.length; i++) {
                 if (classes[i].indexOf(className) > -1) {
                   colorPicker.nativeElement.classList.remove(
-                    colorPicker.nativeElement.classList.item(i)
+                    colorPicker.nativeElement.classList.item(i) || ''
                   );
                 }
               }
@@ -81,7 +81,7 @@ export class AppComponent implements AfterViewInit, OnInit {
               checkBox.nodeName == 'SMART-CHECK-BOX' &&
               checkBox.id === 'enableCustomColors'
             ) {
-              colorPicker.enableCustomColors = checkBox.checked;
+              colorPicker.enableCustomColors = checkBox.checked || false;
               return;
             }
           }

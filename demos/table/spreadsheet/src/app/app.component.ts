@@ -9,7 +9,7 @@ import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     data = (function () {
         const productNames = [
@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             data = [];
 
         for (let i = 0; i < 50; i++) {
-            const dataPoint = {
+            const dataPoint: any = {
                 rowHeader: i + 1
             };
             if (i === 0) {
@@ -43,10 +43,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     columns: Object[] = (function () {
         let columns: {
-            label: String,
-            dataField: String,
-            width: Number,
-            freeze?: String,
+            label: string,
+            dataField: string,
+            width: number,
+            freeze?: string,
             formatFunction: Function
         }[] = [{
             label: '',
@@ -65,7 +65,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 label: letter,
                 dataField: letter,
                 width: i !== 65 ? 100 : 200,
-                formatFunction(settings) {
+                formatFunction(settings: any) {
                     if (settings.row === 0) {
                         settings.cell.classList.add('header-cell');
                     }
@@ -87,11 +87,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         dataSource: this.data,
     });
 
-    editing: Boolean = true;
+    editing: boolean = true;
 
-    freezeHeader: Boolean = true;
+    freezeHeader: boolean = true;
 
-    keyboardNavigation: Boolean = true;
+    keyboardNavigation: boolean = true;
 
     ngOnInit(): void {
         // onInit code.

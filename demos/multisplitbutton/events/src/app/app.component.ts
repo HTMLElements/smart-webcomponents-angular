@@ -9,8 +9,8 @@ import { MultiSplitButtonComponent } from '@smart-webcomponents-angular/multispl
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('multisplitbutton', { read: MultiSplitButtonComponent, static: false }) multisplitbutton: MultiSplitButtonComponent;
-	@ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+	@ViewChild('multisplitbutton', { read: MultiSplitButtonComponent, static: false }) multisplitbutton!: MultiSplitButtonComponent;
+	@ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
 	buttonsDataSource = ['Button 1', 'Button 2', 'Button 3'];
 	dropDownButtonPosition = 'right';
@@ -30,6 +30,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 		that.multisplitbutton.addEventListener('buttonClick', function (event: CustomEvent) {
 			that.log.nativeElement.innerHTML = "Clicked Button " + event.detail.index;
-		});
+		} as EventListener);
 	}
 }

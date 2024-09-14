@@ -11,7 +11,7 @@ import { GetKanbanData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     collapsible = true;
     editable = true;
@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     columnSummary = true;
     columnColors = true;
     columnColorEntireSurface = true;
-    dataSource = [
+    dataSource: any = [
         {
             Name: 'Michelangelo',
             Country: 'Italy',
@@ -73,7 +73,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             Paintings: 'https://upload.wikimedia.org/wikipedia/commons/4/47/Svetogorska_legenda_1926.jpg,https://upload.wikimedia.org/wikipedia/commons/9/93/Ahinora_1922_%28Anna_Orozova_model%29.jpg'
         }
     ];
-    dataSourceMap = {
+    dataSourceMap: any = {
         'checklist': 'checklist',
         'color': 'color',
         'comments': 'comments',
@@ -132,7 +132,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     taskComments = true;
     currentUser = 0;
     taskProgress = true;
-    dialogRendered = (dialog, editors, labels, tabs, layout) => {
+    dialogRendered = (dialog: any, editors: any, labels: any, tabs: any, layout: any) => {
         // hides the tabs in the kanban.
         tabs['all'].style.display = 'none';
 
@@ -157,20 +157,6 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         }
     };
-    localizeFormatFunction = (defaultMessage, message, messageArguments, messageKey) => {
-        if (messageKey === 'tasksSummary') {
-            const summary = messageArguments['summary'];
-            return summary > 1 ? summary + ' Artists' : summary + ' Artist';
-        }
-
-        if (messageKey === 'status') {
-            return 'Continent';
-        }
-
-        if (messageKey === 'description') {
-            return 'Bio';
-        }
-    }
     users = [
         { id: 0, name: 'Andrew', image: 'https://htmlelements.com/demos/images/people/andrew.png' },
         { id: 1, name: 'Anne', image: 'https://htmlelements.com/demos/images/people/anne.png' },

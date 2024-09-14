@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { Scheduler, SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -9,9 +9,9 @@ import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angu
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(), todayDate = today.getDate(), currentYear = today.getFullYear(), currentMonth = today.getMonth(), data = [
             {
                 label: 'Google AdWords Strategy',
@@ -33,7 +33,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'week';
 
-    footerTemplate: Function = function (footerContainer: HTMLElement): void {
+    footerTemplate: Function = function (this: Scheduler, footerContainer: HTMLElement): void {
         if (footerContainer.querySelector('.custom-footer')) {
             return;
         }
@@ -41,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const scheduler = this,
             customFooter = document.createElement('div');
 
-        customFooter.classList.add('custom-footer');
+            customFooter.classList.add('custom-footer');
 
         customFooter.addEventListener('change', function (event) {
             const target = event.target as HTMLElement;
@@ -50,7 +50,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 const schedulerClassList = scheduler.classList;
 
                 //Remove previous classes
-                Array.from(schedulerClassList).forEach((c: string[]) => {
+                Array.from(schedulerClassList).forEach((c: any) => {
                     if (c.indexOf('color-') > -1) {
                         schedulerClassList.remove(c);
                     }

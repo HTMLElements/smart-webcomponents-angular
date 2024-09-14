@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
-import { SchedulerComponent, SchedulerViewType, SchedulerResource, SchedulerViews, SchedulerGroupOrientation } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewType, SchedulerResource, SchedulerViews, SchedulerGroupOrientation } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -10,10 +10,10 @@ import { SchedulerComponent, SchedulerViewType, SchedulerResource, SchedulerView
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             year = today.getFullYear(),
             month = today.getMonth(),
@@ -233,10 +233,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const scheduler = this.scheduler;
 
-        document.querySelector('.options').addEventListener('change', function (event) {
-            const target = (<HTMLElement>event.target).closest('smart-radio-button');
+        document.querySelector('.options')
+            ?.addEventListener('change', function (event) {
+                const target = (<HTMLElement>event.target).closest('smart-radio-button');
 
-            scheduler.groupOrientation = target.textContent.trim().toLowerCase() as SchedulerGroupOrientation;
-        });
+                scheduler.groupOrientation = target?.textContent?.trim().toLowerCase() as SchedulerGroupOrientation;
+            });
     };
 }

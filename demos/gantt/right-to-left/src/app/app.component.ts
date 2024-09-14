@@ -129,9 +129,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            ganttChart = that.ganttchart,
-            messages = Object.assign({}, ganttChart.messages);
+        const messages = Object.assign({}, this.ganttchart.messages);
 
         messages['he'] = {
             'noId': 'smartGanttChart דורש מזהה כדי לשמור / לטעון / לנקות מצב.',
@@ -144,11 +142,12 @@ export class AppComponent implements AfterViewInit, OnInit {
             'deleteLink': 'מחק קישור'
         };
 
-        ganttChart.messages = messages;
+        this.ganttchart.messages = messages;
 
-        that.checkbox.addEventListener('change', function (event: CustomEvent): void {
-            ganttChart.rightToLeft = event.detail.value;
-        });
+        const checkboxChangeHandler = (event: CustomEvent): void => {
+            this.ganttchart.rightToLeft = event.detail.value;
+        }
+        this.checkbox.addEventListener('change', checkboxChangeHandler as EventListener);
 
 
     }

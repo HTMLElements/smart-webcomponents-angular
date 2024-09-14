@@ -10,8 +10,8 @@ import { EditorComponent } from '@smart-webcomponents-angular/editor';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
     //Properties
     contextMenuDataSource: Function = function (target: HTMLElement, type: string, defaultItems: any[]) {

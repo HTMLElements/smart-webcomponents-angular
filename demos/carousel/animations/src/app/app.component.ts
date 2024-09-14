@@ -9,12 +9,12 @@ import { CarouselComponent } from '@smart-webcomponents-angular/carousel';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('carousel', { read: CarouselComponent, static: false }) carousel: CarouselComponent;
-    @ViewChild('carousel2', { read: CarouselComponent, static: false }) carousel2: CarouselComponent;
-    @ViewChild('carousel3', { read: CarouselComponent, static: false }) carousel3: CarouselComponent;
-    @ViewChild('carousel4', { read: CarouselComponent, static: false }) carousel4: CarouselComponent;
-    @ViewChild('carousel5', { read: CarouselComponent, static: false }) carousel5: CarouselComponent;
-    @ViewChild('carousel6', { read: CarouselComponent, static: false }) carousel6: CarouselComponent;
+    @ViewChild('carousel', { read: CarouselComponent, static: false }) carousel!: CarouselComponent;
+    @ViewChild('carousel2', { read: CarouselComponent, static: false }) carousel2!: CarouselComponent;
+    @ViewChild('carousel3', { read: CarouselComponent, static: false }) carousel3!: CarouselComponent;
+    @ViewChild('carousel4', { read: CarouselComponent, static: false }) carousel4!: CarouselComponent;
+    @ViewChild('carousel5', { read: CarouselComponent, static: false }) carousel5!: CarouselComponent;
+    @ViewChild('carousel6', { read: CarouselComponent, static: false }) carousel6!: CarouselComponent;
 
 
     ngOnInit(): void {

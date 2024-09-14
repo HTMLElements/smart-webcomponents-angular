@@ -8,8 +8,8 @@ import { ColorPanelComponent, ColorApplyValueMode } from '@smart-webcomponents-a
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel: ColorPanelComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel!: ColorPanelComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -30,7 +30,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         if (colorPanel) {
             colorPanel.addEventListener('change', function (event: CustomEvent): void {
                 log.innerHTML += '<b>type:</b> ' + event.type + ', <b>value:</b> ' + event.detail.value + '<br />';
-            });
+            } as EventListener);
         }
     }
 }

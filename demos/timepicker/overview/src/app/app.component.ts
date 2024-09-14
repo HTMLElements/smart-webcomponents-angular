@@ -1,4 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { TimePickerComponent } from '@smart-webcomponents-angular/timepicker';
 
 
@@ -9,10 +10,10 @@ import { TimePickerComponent } from '@smart-webcomponents-angular/timepicker';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker: TimePickerComponent;
-	@ViewChild('timepicker2', { read: TimePickerComponent, static: false }) timepicker2: TimePickerComponent;
-	@ViewChild('timepicker3', { read: TimePickerComponent, static: false }) timepicker3: TimePickerComponent;
-	@ViewChild('timepicker4', { read: TimePickerComponent, static: false }) timepicker4: TimePickerComponent;
+	@ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker!: TimePickerComponent;
+	@ViewChild('timepicker2', { read: TimePickerComponent, static: false }) timepicker2!: TimePickerComponent;
+	@ViewChild('timepicker3', { read: TimePickerComponent, static: false }) timepicker3!: TimePickerComponent;
+	@ViewChild('timepicker4', { read: TimePickerComponent, static: false }) timepicker4!: TimePickerComponent;
 	
  
 	ngOnInit(): void {

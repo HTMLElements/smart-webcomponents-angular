@@ -19,8 +19,8 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
         virtualDataSource: function (resultCallbackFunction: any, details: any) {
@@ -71,14 +71,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'City', dataField: 'City' },
         { label: 'Country', dataField: 'Country' },
         {
-            label: '', dataField: '', width: 50, allowEdit: false, formatFunction(settings) {
+            label: '', dataField: '', width: 50, allowEdit: false, formatFunction(settings: any) {
                 settings.template = `<div class="icon-container"><span class="material-icons delete-icon" row-id="${settings.row}" title="Delete row">delete_forever</span></div>`;
             }
         }
     ];
 
     handleButtonClick() {
-        this.table.nativeElement.rows.push({});
+        this.table.nativeElement['rows'].push({});
     }
 
     ngOnInit(): void {
@@ -101,10 +101,10 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return;
             }
 
-            const rowId = deleteIcon.getAttribute('row-id'),
-                tableRowObject = table.nativeElement.rowById[rowId];
+            const rowId = deleteIcon.getAttribute('row-id') || 0,
+                tableRowObject = table.nativeElement['rowById'][rowId];
 
-            table.nativeElement.rows.splice(tableRowObject.data.$.index, 1);
+            table.nativeElement['rows'].splice(tableRowObject.data.$.index, 1);
         });
     };
 }
@@ -129,7 +129,10 @@ function LogData(data: any) {
         content += row;
     }
     content += '</table>';
-    log.innerHTML = content;
+
+    if(log) {
+        log.innerHTML = content;
+    }
 }
 // In this sample, we use http://alasql.org/ to show how to use SQL queries with Smart.Grid
 function DemoServer() {

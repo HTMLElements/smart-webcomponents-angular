@@ -12,7 +12,7 @@ import { SwitchButton } from '@smart-webcomponents-angular/switchbutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
+    @ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
 
     itemTemplate: string = 'multiLineTemplate';
 
@@ -32,13 +32,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             switch (slider) {
                 case mediaSlider:
-                    slider.previousElementSibling.textContent = mediaSlider.value === mediaSlider.min ? 'volume_off' : 'volume_up';
+                    slider.previousElementSibling!.textContent = mediaSlider.value === mediaSlider.min ? 'volume_off' : 'volume_up';
                     break;
                 case alarmSlider:
-                    slider.previousElementSibling.textContent = alarmSlider.value === alarmSlider.min ? 'alarm_off' : 'alarm';
+                    slider.previousElementSibling!.textContent = alarmSlider.value === alarmSlider.min ? 'alarm_off' : 'alarm';
                     break;
                 case ringSlider:
-                    slider.previousElementSibling.textContent = ringSlider.value === ringSlider.min ? 'notifications_off' : 'notifications';
+                    slider.previousElementSibling!.textContent = ringSlider.value === ringSlider.min ? 'notifications_off' : 'notifications';
                     break;
             }
         };
@@ -55,13 +55,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         listBoxLightSecondaryAction[3].appendChild(alarmSlider);
         listBoxLightSecondaryAction[4].innerHTML = '<i class="material-icons">&#xE7F4;</i>';
         listBoxLightSecondaryAction[4].appendChild(ringSlider);
-        listBoxLightSecondaryAction[5].parentElement.classList.add('single-line');
+        listBoxLightSecondaryAction[5].parentElement?.classList.add('single-line');
         listBoxLightSecondaryAction[5].appendChild(switchVibration);
-        listBoxLightSecondaryAction[8].parentElement.classList.add('single-line');
+        listBoxLightSecondaryAction[8].parentElement?.classList.add('single-line');
         listBoxLightSecondaryAction[8].appendChild(switchRingtone);
-        listBoxLightSecondaryAction[11].parentElement.classList.add('single-line');
+        listBoxLightSecondaryAction[11].parentElement?.classList.add('single-line');
         listBoxLightSecondaryAction[11].appendChild(switchNotificationLight);
-        listBoxLightSecondaryAction[14].parentElement.classList.add('single-line');
+        listBoxLightSecondaryAction[14].parentElement?.classList.add('single-line');
         listBoxLightSecondaryAction[14].appendChild(switchNotificationsLockScreen);
 
         //Additional text

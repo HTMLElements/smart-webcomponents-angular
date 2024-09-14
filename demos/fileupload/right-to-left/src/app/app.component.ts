@@ -9,7 +9,7 @@ import { FileUploadComponent } from '@smart-webcomponents-angular/fileupload';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('fileupload', { read: FileUploadComponent, static: false }) fileupload: FileUploadComponent;
+    @ViewChild('fileupload', { read: FileUploadComponent, static: false }) fileupload!: FileUploadComponent;
 
 
     ngOnInit(): void {

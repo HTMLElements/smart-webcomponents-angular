@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ChartComponent } from '@smart-webcomponents-angular/chart';
+import { ChartComponent, ChartSeriesGroupSerie } from '@smart-webcomponents-angular/chart';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     sampleData = [
         { Film: 1, StarWars: 621.7, Jurassic: 983.8 },
@@ -52,8 +52,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         unitInterval: 100,
         title: { text: 'Revenue (millions USD)' }
     };
-    toolTipFormatFunction = (value, index, series) => {
-        return `<div>Film: <em>${this.filmNames[series.dataField][index]}</em></div>
+    toolTipFormatFunction = (value?: any, index?: number | undefined, series?: any) => {
+
+        if (!series.dataField || !index) {
+            return ''
+        }
+        return `<div>Film: <em>${this.filmNames[series.dataField as keyof typeof this.filmNames][index]}</em></div>
     <div>Revenue: ${value} million USD</div>`;
     };
     colorScheme = 'scheme32';

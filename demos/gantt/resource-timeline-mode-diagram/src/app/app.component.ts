@@ -10,7 +10,7 @@ import { GanttChartComponent, GanttChartTask, GanttChart } from '@smart-webcompo
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
+    @ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
@@ -166,7 +166,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'Workload',
             value: 'workload',
-            formatFunction: (data) => data + 'h',
+            formatFunction: (data: string) => data + 'h',
             size: '20%'
         }
     ];
@@ -179,7 +179,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     nonworkingDays: Array<number> = [0, 6];
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string, isHeaderDetailsContainer: boolean): string {
+    timelineHeaderFormatFunction(date: Date, type: string, isHeaderDetailsContainer: boolean): string {
         //W3C Standard function for week numbers
         function ISO8601_week_no(date: Date): number {
             let toDate = new Date(date.valueOf());
@@ -194,10 +194,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
 
         if (isHeaderDetailsContainer) {
-            return `Week ${ISO8601_week_no(date)}, ${date.toLocaleDateString(this.locale, { year: '2-digit' })}`;
+            return `Week ${ISO8601_week_no(date)}, ${date.toLocaleDateString(this.ganttChart.locale, { year: '2-digit' })}`;
         }
         else {
-            return date.toLocaleDateString(this.locale, { weekday: 'short' });
+            return date.toLocaleDateString(this.ganttChart.locale, { weekday: 'short' });
         }
     };
 
@@ -213,5 +213,6 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
     }
 }

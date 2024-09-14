@@ -10,8 +10,8 @@ import { ProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
-    @ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressBar: ProgressBarComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
+    @ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressBar!: ProgressBarComponent;
 
     setVal(event: any): void {
         this.progressBar.value = 100;
@@ -36,6 +36,6 @@ export class AppComponent implements AfterViewInit, OnInit {
                 oldV = event.detail.oldValue;
 
             that.log.nativeElement.innerHTML = '"change" event has been raised.' + '<br/><br/>' + 'Event Details:' + '<br/>' + 'newValue:' + newV + '<br/>' + 'oldValue: ' + oldV;
-        });
+        } as EventListener);
     };
 }

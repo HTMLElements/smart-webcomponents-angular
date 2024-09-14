@@ -9,8 +9,8 @@ import { PasswordTextBoxComponent } from '@smart-webcomponents-angular/passwordt
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox: PasswordTextBoxComponent;
-	@ViewChild('passwordtextbox2', { read: PasswordTextBoxComponent, static: false }) passwordtextbox2: PasswordTextBoxComponent;
+	@ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox!: PasswordTextBoxComponent;
+	@ViewChild('passwordtextbox2', { read: PasswordTextBoxComponent, static: false }) passwordtextbox2!: PasswordTextBoxComponent;
 	
  
 	ngOnInit(): void {

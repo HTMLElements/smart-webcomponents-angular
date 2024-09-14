@@ -10,11 +10,11 @@ import { TankComponent } from '@smart-webcomponents-angular/tank';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
-    @ViewChild('tank2', { read: TankComponent, static: false }) tank2: TankComponent;
-    @ViewChild('tank3', { read: TankComponent, static: false }) tank3: TankComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
+    @ViewChild('tank2', { read: TankComponent, static: false }) tank2!: TankComponent;
+    @ViewChild('tank3', { read: TankComponent, static: false }) tank3!: TankComponent;
 
 
     ngOnInit(): void {
@@ -36,7 +36,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.tank.customInterval = checked;
             that.tank2.customInterval = checked;
             that.tank3.customInterval = checked;
-        });
+        } as EventListener);
 
         that.checkbox2.addEventListener('change', function (event: CustomEvent) {
             const checked = event.detail.value;
@@ -44,6 +44,6 @@ export class AppComponent implements AfterViewInit, OnInit {
             that.tank.coerce = checked;
             that.tank2.coerce = checked;
             that.tank3.coerce = checked;
-        });
+        } as EventListener);
     }
 }

@@ -10,8 +10,8 @@ import { CircularProgressBarComponent } from '@smart-webcomponents-angular/progr
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('toggleButton', { read: ToggleButtonComponent, static: false }) toggleButton: ToggleButtonComponent;
-    @ViewChild('circularProgressBar', { read: CircularProgressBarComponent, static: false }) circularProgressBar: CircularProgressBarComponent;
+    @ViewChild('toggleButton', { read: ToggleButtonComponent, static: false }) toggleButton!: ToggleButtonComponent;
+    @ViewChild('circularProgressBar', { read: CircularProgressBarComponent, static: false }) circularProgressBar!: CircularProgressBarComponent;
 
     ngOnInit(): void {
         // onInit code.

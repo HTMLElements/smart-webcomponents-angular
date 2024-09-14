@@ -9,7 +9,7 @@ import { SortableComponent } from '@smart-webcomponents-angular/sortable';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('sortable', { read: SortableComponent, static: false }) sortable: SortableComponent;
+	@ViewChild('sortable', { read: SortableComponent, static: false }) sortable!: SortableComponent;
 	
  
 	ngOnInit(): void {

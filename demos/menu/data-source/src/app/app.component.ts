@@ -10,7 +10,7 @@ import { MenuComponent } from '@smart-webcomponents-angular/menu';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('menu', { read: MenuComponent, static: false }) menu: MenuComponent;
+    @ViewChild('menu', { read: MenuComponent, static: false }) menu!: MenuComponent;
 
 
     ngOnInit(): void {

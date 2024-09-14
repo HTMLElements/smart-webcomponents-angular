@@ -9,7 +9,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
     
     dataSource = new window.Smart.DataAdapter({
 		dataSource: GetData(15),
@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			'date: date'
 		]
 	});
-	columnReorder: Boolean = true;
+	columnReorder: boolean = true;
 	columns: TableColumn[]  = [{
 			label: 'id',
 			dataField: 'id',

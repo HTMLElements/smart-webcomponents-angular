@@ -58,9 +58,16 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return container;
             },
             getCustomEditorValue: function (editor: HTMLElement) {
-                return (<DropDownList>editor.querySelector('smart-drop-down-list')).selectedIndexes[0];
+
+                const dropdownlist: DropDownList | null = editor.querySelector('smart-drop-down-list')!;
+
+                if (dropdownlist) {
+                    return dropdownlist?.selectedIndexes![0]
+                }
+
+                return editor;
             },
-            formatFunction: (value: string) => ['Low', 'Medium', 'High'][value]
+            formatFunction: (value: string) => ['Low', 'Medium', 'High'][value as keyof []]
         }
     ];
 
@@ -197,13 +204,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
-        const ganttChart = document.querySelector('smart-gantt-chart'),
-            button = document.getElementById('filterRow');
-
-        button.addEventListener('click', function (event: CustomEvent) {
-            ganttChart.filterRow = !ganttChart.filterRow;
-            button.innerHTML = ganttChart.filterRow ? 'Disable' : 'Enable';
-        });
     };
+
+    onButtonClick() {
+        this.ganttChart.filterRow = !this.ganttChart.filterRow;
+        this.button.innerHTML = this.ganttChart.filterRow ? 'Disable' : 'Enable';
+    }
 }

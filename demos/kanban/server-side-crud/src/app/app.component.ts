@@ -18,7 +18,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     addNewButton = true;
     currentUser = '1';
@@ -67,7 +67,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     taskComments = true;
     taskDue = true;
     taskProgress = true;
-    textTemplate = function (settings: { data: any, task: HTMLDivElement, text: string, template?: string }) {
+    textTemplate = function (settings: { data: any, task: HTMLDivElement, text: string, template: string }) {
         settings.template = `<span class="smart-badge smart-badge-dark">${settings.data.id}</span>${settings.text}`;
     };
     userList = true;
@@ -125,7 +125,10 @@ function LogData(data: any, logElementId: string = 'dataLog') {
         content += row;
     }
     content += '</table>';
-    log.innerHTML = content;
+
+    if (log) {
+        log.innerHTML = content;
+    }
 }
 // In this sample, we use http://alasql.org/ to show how to use SQL queries with Smart.Grid
 function DemoServer() {
@@ -162,7 +165,9 @@ function DemoServer() {
         window.query.innerHTML = '';
         // Deletes a task and its comments.
         if (request.action === 'remove') {
-            const removeQuery = request.query['remove'], sqlDeleteQuery = 'DELETE FROM Tasks' + removeQuery, taskid = /WHERE id=(.+)/.exec(removeQuery)[1];
+            const removeQuery = request.query['remove'];
+            const sqlDeleteQuery = 'DELETE FROM Tasks' + removeQuery;
+            const taskid = (/WHERE id=(.+)/.exec(removeQuery) || [])[1];
             window.alasql(sqlDeleteQuery);
             window.query.innerHTML = sqlDeleteQuery;
             executeQuery('DELETE FROM Comments WHERE taskid=' + taskid);
@@ -176,9 +181,11 @@ function DemoServer() {
         }
         // Updates a task and its comments.
         else if (request.action === 'update') {
-            const updateQuery = request.query['update'], taskid = /WHERE id=(.+)/.exec(updateQuery)[1], commentsRegex = /(?<=comments=')\[.*?](?=\',)/;
-            let comments: any = commentsRegex.exec(updateQuery)[0];
-            comments = /\[.*\]/.exec(comments)[0];
+            const updateQuery = request.query['update'];
+            const taskid = (/WHERE id=(.+)/.exec(updateQuery) || [])[1];
+            const commentsRegex = /(?<=comments=')\[.*?](?=\',)/;
+            let comments: any = (commentsRegex.exec(updateQuery) || [])[0];
+            comments = (/\[.*\]/.exec(comments) || [])[0];
             comments = JSON.parse(comments);
             executeQuery('DELETE FROM Comments WHERE taskid=' + taskid);
             for (const comment of comments) {

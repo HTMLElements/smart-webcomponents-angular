@@ -261,9 +261,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: string = 'week';
 
-    timelineHeaderFormatFunction = function (date: Date, type: string): any {
-        const gantt = document.querySelector('smart-gantt-chart')!,
-            monthFormat = (gantt.monthFormat as "numeric" | "2-digit" | "narrow" | "long" | "short" | undefined);
+    timelineHeaderFormatFunction(date: Date, type: string): any {
+
+        const monthFormat = this.ganttChart.monthFormat as "numeric" | "2-digit" | "narrow" | "long" | "short" | undefined;
+        const yearFormat = this.ganttChart.yearFormat as "numeric" | "2-digit" | undefined;
 
         if (type === 'week') {
             const startDayOfWeek = new Date(date),
@@ -271,12 +272,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             endDateOfWeek.setDate(date.getDate() + 6);
 
-            return startDayOfWeek.toLocaleDateString(gantt.locale, { day: 'numeric', month: monthFormat, year: 'numeric' }) + ' - ' +
-                endDateOfWeek.toLocaleDateString(gantt.locale, { day: 'numeric', month: monthFormat, year: 'numeric' });
+            return startDayOfWeek.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat, year: yearFormat }) + ' - ' +
+                endDateOfWeek.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat, year: yearFormat });
         }
 
         if (type === 'day') {
-            return date.toLocaleDateString(gantt.locale, { day: 'numeric', month: monthFormat });
+            return date.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat });
         }
     }
 
@@ -292,11 +293,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            ganttChart = that.ganttChart;
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
 
-        that.checkBox.addEventListener('change', function (event: CustomEvent): void {
-            ganttChart.groupByResources = event.detail.value;
-        });
+        const checkboxChangeHandler = (event: CustomEvent): void => {
+            this.ganttChart.groupByResources = event.detail.value;
+        }
+        this.checkBox.addEventListener('change', checkboxChangeHandler as EventListener);
     }
 }

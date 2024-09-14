@@ -12,7 +12,7 @@ import { AccordionComponent, AccordionItem } from '@smart-webcomponents-angular/
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild('accordion', { read: AccordionComponent, static: false }) accordion: AccordionComponent;
+  @ViewChild('accordion', { read: AccordionComponent, static: false }) accordion!: AccordionComponent;
 
   constructor(private router: Router) { }
 
@@ -44,6 +44,6 @@ export class AppComponent implements AfterViewInit, OnInit {
       else {
         that.router.navigate([{ outlets: { crisis: ['crisis'] } }]);
       }
-    })
+    } as EventListenerOrEventListenerObject)
   }
 }

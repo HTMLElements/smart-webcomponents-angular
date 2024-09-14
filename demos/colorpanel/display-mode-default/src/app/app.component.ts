@@ -11,16 +11,16 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel: ColorPanelComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6: RadioButtonComponent;
-    @ViewChild('rgbaInput', { read: ElementRef, static: false }) rgbaInput: ElementRef;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('colorpanel', { read: ColorPanelComponent, static: false }) colorpanel!: ColorPanelComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6!: RadioButtonComponent;
+    @ViewChild('rgbaInput', { read: ElementRef, static: false }) rgbaInput!: ElementRef;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 
 
     ngOnInit(): void {
@@ -69,14 +69,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 
                 for (let i = 0; i < classes.length; i++) {
                     if (classes[i].indexOf(className) > -1) {
-                        colorPanel.nativeElement.classList.remove(colorPanel.nativeElement.classList.item(i));
+                        colorPanel.nativeElement.classList.remove(colorPanel.nativeElement.classList.item(i) || '');
                     }
                 }
                 colorPanel.nativeElement.classList.add(className + '-' + size);
                 return;
             }
             if (checkBox && checkBox.id === 'enableCustomColors') {
-                colorPanel.enableCustomColors = checkBox.checked;
+                colorPanel.enableCustomColors = checkBox.checked || false;
                 return;
             }
             //Set a new value
@@ -87,6 +87,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         colorPanel.addEventListener('change', function (event: CustomEvent): void {
             that.rgbaInput.nativeElement.value = event.detail.value;
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

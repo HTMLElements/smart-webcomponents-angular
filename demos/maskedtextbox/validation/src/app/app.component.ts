@@ -9,8 +9,8 @@ import { MaskedTextBoxComponent } from '@smart-webcomponents-angular/maskedtextb
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox: MaskedTextBoxComponent;
-    @ViewChild('validationStatus', { read: ElementRef, static: false }) validationStatus: ElementRef;
+    @ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox!: MaskedTextBoxComponent;
+    @ViewChild('validationStatus', { read: ElementRef, static: false }) validationStatus!: ElementRef;
 
     validation = function (value: string): boolean {
         if (value.length === 5) {
@@ -41,6 +41,6 @@ export class AppComponent implements AfterViewInit, OnInit {
             else {
                 that.validationStatus.nativeElement.innerHTML = 'Please, fill the mask...';
             }
-        });
+        } as EventListener);
     }
 }

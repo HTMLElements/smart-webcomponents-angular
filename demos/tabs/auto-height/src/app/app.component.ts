@@ -9,7 +9,7 @@ import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
+	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
 	
  
 	ngOnInit(): void {

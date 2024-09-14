@@ -10,12 +10,12 @@ import { TreeComponent } from '@smart-webcomponents-angular/tree';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
-    @ViewChild('tree2', { read: TreeComponent, static: false }) tree2: TreeComponent;
-    @ViewChild('tree3', { read: TreeComponent, static: false }) tree3: TreeComponent;
-    @ViewChild('tree4', { read: TreeComponent, static: false }) tree4: TreeComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
+    @ViewChild('tree2', { read: TreeComponent, static: false }) tree2!: TreeComponent;
+    @ViewChild('tree3', { read: TreeComponent, static: false }) tree3!: TreeComponent;
+    @ViewChild('tree4', { read: TreeComponent, static: false }) tree4!: TreeComponent;
 
 
     ngOnInit(): void {

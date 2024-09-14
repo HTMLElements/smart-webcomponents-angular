@@ -3,7 +3,7 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
-import { SchedulerComponent, SchedulerResource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerResource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -13,16 +13,16 @@ import { SchedulerComponent, SchedulerResource, SchedulerViewType } from '@smart
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -196,7 +196,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         if (scheduler.filterable) {
             filterButton.innerHTML = 'Disable Filtering';
-            
+
             if (scheduler.filter) {
                 applyFilterButton.disabled = true;
                 clearFilter.disabled = false;
@@ -227,29 +227,30 @@ export class AppComponent implements AfterViewInit, OnInit {
         const that = this,
             scheduler = that.scheduler;
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent) {
-            const target = event.target as HTMLElement,
-                detail = event.detail.value;
+        document.querySelector('.options')
+            ?.addEventListener('change', function (event: CustomEvent) {
+                const target = event.target as HTMLElement,
+                    detail = event.detail.value;
 
-            if (target.closest('.legend')) {
-                scheduler.showLegend = detail;
-            }
-            else if (target.closest('.legend-position')) {
-                scheduler.legendPosition = target.textContent.toLocaleLowerCase().indexOf('near') > -1 ? 'near' : 'far';
-            }
-            else if (target.closest('.legend-location')) {
-                scheduler.legendLocation = target.textContent.toLocaleLowerCase().indexOf('header') > -1 ? 'header' : 'footer';
-            }
-            else if (target.closest('.legend-item')) {
-                const resources = scheduler.resources.slice(),
-                    resourceItem = resources[0].dataSource.find((i: { id: number }) => i.id === 4);
-
-                if (resourceItem) {
-                    resourceItem.disabled = detail;
+                if (target.closest('.legend')) {
+                    scheduler.showLegend = detail;
                 }
+                else if (target.closest('.legend-position')) {
+                    scheduler.legendPosition = (target.textContent?.toLocaleLowerCase().indexOf('near') || 0) > -1 ? 'near' : 'far';
+                }
+                else if (target.closest('.legend-location')) {
+                    scheduler.legendLocation = (target.textContent?.toLocaleLowerCase().indexOf('header') || 0) > -1 ? 'header' : 'footer';
+                }
+                else if (target.closest('.legend-item')) {
+                    const resources = scheduler.resources.slice(),
+                        resourceItem = resources[0].dataSource.find((i: { id: number }) => i.id === 4);
 
-                scheduler.resources = resources;
-            }
-        });
+                    if (resourceItem) {
+                        resourceItem.disabled = detail;
+                    }
+
+                    scheduler.resources = resources;
+                }
+            } as EventListener);
     }
 }

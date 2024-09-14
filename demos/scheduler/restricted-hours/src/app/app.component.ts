@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -9,12 +9,12 @@ import { SchedulerComponent, SchedulerViewType } from '@smart-webcomponents-angu
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    targetEvent = null;
-    eventEditors = null;
+    targetEvent: any = null;
+    eventEditors: any = null;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(), currentDate = today.getDate(), currentYear = today.getFullYear(), currentMonth = today.getMonth(), data = [
             {
                 label: 'Google AdWords Strategy',
@@ -122,7 +122,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     clearEventEdit() {
-        this.targetEvent = undefined;
+        this.targetEvent = null;
     }
 
     async checkEventEdit() {

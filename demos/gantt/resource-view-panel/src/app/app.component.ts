@@ -214,7 +214,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             formatFunction: function (data: Array<string>, task: GanttChartTask): string {
                 const gantt = document.querySelector('smart-gantt-chart') as GanttChart,
                     resources = gantt.resources as Array<GanttChartResource>,
-                    getResource = (d: string) => resources.find((res) => res.id.toString() === d.toString());
+                    getResource = (d: string) => resources.find((res) => res?.id?.toString() === d.toString());
 
                 if (task && task.disableResources) {
                     return ''
@@ -224,7 +224,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     return '<span class="gantt-chart-task-assignee unassigned">?</span>';
                 }
                 else if (data.length === 1) {
-                    return `<span>${getResource(data[0]).label}</span>`;
+                    return `<span>${getResource(data[0])?.label}</span>`;
                 }
                 else {
                     let result = '';
@@ -232,7 +232,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         const resource = getResource(data[i]);
 
                         if (resource) {
-                            result += `<span class="gantt-chart-task-assignee ${resource.id.toLowerCase()}">${resource.label.charAt(0)}</span>`;
+                            result += `<span class="gantt-chart-task-assignee ${resource?.id?.toLowerCase()}">${resource?.label?.charAt(0)}</span>`;
                         }
                     }
                     return result;
@@ -262,9 +262,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: string = 'week';
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string): string {
-        const that = document.querySelector('smart-gantt-chart') as GanttChart,
-            monthFormat = that.monthFormat as "numeric" | "2-digit" | "narrow" | "long" | "short";
+    timelineHeaderFormatFunction(date: Date, type: string) {
+
+        const monthFormat = this.ganttChart.monthFormat as "numeric" | "2-digit" | "narrow" | "long" | "short";
 
         if (type === 'week') {
             const startDayOfWeek = new Date(date),
@@ -272,13 +272,15 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             endDateOfWeek.setDate(date.getDate() + 6);
 
-            return startDayOfWeek.toLocaleDateString(that.locale, { day: 'numeric', month: monthFormat, year:  'numeric' }) + ' - ' +
-                endDateOfWeek.toLocaleDateString(that.locale, { day: 'numeric', month: monthFormat, year: 'numeric' });
+            return startDayOfWeek.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat, year: 'numeric' }) + ' - ' +
+                endDateOfWeek.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat, year: 'numeric' });
         }
 
         if (type === 'day') {
-            return date.toLocaleDateString(that.locale, { day: 'numeric', month: monthFormat });
+            return date.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat });
         }
+
+        return
     }
 
     ngOnInit(): void {
@@ -292,6 +294,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
+
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this)
 
     }
 }

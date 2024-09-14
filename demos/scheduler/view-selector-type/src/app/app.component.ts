@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
-import { SchedulerComponent, SchedulerViewSelectorType, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViewSelectorType, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -11,10 +11,10 @@ import { SchedulerComponent, SchedulerViewSelectorType, SchedulerViewType } from
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -127,10 +127,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         const scheduler = this.scheduler;
 
-        document.querySelector('.options').addEventListener('change', function (event: CustomEvent) {
+        document.querySelector('.options')?.addEventListener('change', function (event: CustomEvent) {
             const target = (<HTMLElement>event.target).closest('smart-radio-button');
 
-            scheduler.viewSelectorType = target.textContent.trim() as SchedulerViewSelectorType;
-        });
+            scheduler.viewSelectorType = target?.textContent?.trim() || 'auto' as SchedulerViewSelectorType;
+        } as EventListener);
     };
 }

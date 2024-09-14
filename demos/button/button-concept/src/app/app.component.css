@@ -1,4 +1,5 @@
-
+@import url(//codepen.io/chrisdothtml/pen/ojLzJK.css);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
 
 .button-demo {
     margin-top: 20px;
@@ -18,9 +19,6 @@
 
 /* Button concept */
 /* Reset */
-@import url(//codepen.io/chrisdothtml/pen/ojLzJK.css);
-
-@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
 
 smart-button.button-concept {
     width: auto;
@@ -37,6 +35,10 @@ smart-button.button-concept {
 
 smart-button.button-concept button {
     padding: 0;
+}
+
+smart-button.button-concept a {
+    text-decoration: none;
 }
 
 /* Main Styles */

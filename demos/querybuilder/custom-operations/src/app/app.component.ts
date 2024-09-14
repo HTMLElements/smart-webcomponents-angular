@@ -9,8 +9,8 @@ import { QueryBuilderComponent } from '@smart-webcomponents-angular/querybuilder
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder: QueryBuilderComponent;
-    @ViewChild('filterQueryValue', { read: ElementRef, static: false }) filterQueryValue: ElementRef;
+    @ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder!: QueryBuilderComponent;
+    @ViewChild('filterQueryValue', { read: ElementRef, static: false }) filterQueryValue!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             {
                 label: 'Is valid',
                 name: 'isvalid',
-                editorTemplate: function (fieldType, value, fieldData) {
+                editorTemplate: function (fieldType: string, value: any, fieldData: any) {
                     const editor1 = document.createElement('smart-radio-button'), editor2 = document.createElement('smart-radio-button'), container = document.createElement('div');
                     editor1.innerHTML = 'Yes';
                     editor2.innerHTML = 'No';
@@ -45,10 +45,10 @@ export class AppComponent implements AfterViewInit, OnInit {
                     container.appendChild(editor2);
                     return container;
                 },
-                valueTemplate: function (editor, value) {
+                valueTemplate: function (editor: any, value: any) {
                     return value ? '<em>yes</em>' : '<em>no</em>';
                 },
-                handleValue: function (editor) {
+                handleValue: function (editor: any) {
                     const editors = editor.getElementsByTagName('smart-radio-button');
                     return Number(editors[0].checked);
                 }

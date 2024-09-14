@@ -9,7 +9,7 @@ import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayo
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout: DockingLayoutComponent;
+    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
 
     layout: Array<object> = [
         {

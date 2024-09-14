@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ChartComponent } from '@smart-webcomponents-angular/chart';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 import { GeneratePivotData } from '../assets/data';
 
 @Component({
@@ -11,8 +11,8 @@ import { GeneratePivotData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
 
     columnTotals = true;
     dataSource = GeneratePivotData(300, 3);
@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Year', dataField: 'year', dataType: 'number', allowPivot: true, pivot: true },
         { label: 'Quarter', dataField: 'quarter', dataType: 'string', allowPivot: true, pivot: true },
         { label: 'Revenue', dataField: 'revenue', dataType: 'number', summary: 'sum', summarySettings: { prefix: '$' } }
-    ];
+    ] as PivotTableColumn[];
 
     caption = '';
     description = '';
@@ -57,15 +57,15 @@ export class AppComponent implements AfterViewInit, OnInit {
     continents = ['Africa', 'Asia', 'Australia', 'Europe', 'North America', 'South America'];
     currentYear = new Date().getFullYear();
     years = [this.currentYear - 2, this.currentYear - 1, this.currentYear];
-    expandedColumns = [];
-    expandedRows = [];
-    aggregatedData: any[];
+    expandedColumns: any = [];
+    expandedRows: any = [];
+    aggregatedData: any;
 
     getInitialData() {
         const that = this,
-            continentsDataOnly = that.aggregatedData.filter(dataPoint => dataPoint.level === 0),
+            continentsDataOnly = that.aggregatedData.filter((dataPoint: any) => dataPoint.level === 0),
             series = that.continents.map(continent => ({ dataField: continent, displayText: continent })),
-            dataSource = [];
+            dataSource: any = [];
 
         that.years.forEach(year => dataSource.push({ Period: year }));
 
@@ -73,7 +73,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             for (const column in aggregatedDataPoint) {
                 if (column.indexOf('TOTAL') !== -1 && /_Q\d_/.test(column) === false) {
                     // process only year total columns
-                    const dataPoint = dataSource.find(dP => dP.Period === parseFloat(column.slice(0, 4))), value = aggregatedDataPoint[column];
+                    const dataPoint = dataSource.find((dP: any) => dP.Period === parseFloat(column.slice(0, 4))), value = aggregatedDataPoint[column];
                     dataPoint[aggregatedDataPoint.id.slice(0, aggregatedDataPoint.id.length - 1)] = value;
                 }
             }
@@ -93,13 +93,13 @@ export class AppComponent implements AfterViewInit, OnInit {
             return;
         }
 
-        const dataSource = [];
-        let series = [],
+        const dataSource: any = [];
+        let series: any = [],
             yearsToDisplay = [];
 
         if (expandedColumns.length > 0) {
-            yearsToDisplay = expandedColumns.sort().map(col => parseFloat(col.slice(0, 4)));
-            yearsToDisplay.forEach(year => {
+            yearsToDisplay = expandedColumns.sort().map((col: any) => parseFloat(col.slice(0, 4)));
+            yearsToDisplay.forEach((year: any) => {
                 for (let i = 1; i <= 4; i++) {
                     // Create a data point for each quarter (Q) of each year to display
                     dataSource.push({ Period: `${year}/Q${i}` });
@@ -115,7 +115,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             series = that.continents.map(continent => ({ dataField: continent, displayText: continent }));
         }
 
-        that.aggregatedData.forEach(sourceDataPoint => {
+        that.aggregatedData.forEach((sourceDataPoint: any) => {
             if (sourceDataPoint.level === 0 && expandedRows.length > 0 ||
                 sourceDataPoint.level === 1 && expandedRows.length === 0) {
                 return;
@@ -136,10 +136,10 @@ export class AppComponent implements AfterViewInit, OnInit {
                 let dataPoint: any;
 
                 if (expandedColumns.length > 0) {
-                    dataPoint = dataSource.find(dP => dP.Period === column.slice(0, 7).replace('_', '/'));
+                    dataPoint = dataSource.find((dP: any) => dP.Period === column.slice(0, 7).replace('_', '/'));
                 }
                 else {
-                    dataPoint = dataSource.find(dP => dP.Period + '_TOTAL' === column);
+                    dataPoint = dataSource.find((dP: any) => dP.Period + '_TOTAL' === column);
                 }
 
                 if (!dataPoint) {
@@ -166,7 +166,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     collapseTotalColumnHandler = (event: CustomEvent) => {
         const that = this;
 
-        that.expandedColumns = that.expandedColumns.filter(col => col !== event.detail.columnDefinition.id);
+        that.expandedColumns = that.expandedColumns.filter((col: any) => col !== event.detail.columnDefinition.id);
         that.getDataBasedOnExpandedGroups();
     }
 
@@ -187,14 +187,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     collapseHandler = (event: CustomEvent) => {
         const that = this;
 
-        that.expandedRows = that.expandedRows.filter(row => row !== event.detail.record.id);
+        that.expandedRows = that.expandedRows.filter((row: any) => row !== event.detail.record.id);
         that.getDataBasedOnExpandedGroups();
     }
 
     readyHandler = () => {
         const that = this;
 
-        that.aggregatedData = that.pivottable.nativeElement.rows.toArray();
+        that.aggregatedData = that.pivottable.nativeElement['rows'].toArray();
         that.getInitialData();
     }
 

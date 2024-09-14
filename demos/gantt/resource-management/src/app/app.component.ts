@@ -231,7 +231,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Assignee',
             value: 'resources',
             size: '35%',
-            formatFunction: function (data: any, task: GanttChartTask): String {
+            formatFunction: function (data: any, task: GanttChartTask): string {
                 const ganttChart = document.querySelector('smart-gantt-chart')!,
                     resources = ganttChart.resources!;
 
@@ -278,41 +278,41 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            ganttChart = that.ganttchart;
-
-        ganttChart.addEventListener('click', function (event: CustomEvent): void {
+        const ganttChartClickHandler = (event: CustomEvent): void => {
             const target = event.target as HTMLElement;
 
             if (target.classList.contains('add-task-button')) {
-                const newTaskIndex = Array.from(ganttChart.nativeElement.querySelectorAll('.add-task-button')).indexOf(target) + 1;
+                const newTaskIndex = Array.from(this.ganttchart.nativeElement.querySelectorAll('.add-task-button')).indexOf(target) + 1;
                 //Add a new Task
-                ganttChart.insertTask(newTaskIndex, { label: 'New Task', dateStart: ganttChart.dateStart });
+                this.ganttchart.insertTask(newTaskIndex, { label: 'New Task', dateStart: this.ganttchart.dateStart });
                 //Open the Editor to configure
-                ganttChart.openWindow(newTaskIndex);
+                this.ganttchart.openWindow(newTaskIndex);
             }
-        });
+        }
 
-        that.button.addEventListener('click', function (): void {
+        this.ganttchart.addEventListener('click', ganttChartClickHandler as EventListener);
+
+        this.button.addEventListener('click', (): void => {
             const resource = {
                 id: 'new-resource',
                 label: 'New Resource',
                 assignedTo: 'release'
             };
 
-            ganttChart.insertResource(0, resource);
-            this.disabled = true;
-        });
-        that.button2.addEventListener('click', function (): void {
-            ganttChart.updateResource(0, { label: 'Updated resource' });
-            this.disabled = true;
+            this.ganttchart.insertResource(0, resource);
+            this.button.disabled = true;
         });
 
-        that.button3.addEventListener('click', function (): void {
-            const resources = ganttChart.resources;
+        this.button2.addEventListener('click', (): void => {
+            this.ganttchart.updateResource(0, { label: 'Updated resource' });
+            this.button2.disabled = true;
+        });
 
-            ganttChart.removeResource(resources[resources.length - 1].id);
-            that.button.disabled = true;
+        this.button3.addEventListener('click', (): void => {
+            const resources = this.ganttchart.resources;
+
+            this.ganttchart.removeResource(resources[resources.length - 1]?.id);
+            this.button.disabled = true;
         });
     }
 }

@@ -9,8 +9,8 @@ import { PagerComponent } from '@smart-webcomponents-angular/pager';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('pager', { read: PagerComponent, static: false }) pager: PagerComponent;
-	@ViewChild('pager2', { read: PagerComponent, static: false }) pager2: PagerComponent;
+	@ViewChild('pager', { read: PagerComponent, static: false }) pager!: PagerComponent;
+	@ViewChild('pager2', { read: PagerComponent, static: false }) pager2!: PagerComponent;
 	
  
 	ngOnInit(): void {

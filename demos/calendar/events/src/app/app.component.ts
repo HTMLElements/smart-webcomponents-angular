@@ -7,9 +7,9 @@ import { CalendarComponent } from "@smart-webcomponents-angular/calendar";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild("calendar", { read: CalendarComponent, static: false })
-  calendar: CalendarComponent;
-  eventLog: string;
+  @ViewChild("calendar", { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+  
+  eventLog: string = '';
 
   ngOnInit(): void {
     // onInit code.

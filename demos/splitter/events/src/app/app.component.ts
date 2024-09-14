@@ -8,8 +8,8 @@ import { SplitterComponent } from '@smart-webcomponents-angular/splitter';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter: SplitterComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter!: SplitterComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -45,22 +45,22 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
 
             eventLog.appendChild(getElement(event));
-        });
+        } as EventListener);
 
         smartSplitter.addEventListener('expand', function (event: CustomEvent): void {
             eventLog.appendChild(getElement(event));
-        });
+        } as EventListener);
 
         smartSplitter.addEventListener('collapse', function (event: CustomEvent): void {
             eventLog.appendChild(getElement(event));
-        });
+        } as EventListener);
 
         smartSplitter.addEventListener('resizeStart', function (event: CustomEvent): void {
             eventLog.appendChild(getElement(event));
-        });
+        } as EventListener);
 
         smartSplitter.addEventListener('resizeEnd', function (event: CustomEvent): void {
             eventLog.appendChild(getElement(event));
-        });
+        } as EventListener);
     }
 }

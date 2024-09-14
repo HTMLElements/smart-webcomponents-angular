@@ -16,8 +16,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [ AppComponent ],
     imports: [ BrowserModule, LayoutModule, ButtonModule, CalendarModule, ChartModule, DateTimePickerModule, GridModule, ListBoxModule, RadioButtonModule, TextBoxModule ],
-    bootstrap: [ AppComponent ],
-	
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

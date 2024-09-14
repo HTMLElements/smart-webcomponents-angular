@@ -10,13 +10,13 @@ import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2: GaugeComponent;
-    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3: GaugeComponent;
-    @ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4: GaugeComponent;
-    @ViewChild('gauge5', { read: GaugeComponent, static: false }) gauge5: GaugeComponent;
-    @ViewChild('gauge6', { read: GaugeComponent, static: false }) gauge6: GaugeComponent;
-    @ViewChild('gauge7', { read: GaugeComponent, static: false }) gauge7: GaugeComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2!: GaugeComponent;
+    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3!: GaugeComponent;
+    @ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4!: GaugeComponent;
+    @ViewChild('gauge5', { read: GaugeComponent, static: false }) gauge5!: GaugeComponent;
+    @ViewChild('gauge6', { read: GaugeComponent, static: false }) gauge6!: GaugeComponent;
+    @ViewChild('gauge7', { read: GaugeComponent, static: false }) gauge7!: GaugeComponent;
 
 
     ngOnInit(): void {
@@ -46,6 +46,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             { startValue: 80.5, endValue: 100, className: 'range5' }
         ];
         that.gauge4.digitalDisplayPosition = 'bottom';
+
+        that.gauge7.ranges = [{ "startValue": "0", "endValue": "2", "className": "range1" }, { "startValue": "19", "endValue": "21", "className": "range2" }, { "startValue": "38", "endValue": "40", "className": "range3" }] as any
     }
 
     fuelGaugeLabelFormatFunction(value: string): string {

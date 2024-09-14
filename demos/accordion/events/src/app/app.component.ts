@@ -9,10 +9,9 @@ import { AccordionComponent } from '@smart-webcomponents-angular/accordion';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion: AccordionComponent;
-	@ViewChild('log', { static: false }) log: ElementRef;
+	@ViewChild('accordion', { read: AccordionComponent, static: false }) accordion!: AccordionComponent;
+	@ViewChild('log', { static: false }) log!: ElementRef;
 	
- 
 	ngAfterViewInit(): void {
 		// afterViewInit code.
 		this.init();
@@ -25,7 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	init(): void {
 	    const that = this;
 		
-		const updateEventLog = (event) => {
+		const updateEventLog = (event: any) => {
 			const eventContainer = document.createElement('div'),
 				eventType = event.type;
 

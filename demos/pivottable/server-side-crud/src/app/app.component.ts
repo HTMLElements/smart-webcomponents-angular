@@ -20,9 +20,9 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
 
     freezeHeader = true;
     grandTotal = true;
@@ -78,7 +78,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     editMode = 'row';
     filtering = true;
     filterRow = true;
-    pageSize = 25;
+    pageSize = '25';
     sortMode = 'one';
     columns: TableColumn[] = [
         { label: 'Id', dataField: 'CustomerID', width: 40, allowEdit: false, allowFilter: false },
@@ -91,14 +91,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'City', dataField: 'City' },
         { label: 'Country', dataField: 'Country' },
         {
-            label: '', dataField: '', width: 50, allowEdit: false, allowFilter: false, formatFunction(settings: { value: any, row: number | string, column: string, cell: HTMLTableCellElement, template?: string }) {
+            label: '', dataField: '', width: 50, allowEdit: false, allowFilter: false, formatFunction(settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template?: string }) {
                 settings.template = `<div class="icon-container"><span class="material-icons delete-icon" row-id="${settings.row}" title="Delete row">delete_forever</span></div>`;
             }
         }
     ];
 
     handleButtonClick() {
-        this.table.nativeElement.rows.push({});
+        this.table.nativeElement["rows"].push({});
     }
 
     ngOnInit(): void {
@@ -121,10 +121,10 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return;
             }
 
-            const rowId = deleteIcon.getAttribute('row-id'),
-                tableRowObject = table.nativeElement.rowById[rowId];
+            const rowId = deleteIcon.getAttribute('row-id');
+            const tableRowObject = table.nativeElement['rowById'][rowId || ''];
 
-            table.nativeElement.rows.splice(tableRowObject.data.$.index, 1);
+            table.nativeElement['rows'].splice(tableRowObject.data.$.index, 1);
         });
     };
 }
@@ -149,7 +149,10 @@ export function LogData(data: any) {
         content += row;
     }
     content += '</table>';
-    log.innerHTML = content;
+
+    if (log) {
+        log.innerHTML = content;        
+    }
 }
 // In this sample, we use http://alasql.org/ to show how to use SQL queries with Smart.Grid
 export function DemoServer() {

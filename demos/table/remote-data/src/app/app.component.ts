@@ -9,16 +9,16 @@ import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
         virtualDataSourceLength: 500,
         virtualDataSourceCache: true,
-        virtualDataSource: function (resultCallbackFunction, details) {
+        virtualDataSource: function (resultCallbackFunction: any, details: any) {
             fetch('https://randomuser.me/api/?results=' + (details.last - details.first))
                 .then(response => response.json())
                 .then(json => {
-                    const data = json.results.map((result) => {
+                    const data = json.results.map((result: any) => {
                         return {
                             title: result.name.title,
                             firstName: result.name.first,
@@ -40,11 +40,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    paging: Boolean = true;
+    paging: boolean = true;
 
-    pageIndex: Number = 0;
+    pageIndex: number = 0;
 
-    pageSize: Number = 10;
+    pageSize: string = '10';
 
     columns: TableColumn[] = [{
         label: 'Title',

@@ -11,8 +11,8 @@ import { CrisisService } from '../crisis.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CrisisDetailComponent implements OnInit {
-  crisis: Crisis;
-  editName: string;
+  crisis?: Crisis;
+  editName?: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,9 +24,11 @@ export class CrisisDetailComponent implements OnInit {
     const that = this;
 
     this.route.data
-      .subscribe((data: { crisis: Crisis }) => {
-        this.editName = data.crisis.name;
-        this.crisis = data.crisis;
+      .subscribe((data) => {
+
+        const crisis = data['crisis'] as Crisis || undefined
+        this.editName = crisis.name;
+        this.crisis = crisis;
       });
   }
 
@@ -35,7 +37,9 @@ export class CrisisDetailComponent implements OnInit {
   }
 
   save() {
-    this.crisis.name = this.editName;
+    if (this.crisis?.name) {
+      this.crisis.name = this.editName;
+    }
     this.gotoCrises();
   }
 

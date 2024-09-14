@@ -25,13 +25,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    freezeFooter: Boolean = true;
+    freezeFooter: boolean = true;
 
-    freezeHeader: Boolean = true;
+    freezeHeader: boolean = true;
 
-    footerRow: String = 'customFooterRowTemplate';
+    footerRow: string = 'customFooterRowTemplate';
 
-    headerRow: String = 'customHeaderRowTemplate';
+    headerRow: string = 'customHeaderRowTemplate';
 
     columns: TableColumn[] = [{
         label: 'id',
@@ -69,12 +69,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.init();
     }
 
-    handleReady(event) {
+    handleReady(event: CustomEvent) {
         let totalQuantity: number = 0;
 
         this.data.forEach((dataPoint: any) => totalQuantity += (dataPoint.quantity) as number);
 
-        document.getElementById('totalQuantity').innerHTML = totalQuantity.toString();
+        if (document.getElementById('totalQuantity')) {
+            document.getElementById('totalQuantity')!.innerHTML = totalQuantity.toString();
+        }
     }
 
     init(): void {

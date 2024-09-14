@@ -9,7 +9,7 @@ import { QueryBuilderComponent } from '@smart-webcomponents-angular/querybuilder
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder: QueryBuilderComponent;
+	@ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder!: QueryBuilderComponent;
 	
  
 	ngOnInit(): void {

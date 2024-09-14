@@ -13,15 +13,15 @@ import { WindowComponent } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox: MultilineTextBoxComponent;
-    @ViewChild('multilinetextbox2', { read: MultilineTextBoxComponent, static: false }) multilinetextbox2: MultilineTextBoxComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('window', { read: WindowComponent, static: false }) window: WindowComponent;
-    @ViewChild('window2', { read: WindowComponent, static: false }) window2: WindowComponent;
-    @ViewChild('messageContainer', { read: ElementRef, static: false }) messageContainer: ElementRef;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox!: MultilineTextBoxComponent;
+    @ViewChild('multilinetextbox2', { read: MultilineTextBoxComponent, static: false }) multilinetextbox2!: MultilineTextBoxComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('window', { read: WindowComponent, static: false }) window!: WindowComponent;
+    @ViewChild('window2', { read: WindowComponent, static: false }) window2!: WindowComponent;
+    @ViewChild('messageContainer', { read: ElementRef, static: false }) messageContainer!: ElementRef;
 
 
     ngOnInit(): void {
@@ -44,10 +44,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         });
         that.multilinetextbox.addEventListener('change', function (event: CustomEvent) {
             updateMessageContainer(event, 'J');
-        });
+        } as EventListener);
         that.multilinetextbox2.addEventListener('change', function (event: CustomEvent) {
             updateMessageContainer(event, 'S');
-        });
+        } as EventListener);
         that.radiobutton.addEventListener('change', function () {
             enterKeyBehaviorTo('clearOnSubmit');
         });
@@ -64,11 +64,11 @@ export class AppComponent implements AfterViewInit, OnInit {
             const value = event.detail.value,
                 messageChip = document.createElement('smart-chip');
             messages.push(value);
-            messageChip.value = value.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+            messageChip.value = value.replace(/(!:\r\n|\r|\n)/g, '<br/>');
             messageChip.avatar = user;
             that.messageContainer.nativeElement.appendChild(messageChip);
         }
-        function enterKeyBehaviorTo(option) {
+        function enterKeyBehaviorTo(option: any) {
             that.multilinetextbox.enterKeyBehavior = option;
             that.multilinetextbox2.enterKeyBehavior = option;
         }

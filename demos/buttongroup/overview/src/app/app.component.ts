@@ -9,7 +9,7 @@ import { ButtonGroupComponent } from '@smart-webcomponents-angular/buttongroup';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('buttongroup', { read: ButtonGroupComponent, static: false }) buttongroup: ButtonGroupComponent;
+	@ViewChild('buttongroup', { read: ButtonGroupComponent, static: false }) buttongroup!: ButtonGroupComponent;
 
 	dataSource: Array<String> = ["a", "b", "c"];
 

@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { SchedulerComponent, SchedulerTimelineDayScale } from '@smart-webcompone
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentYear = today.getFullYear(),
             currentMonth = today.getMonth();
@@ -313,22 +313,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     nonworkingDays: number[] = [0];
 
-    views: object | string[] = ['day',
-        {
-            //Custom view definition
-            label: '4 Days',
-            value: 'workWeek',
-            type: 'week',
-            hideWeekend: true
-        },
-        {
-            //Custom view definition
-            label: 'Work Month',
-            value: 'workMonth',
-            type: 'month',
-            hideNonworkingWeekdays: true
-        }
-    ];
+    views: SchedulerViews = ['day', 'week', 'month'];
 
     hourStart: number = 9;
 

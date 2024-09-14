@@ -10,22 +10,22 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2: GaugeComponent;
-    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3: GaugeComponent;
-    @ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4: GaugeComponent;
-    @ViewChild('gauge5', { read: GaugeComponent, static: false }) gauge5: GaugeComponent;
-    @ViewChild('gauge6', { read: GaugeComponent, static: false }) gauge6: GaugeComponent;
-    @ViewChild('gauge7', { read: GaugeComponent, static: false }) gauge7: GaugeComponent;
-    @ViewChild('gauge8', { read: GaugeComponent, static: false }) gauge8: GaugeComponent;
-    @ViewChild('gauge9', { read: GaugeComponent, static: false }) gauge9: GaugeComponent;
-    @ViewChild('gauge10', { read: GaugeComponent, static: false }) gauge10: GaugeComponent;
-    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5: RadioButtonComponent;
-    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6: RadioButtonComponent;
+    @ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+    @ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2!: GaugeComponent;
+    @ViewChild('gauge3', { read: GaugeComponent, static: false }) gauge3!: GaugeComponent;
+    @ViewChild('gauge4', { read: GaugeComponent, static: false }) gauge4!: GaugeComponent;
+    @ViewChild('gauge5', { read: GaugeComponent, static: false }) gauge5!: GaugeComponent;
+    @ViewChild('gauge6', { read: GaugeComponent, static: false }) gauge6!: GaugeComponent;
+    @ViewChild('gauge7', { read: GaugeComponent, static: false }) gauge7!: GaugeComponent;
+    @ViewChild('gauge8', { read: GaugeComponent, static: false }) gauge8!: GaugeComponent;
+    @ViewChild('gauge9', { read: GaugeComponent, static: false }) gauge9!: GaugeComponent;
+    @ViewChild('gauge10', { read: GaugeComponent, static: false }) gauge10!: GaugeComponent;
+    @ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+    @ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+    @ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+    @ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+    @ViewChild('radiobutton5', { read: RadioButtonComponent, static: false }) radiobutton5!: RadioButtonComponent;
+    @ViewChild('radiobutton6', { read: RadioButtonComponent, static: false }) radiobutton6!: RadioButtonComponent;
 
 
     ngOnInit(): void {

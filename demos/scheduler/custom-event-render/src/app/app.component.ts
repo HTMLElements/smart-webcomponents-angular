@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerEvent } from '@smart-webcomponents-angular/scheduler';
+import { Scheduler, SchedulerComponent, SchedulerEvent } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -9,9 +9,9 @@ import { SchedulerComponent, SchedulerEvent } from '@smart-webcomponents-angular
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -92,7 +92,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     timelineDayScale: string = 'halfHour';
 
-    eventTemplate: Function = function (eventContent: HTMLElement, eventObj: { dateStart: Date, img: string, label: string }): HTMLElement {
+    eventTemplate: Function = function (this: Scheduler, eventContent: HTMLElement, eventObj: { dateStart: Date, img: string, label: string }): HTMLElement {
         const scheduler = this;
         let eventContentWrapper = eventContent.querySelector('.event-content-wrapper') as HTMLElement;
 
@@ -115,10 +115,17 @@ export class AppComponent implements AfterViewInit, OnInit {
             label = document.createElement('label');
             eventContentWrapper.appendChild(label);
         }
-        
+
         label.textContent = eventObj.label;
-        time.textContent = new Intl.DateTimeFormat(scheduler.locale, { hour: scheduler.hourFormat, minute: scheduler.minuteFormat }).format(eventObj.dateStart);
-        
+        time.textContent = new Intl.DateTimeFormat(
+            scheduler.locale,
+            {
+                hour: scheduler.hourFormat as "2-digit" | "numeric" | undefined,
+                minute: scheduler.minuteFormat as "2-digit" | "numeric" | undefined
+            }
+        )
+            .format(eventObj.dateStart);
+
         if (eventObj.img) {
             if (!img) {
                 img = document.createElement('img');

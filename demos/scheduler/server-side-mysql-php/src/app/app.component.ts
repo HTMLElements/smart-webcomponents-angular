@@ -10,14 +10,14 @@ import { SchedulerComponent, DataAdapter, SchedulerViewType, SchedulerViews } fr
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+	@ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 	
-    dataSource: DataAdapter = new window.Smart.DataAdapter({
-        beforeLoadComplete: (data) => {
+    dataSource = new window.Smart.DataAdapter({
+        beforeLoadComplete: (data: any) => {
             //Handle Data from the Server before the DataAdapter handles it
             return JSON.parse(data);
         },
-        onBindingComplete: (boundSource) => {
+        onBindingComplete: (boundSource: any) => {
             //Modify the DataAdapter data before it is handled by the Scheduler
             const today = new Date(), year = today.getFullYear(), month = today.getMonth(), data = boundSource.data;
             for (let i = 0; i < data.length; i++) {

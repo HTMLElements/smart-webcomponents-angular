@@ -8,10 +8,12 @@ import { ButtonComponent } from "@smart-webcomponents-angular/button";
 })
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild("button", { read: ButtonComponent, static: false })
-  button: ButtonComponent;
-  log: string;
+  button?: ButtonComponent;
+  log?: string;
 
   clickMe() {
+    if (!this.button) return
+    
     this.button.disabled = true;
 
     const hasAttribute = this.button.nativeElement.hasAttribute("disabled");

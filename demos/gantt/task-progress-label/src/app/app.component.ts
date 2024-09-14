@@ -12,29 +12,28 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: GanttChartView = 'week';
 
-    dateStart: String = '2020-07-31';
+    dateStart: string = '2020-07-31';
 
-    treeSize: Number = 350;
+    treeSize: number = 350;
 
-    hideTimelineHeaderDetails: Boolean = true;
+    hideTimelineHeaderDetails: boolean = true;
 
-    snapToNearest: Boolean = true;
+    snapToNearest: boolean = true;
 
-    showProgressLabel: Boolean = true;
+    showProgressLabel: boolean = true;
 
     progressLabelFormatFunction: Function = (progress: number) => Math.round(progress) + '%';
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: String) {
-        const ganttChart = document.querySelector('smart-gantt-chart');
+    timelineHeaderFormatFunction(date: Date, type: String) {
 
         if (type === 'day') {
-            return date.toLocaleDateString(ganttChart.locale, {
+            return date.toLocaleDateString(this.ganttChart.locale, {
                 day: 'numeric',
                 month: 'short'
             });
         }
 
-        return date.toLocaleDateString(ganttChart.locale, {
+        return date.toLocaleDateString(this.ganttChart.locale, {
             day: 'numeric',
             month: 'short',
             year: 'numeric'
@@ -334,5 +333,8 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     init(): void {
+
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
+        
     }
 }

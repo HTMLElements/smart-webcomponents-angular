@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 import { GetCountriesCodesData } from '../assets/data';
 
 
@@ -11,8 +11,8 @@ import { GetCountriesCodesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
-    @ViewChild('loading', { read: ElementRef, static: false }) loading: ElementRef;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
+    @ViewChild('loading', { read: ElementRef, static: false }) loading!: ElementRef;
 
     countriesCodesData = GetCountriesCodesData();
 
@@ -27,7 +27,7 @@ ${settings.text}
             }
         }
     };
-    columns = [
+    columns: PivotTableColumn[] = [
         { label: 'Age group', dataField: 'ageGroup', dataType: 'string', allowRowGroup: true, rowGroup: true },
         { label: 'Reg. at age', dataField: 'ageRegistered', dataType: 'number', summary: 'avg' },
         { label: 'Country', dataField: 'country', dataType: 'string', allowPivot: true, pivot: true },

@@ -10,8 +10,8 @@ import { ProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-    @ViewChild('loading', { read: ElementRef, static: false }) loading: ElementRef;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+    @ViewChild('loading', { read: ElementRef, static: false }) loading!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.

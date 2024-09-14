@@ -1,58 +1,35 @@
-﻿import {
-    Component,
-    ViewChild,
-    OnInit,
-    AfterViewInit,
-    ElementRef,
-    ViewEncapsulation,
-} from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
-import {
-    DropDownListComponent,
-    ListItem,
-} from '@smart-webcomponents-angular/dropdownlist';
+import { DropDownListComponent, ListItem } from '@smart-webcomponents-angular/dropdownlist';
 import { WindowComponent, Window } from '@smart-webcomponents-angular/window';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('button', { read: ButtonComponent, static: false })
-    button!: ButtonComponent;
-    @ViewChild('button2', { read: ButtonComponent, static: false })
-    button2!: ButtonComponent;
-    @ViewChild('button3', { read: ButtonComponent, static: false })
-    button3!: ButtonComponent;
-    @ViewChild('button4', { read: ButtonComponent, static: false })
-    button4!: ButtonComponent;
-    @ViewChild('button5', { read: ButtonComponent, static: false })
-    button5!: ButtonComponent;
-    @ViewChild('button6', { read: ButtonComponent, static: false })
-    button6!: ButtonComponent;
-    @ViewChild('button7', { read: ButtonComponent, static: false })
-    button7!: ButtonComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false })
-    checkbox!: CheckBoxComponent;
-    @ViewChild('dialogWindow', { read: WindowComponent, static: false })
-    dialogWindow!: WindowComponent;
-    @ViewChild('dialogWindow2', { read: WindowComponent, static: false })
-    dialogWindow2!: WindowComponent;
-    @ViewChild('alertWindow', { read: WindowComponent, static: false })
-    alertWindow!: WindowComponent;
-    @ViewChild('progressWindow', { read: WindowComponent, static: false })
-    progressWindow!: WindowComponent;
-    @ViewChild('waitWindow', { read: WindowComponent, static: false })
-    waitWindow!: WindowComponent;
-    @ViewChild('promptWindow', { read: WindowComponent, static: false })
-    promptWindow!: WindowComponent;
-    @ViewChild('multilinePromptWindow', { read: WindowComponent, static: false }) multilinePromptWindow!: WindowComponent;
-    @ViewChild('dropDownList', { read: DropDownListComponent, static: false })
-    dropDownList!: DropDownListComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+    @ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+    @ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+    @ViewChild('button5', { read: ButtonComponent, static: false }) button5!: ButtonComponent;
+    @ViewChild('button6', { read: ButtonComponent, static: false }) button6!: ButtonComponent;
+    @ViewChild('button7', { read: ButtonComponent, static: false }) button7!: ButtonComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('dialogWindow', { read: WindowComponent, static: false }) dialogWindow!: WindowComponent;
+    @ViewChild('dialogWindow2', { read: WindowComponent, static: false }) dialogWindow2!: WindowComponent;
+    @ViewChild('alertWindow', { read: WindowComponent, static: false }) alertWindow!: WindowComponent;
+    @ViewChild('progressWindow', { read: WindowComponent, static: false }) progressWindow!: WindowComponent;
+    @ViewChild('waitWindow', { read: WindowComponent, static: false }) waitWindow!: WindowComponent;
+    @ViewChild('promptWindow', { read: WindowComponent, static: false }) promptWindow!: WindowComponent;
+    // @ViewChild('multilinePromptWindow', { read: WindowComponent, static: false }) multilinePromptWindow!: WindowComponent;
+    @ViewChild('dropDownList', { read: DropDownListComponent, static: false }) dropDownList!: DropDownListComponent;
     @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
+
 
     ngOnInit(): void {
         // onInit code.
@@ -72,9 +49,9 @@ export class AppComponent implements AfterViewInit, OnInit {
             progressWindow = that.progressWindow,
             waitWindow = that.waitWindow,
             promptWindow = that.promptWindow,
-            multilinePromptWindow = that.multilinePromptWindow,
+            // multilinePromptWindow = that.multilinePromptWindow,
             iconDialogWindow = that.dialogWindow2,
-            dropDownList = that.dropDownList;
+            dropDownList = that.dropDownList
         const log = that.log.nativeElement;
 
         function dialogButtonsHandler(event: CustomEvent): void {
@@ -83,7 +60,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (target.closest('.smart-cancel-button')) {
                 log.textContent = 'Canceled';
                 (<Window>target.closest('.smart-window')).close();
-            } else if (target.closest('.smart-confirm-button')) {
+            }
+            else if (target.closest('.smart-confirm-button')) {
                 log.textContent = 'Confirmed';
                 (<Window>target.closest('.smart-window')).close();
             }
@@ -97,10 +75,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             alertWindow.opened ? alertWindow.close() : alertWindow.open();
         });
 
-        dialogWindow.addEventListener(
-            'click',
-            dialogButtonsHandler as EventListener
-        );
+        dialogWindow.addEventListener('click', dialogButtonsHandler as EventListener);
 
         alertWindow.addEventListener('click', function (event: CustomEvent): void {
             const target: HTMLElement = event.target as HTMLElement;
@@ -131,9 +106,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             }, 500);
         });
 
-        progressWindow.addEventListener('click', function (
-            event: CustomEvent
-        ): void {
+        progressWindow.addEventListener('click', function (event: CustomEvent): void {
             const target = event.target as HTMLElement;
 
             if (target.closest('.smart-complete-button')) {
@@ -158,33 +131,22 @@ export class AppComponent implements AfterViewInit, OnInit {
             promptWindow.opened ? promptWindow.close() : promptWindow.open();
         });
 
-        promptWindow.addEventListener(
-            'click',
-            dialogButtonsHandler as EventListener
-        );
+        promptWindow.addEventListener('click', dialogButtonsHandler as EventListener);
 
-        that.button6.addEventListener('click', function (): void {
-            multilinePromptWindow.opened ? multilinePromptWindow.close() : multilinePromptWindow.open();
-        });
+        // that.button6.addEventListener('click', function (): void {
+        //     multilinePromptWindow.opened ? multilinePromptWindow.close() : multilinePromptWindow.open();
+        // });
 
-        multilinePromptWindow.addEventListener('click', dialogButtonsHandler as EventListener);
+        // multilinePromptWindow.addEventListener('click', dialogButtonsHandler as EventListener);
 
         that.button7.addEventListener('click', async function () {
             try {
-                const selectedItem: any = await dropDownList.getItem(
-                    dropDownList.selectedValues[0]
-                );
+                const selectedItem: any = await dropDownList.getItem(dropDownList.selectedValues[0]);
+                
+                document.getElementsByClassName('smart-icon-dialog-icon')[0].innerHTML = '<span class="glyphicon glyphicon-' + selectedItem.value + '"></span>';
+                document.getElementsByClassName('smart-icon-dialog-content')[0].innerHTML = selectedItem.label;
 
-                document.getElementsByClassName('smart-icon-dialog-icon')[0].innerHTML =
-                    '<span class="glyphicon glyphicon-' +
-                    selectedItem.value +
-                    '"></span>';
-                document.getElementsByClassName(
-                    'smart-icon-dialog-content'
-                )[0].innerHTML = selectedItem.label;
-
-                const icondDialogWindowClassList =
-                    iconDialogWindow.nativeElement.classList;
+                const icondDialogWindowClassList = iconDialogWindow.nativeElement.classList;
 
                 for (let i = 0; i < icondDialogWindowClassList.length; i++) {
                     if (icondDialogWindowClassList[i].indexOf('smart-theme-') > -1) {
@@ -192,34 +154,34 @@ export class AppComponent implements AfterViewInit, OnInit {
                     }
                 }
 
-                icondDialogWindowClassList.add(
-                    'smart-theme-' + selectedItem.label.toLowerCase()
-                );
+                icondDialogWindowClassList.add('smart-theme-' + selectedItem.label.toLowerCase());
 
-                if (iconDialogWindow.opened) {
-                    iconDialogWindow.close();
+                if(iconDialogWindow.opened) {
+                    iconDialogWindow.close()
                 } else {
-                    iconDialogWindow.open();
+                    iconDialogWindow.open()
                 }
             } catch (error) {
                 console.log(error);
             }
         });
 
-        iconDialogWindow.addEventListener(
-            'click',
-            dialogButtonsHandler as EventListener
-        );
+        iconDialogWindow.addEventListener('click', dialogButtonsHandler as EventListener);
 
         document.addEventListener('click', function (event) {
             if (that.checkbox.checked) {
+                // dialogWindow.closeOnMaskClick = alertWindow.closeOnMaskClick = progressWindow.closeOnMaskClick =
+                //     waitWindow.closeOnMaskClick = promptWindow.closeOnMaskClick = multilinePromptWindow.closeOnMaskClick =
+                //     iconDialogWindow.closeOnMaskClick = true;
                 dialogWindow.closeOnMaskClick = alertWindow.closeOnMaskClick = progressWindow.closeOnMaskClick =
-                    waitWindow.closeOnMaskClick = promptWindow.closeOnMaskClick = multilinePromptWindow.closeOnMaskClick =
-                    iconDialogWindow.closeOnMaskClick = true;
-            } else {
+                    waitWindow.closeOnMaskClick = promptWindow.closeOnMaskClick = iconDialogWindow.closeOnMaskClick = true;
+            }
+            else {
+                // dialogWindow.closeOnMaskClick = alertWindow.closeOnMaskClick = progressWindow.closeOnMaskClick =
+                //     waitWindow.closeOnMaskClick = promptWindow.closeOnMaskClick = multilinePromptWindow.closeOnMaskClick =
+                //     iconDialogWindow.closeOnMaskClick = false;
                 dialogWindow.closeOnMaskClick = alertWindow.closeOnMaskClick = progressWindow.closeOnMaskClick =
-                    waitWindow.closeOnMaskClick = promptWindow.closeOnMaskClick = multilinePromptWindow.closeOnMaskClick =
-                    iconDialogWindow.closeOnMaskClick = false;
+                    waitWindow.closeOnMaskClick = promptWindow.closeOnMaskClick = iconDialogWindow.closeOnMaskClick = false;
             }
         });
     }

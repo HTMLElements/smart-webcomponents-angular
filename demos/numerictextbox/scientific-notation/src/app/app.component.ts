@@ -10,9 +10,9 @@ import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
-    @ViewChild('numerictextbox2', { read: NumericTextBoxComponent, static: false }) numerictextbox2: NumericTextBoxComponent;
-    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
+    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
+    @ViewChild('numerictextbox2', { read: NumericTextBoxComponent, static: false }) numerictextbox2!: NumericTextBoxComponent;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
 
 
     ngOnInit(): void {
@@ -33,6 +33,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             that.numerictextbox.scientificNotation = enabled;
             that.numerictextbox2.scientificNotation = enabled;
-        });
+        } as EventListener);
     }
 }

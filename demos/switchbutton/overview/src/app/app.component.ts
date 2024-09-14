@@ -3,15 +3,14 @@ import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton
 
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
+	selector: 'app-root',
+	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
-	
- 
+export class AppComponent implements AfterViewInit, OnInit {
+	@ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
+
 	ngOnInit(): void {
 		// onInit code.
 	}
@@ -19,12 +18,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 	ngAfterViewInit(): void {
 		// afterViewInit code.
 		this.init();
-    }
-		
+	}
+
 	init(): void {
 		// init code.
-	    
-    // Your code here
 
-	}	
+		// Your code here
+	}
 }

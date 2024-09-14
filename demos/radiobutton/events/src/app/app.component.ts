@@ -9,9 +9,9 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-	@ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+	@ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
 	ngOnInit(): void {
 		// onInit code.
@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			buttons[i].addEventListener('change', function (event: CustomEvent) {
 				const checkStatus = event.detail.value;
 				that.log.nativeElement.textContent = (<RadioButton>event.target).innerHTML + " is checked";
-			});
+			} as EventListener);
 		}
 	}
 }

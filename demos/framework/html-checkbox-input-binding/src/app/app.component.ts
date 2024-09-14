@@ -6,33 +6,34 @@ import 'smart-webcomponents-angular/source/smart.element.js';
 import 'smart-webcomponents-angular/source/smart.core.js';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
-  app = new window.Smart.App({
-    data: {
-      isChecked: true,
-    },
-  });
 
-  ngOnInit(): void {
-    // onInit code.
-  }
+	app = new window.Smart.App({
+		data: {
+			isChecked: true
+		}
+	});
 
-  ngAfterViewInit(): void {
-    // afterViewInit code.
-    this.init();
-  }
+	ngOnInit(): void {
+		// onInit code.
+	}
 
-  init(): void {
-    // init code.
+	ngAfterViewInit(): void {
+		// afterViewInit code.
+		this.init();
+	}
 
-    this.app = new window.Smart.App({
-      data: {
-        isChecked: true,
-      },
-    });
-  }
+	init(): void {
+		// init code.
+
+
+
+
+
+	}
 }

@@ -10,9 +10,9 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout: DockingLayoutComponent;
-    @ViewChild('radioButton', { read: RadioButtonComponent, static: false }) radioButton: RadioButtonComponent;
-    @ViewChild('radioButton2', { read: RadioButtonComponent, static: false }) radioButton2: RadioButtonComponent;
+    @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
+    @ViewChild('radioButton', { read: RadioButtonComponent, static: false }) radioButton!: RadioButtonComponent;
+    @ViewChild('radioButton2', { read: RadioButtonComponent, static: false }) radioButton2!: RadioButtonComponent;
 
     layout: Array<object> = [
         {
@@ -51,12 +51,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            radioButtons = [that.radioButton, that.radioButton2];
+        const radioButtons = [this.radioButton, this.radioButton2];
 
         for (let i = 0; i < radioButtons.length; i++) {
-            radioButtons[i].addEventListener('click', function (): void {
-                that.dockinglayout.snapMode = this.innerHTML.toLowerCase();
+            radioButtons[i].addEventListener('click', (e: Event) => {
+                this.dockinglayout.snapMode = (<Element>e.currentTarget)?.innerHTML.toLowerCase();
             });
         }
 

@@ -13,11 +13,11 @@ import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn } f
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
     @ViewChild('ganttchart', { read: GanttChartComponent, static: false }) ganttchart!: GanttChartComponent;
-    @ViewChild('log', { read: ElementRef , static: false }) log!: ElementRef;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
     view: GanttChartView = 'month';
 
-    treeSize: String = '25%';
+    treeSize: string = '25%';
 
     durationUnit: Duration = 'day';
 
@@ -33,11 +33,10 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
     ];
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: String, isHeaderDetails: Boolean, defaultValue: String) {
-        const ganttChart = this.ganttchart;
+    timelineHeaderFormatFunction(date: Date, type: string, isHeaderDetails: boolean, defaultValue: string) {
 
-        if (isHeaderDetails && ganttChart) {
-            return date.toLocaleDateString(ganttChart.locale, {
+        if (isHeaderDetails && this.ganttchart) {
+            return date.toLocaleDateString(this.ganttchart.locale, {
                 month: 'short',
                 year: 'numeric'
             });
@@ -161,6 +160,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         const ganttChart = this.ganttchart,
             button = this.button,
             log = this.log;
+
+        ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
 
         button.addEventListener('click', function (event) {
             log.nativeElement.innerHTML = JSON.stringify(ganttChart.tasks, null, 4);

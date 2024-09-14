@@ -5,6 +5,7 @@ import { ButtonModule } from '@smart-webcomponents-angular/button';
 import { EditorModule } from '@smart-webcomponents-angular/editor';
 
 import { AppComponent } from './app.component';
+import '@angular/compiler';
 
 @NgModule({
     declarations: [ AppComponent ],

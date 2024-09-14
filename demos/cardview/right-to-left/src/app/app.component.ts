@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview';
+import { CardViewColumn, CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('cardview', { read: CardViewComponent, static: false }) cardview: CardViewComponent;
+	@ViewChild('cardview', { read: CardViewComponent, static: false }) cardview!: CardViewComponent;
 	
     generateData(length: number): any[] {
         const sampleData = [], 
@@ -30,7 +30,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             row.attachments = [];
             const maxAttachments = Math.floor(Math.random() * Math.floor(3)) + 1;
             for (let i = 0; i < maxAttachments; i++) {
-                row.attachments.push(`https://htmlelements.com/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
+                row.attachments.push(`../../../src/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
             }
             row.attachments = row.attachments.join(',');
             sampleData[i] = row;
@@ -55,8 +55,9 @@ export class AppComponent implements AfterViewInit, OnInit {
             'expired: boolean',
             'attachments: string'
         ]
-    }); 
-    columns = [
+    });
+
+    columns: CardViewColumn[] = [
         { label: 'שם פרטי', dataField: 'firstName', icon: 'firstName' },
         { label: 'שם משפחה', dataField: 'lastName', icon: 'lastName' },
         { label: 'יום הולדת', dataField: 'birthday', icon: 'birthday', formatSettings: { formatString: 'd' } },

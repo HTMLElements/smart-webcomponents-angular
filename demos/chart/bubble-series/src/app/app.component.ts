@@ -10,9 +10,9 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('dropdownlist2', { read: DropDownListComponent, static: false }) dropdownlist2: DropDownListComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('dropdownlist2', { read: DropDownListComponent, static: false }) dropdownlist2!: DropDownListComponent;
 
     sampleData = [
         { City: 'New York', SalesQ1: 310500, SalesQ2: 210500, YoYGrowthQ1: 1.05, YoYGrowthQ2: 1.25 },
@@ -74,12 +74,12 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.chart.seriesGroups[0].series[0].symbolType = event.detail.value;
                 that.chart.refresh();
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.dropdownlist2.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[0] && that.chart.seriesGroups[0].series) {
                 that.chart.seriesGroups[0].series[1].symbolType = event.detail.value;
                 that.chart.refresh();
             }
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

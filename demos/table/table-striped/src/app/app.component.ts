@@ -9,7 +9,7 @@ import { GetCountriesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
     
 	dataSource = new window.Smart.DataAdapter({
 		dataSource: GetCountriesData(),
@@ -27,7 +27,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	columns: String[] = [
+	columns: any = [
 		'Country',
 		'Area',
 		'Population_Rural',

@@ -10,8 +10,8 @@ import { TankComponent } from '@smart-webcomponents-angular/tank';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
-    @ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
+    @ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
+    @ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
 
 
     ngOnInit(): void {
@@ -29,6 +29,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         that.numerictextbox.addEventListener('change', function (event: CustomEvent) {
             that.tank.interval = event.detail.value;
-        });
+        } as EventListener);
     }
 }

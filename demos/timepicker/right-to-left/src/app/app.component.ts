@@ -9,7 +9,7 @@ import { TimePickerComponent } from '@smart-webcomponents-angular/timepicker';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker: TimePickerComponent;
+	@ViewChild('timepicker', { read: TimePickerComponent, static: false }) timepicker!: TimePickerComponent;
 	
  
 	ngOnInit(): void {

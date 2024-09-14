@@ -9,7 +9,7 @@ import { RatingComponent } from '@smart-webcomponents-angular/rating';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('rating', { read: RatingComponent, static: false }) rating: RatingComponent;
+	@ViewChild('rating', { read: RatingComponent, static: false }) rating!: RatingComponent;
 	
  
 	ngOnInit(): void {

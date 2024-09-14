@@ -1,5 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CarouselComponent } from '@smart-webcomponents-angular/carousel';
+import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
 

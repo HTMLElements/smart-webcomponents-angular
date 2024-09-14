@@ -15,10 +15,10 @@ import { Tooltip } from '@smart-webcomponents-angular/tooltip';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-    @ViewChild('daterangeinput', { read: DateRangeInputComponent, static: false }) daterangeinput: DateRangeInputComponent;
-    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox: MultilineTextBoxComponent;
-    @ViewChild('window', { read: WindowComponent, static: false }) window: WindowComponent;
+    @ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+    @ViewChild('daterangeinput', { read: DateRangeInputComponent, static: false }) daterangeinput!: DateRangeInputComponent;
+    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox!: MultilineTextBoxComponent;
+    @ViewChild('window', { read: WindowComponent, static: false }) window!: WindowComponent;
 
     //Events data
     events: Object[] = [
@@ -189,10 +189,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         },
     ];
 
-    eventDetails = null;
+    eventDetails: {
+        from: Date,
+        to?: Date,
+        description: string
+    } | null = null;
 
     //Handles Events Data
-    getImportantDates(dataSource?) {
+    getImportantDates(dataSource?: any) {
         let dates = [];
 
         if (!dataSource) {
@@ -219,14 +223,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     }
 
     //Returns an event based on it's Date
-    getImportantDate(date) {
+    getImportantDate(date: Date) {
         date = new Date(date);
         date.setHours(0, 0, 0, 0);
 
         const event = this.importantDatesData.find(dateObj => dateObj.date.getTime() === date.getTime());
 
         if (!event) {
-            return;
+            return null;
         }
 
         const eventDates = this.importantDatesData.filter(dateObj => dateObj.description === event.description);
@@ -234,27 +238,29 @@ export class AppComponent implements AfterViewInit, OnInit {
         if (eventDates.length) {
             return { from: eventDates[0].date, to: eventDates[eventDates.length - 1].date, description: event.description };
         }
+
+        return null
     }
 
     importantDatesData = this.getImportantDates();
 
-    months: Number = 12;
+    months: number = 12;
 
-    firstDayOfWeek: Number = 1;
+    firstDayOfWeek: number = 1;
 
     importantDates: Date[] = this.importantDatesData.map((dateObj) => dateObj.date);
 
-    scrollButtonsPosition: String = 'far';
+    scrollButtonsPosition: string = 'far';
 
-    selectedDates: String[] = ['2020-01-01'];
+    selectedDates: string[] = ['2020-01-01'];
 
-    headerTemplate: String = 'headerTemplate';
+    headerTemplate: string = 'headerTemplate';
 
-    tooltipTemplate: String = 'tooltipTemplate';
+    tooltipTemplate: string = 'tooltipTemplate';
 
-    tooltip: Boolean = true;
+    tooltip: boolean = true;
 
-    handleReady(event) {
+    handleReady(event: CustomEvent) {
         const that = this,
             calendar = that.calendar,
             descriptionInput = that.multilinetextbox,
@@ -264,31 +270,36 @@ export class AppComponent implements AfterViewInit, OnInit {
         calendar.selectionMode = 'none';
 
         //Delete Event
-        document.getElementById('buttonDelete')?.addEventListener('click', function () {
-            if (!that.eventDetails) {
+        document.getElementById('buttonDelete')?.addEventListener('click', () => {
+            if (!this.eventDetails) {
                 eventWindow.close();
                 return;
             }
 
-            that.importantDatesData = that.importantDatesData.filter(dateObj => dateObj.description !== that.eventDetails.description);
-            calendar.importantDates = that.importantDatesData.map(dateObj => dateObj.date);
+            this.importantDatesData = this.importantDatesData
+                .filter(dateObj => dateObj.description !== this.eventDetails!.description);
+
+            calendar.importantDates = this.importantDatesData
+                .map(dateObj => dateObj.date);
+
             eventWindow.close();
         });
 
         //Cancel Event Editing
-        document.getElementById('buttonCancel')?.addEventListener('click', function () {
+        document.getElementById('buttonCancel')?.addEventListener('click', () => {
             eventWindow.close();
-            that.eventDetails = null;
+            this.eventDetails = null;
         });
 
         //Save Event
-        document.getElementById('buttonSave')?.addEventListener('click', function () {
+        document.getElementById('buttonSave')?.addEventListener('click', () => {
             if (!that.eventDetails) {
                 eventWindow.close();
                 return;
             }
 
-            that.importantDatesData = that.importantDatesData.filter(dateObj => dateObj.description !== that.eventDetails.description);
+            that.importantDatesData = that.importantDatesData
+                .filter(dateObj => dateObj.description !== that.eventDetails!.description);
 
             const newDateRangeString: string = dateRangeInput.value;
 
@@ -301,12 +312,95 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return;
             }
 
-            const newImportantDates = that.getImportantDates([{ dateFrom: newDateRange.from, dateTo: newDateRange.to, description: descriptionInput.value || '' }]);
+            const newImportantDates = that.getImportantDates(
+                [{
+                    dateFrom: newDateRange.from,
+                    dateTo: newDateRange.to,
+                    description: descriptionInput.value || ''
+                }]
+            );
 
             that.importantDatesData = that.importantDatesData.concat(newImportantDates);
             calendar.importantDates = that.importantDatesData.map(dateObj => dateObj.date);
             eventWindow.close();
         });
+    }
+
+    //Handle Tooltip and prepare editor window
+    handleCalendarOpen(event: CustomEvent) {
+        const tooltip = event.detail.target as Tooltip;
+        
+        if (!(tooltip instanceof window.Smart.Tooltip)) {
+            return;
+        }
+
+        this.eventDetails = this.getImportantDate(event.detail.value);
+
+        if (this.eventDetails) {
+            tooltip.value = this.window.label = this.multilinetextbox.value = this.eventDetails.description;
+            this.daterangeinput.value = this.eventDetails;
+        }
+    }
+
+    //Handle Calendar Header buttons
+    handleCalendarClick(event: Event) {
+        let target = event.target as HTMLElement;
+        
+        if (target.closest('.event-window-button')) {
+            this.window.open();
+        }
+
+        if (!target.closest('smart-button')) { return }
+
+        target = target.closest('smart-button')!;
+
+        if (!target) {
+            return;
+        }
+
+        switch (target.id) {
+            case 'next':
+                this.calendar.navigate(12);
+                break;
+            case 'previous':
+                this.calendar.navigate(-12);
+                break;
+            case 'today':
+                const today = new Date();
+                today.setDate(1);
+                today.setMonth(0);
+                this.calendar.navigate(today);
+                break;
+            case 'month':
+                this.calendar.displayMode = 'month';
+                break;
+            case 'year':
+                this.calendar.displayMode = 'year';
+                break;
+            case 'decade':
+                this.calendar.displayMode = 'decade';
+                break;
+        }
+    }
+
+    //Set the primary button for the current display mode
+    handleCalendarDisplayModeChange() {
+        const displayMode = this.calendar.displayMode;
+        const viewSelection = document.querySelector('.view-selection');
+        
+        if (!viewSelection) { return }
+
+        const viewSelectionButtons = viewSelection.querySelectorAll('smart-button');
+
+        for (let i = 0; i < viewSelectionButtons.length; i++) {
+            const button = viewSelectionButtons[i];
+            if (button.id !== displayMode) {
+                button.classList.remove('primary');
+            }
+            else {
+                button.classList.add('primary');
+            }
+        }
     }
 
     ngOnInit(): void {
@@ -327,79 +421,10 @@ export class AppComponent implements AfterViewInit, OnInit {
             dateRangeInput = that.daterangeinput,
             eventWindow = that.window;
 
-        //Handle Calendar Header buttons
-        calendar.addEventListener('click', function (event: CustomEvent) {
-            let target = event.target as HTMLElement;
-
-            if (target.closest('.event-window-button')) {
-                eventWindow.open();
-            }
-
-            target = target.closest('smart-button');
-
-            if (!target) {
-                return;
-            }
-
-            switch (target.id) {
-                case 'next':
-                    calendar.navigate(12);
-                    break;
-                case 'previous':
-                    calendar.navigate(-12);
-                    break;
-                case 'today':
-                    const today = new Date();
-                    today.setDate(1);
-                    today.setMonth(0);
-                    calendar.navigate(today);
-                    break;
-                case 'month':
-                    calendar.displayMode = 'month';
-                    break;
-                case 'year':
-                    calendar.displayMode = 'year';
-                    break;
-                case 'decade':
-                    calendar.displayMode = 'decade';
-                    break;
-            }
-        });
-
-        //Set the primary button for the current display mode
-        calendar.addEventListener('displayModeChange', function () {
-            const displayMode = calendar.displayMode,
-                viewSelection = document.querySelector('.view-selection'),
-                viewSelectionButtons = viewSelection.querySelectorAll('smart-button');
-
-            for (let i = 0; i < viewSelectionButtons.length; i++) {
-                const button = viewSelectionButtons[i];
-                if (button.id !== displayMode) {
-                    button.classList.remove('primary');
-                }
-                else {
-                    button.classList.add('primary');
-                }
-            }
-        });
-
-        //Handle Tooltip and prepare editor window
-        calendar.addEventListener('open', function (event: CustomEvent) {
-            const tooltip = event.detail.target as Tooltip;
-
-            if (!(tooltip instanceof window.Smart.Tooltip)) {
-                return;
-            }
-            that.eventDetails = that.getImportantDate(event.detail.value);
-
-            if (that.eventDetails) {
-                tooltip.value = eventWindow.label = descriptionInput.value = that.eventDetails.description;
-                dateRangeInput.value = that.eventDetails;
-            }
-        });
-
         //Create new Event on DoubleClick
         calendar.addEventListener('dblclick', function (event) {
+            console.log('double click');
+
             const target = event.target as HTMLElement,
                 calendarCell = target.closest('.smart-calendar-cell') as any;
 

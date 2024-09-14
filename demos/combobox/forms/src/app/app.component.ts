@@ -32,7 +32,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	newHero() {
-		this.model = new Hero(42, '', '');
+		this.model = new Hero(42, '', '', '');
 	}
 
 	get diagnostic() { return JSON.stringify(this.model); }

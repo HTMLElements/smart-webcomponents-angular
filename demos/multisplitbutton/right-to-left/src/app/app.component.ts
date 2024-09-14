@@ -9,7 +9,7 @@ import { MultiSplitButtonComponent } from '@smart-webcomponents-angular/multispl
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('multisplitbutton', { read: MultiSplitButtonComponent, static: false }) multisplitbutton: MultiSplitButtonComponent;
+	@ViewChild('multisplitbutton', { read: MultiSplitButtonComponent, static: false }) multisplitbutton!: MultiSplitButtonComponent;
 	
  
 	ngOnInit(): void {

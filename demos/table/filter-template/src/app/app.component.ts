@@ -10,7 +10,7 @@ import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     data: Object[] = [{
         firstName: 'Jorge',
@@ -90,9 +90,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    filterTemplate: String = 'customFilterTemplate';
+    filterTemplate: string = 'customFilterTemplate';
 
-    filtering: Boolean = true;
+    filtering: boolean = true;
 
     columns: TableColumn[] = [{
         label: 'First Name',
@@ -119,31 +119,32 @@ export class AppComponent implements AfterViewInit, OnInit {
     handleReady(event: Event) {
         const table = this.table;
 
-        document.getElementById('filterCheckboxesContainer').addEventListener('change', function () {
-            const maleChecked = (<CheckBox>document.getElementById('male')).checked,
-                femaleChecked = (<CheckBox>document.getElementById('female')).checked;
+        document.getElementById('filterCheckboxesContainer')
+            ?.addEventListener('change', function () {
+                const maleChecked = (<CheckBox>document.getElementById('male')).checked,
+                    femaleChecked = (<CheckBox>document.getElementById('female')).checked;
 
-            if (maleChecked && femaleChecked) {
-                table.clearFilters();
-                return;
-            }
+                if (maleChecked && femaleChecked) {
+                    table.clearFilters();
+                    return;
+                }
 
-            const filterGroup = new window.Smart.Utilities.FilterGroup();
+                const filterGroup = new window.Smart.Utilities.FilterGroup();
 
-            if (!maleChecked) {
-                const filterObject1 = filterGroup.createFilter('string', 'male', 'NOT_EQUAL');
+                if (!maleChecked) {
+                    const filterObject1 = filterGroup.createFilter('string', 'male', 'NOT_EQUAL');
 
-                filterGroup.addFilter('and', filterObject1);
-            }
+                    filterGroup.addFilter('and', filterObject1);
+                }
 
-            if (!femaleChecked) {
-                const filterObject2 = filterGroup.createFilter('string', 'female', 'NOT_EQUAL');
+                if (!femaleChecked) {
+                    const filterObject2 = filterGroup.createFilter('string', 'female', 'NOT_EQUAL');
 
-                filterGroup.addFilter('and', filterObject2);
-            }
+                    filterGroup.addFilter('and', filterObject2);
+                }
 
-            table.addFilter('gender', filterGroup);
-        });
+                table.addFilter('gender', filterGroup);
+            });
     }
 
     ngOnInit(): void {

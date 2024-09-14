@@ -5,29 +5,29 @@ import { DropDownButtonComponent } from '@smart-webcomponents-angular/dropdownbu
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton: DropDownButtonComponent;
-	@ViewChild('dropdownbutton2', { read: DropDownButtonComponent, static: false }) dropdownbutton2: DropDownButtonComponent;
-	@ViewChild('dropdownbutton3', { read: DropDownButtonComponent, static: false }) dropdownbutton3: DropDownButtonComponent;
-	@ViewChild('dropdownbutton4', { read: DropDownButtonComponent, static: false }) dropdownbutton4: DropDownButtonComponent;
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+export class AppComponent implements AfterViewInit, OnInit {
+    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton!: DropDownButtonComponent;
+    @ViewChild('dropdownbutton2', { read: DropDownButtonComponent, static: false }) dropdownbutton2!: DropDownButtonComponent;
+    @ViewChild('dropdownbutton3', { read: DropDownButtonComponent, static: false }) dropdownbutton3!: DropDownButtonComponent;
+    @ViewChild('dropdownbutton4', { read: DropDownButtonComponent, static: false }) dropdownbutton4!: DropDownButtonComponent;
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
-	    
-    
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
+
         const listMenuDataSource = [
             {
                 label: 'OSI',
@@ -134,8 +134,12 @@ export class AppComponent implements AfterViewInit, OnInit {
                 ]
             }
         ];
-        document.querySelector('smart-list-menu').dataSource = listMenuDataSource;
-    
 
-	}	
+        const listMenu = document.querySelector('smart-list-menu')
+        
+        if (listMenu) {
+            listMenu.dataSource = listMenuDataSource;
+        }
+
+    }
 }

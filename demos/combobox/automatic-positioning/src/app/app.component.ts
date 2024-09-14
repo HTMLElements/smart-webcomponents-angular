@@ -9,8 +9,8 @@ import { ComboBoxComponent } from '@smart-webcomponents-angular/combobox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox: ComboBoxComponent;
-    @ViewChild('combobox2', { read: ComboBoxComponent, static: false }) combobox2: ComboBoxComponent;
+    @ViewChild('combobox', { read: ComboBoxComponent, static: false }) combobox!: ComboBoxComponent;
+    @ViewChild('combobox2', { read: ComboBoxComponent, static: false }) combobox2!: ComboBoxComponent;
 
 
     ngOnInit(): void {

@@ -10,11 +10,11 @@ import { SplitterComponent, SplitterResizeMode } from '@smart-webcomponents-angu
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-	@ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-	@ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4: RadioButtonComponent;
-	@ViewChild('splitter', { read: SplitterComponent, static: false }) splitter: SplitterComponent;
+	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+	@ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+	@ViewChild('radiobutton4', { read: RadioButtonComponent, static: false }) radiobutton4!: RadioButtonComponent;
+	@ViewChild('splitter', { read: SplitterComponent, static: false }) splitter!: SplitterComponent;
 
 
 	ngOnInit(): void {
@@ -36,8 +36,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 			radioButtons[i].addEventListener('change', function (event: CustomEvent): void {
 				const el: HTMLElement = event.target as HTMLElement;
 
-				that.splitter.resizeMode = el.textContent.trim() as SplitterResizeMode;
-			});
+				that.splitter.resizeMode = el?.textContent?.trim() as SplitterResizeMode;
+			} as EventListener);
 		}
 	}
 }

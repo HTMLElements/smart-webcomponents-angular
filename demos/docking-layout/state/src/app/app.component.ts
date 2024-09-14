@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayout';
 import { GaugeComponent, Gauge } from '@smart-webcomponents-angular/gauge';
@@ -8,7 +8,6 @@ import { ProgressBarComponent, ProgressBar } from '@smart-webcomponents-angular/
 import { CarouselComponent, Carousel } from '@smart-webcomponents-angular/carousel';
 
 
-
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -16,11 +15,11 @@ import { CarouselComponent, Carousel } from '@smart-webcomponents-angular/carous
     encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
     @ViewChild('dockingLayout', { read: DockingLayoutComponent, static: false })
-    dockingLayout: DockingLayoutComponent;
+    dockingLayout!: DockingLayoutComponent;
 
-    currentState;
+    currentState: any;
 
     initializeLayout(event: any) {
         const that = this,
@@ -155,7 +154,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         carousel.swipe = true;
         carousel.slideShow = true;
         carousel.loop = true;
-        carousel.indicators = true;
+        carousel['indicators'] = true;
         carousel.keyboard = true;
         multiLineTextBox.value =
             'What is Lorem Ipsum? \n\n' +
@@ -168,38 +167,40 @@ export class AppComponent implements AfterViewInit, OnInit {
         progressBar1.showProgressValue = true;
         progressBar2.showProgressValue = true;
 
-        gauge1.addEventListener('change', function (event: CustomEvent) {
+        const gauge1ChangeHandler = (event: CustomEvent) => {
             progressBar1.value = event.detail.value;
-        });
+        }
 
-        gauge2.addEventListener('change', function (event: CustomEvent) {
+        const gauge2ChangeHandler = (event: CustomEvent) => {
             progressBar2.value = event.detail.value;
-        });
+        }
+
+        gauge1.addEventListener('change', gauge1ChangeHandler as EventListener);
+
+        gauge2.addEventListener('change', gauge2ChangeHandler as EventListener);
 
         if (dockingLayout.items.length > 0) {
             dockingLayout.nativeElement
                 .querySelector('#tabItem10')
-                .appendChild(progressBar1);
+                ?.appendChild(progressBar1);
             dockingLayout.nativeElement
                 .querySelector('#tabItem10')
-                .appendChild(progressBar2);
+                ?.appendChild(progressBar2);
             dockingLayout.nativeElement
                 .querySelector('#tabItem7')
-                .appendChild(gauge1);
+                ?.appendChild(gauge1);
             dockingLayout.nativeElement
                 .querySelector('#tabItem8')
-                .appendChild(gauge2);
+                ?.appendChild(gauge2);
             dockingLayout.nativeElement
                 .querySelector('#tabItem6')
-                .appendChild(carousel);
+                ?.appendChild(carousel);
             dockingLayout.nativeElement
                 .querySelector('#tabItem2')
-                .appendChild(multiLineTextBox);
-            dockingLayout.nativeElement.querySelector('#tabItem1').appendChild(tank);
+                ?.appendChild(multiLineTextBox);
+            dockingLayout.nativeElement.querySelector('#tabItem1')?.appendChild(tank);
 
-            gauge1.addEventListener('change', function (event: CustomEvent): void {
-                progressBar1.value = event.detail.value;
-            });
+            gauge1.addEventListener('change', gauge1ChangeHandler as EventListener);
         }
 
         dockingLayout.getJSONStructure().then((state) => {

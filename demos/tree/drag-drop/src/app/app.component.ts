@@ -10,9 +10,9 @@ import { TreeComponent } from '@smart-webcomponents-angular/tree';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox: MultilineTextBoxComponent;
-    @ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
-    @ViewChild('tree2', { read: TreeComponent, static: false }) tree2: TreeComponent;
+    @ViewChild('multilinetextbox', { read: MultilineTextBoxComponent, static: false }) multilinetextbox!: MultilineTextBoxComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
+    @ViewChild('tree2', { read: TreeComponent, static: false }) tree2!: TreeComponent;
 
 
     ngOnInit(): void {

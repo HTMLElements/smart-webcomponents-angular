@@ -9,7 +9,7 @@ import { TableComponent } from '@smart-webcomponents-angular/table';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     chemicalElementsData = [
         { number: 1, name: 'Hydrogen', symbol: 'H', weight: 1.008, abundance: 1400 },
@@ -51,13 +51,13 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Атомен номер', dataField: 'number', dataType: 'number' },
         {
             label: 'Име', dataField: 'name', dataType: 'string', transform: (value: any) => {
-                return this.dictionary[value];
+                return this.dictionary[value as keyof typeof this.dictionary];
             }
         },
         { label: 'Химичен знак', dataField: 'symbol', dataType: 'string' },
         { label: 'Относителна атомна маса', dataField: 'weight', dataType: 'number' },
         {
-            label: 'Изобилие', dataField: 'abundance', dataType: 'number', formatFunction(settings) {
+            label: 'Изобилие', dataField: 'abundance', dataType: 'number', formatFunction(settings: any) {
                 settings.template = settings.value + ' мг/кг';
             }
         }

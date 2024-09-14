@@ -10,8 +10,8 @@ import { TreeComponent, TreeItem, TreeItemsGroup } from '@smart-webcomponents-an
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('menu', { read: MenuComponent, static: false }) menu: MenuComponent;
-    @ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
+    @ViewChild('menu', { read: MenuComponent, static: false }) menu!: MenuComponent;
+    @ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
 
     ngOnInit(): void {
         // onInit code.
@@ -32,8 +32,12 @@ export class AppComponent implements AfterViewInit, OnInit {
         tree.addEventListener('contextmenu', function (event: MouseEvent) {
             const target = event.target as HTMLElement;
 
-            item = target.closest('smart-tree-item');
-            itemGroup = target.closest('smart-tree-items-group');
+            if (target.closest('smart-tree-item')) {
+                item = target.closest('smart-tree-item')!;
+            }
+            if (target.closest('smart-tree-items-group')) {
+                itemGroup = target.closest('smart-tree-items-group')!;
+            }
 
             if (!item && !itemGroup) {
                 return;
@@ -56,7 +60,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             //Open Smart.Menu
             menu.open(event.pageX, event.pageY);
-        });
+        } as EventListener);
 
         menu.addEventListener('itemClick', function (event: CustomEvent): void {
             const eventDetail = event.detail,
@@ -68,12 +72,14 @@ export class AppComponent implements AfterViewInit, OnInit {
                     const newItem = document.createElement('smart-tree-item') as TreeItem;
 
                     newItem.label = 'New item';
+                    //@ts-ignore
                     tree[methodName](newItem, methodName === 'addTo' ? itemGroup : (item || itemGroup));
                     break;
                 case 'removeItem':
+                    //@ts-ignore
                     tree[methodName](item || itemGroup);
                     break;
             }
-        });
+        } as EventListener);
     }
 }

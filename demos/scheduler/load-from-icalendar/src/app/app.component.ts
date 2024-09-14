@@ -10,7 +10,7 @@ import { SchedulerComponent, SchedulerTimelineDayScale, SchedulerViews, Schedule
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
     dataSource = new window.Smart.DataAdapter({
         dataSource: './../../../src/scheduler/load-from-icalendar/icalendar.ics',

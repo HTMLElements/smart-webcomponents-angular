@@ -10,7 +10,7 @@ import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     collapsible = true;
     dataSource = [

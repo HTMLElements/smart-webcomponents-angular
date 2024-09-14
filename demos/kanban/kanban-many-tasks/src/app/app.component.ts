@@ -10,12 +10,14 @@ import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
-    getKanbanDataItems(locale = 'en') {
+    getKanbanDataItems(locale: keyof {
+        en: string[];
+    } = 'en') {
         var firstNames = ["Nancy", "Andrew", "Johnny", "Maya", "Steven", "Mark", "Monica", "Laura", "Anne"];
         var lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth"];
-    
+
         const text = {
             en: [
                 'Research', 'Displaying data from data source', 'Showing cover and title', 'Property validation',
@@ -28,7 +30,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             tags = {
                 en: ['initial', 'data', 'visual', 'property', 'scrolling', 'method']
             },
-            data = [
+            data: any = [
                 {
                     id: 0,
                     status: 'done',
@@ -39,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     userId: 2,
                     startDate: null,
                     dueDate: null
-    
+
                 }, {
                     id: 1,
                     status: 'done',
@@ -236,10 +238,10 @@ export class AppComponent implements AfterViewInit, OnInit {
                 'Curabitur at accumsan metus, rhoncus porttitor ligula.',
                 'Nulla sodales faucibus accumsan.'
             ];
-    
+
         for (let i = 0; i < data.length; i++) {
             const task = data[i];
-    
+
             if (task.status === 'inProgress') {
                 task.startDate = new Date(time - Math.floor(Math.random() * 9 + 1) * msInDay);
             }
@@ -249,7 +251,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             else if (task.status === 'done') {
                 task.startDate = new Date(time - Math.floor(Math.random() * 20 + 20) * msInDay);
             }
-    
+
             if (task.priority === 'high' && task.status !== 'done') {
                 task.dueDate = new Date(time - Math.floor(Math.random() * 3 + 1) * msInDay);
             }
@@ -262,15 +264,15 @@ export class AppComponent implements AfterViewInit, OnInit {
             else {
                 task.dueDate = new Date(time + msInMonth + Math.floor(Math.random() * 2 + 1) * msInDay);
             }
-    
+
             let numberOfComments = Math.round(Math.random() * 3);
-    
+
             if (Math.round(Math.random() + 1) === 2) {
                 let prevTime = time - Math.floor(Math.random() * 10 + 3) * msInDay;
-    
+
                 for (let j = 0; j < numberOfComments; j++) {
                     prevTime = prevTime + Math.floor(Math.random() * 2 + 1) * msInDay + msInDay / Math.floor(Math.random() * 5 + 1);
-    
+
                     task.comments?.push({
                         text: comments[Math.round(Math.random() * 5)],
                         userId: Math.round(Math.random() * 4),
@@ -279,21 +281,21 @@ export class AppComponent implements AfterViewInit, OnInit {
                 }
             }
         }
-    
+
         return data;
     }
-    
+
     getKanbanData() {
-        let data = [];
+        let data: any = [];
         for (let i = 0; i < 630; i++) {
             data = data.concat(this.getKanbanDataItems());
         }
-    
+
         for (let i = 0; i < data.length; i++) {
             data[i].id = i;
             data[i].text = data[i].text + i;
         }
-    
+
         return data;
     }
 
@@ -326,8 +328,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
-
-
     }
 }

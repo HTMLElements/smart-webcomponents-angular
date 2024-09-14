@@ -9,7 +9,7 @@ import { TableComponent } from '@smart-webcomponents-angular/table';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     chemicalElementsData = [
         { number: 1, name: 'Hydrogen', symbol: 'H', weight: 1.008, abundance: 1400 },
@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 const direction = directions[i], directionCoefficient = direction === undefined || direction === 'asc' || direction === 'ascending' ? 1 : -1;
                 let result: number;
                 if (sortColumns[i] === 'name') {
-                    const localizedA = dictionary[a.name], localizedB = dictionary[b.name];
+                    const localizedA = dictionary[a.name as keyof typeof dictionary], localizedB = dictionary[b.name as keyof typeof dictionary];
                     result = new Intl.Collator().compare(localizedA, localizedB);
                 }
                 else {
@@ -72,35 +72,37 @@ export class AppComponent implements AfterViewInit, OnInit {
                 }
                 return result * directionCoefficient;
             }
+
+            return
         });
     };
-    columns = [
+    columns: any = [
         { label: 'Ordnungszahl', dataField: 'number', dataType: 'number' },
         {
-            label: 'Name', dataField: 'name', dataType: 'string', formatFunction: (settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template?: any }) => {
-                settings.template = this.dictionary[settings.value];
+            label: 'Name', dataField: 'name', dataType: 'string', formatFunction: (settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template: any }) => {
+                settings.template = this.dictionary[settings.value as keyof typeof this.dictionary];
             }
         },
         { label: 'Symbol', dataField: 'symbol', dataType: 'string' },
         { label: 'Atommasse', dataField: 'weight', dataType: 'number' },
         {
-            label: 'Fülle', dataField: 'abundance', dataType: 'number', formatFunction(settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template?: any }) {
-                settings.template = settings.value + ' mg/kg';
-            }
+            label: 'Fülle', dataField: 'abundance', dataType: 'number', formatFunction(settings: { value: any, row: string | number, column: string, cell: HTMLTableCellElement, template: any }) {
+            settings.template = settings.value + ' mg/kg';
+        }
         }
     ];
 
-    ngOnInit(): void {
-        // onInit code.
-    }
+ngOnInit(): void {
+    // onInit code.
+}
 
-    ngAfterViewInit(): void {
-        // afterViewInit code.
-        this.init();
-    }
+ngAfterViewInit(): void {
+    // afterViewInit code.
+    this.init();
+}
 
-    init(): void {
-        // init code.
-        this.table.sortBy('name', 'desc');
-    }
+init(): void {
+    // init code.
+    this.table.sortBy('name', 'desc');
+}
 }

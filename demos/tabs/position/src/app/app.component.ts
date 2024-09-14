@@ -10,14 +10,14 @@ import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton: RadioButtonComponent;
-	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2: RadioButtonComponent;
-	@ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3: RadioButtonComponent;
-	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
-	@ViewChild('tabs2', { read: TabsComponent, static: false }) tabs2: TabsComponent;
-	@ViewChild('tabs3', { read: TabsComponent, static: false }) tabs3: TabsComponent;
-	@ViewChild('tabs4', { read: TabsComponent, static: false }) tabs4: TabsComponent;
-	@ViewChild('tabs5', { read: TabsComponent, static: false }) tabs5: TabsComponent;
+	@ViewChild('radiobutton', { read: RadioButtonComponent, static: false }) radiobutton!: RadioButtonComponent;
+	@ViewChild('radiobutton2', { read: RadioButtonComponent, static: false }) radiobutton2!: RadioButtonComponent;
+	@ViewChild('radiobutton3', { read: RadioButtonComponent, static: false }) radiobutton3!: RadioButtonComponent;
+	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
+	@ViewChild('tabs2', { read: TabsComponent, static: false }) tabs2!: TabsComponent;
+	@ViewChild('tabs3', { read: TabsComponent, static: false }) tabs3!: TabsComponent;
+	@ViewChild('tabs4', { read: TabsComponent, static: false }) tabs4!: TabsComponent;
+	@ViewChild('tabs5', { read: TabsComponent, static: false }) tabs5!: TabsComponent;
 
 
 	ngOnInit(): void {

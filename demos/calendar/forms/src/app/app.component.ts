@@ -7,8 +7,8 @@ export class Hero {
 		public id: number,
 		public name: string,
 		public power: string,
-		public age?: Date,
-		public alterEgo?: string
+		public age: Date,
+		public alterEgo: string
 	) { }
 
 }
@@ -20,7 +20,7 @@ export class Hero {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('power', { read: DropDownListComponent, static: false }) power: DropDownListComponent;
+	@ViewChild('power', { read: DropDownListComponent, static: false }) power!: DropDownListComponent;
 
 	powers = ['Really Smart', 'Super Flexible',
 		'Super Hot', 'Weather Changer'];
@@ -45,7 +45,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	newHero() {
-		this.model = new Hero(42, '', '');
+		this.model = new Hero(42, '', '', new Date(), '');
 	}
 
 	get diagnostic() {

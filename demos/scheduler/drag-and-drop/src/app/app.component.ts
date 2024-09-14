@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerViewType, SchedulerEvent, SchedulerViews, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
     selector: 'app-root',
@@ -9,8 +9,8 @@ import { SchedulerComponent, SchedulerViewType, SchedulerViews, SchedulerTimelin
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
-    @ViewChild('scheduler2', { read: SchedulerComponent, static: false }) scheduler2: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
+    @ViewChild('scheduler2', { read: SchedulerComponent, static: false }) scheduler2!: SchedulerComponent;
 
     getData(id: string): object[] {
         const today = new Date(),
@@ -90,7 +90,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: SchedulerViewType = 'week';
 
-    dataSource: any[] = this.getData('scheduler');
+    dataSource: SchedulerEvent[] = this.getData('scheduler');
 
     views: SchedulerViews = ['day', 'week', 'month'];
 
@@ -98,7 +98,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     timelineDayScale: SchedulerTimelineDayScale = 'halfHour';
 
-    dataSource2: any[] = this.getData('scheduler2');
+    dataSource2: SchedulerEvent[] = this.getData('scheduler2');
 
     ngOnInit(): void {
         // onInit code.

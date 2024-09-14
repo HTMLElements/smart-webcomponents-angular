@@ -9,7 +9,7 @@ import { DropDownButtonComponent } from '@smart-webcomponents-angular/dropdownbu
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton: DropDownButtonComponent;
+    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton!: DropDownButtonComponent;
 
 
     ngOnInit(): void {

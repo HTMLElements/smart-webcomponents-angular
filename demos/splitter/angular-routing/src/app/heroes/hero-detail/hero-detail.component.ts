@@ -1,4 +1,4 @@
-import { switchMap } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -19,13 +19,17 @@ export class HeroDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private service: HeroService
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.hero$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.service.getHero(params.get('id')))
+        this.service.getHero(params.get('id') || 0)
+      ),
+      filter((hero): hero is Hero => !!hero),
     );
+  }
+
+  ngOnInit() {
+
   }
 
   gotoHeroes(event: CustomEvent, hero: Hero) {

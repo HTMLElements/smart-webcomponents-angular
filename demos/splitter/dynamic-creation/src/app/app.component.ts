@@ -10,7 +10,7 @@ import { SplitterComponent, SplitterItem } from '@smart-webcomponents-angular/sp
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter: SplitterComponent;
+    @ViewChild('splitter', { read: SplitterComponent, static: false }) splitter!: SplitterComponent;
 
 
     ngOnInit(): void {
@@ -28,8 +28,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         const splitter = document.querySelector('smart-splitter');
         let counter = 2;
 
-        splitter.addEventListener('dblclick', function (event: CustomEvent): void {
-            const splitterItem: SplitterItem = (<HTMLElement>event.target).closest('smart-splitter-item');
+        splitter?.addEventListener('dblclick', function (event: CustomEvent): void {
+            const splitterItem: SplitterItem | null = (<HTMLElement>event.target)
+                .closest('smart-splitter-item');
 
             if (splitterItem) {
                 const splitterItemNumber = parseFloat('' + splitterItem.textContent);
@@ -38,10 +39,10 @@ export class AppComponent implements AfterViewInit, OnInit {
                     '<smart-splitter-item>' + splitterItem.innerHTML + '</smart-splitter-item>' +
                     '<smart-splitter-item>New Item' + '</smart-splitter-item>' +
                     '</smart-splitter>';
-                    
+
                 counter = splitterItemNumber;
             }
-        });
+        } as EventListener);
 
 
     }

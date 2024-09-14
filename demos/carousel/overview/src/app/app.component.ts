@@ -1,31 +1,35 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { CarouselComponent } from '@smart-webcomponents-angular/carousel';
 
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	
- 
-	ngOnInit(): void {
-		// onInit code.
-	}
+export class AppComponent implements AfterViewInit, OnInit {
 
-	ngAfterViewInit(): void {
-		// afterViewInit code.
-		this.init();
+    @ViewChild('carousel', { read: CarouselComponent, static: false }) carousel!: CarouselComponent;
+
+    ngOnInit(): void {
+        // onInit code.
     }
-		
-	init(): void {
-		// init code.
-	    
-    
-        const basePath = 'https://htmlelements.com/demos/images/', carousel = document.querySelector('smart-carousel');
-        carousel.dataSource = generateDataSource(6);
-        function generateDataSource(items) {
+
+    ngAfterViewInit(): void {
+        // afterViewInit code.
+        this.init();
+    }
+
+    init(): void {
+        // init code.
+
+
+        const basePath = '../../../src/images/';
+        
+        this.carousel.dataSource = generateDataSource(6);
+
+        function generateDataSource(items: number) {
             const dataSource = Array(items).fill({});
             dataSource.forEach((element, index) => dataSource[index] = {
                 image: `${basePath}carousel-medium-${index + 1}.jpg`,
@@ -34,7 +38,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             });
             return dataSource;
         }
-    
 
-	}	
+
+    }
 }

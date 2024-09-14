@@ -10,9 +10,9 @@ import { Window } from '@smart-webcomponents-angular/window';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date();
 
         today.setHours(0, 0, 0, 0);
@@ -83,8 +83,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             return;
         }
 
-        const scheduler = document.querySelector('smart-scheduler') as Scheduler,
-            events = scheduler.events;
+        const scheduler = document.querySelector('smart-scheduler') as Scheduler
+        const events = scheduler.events || [];
 
         target.footerPosition = 'none';
         target.label = 'Events';
@@ -124,10 +124,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         target.appendChild(container);
     }
 
-    createCard(event: { dateStart: Date, dateEnd: Date, label: string, speaker: string[], image: string } ): HTMLElement {
+    createCard(event: { dateStart: Date, dateEnd: Date, label: string, speaker: string[], image: string }): HTMLElement {
         const token = document.createElement('div'),
             scheduler = document.querySelector('smart-scheduler') as Scheduler,
-            dateTimeObject: any = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+            dateTimeObject = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
         token.classList.add('event-token');
         token.innerHTML = `
@@ -151,11 +151,21 @@ export class AppComponent implements AfterViewInit, OnInit {
             <img class="image"></div>
         </div>`;
 
-        token.querySelector('.date-start').innerHTML = event.dateStart.toLocaleDateString(scheduler.locale, dateTimeObject);
-        token.querySelector('.date-end').innerHTML = event.dateEnd.toLocaleDateString(scheduler.locale, dateTimeObject);
-        token.querySelector('.label').innerHTML = event.label || '';
-        token.querySelector('.speaker').innerHTML = event.speaker ? event.speaker.toString() : '';
-        (<HTMLImageElement>token.querySelector('.image')).src = event.image || '';
+        if (token.querySelector('.date-start')) {
+            token.querySelector('.date-start')!.innerHTML = event.dateStart.toLocaleDateString(scheduler.locale, dateTimeObject as any);
+        }
+        if (token.querySelector('.date-end')) {
+            token.querySelector('.date-end')!.innerHTML = event.dateEnd.toLocaleDateString(scheduler.locale, dateTimeObject as any);
+        }
+        if (token.querySelector('.label')) {
+            token.querySelector('.label')!.innerHTML = event.label || '';
+        }
+        if (token.querySelector('.speaker')) {
+            token.querySelector('.speaker')!.innerHTML = event.speaker ? event.speaker.toString() : '';
+        }
+        if(token.querySelector('.image')) {
+            (<HTMLImageElement>token.querySelector('.image')).src = event.image || '';
+        }
 
         return token;
     }

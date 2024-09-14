@@ -9,11 +9,11 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-  @ViewChild("dropdownlist", { read: DropDownListComponent, static: false })
-  dropdownlist: DropDownListComponent;
-  @ViewChild("calendar", { read: CalendarComponent, static: false })
-  calendar: CalendarComponent;
-  log: string;
+  @ViewChild("dropdownlist", { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+  @ViewChild("calendar", { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+
+  log: string = '';
+
   dataSource = [
     { value: 0, label: "Sunday" },
     { value: 1, label: "Monday" },

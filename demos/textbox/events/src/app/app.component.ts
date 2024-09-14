@@ -9,9 +9,9 @@ import { ButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
-    @ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
+    @ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             textBox.value = label[Math.floor(Math.random() * Math.floor(5))];
 
             //Fire a 'change' event with details
-            textBox.nativeElement.$.fireEvent('change', { newValue: textBox.value, oldValue: oldValue });
+            textBox.nativeElement['$'].fireEvent('change', { newValue: textBox.value, oldValue: oldValue });
         });
     }
 }

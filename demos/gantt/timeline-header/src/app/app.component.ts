@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Button } from '@smart-webcomponents-angular/button';
-import { GanttChartComponent, GanttChart, GanttChartView } from '@smart-webcomponents-angular/ganttchart';
+import { GanttChartComponent, GanttChartView } from '@smart-webcomponents-angular/ganttchart';
 
 
 @Component({
@@ -164,7 +164,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             //Column min size
             size: '30%',
             //Custom format function
-            formatFunction: function (label) {
+            formatFunction: function (label: string) {
                 if (label === 'Learn') {
                     return ' <i class="material-icons">&#xE80C;</i>' + label;
                 }
@@ -192,10 +192,9 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'Date Start',
             value: 'dateStart',
             //Custom format function
-            formatFunction: (date) => {
-                const ganttChart = document.querySelector('smart-gantt-chart');
+            formatFunction: (date: string) => {
 
-                return new Date(date).toLocaleDateString(ganttChart.locale, {});
+                return new Date(date).toLocaleDateString(this.ganttChart.locale, {});
             },
             size: '25%'
         },
@@ -217,23 +216,25 @@ export class AppComponent implements AfterViewInit, OnInit {
     hideResourcePanel: boolean = true;
 
     onReady(event: any): void {
-        const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart,
-            views = ["day" /* Day */, "week" /* Week */, "month" /* Month */, "year" /* Year */];
-        let view = ganttChart.view, stateId = 0, states = { 0: ganttChart.getState() };
 
-        function storeState() {
+        const views = ["day", "week", "month", "year"];
+        let view = this.ganttChart.view;
+        let stateId = 0
+        const states = { 0: this.ganttChart.getState() };
+
+        const storeState = () => {
             stateId++;
-            states[stateId] = ganttChart.getState();
+            states[stateId as keyof typeof states] = this.ganttChart.getState();
             (<Button>document.getElementById('undo')).disabled = false;
         }
 
-        ganttChart.addEventListener('change', storeState);
-        ganttChart.addEventListener('dragEnd', storeState);
-        ganttChart.addEventListener('resizeEnd', storeState);
-        ganttChart.addEventListener('progressChangeEnd', storeState);
-        ganttChart.addEventListener('connectionEnd', storeState);
+        this.ganttChart.addEventListener('change', storeState);
+        this.ganttChart.addEventListener('dragEnd', storeState);
+        this.ganttChart.addEventListener('resizeEnd', storeState);
+        this.ganttChart.addEventListener('progressChangeEnd', storeState);
+        this.ganttChart.addEventListener('connectionEnd', storeState);
 
-        document.querySelector('.header-controls').addEventListener('click', function (event: CustomEvent): void {
+        const headerControlsClick = (event: CustomEvent) => {
             const button = (<HTMLElement>event.target)!.closest('smart-button') as Button;
 
             if (!button) {
@@ -242,12 +243,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             switch (button.id) {
                 case 'view':
-                    if (ganttChart.groupByResources) {
-                        ganttChart.groupByResources = false;
+                    if (this.ganttChart.groupByResources) {
+                        this.ganttChart.groupByResources = false;
                         button.innerHTML = 'show resource view';
                     }
                     else {
-                        ganttChart.groupByResources = true;
+                        this.ganttChart.groupByResources = true;
                         button.innerHTML = 'hide resource view';
                     }
                     break;
@@ -256,7 +257,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     const isZoomIn = button.id === 'zoomIn',
                         maxValue = isZoomIn ? views[views.length - 1] : views[0];
 
-                    ganttChart.view = view = (views[views.indexOf(view) + (isZoomIn ? -1 : 1) * 1] || maxValue) as GanttChartView;
+                    this.ganttChart.view = view = (views[views.indexOf(view) + (isZoomIn ? -1 : 1) * 1] || maxValue) as GanttChartView;
 
                     (<Button>document.getElementById(isZoomIn ? 'zoomOut' : 'zoomIn'))!.disabled = false;
 
@@ -271,24 +272,30 @@ export class AppComponent implements AfterViewInit, OnInit {
                     if (button.id === 'undo') {
                         stateId -= 1;
 
-                        if (states[stateId]) {
-                            ganttChart.loadState(states[stateId]);
+                        if (Boolean(states[stateId as keyof typeof states])) {
+
+                            states[stateId as keyof typeof states]
+                                .then(state => this.ganttChart.loadState(state));
+
                             (<Button>document.getElementById('redo'))!.disabled = false;
                         }
 
-                        if (!states[stateId] || !states[stateId - 1]) {
+                        if (!states[stateId as keyof typeof states] || !states[(stateId - 1) as keyof typeof states]) {
                             button.disabled = true;
                         }
                     }
                     else {
                         stateId += 1;
 
-                        if (states[stateId]) {
-                            ganttChart.loadState(states[stateId]);
+                        if (Boolean(states[stateId as keyof typeof states])) {
+
+                            states[stateId as keyof typeof states]
+                                .then(state => this.ganttChart.loadState(state));
+
                             (<Button>document.getElementById('undo'))!.disabled = false;
                         }
 
-                        if (!states[stateId] || !states[stateId + 1]) {
+                        if (!Boolean(states[stateId as keyof typeof states]) || !states[(stateId + 1) as keyof typeof states]) {
                             button.disabled = true;
                         }
                     }
@@ -296,9 +303,11 @@ export class AppComponent implements AfterViewInit, OnInit {
                     stateId = Math.max(0, Math.min(Object.keys(states).length - 1, stateId));
                     return;
             }
-            
-            ganttChart.ensureVisible(0);
-        });
+
+            this.ganttChart.ensureVisible(0);
+        }
+        document.querySelector('.header-controls')
+            ?.addEventListener('click', headerControlsClick as EventListener);
     }
 
     ngOnInit(): void {

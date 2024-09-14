@@ -10,11 +10,11 @@ import { NumericTextBoxComponent } from '@smart-webcomponents-angular/numerictex
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-	@ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-	@ViewChild('button4', { read: ButtonComponent, static: false }) button4: ButtonComponent;
-	@ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox: NumericTextBoxComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+	@ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+	@ViewChild('button4', { read: ButtonComponent, static: false }) button4!: ButtonComponent;
+	@ViewChild('numerictextbox', { read: NumericTextBoxComponent, static: false }) numerictextbox!: NumericTextBoxComponent;
 	
  
 	ngOnInit(): void {

@@ -11,6 +11,10 @@ smart-gantt-chart {
     }
 }
 
+.demo-description {
+    margin-right: 300px;
+}
+
 .options {
     padding: 20px;
     background-color: rgba(191, 191, 191, .15);
@@ -27,6 +31,10 @@ smart-gantt-chart {
         top: 30px;
         width: 240px;
         margin: 0 auto;
+    }
+
+    .demo-description {
+        margin-right: 0;
     }
 }
 

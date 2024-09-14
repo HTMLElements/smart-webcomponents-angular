@@ -12,8 +12,8 @@ import { GetKanbanData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
-    @ViewChild('window', { read: WindowComponent, static: false }) window: WindowComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
+    @ViewChild('window', { read: WindowComponent, static: false }) window!: WindowComponent;
 
     addNewColumn = true;
     allowColumnRemove = true;
@@ -60,20 +60,24 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        
-    this.kanban.addEventListener('taskDoubleClick', (event: CustomEvent) => {
-        const task = event.detail.value;
 
-        this.window.label = task.text;
-        document.querySelector('smart-window').innerHTML = `Text: ${task.text}<br/><br/>
-Due Date: ${task.dueDate}<br/><br/>
-Tags: ${task.tags}<br/><br/>
-Priority: ${task.priority}<br/><br/>
-<img style="max-width: 100%;" src="https://www.htmlelements.com/demos/images/admin-template.png"/>`
-        this.window.open();
+        this.kanban.addEventListener('taskDoubleClick', ((event: CustomEvent) => {
+            const task = event.detail.value;
 
-        event.preventDefault();
-    })
+            this.window.label = task.text;
+            const window = document.querySelector('smart-window');
+            if (window) {
+                window.innerHTML = `Text: ${task.text}<br/><br/>
+            Due Date: ${task.dueDate}<br/><br/>
+            Tags: ${task.tags}<br/><br/>
+            Priority: ${task.priority}<br/><br/>
+            <img style="max-width: 100%;" src="https://www.htmlelements.com/demos/images/admin-template.png"/>`
+            }
+
+            this.window.open();
+
+            event.preventDefault();
+        }) as EventListener)
 
     }
 }

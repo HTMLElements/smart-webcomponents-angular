@@ -9,9 +9,9 @@ import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2: SliderComponent;
-    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2!: SliderComponent;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
 
 
     ngOnInit(): void {
@@ -30,6 +30,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.togglebutton.addEventListener('change', function (event: CustomEvent) {
             that.slider.showButtons = event.detail.value;
             that.slider2.showButtons = event.detail.value;
-        });
+        } as EventListener);
     }
 }

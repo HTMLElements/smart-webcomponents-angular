@@ -11,16 +11,16 @@ import { GetKanbanData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     collapsible = true;
-  editable = true;
-  columnFooter = true;
-  columnSummary = true;
-  priorityList = false;
-  taskUserIcon = false;
-  taskPriority = false;
-  onTaskRender = (task, data) => {
+    editable = true;
+    columnFooter = true;
+    columnSummary = true;
+    priorityList = false;
+    taskUserIcon = false;
+    taskPriority = false;
+    onTaskRender = (task: any, data: any) => {
         let color = '';
         switch (data.Name) {
             case 'Michelangelo': {
@@ -47,7 +47,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         task.style.background = color;
         task.style.color = '#fff';
     };
-  dialogRendered = (dialog, editors, labels, tabs, layout) => {
+    dialogRendered = (dialog: any, editors: any, labels: any, tabs: any, layout: any) => {
         // hides the tabs in the kanban.
         tabs['all'].style.display = 'none';
 
@@ -72,21 +72,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
         }
     };
-  localizeFormatFunction = (defaultMessage, message, messageArguments, messageKey) => {
-        if (messageKey === 'tasksSummary') {
-            const summary = messageArguments['summary'];
-            return summary > 1 ? summary + ' Artists' : summary + ' Artist';
-        }
-
-        if (messageKey === 'status') {
-            return 'Continent';
-        }
-
-        if (messageKey === 'description') {
-            return 'Bio';
-        }
-    };
-  dataSourceMap = {
+    dataSourceMap: any = {
         'checklist': 'checklist',
         'color': 'color',
         'comments': 'comments',
@@ -106,9 +92,8 @@ export class AppComponent implements AfterViewInit, OnInit {
         'status': 'Continent',
         'text': 'Name',
         'description': 'Bio',
-
     };
-  dataSource = [
+    dataSource: any = [
         {
             Name: 'Michelangelo',
             Country: 'Italy',
@@ -160,7 +145,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             Paintings: 'https://upload.wikimedia.org/wikipedia/commons/4/47/Svetogorska_legenda_1926.jpg,https://upload.wikimedia.org/wikipedia/commons/9/93/Ahinora_1922_%28Anna_Orozova_model%29.jpg'
         }
     ];
-  taskCustomFields = [
+    taskCustomFields = [
         {
             label: 'Paintings',
             dataField: 'Paintings',
@@ -189,21 +174,21 @@ export class AppComponent implements AfterViewInit, OnInit {
             dataField: 'Country'
         }
     ];
-  allowColumnEdit = true;
-  allowColumnReorder = true;
-  taskActions = false;
-  taskDue = false;
-  taskComments = true;
-  currentUser = 0;
-  taskProgress = false;
-  users = [
+    allowColumnEdit = true;
+    allowColumnReorder = true;
+    taskActions = false;
+    taskDue = false;
+    taskComments = true;
+    currentUser = 0;
+    taskProgress = false;
+    users = [
         { id: 0, name: 'Andrew', image: 'https://htmlelements.com/demos/images/people/andrew.png' },
         { id: 1, name: 'Anne', image: 'https://htmlelements.com/demos/images/people/anne.png' },
         { id: 2, name: 'Janet', image: 'https://htmlelements.com/demos/images/people/janet.png' },
         { id: 3, name: 'John', image: 'https://htmlelements.com/demos/images/people/john.png' },
         { id: 4, name: 'Laura', image: 'https://htmlelements.com/demos/images/people/laura.png' }
     ];
-  columns = [
+    columns = [
         { color: '#33B679', label: 'Europe', dataField: 'Europe', allowHide: false },
         { color: '#8E24AA', label: 'Asia', dataField: 'Asia', allowHide: false }
     ]

@@ -9,7 +9,7 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
         dataSource: GetData(10),
@@ -22,9 +22,9 @@ export class AppComponent implements AfterViewInit, OnInit {
         ]
     });
 
-    editing: Boolean = true;
+    editing: boolean = true;
 
-    editMode: String = 'cell';
+    editMode: string = 'cell';
 
     columns: TableColumn[] = [{
         label: 'id',
@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         label: 'Product Name',
         dataField: 'productName',
         dataType: 'string',
-        validation(value: String) {
+        validation(value: string) {
             if (value === '') {
                 return {
                     message: 'Product name is required!'

@@ -4,29 +4,37 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
+	selector: 'app-root',
+	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-	
- 
+export class AppComponent implements AfterViewInit, OnInit {
+	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+
+
 	ngOnInit(): void {
 		// onInit code.
+		const template = document.createElement('template');
+		template.id="templateWithButtons"
+		template.innerHTML = `
+			<div id="buttonContainer">
+				<smart-button class="flat primary">CANCEL</smart-button>
+				<smart-button class="flat primary">OK</smart-button>
+			</div>
+		`
+
+		document.body.appendChild(template);
 	}
 
 	ngAfterViewInit(): void {
 		// afterViewInit code.
 		this.init();
-    }
-		
+	}
+
 	init(): void {
 		// init code.
-	    
 
-	}	
+
+	}
 }

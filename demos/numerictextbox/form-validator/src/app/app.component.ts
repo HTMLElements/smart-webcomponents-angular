@@ -29,7 +29,7 @@ export class Shipment {
 
 export class AppComponent implements AfterViewInit, OnInit {
 	productType = ['Bananas', 'Oranges', 'Coffee', 'Sugar', 'Cocoa', 'Spices', 'Silk'];
-	model = new Shipment(this.productType[2], '552  Whitetail Lane, Dallas, TX', null);
+	model = new Shipment(this.productType[2], '552  Whitetail Lane, Dallas, TX', '');
 	submitted = false;
 
 	onSubmit() { this.submitted = true; }
@@ -48,7 +48,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	newShipment() {
-		this.model = new Shipment('', '', null);
+		this.model = new Shipment('', '', '');
 	}
 
 	get diagnostic() { return JSON.stringify(this.model); }

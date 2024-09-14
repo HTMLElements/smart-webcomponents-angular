@@ -9,9 +9,9 @@ import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-	@ViewChild('minInput', { read: ElementRef<HTMLInputElement>, static: false }) minInput: ElementRef<HTMLInputElement>;
-	@ViewChild('maxInput', { read: ElementRef<HTMLInputElement>, static: false }) maxInput: ElementRef<HTMLInputElement>;
+	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+	@ViewChild('minInput', { read: ElementRef<HTMLInputElement>, static: false }) minInput!: ElementRef<HTMLInputElement>;
+	@ViewChild('maxInput', { read: ElementRef<HTMLInputElement>, static: false }) maxInput!: ElementRef<HTMLInputElement>;
 
 	minYear = (new Date()).getFullYear() - 1;
 	min = `${this.minYear}, 7, 1`
@@ -36,10 +36,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 		that.minInput.nativeElement.addEventListener('change', function (event: CustomEvent) {
 			that.calendar.min = that.minInput.nativeElement.value;
-		});
+		} as EventListenerOrEventListenerObject);
 
 		that.maxInput.nativeElement.addEventListener('change', function (event: CustomEvent) {
 			that.calendar.max = that.maxInput.nativeElement.value;
-		});
+		} as EventListenerOrEventListenerObject);
 	}
 }

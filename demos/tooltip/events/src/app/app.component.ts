@@ -10,9 +10,9 @@ import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('powerButton', { read: PowerButtonComponent, static: false }) powerButton: PowerButtonComponent;
-    @ViewChild('tooltip', { read: TooltipComponent, static: false }) tooltip: TooltipComponent;
-    @ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+    @ViewChild('powerButton', { read: PowerButtonComponent, static: false }) powerButton!: PowerButtonComponent;
+    @ViewChild('tooltip', { read: TooltipComponent, static: false }) tooltip!: TooltipComponent;
+    @ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
 
     ngOnInit(): void {
@@ -41,6 +41,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         that.powerButton.addEventListener('change', function (event: CustomEvent): void {
             tooltip.nativeElement.innerHTML = 'PowerButton is: ' + (event.detail.value ? "ON" : "OFF");
-        });
+        } as EventListener);
     }
 }

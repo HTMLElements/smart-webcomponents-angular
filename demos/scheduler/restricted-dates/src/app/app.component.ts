@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { DateTimePicker } from '@smart-webcomponents-angular/datetimepicker';
+import { DateTimePicker } from '@smart-webcomponents-angular';
 import { SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
@@ -11,7 +11,7 @@ import { SchedulerComponent, SchedulerEvent, SchedulerViewType } from '@smart-we
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
     today = new Date();
     currentDate = this.today.getDate();
@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     targetEvent: SchedulerEvent | undefined;
     eventEditors: {dateStart: HTMLElement, dateEnd: HTMLElement} | undefined;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         return [
             {
                 label: 'Google AdWords Strategy',
@@ -145,7 +145,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         this.targetEvent = undefined;
     }
 
-    checkEventEdit() {
+    async checkEventEdit() {
         if (!this.targetEvent || !this.eventEditors) {
             return;
         }
@@ -153,7 +153,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const dateStart = (<DateTimePicker>this.eventEditors.dateStart.querySelector('[event-editor]')).value.toDate(),
             dateEnd = (<DateTimePicker>this.eventEditors.dateEnd.querySelector('[event-editor]')).value.toDate();
 
-        if (this.scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
+        if (await this.scheduler.isEventRestricted({ dateStart: dateStart, dateEnd: dateEnd })) {
             this.openNotification();
         }
     }

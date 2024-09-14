@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 
 import 'smart-webcomponents-angular/element';
 
@@ -8,8 +8,7 @@ import 'smart-webcomponents-angular/source/smart.core.js';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
-	encapsulation: ViewEncapsulation.None
+	styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -31,5 +30,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
+
+
+
+
+
 	}
 }

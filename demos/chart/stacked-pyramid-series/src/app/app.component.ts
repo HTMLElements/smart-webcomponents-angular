@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { ChartComponent } from '@smart-webcomponents-angular/chart';
+import { ChartComponent, ChartSeriesGroup, ChartSeriesGroupSerie } from '@smart-webcomponents-angular/chart';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ChartComponent } from '@smart-webcomponents-angular/chart';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
 
     sampleData = [
         { Period: 'January 2019', 'Marvel Comics': 39.24, DC: 29.7, 'Image Comics': 7.56, 'Dark Horse Comics': 3.95, 'IDW Publishing': 3.65, 'BOOM! Studios': 2.32 }
@@ -28,7 +28,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         visible: false
     };
     colorScheme = 'scheme29';
-    seriesGroups = [
+    seriesGroups: ChartSeriesGroup[] = [
         {
             type: 'stackedcolumn',
             columnsGapPercent: 50,
@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             columnsBottomWidthPercent: 100,
             columnsMinWidth: 600,
             formatSettings: { sufix: '%' },
-            toolTipFormatFunction: function (value, index, series) {
+            toolTipFormatFunction: function (value?: any, index?: number | undefined, series?: any) {
                 return series.dataField + ': ' + value + '%';
             },
             series: [

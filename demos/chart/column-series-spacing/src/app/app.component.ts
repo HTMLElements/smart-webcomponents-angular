@@ -11,17 +11,17 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2: SliderComponent;
-    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3: SliderComponent;
-    @ViewChild('slider4', { read: SliderComponent, static: false }) slider4: SliderComponent;
-    @ViewChild('slider5', { read: SliderComponent, static: false }) slider5: SliderComponent;
-    @ViewChild('slider6', { read: SliderComponent, static: false }) slider6: SliderComponent;
-    @ViewChild('slider7', { read: SliderComponent, static: false }) slider7: SliderComponent;
-    @ViewChild('slider8', { read: SliderComponent, static: false }) slider8: SliderComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2!: SliderComponent;
+    @ViewChild('slider3', { read: SliderComponent, static: false }) slider3!: SliderComponent;
+    @ViewChild('slider4', { read: SliderComponent, static: false }) slider4!: SliderComponent;
+    @ViewChild('slider5', { read: SliderComponent, static: false }) slider5!: SliderComponent;
+    @ViewChild('slider6', { read: SliderComponent, static: false }) slider6!: SliderComponent;
+    @ViewChild('slider7', { read: SliderComponent, static: false }) slider7!: SliderComponent;
+    @ViewChild('slider8', { read: SliderComponent, static: false }) slider8!: SliderComponent;
 
     sampleData = [
         { Position: 0, Serie1: 30, Serie2: 5, Serie3: 25, Serie4: 30, Serie5: 10, Serie6: 5 },
@@ -123,44 +123,44 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (that.chart.seriesGroups && that.chart.seriesGroups[0]) {
                 that.chart.seriesGroups[0].columnsGapPercent = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider2.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[1]) {
                 that.chart.seriesGroups[1].columnsGapPercent = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         // series spacing
         that.slider3.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[0]) {
                 that.chart.seriesGroups[0].seriesGapPercent = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider4.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[1]) {
                 that.chart.seriesGroups[1].seriesGapPercent = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         // min column width
         that.slider5.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[0]) {
                 that.chart.seriesGroups[0].columnsMinWidth = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider6.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[1]) {
                 that.chart.seriesGroups[1].columnsMinWidth = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         // max column width
         that.slider7.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[0]) {
                 that.chart.seriesGroups[0].columnsMaxWidth = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider8.addEventListener('change', function (event: CustomEvent) {
             if (that.chart.seriesGroups && that.chart.seriesGroups[1]) {
                 that.chart.seriesGroups[1].columnsMaxWidth = event.detail.value;
             }
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

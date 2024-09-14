@@ -50,9 +50,11 @@ export class AppComponent implements AfterViewInit, OnInit {
                 dropDownList.select(value.toString());
             },
             getCustomEditorValue: function (editor: HTMLElement): string {
-                const dropDownList = editor.querySelector('smart-drop-down-list') as DropDownList;
+                const dropDownList = editor.querySelector('smart-drop-down-list')! as DropDownList;
 
-                return dropDownList.selectedValues[0];
+                const selectedValues = dropDownList.selectedValues![0] || '';
+
+                return selectedValues;
             }
         }
     ];

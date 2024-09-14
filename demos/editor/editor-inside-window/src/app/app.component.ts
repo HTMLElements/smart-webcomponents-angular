@@ -12,9 +12,9 @@ import { EditorComponent } from '@smart-webcomponents-angular/editor';
 
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('window', { read: WindowComponent, static: false }) window: WindowComponent;
-	@ViewChild('editor', { read: EditorComponent, static: false }) editor: EditorComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('window', { read: WindowComponent, static: false }) window!: WindowComponent;
+	@ViewChild('editor', { read: EditorComponent, static: false }) editor!: EditorComponent;
 	
  
 	ngOnInit(): void {

@@ -9,9 +9,9 @@ import { ProgressBarComponent, CircularProgressBarComponent } from '@smart-webco
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressbar: ProgressBarComponent;
-	@ViewChild('progressbar2', { read: ProgressBarComponent, static: false }) progressbar2: ProgressBarComponent;
-	@ViewChild('circularProgressBar', { read: CircularProgressBarComponent, static: false }) circularProgressBar: CircularProgressBarComponent;
+	@ViewChild('progressbar', { read: ProgressBarComponent, static: false }) progressbar!: ProgressBarComponent;
+	@ViewChild('progressbar2', { read: ProgressBarComponent, static: false }) progressbar2!: ProgressBarComponent;
+	@ViewChild('circularProgressBar', { read: CircularProgressBarComponent, static: false }) circularProgressBar!: CircularProgressBarComponent;
 
 
 	ngOnInit(): void {

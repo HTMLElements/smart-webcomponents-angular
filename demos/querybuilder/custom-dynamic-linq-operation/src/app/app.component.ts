@@ -10,18 +10,18 @@ import { QueryBuilderComponent } from '@smart-webcomponents-angular/querybuilder
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder: QueryBuilderComponent;
-    @ViewChild('linqValue', { read: ElementRef, static: false }) linqValue: QueryBuilderComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('querybuilder', { read: QueryBuilderComponent, static: false }) querybuilder!: QueryBuilderComponent;
+    @ViewChild('linqValue', { read: ElementRef, static: false }) linqValue!: QueryBuilderComponent;
     items: string[] = [
-    'operatorObject["Michael"].Contains("employee") && (programName.StartsWith("SpaceX") && price < @minPrice && price < 100)',
-    '(partNumber = "PN-5478" && programName = "Voltage Test") && (startedWithin <="90.00:00:00" operator.Contains( "John" ))',
-    '>(productName.StartsWith("ABC"))',
-    '(price = "25" || id.Any(!it.Contains("Alpha"))) && productName.StartsWith("ABC") ||  productName.StartsWith("W")',
-    '(partNumber = "PN-5478") && (programName = "Voltage Test" && startedWithin <="90.00:00:00") &&  operator.Contains( "John" )',
-    '(asdasd) && price = "25" && sadasda'
-	];
-	
+        'operatorObject["Michael"].Contains("employee") && (programName.StartsWith("SpaceX") && price < @minPrice && price < 100)',
+        '(partNumber = "PN-5478" && programName = "Voltage Test") && (startedWithin <="90.00:00:00" operator.Contains( "John" ))',
+        '>(productName.StartsWith("ABC"))',
+        '(price = "25" || id.Any(!it.Contains("Alpha"))) && productName.StartsWith("ABC") ||  productName.StartsWith("W")',
+        '(partNumber = "PN-5478") && (programName = "Voltage Test" && startedWithin <="90.00:00:00") &&  operator.Contains( "John" )',
+        '(asdasd) && price = "25" && sadasda'
+    ];
+
     ngOnInit(): void {
         // onInit code.
     }
@@ -44,7 +44,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 expressionTemplate: '{0} < {1}',
                 //Determines which arguments from an expression are used for the fieldName and value for the QueryBuilder. 
                 //Used when converting a Linq expression to QuieryBuilder value.
-                expressionReaderCallback: function (expression, bindings) {
+                expressionReaderCallback: function (expression: any, bindings: any) {
                     return { fieldName: bindings[0], value: (bindings[1] === '@minPrice' ? 0 : 100) };
                 }
             },
@@ -73,16 +73,16 @@ export class AppComponent implements AfterViewInit, OnInit {
                 name: 'keyvalue_contains',
                 expressionTemplate: '{0}["{1}"].Contains("{2}")',
                 //Determines the arguments for the Logical statement. Used when converting value to Linq expression
-                expressionBuilderCallback: function (dataField, operation, objValue) {
-                    return this.expressionTemplate.replace('{0}', dataField).replace('{1}', objValue.name).replace('{2}', objValue.occupation);
+                expressionBuilderCallback: function (dataField: string, operation: string, objValue: any) {
+                    return this.expressionTemplate?.replace('{0}', dataField).replace('{1}', objValue.name).replace('{2}', objValue.occupation);
                 },
                 //Determines which arguments from the expression are used for the fieldName and value for the QueryBuilder. 
                 //Used when converting a Linq expression to QuieryBuilder value.
-                expressionReaderCallback: function (expression, bindings) {
+                expressionReaderCallback: function (expression: any, bindings: any) {
                     return { fieldName: bindings[0], value: { name: bindings[1], occupation: bindings[2] } };
                 },
                 //Determines the a custom editor tempalte
-                editorTemplate: function (fieldType, valueObj, fieldData) {
+                editorTemplate: function (fieldType: string, valueObj: any, fieldData: string) {
                     const editor1 = document.createElement('smart-input'), editor2 = document.createElement('smart-input'), label = document.createElement('label'), container = document.createElement('div');
                     container.className = 'container';
                     label.classList.add('custom-label');
@@ -97,11 +97,11 @@ export class AppComponent implements AfterViewInit, OnInit {
                     return container;
                 },
                 //Determines the HTML representation of the editor's value
-                valueTemplate: function (editor, obj) {
+                valueTemplate: function (editor: any, obj: any) {
                     return obj.name + ' is an ' + obj.occupation;
                 },
                 //Determines how the value of editor is handled by the QueryBuilder
-                handleValue: function (editor) {
+                handleValue: function (editor: any) {
                     const editors = editor.getElementsByTagName('smart-input');
                     return {
                         name: editors[0].value, occupation: editors[1].value
@@ -112,21 +112,21 @@ export class AppComponent implements AfterViewInit, OnInit {
                 label: 'Relative Time',
                 name: 'relative_time',
                 expressionTemplate: '{0} <= "{1}"',
-                expressionBuilderCallback: function (dataField, operation, value) {
+                expressionBuilderCallback: function (dataField: string, operation: string, value: any) {
                     let days = Math.abs(new Date().getTime() - value.getTime()) / (1000 * 60 * 60 * 24), hours = Math.floor((days % 1) * 60), minutes = Math.round((hours % 1) * 60), seconds = Math.round((minutes % 1) * 60);
-                    const format = (amount) => amount.toString().length < 2 ? '0' + amount : amount;
-                    return this.expressionTemplate.replace('{0}', dataField).replace('{1}', format(Math.round(days)) + '.' + format(hours) + ':' + format(minutes) + '.' + format(seconds));
+                    const format = (amount: any) => amount.toString().length < 2 ? '0' + amount : amount;
+                    return this.expressionTemplate?.replace('{0}', dataField).replace('{1}', format(Math.round(days)) + '.' + format(hours) + ':' + format(minutes) + '.' + format(seconds));
                 },
-                expressionReaderCallback: function (expression, bindings) {
+                expressionReaderCallback: function (expression: any, bindings: any) {
                     let value = bindings[1], targetDate = new Date();
                     //Timespan type handling
                     if (/([0-9]{2}).([0-9]{2}):([0-9]{2}):([0-9]{2})/gm.test(value)) {
                         let timeSpan = /([0-9]{2}).([0-9]{2}):([0-9]{2}):([0-9]{2})/gm.exec(value);
-                        targetDate.setDate(targetDate.getDate() + parseInt(timeSpan[1]));
+                        targetDate.setDate(targetDate.getDate() + parseInt(timeSpan ? timeSpan![1] : '1'));
                         targetDate.setHours(targetDate.getHours(), 0, 0, 0);
-                        targetDate.setHours(targetDate.getHours() + parseInt(timeSpan[2]));
-                        targetDate.setMinutes(targetDate.getMinutes() + parseInt(timeSpan[3]));
-                        targetDate.setSeconds(targetDate.getSeconds() + parseInt(timeSpan[4]));
+                        targetDate.setHours(targetDate.getHours() + parseInt(timeSpan ? timeSpan![2] : '1'));
+                        targetDate.setMinutes(targetDate.getMinutes() + parseInt(timeSpan ? timeSpan![3] : '1'));
+                        targetDate.setSeconds(targetDate.getSeconds() + parseInt(timeSpan ? timeSpan![4] : '1'));
                     }
                     return { fieldName: bindings[0], value: targetDate };
                 }
@@ -145,7 +145,10 @@ export class AppComponent implements AfterViewInit, OnInit {
         that.querybuilder.showIcons = true;
         that.querybuilder.value = '(partNumber = "PN-5478" && programName = "Voltage Test") && (startedWithin <= "90.00:00:00" || operator.Contains("John"))';
 
-        that.linqValue.nativeElement.innerHTML = that.querybuilder.getLinq();
+        that.querybuilder.getLinq()
+            .then(value => {
+                that.linqValue.nativeElement.innerHTML = value;
+            })
 
         that.querybuilder.addEventListener('change', function (event: any) {
             if (event.target === that.querybuilder.nativeElement) {

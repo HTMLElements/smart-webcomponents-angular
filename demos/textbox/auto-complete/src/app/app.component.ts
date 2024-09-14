@@ -10,11 +10,11 @@ import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('radiobuttonnone', { read: RadioButtonComponent, static: false }) radiobuttonnone: RadioButtonComponent;
-    @ViewChild('radiobuttonauto', { read: RadioButtonComponent, static: false }) radiobuttonauto: RadioButtonComponent;
-    @ViewChild('radiobuttoninline', { read: RadioButtonComponent, static: false }) radiobuttoninline: RadioButtonComponent;
-    @ViewChild('radiobuttonmanual', { read: RadioButtonComponent, static: false }) radiobuttonmanual: RadioButtonComponent;
-    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
+    @ViewChild('radiobuttonnone', { read: RadioButtonComponent, static: false }) radiobuttonnone!: RadioButtonComponent;
+    @ViewChild('radiobuttonauto', { read: RadioButtonComponent, static: false }) radiobuttonauto!: RadioButtonComponent;
+    @ViewChild('radiobuttoninline', { read: RadioButtonComponent, static: false }) radiobuttoninline!: RadioButtonComponent;
+    @ViewChild('radiobuttonmanual', { read: RadioButtonComponent, static: false }) radiobuttonmanual!: RadioButtonComponent;
+    @ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
 
 
     ngOnInit(): void {

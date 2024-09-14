@@ -9,7 +9,7 @@ import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox: TextBoxComponent;
+	@ViewChild('textbox', { read: TextBoxComponent, static: false }) textbox!: TextBoxComponent;
 	
  
 	ngOnInit(): void {

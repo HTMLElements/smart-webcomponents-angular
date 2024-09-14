@@ -11,9 +11,9 @@ import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox: ListBoxComponent;
-	@ViewChild('listbox2', { read: ListBoxComponent, static: false }) listbox2: ListBoxComponent;
-	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs: TabsComponent;
+	@ViewChild('listbox', { read: ListBoxComponent, static: false }) listbox!: ListBoxComponent;
+	@ViewChild('listbox2', { read: ListBoxComponent, static: false }) listbox2!: ListBoxComponent;
+	@ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
 
 
 	ngOnInit(): void {

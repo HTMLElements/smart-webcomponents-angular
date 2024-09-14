@@ -12,14 +12,14 @@ import { TankComponent } from '@smart-webcomponents-angular/tank';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton: DropDownButtonComponent;
-    @ViewChild('radioButtonLeft', { read: RadioButtonComponent, static: false }) radioButtonLeft: RadioButtonComponent;
-    @ViewChild('radioButtonRight', { read: RadioButtonComponent, static: false }) radioButtonRight: RadioButtonComponent;
-    @ViewChild('radioButtonTop', { read: RadioButtonComponent, static: false }) radioButtonTop: RadioButtonComponent;
-    @ViewChild('radioButtonBottom', { read: RadioButtonComponent, static: false }) radioButtonBottom: RadioButtonComponent;
-    @ViewChild('radioButtonDefault', { read: RadioButtonComponent, static: false }) radioButtonDefault: RadioButtonComponent;
-    @ViewChild('radioButtonDropDownButton', { read: RadioButtonComponent, static: false }) radioButtonDropDownButton: RadioButtonComponent;
-    @ViewChild('tank', { read: TankComponent, static: false }) tank: TankComponent;
+    @ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton!: DropDownButtonComponent;
+    @ViewChild('radioButtonLeft', { read: RadioButtonComponent, static: false }) radioButtonLeft!: RadioButtonComponent;
+    @ViewChild('radioButtonRight', { read: RadioButtonComponent, static: false }) radioButtonRight!: RadioButtonComponent;
+    @ViewChild('radioButtonTop', { read: RadioButtonComponent, static: false }) radioButtonTop!: RadioButtonComponent;
+    @ViewChild('radioButtonBottom', { read: RadioButtonComponent, static: false }) radioButtonBottom!: RadioButtonComponent;
+    @ViewChild('radioButtonDefault', { read: RadioButtonComponent, static: false }) radioButtonDefault!: RadioButtonComponent;
+    @ViewChild('radioButtonDropDownButton', { read: RadioButtonComponent, static: false }) radioButtonDropDownButton!: RadioButtonComponent;
+    @ViewChild('tank', { read: TankComponent, static: false }) tank!: TankComponent;
 
 
     ngOnInit(): void {

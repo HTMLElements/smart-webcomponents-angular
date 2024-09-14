@@ -9,7 +9,7 @@ import { CardViewComponent, Smart } from '@smart-webcomponents-angular/cardview'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('cardview', { read: CardViewComponent, static: false }) cardview: CardViewComponent;
+	@ViewChild('cardview', { read: CardViewComponent, static: false }) cardview!: CardViewComponent;
 	
     dataSource = new Smart.DataAdapter({
         dataSource: [

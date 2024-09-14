@@ -9,9 +9,9 @@ import { InputComponent } from '@smart-webcomponents-angular/input';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('buttongroup', { read: ButtonGroupComponent, static: false }) buttongroup: ButtonGroupComponent;
-	@ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-	@ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+	@ViewChild('buttongroup', { read: ButtonGroupComponent, static: false }) buttongroup!: ButtonGroupComponent;
+	@ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+	@ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 	
 	dataSource: Array<String> = ["a","b","c"];
 	selectionModes: Array<string> = ["none", "one", "zeroOrOne", "zeroOrMany"];

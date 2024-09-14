@@ -10,10 +10,10 @@ import { GetCountriesData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('button', { read: ButtonComponent, static: false }) button: ButtonComponent;
-	@ViewChild('button2', { read: ButtonComponent, static: false }) button2: ButtonComponent;
-	@ViewChild('button3', { read: ButtonComponent, static: false }) button3: ButtonComponent;
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
+	@ViewChild('button', { read: ButtonComponent, static: false }) button!: ButtonComponent;
+	@ViewChild('button2', { read: ButtonComponent, static: false }) button2!: ButtonComponent;
+	@ViewChild('button3', { read: ButtonComponent, static: false }) button3!: ButtonComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
 
     dataSource = new window.Smart.DataAdapter({
 		dataSource: GetCountriesData(),
@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	columns: String[] = [
+	columns: any = [
 		'Country',
 		'Area',
 		'Population_Rural',

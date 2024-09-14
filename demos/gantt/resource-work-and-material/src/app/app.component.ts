@@ -261,16 +261,17 @@ export class AppComponent implements AfterViewInit, OnInit {
             value: 'resources',
             size: '20%',
             formatFunction: function (data: Array<string>, itemObj: GanttChartTask): string {
+
                 const gantt = document.querySelector('smart-gantt-chart') as GanttChart,
                     resources = gantt.resources as Array<GanttChartResource>,
-                    getResource = (d: string): GanttChartResource => resources.find((res) => res.id.toString() === d.toString());
+                    getResource = (d: string): GanttChartResource => resources.find((res) => res?.id?.toString() === d.toString())!;
 
                 if (!itemObj || itemObj.disableResources || !data.length) {
                     return ''
                 }
 
                 if (data.length === 1) {
-                    return `<span>${getResource(data[0]).label.split(',')[0]}</span>`;
+                    return `<span>${getResource(data[0])?.label?.split(',')[0]}</span>`;
                 }
                 else {
                     let result = '<div class="gantt-chart-task-assignees">';
@@ -279,7 +280,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                         const resource = getResource(data[i]);
 
                         if (resource) {
-                            result += `<span class="gantt-chart-task-assignee ${resource.id.toLowerCase()}">${resource.label.charAt(0)}</span>`;
+                            result += `<span class="gantt-chart-task-assignee ${resource.id?.toLowerCase()}">${resource.label?.charAt(0)}</span>`;
                         }
                     }
 
@@ -312,7 +313,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                     for (let i = 0; i < assignedTasks.length; i++) {
                         const assignedTask = assignedTasks[i];
 
-                        allocated += assignedTask.duration * resource.capacity!;
+                        allocated += assignedTask.duration! * resource.capacity!;
                     }
 
                     switch (resource.id) {
@@ -347,32 +348,33 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     view: string = 'week';
 
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string): string {
-        const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart,
-            monthFormat = ganttChart.month as "numeric" | "2-digit" | "narrow" | "long" | "short";
+    timelineHeaderFormatFunction(date: Date, type: string): string {
+        const monthFormat = this.ganttChart.monthFormat as "numeric" | "2-digit" | "narrow" | "long" | "short";
 
         if (type === 'week') {
             const startDayOfWeek = new Date(date),
                 endDateOfWeek = new Date(date);
 
             endDateOfWeek.setDate(date.getDate() + 6);
-            return startDayOfWeek.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: monthFormat, year:  'numeric' }) + ' - ' +
-                endDateOfWeek.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: monthFormat, year:  'numeric' });
+            return startDayOfWeek.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat, year: 'numeric' }) + ' - ' +
+                endDateOfWeek.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat, year: 'numeric' });
         }
 
         if (type === 'day') {
-            return date.toLocaleDateString(ganttChart.locale, { day: 'numeric', month: monthFormat });
+            return date.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: monthFormat });
         }
+
+        return '';
     };
 
     resourceTimelineView: string = 'custom';
 
-    resourceTimelineFormatFunction: Function = function (taskIndexes: Array<number>, resourceIndex: number, cellDate: Date): any {
-        const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart,
-            resource = ganttChart.resources[resourceIndex] as GanttChartResource,
-            tasks = ganttChart.tasks as Array<GanttChartTask>;
+    resourceTimelineFormatFunction(taskIndexes: Array<number>, resourceIndex: number, cellDate: Date): any {
 
-        if (ganttChart.nonworkingDays.includes(cellDate.getDay())) {
+        const resource = this.ganttChart.resources[resourceIndex] as GanttChartResource;
+        const tasks = this.ganttChart.tasks as Array<GanttChartTask>;
+
+        if (this.ganttChart.nonworkingDays.includes(cellDate.getDay())) {
             return;
         }
 
@@ -385,7 +387,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 total += Math.round(resource.value / (task.duration || 1));
             }
             else {
-                total += resource.capacity;
+                total += resource.capacity!;
             }
         }
         return total;
@@ -402,6 +404,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
+
+        this.ganttChart.timelineHeaderFormatFunction = this.timelineHeaderFormatFunction.bind(this);
+        this.ganttChart.resourceTimelineFormatFunction = this.resourceTimelineFormatFunction.bind(this);
 
     }
 }

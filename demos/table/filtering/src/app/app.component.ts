@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
 import { GetData } from '../assets/data';
-import { Utilities } from 'smart-webcomponents-angular/source/modules/smart.element';
+import '@smart-webcomponents-angular/source/modules/smart.element';
 
 @Component({
 	selector: 'app-root',
@@ -10,11 +10,11 @@ import { Utilities } from 'smart-webcomponents-angular/source/modules/smart.elem
 })
 
 export class AppComponent implements AfterViewInit {
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-	
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+
 	dataSource = GetData(50);
 
-	dataSourceSettings = {
+	dataSourceSettings: any = {
 		dataFields: [
 			'id: number',
 			'firstName: string',
@@ -26,9 +26,9 @@ export class AppComponent implements AfterViewInit {
 		]
 	};
 
-	filtering: Boolean = true;
+	filtering: boolean = true;
 
-	tooltip: Boolean = true;
+	tooltip: boolean = true;
 
 	columns: TableColumn[] = [{
 		label: 'id',
@@ -69,10 +69,10 @@ export class AppComponent implements AfterViewInit {
 
 	ngAfterViewInit(): void {
 		// afterViewInit code.
-		const filterGroup = new Utilities.FilterGroup();
-        const filterObject = filterGroup.createFilter('numericFilter', '3', 'GREATER_THAN');
-		
-        filterGroup.addFilter('and', filterObject);
-        this.table.addFilter('quantity', filterGroup);		
+		const filterGroup = new window.Smart.Utilities.FilterGroup();
+		const filterObject = filterGroup.createFilter('numericFilter', '3', 'GREATER_THAN');
+
+		filterGroup.addFilter('and', filterObject);
+		this.table.addFilter('quantity', filterGroup);
 	}
 }

@@ -7,8 +7,8 @@ import { FormComponent, Smart } from '@smart-webcomponents-angular/form';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	 
-	@ViewChild('profileForm', { read: FormComponent, static: false }) profileForm: FormComponent;
-	@ViewChild('log', { static: false }) log;
+	@ViewChild('profileForm', { read: FormComponent, static: false }) profileForm!: FormComponent;
+	@ViewChild('log', { static: false }) log!: HTMLElement;
 	
 	formValue = {
 		employee: {
@@ -32,12 +32,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// onInit code.
 	}
 
-	handleReady($event) {
+	handleReady(event: Event) {
 		setTimeout(()=> {
 			this.profileForm.value = this.formValue;
 			this.value = JSON.stringify(this.formValue);
 
-			this.profileForm.nativeElement.onValueChanges = (value) => {
+			this.profileForm.nativeElement.onValueChanges = (value: any) => {
 				this.value = JSON.stringify(value);
 			}
 		});

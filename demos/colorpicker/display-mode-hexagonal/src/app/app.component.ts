@@ -11,9 +11,9 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker: ColorPickerComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker!: ColorPickerComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 
 
     ngOnInit(): void {
@@ -41,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 return;
             }
             if (checkBox && checkBox.id === 'inverted') {
-                colorPicker.inverted = checkBox.checked;
+                colorPicker.inverted = checkBox.checked || false;
                 return;
             }
             //Set ApplyValueMode and Palette

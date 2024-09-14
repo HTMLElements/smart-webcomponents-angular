@@ -25,18 +25,18 @@
             <label for="exampleInputPassword1">Password</label>
             <smart-password-text-box type="password" class="form-component" id="exampleInputPassword1"
                 placeholder="password" [(ngModel)]="password1" (change)="model.password=passwordA.value"
-                #passwordA="ngModel" name="passwordA" required id="passwordA">
+                #passwordA="ngModel" name="passwordA" [required]="true" id="passwordA">
             </smart-password-text-box>
             <label for="exampleInputPassword2">Confirm Password</label>
             <smart-password-text-box type="password" class="form-component" id="exampleInputPassword2"
-                placeholder="confirm password" [(ngModel)]="password2" #passwordB="ngModel" name="passwordB" required
-                id="passwordB">
+                placeholder="confirm password" [(ngModel)]="password2" #passwordB="ngModel" name="passwordB"
+                [required]="true" id="passwordB">
             </smart-password-text-box>
         </div>
         <div *ngIf="passwordB.invalid && (passwordA.dirty || passwordA.touched)" class="alert alert-danger">
             Please confirm your password.
         </div>
-        <div *ngIf="passwords.errors?.passwordCheck && (passwordB.dirty || passwordB.touched)"
+        <div *ngIf="(passwords.errors ? passwords.errors!['passwordCheck'] : false) && (passwordB.dirty || passwordB.touched)"
             class="alert alert-danger">
             Passwords do not match.
         </div>

@@ -9,8 +9,8 @@ import { PasswordTextBoxComponent } from '@smart-webcomponents-angular/passwordt
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox: PasswordTextBoxComponent;
-	@ViewChild('eventLog', { read: ElementRef, static: false }) eventLog: ElementRef;
+	@ViewChild('passwordtextbox', { read: PasswordTextBoxComponent, static: false }) passwordtextbox!: PasswordTextBoxComponent;
+	@ViewChild('eventLog', { read: ElementRef, static: false }) eventLog!: ElementRef;
 
 
 	ngOnInit(): void {
@@ -28,6 +28,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 		that.passwordtextbox.addEventListener('change', function (event: CustomEvent) {
 			that.eventLog.nativeElement.innerHTML = that.passwordtextbox.value;
-		});
+		} as EventListener);
+		
+		that.passwordtextbox.addEventListener('keyup', function (event: CustomEvent) {
+			that.eventLog.nativeElement.innerHTML = 'Keyup: ' + that.passwordtextbox.value;
+		} as EventListener);
 	}
 }

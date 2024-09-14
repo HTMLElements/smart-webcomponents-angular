@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn } from '@smart-webcomponents-angular/ganttchart';
+import { GanttChartComponent, GanttChartView, Duration, GanttChartTaskColumn, GanttChartTask } from '@smart-webcomponents-angular/ganttchart';
 
 @Component({
     selector: 'app-root',
@@ -39,14 +39,14 @@ export class AppComponent implements AfterViewInit, OnInit {
         {
             label: 'From',
             value: 'dateStart',
-            formatFunction: (value, item) => {
+            formatFunction: (value: Date, item: any) => {
                 return item.dateStart.toLocaleDateString('en', { hour: '2-digit', minute: '2-digit' });
             }
         },
         {
             label: 'Deadline',
             value: 'deadline',
-            formatFunction: (value, item) => {
+            formatFunction: (value: Date, item: any) => {
                 if (!item.deadline) {
                     return '';
                 }

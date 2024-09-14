@@ -11,8 +11,8 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker: ColorPickerComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
+	@ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker!: ColorPickerComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
 	
  
 	ngOnInit(): void {
@@ -41,6 +41,8 @@ export class AppComponent implements AfterViewInit, OnInit {
             }
 
             if (checkBox && checkBox.id.indexOf('hide') === 0) {
+
+                // @ts-ignore
                 colorPicker[checkBox.id] = checkBox.checked;
                 return;
             }

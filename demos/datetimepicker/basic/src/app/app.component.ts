@@ -9,7 +9,7 @@ import { DateTimePickerComponent } from '@smart-webcomponents-angular/datetimepi
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker: DateTimePickerComponent;
+	@ViewChild('datetimepicker', { read: DateTimePickerComponent, static: false }) datetimepicker!: DateTimePickerComponent;
 	
  
 	ngOnInit(): void {

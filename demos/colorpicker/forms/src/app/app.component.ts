@@ -9,7 +9,7 @@ export class Hero {
 		public power: string,
 		public hairColor: string,
 		public eyesColor: string,
-		public alterEgo?: string
+		public alterEgo: string
 	) { }
 
 }
@@ -21,7 +21,7 @@ export class Hero {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('power', { read: DropDownListComponent, static: false }) power: DropDownListComponent;
+	@ViewChild('power', { read: DropDownListComponent, static: false }) power!: DropDownListComponent;
 
 	powers = ['Really Smart', 'Super Flexible',
 		'Super Hot', 'Weather Changer'];
@@ -46,7 +46,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 
 	newHero() {
-		this.model = new Hero(42, '', '', '', '');
+		this.model = new Hero(42, '', '', '', '', '');
 	}
 
 	get diagnostic() { return JSON.stringify(this.model); }

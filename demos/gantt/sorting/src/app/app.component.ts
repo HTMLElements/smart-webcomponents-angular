@@ -17,11 +17,11 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('buttonSort', { read: ButtonComponent, static: false }) buttonSort!: ButtonComponent;
     @ViewChild('buttonClearSort', { read: ButtonComponent, static: false }) buttonClearSort!: ButtonComponent;
 
-    sortMode: String = 'one';
+    sortMode: string = 'one';
 
-    treeSize: String = '30%';
+    treeSize: string = '30%';
 
-    durationUnit: String = 'hour';
+    durationUnit: string = 'hour';
 
     taskColumns: Array<object> = [
         {
@@ -146,19 +146,23 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            ganttChart = that.ganttChart;
+        const checkBoxChangeHandler = (event: CustomEvent): void => {
+            this.ganttChart.sortMode = this.checkBox.checked ? 'many' : 'one';
+        }
 
-        that.checkBox.addEventListener('change', function (event: CustomEvent): void {
-            ganttChart.sortMode = this.checked ? 'many' : 'one';
+        this.checkBox.addEventListener('change', checkBoxChangeHandler as EventListener);
+
+        this.buttonSort.addEventListener('click', (): void => {
+            this.ganttChart
+                .sort(
+                    [
+                        { value: 'duration', sortOrder: 'asc', type: 'task' },
+                        { value: 'progress', sortOrder: 'asc', type: 'resource' }
+                    ]);
         });
 
-        that.buttonSort.addEventListener('click', function (): void {
-            ganttChart.sort([{ value: 'duration', sortOrder: 'asc', type: 'task' }, { value: 'progress', sortOrder: 'asc', type: 'resource' }]);
-        });
-
-        that.buttonClearSort.addEventListener('click', function (): void {
-            ganttChart.clearSort();
+        this.buttonClearSort.addEventListener('click', (): void => {
+            this.ganttChart.clearSort();
         });
     }
 }

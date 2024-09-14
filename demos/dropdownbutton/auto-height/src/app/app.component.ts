@@ -10,8 +10,8 @@ import { TreeComponent, TreeItem } from '@smart-webcomponents-angular/tree';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton: DropDownButtonComponent;
-	@ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
+	@ViewChild('dropdownbutton', { read: DropDownButtonComponent, static: false }) dropdownbutton!: DropDownButtonComponent;
+	@ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
 
 
 	ngOnInit(): void {

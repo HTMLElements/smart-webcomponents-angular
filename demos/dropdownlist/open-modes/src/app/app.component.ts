@@ -6,16 +6,16 @@ import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-	encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None,
     styleUrls: ['./app.component.css']
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('buttonDefault', { read: ButtonComponent, static: false }) buttonDefault: ButtonComponent;
-    @ViewChild('buttonAuto', { read: ButtonComponent, static: false }) buttonAuto: ButtonComponent;
-    @ViewChild('buttonDropDownButton', { read: ButtonComponent, static: false }) buttonDropDownButton: ButtonComponent;
-    @ViewChild('buttonNone', { read: ButtonComponent, static: false }) buttonNone: ButtonComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
+    @ViewChild('buttonDefault', { read: ButtonComponent, static: false }) buttonDefault!: ButtonComponent;
+    @ViewChild('buttonAuto', { read: ButtonComponent, static: false }) buttonAuto!: ButtonComponent;
+    @ViewChild('buttonDropDownButton', { read: ButtonComponent, static: false }) buttonDropDownButton!: ButtonComponent;
+    @ViewChild('buttonNone', { read: ButtonComponent, static: false }) buttonNone!: ButtonComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
 
 
     ngOnInit(): void {
@@ -76,35 +76,35 @@ export class AppComponent implements AfterViewInit, OnInit {
                 group: "C"
             }];
 
-        buttons[0].addEventListener('click', function () {
+        buttons[0].addEventListener('click', (e: Event) => {
             dropDownList.dropDownOpenMode = 'default';
 
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
 
-        buttons[1].addEventListener('click', function () {
+        buttons[1].addEventListener('click', (e: Event) => {
             dropDownList.dropDownOpenMode = 'auto';
 
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
 
-        buttons[2].addEventListener('click', function () {
+        buttons[2].addEventListener('click', (e: Event) => {
             dropDownList.dropDownOpenMode = 'dropDownButton';
 
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
 
-        buttons[3].addEventListener('click', function () {
+        buttons[3].addEventListener('click', (e: Event) => {
             dropDownList.dropDownOpenMode = 'none';
 
             for (let b = 0; b < buttons.length; b++) {
-                buttons[b].disabled = buttons[b] === this ? true : false;
+                buttons[b].disabled = buttons[b].nativeElement === e.currentTarget ? true : false;
             }
         });
     }

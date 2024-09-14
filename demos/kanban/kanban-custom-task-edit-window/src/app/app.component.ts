@@ -1,4 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Dialog } from '@smart-webcomponents-angular';
 import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
 import { GetKanbanData } from '../assets/data';
 
@@ -11,7 +12,7 @@ import { GetKanbanData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     collapsible = true;
     editable = true;
@@ -40,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
             label: 'My Number Field', dataField: 'customField3'
         }
     ];
-    dialogCustomizationFunction = (dialog, task, editors, labels) => {
+    dialogCustomizationFunction = (dialog: any, task: any, editors: any, labels: any) => {
         dialog.label = 'My dialog'
 
         for (let key in editors) {
@@ -88,7 +89,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
             const label2 = document.createElement('label');
             label2.innerHTML = 'Custom field 2';
-
+            
             dialog.content.appendChild(label2);
             dialog.content.appendChild(input2);
 

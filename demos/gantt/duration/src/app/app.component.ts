@@ -44,19 +44,14 @@ export class AppComponent implements AfterViewInit, OnInit {
     init(): void {
         // init code.
 
-        const that = this,
-            ganttChart = that.ganttchart;
-
-        that.radiobutton.addEventListener('change', function (event: CustomEvent): void {
+        const radiobuttonChangeHandler = (event: CustomEvent) => {
             if (event.detail.value) {
-                ganttChart.durationUnit = (<HTMLElement>event.target).innerHTML as Duration;
+                this.ganttchart.durationUnit = (<HTMLElement>event.target).innerHTML as Duration;
             }
-        });
+        }
 
-        that.radiobutton2.addEventListener('change', function (event: CustomEvent): void {
-            if (event.detail.value) {
-                ganttChart.durationUnit = (<HTMLElement>event.target).innerHTML as Duration;
-            }
-        });
+        this.radiobutton.addEventListener('change', radiobuttonChangeHandler as EventListener);
+
+        this.radiobutton2.addEventListener('change', radiobuttonChangeHandler as EventListener);
     }
 }

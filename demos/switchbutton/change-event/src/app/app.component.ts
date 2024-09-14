@@ -9,8 +9,8 @@ import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('switchButton', { read: SwitchButtonComponent, static: false }) switchButton: SwitchButtonComponent;
-	@ViewChild('log', { read: ElementRef, static: false }) log: ElementRef;
+	@ViewChild('switchButton', { read: SwitchButtonComponent, static: false }) switchButton!: SwitchButtonComponent;
+	@ViewChild('log', { read: ElementRef, static: false }) log!: ElementRef;
 
 	ngOnInit(): void {
 		// onInit code.
@@ -34,6 +34,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 			const checkStatus = event.detail.value;
 
 			log.textContent = checkStatus;
-		});
+		} as EventListener);
 	}
 }

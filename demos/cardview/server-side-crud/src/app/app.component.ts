@@ -1,5 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { CardViewComponent } from '@smart-webcomponents-angular/cardview';
+import { CardViewColumn, CardViewComponent } from '@smart-webcomponents-angular/cardview';
 
 declare global {
     interface Window {
@@ -18,7 +18,7 @@ declare global {
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('cardview', { read: CardViewComponent, static: false }) cardview: CardViewComponent;
+    @ViewChild('cardview', { read: CardViewComponent, static: false }) cardview!: CardViewComponent;
 
     addNewButton = true;
     cellOrientation = 'horizontal';
@@ -64,9 +64,9 @@ export class AppComponent implements AfterViewInit, OnInit {
     headerPosition = 'top';
     scrolling = 'virtual';
     titleField = 'CustomerName';
-    columns = [
+    columns: CardViewColumn[] = [
         {
-            label: 'Id', dataField: 'CustomerID', icon: 'CustomerID', formatFunction: function (settings: { value: any; template: string; }) {
+            label: 'Id', dataField: 'CustomerID', icon: 'CustomerID', formatFunction: function (settings) {
                 settings.template = `<span class="smart-badge smart-badge-dark">${settings.value}</span>`;
             }
         },
@@ -95,6 +95,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 }
 function LogData(data: any) {
     const log = document.getElementById('dataLog');
+
     let content = '<table>';
     for (let i = 0; i < data.length; i++) {
         let row = '<tr>';
@@ -113,7 +114,10 @@ function LogData(data: any) {
         content += row;
     }
     content += '</table>';
-    log.innerHTML = content;
+
+    if(log) {
+        log.innerHTML = content;        
+    }
 }
 // In this sample, we use http://alasql.org/ to show how to use SQL queries with Smart.Grid
 function DemoServer() {

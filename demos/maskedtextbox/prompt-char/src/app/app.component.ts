@@ -9,7 +9,7 @@ import { MaskedTextBoxComponent } from '@smart-webcomponents-angular/maskedtextb
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox: MaskedTextBoxComponent;
+	@ViewChild('maskedtextbox', { read: MaskedTextBoxComponent, static: false }) maskedtextbox!: MaskedTextBoxComponent;
 	
  
 	ngOnInit(): void {

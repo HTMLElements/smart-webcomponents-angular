@@ -9,8 +9,8 @@ import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge: GaugeComponent;
-	@ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2: GaugeComponent;
+	@ViewChild('gauge', { read: GaugeComponent, static: false }) gauge!: GaugeComponent;
+	@ViewChild('gauge2', { read: GaugeComponent, static: false }) gauge2!: GaugeComponent;
 	
  
 	ngOnInit(): void {

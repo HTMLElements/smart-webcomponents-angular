@@ -9,7 +9,7 @@ import { InputComponent } from '@smart-webcomponents-angular/input';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
+	@ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
 	
  
 	ngOnInit(): void {

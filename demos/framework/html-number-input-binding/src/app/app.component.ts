@@ -23,6 +23,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 		this.init();
 	}
 
+
+
 	app = new window.Smart.App({
 		data: {
 			number: 10
@@ -32,10 +34,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	init(): void {
 		// init code.
-		this.app = new window.Smart.App({
-			data: {
-				number: 10
-			}
-		});
+
+
 	}
 }

@@ -1,68 +1,65 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <title>Angular Toast Overview</title>
   <base href="/">
-  <link rel="stylesheet"
-    href="https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/smart.default.css" />
+  <link rel="stylesheet" href="https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/smart.default.css"/>
   <style>
-    @font-face {
-      font-family: "smart-icons";
-      src: url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.eot");
-      src:
-        url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff2") format("woff2"),
-        url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff") format("woff"),
-        url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.ttf") format("truetype");
-      font-weight: normal;
-      font-style: normal;
-    }
+@font-face {
+  font-family: "smart-icons";
+  src: url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.eot");
+  src: 
+	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff2")
+      format("woff2"),
+	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff")
+      format("woff"),
+    url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
   </style>
   <script>
     console.log('****************************************************************************************************************');
-    console.log('*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
-    console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
-    console.log('****************************************************************************************************************');
-  </script>
+	console.log('*This is an EVALUATION only Version, it is NOT Licensed for software projects intended for PRODUCTION.');
+	console.log('*For COMMERCIAL & PRODUCTION usage, please visit: https://www.jqwidgets.com/license/.');
+	console.log('****************************************************************************************************************');
+  </script>  
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <body>
-  <app-root>Loading...</app-root>
-  <template id="toastTemplate3"> <span class="message smart-toast-item-content">{{message}}</span>
-    <smart-button class="primary flat">UNDO</smart-button>
-  </template>
-  <template id="toastTemplate4"> <span class="message smart-toast-item-content">{{message}}</span>
-    <smart-button class="success flat">UNDO</smart-button>
-  </template>
-  <template id="toastTemplate5"> <span class="message smart-toast-item-content">{{message}}</span>
-    <smart-button class="success raised">UNDO</smart-button>
-  </template>
-  <template id="toastTemplate6"> <span class="message smart-toast-item-content">{{message}}</span>
-    <smart-button class="raised primary">RETRY</smart-button>
-  </template>
-  <template id="notificationMessagingTemplate">
-    <div class="message-template">
-      <div class="message-header"> <i class="material-icons icon">&#xE0B7;</i> <span class="message">
-          Messages </span>
-        <i class="material-icons dot">&#xE061;</i> <span><i class="material-icons arrow">&#xE313;</i></span>
-      </div>
-      <div class="message-content">
-        <h3>Justin Rhyss</h3>
-        <span class="smart-toast-item-content">{{message}}</span>
-      </div>
-      <img src="https://www.htmlelements.com/demos/images/notifications-icon2.png" class="profile-picture">
-      <div class="message-footer smart-hidden">
-        <smart-button>REPLY</smart-button>
-        <smart-button>ARCHIVE</smart-button>
-      </div>
-    </div>
-  </template>
-  <div style="position: fixed; bottom: 5px; right: 5px;">
-    <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/"><img alt="https://www.jqwidgets.com/"
-        title="https://www.jqwidgets.com/" src="https://www.jqwidgets.com/wp-content/design/i/logo-jqwidgets.png" /></a>
-  </div>
-</body>
-
+	<app-root>Loading...</app-root>
+	 <div style="position: fixed; bottom: 5px; right: 5px;">
+         <a href="https://www.jqwidgets.com/" alt="https://www.jqwidgets.com/">https://www.jqwidgets.com/</a>
+	</div>
+<template id="toastTemplate3"> <span class="message smart-toast-item-content">{{message}}</span>
+        <smart-button #button class="primary flat">UNDO</smart-button>
+    </template>
+    <template id="toastTemplate4"> <span class="message smart-toast-item-content">{{message}}</span>
+        <smart-button #button3 class="success flat">UNDO</smart-button>
+    </template>
+    <template id="toastTemplate5"> <span class="message smart-toast-item-content">{{message}}</span>
+        <smart-button #button5 class="success raised">UNDO</smart-button>
+    </template>
+    <template id="toastTemplate6"> <span class="message smart-toast-item-content">{{message}}</span>
+        <smart-button #button6 class="raised primary">RETRY</smart-button>
+    </template>
+    <template id="notificationMessagingTemplate">
+        <div class="message-template">
+            <div class="message-header"> <i class="material-icons icon">&#xE0B7;</i> <span class="message">
+                    Messages </span>
+                <i class="material-icons dot">&#xE061;</i> <span><i class="material-icons arrow">&#xE313;</i></span>
+            </div>
+            <div class="message-content">
+                <h3>Justin Rhyss</h3>
+                <span class="smart-toast-item-content">{{message}}</span>
+            </div>
+            <img src="../../../src/images/notifications-icon2.png" class="profile-picture">
+            <div class="message-footer smart-hidden">
+                <smart-button>REPLY</smart-button>
+                <smart-button>ARCHIVE</smart-button>
+            </div>
+        </div>
+    </template></body>
 </html>

@@ -9,8 +9,8 @@ import { CarouselComponent } from '@smart-webcomponents-angular/carousel';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('carousel', { read: CarouselComponent, static: false }) carousel: CarouselComponent;
-	@ViewChild('carousel2', { read: CarouselComponent, static: false }) carousel2: CarouselComponent;
+	@ViewChild('carousel', { read: CarouselComponent, static: false }) carousel!: CarouselComponent;
+	@ViewChild('carousel2', { read: CarouselComponent, static: false }) carousel2!: CarouselComponent;
 
 
 	ngOnInit(): void {

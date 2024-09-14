@@ -1,4 +1,5 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { Toast, ToastComponent } from '@smart-webcomponents-angular/toast';
 
 
@@ -16,6 +17,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('toast4', { read: ToastComponent, static: false }) toast4!: ToastComponent;
     @ViewChild('toast5', { read: ToastComponent, static: false }) toast5!: ToastComponent;
     @ViewChild('toast6', { read: ToastComponent, static: false }) toast6!: ToastComponent;
+
 
     ngOnInit(): void {
         // onInit code.

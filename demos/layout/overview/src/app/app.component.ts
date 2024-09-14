@@ -11,7 +11,7 @@ import { LayoutComponent } from '@smart-webcomponents-angular/layout';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
+	@ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
 
 
 	ngOnInit(): void {

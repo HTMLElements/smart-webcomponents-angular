@@ -9,7 +9,7 @@ import { ToastComponent } from '@smart-webcomponents-angular/toast';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('toast', { read: ToastComponent, static: false }) toast: ToastComponent;
+	@ViewChild('toast', { read: ToastComponent, static: false }) toast!: ToastComponent;
 	
  
 	ngOnInit(): void {

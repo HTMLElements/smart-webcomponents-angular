@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ToggleButtonComponent } from '@smart-webcomponents-angular/button';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 import { GeneratePivotData } from '../assets/data';
 
 @Component({
@@ -10,8 +10,8 @@ import { GeneratePivotData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton: ToggleButtonComponent;
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
+    @ViewChild('togglebutton', { read: ToggleButtonComponent, static: false }) togglebutton!: ToggleButtonComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
 
     dataSource = GeneratePivotData(300, 2);
     drillDown = true;
@@ -28,11 +28,11 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Quarter', dataField: 'quarter', dataType: 'string', allowPivot: true, pivot: true },
         { label: 'Revenue', dataField: 'revenue', dataType: 'number', summary: 'sum', summarySettings: { prefix: '$', negativesInBrackets: true } },
         { label: 'Expenses', dataField: 'expense', dataType: 'number', summary: 'sum', summarySettings: { prefix: '$', negativesInBrackets: true } }
-    ];
+    ] as PivotTableColumn[];
 
     readyHandler = () => {
         const pivotTable = this.pivottable,
-            rows = pivotTable.nativeElement.rows;
+            rows = pivotTable.nativeElement['rows'];
 
         pivotTable.getDynamicColumns().then((dynamicColumns) => {
             pivotTable.select(rows[0].$.id, dynamicColumns[1].id);

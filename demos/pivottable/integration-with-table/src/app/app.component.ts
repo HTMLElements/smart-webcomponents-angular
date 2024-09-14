@@ -1,7 +1,7 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
 import { TableComponent } from '@smart-webcomponents-angular/table';
-import { PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
+import { PivotTableColumn, PivotTableComponent } from '@smart-webcomponents-angular/pivottable';
 import { GetData } from '../assets/data';
 
 @Component({
@@ -12,10 +12,10 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton: SwitchButtonComponent;
-    @ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable: PivotTableComponent;
-    @ViewChild('mainContainer', { read: ElementRef, static: false }) mainContainer: ElementRef;
+    @ViewChild('switchbutton', { read: SwitchButtonComponent, static: false }) switchbutton!: SwitchButtonComponent;
+    @ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+    @ViewChild('pivottable', { read: PivotTableComponent, static: false }) pivottable!: PivotTableComponent;
+    @ViewChild('mainContainer', { read: ElementRef, static: false }) mainContainer!: ElementRef;
 
     data = GetData(25);
 
@@ -55,7 +55,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         { label: 'Product Name', dataField: 'productName', dataType: 'string', allowPivot: true, pivot: true },
         { label: 'Quantity', dataField: 'quantity', dataType: 'number' },
         { label: 'Price', dataField: 'price', dataType: 'number', summary: 'sum', summarySettings: { prefix: '$', decimalPlaces: 2 } },
-    ];
+    ] as PivotTableColumn[];
 
     handleChange(event: CustomEvent) {
         if (event.detail.value) {

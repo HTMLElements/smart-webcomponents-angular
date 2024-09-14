@@ -1,22 +1,24 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { Smart } from '@smart-webcomponents-angular/form';
+import { FormComponent, Smart } from '@smart-webcomponents-angular/form';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+	selector: 'app-root',
+	templateUrl: './app.component.html'
 })
 
-export class AppComponent implements AfterViewInit, OnInit {	 
-	
-	
+export class AppComponent implements AfterViewInit, OnInit {
+
+	form: FormComponent | null = null;
+
 	ngOnInit(): void {
 		// onInit code.
 	}
 
 	ngAfterViewInit(): void {
-		const form = new Smart.Form('#profileForm',
-			{controls: [
-				 {
+		this.form = new Smart.Form('#profileForm',
+			{
+				controls: [
+					{
 						dataField: 'textBoxValue',
 						controlType: 'text',
 						label: 'Text input',
@@ -85,8 +87,15 @@ export class AppComponent implements AfterViewInit, OnInit {
 			}
 		);
 
-		form.onValueChanges = function(value) {
-		  document.getElementById('log').innerHTML = `<br/><br/>
+		if (!this.form) { return }
+
+		this.form.onValueChanges = function (value: any) {
+
+			const log = document.getElementById('log');
+
+			if (!log) { return }
+
+			log.innerHTML = `<br/><br/>
 		  <table>
 			<tr><td>textBoxValue</td><td>${value['textBoxValue']}</td></tr>
 			<tr><td>passwordBoxValue</td><td>${value['passwordBoxValue']}</td></tr>
@@ -99,8 +108,12 @@ export class AppComponent implements AfterViewInit, OnInit {
 		  </table>`;
 		}
 
-		form.onStatusChanges = function(value) {
-		  document.getElementById('statusLog').innerHTML = `<br/><br/>
+		this.form.onStatusChanges = function (value: any) {
+			const statusLog = document.getElementById('statusstatusLog');
+
+			if (!statusLog) { return }
+
+			statusLog.innerHTML = `<br/><br/>
 		  <table>
 			<tr><td>Form Control</td><td>State</td><td>Dirty</td><td>Untouched</td><td>Disabled</td></tr>
 			<tr><td>textBoxValue</td><td>${value['textBoxValue']}</td><td>${value.state['textBoxValue'].dirty}</td><td>${value.state['textBoxValue'].untouched}</td><td>${value.state['textBoxValue'].disabled}</td></tr>
@@ -113,7 +126,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			<tr><td>checkboxValue3</td><td>${value['checkboxValue3']}</td><td>${value.state['checkboxValue3'].dirty}</td><td>${value.state['checkboxValue3'].untouched}</td><td>${value.state['checkboxValue3'].disabled}</td></tr>
 			</table>`;
 		}
-		
+
 		const sampleValue = {
 			'textBoxValue': 'text box value',
 			'passwordBoxValue': 'password box',
@@ -125,8 +138,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 			'checkboxValue3': true,
 		};
 
-		setTimeout(()=> {
-			form.value = sampleValue;
+		setTimeout(() => {
+			if (!this.form) { return }
+
+			this.form.value = sampleValue;
 		});
-    }
+	}
 }

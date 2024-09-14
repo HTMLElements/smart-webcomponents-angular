@@ -5,14 +5,14 @@
             <label for="name">Name</label>
             <smart-input required class="form-component" formControlName="name">
             </smart-input>
-            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-                <div *ngIf="name.errors.required">
+            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+                <div *ngIf="name?.errors ? name?.errors!['required'] : false">
                     Name is required.
                 </div>
-                <div *ngIf="name.errors.minlength">
+                <div *ngIf="name?.errors ? name?.errors!['minlength'] : false">
                     Name must be at least 4 characters long.
                 </div>
-                <div *ngIf="name.errors.forbiddenName">
+                <div *ngIf="name?.errors ? name?.errors!['forbiddenName'] : false">
                     Name cannot be Bob.
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <smart-drop-down-list required class="form-component" formControlName="power" required>
                     <smart-list-item *ngFor="let pow of powers" [value]="pow">{{pow}}</smart-list-item>
                 </smart-drop-down-list>
-                <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+                <div [hidden]="power?.valid || power?.pristine" class="alert alert-danger">
                     Power is required
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <label for="power">Hero Super Power</label>
                 <smart-check-box required class="form-component" formControlName="superPower" required>
                 </smart-check-box>
-                <div [hidden]="superPower.valid || superPower.pristine" class="alert alert-danger">
+                <div [hidden]="superPower?.valid || superPower?.pristine" class="alert alert-danger">
                     Super Power is required
                 </div>
             </div>
@@ -51,19 +51,19 @@
     <h2>You submitted the following:</h2>
     <div class="row">
         <div class="col-xs-3">Name</div>
-        <div class="col-xs-9">{{ name.value }}</div>
+        <div class="col-xs-9">{{ name?.value }}</div>
     </div>
     <div class="row">
         <div class="col-xs-3">Alter Ego</div>
-        <div class="col-xs-9">{{ alterEgo.value }}</div>
+        <div class="col-xs-9">{{ alterEgo?.value }}</div>
     </div>
     <div class="row">
         <div class="col-xs-3">Power</div>
-        <div class="col-xs-9">{{ power.value }}</div>
+        <div class="col-xs-9">{{ power?.value }}</div>
     </div>
     <div class="row">
         <div class="col-xs-3">Super Power</div>
-        <div class="col-xs-9">{{ superPower.value }}</div>
+        <div class="col-xs-9">{{ superPower?.value }}</div>
     </div>
     <br>
     <smart-button class="primary" (click)="submitted=false">Edit</smart-button>

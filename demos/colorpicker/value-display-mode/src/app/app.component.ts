@@ -10,9 +10,9 @@ import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker: ColorPickerComponent;
-    @ViewChild('options', { read: ElementRef, static: false }) options: ElementRef;
-    @ViewChild('rgbInput', { read: ElementRef, static: false }) rgbInput: ElementRef;
+    @ViewChild('colorpicker', { read: ColorPickerComponent, static: false }) colorpicker!: ColorPickerComponent;
+    @ViewChild('options', { read: ElementRef, static: false }) options!: ElementRef;
+    @ViewChild('rgbInput', { read: ElementRef, static: false }) rgbInput!: ElementRef;
 
     ngOnInit(): void {
         // onInit code.
@@ -47,6 +47,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
         colorPicker.addEventListener('change', function (event: CustomEvent): void {
             that.rgbInput.nativeElement.value = event.detail.value;
-        });
+        } as EventListener);
     }
 }

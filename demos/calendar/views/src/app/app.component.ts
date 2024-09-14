@@ -10,9 +10,9 @@ import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar: CalendarComponent;
-	@ViewChild('portrait', { read: RadioButtonComponent, static: false }) portrait: RadioButtonComponent;
-    @ViewChild('landscape', { read: RadioButtonComponent, static: false }) landscape: RadioButtonComponent;
+	@ViewChild('calendar', { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
+	@ViewChild('portrait', { read: RadioButtonComponent, static: false }) portrait!: RadioButtonComponent;
+    @ViewChild('landscape', { read: RadioButtonComponent, static: false }) landscape!: RadioButtonComponent;
 
  
 	ngOnInit(): void {

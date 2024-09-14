@@ -1,6 +1,12 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/radiobutton';
-import { GanttChartComponent, GanttChartResourceTimelineView, GanttChart, GanttChartResource, Smart } from '@smart-webcomponents-angular/ganttchart';
+import {
+    GanttChartComponent,
+    GanttChartResourceTimelineView,
+    GanttChart,
+    GanttChartResource,
+    Smart
+} from '@smart-webcomponents-angular/ganttchart';
 
 
 @Component({
@@ -11,7 +17,7 @@ import { GanttChartComponent, GanttChartResourceTimelineView, GanttChart, GanttC
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart: GanttChartComponent;
+    @ViewChild('ganttChart', { read: GanttChartComponent, static: false }) ganttChart!: GanttChartComponent;
 
     dataSource: Array<object> = [
         {
@@ -250,63 +256,64 @@ export class AppComponent implements AfterViewInit, OnInit {
     durationUnit: string = 'day';
 
     view: string = 'month';
-
-    selectedIndexes: Array<number> = [3];
-
-    timelineHeaderFormatFunction: Function = function (date: Date, type: string, isHeaderDetails: boolean): string {
+    
+    timelineHeaderFormatFunction: Function = (date: Date, type: string, isHeaderDetails: boolean): string => {
         const weekStartDate = new Date(date);
 
         if (isHeaderDetails) {
-            return weekStartDate.toLocaleDateString(this.locale, { month: this.monthFormat, year: this.yearFormat });
+            return weekStartDate.toLocaleDateString(this.ganttChart.locale, { month: this.ganttChart.monthFormat as any, year: this.ganttChart.yearFormat as any });
         }
         else {
-            return weekStartDate.toLocaleDateString(this.locale, { day: 'numeric', month: this.monthFormat });
+            return weekStartDate.toLocaleDateString(this.ganttChart.locale, { day: 'numeric', month: this.ganttChart.monthFormat as any });
         }
     };
 
     onReady(event: any): void {
-        document.querySelector('.custom-resource-panel-header').addEventListener('change', function (event: CustomEvent) {
-            const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart,
-                target = event.target as HTMLElement;
+        document.querySelector('.custom-resource-panel-header')
+            ?.addEventListener('change', function (event: CustomEvent) {
+                const ganttChart = document.querySelector('smart-gantt-chart') as GanttChart;
+                const target = event.target as HTMLElement;
 
-            if (target instanceof Smart.DropDownList) {
-                const filter = event.detail.value,
-                    resources = ganttChart.resources;
+                if (target instanceof Smart.DropDownList) {
+                    const filter = event.detail.value;
+                    const resources = ganttChart.resources;
 
-                //Important Note: Begins a batch update
-                ganttChart.beginUpdate();
+                    if (!resources) { return }
 
-                if (filter === 'all') {
-                    for (let i = 0; i < resources.length; i++) {
-                        const resource = resources[i] as GanttChartResource;
-                        
-                        if (resource.hidden) {
-                            ganttChart.updateResource(resource, { hidden: false });
+                    //Important Note: Begins a batch update
+                    ganttChart.beginUpdate();
+
+                    if (filter === 'all') {
+                        for (let i = 0; i < resources.length; i++) {
+                            const resource = resources[i] as GanttChartResource;
+
+                            if (resource.hidden) {
+                                ganttChart.updateResource(resource, { hidden: false });
+                            }
                         }
                     }
-                }
-                else {
-                    for (let i = 0; i < resources.length; i++) {
-                        const resource: GanttChartResource = resources[i] as GanttChartResource;
+                    else {
+                        for (let i = 0; i < resources.length; i++) {
+                            const resource: GanttChartResource = resources[i] as GanttChartResource;
 
-                        if (resource.type !== filter) {
-                            ganttChart.updateResource(resource, { hidden: true });
-                        }
-                        else {
-                            ganttChart.updateResource(resource, { hidden: false });
+                            if (resource.type !== filter) {
+                                ganttChart.updateResource(resource, { hidden: true });
+                            }
+                            else {
+                                ganttChart.updateResource(resource, { hidden: false });
+                            }
                         }
                     }
+
+                    //Important Note: Ends the batch update
+                    ganttChart.endUpdate();
+                    return;
                 }
 
-                //Important Note: Ends the batch update
-                ganttChart.endUpdate();
-                return;
-            }
-
-            if (target instanceof Smart.RadioButton && event.detail.value) {
-                ganttChart.resourceTimelineView = (<RadioButton>target).value as GanttChartResourceTimelineView;
-            }
-        })
+                if (target instanceof Smart.RadioButton && event.detail.value) {
+                    ganttChart.resourceTimelineView = (<RadioButton>target).value as GanttChartResourceTimelineView;
+                }
+            } as EventListener)
     };
 
     ngOnInit(): void {

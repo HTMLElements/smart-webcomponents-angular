@@ -9,9 +9,9 @@ import { TreeComponent } from '@smart-webcomponents-angular/tree';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('tree', { read: TreeComponent, static: false }) tree: TreeComponent;
-	@ViewChild('tree2', { read: TreeComponent, static: false }) tree2: TreeComponent;
-	@ViewChild('tree3', { read: TreeComponent, static: false }) tree3: TreeComponent;
+	@ViewChild('tree', { read: TreeComponent, static: false }) tree!: TreeComponent;
+	@ViewChild('tree2', { read: TreeComponent, static: false }) tree2!: TreeComponent;
+	@ViewChild('tree3', { read: TreeComponent, static: false }) tree3!: TreeComponent;
 
 
 	ngOnInit(): void {
@@ -27,20 +27,20 @@ export class AppComponent implements AfterViewInit, OnInit {
 		// init code.
 	}
 
-	customSortingFunction(items, parentItem) {
+	customSortingFunction(items: any, parentItem: any) {
 		if (parentItem.label === 'Numbers') {
-			items.sort(function (a, b) {
+			items.sort(function (a: any, b: any) {
 				return parseFloat(a.label) - parseFloat(b.label);
 			});
 		}
 		else if (parentItem.label === 'Letters') {
-			items.sort(function (a, b) {
+			items.sort(function (a: any, b: any) {
 				return parseFloat(b.value) - parseFloat(a.value);
 			});
 		}
 		else {
 			// apply default sorting
-			items.sort(function (a, b) {
+			items.sort(function (a: any, b: any) {
 				return (a.label).localeCompare(b.label);
 			});
 		}

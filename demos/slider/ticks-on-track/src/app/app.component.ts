@@ -9,7 +9,7 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	
-	@ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
+	@ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
 	
  
 	ngOnInit(): void {

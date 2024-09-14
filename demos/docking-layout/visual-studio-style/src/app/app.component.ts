@@ -13,12 +13,12 @@ import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('dockingLayout', { read: DockingLayoutComponent }) dockingLayout: DockingLayoutComponent;
-    @ViewChild('tree', { read: TreeComponent }) tree: TreeComponent;
-    @ViewChild('multilineTextBox', { read: MultilineTextBoxComponent }) multilineTextBox: MultilineTextBoxComponent;
-    @ViewChild('multilineTextBox2', { read: MultilineTextBoxComponent }) multilineTextBox2: MultilineTextBoxComponent;
-    @ViewChild('multilineTextBox3', { read: MultilineTextBoxComponent }) multilineTextBox3: MultilineTextBoxComponent;
-    @ViewChild('textBox', { read: TextBoxComponent }) textBox: TextBoxComponent;
+    @ViewChild('dockingLayout', { read: DockingLayoutComponent }) dockingLayout!: DockingLayoutComponent;
+    @ViewChild('tree', { read: TreeComponent }) tree!: TreeComponent;
+    @ViewChild('multilineTextBox', { read: MultilineTextBoxComponent }) multilineTextBox!: MultilineTextBoxComponent;
+    @ViewChild('multilineTextBox2', { read: MultilineTextBoxComponent }) multilineTextBox2!: MultilineTextBoxComponent;
+    @ViewChild('multilineTextBox3', { read: MultilineTextBoxComponent }) multilineTextBox3!: MultilineTextBoxComponent;
+    @ViewChild('textBox', { read: TextBoxComponent }) textBox!: TextBoxComponent;
 
 
     multilineTextBoxValue: string = `

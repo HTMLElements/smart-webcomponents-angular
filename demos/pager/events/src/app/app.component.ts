@@ -9,8 +9,8 @@ import { PagerComponent } from '@smart-webcomponents-angular/pager';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('pager', { read: PagerComponent, static: false }) pager: PagerComponent;
-	@ViewChild('eventLog', { read: ElementRef, static: false }) eventLog: ElementRef;
+	@ViewChild('pager', { read: PagerComponent, static: false }) pager!: PagerComponent;
+	@ViewChild('eventLog', { read: ElementRef, static: false }) eventLog!: ElementRef;
 
 	ngOnInit(): void {
 		// onInit code.
@@ -29,6 +29,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 			const details = event.detail;
 			that.eventLog.nativeElement.innerHTML = 'Selected item #' + details.index;
 			console.log('Selected item #' + details.index);
-		});
+		} as EventListener);
 	}
 }

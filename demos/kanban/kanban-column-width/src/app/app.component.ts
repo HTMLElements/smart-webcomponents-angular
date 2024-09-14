@@ -11,7 +11,7 @@ import { GetKanbanData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban: KanbanComponent;
+    @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 
     collapsible = true;
     dataSource = GetKanbanData();
@@ -59,8 +59,5 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     init(): void {
         // init code.
-
-
-
     }
 }

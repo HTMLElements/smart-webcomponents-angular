@@ -10,9 +10,9 @@ import { GetData } from '../assets/data';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-	@ViewChild('table', { read: TableComponent, static: false }) table: TableComponent;
-	@ViewChild('checkBox', { read: CheckBoxComponent, static: false }) checkBox: CheckBoxComponent;
-	@ViewChild('checkBox2', { read: CheckBoxComponent, static: false }) checkBox2: CheckBoxComponent;
+	@ViewChild('table', { read: TableComponent, static: false }) table!: TableComponent;
+	@ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+	@ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
 
 	dataSource = new window.Smart.DataAdapter({
 		dataSource: GetData(50),
@@ -25,9 +25,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	});
 
-	grouping: Boolean = true;
+	grouping: boolean = true;
 
-	keyboardNavigation: Boolean = true;
+	keyboardNavigation: boolean = true;
 
 	columns: TableColumn[] = [{
 		label: 'id',

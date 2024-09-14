@@ -1,6 +1,6 @@
 ﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { InputComponent, InputEditor } from '@smart-webcomponents-angular/input';
-import { SchedulerComponent, SchedulerTimelineDayScale, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
+import { SchedulerComponent, SchedulerEventRenderMode, SchedulerEvent, SchedulerTimelineDayScale, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
 
 @Component({
@@ -11,10 +11,10 @@ import { SchedulerComponent, SchedulerTimelineDayScale, SchedulerViews, Schedule
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('input', { read: InputComponent, static: false }) input: InputComponent;
-    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler: SchedulerComponent;
+    @ViewChild('input', { read: InputComponent, static: false }) input!: InputComponent;
+    @ViewChild('scheduler', { read: SchedulerComponent, static: false }) scheduler!: SchedulerComponent;
 
-    dataSource: any[] = (() => {
+    dataSource: SchedulerEvent[] = (() => {
         const today = new Date(),
             currentDate = today.getDate(),
             currentYear = today.getFullYear(),
@@ -340,7 +340,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     inputDataSource: string[] = ['classic', 'modern'];
 
     handleChange(event: CustomEvent) {
-        this.scheduler.eventRenderMode = (<InputEditor>event.target).value;
+        this.scheduler.eventRenderMode = (<InputEditor>event.target).value as SchedulerEventRenderMode;
     }
 
     ngOnInit(): void {

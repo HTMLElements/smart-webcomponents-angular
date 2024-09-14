@@ -12,13 +12,13 @@ import { SliderComponent } from '@smart-webcomponents-angular/slider';
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
-    @ViewChild('chart', { read: ChartComponent, static: false }) chart: ChartComponent;
-    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox: CheckBoxComponent;
-    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2: CheckBoxComponent;
-    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist: DropDownListComponent;
-    @ViewChild('dropdownlist2', { read: DropDownListComponent, static: false }) dropdownlist2: DropDownListComponent;
-    @ViewChild('slider', { read: SliderComponent, static: false }) slider: SliderComponent;
-    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2: SliderComponent;
+    @ViewChild('chart', { read: ChartComponent, static: false }) chart!: ChartComponent;
+    @ViewChild('checkbox', { read: CheckBoxComponent, static: false }) checkbox!: CheckBoxComponent;
+    @ViewChild('checkbox2', { read: CheckBoxComponent, static: false }) checkbox2!: CheckBoxComponent;
+    @ViewChild('dropdownlist', { read: DropDownListComponent, static: false }) dropdownlist!: DropDownListComponent;
+    @ViewChild('dropdownlist2', { read: DropDownListComponent, static: false }) dropdownlist2!: DropDownListComponent;
+    @ViewChild('slider', { read: SliderComponent, static: false }) slider!: SliderComponent;
+    @ViewChild('slider2', { read: SliderComponent, static: false }) slider2!: SliderComponent;
 
     sampleData = [
         {
@@ -70,7 +70,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         unitInterval: 1000000,
         labels: {
             formatSettings: { decimalPlaces: 0 },
-            formatFunction: function (value, itemIndex, series, group) {
+            formatFunction: function (value: number) {
                 return Math.round(value / 1000) + ' K';
             }
         }
@@ -109,7 +109,7 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.chart.seriesGroups[0].endAngle = value + 360;
                 that.chart.update();
             }
-        });
+        } as EventListenerOrEventListenerObject);
         that.slider2.addEventListener('change', function (event: CustomEvent) {
             if (!that.chart.seriesGroups) {
                 return;
@@ -119,10 +119,12 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.chart.seriesGroups[0].radius = value;
                 that.chart.update();
             }
-        });
+        } as EventListenerOrEventListenerObject);
+
         that.dropdownlist2.addEventListener('change', function () {
             that.chart.colorScheme = <ChartColorScheme>that.dropdownlist2.selectedValues[0];
         });
+        
         that.dropdownlist.addEventListener('change', function () {
             if (!that.chart.seriesGroups) {
                 return;
@@ -135,7 +137,8 @@ export class AppComponent implements AfterViewInit, OnInit {
                 that.chart.update();
             }
         });
-        document.getElementById('checkBoxAutoRotateLabels').addEventListener('change', function (event: CustomEvent) {
+
+        document.getElementById('checkBoxAutoRotateLabels')?.addEventListener('change', function (event: CustomEvent) {
             if (!that.chart) {
                 return;
             }
@@ -145,12 +148,13 @@ export class AppComponent implements AfterViewInit, OnInit {
             if (that.chart.valueAxis && that.chart.valueAxis.labels) {
                 that.chart.valueAxis.labels.autoRotate = event.detail.value;
             }
-        });
-        document.getElementById('checkBoxTicksBetween').addEventListener('change', function (event: CustomEvent) {
+        } as EventListenerOrEventListenerObject);
+
+        document.getElementById('checkBoxTicksBetween')?.addEventListener('change', function (event: CustomEvent) {
             if (!that.chart || !that.chart.xAxis) {
                 return;
             }
             that.chart.xAxis.valuesOnTicks = !event.detail.value;
-        });
+        } as EventListenerOrEventListenerObject);
     }
 }

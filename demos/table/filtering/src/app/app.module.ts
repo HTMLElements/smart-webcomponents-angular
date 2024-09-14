@@ -9,8 +9,7 @@ import '@angular/compiler';
 @NgModule({
     declarations: [ AppComponent ],
     imports: [ BrowserModule, TableModule ],
-    bootstrap: [ AppComponent ],
-	
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }
