@@ -15,6 +15,7 @@
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
     "@smart-webcomponents-angular/grid": "19.0.8",
+	"@smart-webcomponents-angular/tabs": "19.0.8",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
     "zone.js": "~0.14.0"
