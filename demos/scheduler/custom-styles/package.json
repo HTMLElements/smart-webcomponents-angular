@@ -18,7 +18,7 @@
 	"@smart-webcomponents-angular/colorinput": "19.0.8",
 	"@smart-webcomponents-angular/input": "19.0.8",
 	"@smart-webcomponents-angular/switchbutton": "19.0.8",
-	"@smart-webcomponents-angular/scheduler": "19.0.8",
+	"@smart-webcomponents-angular/scheduler": "19.0.9",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
     "zone.js": "~0.14.0"

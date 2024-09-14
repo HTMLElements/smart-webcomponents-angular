@@ -16,7 +16,7 @@
     "@angular/router": "^18.1.0",
     "@smart-webcomponents-angular/progressbar": "19.0.8",
 	"@smart-webcomponents-angular/rating": "19.0.8",
-	"@smart-webcomponents-angular/scheduler": "19.0.8",
+	"@smart-webcomponents-angular/scheduler": "19.0.9",
 	"@smart-webcomponents-angular/rating": "19.0.8",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",

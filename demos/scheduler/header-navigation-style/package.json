@@ -17,7 +17,7 @@
     "@smart-webcomponents-angular/button": "19.0.8",
 	"@smart-webcomponents-angular/checkbox": "19.0.8",
 	"@smart-webcomponents-angular/radiobutton": "19.0.8",
-	"@smart-webcomponents-angular/scheduler": "19.0.8",
+	"@smart-webcomponents-angular/scheduler": "19.0.9",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
     "zone.js": "~0.14.0"
