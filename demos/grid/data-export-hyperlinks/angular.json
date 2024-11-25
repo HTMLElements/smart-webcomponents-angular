@@ -31,7 +31,11 @@
             "browser": "src/main.ts",
             "outputPath": "dist/demo",
             "polyfills": ["zone.js"],
-            "scripts": [],
+                     "scripts": [
+              "./node_modules/@smart-webcomponents-angular/grid/common/jszip.min.js",
+              "./node_modules/@smart-webcomponents-angular/grid/common/pdfmake.min.js",
+              "./node_modules/@smart-webcomponents-angular/grid/common/vfs_fonts.js"
+            ],	
             "styles": [
               	"./node_modules/@smart-webcomponents-angular/grid/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
