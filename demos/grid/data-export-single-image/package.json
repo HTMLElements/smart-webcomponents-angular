@@ -14,6 +14,7 @@
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
+    "@smart-webcomponents-angular/button": "20.0.86",
     "@smart-webcomponents-angular/grid": "20.0.86",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
