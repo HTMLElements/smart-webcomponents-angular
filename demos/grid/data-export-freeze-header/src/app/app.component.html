@@ -1,0 +1,10 @@
+<div class="demo-description">
+    <h1>Grid Grouping in Compact Mode</h1>
+    <p>The example demonstrates the grouping renderMode="compact".</p>
+</div>
+<smart-grid #grid id="grid" [onRowInit]="onRowInit" [sorting]="sorting" [selection]="selection" [dataSource]="dataSource"
+    [dataExport]="dataExport" [columns]="columns"></smart-grid>
+
+<smart-button data-target="#grid" data-toggle="exportData" data-arguments="xlsx" id="dataExport">Export to
+			XLSX</smart-button>
+			
