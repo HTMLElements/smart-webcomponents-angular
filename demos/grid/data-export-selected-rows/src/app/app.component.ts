@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿import { Component, ViewChild, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data'
@@ -7,6 +8,21 @@ import { GetData } from '../assets/data'
     templateUrl: './app.component.html',
     styleUrls: ['app.component.css'],
     encapsulation: ViewEncapsulation.None
+=======
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
+import { GetData } from '../assets/data';
+import { RouterOutlet } from '@angular/router';
+import { GridModule } from '@smart-webcomponents-angular/grid';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ RouterOutlet, ButtonModule, GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+>>>>>>> 620199ab98db9fa8cd0583aaf7cb3ee0405decae
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -37,7 +53,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 			row.attachments = [];
 			const maxAttachments = Math.floor(Math.random() * Math.floor(3)) + 1;
 			for (let i = 0; i < maxAttachments; i++) {
+<<<<<<< HEAD
 				row.attachments.push(`../../images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
+=======
+				row.attachments.push(`https://htmlelements.com/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
+>>>>>>> 620199ab98db9fa8cd0583aaf7cb3ee0405decae
 			}
 			row.attachments = row.attachments.join(',');
 			sampleData[i] = row;

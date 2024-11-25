@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @font-face {
   font-family: "smart-icons";
   src: url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.eot");
@@ -11,3 +12,18 @@
   font-weight: normal;
   font-style: normal;
 }
+=======
+@font-face {
+  font-family: "smart-icons";
+  src: url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.eot");
+  src: 
+	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff2")
+      format("woff2"),
+	url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.woff")
+      format("woff"),
+    url("https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/source/styles/font/smart-icons.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+>>>>>>> 620199ab98db9fa8cd0583aaf7cb3ee0405decae
