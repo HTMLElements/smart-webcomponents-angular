@@ -69,7 +69,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				const column = exportColumns[j];
 
 				if (column.dataField === 'Photo') {
-					let value = '../../images/phonebook/' + rowData.firstName.toLowerCase() + '.png';
+					let value = 'https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/demos/images/travel/phonebook/' + rowData.firstName.toLowerCase() + '.png';
 
 					let images: any = [];
 
