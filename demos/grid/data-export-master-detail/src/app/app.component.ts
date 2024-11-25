@@ -41,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			row.attachments = [];
 			const maxAttachments = Math.floor(Math.random() * Math.floor(3)) + 1;
 			for (let i = 0; i < maxAttachments; i++) {
-				row.attachments.push(`../assets/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
+				row.attachments.push(`https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
 			}
 			row.attachments = row.attachments.join(',');
 			sampleData[i] = row;
