@@ -40,6 +40,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 				row.attachments.push(`../assets/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
 			}
 			row.attachments = row.attachments.join(',');
+			
+			 const urls = ['https://www.jqwidgets.com', 'https://www.htmlelements.com', 'https://www.artavolo.com',]
+			row.url = urls[Math.floor(Math.random() * urls.length)];
+		
 			sampleData[i] = row;
 		}
 		return sampleData;
@@ -62,17 +66,32 @@ export class AppComponent implements AfterViewInit, OnInit {
 			'quantity: number',
 			'timeOfPurchase: date',
 			'expired: boolean',
-			'attachments: string'
+			'url: string'
 		]
 	})
 
-	layout = {
-		cardMinWidth: 300,
-		rowMinHeight: 40
-	}
-	
     dataExport = {
-		freezeHeader: true
+		cellFormatFunction: (index: number, dataField: string, value: any) => {
+			if (dataField === 'url') {
+				return `=HYPERLINK("${value}", "${value}")`
+			}
+			return null;
+		},
+		style: {
+			hyperlinks: {
+				color: '#358CCB'
+			},
+			red: {
+				backgroundColor: '#E94F37',
+				color: '#FFFFFF'
+			},
+			yellow: {
+				backgroundColor: '#FFEE93'
+			},
+			green: {
+				backgroundColor: '#63C7B2'
+			}
+		}
 	}
 	
 	selection = {
@@ -82,10 +101,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 	}
 
-	behavior = {
-		columnResizeMode: 'growAndShrink'
-	}
-	
     onRowInit = (index: number, row: any) => {
 		if (index === 0 || index === 3 || index === 7 || index === 8 || index === 4) {
 			row.selected = true;
@@ -93,17 +108,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 			
 	columns = [
-		{ label: 'Attachments', dataField: 'attachments', width: 300, showIcon: true, editor: 'image', template: 'image', cardHeight: 6 },
-		{ label: 'First Name', dataField: 'firstName', width: 300, showIcon: true, icon: 'firstName' },
-		{ label: 'Last Name', dataField: 'lastName', width: 300, showIcon: true, icon: 'lastName' },
-		{ label: 'Birthday', dataField: 'birthday', width: 300, showIcon: true, icon: 'birthday', formatSettings: { formatString: 'd' } },
-		{ label: 'Pet Name', dataField: 'petName', width: 300, showIcon: true, icon: 'petName' },
 		{ label: 'Country', dataField: 'country', width: 300, showIcon: true, icon: 'country' },
 		{ label: 'Product Name', dataField: 'productName', width: 300, showIcon: true, icon: 'productName' },
+		{ label: 'URL', cellsClassName: 'hyperlinks', dataField: 'url', width: 300, showIcon: true, editor: 'image', template: 'url' },
 		{ label: 'Price', dataField: 'price', width: 300, showIcon: true, icon: 'price', formatSettings: { formatString: 'c2' } },
 		{
-			label: 'Quantity', dataField: 'quantity', width: 300, showIcon: true, icon: 'quantity', formatFunction: function (settings: any) {
-				const value = settings.value;
+			label: 'Quantity', dataField: 'quantity', width: 300, showIcon: true, icon: 'quantity', cellsClassName: function (index: number, dataField: string, value: any) {
+
 				let className;
 				if (value < 20) {
 					className = 'red';
@@ -114,7 +125,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				else {
 					className = 'green';
 				}
-				settings.template = `<div class="${className}">${value}</div>`;
+				return className;
 			}
 		},
 		{ label: 'Time of Purchase', dataField: 'timeOfPurchase', width: 300, showIcon: true, icon: 'timeOfPurchase', formatSettings: { formatString: 'hh:mm tt' } },

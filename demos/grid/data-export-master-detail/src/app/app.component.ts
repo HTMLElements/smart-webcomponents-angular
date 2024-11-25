@@ -20,6 +20,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 	ngAfterViewInit(): void {
 	}
 	
+	behavior = {
+		columnResizeMode: 'growAndShrink'
+	}
+	
 	generateData = (length: number) => {
 		const sampleData = [], firstNames = ['Andrew', 'Nancy', 'Shelley', 'Regina', 'Yoshi', 'Antoni', 'Mayumi', 'Ian', 'Peter', 'Lars', 'Petra', 'Martin', 'Sven', 'Elio', 'Beate', 'Cheryl', 'Michael', 'Guylene'], lastNames = ['Fuller', 'Davolio', 'Burke', 'Murphy', 'Nagase', 'Saavedra', 'Ohno', 'Devling', 'Wilson', 'Peterson', 'Winkler', 'Bein', 'Petersen', 'Rossi', 'Vileid', 'Saylor', 'Bjorn', 'Nodier'], petNames = ['Sam', 'Bob', 'Lucky', 'Tommy', 'Charlie', 'Olliver', 'Mixie', 'Fluffy', 'Acorn', 'Beak'], countries = ['Bulgaria', 'USA', 'UK', 'Singapore', 'Thailand', 'Russia', 'China', 'Belize'], productNames = ['Black Tea', 'Green Tea', 'Caffe Espresso', 'Doubleshot Espresso', 'Caffe Latte', 'White Chocolate Mocha', 'Cramel Latte', 'Caffe Americano', 'Cappuccino', 'Espresso Truffle', 'Espresso con Panna', 'Peppermint Mocha Twist'];
 		for (let i = 0; i < length; i++) {
@@ -44,48 +48,119 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 		return sampleData;
 	}
+	
+	  onRowInit(index, row) => {
+		if (index === 0) {
+			row.showDetail = true;
+		}
+	  }
+	  
+	  onRowDetailInit = (index, row, detail) => {
+		const grid = document.createElement('div');
+
+		detail.appendChild(grid);
+
+		const gridInstance = new Smart.Grid(grid, {
+			dataSource: new Smart.DataAdapter(
+				{
+					dataSource: getCountriesData().filter(data => data.ID === row.data.ID),
+					dataFields:
+						[
+							'ID: number',
+							'Country: string',
+							'Area: number',
+							'Population_Urban: number',
+							'Population_Rural: number',
+							'Population_Total: number',
+							'GDP_Agriculture: number',
+							'GDP_Industry: number',
+							'GDP_Services: number',
+							'GDP_Total: number'
+						]
+				}),
+			columns: [
+				'Population_Urban',
+				'Population_Rural',
+				'Population_Total',
+				'GDP_Total'
+			]
+		});
+	},
 
 	sorting = {
 		enabled: true
 	}
 	
+	rowDetail = {
+		enabled: true,
+		visible: true,
+		height: 120
+	}
+	
 	dataSource = new Smart.DataAdapter({
-	    dataSource: this.generateData(50),
-		dataFields: [
-			'firstName: string',
-			'lastName: string',
-			'birthday: date',
-			'petName: string',
-			'country: string',
-			'productName: string',
-			'price: number',
-			'quantity: number',
-			'timeOfPurchase: date',
-			'expired: boolean',
-			'attachments: string'
+	   dataSource: getCountriesData(),
+	   dataFields:
+		[
+			'ID: number',
+			'Country: string',
+			'Area: number',
+			'Population_Urban: number',
+			'Population_Rural: number',
+			'Population_Total: number',
+			'GDP_Agriculture: number',
+			'GDP_Industry: number',
+			'GDP_Services: number',
+			'GDP_Total: number'
 		]
 	})
 
-	layout = {
-		cardMinWidth: 300,
-		rowMinHeight: 40
+    dataExport = {
+		getSpreadsheets: () => {
+			const spreadsheets = [];
+
+			for (let i = 0; i < grid.rows.length; i++) {
+				const row = grid.rows[i];
+
+				const data = getCountriesData().filter(data => data.ID === row.data.ID);
+				const dataFields = [
+					'Population_Urban',
+					'Population_Rural',
+					'Population_Total',
+					'GDP_Total'
+				];
+				const columns = [
+					'Population_Urban',
+					'Population_Rural',
+					'Population_Total',
+					'GDP_Total'
+				];
+
+				spreadsheets.push({
+					label: row.data['Country'],
+					dataSource: data,
+					dataFields: dataFields,
+					columns: columns
+				})
+			}
+		}
+        
 	}
 	
-    dataExport = {
-		freezeHeader: true
+	appearance = {
+		showRowHeaderNumber: true,
+		allowRowDetailToggleAnimation: true
 	}
 	
 	selection = {
 		enabled: true,
 		checkBoxes: {
 			enabled: true
-		}
+		},
+		allowRowHeaderSelection: true,
+		allowColumnHeaderSelection: true,
+		mode: 'checkBox'
 	}
 
-	behavior = {
-		columnResizeMode: 'growAndShrink'
-	}
-	
     onRowInit = (index: number, row: any) => {
 		if (index === 0 || index === 3 || index === 7 || index === 8 || index === 4) {
 			row.selected = true;
@@ -93,11 +168,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 			
 	columns = [
-		{ label: 'Attachments', dataField: 'attachments', width: 300, showIcon: true, editor: 'image', template: 'image', cardHeight: 6 },
 		{ label: 'First Name', dataField: 'firstName', width: 300, showIcon: true, icon: 'firstName' },
 		{ label: 'Last Name', dataField: 'lastName', width: 300, showIcon: true, icon: 'lastName' },
 		{ label: 'Birthday', dataField: 'birthday', width: 300, showIcon: true, icon: 'birthday', formatSettings: { formatString: 'd' } },
 		{ label: 'Pet Name', dataField: 'petName', width: 300, showIcon: true, icon: 'petName' },
+		{ label: 'Attachments', dataField: 'attachments', width: 300, showIcon: true, editor: 'image', template: 'image', cardHeight: 6 },
 		{ label: 'Country', dataField: 'country', width: 300, showIcon: true, icon: 'country' },
 		{ label: 'Product Name', dataField: 'productName', width: 300, showIcon: true, icon: 'productName' },
 		{ label: 'Price', dataField: 'price', width: 300, showIcon: true, icon: 'price', formatSettings: { formatString: 'c2' } },

@@ -49,6 +49,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 		enabled: true
 	}
 	
+	behavior = {
+		columnResizeMode: 'growAndShrink'
+	}
+	
 	dataSource = new Smart.DataAdapter({
 	    dataSource: this.generateData(50),
 		dataFields: [
@@ -66,13 +70,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 		]
 	})
 
-	layout = {
-		cardMinWidth: 300,
-		rowMinHeight: 40
-	}
-	
     dataExport = {
-		freezeHeader: true
+		onlySelected: true
 	}
 	
 	selection = {
@@ -82,10 +81,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 	}
 
-	behavior = {
-		columnResizeMode: 'growAndShrink'
-	}
-	
     onRowInit = (index: number, row: any) => {
 		if (index === 0 || index === 3 || index === 7 || index === 8 || index === 4) {
 			row.selected = true;
@@ -93,11 +88,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 			
 	columns = [
-		{ label: 'Attachments', dataField: 'attachments', width: 300, showIcon: true, editor: 'image', template: 'image', cardHeight: 6 },
 		{ label: 'First Name', dataField: 'firstName', width: 300, showIcon: true, icon: 'firstName' },
 		{ label: 'Last Name', dataField: 'lastName', width: 300, showIcon: true, icon: 'lastName' },
 		{ label: 'Birthday', dataField: 'birthday', width: 300, showIcon: true, icon: 'birthday', formatSettings: { formatString: 'd' } },
 		{ label: 'Pet Name', dataField: 'petName', width: 300, showIcon: true, icon: 'petName' },
+		{ label: 'Attachments', dataField: 'attachments', width: 300, showIcon: true, editor: 'image', template: 'image', cardHeight: 6 },
 		{ label: 'Country', dataField: 'country', width: 300, showIcon: true, icon: 'country' },
 		{ label: 'Product Name', dataField: 'productName', width: 300, showIcon: true, icon: 'productName' },
 		{ label: 'Price', dataField: 'price', width: 300, showIcon: true, icon: 'price', formatSettings: { formatString: 'c2' } },
