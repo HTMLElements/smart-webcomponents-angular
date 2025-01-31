@@ -1,47 +1,32 @@
 {
   "name": "angular-barcode-customization",
-  "description": "Angular barcode customization example. This example demonstrates commercial components by jQWidgets(https://www.jqwidgets.com/license/)",
-  "version": "1.0.2",
-  "homepage": "https://www.htmlelements.com/",
-   "dependencies": {
-    "@angular/animations": "~13.3.0",
-    "@angular/common": "~13.3.0",
-    "@angular/compiler": "~13.3.0",
-    "@angular/core": "~13.3.0",
-    "@angular/elements": "^13.3.2",
-    "@angular/forms": "~13.3.0",
-    "@angular/platform-browser": "~13.3.0",
-    "@angular/platform-browser-dynamic": "~13.3.0",
-    "@angular/router": "~13.3.0",
-    "@smart-webcomponents-angular/button": "13.1.70",
-	"@smart-webcomponents-angular/numberinput": "13.1.70",
-	"@smart-webcomponents-angular/colorpicker": "13.1.70",
-	"@smart-webcomponents-angular/input": "13.1.70",
-	"@smart-webcomponents-angular/barcode": "13.1.70",
-    "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
-  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "build": "ng build"
+  },
+  "dependencies": {
+    "@angular/animations": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
+    "@angular/router": "^19.0.0",
+    "@smart-webcomponents-angular/button": "22.0.2",
+	"@smart-webcomponents-angular/numberinput": "22.0.2",
+	"@smart-webcomponents-angular/colorpicker": "22.0.2",
+	"@smart-webcomponents-angular/input": "22.0.2",
+	"@smart-webcomponents-angular/barcode": "22.0.2",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.5.0",
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.3.0",
-    "@angular/cli": "~13.3.0",
-    "@angular/compiler-cli": "~13.3.0",
-    "@types/jasmine": "~3.10.0",
-    "@types/node": "^12.11.1",
-    "jasmine-core": "~4.0.0",
-    "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.1.0",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.6.2"
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular/cli": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
+    "typescript": "~5.5.0"
   }
 }

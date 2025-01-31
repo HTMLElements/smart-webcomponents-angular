@@ -1,11 +1,14 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { MaskedTextBoxComponent } from '@smart-webcomponents-angular/maskedtextbox';
 
+import { MaskedTextBoxModule } from '@smart-webcomponents-angular/maskedtextbox';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  MaskedTextBoxModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

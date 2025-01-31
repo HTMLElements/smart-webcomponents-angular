@@ -1,15 +1,22 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { MenuComponent, MenuItem } from '@smart-webcomponents-angular/menu';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
 import { InputComponent, InputEditor } from '@smart-webcomponents-angular/input';
 import { Button } from '@smart-webcomponents-angular/button';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { MenuModule } from '@smart-webcomponents-angular/menu';
+
+import { TableModule } from '@smart-webcomponents-angular/table';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, MenuModule, TableModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

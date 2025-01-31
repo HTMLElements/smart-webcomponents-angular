@@ -1,12 +1,15 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';import { TabsModule } from '@smart-webcomponents-angular/tabs';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  RadioButtonModule, TabsModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

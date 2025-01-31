@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { MenuComponent, MenuItem } from '@smart-webcomponents-angular/menu';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { MenuModule } from '@smart-webcomponents-angular/menu';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ ButtonModule, MenuModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

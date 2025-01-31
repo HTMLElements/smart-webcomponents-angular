@@ -1,16 +1,18 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 import { MenuComponent, Menu } from '@smart-webcomponents-angular/menu';
 import { GetData } from '../assets/data';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';import { GridModule } from '@smart-webcomponents-angular/grid';import { InputModule } from '@smart-webcomponents-angular/input';import { MenuModule } from '@smart-webcomponents-angular/menu';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, GridModule, InputModule, MenuModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

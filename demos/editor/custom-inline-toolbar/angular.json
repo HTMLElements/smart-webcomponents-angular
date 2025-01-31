@@ -33,9 +33,12 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/buttongroup/styles/smart.buttongroup.css",
+				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.checkbox.css",
+				"./node_modules/@smart-webcomponents-angular/input/styles/smart.input.css",
+				"./node_modules/@smart-webcomponents-angular/window/styles/smart.window.css",
 				"./node_modules/@smart-webcomponents-angular/editor/styles/smart.editor.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
               "src/assets/fonts.css",

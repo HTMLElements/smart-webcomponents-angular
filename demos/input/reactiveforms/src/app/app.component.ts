@@ -1,11 +1,23 @@
-﻿import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Validators, FormBuilder, FormArray } from '@angular/forms';
 
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { FormsModule } from '@angular/forms';
+
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
+  selector: 'app-root',
+  standalone: true,
+  imports: [ ReactiveFormsModule, DropDownListModule, ButtonModule, InputModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent {
 	fb;
 	profileForm;

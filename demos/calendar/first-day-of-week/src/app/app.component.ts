@@ -1,11 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  DropDownListModule, CalendarModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

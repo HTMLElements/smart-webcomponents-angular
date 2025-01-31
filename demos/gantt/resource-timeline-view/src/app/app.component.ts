@@ -1,12 +1,16 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { GanttChartComponent, GanttChartTask, GanttChartResourceTimelineView, GanttChart } from '@smart-webcomponents-angular/ganttchart';
 
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  RadioButtonModule, GanttChartModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

@@ -1,16 +1,18 @@
 import { Component, AfterViewInit, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { slideInAnimation } from './animations';
 
 import { AccordionComponent, AccordionItem } from '@smart-webcomponents-angular/accordion';
+import { AccordionModule } from '@smart-webcomponents-angular/accordion';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  animations: [slideInAnimation],
-  encapsulation: ViewEncapsulation.None
+  standalone: true,
+  imports: [AccordionModule, RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('accordion', { read: AccordionComponent, static: false }) accordion!: AccordionComponent;
 

@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.checkbox.css",
 				"./node_modules/@smart-webcomponents-angular/tank/styles/smart.tank.css",
 				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.common.css",

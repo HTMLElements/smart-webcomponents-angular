@@ -1,11 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ButtonGroupComponent } from '@smart-webcomponents-angular/buttongroup';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 
+import { ButtonGroupModule } from '@smart-webcomponents-angular/buttongroup';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
 @Component({
-    selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonGroupModule, InputModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	

@@ -1,11 +1,14 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
 
+import { TableModule } from '@smart-webcomponents-angular/table';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  TableModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -44,7 +47,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     pageIndex: number = 0;
 
-    pageSize: string = '10';
+    pageSize: number = 10;
 
     columns: TableColumn[] = [{
         label: 'Title',

@@ -1,14 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { DropDownButtonComponent } from '@smart-webcomponents-angular/dropdownbutton';
 import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/radiobutton';
 import { TankComponent } from '@smart-webcomponents-angular/tank';
 
+import { DropDownButtonModule } from '@smart-webcomponents-angular/dropdownbutton';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { TankModule } from '@smart-webcomponents-angular/tank';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  DropDownButtonModule, RadioButtonModule, TankModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

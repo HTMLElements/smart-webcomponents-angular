@@ -1,10 +1,21 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormComponent, Smart } from '@smart-webcomponents-angular/form';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 
+import { FormModule } from '@smart-webcomponents-angular/form';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { DateTimePickerModule } from '@smart-webcomponents-angular/datetimepicker';
+
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html'
+  selector: 'app-root',
+  standalone: true,
+  imports: [  FormModule, DropDownListModule, DateTimePickerModule, InputModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

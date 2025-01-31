@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { Directive, Input } from "@angular/core";
 import {
 	Validator,
@@ -22,11 +22,24 @@ export class User {
 	) { }
 }
 
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { MaskedTextBoxModule } from '@smart-webcomponents-angular/maskedtextbox';
+
+import { PasswordTextBoxModule } from '@smart-webcomponents-angular/passwordtextbox';
+
+import { FormsModule } from '@angular/forms';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ FormsModule, DropDownListModule, ButtonModule, PasswordTextBoxModule, MaskedTextBoxModule, InputModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

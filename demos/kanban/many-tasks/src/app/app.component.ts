@@ -1,4 +1,4 @@
-﻿import {
+import {
   Component,
   ViewChild,
   OnInit,
@@ -336,12 +336,16 @@ function getKanbanData() {
   return data;
 }
 
+import { KanbanModule } from '@smart-webcomponents-angular/kanban';
+
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [  KanbanModule ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('kanban', { read: KanbanComponent, static: false }) kanban!: KanbanComponent;
 

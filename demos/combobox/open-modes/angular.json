@@ -33,9 +33,10 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/combobox/styles/smart.combobox.css",
+				"./node_modules/@smart-webcomponents-angular/dropdownbutton/styles/smart.dropdownbutton.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"

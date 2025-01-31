@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/splitter/styles/smart.splitter.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",

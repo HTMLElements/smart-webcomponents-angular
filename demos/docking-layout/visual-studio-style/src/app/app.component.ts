@@ -1,15 +1,23 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayout';
 import { TreeComponent } from '@smart-webcomponents-angular/tree';
 import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
 import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
+import { DockingLayoutModule } from '@smart-webcomponents-angular/dockinglayout';
+
+import { TreeModule } from '@smart-webcomponents-angular/tree';
+
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ DockingLayoutModule, TreeModule, MultilineTextBoxModule, TextBoxModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

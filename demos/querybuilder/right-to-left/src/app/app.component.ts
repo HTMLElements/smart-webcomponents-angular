@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { QueryBuilderComponent } from '@smart-webcomponents-angular/querybuilder';
 
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { QueryBuilderModule } from '@smart-webcomponents-angular/querybuilder';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  CheckBoxModule, QueryBuilderModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

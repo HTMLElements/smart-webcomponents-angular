@@ -1,4 +1,4 @@
-﻿import {
+import {
 	Component,
 	OnInit,
 	AfterViewInit,
@@ -7,12 +7,20 @@
 import { DynamicSmartButton } from './dynamic-smart-button/dynamic-smart-button.component';
 import { smartDomService } from './smart-dom.service';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { DynamicSmartButton } from './dynamic-smart-button/dynamic-smart-button.component';
+
+import { smartDomService } from './smart-dom.service';
+
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
-	encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
 	constructor(private smartDomService: smartDomService) { }
 

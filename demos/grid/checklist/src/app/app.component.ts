@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GridComponent, GridLayout, GridEditing, GridDataSourceSettings, GridColumn, GridSelection, Smart } from '@smart-webcomponents-angular/grid';
 
 function GenerateData() {
@@ -289,11 +289,14 @@ function GenerateData() {
     return orderData;
 }
 
+import { GridModule } from '@smart-webcomponents-angular/grid';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -327,7 +330,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 		allowCellSelection: true,
 		allowRowHeaderSelection: true,
 		allowColumnHeaderSelection: true,
-		mode: 'extended'allowHover: true
+		mode: 'extended',
+		allowHover: true
 	};
 	
 	editing: any = {
@@ -359,11 +363,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 					},
 					onRender: function (index, dataField, element, data) {
 						const items = typeof data[dataField] === 'string' && data[dataField] ? JSON.parse(data[dataField]) : data[dataField];
-						const selectedItems = [];
+						const selectedItems: any[] = [];
 						const comboBox = element.firstElementChild;
 comboBox.style.height = '100%';
 						if (items) {
-							const comboItems = items.map((item) => {
+							const comboItems = items.map((item: any) => {
 								const mapItem = {
 									label: item.text,
 									value: item.text
@@ -390,8 +394,8 @@ comboBox.style.height = '100%';
 					getValue: function () {
 						const comboBox = this.firstElementChild;
 
-						const items = comboBox.dataSource.map((item) => {
-							const selectedItem = comboBox.selectedItems.find((selectedItem) => {
+						const items = comboBox.dataSource.map((item: any) => {
+							const selectedItem = comboBox.selectedItems.find((selectedItem: any) => {
 								return item.value === selectedItem.value;
 							});
 

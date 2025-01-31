@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/maskedtextbox/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/maskedtextbox/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/maskedtextbox/styles/smart.maskedtextbox.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/maskedtextbox/styles/smart.common.css",

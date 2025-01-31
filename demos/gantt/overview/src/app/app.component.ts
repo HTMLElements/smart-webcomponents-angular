@@ -1,11 +1,16 @@
-﻿import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { GanttChartComponent, GanttChartTaskColumn } from '@smart-webcomponents-angular/ganttchart';
 
+import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
+
+import { FormsModule } from '@angular/forms';
+
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['app.component.css'],
-	encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ FormsModule, GanttChartModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent {

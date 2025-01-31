@@ -1,14 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent, Button } from '@smart-webcomponents-angular/button';
 import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
 import { SplitterComponent } from '@smart-webcomponents-angular/splitter';
 import { GetData } from '../assets/data';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';import { GridModule } from '@smart-webcomponents-angular/grid';import { SplitterModule } from '@smart-webcomponents-angular/splitter';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, GridModule, SplitterModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

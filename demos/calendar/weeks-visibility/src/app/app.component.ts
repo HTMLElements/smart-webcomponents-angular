@@ -1,4 +1,4 @@
-﻿import {
+import {
   Component,
   ViewChild,
   OnInit,
@@ -7,11 +7,16 @@
 } from "@angular/core";
 import { CalendarComponent } from "@smart-webcomponents-angular/calendar";
 
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
+
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+  selector: 'app-root',
+  standalone: true,
+  imports: [  CalendarModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild("calendar", { read: CalendarComponent, static: false }) calendar!: CalendarComponent;
 

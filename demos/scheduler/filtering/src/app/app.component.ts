@@ -1,15 +1,26 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
 import { SchedulerComponent, SchedulerEvent, SchedulerResource, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
+
+import { SchedulerModule } from '@smart-webcomponents-angular/scheduler';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, CheckBoxModule, RadioButtonModule, SwitchButtonModule, SchedulerModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

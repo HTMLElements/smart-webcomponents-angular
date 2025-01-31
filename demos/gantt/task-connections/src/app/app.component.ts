@@ -1,13 +1,22 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { GanttChartComponent, GanttChartTask } from '@smart-webcomponents-angular/ganttchart';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, DropDownListModule, GanttChartModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('createConButton', { read: ButtonComponent, static: false })
     createConButton!: ButtonComponent;

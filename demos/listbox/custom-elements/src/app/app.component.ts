@@ -1,14 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
 import { Slider } from '@smart-webcomponents-angular/slider';
 import { SwitchButton } from '@smart-webcomponents-angular/switchbutton';
 
+import { ListBoxModule } from '@smart-webcomponents-angular/listbox';
+
+import { SliderModule } from '@smart-webcomponents-angular/slider';
+
+import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ListBoxModule, SliderModule, SwitchButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

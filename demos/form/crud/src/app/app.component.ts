@@ -1,10 +1,19 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { Smart } from '@smart-webcomponents-angular/form';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 
+import { FormModule } from '@smart-webcomponents-angular/form';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+  selector: 'app-root',
+  standalone: true,
+  imports: [  FormModule, ButtonModule, DropDownListModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	 

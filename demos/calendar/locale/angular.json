@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/calendar/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/calendar/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/calendar/styles/smart.calendar.css",
 				"./node_modules/@smart-webcomponents-angular/dropdownlist/styles/smart.dropdownlist.css",
 				"./node_modules/@smart-webcomponents-angular/calendar/styles/smart.common.css",

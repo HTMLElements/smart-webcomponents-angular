@@ -1,12 +1,15 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CalendarComponent, Calendar } from '@smart-webcomponents-angular/calendar';
 import { Tooltip } from '@smart-webcomponents-angular/tooltip';
 
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  CalendarModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

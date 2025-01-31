@@ -1,15 +1,26 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { ToastComponent, ToastType } from '@smart-webcomponents-angular/toast';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { ToastModule } from '@smart-webcomponents-angular/toast';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ ButtonModule, CheckBoxModule, DropDownListModule, RadioButtonModule, ToastModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

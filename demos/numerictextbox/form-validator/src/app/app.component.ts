@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { Directive, Input } from "@angular/core";
 import {
 	Validator,
@@ -20,11 +20,20 @@ export class Shipment {
 	) { }
 }
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { NumericTextBoxModule } from '@smart-webcomponents-angular/numerictextbox';
+
+import { FormsModule } from '@angular/forms';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ FormsModule, ButtonModule, InputModule, NumericTextBoxModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

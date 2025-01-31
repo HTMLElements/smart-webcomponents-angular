@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/timepicker/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/timepicker/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/timepicker/styles/smart.timepicker.css",
 				"./node_modules/@smart-webcomponents-angular/timepicker/styles/smart.common.css",
               "src/assets/fonts.css",

@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/rating/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/rating/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/rating/styles/smart.rating.css",
 				"./node_modules/@smart-webcomponents-angular/rating/styles/smart.rating.css",
 				"./node_modules/@smart-webcomponents-angular/rating/styles/smart.common.css",

@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 import { DateRangeInputComponent } from '@smart-webcomponents-angular/daterangeinput';
@@ -6,12 +6,22 @@ import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilin
 import { WindowComponent } from '@smart-webcomponents-angular/window';
 import { Tooltip } from '@smart-webcomponents-angular/tooltip';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
+
+import { DateRangeInputModule } from '@smart-webcomponents-angular/daterangeinput';
+
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { WindowModule } from '@smart-webcomponents-angular/window';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, CalendarModule, DateRangeInputModule, MultilineTextBoxModule, WindowModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

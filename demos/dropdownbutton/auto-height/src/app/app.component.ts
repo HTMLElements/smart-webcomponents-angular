@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { DropDownButtonComponent } from '@smart-webcomponents-angular/dropdownbutton';
 import { TreeComponent, TreeItem } from '@smart-webcomponents-angular/tree';
 
+import { DropDownButtonModule } from '@smart-webcomponents-angular/dropdownbutton';
+
+import { TreeModule } from '@smart-webcomponents-angular/tree';
+
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css'],
-	encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  DropDownButtonModule, TreeModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

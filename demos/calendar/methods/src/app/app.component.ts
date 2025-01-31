@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, CalendarModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	

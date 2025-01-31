@@ -33,8 +33,9 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/scrollbar/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/scrollbar/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/scrollbar/styles/smart.scrollbar.css",
+				"./node_modules/@smart-webcomponents-angular/slider/styles/smart.slider.css",
 				"./node_modules/@smart-webcomponents-angular/scrollbar/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"

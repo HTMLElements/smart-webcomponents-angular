@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/progressbar/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/progressbar/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/progressbar/styles/smart.progressbar.css",
 				"./node_modules/@smart-webcomponents-angular/table/styles/smart.table.css",
 				"./node_modules/@smart-webcomponents-angular/progressbar/styles/smart.common.css",

@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 import { MultiComboInputComponent } from '@smart-webcomponents-angular/multicomboinput';
 import { EditorComponent, EditorContentFilteringTagFilterMode } from '@smart-webcomponents-angular/editor';
@@ -12,11 +12,18 @@ interface InputDataSource {
     }[]
 }
 
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { MultiComboInputModule } from '@smart-webcomponents-angular/multicomboinput';
+
+import { EditorModule } from '@smart-webcomponents-angular/editor';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  InputModule, MultiComboInputModule, EditorModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

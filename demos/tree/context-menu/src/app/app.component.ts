@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { MenuComponent } from '@smart-webcomponents-angular/menu';
 import { TreeComponent, TreeItem, TreeItemsGroup } from '@smart-webcomponents-angular/tree';
 
+import { MenuModule } from '@smart-webcomponents-angular/menu';
+
+import { TreeModule } from '@smart-webcomponents-angular/tree';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  MenuModule, TreeModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

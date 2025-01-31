@@ -1,13 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GanttChartComponent, GanttChartTaskColumn, GanttChartView } from '@smart-webcomponents-angular/ganttchart';
 import { NumberInputComponent, NumberInput } from '@smart-webcomponents-angular/numberinput';
 import { SwitchButtonComponent, SwitchButton } from '@smart-webcomponents-angular/switchbutton';
 
+import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
+
+import { NumberInputModule } from '@smart-webcomponents-angular/numberinput';
+
+import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  GanttChartModule, NumberInputModule, SwitchButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

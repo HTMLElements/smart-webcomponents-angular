@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { TreeComponent } from '@smart-webcomponents-angular/tree';
 import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
+import { TreeModule } from '@smart-webcomponents-angular/tree';
+
+import { SchedulerModule } from '@smart-webcomponents-angular/scheduler';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  TreeModule, SchedulerModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

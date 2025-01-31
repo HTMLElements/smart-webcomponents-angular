@@ -1,12 +1,16 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
-import { GetData } from '../assets/data'
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
+import { GetData } from '../assets/data';
+
+import { GridModule } from '@smart-webcomponents-angular/grid';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -37,7 +41,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			row.attachments = [];
 			const maxAttachments = Math.floor(Math.random() * Math.floor(3)) + 1;
 			for (let i = 0; i < maxAttachments; i++) {
-				row.attachments.push(`https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
+				row.attachments.push(`https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/travel/${Math.floor(Math.random() * 36) + 1}.jpg`);
 			}
 			row.attachments = row.attachments.join(',');
 			sampleData[i] = row;
@@ -50,29 +54,101 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	dataSource = new Smart.DataAdapter({
-	    dataSource: this.generateData(50),
+	    dataSource:  [
+                {
+                    firstName: 'Andrew',
+                    lastName: 'Burke',
+                    product: {
+                        name: 'Ice Coffee', price: 10, quantity: 3, total: 30
+                    }
+                },
+                {
+                    firstName: 'Petra',
+                    lastName: 'Williams',
+                    product: {
+                        name: 'Espresso', price: 7, quantity: 5, total: 35
+                    }
+                },
+                {
+                    firstName: 'Anthony',
+                    lastName: 'Baker',
+                    product: {
+                        name: 'Frappucino', price: 6, quantity: 4, total: 24
+                    }
+                }
+            ],
 		dataFields: [
-			'firstName: string',
-			'lastName: string',
-			'birthday: date',
-			'petName: string',
-			'country: string',
-			'productName: string',
-			'price: number',
-			'quantity: number',
-			'timeOfPurchase: date',
-			'expired: boolean',
-			'attachments: string'
+		    { name: 'firstName', dataType: 'string' },
+			{ name: 'lastName', dataType: 'string' },
+			{ name: 'productName', map: 'product.name', dataType: 'string' },
+			{ name: 'price', map: 'product.price', dataType: 'number' },
+			{ name: 'quantity', map: 'product.quantity', dataType: 'number' },
+			{ name: 'total', map: 'product.total', dataType: 'number' }
 		]
 	})
 
-	layout = {
-		cardMinWidth: 300,
-		rowMinHeight: 40
-	}
-	
     dataExport = {
-		freezeHeader: true
+		 style: {
+			border: '1px solid #bbbbbb',
+			borderCollapse: 'collapse',
+			header: {
+				height: '30px',
+				border: '1px solid #bbbbbb',
+				fontFamily: 'Helvetica',
+				fontSize: '13px',
+				color: '#ffffff',
+				backgroundColor: '#6610F2',
+				fontWeight: '400',
+				firstName: {
+					width: '150px'
+				},
+				lastName: {
+					width: '150px'
+				},
+				productName: {
+					width: '150px'
+				},
+				quantity: {
+					textAlign: 'right',
+					width: '150px'
+				},
+				price: {
+					textAlign: 'right',
+					format: 'c2',
+					width: '150px'
+				}
+			},
+			columns: {
+				border: '1px solid #bbbbbb',
+				fontFamily: 'Helvetica',
+				fontSize: '13px',
+				quantity: {
+					textAlign: 'right'
+				},
+				price: {
+					textAlign: 'right',
+					format: 'c2'
+				}
+			},
+			rows: {
+				height: '30px',
+				0: {
+					border: '1px solid #bbbbbb',
+					color: '#ffffff',
+					backgroundColor: '#00D647',
+				},
+				1: {
+					border: '1px solid #bbbbbb',
+					color: '#ffffff',
+					backgroundColor: '#FEC101',
+				},
+				2: {
+					border: '1px solid #bbbbbb',
+					color: '#ffffff',
+					backgroundColor: '#00D647',
+				}
+			}
+		}
 	}
 	
 	selection = {
@@ -82,10 +158,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 		}
 	}
 
-	behavior = {
-		columnResizeMode: 'growAndShrink'
-	}
-	
     onRowInit = (index: number, row: any) => {
 		if (index === 0 || index === 3 || index === 7 || index === 8 || index === 4) {
 			row.selected = true;
@@ -93,11 +165,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 			
 	columns = [
-		{ label: 'Attachments', dataField: 'attachments', width: 300, showIcon: true, editor: 'image', template: 'image', cardHeight: 6 },
 		{ label: 'First Name', dataField: 'firstName', width: 300, showIcon: true, icon: 'firstName' },
 		{ label: 'Last Name', dataField: 'lastName', width: 300, showIcon: true, icon: 'lastName' },
 		{ label: 'Birthday', dataField: 'birthday', width: 300, showIcon: true, icon: 'birthday', formatSettings: { formatString: 'd' } },
 		{ label: 'Pet Name', dataField: 'petName', width: 300, showIcon: true, icon: 'petName' },
+		{ label: 'Attachments', dataField: 'attachments', width: 300, showIcon: true, editor: 'image', template: 'image', cardHeight: 6 },
 		{ label: 'Country', dataField: 'country', width: 300, showIcon: true, icon: 'country' },
 		{ label: 'Product Name', dataField: 'productName', width: 300, showIcon: true, icon: 'productName' },
 		{ label: 'Price', dataField: 'price', width: 300, showIcon: true, icon: 'price', formatSettings: { formatString: 'c2' } },

@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
 import { EditorComponent, EditMode } from '@smart-webcomponents-angular/editor';
 
+import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
+
+import { EditorModule } from '@smart-webcomponents-angular/editor';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ SwitchButtonModule, EditorModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

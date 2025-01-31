@@ -1,13 +1,16 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
 import { GetKanbanData } from '../assets/data';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';import { KanbanModule } from '@smart-webcomponents-angular/kanban';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, KanbanModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

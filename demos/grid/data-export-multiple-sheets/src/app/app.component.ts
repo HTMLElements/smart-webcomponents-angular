@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
-import { GetData } from '../assets/data'
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
+import { GetData } from '../assets/data';
+
+import { GridModule } from '@smart-webcomponents-angular/grid';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+import { TabsModule } from '@smart-webcomponents-angular/tabs';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, TabsModule, GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent  {

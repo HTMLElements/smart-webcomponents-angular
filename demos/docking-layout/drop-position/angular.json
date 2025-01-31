@@ -33,10 +33,12 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/dockinglayout/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/array/styles/smart.base.css",
+				"./node_modules/@smart-webcomponents-angular/array/styles/smart.array.css",
 				"./node_modules/@smart-webcomponents-angular/dockinglayout/styles/smart.dockinglayout.css",
 				"./node_modules/@smart-webcomponents-angular/layout/styles/smart.layout.css",
-				"./node_modules/@smart-webcomponents-angular/dockinglayout/styles/smart.common.css",
+				"./node_modules/@smart-webcomponents-angular/tabs/styles/smart.tabs.css",
+				"./node_modules/@smart-webcomponents-angular/array/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"
             ],

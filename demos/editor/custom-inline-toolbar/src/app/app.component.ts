@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { EditorComponent, ToolbarItem } from '@smart-webcomponents-angular/editor';
 import { ButtonGroup } from '@smart-webcomponents-angular/buttongroup';
 
@@ -6,11 +6,16 @@ interface CustomElement extends HTMLElement {
     customElement: any
 }
 
+import { EditorModule } from '@smart-webcomponents-angular/editor';
+
+import { ButtonGroupModule } from '@smart-webcomponents-angular/buttongroup';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ EditorModule, ButtonGroupModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

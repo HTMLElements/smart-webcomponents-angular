@@ -33,11 +33,15 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/multicomboinput/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/multicomboinput/styles/smart.multicomboinput.css",
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
 				"./node_modules/@smart-webcomponents-angular/input/styles/smart.input.css",
-				"./node_modules/@smart-webcomponents-angular/multicomboinput/styles/smart.common.css",
+				"./node_modules/@smart-webcomponents-angular/menu/styles/smart.menu.css",
+				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
+				"./node_modules/@smart-webcomponents-angular/timepicker/styles/smart.timepicker.css",
+				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"
             ],

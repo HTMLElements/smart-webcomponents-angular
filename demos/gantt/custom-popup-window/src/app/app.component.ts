@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent, RepeatButton, Button } from '@smart-webcomponents-angular/button';
 import { GanttChartComponent, GanttChartTask } from '@smart-webcomponents-angular/ganttchart';
 import { MultilineTextBoxComponent, MultilineTextBox } from '@smart-webcomponents-angular/multilinetextbox';
@@ -6,12 +6,22 @@ import { RepeatButtonComponent } from '@smart-webcomponents-angular/button';
 import { TextBoxComponent, TextBox } from '@smart-webcomponents-angular/textbox';
 import { Window, TabPosition, WindowFooterPosition } from '@smart-webcomponents-angular/window';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
+
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
+
+import { WindowModule } from '@smart-webcomponents-angular/window';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, WindowModule, GanttChartModule, MultilineTextBoxModule, TextBoxModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

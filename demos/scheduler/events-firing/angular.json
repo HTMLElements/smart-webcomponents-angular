@@ -33,9 +33,12 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/scheduler/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/menu/styles/smart.base.css",
+				"./node_modules/@smart-webcomponents-angular/menu/styles/smart.menu.css",
+				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
+				"./node_modules/@smart-webcomponents-angular/window/styles/smart.window.css",
 				"./node_modules/@smart-webcomponents-angular/scheduler/styles/smart.scheduler.css",
-				"./node_modules/@smart-webcomponents-angular/scheduler/styles/smart.common.css",
+				"./node_modules/@smart-webcomponents-angular/menu/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"
             ],

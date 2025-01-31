@@ -1,10 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { Hero } from './hero';
 
+import { ComboBoxModule } from '@smart-webcomponents-angular/combobox';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { FormsModule } from '@angular/forms';
+
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ FormsModule, ComboBoxModule, ButtonModule, InputModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

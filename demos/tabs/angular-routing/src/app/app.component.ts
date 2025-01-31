@@ -1,15 +1,18 @@
 import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
-import { RouterOutlet, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { slideInAnimation } from './animations';
 
 import { TabsComponent, TabItem } from '@smart-webcomponents-angular/tabs';
+import { TabsModule } from '@smart-webcomponents-angular/tabs';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  animations: [slideInAnimation]
+  standalone: true,
+  imports: [RouterOutlet, TabsModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('tabs', { read: TabsComponent, static: false }) tabs!: TabsComponent;
 

@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/numerictextbox/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/numerictextbox/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/numerictextbox/styles/smart.numerictextbox.css",
 				"./node_modules/@smart-webcomponents-angular/tank/styles/smart.tank.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",

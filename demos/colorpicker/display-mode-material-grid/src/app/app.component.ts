@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { ColorPickerComponent, ColorApplyValueMode } from '@smart-webcomponents-angular/colorpicker';
 import { RadioButtonComponent, RadioButton } from '@smart-webcomponents-angular/radiobutton';
 
+import { ColorPickerModule } from '@smart-webcomponents-angular/colorpicker';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ColorPickerModule, RadioButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

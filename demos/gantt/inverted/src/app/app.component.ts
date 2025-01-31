@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { GanttChartComponent } from '@smart-webcomponents-angular/ganttchart';
 
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  CheckBoxModule, GanttChartModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

@@ -1,15 +1,26 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { QRcodeComponent } from '@smart-webcomponents-angular/qrcode';
 import { ColorPickerComponent } from '@smart-webcomponents-angular/colorpicker';
 import { NumberInputComponent } from '@smart-webcomponents-angular/numberinput';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 
+import { QRcodeModule } from '@smart-webcomponents-angular/qrcode';
+
+import { ColorPickerModule } from '@smart-webcomponents-angular/colorpicker';
+
+import { NumberInputModule } from '@smart-webcomponents-angular/numberinput';
+
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  QRcodeModule, ColorPickerModule, NumberInputModule, CheckBoxModule, ButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	

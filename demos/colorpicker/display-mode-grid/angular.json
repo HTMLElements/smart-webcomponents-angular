@@ -33,10 +33,11 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/checkbox/styles/smart.checkbox.css",
 				"./node_modules/@smart-webcomponents-angular/colorpicker/styles/smart.colorpicker.css",
+				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
 				"./node_modules/@smart-webcomponents-angular/radiobutton/styles/smart.radiobutton.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
               "src/assets/fonts.css",

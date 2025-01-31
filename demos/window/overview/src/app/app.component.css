@@ -252,6 +252,7 @@ smart-tab-item .smart-container {
 }
 
 #materialWindowContainer .confirmation-window {
+	background-image: url(../../../src/images/components-windows-confirmation.png);
 	height: 725px;
 	width: 405px;
 	background-size: cover;
@@ -346,6 +347,7 @@ smart-tab-item .smart-container {
 
 #materialWindowContainer .window-with-header-themes1,
 #materialWindowContainer .window-with-header-themes2 {
+	background-image: url('../../../src/images/components-windows-header.png');
 	background-size: cover;
 	height: 665px;
 }

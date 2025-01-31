@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 
 export class Hero {
@@ -13,10 +13,22 @@ export class Hero {
 
 }
 
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
+
+import { FormsModule } from '@angular/forms';
+
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ FormsModule, DropDownListModule, ButtonModule, CalendarModule, InputModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

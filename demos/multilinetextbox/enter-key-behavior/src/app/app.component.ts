@@ -1,15 +1,25 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { WindowComponent } from '@smart-webcomponents-angular/window';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { WindowModule } from '@smart-webcomponents-angular/window';
+
+import { ChipModule } from '@smart-webcomponents-angular/chip';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ ButtonModule, MultilineTextBoxModule, RadioButtonModule, WindowModule, ChipModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

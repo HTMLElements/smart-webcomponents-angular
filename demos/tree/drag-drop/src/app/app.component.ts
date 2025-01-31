@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
 import { TreeComponent } from '@smart-webcomponents-angular/tree';
 
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { TreeModule } from '@smart-webcomponents-angular/tree';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ MultilineTextBoxModule, TreeModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

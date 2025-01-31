@@ -1,9 +1,30 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormComponent, Smart } from '@smart-webcomponents-angular/form';
 
+import { FormModule } from '@smart-webcomponents-angular/form';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { NumericTextBoxModule } from '@smart-webcomponents-angular/numerictextbox';
+
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { DateTimePickerModule } from '@smart-webcomponents-angular/datetimepicker';
+
+import { MaskedTextBoxModule } from '@smart-webcomponents-angular/maskedtextbox';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, InputModule, CheckBoxModule, MaskedTextBoxModule, DateTimePickerModule, RadioButtonModule, NumericTextBoxModule, DropDownListModule, FormModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	 

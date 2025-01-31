@@ -33,7 +33,8 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/array/styles/smart.base.css",
+				"./node_modules/@smart-webcomponents-angular/array/styles/smart.array.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/calendar/styles/smart.calendar.css",
 				"./node_modules/@smart-webcomponents-angular/chart/styles/smart.chart.css",
@@ -41,10 +42,12 @@
 				"./node_modules/@smart-webcomponents-angular/layout/styles/smart.layout.css",
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
 				"./node_modules/@smart-webcomponents-angular/listbox/styles/smart.listbox.css",
+				"./node_modules/@smart-webcomponents-angular/path/styles/smart.path.css",
 				"./node_modules/@smart-webcomponents-angular/radiobutton/styles/smart.radiobutton.css",
+				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/timepicker/styles/smart.timepicker.css",
-				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
+				"./node_modules/@smart-webcomponents-angular/array/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"
             ],

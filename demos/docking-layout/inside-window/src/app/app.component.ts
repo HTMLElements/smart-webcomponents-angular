@@ -1,4 +1,4 @@
-﻿import {
+import {
     Component,
     ViewChild,
     OnInit,
@@ -11,12 +11,26 @@ import { TreeComponent } from '@smart-webcomponents-angular/tree';
 import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
 import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 
+import { DockingLayoutModule } from '@smart-webcomponents-angular/dockinglayout';
+
+import { WindowModule } from '@smart-webcomponents-angular/window';
+
+import { TreeModule } from '@smart-webcomponents-angular/tree';
+
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
+
+import { GaugeModule } from '@smart-webcomponents-angular/gauge';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None,
+  selector: 'app-root',
+  standalone: true,
+  imports: [ DockingLayoutModule, WindowModule, TreeModule, MultilineTextBoxModule, TextBoxModule, GaugeModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
     @ViewChild('dockinglayout', { read: DockingLayoutComponent, static: false }) dockinglayout!: DockingLayoutComponent;
     @ViewChild('window', { read: WindowComponent, static: false }) window!: WindowComponent;

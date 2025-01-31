@@ -1,13 +1,18 @@
-﻿import { Component, ViewEncapsulation, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent, Smart } from '@smart-webcomponents-angular/grid';
 import { MultiComboInputComponent } from '@smart-webcomponents-angular/multicomboinput';
 import { GetData } from '../assets/data';
 
+import { GridModule } from '@smart-webcomponents-angular/grid';
+
+import { MultiComboInputModule } from '@smart-webcomponents-angular/multicomboinput';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  GridModule, MultiComboInputModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

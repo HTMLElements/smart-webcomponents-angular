@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from "@angular/core";
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from "@angular/core";
 import {
   CardViewColumn,
   CardViewComponent,
@@ -6,12 +6,22 @@ import {
 } from "@smart-webcomponents-angular/cardview";
 import { DropDownListComponent } from "@smart-webcomponents-angular/dropdownlist";
 
+import { CardViewModule } from '@smart-webcomponents-angular/cardview';
+
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  CardViewModule, CheckBoxModule, DropDownListModule, RadioButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
+
 export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild("cardview", { read: CardViewComponent, static: false })
   cardview!: CardViewComponent;

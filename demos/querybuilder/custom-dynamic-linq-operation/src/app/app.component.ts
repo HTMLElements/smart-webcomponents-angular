@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { QueryBuilderComponent } from '@smart-webcomponents-angular/querybuilder';
 
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { QueryBuilderModule } from '@smart-webcomponents-angular/querybuilder';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  DropDownListModule, QueryBuilderModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

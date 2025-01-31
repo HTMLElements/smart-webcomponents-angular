@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/gauge/styles/smart.gauge.css",
 				"./node_modules/@smart-webcomponents-angular/radiobutton/styles/smart.radiobutton.css",

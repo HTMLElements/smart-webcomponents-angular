@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/chip/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/chip/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/chip/styles/smart.chip.css",
 				"./node_modules/@smart-webcomponents-angular/chip/styles/smart.common.css",
               "src/assets/fonts.css",

@@ -1,13 +1,26 @@
-﻿import { Component, ViewChild, AfterViewInit, ViewEncapsulation, Inject, ElementRef, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ViewEncapsulation, Inject, ElementRef, ViewContainerRef } from '@angular/core';
 import { Smart, DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayout';
 import { SliderComponent } from '@smart-webcomponents-angular/slider';
 import { MultilineTextBoxComponent } from '@smart-webcomponents-angular/multilinetextbox';
 
+import { DockingLayoutModule } from '@smart-webcomponents-angular/dockinglayout';
+
+import { TabsModule } from '@smart-webcomponents-angular/tabs';
+
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
+
+import { SliderModule } from '@smart-webcomponents-angular/slider';
+
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { FormsModule } from '@angular/forms';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ FormsModule, DockingLayoutModule, TabsModule, TextBoxModule, SliderModule, MultilineTextBoxModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit {

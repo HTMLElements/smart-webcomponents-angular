@@ -1,13 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { DropDownList } from '@smart-webcomponents-angular/dropdownlist';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GanttChartComponent, GanttChartTaskColumn, GanttChartView } from '@smart-webcomponents-angular/ganttchart';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { GanttChartModule } from '@smart-webcomponents-angular/ganttchart';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, DropDownListModule, GanttChartModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

@@ -1,12 +1,16 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
-import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcomponents-angular/grid';
-import { GetEmployees } from '../assets/data'
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
+import { GetEmployees } from '../assets/data';
+
+import { GridModule } from '@smart-webcomponents-angular/grid';
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -69,7 +73,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				const column = exportColumns[j];
 
 				if (column.dataField === 'Employee') {
-					let value = 'https://raw.githubusercontent.com/HTMLElements/smart-webcomponents-angular/master/demos/images/phonebook/' + dataSource[i].firstName.toLowerCase() + '.png';
+					let value = 'https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/phonebook/' + dataSource[i].firstName.toLowerCase() + '.png';
 
 					let images: any = [];
 
@@ -165,7 +169,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	columns = [
 	    {
 			label: 'Employee', cardSpan: true, cardHeight: 3, dataField: 'Employee', width: 250, cellsVerticalAlign: 'middle', verticalAlign: 'middle', align: 'center', cellsAlign: 'center', formatFunction(settings: any) {
-				settings.template = '<img height="50" width="50" src="' + '../../images/phonebook/' + settings.row.data.firstName.toLowerCase() + '.png"/>' + '<span>' + settings.row.data.firstName + ' ' + settings.row.data.lastName + '</span>';
+				settings.template = '<img height="50" width="50" src="' + 'https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/phonebook/' + settings.row.data.firstName.toLowerCase() + '.png"/>' + '<span>' + settings.row.data.firstName + ' ' + settings.row.data.lastName + '</span>';
 			}
 		},
 		{ label: 'Title', dataField: 'title', align: 'left', width: 200 },

@@ -1,13 +1,22 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { InputComponent } from '@smart-webcomponents-angular/input';
 import { SwitchButton, SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
 import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewType, SchedulerTimelineDayScale } from '@smart-webcomponents-angular/scheduler';
 
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
+
+import { SchedulerModule } from '@smart-webcomponents-angular/scheduler';
+
+import { ColorInputModule } from '@smart-webcomponents-angular/colorinput';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ InputModule, SwitchButtonModule, SchedulerModule, ColorInputModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

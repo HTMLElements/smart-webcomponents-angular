@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { MultiSplitButtonComponent } from '@smart-webcomponents-angular/multisplitbutton';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 
+import { MultiSplitButtonModule } from '@smart-webcomponents-angular/multisplitbutton';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ MultiSplitButtonModule, RadioButtonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

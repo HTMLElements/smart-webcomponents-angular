@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { PowerButtonComponent } from '@smart-webcomponents-angular/button';
 import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { TooltipModule } from '@smart-webcomponents-angular/tooltip';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, TooltipModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

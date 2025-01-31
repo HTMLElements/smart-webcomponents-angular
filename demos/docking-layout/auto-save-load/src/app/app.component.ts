@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { DockingLayoutComponent } from '@smart-webcomponents-angular/dockinglayout';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GaugeComponent, Gauge } from '@smart-webcomponents-angular/gauge';
@@ -7,12 +7,26 @@ import { MultilineTextBoxComponent, MultilineTextBox } from '@smart-webcomponent
 import { ProgressBarComponent, ProgressBar } from '@smart-webcomponents-angular/progressbar';
 import { CarouselComponent, Carousel } from '@smart-webcomponents-angular/carousel';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { DockingLayoutModule } from '@smart-webcomponents-angular/dockinglayout';
+
+import { GaugeModule } from '@smart-webcomponents-angular/gauge';
+
+import { CarouselModule } from '@smart-webcomponents-angular/carousel';
+
+import { MultilineTextBoxModule } from '@smart-webcomponents-angular/multilinetextbox';
+
+import { ProgressBarModule } from '@smart-webcomponents-angular/progressbar';
+
+import { TankModule } from '@smart-webcomponents-angular/tank';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ DockingLayoutModule, ButtonModule, GaugeModule, CarouselModule, MultilineTextBoxModule, ProgressBarModule, TankModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

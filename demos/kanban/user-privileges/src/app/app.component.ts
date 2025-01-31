@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
 import { GetKanbanData } from '../assets/data';
 import { WindowComponent } from '@smart-webcomponents-angular/window';
@@ -6,12 +6,22 @@ import { InputComponent } from '@smart-webcomponents-angular/input';
 import { PasswordTextBoxComponent } from '@smart-webcomponents-angular/passwordtextbox';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 
+import { KanbanModule } from '@smart-webcomponents-angular/kanban';
+
+import { WindowModule } from '@smart-webcomponents-angular/window';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { PasswordTextBoxModule } from '@smart-webcomponents-angular/passwordtextbox';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ KanbanModule, WindowModule, InputModule, PasswordTextBoxModule, ButtonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

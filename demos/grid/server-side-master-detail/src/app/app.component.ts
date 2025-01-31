@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent, GridRow, GridRowDetail } from '@smart-webcomponents-angular/grid';
 
 declare global {
@@ -11,9 +11,14 @@ declare global {
    }
 }
 
+import { GridModule } from '@smart-webcomponents-angular/grid';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+  selector: 'app-root',
+  standalone: true,
+  imports: [  GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	

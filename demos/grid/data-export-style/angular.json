@@ -31,15 +31,12 @@
             "browser": "src/main.ts",
             "outputPath": "dist/demo",
             "polyfills": ["zone.js"],
-                      "scripts": [
-              "./node_modules/@smart-webcomponents-angular/grid/common/jszip.min.js",
-              "./node_modules/@smart-webcomponents-angular/grid/common/pdfmake.min.js",
-              "./node_modules/@smart-webcomponents-angular/grid/common/vfs_fonts.js"
-            ],	
+            "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/grid/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
+				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
-				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.common.css",
+				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"
             ],

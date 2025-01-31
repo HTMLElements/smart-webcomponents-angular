@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { LayoutComponent } from '@smart-webcomponents-angular/layout';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
@@ -9,12 +9,30 @@ import { ListBoxComponent, ListItem } from '@smart-webcomponents-angular/listbox
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
+import { LayoutModule } from '@smart-webcomponents-angular/layout';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
+
+import { ChartModule } from '@smart-webcomponents-angular/chart';
+
+import { DateTimePickerModule } from '@smart-webcomponents-angular/datetimepicker';
+
+import { GridModule } from '@smart-webcomponents-angular/grid';
+
+import { ListBoxModule } from '@smart-webcomponents-angular/listbox';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  LayoutModule, ButtonModule, CalendarModule, ChartModule, DateTimePickerModule, GridModule, ListBoxModule, RadioButtonModule, TextBoxModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

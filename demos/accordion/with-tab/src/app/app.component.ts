@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { AccordionComponent } from '@smart-webcomponents-angular/accordion';
 import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 
+import { AccordionModule } from '@smart-webcomponents-angular/accordion';
+
+import { TabsModule } from '@smart-webcomponents-angular/tabs';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  AccordionModule, TabsModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	

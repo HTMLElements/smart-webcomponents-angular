@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 
 export class Hero {
@@ -20,11 +20,22 @@ export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
 	};
 }
 
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { FormsModule } from '@angular/forms';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ ReactiveFormsModule, DropDownListModule, ButtonModule, InputModule, CheckBoxModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

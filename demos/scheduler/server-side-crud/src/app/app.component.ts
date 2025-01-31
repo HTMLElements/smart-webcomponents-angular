@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { TableColumn, TableComponent } from '@smart-webcomponents-angular/table';
 import { SchedulerComponent, DataAdapter, SchedulerViewType, SchedulerEvent } from '@smart-webcomponents-angular/scheduler';
 
@@ -11,11 +11,16 @@ declare global {
     }
 }
 
+import { TableModule } from '@smart-webcomponents-angular/table';
+
+import { SchedulerModule } from '@smart-webcomponents-angular/scheduler';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  TableModule, SchedulerModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

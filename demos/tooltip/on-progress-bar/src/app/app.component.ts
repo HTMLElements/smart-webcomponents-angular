@@ -1,13 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ProgressBarComponent, CircularProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 
+import { ProgressBarModule } from '@smart-webcomponents-angular/progressbar'
+
+;import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { TooltipModule } from '@smart-webcomponents-angular/tooltip';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ProgressBarModule, RadioButtonModule, TooltipModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

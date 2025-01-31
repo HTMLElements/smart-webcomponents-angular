@@ -1,4 +1,4 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { GridComponent, GridLayout, GridEditing, GridDataSourceSettings, GridColumn, GridSelection, Smart } from '@smart-webcomponents-angular/grid';
 function GenerateData() {
     const sampleData: any = [], 
@@ -29,11 +29,14 @@ function GenerateData() {
     return sampleData;
 }
 
+import { GridModule } from '@smart-webcomponents-angular/grid';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

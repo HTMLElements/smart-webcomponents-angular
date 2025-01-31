@@ -1,13 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { CheckInputComponent } from '@smart-webcomponents-angular/checkinput';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { CheckInputModule } from '@smart-webcomponents-angular/checkinput';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  CheckBoxModule, CheckInputModule, RadioButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

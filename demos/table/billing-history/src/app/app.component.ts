@@ -1,13 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { TableComponent, TableColumn } from '@smart-webcomponents-angular/table';
 import { ToastComponent } from '@smart-webcomponents-angular/toast';
 import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 
+import { TableModule } from '@smart-webcomponents-angular/table';
+
+import { ToastModule } from '@smart-webcomponents-angular/toast';
+
+import { TooltipModule } from '@smart-webcomponents-angular/tooltip';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  TableModule, ToastModule, TooltipModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

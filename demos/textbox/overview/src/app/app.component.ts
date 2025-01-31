@@ -1,12 +1,15 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ComboBoxComponent } from '@smart-webcomponents-angular/combobox';
 import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
+import { ComboBoxModule } from '@smart-webcomponents-angular/combobox';import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ComboBoxModule, TextBoxModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {	

@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/timeinput/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/timeinput/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/timeinput/styles/smart.timeinput.css",
 				"./node_modules/@smart-webcomponents-angular/input/styles/smart.input.css",
 				"./node_modules/@smart-webcomponents-angular/timeinput/styles/smart.common.css",

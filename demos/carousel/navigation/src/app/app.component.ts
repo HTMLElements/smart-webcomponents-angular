@@ -1,14 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { CarouselComponent } from '@smart-webcomponents-angular/carousel';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { TextBoxComponent } from '@smart-webcomponents-angular/textbox';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';import { CarouselModule } from '@smart-webcomponents-angular/carousel';import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, CarouselModule, CheckBoxModule, TextBoxModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

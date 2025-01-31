@@ -1,14 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { CheckBox, CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { InputComponent, InputEditor } from '@smart-webcomponents-angular/input';
 import { SchedulerComponent, SchedulerEvent, SchedulerViews, SchedulerViewSelectorType, SchedulerViewType } from '@smart-webcomponents-angular/scheduler';
 
+import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';
+
+import { InputModule } from '@smart-webcomponents-angular/input';
+
+import { SchedulerModule } from '@smart-webcomponents-angular/scheduler';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  CheckBoxModule, InputModule, SchedulerModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

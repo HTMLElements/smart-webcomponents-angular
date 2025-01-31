@@ -1,13 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 import { TooltipComponent } from '@smart-webcomponents-angular/tooltip';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
+import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
+
+import { TooltipModule } from '@smart-webcomponents-angular/tooltip';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ButtonModule, RadioButtonModule, TooltipModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

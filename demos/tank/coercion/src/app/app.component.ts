@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { NumericTextBoxComponent } from '@smart-webcomponents-angular/numerictextbox';
 import { TankComponent } from '@smart-webcomponents-angular/tank';
 
+import { NumericTextBoxModule } from '@smart-webcomponents-angular/numerictextbox';
+
+import { TankModule } from '@smart-webcomponents-angular/tank';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  NumericTextBoxModule, TankModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

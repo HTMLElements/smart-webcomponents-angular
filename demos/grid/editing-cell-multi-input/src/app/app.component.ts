@@ -1,10 +1,15 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
 
+import { GridModule } from '@smart-webcomponents-angular/grid';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html'
+  selector: 'app-root',
+  standalone: true,
+  imports: [  GridModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
@@ -58,11 +63,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 				pills: true,
 				singleSelect: true,
 				dataSource: [
-					{ value: 0, color: '#8E24AA', label: 'Andrew', image: 'https://htmlelements.com/demos/images/people/andrew.png' },
-					{ value: 1, color: '#41B883', label: 'Anne', image: 'https://htmlelements.com/demos/images/people/anne.png' },
-					{ value: 2, color: '#53B9E6', label: 'Janet', image: 'https://htmlelements.com/demos/images/people/janet.png' },
-					{ value: 3, color: '#FFCD42', label: 'John', image: 'https://htmlelements.com/demos/images/people/john.png' },
-					{ value: 4, color: '#DD5347', label: 'Laura', image: 'https://htmlelements.com/demos/images/people/laura.png' }
+					{ value: 0, color: '#8E24AA', label: 'Andrew', image: 'https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/people/andrew.png' },
+					{ value: 1, color: '#41B883', label: 'Anne', image: 'https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/people/anne.png' },
+					{ value: 2, color: '#53B9E6', label: 'Janet', image: 'https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/people/janet.png' },
+					{ value: 3, color: '#FFCD42', label: 'John', image: 'https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/people/john.png' },
+					{ value: 4, color: '#DD5347', label: 'Laura', image: 'https://raw.githubusercontent.com/HTMLElements/@smart-webcomponents-angular/master/demos/images/people/laura.png' }
 				]
 			}
 		}

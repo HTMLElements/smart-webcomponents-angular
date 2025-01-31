@@ -1,13 +1,18 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GridComponent, Smart } from '@smart-webcomponents-angular/grid';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { GetData } from '../assets/data';
 
+import { GridModule } from '@smart-webcomponents-angular/grid';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ GridModule, ButtonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

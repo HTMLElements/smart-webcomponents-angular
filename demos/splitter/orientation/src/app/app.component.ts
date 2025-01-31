@@ -1,15 +1,23 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation, ElementRef } from '@angular/core';
 import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
 import { SplitterComponent, SplitterItemComponent } from '@smart-webcomponents-angular/splitter';
 import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 import { CircularProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
 
+import { ListBoxModule } from '@smart-webcomponents-angular/listbox';
+
+import { SplitterModule } from '@smart-webcomponents-angular/splitter';
+
+import { TabsModule } from '@smart-webcomponents-angular/tabs';
+
+import { ProgressBarModule } from '@smart-webcomponents-angular/progressbar';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ListBoxModule, SplitterModule, TabsModule, ProgressBarModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

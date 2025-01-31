@@ -1,10 +1,16 @@
-﻿import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AccordionComponent, AccordionItemComponent, AccordionExpandMode } from '@smart-webcomponents-angular/accordion';
 
+import { AccordionModule } from '@smart-webcomponents-angular/accordion';
+
+import { TextBoxModule } from '@smart-webcomponents-angular/textbox';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  AccordionModule, TextBoxModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent {

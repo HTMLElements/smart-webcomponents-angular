@@ -1,14 +1,20 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { SchedulerComponent, SchedulerEvent } from '@smart-webcomponents-angular/scheduler';
 import { Rating } from '@smart-webcomponents-angular/rating';
 import { ProgressBar } from '@smart-webcomponents-angular/progressbar';
 
+import { SchedulerModule } from '@smart-webcomponents-angular/scheduler';
+
+import { RatingModule } from '@smart-webcomponents-angular/rating';
+
+import { ProgressBarModule } from '@smart-webcomponents-angular/progressbar';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [  SchedulerModule, RatingModule, ProgressBarModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

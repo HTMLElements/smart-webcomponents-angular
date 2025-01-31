@@ -1,14 +1,18 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { KanbanComponent } from '@smart-webcomponents-angular/kanban';
 import { GetKanbanData } from '../assets/data';
 import { MenuComponent, MenuItemComponent } from '@smart-webcomponents-angular/menu';
 
+import { KanbanModule } from '@smart-webcomponents-angular/kanban';
+
+import { MenuModule } from '@smart-webcomponents-angular/menu';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ KanbanModule, MenuModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

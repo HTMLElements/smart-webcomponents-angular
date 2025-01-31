@@ -1,10 +1,16 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ProgressBarComponent, CircularProgressBarComponent } from '@smart-webcomponents-angular/progressbar';
 
+import { ProgressBarModule } from '@smart-webcomponents-angular/progressbar';
+
+import { ButtonModule } from '@smart-webcomponents-angular/button';
+
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [  ProgressBarModule, ButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

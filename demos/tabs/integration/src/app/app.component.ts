@@ -1,15 +1,26 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { GaugeComponent } from '@smart-webcomponents-angular/gauge';
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
 import { TabsComponent } from '@smart-webcomponents-angular/tabs';
 import { TankComponent } from '@smart-webcomponents-angular/tank';
 import { ListBoxComponent } from '@smart-webcomponents-angular/listbox';
 
+import { GaugeModule } from '@smart-webcomponents-angular/gauge';
+
+import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
+
+import { TabsModule } from '@smart-webcomponents-angular/tabs';
+
+import { TankModule } from '@smart-webcomponents-angular/tank';
+
+import { ListBoxModule } from '@smart-webcomponents-angular/listbox';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ GaugeModule, SwitchButtonModule, TabsModule, TankModule, ListBoxModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

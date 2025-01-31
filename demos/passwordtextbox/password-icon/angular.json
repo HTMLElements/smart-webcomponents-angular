@@ -33,7 +33,7 @@
             "polyfills": ["zone.js"],
             "scripts": [],
             "styles": [
-              	"./node_modules/@smart-webcomponents-angular/passwordtextbox/styles/smart.base.css",
+			  	"./node_modules/@smart-webcomponents-angular/passwordtextbox/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/passwordtextbox/styles/smart.passwordtextbox.css",
 				"./node_modules/@smart-webcomponents-angular/textbox/styles/smart.textbox.css",
 				"./node_modules/@smart-webcomponents-angular/passwordtextbox/styles/smart.common.css",
