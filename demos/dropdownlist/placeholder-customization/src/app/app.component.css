@@ -5,6 +5,6 @@ smart-drop-down-list .smart-action-button {
 }
 smart-drop-down-list {
 	min-height: 35px;
-	height: auto;
+	height: 35px;
 	width: 300px;
 }

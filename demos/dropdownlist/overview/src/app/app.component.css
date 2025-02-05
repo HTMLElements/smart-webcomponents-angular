@@ -191,7 +191,7 @@ td p {
             }
 
         #materialDropDownListContainer .preview smart-drop-down-list {
-            --smart-drop-down-element-height: auto;
+            --smart-drop-down-element-height: 35px;
             --smart-drop-down-list-default-width: 30%;
         }
 
@@ -271,7 +271,7 @@ td p {
 
         #materialDropDownListContainer .dropDownListUsage smart-drop-down-list,
         #materialDropDownListContainer #style smart-drop-down-list {
-            --smart-drop-down-element-height: auto;
+            --smart-drop-down-element-height: 35px;
         }
 
         #materialDropDownListContainer #continuousTanks .module:first-of-type,
@@ -410,7 +410,7 @@ td p {
 
         #materialDropDownListContainer #dropDownListSelectionModes smart-drop-down-list,
         #materialDropDownListContainer #dropDownListOpenModes smart-drop-down-list {
-            --smart-drop-down-element-height: auto;
+            --smart-drop-down-element-height: 35px;
         }
 
         #materialDropDownListContainer .shipping {

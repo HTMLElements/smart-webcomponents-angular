@@ -19,5 +19,5 @@
 smart-drop-down-list[selection-display-mode="tokens"] .smart-selection-field > .smart-token {
     box-shadow: initial;
 	min-height: 30px;
-	height: auto !important;	
+	height: 35px !important;	
 }
