@@ -35,6 +35,7 @@
             "styles": [
 			  	"./node_modules/@smart-webcomponents-angular/tree/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/tree/styles/smart.tree.css",
+				"./node_modules/@smart-webcomponents-angular/tree/styles/smart.dropdownlist.css",
 				"./node_modules/@smart-webcomponents-angular/tree/styles/smart.common.css",
               "src/assets/fonts.css",
               "src/assets/styles.css"
