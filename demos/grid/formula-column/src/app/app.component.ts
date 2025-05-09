@@ -3,15 +3,13 @@ import { Smart, GridComponent } from '@smart-webcomponents-angular/grid';
 import { GetData } from '../assets/data';
 
 import { GridModule } from '@smart-webcomponents-angular/grid';
-import { GaugeModule, GaugeComponent } from '@smart-webcomponents-angular/gauge';
-import { ChartModule, ChartComponent } from '@smart-webcomponents-angular/chart';
 
 import { ButtonModule } from '@smart-webcomponents-angular/button';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ ButtonModule, ChartModule, GaugeModule, GridModule ],
+  imports: [ ButtonModule,  GridModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
