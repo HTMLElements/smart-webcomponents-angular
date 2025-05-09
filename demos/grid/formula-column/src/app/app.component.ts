@@ -14,6 +14,8 @@ import { ButtonModule } from '@smart-webcomponents-angular/button';
   styleUrl: './app.component.css'
 })
 
+declare const formulaParser: any;
+
 export class AppComponent implements AfterViewInit, OnInit {
 	@ViewChild('grid', { read: GridComponent, static: false }) grid!: GridComponent;
 
