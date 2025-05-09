@@ -1,0 +1,12 @@
+<smart-grid 
+  #grid 
+  [columns]="columns" 
+  [dataSource]="dataSource" 
+  [formulas]="true" 
+  [editing]="editing" 
+  [selection]="selection"
+  (onEndEdit)="onEndEdit($event)"
+  >
+</smart-grid>
+<div id="eventLog"></div>
+ 

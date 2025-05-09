@@ -1,0 +1,20 @@
+<smart-grid 
+  #grid 
+  [columns]="columns" 
+  [dataSource]="dataSource" 
+  [formulas]="true" 
+  [selection]="selection"
+  (onChange)="onGridChange($event)">
+</smart-grid>
+
+<!-- Side panel -->
+<div #sidePanel id="sidePanel" style="margin-top: 20px; display: none; border: 1px solid #ccc; padding: 1rem;">
+  <h3>Product Details</h3>
+  <p><strong>Product:</strong> <span id="productName"></span></p>
+  <p><strong>Quantity:</strong> <span id="productQty"></span></p>
+  <p><strong>Price:</strong> <span id="productPrice"></span></p>
+  <p><strong>Total:</strong> <span id="productTotal"></span></p>
+
+  <smart-gauge #gauge id="quantityGauge" [min]="0" [max]="10" style="height: 100px; width: 100%; margin-top: 1rem;"></smart-gauge>
+  <smart-chart #chart id="priceChart" style="width: 100%; height: 300px;"></smart-chart>
+</div>
