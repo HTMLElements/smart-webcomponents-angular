@@ -114,8 +114,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 					minValue: 0,
 					maxValue: 10,
 					displayValueAxis: true,
-					 axisSize: 'auto',
-					tickMarksColor: '#888888'
+					 axisSize: 'auto'
 				},
 				series: [
 					{ dataField: 'value', displayText: 'Value' }
