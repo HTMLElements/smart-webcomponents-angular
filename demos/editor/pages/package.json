@@ -16,7 +16,7 @@
     "@angular/router": "^19.0.0",
     "@smart-webcomponents-angular/editor": "23.0.5",
     "@smart-webcomponents-angular/button": "22.0.2",
-	"@smart-webcomponents-angular/checkbox": "22.0.2"
+	"@smart-webcomponents-angular/checkbox": "22.0.2",
 
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
