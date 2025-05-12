@@ -3,6 +3,7 @@ import { GridComponent, GridColumn, DataAdapter, Smart } from '@smart-webcompone
 import { GetData } from '../assets/data';
 
 import { GridModule } from '@smart-webcomponents-angular/grid';
+declare const formulaParser: any;
 
 @Component({
   selector: 'app-root',

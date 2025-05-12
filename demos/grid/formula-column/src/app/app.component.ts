@@ -5,6 +5,7 @@ import { GetData } from '../assets/data';
 import { GridModule } from '@smart-webcomponents-angular/grid';
 
 import { ButtonModule } from '@smart-webcomponents-angular/button';
+declare const formulaParser: any;
 
 @Component({
   selector: 'app-root',

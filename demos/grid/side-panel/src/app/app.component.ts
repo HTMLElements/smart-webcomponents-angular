@@ -7,6 +7,7 @@ import { GaugeModule, GaugeComponent } from '@smart-webcomponents-angular/gauge'
 import { ChartModule, ChartComponent } from '@smart-webcomponents-angular/chart';
 
 import { ButtonModule } from '@smart-webcomponents-angular/button';
+declare const formulaParser: any;
 
 @Component({
   selector: 'app-root',

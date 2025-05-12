@@ -31,7 +31,9 @@
             "browser": "src/main.ts",
             "outputPath": "dist/demo",
             "polyfills": ["zone.js"],
-            "scripts": [],
+            "scripts": [
+				"src/assets/formula-parser.min.js"
+			],
             "styles": [
 			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
