@@ -5,6 +5,7 @@ import { GetData } from '../assets/data';
 import { GridModule } from '@smart-webcomponents-angular/grid';
 
 import { ButtonModule } from '@smart-webcomponents-angular/button';
+declare const formulaParser: any;
 
 @Component({
   selector: 'app-root',
@@ -85,7 +86,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         const column = args.dataField;
         const value = args.value;
         const dataValue = args.data[args.column.dataField];
-        this.log = `<div>Row: ${row}, Column: ${column}, Value: ${dataValue}, Label: ${value}</div>`;
+        this.log = `Row: ${row}, Column: ${column}, Value: ${dataValue}, Label: ${value}`;
 	}
 	 
 }
