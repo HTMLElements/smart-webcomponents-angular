@@ -1,0 +1,41 @@
+<div>
+  <h1>Gantt Critical Path</h1>
+  <p>
+    This demo shows how to use the Gantt Chart's critical path feature. The critical path is the longest
+    sequence of tasks that must be completed on time for the project to finish on schedule.
+  </p>
+  <p>
+    Project Description: Office Renovation with Multiple Critical Paths<br />
+    This Gantt Chart example represents a realistic Office Renovation Project involving structural work,
+    systems<br />
+    installation, interior finishes, and furniture setup. The project is designed to demonstrate multiple<br />
+    critical paths, reflecting real-world project complexity where several parallel task sequences determine
+    the<br />
+    project's overall duration.<br />
+
+    Key Characteristics:<br />
+    - The project starts with parallel procurement activities for construction materials, electrical
+    equipment,<br />
+    and furniture.<br />
+    - Site preparation and structural work form the foundation for downstream tasks.<br />
+    - Multiple installation tasks such as Plumbing, Electrical, HVAC, and Painting run in parallel.<br />
+    - Interior Finishes and Furniture Setup converge with critical dependencies on both material deliveries
+    and<br />
+    prior construction phases.<br />
+    - Final Testing, Inspections, and Project Completion rely on the successful, timely execution of all<br />
+    critical paths.<br />
+  </p>
+</div>
+
+<smart-gantt-chart #ganttChart duration-unit="day" id="ganttChart"></smart-gantt-chart>
+
+<p>
+  Click on the "Show Critical Path" button to output the critical path.
+</p>
+
+<smart-button 
+  #criticalPathButton 
+  id="criticalPath" 
+  (onClick)="showCriticalPath()">
+  {{buttonText}}
+</smart-button>

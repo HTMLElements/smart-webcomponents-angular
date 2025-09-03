@@ -1,0 +1,8 @@
+<smart-tabs [tabPosition]="'bottom'" #spreadsheetTabs>
+  <smart-tab-item label="Sheet 1" [selected]="true">
+    <smart-grid [header]="header" [appearance]="appearance" [dataSource]="dataSource" [editing]="editing" [behavior]="behavior" [selection]="selection" [columns]="columns" #grid id="grid"></smart-grid>
+  </smart-tab-item>
+  <smart-tab-item label="Sheet 2">
+    <smart-grid [header]="header" [dataSource]="dataSource" [appearance]="appearance" [editing]="editing" [behavior]="behavior" [selection]="selection" [columns]="columns"  id="grid2"></smart-grid>
+  </smart-tab-item>
+</smart-tabs>

@@ -1,0 +1,11 @@
+<smart-grid #grid [columns]="gridSettings.columns" [dataSource]="gridSettings.dataSource"
+  [filtering]="gridSettings.filtering" [editing]="gridSettings.editing" [appearance]="gridSettings.appearance"
+  [sorting]="gridSettings.sorting" [selection]="gridSettings.selection" id="grid"></smart-grid>
+
+<div class="options">
+  <div class="option">
+    <span>Localization:</span>
+    <smart-drop-down-list (onChange)="changeLocalization($event)" #localization [dataSource]="localizationDataSource" drop-down-max-height="600"
+      drop-down-height="auto" id="localization" style="margin-left: 10px; width: 150px;"></smart-drop-down-list>
+  </div>
+</div>

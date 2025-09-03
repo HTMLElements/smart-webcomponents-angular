@@ -1,0 +1,41 @@
+<div class="demo-description">
+  This demo showcases a real-time financial data dashboard built with Smart.Grid. The grid displays a portfolio of
+  financial instruments such as stocks, ETFs, and bonds, including key fields like ticker, instrument name,
+  quantity, purchase date, purchase price, and current price.
+  <br />
+  <br />
+
+  The grid is powered by a live data adapter that continuously updates values at set intervals, simulating real
+  market conditions. Both the purchase price and current price fluctuate dynamically, while the P&L (Profit &
+  Loss) column highlights gains and losses with intuitive, color-coded pill-shaped indicators (green with ↑ arrows
+  for gains, red with ↓ arrows for losses).
+  <br />
+  <br />
+
+  A timeline column renders a sparkline chart directly inside each grid cell, visualizing the instrument’s recent
+  performance at a glance. The sparklines update in sync with the live price changes, allowing users to track
+  short-term trends without leaving the grid.
+  <br />
+  <br />
+
+  This demo demonstrates how Smart.Grid can be used to build modern, interactive, and visually appealing financial
+  dashboards that combine:
+  <br />
+  <br />
+
+  Real-time data streaming
+  <br />
+
+  Custom cell templates for professional P&L visualization
+  <br />
+
+  Embedded sparklines to show trends inline
+  <br />
+
+  Automatic recalculations of values like total return and percentage changes
+  <br /> <br />
+
+  It is an ideal example of how Smart.Grid can serve as the foundation for trading platforms, investment
+  monitoring tools, or portfolio management applications.
+</div>
+<smart-grid #grid [summaryRow]="summaryRow" [behavior]="behavior" [selection]="selection" [appearance]="appearance" [dataSourceSettings]="dataSourceSettings" [dataSource]="dataSource" [columns]="columns"></smart-grid>

@@ -1,0 +1,28 @@
+{
+  "name": "angular-grid-transpose",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build"
+  },
+  "dependencies": {
+    "@angular/animations": "^20.2.1",
+    "@angular/common": "^20.2.1",
+    "@angular/compiler": "^20.2.1",
+    "@angular/core": "^20.2.1",
+    "@angular/forms": "^20.2.1",
+    "@angular/platform-browser": "^20.2.1",
+    "@angular/platform-browser-dynamic": "^20.2.1",
+    "@angular/router": "^20.2.1",
+    "@smart-webcomponents-angular/grid": "24.0.16",
+    "rxjs": "^7.8.1",
+    "tslib": "^2.8.0",
+    "zone.js": "~0.15.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^20.2.1",
+    "@angular/cli": "^20.2.1",
+    "@angular/compiler-cli": "^20.2.1",
+    "typescript": "~5.8.0"
+  }
+}
