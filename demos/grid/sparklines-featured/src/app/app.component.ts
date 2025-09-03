@@ -1386,7 +1386,7 @@ export class AppComponent implements AfterViewInit {
         }
       },
       {
-        label: 'Timeline', dataField: 'timeline', template: 'sparklines', templateSettings: {
+        label: 'Timeline', width: 300, dataField: 'timeline', template: 'sparklines', templateSettings: {
           type: 'column'
         }, dataType: 'string'
       }
