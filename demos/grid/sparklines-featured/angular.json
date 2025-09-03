@@ -35,7 +35,6 @@
             "styles": [
 			  	"./node_modules/@smart-webcomponents-angular/button/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.button.css",
-				"./node_modules/@smart-webcomponents-angular/card/styles/smart.card.css",
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
 				"./node_modules/@smart-webcomponents-angular/form/styles/smart.form.css",
 				"./node_modules/@smart-webcomponents-angular/button/styles/smart.common.css",
