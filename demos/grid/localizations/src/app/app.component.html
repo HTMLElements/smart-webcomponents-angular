@@ -5,7 +5,7 @@
 <div class="options">
   <div class="option">
     <span>Localization:</span>
-    <smart-drop-down-list (onChange)="changeLocalization($event)" #localization [dataSource]="localizationDataSource" drop-down-max-height="600"
+    <smart-drop-down-list [selectedIndexes]="[0]" (onChange)="changeLocalization($event)" #localization [dataSource]="localizationDataSource" drop-down-max-height="600"
       drop-down-height="auto" id="localization" style="margin-left: 10px; width: 150px;"></smart-drop-down-list>
   </div>
 </div>
