@@ -1392,8 +1392,13 @@ export class AppComponent implements AfterViewInit {
       }
     ]
 
+ 
   ngAfterViewInit(): void {
     const updatePortfolio = (portfolio: any[], intervalDays = 1) => {
+      if (!portfolio) {
+        return;
+      }
+
       portfolio.forEach(asset => {
         // --- Update purchaseDate ---
         let date = new Date(asset.purchaseDate);
@@ -1418,11 +1423,13 @@ export class AppComponent implements AfterViewInit {
       return portfolio;
     };
 
-    setInterval(() => {
-      this.grid.beginUpdate();
-      updatePortfolio(this.grid.dataSource);
-      // only refresh the cell values.
-      this.grid.endUpdate(false);
-    }, 1000);
+       setInterval(() => {
+        this.grid.nativeElement.beginUpdate();
+        updatePortfolio(this.grid.nativeElement.dataSource);
+        // only refresh the cell values.
+        (this.grid.nativeElement as any).endUpdate(false, true, false);
+      }, 1000);
+
   }
+}
 }
