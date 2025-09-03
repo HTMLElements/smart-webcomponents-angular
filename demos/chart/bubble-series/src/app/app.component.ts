@@ -1,12 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ChartComponent } from '@smart-webcomponents-angular/chart';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 
+import { ChartModule } from '@smart-webcomponents-angular/chart';
+
+import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ChartModule, DropDownListModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

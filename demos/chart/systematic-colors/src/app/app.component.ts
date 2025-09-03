@@ -6,7 +6,7 @@ import { ChartModule } from '@smart-webcomponents-angular/chart';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ ChartModule],
+  imports: [ChartModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

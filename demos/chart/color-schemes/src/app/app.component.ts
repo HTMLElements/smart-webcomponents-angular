@@ -1,15 +1,17 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ChartComponent, ChartColorScheme } from '@smart-webcomponents-angular/chart';
 import { CheckBoxComponent } from '@smart-webcomponents-angular/checkbox';
 import { DropDownListComponent } from '@smart-webcomponents-angular/dropdownlist';
 import { RadioButtonComponent } from '@smart-webcomponents-angular/radiobutton';
 
+import { ChartModule } from '@smart-webcomponents-angular/chart';import { CheckBoxModule } from '@smart-webcomponents-angular/checkbox';import { DropDownListModule } from '@smart-webcomponents-angular/dropdownlist';import { RadioButtonModule } from '@smart-webcomponents-angular/radiobutton';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
-    encapsulation: ViewEncapsulation.None
+  selector: 'app-root',
+  standalone: true,
+  imports: [ ChartModule, CheckBoxModule, DropDownListModule, RadioButtonModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {

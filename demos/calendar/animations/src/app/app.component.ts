@@ -2,7 +2,8 @@ import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angula
 import { CalendarComponent } from '@smart-webcomponents-angular/calendar';
 import { SwitchButtonComponent } from '@smart-webcomponents-angular/switchbutton';
 
-import { CalendarModule } from '@smart-webcomponents-angular/calendar';import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
+import { CalendarModule } from '@smart-webcomponents-angular/calendar';
+import { SwitchButtonModule } from '@smart-webcomponents-angular/switchbutton';
 
 @Component({
   selector: 'app-root',

@@ -15,7 +15,7 @@ import { SliderModule } from '@smart-webcomponents-angular/slider';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ ChartModule, CheckBoxModule, DropDownListModule, SliderModule],
+  imports: [ChartModule, CheckBoxModule, DropDownListModule, SliderModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -7,7 +7,7 @@ import { ChartModule } from '@smart-webcomponents-angular/chart';import { DropDo
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [  ChartModule, DropDownListModule ],
+  imports: [ ChartModule, DropDownListModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

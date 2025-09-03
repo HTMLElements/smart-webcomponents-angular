@@ -1,13 +1,16 @@
-﻿import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { ButtonComponent } from '@smart-webcomponents-angular/button';
 import { ChartComponent } from '@smart-webcomponents-angular/chart';
 import { NumericTextBoxComponent } from '@smart-webcomponents-angular/numerictextbox';
 
+import { ButtonModule } from '@smart-webcomponents-angular/button';import { ChartModule } from '@smart-webcomponents-angular/chart';import { NumericTextBoxModule } from '@smart-webcomponents-angular/numerictextbox';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  standalone: true,
+  imports: [ ButtonModule, ChartModule, NumericTextBoxModule ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
 })
 
 export class AppComponent implements AfterViewInit, OnInit {
