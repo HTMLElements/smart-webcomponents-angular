@@ -1,0 +1,24 @@
+<div class="demo-description">
+  <h1>Column Header Component</h1>
+  <p>
+    This demo illustrates how to use a custom column header component in the Grid. The custom header is achieved
+    by defining a headerTemplate function for the desired column. In this example, the header displays a title
+    along with an icon button that can be used to trigger additional actions or display information related to
+    the column.
+  </p>
+</div>
+
+<smart-grid
+  #grid
+  [columns]="columns"
+  [dataSource]="dataSource"
+  [sorting]="sorting"
+  [layout]="layout"
+  [filtering]="filtering"
+  [editing]="editing"
+  [selection]="selection"
+  [summaryRow]="summaryRow"
+  [grouping]="grouping"
+  [behavior]="behavior"
+  [appearance]="appearance"
+></smart-grid>

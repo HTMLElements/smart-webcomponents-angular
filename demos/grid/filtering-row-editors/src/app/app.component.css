@@ -1,0 +1,9 @@
+jqx-grid{
+height: 600px;
+width: 100%;
+  }
+  
+  .jqx-window #article {
+	overflow: auto;
+  }
+  
