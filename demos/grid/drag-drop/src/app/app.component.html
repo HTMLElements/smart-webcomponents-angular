@@ -1,0 +1,113 @@
+ <div class="smart-flex">
+	<smart-tree   (dragStart)="onDragStart($event)"
+  (dragEnd)="onDragEnd($event)" #tree class="membership-tree" id="athletesTree" allow-drag allow-drop>
+
+		<!-- Gold Members -->
+		<smart-tree-items-group [disableDrag]="true" [expanded]="true">
+			🏅Gold Members
+
+			<smart-tree-items-group [disableDrag]="true" [expanded]="true">
+				Athletes
+				<smart-tree-item value="Anna Svensson" class="customer-cell"><span class="name">Anna
+						Svensson</span><br /><span class="team">Sweden Cross-Country Ski</span>
+				</smart-tree-item>
+				<smart-tree-item value="Maxim Kovalev" class="customer-cell"><span class="name">Maxim
+						Kovalev</span><br /><span class="team">Russia Ice
+						Hockey</span></smart-tree-item>
+				<smart-tree-item value="Olivia Brown" class="customer-cell"><span class="name">Olivia
+						Brown</span><br /><span class="team">Canada
+						Alpine
+						Ski</span></smart-tree-item>
+				<smart-tree-item value="Lucas Dubois" class="customer-cell"><span class="name">Lucas
+						Dubois</span><br /><span class="team">France
+						Bobsled</span></smart-tree-item>
+				<smart-tree-item value="Hanna Weber" class="customer-cell"><span class="name">Hanna
+						Weber</span><br /><span class="team">Switzerland
+						Curling</span></smart-tree-item>
+				<smart-tree-item value="Daniel Kim" class="customer-cell"><span class="name">Daniel
+						Kim</span><br /><span class="team">South
+						Korea Short
+						Track</span></smart-tree-item>
+				<smart-tree-item value="Laura Fischer" class="customer-cell"><span class="name">Laura
+						Fischer</span><br /><span class="team">Germany
+						Biathlon</span></smart-tree-item>
+			</smart-tree-items-group>
+
+		</smart-tree-items-group>
+
+		<!-- Silver Members -->
+		<smart-tree-items-group [disableDrag]="true">
+			🥈Silver Members
+
+			<smart-tree-items-group [disableDrag]="true">
+				Athletes
+				<smart-tree-item value="Lars Petersen" class="customer-cell"><span class="name">Lars
+						Petersen</span><br /><span class="team">Norway
+						Biathlon</span></smart-tree-item>
+				<smart-tree-item value="Sofia Müller" class="customer-cell"><span class="name">Sofia
+						Müller</span><br /><span class="team">Germany
+						Luge</span></smart-tree-item>
+				<smart-tree-item value="Jakob Larsen" class="customer-cell"><span class="name">Jakob
+						Larsen</span><br /><span class="team">Denmark
+						Skeleton</span></smart-tree-item>
+				<smart-tree-item value="Mia Johnson" class="customer-cell"><span class="name">Mia
+						Johnson</span><br /><span class="team">USA
+						Freestyle
+						Skiing</span></smart-tree-item>
+				<smart-tree-item value="Sophia Andersson" class="customer-cell"><span class="name">Sophia
+						Andersson</span><br /><span class="team">Norway Ski
+						Jumping</span></smart-tree-item>
+			</smart-tree-items-group>
+
+			<smart-tree-items-group [disableDrag]="true">
+				Coaches
+				<smart-tree-item value="Mats Ekström" class="customer-cell"><span class="name">Mats
+						Ekström</span><br /><span class="team">Sweden
+						Alpine
+						Ski</span></smart-tree-item>
+			</smart-tree-items-group>
+
+		</smart-tree-items-group>
+
+		<!-- Bronze Members -->
+		<smart-tree-items-group [disableDrag]="true">
+			🥉Bronze Members
+
+			<smart-tree-item value="Emily Chen" class="customer-cell"><span class="name">Emily Chen</span><br /><span
+					class="team">China
+					Figure
+					Skating</span></smart-tree-item>
+			<smart-tree-item value="Kaito Tanaka" class="customer-cell"><span class="name">Kaito
+					Tanaka</span><br /><span class="team">Japan
+					Snowboarding</span></smart-tree-item>
+			<smart-tree-item value="Elena Rossi" class="customer-cell"><span class="name">Elena
+					Rossi</span><br /><span class="team">Italy
+					Short
+					Track Speed
+					Skating</span></smart-tree-item>
+			<smart-tree-item value="Nikolai Petrov" class="customer-cell"><span class="name">Nikolai
+					Petrov</span><br /><span class="team">Russia
+					Speed
+					Skating</span></smart-tree-item>
+			<smart-tree-item value="Isabella Moretti" class="customer-cell"><span class="name">Isabella
+					Moretti</span><br /><span class="team">Italy
+					Snowboard</span></smart-tree-item>
+			<smart-tree-item value="Henrik Jørgensen" class="customer-cell"><span class="name">Henrik
+					Jørgensen</span><br /><span class="team">Denmark Ice
+					Hockey</span></smart-tree-item>
+
+		</smart-tree-items-group>
+
+	</smart-tree>
+
+	<smart-grid #grid  [dataSource]="data"
+  [dataSourceSettings]="dataSourceSettings"
+  [appearance]="appearance"
+  [sorting]="sorting"
+  [selection]="selection"
+  [layout]="layout"
+  [editing]="editing"
+  [onRowMouseEnter]="onRowMouseEnter"
+  [onRowMouseLeave]="onRowMouseLeave"
+  [columns]="columns"></smart-grid>
+	</div>

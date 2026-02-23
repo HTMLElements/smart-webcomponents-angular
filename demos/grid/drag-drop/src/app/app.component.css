@@ -1,0 +1,65 @@
+smart-grid {
+	width: calc(100% - 300px);
+	max-width: 1000px;
+	height: 800px;
+}
+
+smart-tree {
+	width: 300px;
+	height: 800px;
+}
+
+.customer-cell {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.customer-cell .tag {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	color: #fff;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.customer-cell .info {
+	display: flex;
+	flex-direction: column;
+}
+
+.customer-cell .name {
+	font-weight: 600;
+}
+
+.customer-cell .team,
+.customer-cell .membership {
+	font-size: 12px;
+	opacity: 0.7;
+}
+
+.city-link {
+	display: flex;
+	color: inherit;
+	align-items: center;
+	gap: 6px;
+	text-decoration: none;
+}
+
+.smart-tree-item-feedback {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 12px;
+	opacity: 0.7;
+}
+
+smart-grid-row.hover {
+	z-index: 99;
+	transition: box-shadow 0.2s ease-in-out;
+	box-shadow: var(--smart-elevation-6);
+}

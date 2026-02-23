@@ -1,0 +1,75 @@
+smart-grid {
+	width: calc(100% - 350px);
+	height: 800px;
+}
+
+@media only screen and (max-width: 700px) {
+	smart-grid {
+		width: 100%;
+	}
+}
+
+	.column-icon {
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.firstName:after, .column-icon.firstName {
+		background-image: url("https://img.icons8.com/ios/16/000000/user-filled.png");
+	}
+	
+	.lastName:after, .column-icon.lastName {
+		background-image: url("https://img.icons8.com/ios/16/000000/signature-filled.png");
+	}
+	
+	.birthday:after, .column-icon.birthday {
+		background-image: url("https://img.icons8.com/ios/16/000000/birthday-filled.png");
+	}
+	
+	.petName:after, .column-icon.petName {
+		background-image: url("https://img.icons8.com/ios/16/000000/pet-commands-follow-filled.png");
+	}
+	
+	.productName:after, .column-icon.productName {
+		background-image: url("https://img.icons8.com/ios/16/000000/box-filled.png");
+	}
+	
+	.price:after, .column-icon.price {
+		background-image: url("https://img.icons8.com/ios/16/000000/price-tag-euro-filled.png");
+	}
+	
+	.quantity:after, .column-icon.quantity {
+		background-image: url("https://img.icons8.com/ios/16/000000/negative-dynamic-filled.png");
+	}
+	
+	.country:after, .column-icon.country {
+		background-image: url("https://img.icons8.com/ios/16/000000/country-filled.png");
+	}
+	
+	.timeOfPurchase:after, .column-icon.timeOfPurchase {
+		background-image: url("https://img.icons8.com/ios/16/000000/alarm-clock-filled.png");
+	}
+	
+	.expired:after, .column-icon.expired {
+		background-image: url("https://img.icons8.com/ios/16/000000/expired-filled.png");
+	}
+	
+	.red, .yellow, .green {
+		display: inline;
+		border-radius: 10px;
+		padding: 5px;
+	}
+	
+	.red {
+		background-color: #E94F37;
+		color: white;
+	}
+	
+	.yellow {
+		background-color: #FFEE93;
+	}
+	
+	.green {
+		background-color: #63C7B2;
+		color: white;
+	}
+	

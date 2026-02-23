@@ -1,0 +1,32 @@
+<div class="demo-description"></div>
+<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+  <span style="font-size: 14px; font-weight: 500;">Scale using font size</span>
+  <smart-slider
+    class="scale-slider"
+    [min]="10"
+    [max]="25"
+    [value]="scaleValue"
+    [interval]="1"
+    [scaleType]="'integer'"
+    [showThumbLabel]="true"
+    [labelsVisibility]="'none'"
+    [ticksVisibility]="'none'"
+    [style.width.px]="200"
+    [style.height.px]="25"
+    (change)="onSliderChange($event)">
+  </smart-slider>
+  <div class="scale-info" style="margin-top:5px; margin-left:5px; font-size:14px;">
+    {{scaleValue}}px
+  </div>
+</div>
+<smart-grid #grid
+  [dataSource]="data"
+  [dataSourceSettings]="dataSourceSettings"
+  [appearance]="appearance"
+  [sorting]="sorting"
+  [selection]="selection"
+  [layout]="layout"
+  [behavior]="behavior"
+  [editing]="editing"
+  [columns]="columns">
+</smart-grid>

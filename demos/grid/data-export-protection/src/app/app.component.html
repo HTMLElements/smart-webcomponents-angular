@@ -1,0 +1,22 @@
+<div class="demo-description"></div>
+<smart-grid #grid
+  [dataSource]="data"
+  [dataSourceSettings]="dataSourceSettings"
+  [dataExport]="dataExport"
+  [layout]="layout"
+  [appearance]="appearance"
+  [sorting]="sorting"
+  [selection]="selection"
+  [editing]="editing"
+  [columns]="columns">
+</smart-grid>
+<div class="options">
+  <div class="caption"></div>
+  <div class="option">
+    <p>Worksheet password(optional)</p>
+    <smart-input #passwordInput value="secret" placeholder="Enter password"></smart-input>
+  </div>
+  <div class="option">
+    <smart-button (click)="exportToXLSX()">Export to XLSX</smart-button>
+  </div>
+</div>

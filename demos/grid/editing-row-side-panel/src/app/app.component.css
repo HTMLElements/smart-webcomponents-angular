@@ -1,0 +1,46 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#grid,
+smart-grid {
+  width: 100%;
+  height: 100%;
+}
+
+.add-client-button .smart-button {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  --smart-background: rgba(var(--smart-primary-rgb), .05);
+  --smart-background-color: var(--smart-primary);
+}
+
+.insert-client-button .smart-button {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  --smart-background: rgba(var(--smart-primary-rgb), .05);
+  --smart-background-color: var(--smart-primary);
+  border-left: none;
+}
+
+.delete-client-button .smart-button {
+  border-radius: 15px;
+  --smart-background: rgba(var(--smart-error-rgb), .05);
+  --smart-background-color: var(--smart-error);
+}
+
+.smart-grid-dialog .smart-footer .smart-button {
+  border-radius: 15px;
+}
+
+.smart-data-view-header-button:hover {
+  background: transparent;
+}

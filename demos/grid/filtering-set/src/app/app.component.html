@@ -1,0 +1,20 @@
+<div class="demo-description">
+  <h1>Filter Set - Data Grid Excel-like Filtering</h1>
+  <p>
+	This demo illustrates how to use the set-filtering feature of the Grid. The set-filtering
+	feature allows users to apply excel-like filter conditions on a single column. Users can select multiple
+	values from a dropdown list or
+	use a search box to find specific values within the column. The set-filtering feature provides an intuitive
+	and efficient way to filter data in the grid, making it easier for users to analyze and explore large
+	datasets. With set-filtering, users can quickly narrow down their data based on specific criteria, enhancing
+	the overall user experience when working with the Grid component.
+  </p>
+</div>
+<smart-grid #grid
+  [sorting]="sorting"
+  [filtering]="filtering"
+  [appearance]="appearance"
+  [columns]="columns"
+  [dataSource]="dataSource"
+  [dataSourceSettings]="dataSourceSettings">
+</smart-grid>

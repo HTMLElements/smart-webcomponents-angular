@@ -1,0 +1,18 @@
+<h3>Freezing Columns</h3>
+ <p class="description">
+   You can keep the state of the Freeze columns in the Excel export by setting the 'dataExport.freezeColumns' property to true.
+</p>
+<smart-grid #grid
+  [dataSource]="dataSource"
+  [columns]="columns"
+  [dataExport]="dataExport"
+  [selection]="selection"
+  [onRowInit]="onRowInit.bind(this)">
+</smart-grid>
+<br /><br />
+<div class="options">
+  <div class="caption"></div>
+  <div class="option">
+    <smart-button (click)="exportToXLSX()">Export to XLSX</smart-button>
+  </div>
+</div>

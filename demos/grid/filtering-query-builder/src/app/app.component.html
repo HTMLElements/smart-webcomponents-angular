@@ -1,0 +1,34 @@
+ <div class="demo-description">
+      <h1>Filter with Query Builder</h1>
+      <p>
+        This demo illustrates how to create a custom filtering side panel for the Grid. The side panel contains
+        a query builder component that allows users to construct complex filter conditions using a user-friendly
+        interface. The query builder supports various logical operators (AND, OR) and comparison operators (equals,
+        not equals, greater than, less than, etc.) to enable flexible filtering of the grid data. Users can easily
+        add multiple filter rules and groups to refine their search criteria, making it easier to find specific data
+        within the grid
+      </p>
+</div>
+<div id="container">
+  <smart-grid #grid
+	[sorting]="sorting"
+	[filtering]="filtering"
+	[appearance]="appearance"
+	[columns]="columns"
+	[selection]="selection"
+	[dataSource]="dataSource"
+	[dataSourceSettings]="dataSourceSettings"
+	[header]="header"
+	(onLoad)="onGridLoad()">
+  </smart-grid>
+</div>
+<!-- Side panel for filtering -->
+<div #filteringPanel
+  id="filteringPanel">
+  <h3>Filter by</h3>
+  <smart-query-builder #queryBuilder
+	[fields]="queryBuilderFields"
+	[value]="queryBuilderValue"
+	style="width: 100%; height: auto;">
+  </smart-query-builder>
+</div>

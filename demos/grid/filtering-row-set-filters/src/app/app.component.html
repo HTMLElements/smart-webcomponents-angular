@@ -1,0 +1,69 @@
+<div class="demo-description">
+  <h1>Filter with Set Filter</h1>
+  <h1>Set Filters Demo</h1>
+  <p>
+    This demo illustrates how to create <strong>set filters</strong>, which allow users to filter data
+    based on a predefined set of values. Set filters provide a user-friendly interface for selecting
+    multiple values from a dropdown list, making it easier to apply complex filtering conditions.
+  </p>
+  <section>
+    <h2>Key Benefits of Set Filters</h2>
+    <ul>
+      <li>Select multiple values from a predefined list</li>
+      <li>Improve usability for categorical data</li>
+      <li>Quickly narrow down grid data</li>
+      <li>Avoid manual entry of filter conditions</li>
+    </ul>
+    <p>
+      Set filters are particularly useful when working with categorical data or when users need to filter
+      based on specific criteria without manually entering filter expressions.
+    </p>
+  </section>
+  <section>
+    <h2>Customizing the Filter Editor</h2>
+    <p>
+      The demo also demonstrates how to customize the filter editor by providing a custom implementation
+      of the filter editor’s <code>onChange</code> event. This gives developers greater control over the
+      filtering behavior.
+    </p>
+    <h3>Why Customize <code>onChange</code>?</h3>
+    <ul>
+      <li>Update other components dynamically</li>
+      <li>Trigger API calls</li>
+      <li>Apply additional filters</li>
+      <li>Implement custom filtering logic</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Review Date Column Example</h2>
+    <p>
+      The <strong>'Review Date'</strong> column includes a custom set filter editor with predefined options:
+    </p>
+    <ul>
+      <li>Last Week</li>
+      <li>Last Month</li>
+      <li>Last Year</li>
+    </ul>
+    <p>
+      When a user selects one of these options, the <code>onChange</code> event is triggered.
+      The application then applies the corresponding date filter to the grid data.
+    </p>
+    <p>
+      This approach provides a more intuitive and efficient filtering experience,
+      especially when working with date-related or categorical data that benefits
+      from predefined filter options.
+    </p>
+  </section>
+</div>
+<div id="container">
+  <smart-grid #grid
+    [dataSource]="data"
+    [columns]="columns"
+    [sorting]="sorting"
+    [filtering]="filtering"
+    [appearance]="appearance"
+    [selection]="selection"
+    [dataSourceSettings]="dataSourceSettings"
+    id="gridContainer">
+  </smart-grid>
+</div>

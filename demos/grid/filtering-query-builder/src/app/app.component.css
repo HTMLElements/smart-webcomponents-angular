@@ -1,0 +1,48 @@
+smart-grid {
+  width: 100%;
+  height: calc(100vh - 200px);
+}
+
+smart-query-builder {
+  width: 100%;
+  border:none;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+	height: 100%;
+}
+.smart-filter-add-btn, .smart-filter-nested-operator {
+  display:none !important;
+}
+.smart-data-view-header-button,
+.smart-data-view-header-button:focus,
+.smart-data-view-header-button:hover {
+  background: transparent;
+}
+#applyFiltersButton {
+  border-radius: 15px;
+  --smart-background-color: #007bff;
+  --smart-ui-state-hover: #0056b3;
+  --smart-ui-state-color-hover: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+#applyFiltersButton:hover {
+  background-color: #0056b3;
+}
+#clearFiltersButton {
+  border-radius: 15px;
+  background-color: #dc3545;
+  border-color: #dc3545;
+   --smart-background-color: #dc3545;
+  --smart-ui-state-hover: #a71d2a;
+  --smart-ui-state-color-hover: #fff;
+  color: white;
+}
+#clearFiltersButton:hover {
+  background-color: #a71d2a;
+}

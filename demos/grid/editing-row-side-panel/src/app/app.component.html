@@ -1,0 +1,56 @@
+<div class="demo-description">
+  <h1>Editing Row Side Panel</h1>
+  <section>
+    <p>
+      This demo demonstrates how to implement row editing in <strong>Smart.Grid</strong> using
+      a side panel that opens on double click. Instead of editing data directly inside the grid cells,
+      the selected row is edited in a dedicated panel positioned beside the grid.
+    </p>
+  </section>
+  <section>
+    <h2>How It Works</h2>
+    <ul>
+      <li>The user double-clicks a row in the grid.</li>
+      <li>A side panel opens automatically.</li>
+      <li>The panel is populated with the selected row’s data.</li>
+      <li>The user edits the fields inside the panel.</li>
+      <li>Changes are saved and reflected back in the grid.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Key Features</h2>
+    <ul>
+      <li>Clean and focused editing experience</li>
+      <li>Prevents accidental inline edits</li>
+      <li>Supports complex forms and validation</li>
+      <li>Easy integration with external components</li>
+      <li>Improved layout for forms with many fields</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Benefits of Side Panel Editing</h2>
+    <p>
+      Using a side panel for editing provides a more structured and user-friendly
+      experience, especially when working with records that contain multiple fields
+      or require validation logic. It separates data visualization from data editing,
+      reducing clutter inside the grid.
+    </p>
+    <p>
+      Developers can fully customize the panel’s layout, validation behavior,
+      and save logic. The double-click event acts as a trigger to load the selected
+      record into the panel, allowing precise control over when editing begins.
+    </p>
+  </section>
+</div>
+<smart-grid #grid
+  [dataSource]="data"
+  [columns]="columns"
+  [appearance]="appearance"
+  [users]="users"
+  [sorting]="sorting"
+  [layout]="layout"
+  [header]="header"
+  [selection]="selection"
+  [editing]="editing"
+  id="grid">
+</smart-grid>
