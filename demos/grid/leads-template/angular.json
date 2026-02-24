@@ -36,7 +36,6 @@
 			  	"./node_modules/@smart-webcomponents-angular/grid/styles/smart.base.css",
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.grid.css",
 				"./node_modules/@smart-webcomponents-angular/input/styles/smart.input.css",
-				"./node_modules/@smart-webcomponents-angular/led/styles/smart.led.css",
 				"./node_modules/@smart-webcomponents-angular/menu/styles/smart.menu.css",
 				"./node_modules/@smart-webcomponents-angular/editor/styles/smart.editor.css",
 				"./node_modules/@smart-webcomponents-angular/grid/styles/smart.common.css",

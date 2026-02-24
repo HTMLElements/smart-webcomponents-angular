@@ -17,7 +17,6 @@
     "@smart-webcomponents-angular/grid": "25.5.5",
     "@smart-webcomponents-angular/menu": "25.5.5",
     "@smart-webcomponents-angular/editor": "25.5.5",
-    "@smart-webcomponents-angular/led": "25.5.5",
     "@smart-webcomponents-angular/input": "25.5.5",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.0",
