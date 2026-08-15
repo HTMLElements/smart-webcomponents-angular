@@ -1,0 +1,226 @@
+/* ---------------------------------------------------------------- headline numbers */
+/* ---------------------------------------------------------------- headline numbers */
+/* A tearsheet strip, not a row of cards. One rule around the whole thing and hairlines between
+   the figures; the number leads and its name sits underneath. Deliberately none of the
+   card-with-a-coloured-left-border, uppercase-micro-label look - colour appears only where it
+   carries meaning: the margin bar against its target and the direction of the growth figure. */
+.pivot-kpis {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 12px;
+    border: 1px solid var(--smart-border);
+    border-radius: var(--smart-border-radius);
+    background: var(--smart-background);
+    overflow: hidden;
+}
+
+.kpi {
+    flex: 1 1 170px;
+    min-width: 0;
+    padding: 12px 18px 14px;
+}
+
+/* Hairline separators rather than gaps, so the strip reads as one instrument. */
+.kpi + .kpi {
+    box-shadow: inset 1px 0 0 0 var(--smart-border);
+}
+
+.kpi-figure {
+    /* Tabular figures keep the columns of digits aligned as the filters change them. */
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+    font-size: 26px;
+    font-weight: 650;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.kpi-unit {
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 1px;
+    opacity: 0.6;
+}
+
+.kpi-name {
+    margin-top: 5px;
+    font-size: 12px;
+    opacity: 0.72;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* The secondary figure inside a name - "$106.5M", "1,536 of 4,224". */
+.kpi-name em {
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.75;
+}
+
+.kpi-name em::before {
+    content: '·';
+    margin: 0 5px;
+    opacity: 0.55;
+}
+
+.kpi-rising { color: #2f7d4f; }
+.kpi-falling { color: #b23b2e; }
+
+/* Margin against its target. The notch is the 45% the heatmap scales to, so "is this good"
+   is answerable without knowing the business. */
+.kpi-bar {
+    position: relative;
+    height: 4px;
+    margin-top: 9px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--smart-border) 70%, transparent);
+    overflow: visible;
+}
+
+.kpi-bar i {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    background: #efbe60;
+}
+
+.kpi-bar.over i {
+    background: #60ad70;
+}
+
+.kpi-bar s {
+    position: absolute;
+    top: -3px;
+    width: 1px;
+    height: 10px;
+    background: var(--smart-background-color);
+    opacity: 0.55;
+}
+
+/* ---------------------------------------------------------------- grid and designer */
+/* Side by side. The designer is docked rather than floated over the data so a drag and its
+   effect on the pivot are visible at the same time. */
+.pivot-demo {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    height: 600px;
+}
+
+.pivot-demo smart-grid {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+}
+
+.pivot-side {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--smart-border);
+    border-radius: var(--smart-border-radius);
+    background: var(--smart-background);
+    overflow: hidden;
+}
+
+.pivot-side-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--smart-border);
+    font-weight: 600;
+}
+
+/* The panel sizes itself to its host, so the host has to be the one with a height. */
+.pivot-designer-host {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+}
+
+.pivot-designer-host smart-pivot-panel {
+    width: 100%;
+    height: 100%;
+}
+
+/* ---------------------------------------------------------------- pivot rows */
+/* Classes come from grid.onRowClass, which reads _pivotKind and _pivotDepth off each row. */
+smart-grid .pivot-group {
+    font-weight: 600;
+}
+
+/* The outermost level anchors the report, so it reads as a heading rather than a row. */
+smart-grid .pivot-group.pivot-depth-0 {
+    background: #eef2f7;
+    font-weight: 700;
+}
+
+smart-grid .pivot-group.pivot-depth-1 {
+    background: #f7f9fc;
+}
+
+smart-grid .pivot-grandTotal {
+    font-weight: 700;
+    background: #dfe7f0;
+    border-top: 2px solid #5b9bd5;
+}
+
+/* The heatmap bands cover the range of the leaf values, and a group with few children has a
+   subtotal that falls inside it - so those rows were picking up a heat tint and reading as
+   ordinary data. conditionalFormatting writes an inline background on the cell's content div,
+   which a class cannot outrank, hence !important: totals are structure, not measurements. */
+smart-grid .pivot-group.pivot-depth-0 smart-grid-cell > div {
+    background: #eef2f7 !important;
+}
+
+smart-grid .pivot-group.pivot-depth-1 smart-grid-cell > div {
+    background: #f7f9fc !important;
+}
+
+smart-grid .pivot-grandTotal smart-grid-cell > div {
+    background: #dfe7f0 !important;
+}
+
+/* Was the Status entry in the options panel; a status bar under the grid now. */
+.pivot-log {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+    padding: 6px 10px;
+    border: 1px solid var(--smart-border);
+    border-radius: var(--smart-border-radius);
+    background: var(--smart-background);
+    font-family: monospace;
+    font-size: 12px;
+    min-height: 32px;
+    word-break: break-word;
+}
+
+@media (max-width: 900px) {
+    .pivot-kpis,
+    .pivot-toolbar,
+    .pivot-log,
+    .pivot-demo {
+        width: 95%;
+        margin-left: 2%;
+    }
+
+    .pivot-demo {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .pivot-demo smart-grid {
+        height: 460px;
+    }
+
+    .pivot-side {
+        flex: 0 0 320px;
+        height: 320px;
+    }
+}

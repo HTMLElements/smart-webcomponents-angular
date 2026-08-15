@@ -1,0 +1,21 @@
+﻿/* Page chrome for the standalone example. In the product demo site this comes from demos.css;
+   the pivot styling itself lives alongside the component. */
+html,
+body {
+    margin: 0;
+    padding: 16px;
+    font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+}
+
+.demo-description {
+    max-width: 1100px;
+    margin-bottom: 16px;
+    line-height: 1.55;
+}
+
+.demo-description h1 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 600;
+}

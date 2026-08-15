@@ -1,0 +1,87 @@
+<div class="demo-description">
+    <h1>DataGrid Pivot</h1>
+    Two financial years of software bookings, 4,224 records across eleven territories, four product
+    lines, four sales channels and three customer segments, with a docked <b>smart-pivot-panel</b>
+    beside the Grid. Drag a field between the Rows / Columns / Values wells to re-pivot,
+    <b>right-click</b> a field for the same moves without dragging, or use the panel's
+    <b>Filters</b> tab to narrow the bookings. A filter runs before aggregation, so the totals are
+    recomputed from what survives rather than masked.
+    <br /><br />
+    Pivot is a <i>native</i> view, so everything else keeps working: drag-select a range of cells,
+    copy with <b>Ctrl+C</b>, resize and reorder columns. Row groups are ordinary tree rows, so the
+    expanders come for free, and the column axis becomes collapsible banded headers - click a year
+    to fold it to its total.
+</div>
+
+<div class="pivot-kpis">
+    <div class="kpi">
+        <div class="kpi-figure">{{ money(kpis.revenue) }}</div>
+        <div class="kpi-name">
+            Bookings
+            <em *ngIf="kpis.filtered">{{ kpis.count.toLocaleString('en-US') }} of {{ totalBookings.toLocaleString('en-US') }}</em>
+        </div>
+    </div>
+
+    <div class="kpi">
+        <div class="kpi-figure">
+            {{ (kpis.marginRate * 100).toFixed(1) }}<span class="kpi-unit">%</span>
+        </div>
+        <div class="kpi-name">Gross margin <em>{{ compact(kpis.margin) }}</em></div>
+        <div class="kpi-bar" [class.over]="kpis.marginRate >= marginTarget">
+            <i [style.width.%]="kpis.marginRate * 100 > 100 ? 100 : kpis.marginRate * 100"></i>
+            <s [style.left.%]="marginTarget * 100"></s>
+        </div>
+    </div>
+
+    <div class="kpi">
+        <div class="kpi-figure">{{ kpis.deals.toLocaleString('en-US') }}</div>
+        <div class="kpi-name">Closed deals</div>
+    </div>
+
+    <div class="kpi">
+        <div class="kpi-figure">
+            <span [class.kpi-rising]="kpis.growth >= 0" [class.kpi-falling]="kpis.growth < 0">
+                {{ kpis.growth >= 0 ? '&#9650;' : '&#9660;' }}
+                {{ (kpis.growth < 0 ? -kpis.growth * 100 : kpis.growth * 100).toFixed(1) }}<span class="kpi-unit">%</span>
+            </span>
+        </div>
+        <div class="kpi-name">
+            FY25 vs FY24 <em>{{ compact(kpis.current) }} vs {{ compact(kpis.previous) }}</em>
+        </div>
+    </div>
+
+    <div class="kpi">
+        <div class="kpi-figure">{{ money(kpis.averageDeal) }}</div>
+        <div class="kpi-name">Average deal</div>
+    </div>
+</div>
+
+<div class="pivot-demo">
+    <smart-grid #grid id="grid"
+        [view]="view"
+        [pivot]="pivot"
+        [dataSource]="bookings"
+        [columns]="columns"
+        [columnGroups]="columnGroups"
+        [appearance]="appearance"
+        [behavior]="behavior"
+        [selection]="selection"
+        [clipboard]="clipboard"
+        [dataExport]="dataExport"
+        [layout]="layout"
+        [onRowClass]="onRowClass"
+        (onPivotChange)="onPivotChange($event)"
+        (onPivotFilter)="onPivotFilter($event)"
+        (onPivotDesignerChange)="onPivotDesignerChange($event)"
+        (onColumnGroupCollapse)="onColumnGroupCollapse($event)"></smart-grid>
+
+    <div class="pivot-side">
+        <div class="pivot-side-header">
+            <smart-switch-button [checked]="true" (onChange)="onPivotModeChange($event)"></smart-switch-button>
+            <span>Pivot Mode</span>
+        </div>
+        <div #designerHost class="pivot-designer-host"></div>
+    </div>
+</div>
+
+<div class="pivot-log">{{ status }}</div>
